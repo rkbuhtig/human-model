@@ -1,4 +1,4 @@
-"""Deterministic typed hybrid engine for Human Model Dynamics v0.1.1."""
+"""Deterministic typed hybrid engine for Human Model Dynamics v0.2 Slice A."""
 
 from __future__ import annotations
 
@@ -39,12 +39,14 @@ from .models import (
     validate_state_bounds,
 )
 from .protocol import (
+    IngressDecision,
     IngressQueue,
     ScenarioEvent,
     action_opportunity_from_event,
     encode_grounding_submission,
     encode_model_input,
 )
+from .temporal import ProcessingStamp, SimTime
 from .trace import EpisodeTrace, StateDelta, TickTrace
 
 
@@ -90,11 +92,19 @@ class SimulationLedger:
     unresolved_event_ids: list[str] = field(default_factory=list)
     duplicate_event_ids: list[str] = field(default_factory=list)
     collision_event_ids: list[str] = field(default_factory=list)
+    redundant_delivery_ids: list[str] = field(default_factory=list)
+    delivery_collision_ids: list[str] = field(default_factory=list)
+    occurrence_collision_ids: list[str] = field(default_factory=list)
+    dangling_reexposure_ids: list[str] = field(default_factory=list)
+    invalid_reexposure_time_ids: list[str] = field(default_factory=list)
+    ingress_decisions: list[IngressDecision] = field(default_factory=list)
+    same_timestamp_order_debts: list[tuple[str, ...]] = field(default_factory=list)
     deferred_event_ids: set[str] = field(default_factory=set)
     provenance_loss_count: int = 0
     raw_received: int = 0
     unique_received: int = 0
     processed: int = 0
+    final_sim_time: SimTime = SimTime(0)
 
 
 @dataclass(frozen=True, slots=True)
@@ -117,7 +127,10 @@ class SimulationResult:
             self.ledger.raw_received
             == self.ledger.unique_received
             + len(self.ledger.duplicate_event_ids)
+            + len(self.ledger.redundant_delivery_ids)
             + len(self.ledger.collision_event_ids)
+            + len(self.ledger.dangling_reexposure_ids)
+            + len(self.ledger.invalid_reexposure_time_ids)
             and self.ledger.unique_received
             == self.ledger.processed
             + len(self.ledger.dropped_event_ids)
@@ -150,7 +163,22 @@ class SimulationResult:
             "dropped": len(self.ledger.dropped_event_ids),
             "unresolved": len(self.ledger.unresolved_event_ids),
             "duplicates_ignored": len(self.ledger.duplicate_event_ids),
+            "transport_redeliveries_ignored": len(
+                self.ledger.redundant_delivery_ids
+            ),
             "event_id_collisions": len(self.ledger.collision_event_ids),
+            "delivery_id_collisions": len(self.ledger.delivery_collision_ids),
+            "occurrence_id_collisions": len(
+                self.ledger.occurrence_collision_ids
+            ),
+            "dangling_reexposures": len(self.ledger.dangling_reexposure_ids),
+            "invalid_reexposure_times": len(
+                self.ledger.invalid_reexposure_time_ids
+            ),
+            "same_timestamp_order_debts": len(
+                self.ledger.same_timestamp_order_debts
+            ),
+            "final_sim_time": int(self.ledger.final_sim_time),
             "input_accounting_ok": self.input_accounting_ok,
             "evidence_links": len(self.ledger.evidence_links),
             "attempts": len(self.ledger.attempts),
@@ -199,8 +227,8 @@ class DynamicsEngine:
         ledger.invariant_errors.extend(f"initial:{error}" for error in initial_errors)
         arrivals: dict[int, list[ScenarioEvent]] = defaultdict(list)
         for event in ordered:
-            arrivals[event.tick].append(event)
-        last_arrival_tick = max((event.tick for event in ordered), default=0)
+            arrivals[int(event.available_at)].append(event)
+        last_arrival_tick = max((int(event.available_at) for event in ordered), default=0)
 
         state = initial_state
         ingress = IngressQueue(
@@ -208,18 +236,46 @@ class DynamicsEngine:
             policy=self.config.ingress_policy,
         )
         end_tick = last_arrival_tick + self.config.drain_ticks
+        processing_sequence = 0
+        arrival_ticks = sorted(arrivals)
+        next_arrival_index = 0
+        tick = 0
 
-        for tick in range(0, end_tick + 1):
+        while tick <= end_tick:
             for event in arrivals.get(tick, ()):
                 ledger.raw_received += 1
                 decision = ingress.accept(event)
+                ledger.ingress_decisions.append(decision)
                 if decision.disposition == "duplicate":
-                    ledger.duplicate_event_ids.append(event.event_id)
+                    ledger.duplicate_event_ids.append(event.delivery_id)
                     continue
-                if decision.disposition == "collision":
-                    ledger.collision_event_ids.append(event.event_id)
+                if decision.disposition == "redundant_delivery":
+                    ledger.redundant_delivery_ids.append(event.delivery_id)
+                    continue
+                if decision.disposition == "delivery_collision":
+                    ledger.delivery_collision_ids.append(event.delivery_id)
+                    ledger.collision_event_ids.append(event.delivery_id)
                     ledger.invariant_errors.append(
-                        f"{event.event_id}:EVENT_ID_PAYLOAD_COLLISION"
+                        f"{event.delivery_id}:EVENT_ID_PAYLOAD_COLLISION"
+                    )
+                    continue
+                if decision.disposition == "occurrence_collision":
+                    ledger.occurrence_collision_ids.append(event.occurrence_id)
+                    ledger.collision_event_ids.append(event.delivery_id)
+                    ledger.invariant_errors.append(
+                        f"{event.occurrence_id}:OCCURRENCE_ID_PAYLOAD_COLLISION"
+                    )
+                    continue
+                if decision.disposition == "dangling_reexposure":
+                    ledger.dangling_reexposure_ids.append(event.delivery_id)
+                    ledger.invariant_errors.append(
+                        f"{event.delivery_id}:DANGLING_REEXPOSURE_SOURCE"
+                    )
+                    continue
+                if decision.disposition == "invalid_reexposure_time":
+                    ledger.invalid_reexposure_time_ids.append(event.delivery_id)
+                    ledger.invariant_errors.append(
+                        f"{event.delivery_id}:REEXPOSURE_PRECEDES_SOURCE_ACCESS"
                     )
                     continue
                 ledger.unique_received += 1
@@ -229,9 +285,13 @@ class DynamicsEngine:
             processing = batch.processing
             ledger.deferred_event_ids.update(batch.deferred_event_ids)
             ledger.dropped_event_ids.extend(batch.dropped_event_ids)
+            ledger.same_timestamp_order_debts.extend(
+                batch.same_timestamp_order_debts
+            )
 
             assessment_anchor = state.evidence_assessment
             for event in processing:
+                processing_sequence += 1
                 access_pressure = legacy_v01_access_pressure_bridge(
                     ingress.pressure()
                 )
@@ -239,17 +299,37 @@ class DynamicsEngine:
                     state,
                     event,
                     tick,
+                    processing_sequence,
                     access_pressure,
                     ledger,
                     assessment_anchor,
                 )
                 ledger.processed += 1
+                ingress.mark_processed(event, processed_at=SimTime(tick))
+
+            while (
+                next_arrival_index < len(arrival_ticks)
+                and arrival_ticks[next_arrival_index] <= tick
+            ):
+                next_arrival_index += 1
+            if not ingress.has_pending:
+                if next_arrival_index >= len(arrival_ticks):
+                    break
+                next_tick = arrival_ticks[next_arrival_index]
+                if next_tick > tick + 1:
+                    tick = next_tick
+                    continue
+            tick += 1
 
         ledger.unresolved_event_ids.extend(ingress.unresolved_event_ids)
+        ledger.final_sim_time = SimTime(end_tick)
         if ledger.raw_received != (
             ledger.unique_received
             + len(ledger.duplicate_event_ids)
+            + len(ledger.redundant_delivery_ids)
             + len(ledger.collision_event_ids)
+            + len(ledger.dangling_reexposure_ids)
+            + len(ledger.invalid_reexposure_time_ids)
         ):
             ledger.invariant_errors.append("RAW_INPUT_ACCOUNTING_MISMATCH")
         if ledger.unique_received != ledger.processed + len(ledger.dropped_event_ids) + len(ledger.unresolved_event_ids):
@@ -283,21 +363,28 @@ class DynamicsEngine:
         state: HumanState,
         event: ScenarioEvent,
         processed_tick: int,
+        processing_sequence: int,
         access_pressure: float,
         ledger: SimulationLedger,
         assessment_anchor: EvidenceAssessmentState,
     ) -> HumanState:
         before = state
         model_input = encode_model_input(event)
+        processing_stamp = ProcessingStamp(
+            envelope=event.temporal,
+            processed_at=SimTime(processed_tick),
+            processing_sequence=processing_sequence,
+        )
         artifact = ObservationArtifact(
             artifact_id=f"artifact:{event.event_id}",
             event_id=event.event_id,
-            source_tick=event.tick,
+            source_tick=int(event.occurred_at),
             observed_tick=processed_tick,
             kind=event.kind,
             source_id=event.source_id,
             provenance_kind=event.provenance_kind,
             external=event.external,
+            processing_stamp=processing_stamp,
         )
         ledger.observations.append(artifact)
         ledger.observations_by_id[artifact.artifact_id] = artifact
@@ -361,6 +448,10 @@ class DynamicsEngine:
                 source_id=event.source_id,
                 provenance_kind=event.provenance_kind,
                 tick=processed_tick,
+                occurrence_id=event.occurrence_id,
+                delivery_id=event.delivery_id,
+                processed_at=processed_tick,
+                processing_sequence=processing_sequence,
             )
         )
         if attempt is not None:
@@ -372,6 +463,10 @@ class DynamicsEngine:
                     source_id="self",
                     provenance_kind=ProvenanceKind.INFERENCE,
                     tick=processed_tick,
+                    occurrence_id=event.occurrence_id,
+                    delivery_id=event.delivery_id,
+                    processed_at=processed_tick,
+                    processing_sequence=processing_sequence,
                 )
             )
         if performance is not None:
@@ -383,6 +478,10 @@ class DynamicsEngine:
                     source_id="self",
                     provenance_kind=ProvenanceKind.PERFORMED_ACTION,
                     tick=processed_tick,
+                    occurrence_id=event.occurrence_id,
+                    delivery_id=event.delivery_id,
+                    processed_at=processed_tick,
+                    processing_sequence=processing_sequence,
                 )
             )
 
@@ -400,6 +499,7 @@ class DynamicsEngine:
             deltas=deltas,
             state_before=before,
             state_after=state,
+            processing_sequence=processing_sequence,
         )
         ledger.tick_traces.append(trace)
 

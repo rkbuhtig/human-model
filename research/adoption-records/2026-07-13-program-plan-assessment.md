@@ -5,7 +5,7 @@
 | Date | 2026-07-13 |
 | Source | [External non-peer assessment](../../assessments/2026-07-13-research-program-plan-assessment.md) |
 | Decision | `ADOPTED WITH REVISIONS` |
-| Implementation | 문서·baseline·v0.1.1 import 분리 `IMPLEMENTED`; queue/access 의미 분리 `PARTIAL` |
+| Implementation | 문서·baseline·v0.1.1 import 분리·v0.2 temporal provenance `IMPLEMENTED`; full temporal dynamics와 queue/access 의미 분리 `PARTIAL` |
 | Human-empirical status | `OPEN` |
 
 `ADOPTED`는 연구 방향의 채택이지 구현 완료나 경험적 참을 뜻하지 않는다.
@@ -17,10 +17,10 @@
 | A-01 | Assessment / Adoption / Implementation / Run / Empirical Evidence 분리 | 문서 `IMPLEMENTED` |
 | A-02 | Contract / Descriptive Dynamics / Experimental Protocol 분리 | v0.1.1 package `IMPLEMENTED`; legacy bridge `PARTIAL` |
 | A-03 | `EpistemicState → EvidenceAssessmentState`; `WarrantState` 유보 | v0.1.1 `IMPLEMENTED` |
-| A-04 | claim 근거를 history/tests/datasets 독립 축으로 기록; scope/exclusions 필수 | schema + 첫 claim `IMPLEMENTED` |
+| A-04 | claim 근거를 history/tests/datasets 독립 축으로 기록; scope/exclusions 필수 | schema + typed registry `IMPLEMENTED` |
 | A-05 | Contract mutation / Structural ablation / Temporal comparison 분리 | 설계 문서 `IMPLEMENTED`; 실행 `PLANNED` |
-| A-06 | 하나의 canonical `sim_time`과 여러 event timestamp | v0.2 `PLANNED` |
-| A-07 | `occurrence_id ≠ delivery_id`; 과거 사건과 현재 재노출 분리 | v0.2 `PLANNED` |
+| A-06 | 하나의 canonical `sim_time`과 여러 event timestamp | v0.2 first slice `IMPLEMENTED`; flow `PLANNED` |
+| A-07 | `occurrence_id ≠ delivery_id`; 과거 사건과 현재 재노출 분리 | v0.2 first slice `IMPLEMENTED` |
 | A-08 | v0.3은 `affect → SubjectiveBelief` 하나만 다룸 | v0.3 `PLANNED` |
 | A-09 | 결함의 당시 기록과 현재 소급 해석 분리 | schema + 첫 case `IMPLEMENTED` |
 | A-10 | 구조 변경 전에 v0.1 baseline 동결 | `FROZEN` |

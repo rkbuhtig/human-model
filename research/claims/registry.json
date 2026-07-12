@@ -33,6 +33,160 @@
       "notes": "ADOPTED records program adoption, not empirical confirmation. No authority-specific historical case is linked yet; the current implementation covers only part of the possible certification domains."
     },
     {
+      "id": "HM-INV-002",
+      "kind": "INVARIANT",
+      "adoption_status": "ADOPTED",
+      "implementation_status": "IMPLEMENTED",
+      "statement": "Within the versioned scenario-to-DynamicsEngine execution path, a processed temporal envelope preserves occurred_at <= available_at <= processed_at, processing time is monotonic, processed_at does not exceed the run's final_sim_time, and the engine path assigns the processing timestamp.",
+      "scope": [
+        "protocol_temporal_envelope_v0.2_slice_a",
+        "engine_processing_trace_v0.2_slice_a"
+      ],
+      "exclusions": [
+        "subjective_or_biological_time",
+        "time_driven_human_state_flow",
+        "same_timestamp_aggregation_policy"
+      ],
+      "depends_on": [
+        "HM-TYPE-004"
+      ],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [
+          "test_temporal_ordering_and_engine_owned_processing"
+        ],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "COUNTEREXAMPLE_TRACE",
+        "description": "A delivery is processed with an inverted timestamp order, processed_at regresses or exceeds final_sim_time, or an input-supplied processed_at is accepted as the engine processing stamp."
+      },
+      "notes": "This is a protocol and trace integrity result, not evidence for a human subjective-time law or a capability-secure Python object constructor. Direct record construction is an unsafe test surface outside the versioned scenario execution contract."
+    },
+    {
+      "id": "HM-INV-003",
+      "kind": "INVARIANT",
+      "adoption_status": "ADOPTED",
+      "implementation_status": "IMPLEMENTED",
+      "statement": "A transport redelivery with the same occurrence identity and canonical payload is idempotent across human-state updates and observation or evidence ledgers.",
+      "scope": [
+        "transport_identity_v0.2_slice_a",
+        "simulation_ledger_v0.2_slice_a"
+      ],
+      "exclusions": [
+        "explicit_current_reexposure",
+        "distinct_repeated_occurrences",
+        "independent_source_evidence"
+      ],
+      "depends_on": [
+        "HM-TYPE-005"
+      ],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [
+          "test_transport_redelivery_is_idempotent"
+        ],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "COUNTEREXAMPLE_TRACE",
+        "description": "A second delivery of the same occurrence and canonical payload applies a second descriptive update, appends a second observation artifact, or strengthens evidence as an independent observation."
+      }
+    },
+    {
+      "id": "HM-INV-004",
+      "kind": "INVARIANT",
+      "adoption_status": "ADOPTED",
+      "implementation_status": "IMPLEMENTED",
+      "statement": "Reusing an occurrence identity with a different canonical payload is a hard identity collision and cannot be silently accepted as either a redelivery or a new occurrence.",
+      "scope": [
+        "occurrence_identity_v0.2_slice_a",
+        "simulation_ingress_v0.2_slice_a"
+      ],
+      "exclusions": [
+        "semantic_payload_canonicalization_beyond_current_schema",
+        "source_retraction_or_correction_protocol"
+      ],
+      "depends_on": [
+        "HM-TYPE-005"
+      ],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [
+          "test_occurrence_payload_collision_is_hard_error"
+        ],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "COUNTEREXAMPLE_TRACE",
+        "description": "Two different canonical payloads carrying the same occurrence_id are both accepted, one silently overwrites the other, or the second is treated as an ordinary duplicate."
+      }
+    },
+    {
+      "id": "HM-INV-005",
+      "kind": "INVARIANT",
+      "adoption_status": "ADOPTED",
+      "implementation_status": "IMPLEMENTED",
+      "statement": "Delayed availability or processing preserves the source occurrence time instead of rewriting a backlog item as a newly occurred event.",
+      "scope": [
+        "backlog_provenance_v0.2_slice_a",
+        "processed_temporal_trace_v0.2_slice_a"
+      ],
+      "exclusions": [
+        "current_reexposure_occurrence",
+        "memory_reconstruction_accuracy",
+        "time_driven_human_state_flow"
+      ],
+      "depends_on": [
+        "HM-TYPE-004",
+        "HM-TYPE-005"
+      ],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [
+          "test_backlog_preserves_occurrence_time"
+        ],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "COUNTEREXAMPLE_TRACE",
+        "description": "Processing a delayed delivery replaces its original occurred_at with available_at, processed_at, or the current sim_time."
+      }
+    },
+    {
+      "id": "HM-INV-006",
+      "kind": "INVARIANT",
+      "adoption_status": "ADOPTED",
+      "implementation_status": "IMPLEMENTED",
+      "statement": "An explicit current reexposure is distinct from transport redelivery: it may produce a new descriptive update while preserving a reference to the past source and cannot automatically strengthen the source EvidenceLink.",
+      "scope": [
+        "current_reexposure_provenance_v0.2_slice_a",
+        "evidence_independence_boundary_v0.2_slice_a"
+      ],
+      "exclusions": [
+        "claim_that_every_reexposure_changes_state",
+        "new_independent_external_observation",
+        "source_memory_reconstruction"
+      ],
+      "depends_on": [
+        "HM-INV-001",
+        "HM-TYPE-004",
+        "HM-TYPE-005"
+      ],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [
+          "test_current_reexposure_changes_state_not_evidence"
+        ],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "COUNTEREXAMPLE_TRACE",
+        "description": "An explicitly identified current reexposure is collapsed into transport duplication solely because it references a past source, rewrites the past occurred_at, or creates independent source evidence without a new grounding observation."
+      },
+      "notes": "The structural test demonstrates one legal descriptive update; it does not establish how human reexposure generally behaves."
+    },
+    {
       "id": "HM-TYPE-001",
       "kind": "TYPE",
       "adoption_status": "ADOPTED",
@@ -114,6 +268,67 @@
         "description": "A schema aliases load, phenomenal readout, report, and evidence or permits one of them to instantiate another without an explicit typed bridge and the required certification provenance."
       },
       "notes": "The separation is adopted; the phenomenal bridge itself remains HOLD."
+    },
+    {
+      "id": "HM-TYPE-004",
+      "kind": "TYPE",
+      "adoption_status": "ADOPTED",
+      "implementation_status": "IMPLEMENTED",
+      "statement": "Source occurrence time, protocol availability time, engine processing time, and the engine simulation-time frontier are distinct temporal fields with different writers.",
+      "scope": [
+        "protocol_temporal_envelope_v0.2_slice_a",
+        "processed_temporal_trace_v0.2_slice_a"
+      ],
+      "exclusions": [
+        "subjective_time",
+        "biological_time",
+        "continuous_time_state_dynamics"
+      ],
+      "depends_on": [],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [
+          "test_temporal_ordering_and_engine_owned_processing",
+          "test_backlog_preserves_occurrence_time"
+        ],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "INVALID_CONSTRUCTION",
+        "description": "A canonical event or processing trace aliases occurred_at, available_at, processed_at, and sim_time into one untyped timestamp or gives the protocol input authority to pre-certify processed_at."
+      },
+      "notes": "Implemented status is limited to timestamp schema, writer ownership, and trace preservation. FlowUpdate and EventJump are not part of this claim."
+    },
+    {
+      "id": "HM-TYPE-005",
+      "kind": "TYPE",
+      "adoption_status": "ADOPTED",
+      "implementation_status": "IMPLEMENTED",
+      "statement": "Occurrence identity, transport delivery identity, and an explicit current-reexposure reference are distinct provenance roles and cannot be freely substituted for one another.",
+      "scope": [
+        "protocol_event_identity_v0.2_slice_a",
+        "simulation_ingress_v0.2_slice_a"
+      ],
+      "exclusions": [
+        "general_world_event_ontology",
+        "source_memory_identity",
+        "independent_observation_identity_beyond_current_schema"
+      ],
+      "depends_on": [],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [
+          "test_transport_redelivery_is_idempotent",
+          "test_occurrence_payload_collision_is_hard_error",
+          "test_current_reexposure_changes_state_not_evidence"
+        ],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "INVALID_CONSTRUCTION",
+        "description": "A schema uses delivery_id as source occurrence identity, treats every new delivery as a new occurrence, or represents current reexposure only by duplicating the original occurrence."
+      },
+      "notes": "The type split is a protocol provenance contract and makes no empirical claim about human event segmentation."
     },
     {
       "id": "HM-DYN-001",

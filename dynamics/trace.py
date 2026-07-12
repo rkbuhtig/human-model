@@ -33,6 +33,10 @@ class EpisodeTrace:
     source_id: str
     provenance_kind: ProvenanceKind
     tick: int
+    occurrence_id: str | None = None
+    delivery_id: str | None = None
+    processed_at: int | None = None
+    processing_sequence: int | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -50,3 +54,4 @@ class TickTrace:
     state_before: HumanState
     state_after: HumanState
     action_opportunity: ActionOpportunity | None = None
+    processing_sequence: int | None = None

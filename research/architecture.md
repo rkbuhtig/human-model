@@ -3,7 +3,7 @@
 | 항목 | 지위 |
 |---|---|
 | 설계 방향 | `ADOPTED` |
-| 코드 반영 | `PARTIAL — v0.1.1 import boundary; legacy access bridge retained` |
+| 코드 반영 | `PARTIAL — v0.1.1 import boundary + v0.2 temporal provenance; legacy access bridge retained` |
 | 인간 경험적 지위 | `OPEN` |
 
 v0.1.1은 다음 core import 경계를 코드와 test로 구현했다. 다만 frozen semantics를
@@ -53,11 +53,12 @@ BeliefUpdateRecord ≠ EvidenceAssessmentRecord
 첫 오류 동역학 `affect → SubjectiveBelief`는 v0.3에 `PLANNED`되어 있으며 현재
 구현된 기능이 아니다.
 
-### Experimental Protocol — `IMPLEMENTED / v0.1 SCOPE`
+### Experimental Protocol — `IMPLEMENTED / v0.2 SLICE-A SCOPE`
 
-v0.1.1에서는 사건 encoding과 ingress queue를 관리한다. canonical time,
-occurrence/delivery identity, 개입·측정 protocol은 v0.2에서 확장한다. Protocol
-queue는 인간 내부 Access backlog라는 존재론적 주장이 아니다.
+사건 encoding과 ingress queue에 canonical time, occurrence/delivery identity,
+backlog/current-reexposure provenance를 구현했다. `FlowUpdate/EventJump`와 일반적인
+개입·측정 protocol은 아직 계획 단계다. Protocol queue는 인간 내부 Access
+backlog라는 존재론적 주장이 아니다.
 
 ### 알려진 v0.1 bridge
 
@@ -69,9 +70,9 @@ protocol ingress pending / queue_limit
 
 이 결합은 `queue_limit` 같은 실험 설정이 동일 처리열의 인간 궤적을 바꿀 수 있는
 confound다. v0.1.1은 의미적 golden을 보존하기 위해 이름을 붙여 격리했을 뿐
-정당화하지 않는다. v0.2에서는 occurrence/access identity를 먼저 도입한 뒤,
-protocol buffer pressure와 모델이 실제로 접근한 demand를 분리하는 competing
-repair를 시험해야 한다.
+정당화하지 않는다. occurrence/delivery/reexposure provenance는 v0.2 첫 slice에서
+도입했지만 실제 access-demand identity는 아직 없다. protocol buffer pressure와
+모델이 실제로 접근한 demand를 분리하는 competing repair는 후속 실험으로 남는다.
 
 ## 의존 경계
 

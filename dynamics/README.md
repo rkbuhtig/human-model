@@ -1,13 +1,14 @@
-# Human Model Dynamics v0.1.1
+# Human Model Dynamics v0.2 — Temporal Provenance Slice
 
 Chapter 01–11의 권한 척추와 분리 원칙을 보존하면서, 인간 내부 상태에 관한 `BRIDGE`를 실행 가능한 가설로 명시해 시험한다.
 
-이 패키지는 실제 인간의 감정값이나 행동을 예측하도록 보정되지 않았다. 퀄리아의 존재를 증명하지도 않는다. 현재 검증 대상은 다음 세 가지다.
+이 패키지는 실제 인간의 감정값이나 행동을 예측하도록 보정되지 않았다. 퀄리아의 존재를 증명하지도 않는다. v0.1.1의 동역학 위에 v0.2 첫 slice가 시간·사건 provenance를 추가했다. 현재 검증 대상은 다음 네 가지다.
 
 ```text
 개념 간 전이가 타입을 보존하는가
 부하 아래에서도 권한 경계가 유지되는가
 경로 의존적 변화와 비리셋 회복을 표현할 수 있는가
+사건 발생·전달·처리 시각과 원천 occurrence·delivery가 섞이지 않는가
 ```
 
 이 구현의 연구 지위와 후속 범위는 다음 문서에서 관리한다.
@@ -48,6 +49,7 @@ dynamics/
 ├─ models/               기술적 인간 상태·routing·update 가설
 ├─ protocol/             사건 encoding과 ingress queue
 ├─ adapters.py           명시적 cross-layer adapter와 legacy bridge
+├─ temporal.py           canonical time과 occurrence/delivery stamp
 ├─ types.py              v0.1 compatibility re-export
 ├─ epistemics.py         v0.1 compatibility wrapper
 ├─ routing.py            v0.1 compatibility wrapper
@@ -78,6 +80,9 @@ experimental confound다.
 v0.1 compatibility façade는 구형 import, constructor keyword, read property를
 지원한다. 구형 dataclass field 이름을 사용한 `dataclasses.replace`·`asdict`,
 `repr`, class identity까지 보존하는 binary/reflective compatibility는 아니다.
+특히 정규화된 legacy event의 `event_id`나 `tick`만 `dataclasses.replace`하면 함께
+복사된 temporal envelope와 불일치하므로, canonical envelope도 함께 교체하거나 새
+event를 생성해야 한다.
 
 외부 패키지는 사용하지 않는다. Python 3.11 이상이면 실행할 수 있다.
 
@@ -142,7 +147,13 @@ python -m unittest discover -s dynamics/tests -v
 - 반증·설명은 기존 증거와 행동 역사를 삭제하지 않는다.
 - 중복 `event_id`는 한 번만 적용된다.
 - 같은 ID의 다른 payload는 duplicate가 아니라 HARD collision이다.
+- 동일 occurrence의 새 delivery는 인간·Evidence update를 반복하지 않는다.
+- 과거 `occurred_at`과 현재 `available_at / processed_at`을 함께 보존한다.
+- 현재 reexposure는 새 내부 occurrence로 처리하되 원천 Evidence를 복제하지 않는다.
 - 입력 손실은 `processed / dropped / unresolved`로 회계된다.
+
+시간·사건 동일성의 정확한 범위와 아직 구현하지 않은 flow는
+[Temporal Envelope Contract](spec/temporal.md)에 구분했다.
 
 ### Canonical semantic baseline
 

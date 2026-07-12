@@ -9,6 +9,12 @@ from .events import (
     encode_model_input,
 )
 from .ingress import IngressBatch, IngressDecision, IngressQueue
+from ..temporal import (
+    EventTemporalEnvelope,
+    ProcessingStamp,
+    SimTime,
+    legacy_temporal_envelope,
+)
 
 __all__ = [
     "ClaimSignal",
@@ -20,4 +26,8 @@ __all__ = [
     "IngressBatch",
     "IngressDecision",
     "IngressQueue",
+    "EventTemporalEnvelope",
+    "ProcessingStamp",
+    "SimTime",
+    "legacy_temporal_envelope",
 ]

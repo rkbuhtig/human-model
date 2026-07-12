@@ -1,6 +1,6 @@
 # Temporal Model Comparison
 
-> **Status:** PLANNED FOR v0.2
+> **Status:** Slice-A identity prerequisites implemented; T0–T3 comparison planned
 
 시간 모델은 구조적 ablation과 독립된 축으로 비교한다.
 
