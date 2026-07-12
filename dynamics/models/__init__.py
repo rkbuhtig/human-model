@@ -2,7 +2,24 @@
 
 from .access import processing_capacity
 from .action import EXTERNAL_ACTION_REQUIREMENTS, run_action_pipeline
-from .reducer import apply_fast_update, apply_slow_update, phenomenal_activation
+from .proposals import (
+    REDUCER_ALLOWED_OPTIONAL_OPERATOR_SUFFIXES,
+    REDUCER_MANDATORY_OPERATOR_SPECS,
+    REDUCER_OPTIONAL_OPERATOR_SPECS,
+    ReducerDriverChannel,
+    ReducerDriverContribution,
+    ReducerFieldProposal,
+    ReducerOperatorSpec,
+    ReducerProposalContext,
+    ReducerStepResult,
+)
+from .reducer import (
+    apply_fast_update,
+    apply_fast_update_traced,
+    apply_slow_update,
+    apply_slow_update_traced,
+    phenomenal_activation,
+)
 from .routing import route_candidates
 from .state import (
     AccessState,
@@ -38,11 +55,22 @@ __all__ = [
     "NarrativeState",
     "PhenomenalActivation",
     "RelationalProfile",
+    "REDUCER_ALLOWED_OPTIONAL_OPERATOR_SUFFIXES",
+    "REDUCER_MANDATORY_OPERATOR_SPECS",
+    "REDUCER_OPTIONAL_OPERATOR_SPECS",
+    "ReducerDriverChannel",
+    "ReducerDriverContribution",
+    "ReducerFieldProposal",
+    "ReducerOperatorSpec",
+    "ReducerProposalContext",
+    "ReducerStepResult",
     "RoutedCandidate",
     "iter_unit_values",
     "EXTERNAL_ACTION_REQUIREMENTS",
     "apply_fast_update",
+    "apply_fast_update_traced",
     "apply_slow_update",
+    "apply_slow_update_traced",
     "phenomenal_activation",
     "processing_capacity",
     "route_candidates",

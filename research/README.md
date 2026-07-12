@@ -20,10 +20,13 @@ Local causal influence
 ## 현재 상태
 
 현재 Dynamics는 v0.1.1의 구조적 구분과 동역학적 반례에 v0.2 temporal provenance
-slice와 read-only mental-transition measurement slice를 추가한 최소 모델이다.
+slice, read-only mental-transition measurement, `MORPH-001A` reducer-proposal
+instrumentation을 추가한 최소 모델이다.
 `Q-v1`은 processed occurrence마다 literal persistent field delta를 측정해 immutable
-receipt와 count/density report를 파생한다. 인간에 대한 경험적 예측 정확도는 아직
-검증되지 않았다.
+receipt와 count/density report를 파생한다. proposal ledger는 각 occurrence의 flat
+ordered pre-clamp proposal/commit tuple을 별도 receipt로 보존한다. 어느 쪽도 인간의
+정신 시간·DeformationDemand·MorphicLoad를 식별하지 않았으며, 인간에 대한 경험적
+예측 정확도도 아직 검증되지 않았다.
 
 | 근거 층 | 지위 |
 |---|---|
@@ -69,8 +72,13 @@ Experimental Protocol
 
 v0.1 baseline은 [원격 source revision과 semantic golden](../dynamics/reports/baseline-v0.1.md)으로 동결했다. v0.1.1 package 경계는 구현되었고, 기존 queue→Access
 결합은 명명된 legacy bridge로 남아 있다. v0.2 temporal provenance와 read-only
-mental-transition type/measurement surface는 구현되었다. 남은 가까운 순서는
-`MORPH-001` count–load 비교다. `FlowUpdate/EventJump`·no-event flow·burst/spaced와
+mental-transition type/measurement surface는 구현되었다. 그 위에
+[`MORPH-001A`](benchmarks/morph-001-demand-commit.md)가 pre-constraint reducer
+proposal과 committed target을 분리하는 instrumentation을 구현했다. 이 proposal은
+independently identified `DeformationDemand`가 아니다. 다음 조각은 별도
+`AccommodationEnvelope`와 competing excess definition을 고정하는 `MORPH-001B`다.
+residual·load는 그 뒤에 남아 있다.
+`FlowUpdate/EventJump`·no-event flow·burst/spaced와
 `HM-DYN-001` predictive comparison은 독립적인 planned temporal-comparison 축이며
 `MORPH-001`의 선행 blocker가 아니다. `affect → SubjectiveBelief`는 독립 v0.3 축이고,
 `WarrantState`, 독립 주관 시계, 퀄리아–부하 대응식, 다른 기억 오귀속은 `HOLD`다.
@@ -80,6 +88,8 @@ implemented Q-v1 receipt/count/density types
 ≠ transition density predicts human trajectories
 ≠ mental time unit identified
 ≠ MorphicLoad or qualia measured
+
+ReducerProposal ≠ DeformationDemand ≠ AccommodationEnvelope ≠ MorphicLoad
 ```
 
 상세 범위는 [roadmap](roadmap.md)과 세 RFC를 따른다.

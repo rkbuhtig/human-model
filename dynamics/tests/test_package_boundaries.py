@@ -57,9 +57,11 @@ class PackageBoundaryTests(unittest.TestCase):
             "..protocol",
             "..types",
             "..mental_transitions",
+            "..reducer_proposals",
             "dynamics.models",
             "dynamics.protocol",
             "dynamics.mental_transitions",
+            "dynamics.reducer_proposals",
         )
         for path in (PACKAGE / "contract").rglob("*.py"):
             imports = _imports(path)
@@ -73,9 +75,11 @@ class PackageBoundaryTests(unittest.TestCase):
             "..protocol",
             "..types",
             "..mental_transitions",
+            "..reducer_proposals",
             "dynamics.protocol",
             "dynamics.types",
             "dynamics.mental_transitions",
+            "dynamics.reducer_proposals",
         )
         for path in (PACKAGE / "models").rglob("*.py"):
             imports = _imports(path)
@@ -89,9 +93,11 @@ class PackageBoundaryTests(unittest.TestCase):
             "..models",
             "..types",
             "..mental_transitions",
+            "..reducer_proposals",
             "dynamics.models",
             "dynamics.types",
             "dynamics.mental_transitions",
+            "dynamics.reducer_proposals",
         )
         for path in (PACKAGE / "protocol").rglob("*.py"):
             imports = _imports(path)

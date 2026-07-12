@@ -15,6 +15,7 @@ from .contract.records import (
     ProvenanceKind,
 )
 from .models.state import HumanState, PhenomenalActivation, RoutedCandidate
+from .models.proposals import ReducerFieldProposal, ReducerProposalContext
 
 
 @dataclass(frozen=True, slots=True)
@@ -55,3 +56,23 @@ class TickTrace:
     state_after: HumanState
     action_opportunity: ActionOpportunity | None = None
     processing_sequence: int | None = None
+    reducer_proposals: tuple[ReducerFieldProposal, ...] = ()
+    reducer_proposal_context: ReducerProposalContext | None = None
+
+    def __post_init__(self) -> None:
+        if type(self.reducer_proposals) is not tuple:
+            raise TypeError("reducer_proposals must be an immutable tuple")
+        if any(
+            type(proposal) is not ReducerFieldProposal
+            for proposal in self.reducer_proposals
+        ):
+            raise TypeError(
+                "reducer_proposals must contain ReducerFieldProposal values"
+            )
+        if (
+            self.reducer_proposal_context is not None
+            and type(self.reducer_proposal_context) is not ReducerProposalContext
+        ):
+            raise TypeError(
+                "reducer_proposal_context must be ReducerProposalContext or None"
+            )

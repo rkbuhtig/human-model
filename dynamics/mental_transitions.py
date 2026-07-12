@@ -166,10 +166,6 @@ class MentalStateDelta:
         object.__setattr__(self, "before", float(self.before))
         object.__setattr__(self, "after", float(self.after))
         object.__setattr__(self, "delta", float(self.delta))
-        if self.unit == "normalized_simulation_unit" and not (
-            0.0 <= self.before <= 1.0 and 0.0 <= self.after <= 1.0
-        ):
-            raise ValueError("normalized before/after values must be in [0, 1]")
         if abs((self.after - self.before) - self.delta) > 1e-12:
             raise ValueError("delta must equal after - before")
 

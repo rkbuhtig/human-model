@@ -3,7 +3,7 @@
 | 항목 | 지위 |
 |---|---|
 | 설계 방향 | `ADOPTED` |
-| 코드 반영 | `PARTIAL — v0.1.1 boundaries + v0.2 temporal provenance/Q-v1 projection; legacy access bridge retained` |
+| 코드 반영 | `PARTIAL — v0.1.1 boundaries + v0.2 provenance/Q-v1 + MORPH-001A proposal–commit instrumentation; legacy access bridge retained` |
 | 인간 경험적 지위 | `OPEN` |
 
 v0.1.1은 다음 core import 경계를 코드와 test로 구현했다. 다만 frozen semantics를
@@ -77,6 +77,49 @@ completed processing trace
 예측 타당성은 아니며, legacy queue→access confound와 same-time serialization 문제도
 남아 있다.
 
+### Reducer Instrumentation — `MORPH-001A IMPLEMENTED`
+
+post-run before/after projection만으로는 clamp 전에 reducer가 요청했던 displacement를
+복원할 수 없다. 따라서 현재 update 경로의 bound 직전에 typed proposal을 관찰하고,
+실제 commit과 함께 occurrence-scoped immutable receipt로 보존하는 instrumentation
+boundary를 둔다.
+
+```text
+current reducer proposal before storage bound
+→ ReducerFieldProposal requested component
+
+bounded persistent state after update - stage basis
+→ ReducerFieldProposal committed component
+```
+
+instrumentation은 생성 경로를 관찰하지만 이를 제어하지 않는다. 미래 결과를 demand
+입력으로 사용하거나 receipt를 state/routing/evidence/action pipeline에 재입력하지
+않는다. 같은 field의 여러 reducer stage는 합산하지 않고 writer·stage identity와 함께
+보존한다.
+
+runtime의 traced reducer는 `ReducerStepResult`로 committed state와 해당 stage의
+proposal을 함께 반환한다. engine은 fast/slow proposal을 write sequence 순서로 평탄화해
+`TickTrace.reducer_proposals`에 보존하며, post-run projection은 occurrence-scoped
+`ReducerProposalReceipt.proposals` flat tuple과 `ReducerProposalLedger`를 만든다.
+ledger는 `ReducerStepResult` sequence를 저장하지 않는다. measurement identity는
+`descriptive-reducer-preclamp-proxy@1.0.0`이다.
+
+고정 policy는 mandatory/conditional operator order와 operator별 field·constraint·driver
+identity를 digest에 결부한다. receipt는 typed before/after state projection과
+proposal digest를 포함하며, 인접 receipt 사이의 descriptive-state chain을 검사한다.
+`ReducerProposalContext`는 encoded soothing과 performance identity를 결부해
+conditional action/soothing write와 driver가 실행 문맥과 맞는지 검사한다.
+
+이 경계는 현재 simulation reducer의 요청과 commit을 분리할 뿐, 인간의 latent demand를
+식별하지 않는다.
+
+```text
+ReducerProposal ≠ independently identified DeformationDemand ≠ MorphicLoad
+```
+
+`AccommodationEnvelope`, excess/residual, `MorphicLoadProfile`, qualia, 주관적 시간은
+이 층의 출력이 아니다.
+
 ### 알려진 v0.1 bridge
 
 ```text
@@ -117,6 +160,7 @@ v0.1.1에서 import 방향을 test로 잠갔다. 위 legacy bridge 때문에
 | Persistent traces | 이후 경로를 기울이는 흔적 | 탐색적 부분 구현 |
 | Plasticity | 경험과 시간에 따른 update kernel | 재정의 `PLANNED` |
 | Qualified mental transition | post-run receipt/subset/count/density | Q-v1 simulation measurement 구현; predictive value `OPEN` |
+| Reducer proposal / committed target | current reducer instrumentation precursor | `MORPH-001A` 구현; DeformationDemand/envelope/load/phenomenal interpretation 제외 |
 
 Plasticity는 Truth/Access/Agency와 같은 종류의 인증 평면이 아니다. Persistence는
 남아 있는 흔적이고 Plasticity는 그 흔적을 바꾸는 연산 가설이다.

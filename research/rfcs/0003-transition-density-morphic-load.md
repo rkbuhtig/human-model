@@ -2,8 +2,8 @@
 
 | 항목 | 값 |
 |---|---|
-| Status | read-only ledger/type/measurement slice `IMPLEMENTED`; predictive value and `MORPH-001` `PROPOSED` |
-| Target | v0.2 derived mental-transition ledger, 이후 `MORPH-001` |
+| Status | read-only transition ledger와 `MORPH-001A` reducer proposal–commit proxy `IMPLEMENTED`; DeformationDemand/envelope/load prediction `PROPOSED` |
+| Target | v0.2 derived mental-transition ledger, `MORPH-001A`, 이후 envelope/load comparison |
 | Kind | Type separation / dynamical hypotheses / measurement preconditions |
 | Prerequisites | RFC 0001 구현, RFC 0002 canonical time |
 | Human empirical status | `OPEN` |
@@ -227,6 +227,126 @@ MorphicLoadProfile = {
 이미 정의된 Demand가 현재 처리 범위를 얼마나 벗어나는지 계산하는 다음 단계다.
 이 순서를 지켜야 capacity를 두 번 반영하지 않는다.
 
+### 3A. `MORPH-001A` — reducer proposal–commit instrumentation
+
+첫 구현 조각은 capacity나 load를 계산하지 않는다. 현재 reducer가 각 stage에서
+요청한 **bound 적용 전 field displacement**와 실제 persistent state에 commit된
+displacement를 같은 trace에 보존한다.
+
+```text
+ReducerDriverContribution = (
+  typed channel,
+  label,
+  contribution
+)
+
+ReducerFieldProposal = (
+  write_sequence,
+  stage_id / operator_id,
+  field,
+  basis_before,
+  requested_after_unbounded,
+  committed_after,
+  unit,
+  constraint_id,
+  typed driver contributions
+)
+
+requested_delta = requested_after_unbounded - basis_before
+committed_delta = committed_after - basis_before
+
+ReducerStepResult = (
+  committed stage state,
+  ordered typed field proposals
+)
+
+ReducerProposalReceipt = (
+  receipt_id,
+  measurement identity / version / policy_digest,
+  occurrence / delivery / reexposure provenance,
+  occurred_at / available_at / processed_at / captured_at,
+  processing_sequence / available_information,
+  conditional writer context / context_digest,
+  typed state_before / state_after projection + digest,
+  flat occurrence-wide ordered proposals tuple / proposal_digest
+)
+
+ReducerProposalLedger = ordered ReducerProposalReceipt sequence
+```
+
+`ReducerStepResult`는 traced reducer가 계산 중 state와 proposal을 함께 engine에 넘기는
+runtime wrapper다. engine은 fast/slow proposal을 write sequence 순서로 평탄화해
+`TickTrace.reducer_proposals`에 저장한다. post-run receipt는 이 flat tuple을 복사·검증하며
+step-result sequence 자체는 ledger schema가 아니다.
+`captured_at = processed_at`이며 policy는 fast→slow stage order, normalized unit과 현재
+이용 가능한 driver 집합을 version/digest로 고정한다. policy digest는 mandatory
+operator prefix, 허용된 conditional suffix, operator별
+stage·field·constraint·driver identity schema를 포함한다. receipt ID는
+occurrence lineage·시각·proposal/state digest의 content identity에 결부된다.
+action/soothing conditional suffix와 driver는 performance identity·encoded soothing을
+담은 최소 context와 일치해야 한다.
+
+한 occurrence에서 같은 field가 여러 stage 또는 write를 통과할 수 있으므로 첫 조각은
+이를 성급하게 합산하지 않고 ordered stage/write-qualified proposal을 그대로 보존한다.
+같은 field의 다음 `basis_before`는 앞선 committed target에서 이어져야 한다. write별
+committed delta와 occurrence 최종 `after - before` net delta도 동일한 양으로 취급하지
+않는다. receipt는 모든
+processed occurrence에 하나씩 생기며 Q-v1을 통과한 `MentalTransition`에만 붙지 않는다.
+따라서 saturation으로 commit이 0이어도 requested displacement는 존재할 수 있다.
+
+measurement model은 `descriptive-reducer-preclamp-proxy@1.0.0`이다. 여기서 기록하는
+것은 **현재 versioned simulation reducer가 요청한 pre-constraint proposal**이다.
+fast/slow reducer에 이미 들어간 access pressure, update rate, phenomenal activation,
+performance 같은 현재 driver의 효과를 포함할 수 있으므로, capacity-independent
+`DeformationDemand`가 아니다.
+typed driver contribution도 구현 수식의 algebraic provenance이지 독립 causal effect나
+경험적으로 식별된 심리 요인이 아니다.
+
+```text
+ReducerProposal
+≠ independently identified DeformationDemand
+≠ MorphicLoad
+```
+
+따라서 첫 조각은 향후 Demand 측정의 instrumentation precursor일 뿐 인간의 실제
+변형 요구량이나 latent quantity를 식별하지 않는다. 현재 입력·현재 stage state·현재
+writer만 사용하며, 미래 결과나 post-run recovery에서 proposal을 역산하지 않는다.
+
+instrumentation은 update를 관찰하기 위해 reducer boundary에서 기록되지만 생성
+runtime을 제어하지 않는다.
+
+```text
+same writer inputs
+→ traced reducer committed state = compatibility reducer committed state
+
+proposal / receipt artifacts
+↛ state, routing, evidence, action update inputs
+```
+
+이는 임의의 instrumentation 코드 변경이 항상 semantics-preserving이라는 주장이 아니다.
+
+세부 사전 등록과 saturation control은
+[`MORPH-001A` benchmark](../benchmarks/morph-001-demand-commit.md)에 고정한다.
+
+### 3B. 아직 구현하지 않는 envelope와 load
+
+`AccommodationEnvelope`는 현재 형태가 가설적으로 수용할 수 있는 typed 범위를
+정의할 미래 policy다. `[0, 1]` state bound나 bound까지 남은 거리는 storage validity
+constraint일 뿐 accommodation capacity가 아니다.
+
+따라서 첫 조각에서는 다음을 계산하거나 이름 붙이지 않는다.
+
+```text
+AccommodationEnvelope                    # PLANNED
+ExcessDemand                             # PLANNED
+requested_delta - committed_delta        # arithmetic gap only
+UncommittedResidual / ResidualStrain      # PLANNED
+MorphicLoadProfile                       # PROPOSED / UNIMPLEMENTED
+```
+
+요청–commit 차이에는 clamp, 감쇠, stage 상호작용과 구현 artifact가 섞일 수 있다.
+별도 operator와 단위 없이 이를 residual strain으로 승격하지 않는다.
+
 ## 4. Morphic Work, Residual Strain, Persistent Trace
 
 Demand가 모두 실제 변화로 수행되는 것은 아니다.
@@ -352,12 +472,15 @@ measurement mapping, 복잡도 보정이 필요하다.
    `0.01` threshold/unit, qualification 시점, typed delta, current-trace 정보 집합을
    버전 고정한다.
 4. **완료:** transition count/density report만 만들고 상태 update에는 사용하지 않는다.
-5. `MORPH-001`에서 pre-transition `DeformationDemand`, vector
-   `CapacityProfile`, `MorphicLoadProfile`, `MorphicWorkReceipt`,
-   `ResidualStrain`, `TraceCandidate`를 한 최소 사례로 비교한다.
-6. retention horizon 뒤 `PersistentTrace` 승격 여부를 별도 측정한다.
-7. count-only 경쟁 모델보다 판별 이득이 없으면 load 가설을 기각·축소한다.
-8. phenomenal bridge는 독립 실험과 측정 모델이 생길 때까지 `HOLD`한다.
+5. **완료 — `MORPH-001A`:** pre-constraint reducer proposal과 committed target을
+   stage-qualified immutable receipt로 분리한다. 아직 envelope나 load를 계산하지 않는다.
+6. **`MORPH-001B`:** 별도 `AccommodationEnvelope` policy와 competing excess
+   definition을 사전 등록한다. state bound를 envelope로 재사용하지 않는다.
+7. 이후에만 vector `MorphicLoadProfile`, residual, recovery와 count-only 경쟁 모델을
+   한 최소 사례에서 비교한다.
+8. retention horizon 뒤 `PersistentTrace` 승격 여부를 별도 측정한다.
+9. count-only 경쟁 모델보다 판별 이득이 없으면 load 가설을 기각·축소한다.
+10. phenomenal bridge는 독립 실험과 측정 모델이 생길 때까지 `HOLD`한다.
 
 ## 비목표
 
@@ -398,3 +521,24 @@ measurement mapping, 복잡도 보정이 필요하다.
 2. persistent라는 이름은 retention horizon 통과 뒤에만 부여된다.
 3. 단위·정규화·결측 규칙 없이는 demand/capacity의 `벗어남`을 계산하지 않는다.
 4. 경쟁 모델, 정상 통제, 폐기 조건이 report에 함께 기록된다.
+
+### `MORPH-001A` instrumentation — `SATISFIED`
+
+1. 모든 processed occurrence는 하나의 occurrence-lineage-bound,
+   operator-schema-bound receipt를 갖고 transport
+   redelivery는 이를 늘리지 않는다.
+2. pre-constraint requested displacement와 committed displacement는 별도 값이며,
+   saturation control에서 달라질 수 있다.
+3. proposal receipt는 Q-qualified transition이 없어도 존재할 수 있다.
+4. 미래 event는 동일 prefix의 proposal receipt를 변경하지 않는다.
+5. traced reducer와 compatibility wrapper의 committed state가 같고, proposal과
+   receipt가 state·evidence·routing·action update의 입력이 되지 않는다.
+6. receipt는 envelope, excess, residual strain, MorphicLoad, qualia 또는 정신 시간을
+   생성하지 않는다.
+7. policy-bound operator/driver schema, content-bound identity, typed state projection과
+   인접 receipt state chain이 내부 불일치를 거부한다.
+8. finite out-of-bound initial state의 기존 invariant-audit 경로를 instrumentation
+   exception으로 바꾸지 않는다.
+
+이 조건은 instrumentation의 무결성만 판정한다. `HM-DYN-002`나 인간 경험적
+타당성의 support가 아니다.
