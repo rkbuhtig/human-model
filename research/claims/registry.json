@@ -187,32 +187,133 @@
       "notes": "The structural test demonstrates one legal descriptive update; it does not establish how human reexposure generally behaves."
     },
     {
+      "id": "HM-INV-007",
+      "kind": "INVARIANT",
+      "adoption_status": "ADOPTED",
+      "implementation_status": "IMPLEMENTED",
+      "statement": "The Q-v1 derived ledger contains exactly one qualification receipt per processed occurrence, its mental transitions are exactly the qualified receipt subset, and transport duplicates or redundant deliveries create neither an extra receipt nor a transition.",
+      "scope": [
+        "derived_mental_transition_ledger_v0.2",
+        "processed_occurrence_checkpoint_q_v1"
+      ],
+      "exclusions": [
+        "unprocessed_delivery_attempts",
+        "claim_that_every_processed_occurrence_qualifies",
+        "claim_that_a_receipt_is_a_conscious_episode"
+      ],
+      "depends_on": [
+        "HM-TYPE-001",
+        "HM-TYPE-005"
+      ],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [
+          "test_one_receipt_per_processed_occurrence_and_qualified_subset",
+          "test_transport_redelivery_does_not_create_mental_transition"
+        ],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "COUNTEREXAMPLE_TRACE",
+        "description": "A processed occurrence has zero or multiple Q receipts, a qualified receipt lacks its mental transition, an unqualified receipt creates one, or a transport duplicate or redundant delivery adds either record."
+      }
+    },
+    {
+      "id": "HM-INV-008",
+      "kind": "INVARIANT",
+      "adoption_status": "ADOPTED",
+      "implementation_status": "IMPLEMENTED",
+      "statement": "Mental-transition qualification is an immutable post-run derived projection: changing Q-v1 threshold or field scope may change only the mental-transition ledger and cannot change the base HumanState trajectory, processing trace, evidence records, or action records.",
+      "scope": [
+        "mental_transition_policy_ablation_v0.2",
+        "read_only_projection_boundary"
+      ],
+      "exclusions": [
+        "using_transition_reports_as_future_model_input",
+        "predictive_validity_of_transition_density",
+        "human_empirical_measurement"
+      ],
+      "depends_on": [
+        "HM-INV-001",
+        "HM-TYPE-001"
+      ],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [
+          "test_policy_ablation_changes_only_read_only_ledger",
+          "test_schema_has_no_morphic_or_qualia_fields_and_no_state_feedback"
+        ],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "COUNTEREXAMPLE_TRACE",
+        "description": "Holding the scenario and non-Q engine configuration fixed while changing only Q policy changes a non-mental-transition state or ledger, or a derived report is fed back into the run that generated it."
+      },
+      "notes": "Read-only means no feedback in the implemented run path; it does not prohibit a future separately specified experiment from consuming a prior report."
+    },
+    {
+      "id": "HM-INV-009",
+      "kind": "INVARIANT",
+      "adoption_status": "ADOPTED",
+      "implementation_status": "IMPLEMENTED",
+      "statement": "Q-v1 uses only current-checkpoint trace information, assigns transition_effective_at and qualified_at to processed_at, and later events cannot requalify an unchanged processing-trace prefix.",
+      "scope": [
+        "mental_transition_temporal_lineage_v0.2",
+        "q_v1_information_boundary"
+      ],
+      "exclusions": [
+        "causal_effect_of_future_events_on_future_state",
+        "lagged_predictive_evaluation",
+        "retrospective_human_memory_reconstruction"
+      ],
+      "depends_on": [
+        "HM-TYPE-001",
+        "HM-TYPE-004"
+      ],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [
+          "test_future_events_cannot_requalify_prefix",
+          "test_backlog_times_are_preserved_and_effective_at_is_processed_at"
+        ],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "COUNTEREXAMPLE_TRACE",
+        "description": "Appending later events changes prior receipts or transitions for an identical processing prefix, or a qualified transition is assigned to source occurrence or availability time rather than processed_at."
+      }
+    },
+    {
       "id": "HM-TYPE-001",
       "kind": "TYPE",
       "adoption_status": "ADOPTED",
-      "implementation_status": "UNIMPLEMENTED",
-      "statement": "Canonical elapsed time and preregistered qualified mental-transition count or density are distinct quantities and cannot be freely cast into one another.",
+      "implementation_status": "IMPLEMENTED",
+      "statement": "Canonical elapsed time, per-processed-occurrence qualification receipt, qualified mental transition, qualified count, and qualified density are distinct typed quantities or records and cannot be freely cast into one another.",
       "scope": [
-        "temporal_kernel_design",
-        "mental_transition_ledger"
+        "mental_transition_measurement_q_v1",
+        "derived_mental_transition_ledger_v0.2"
       ],
       "exclusions": [
         "claim_that_any_quantity_is_already_empirically_identified",
-        "claim_that_mental_transition_is_a_fundamental_physical_time_unit"
+        "claim_that_mental_transition_is_a_fundamental_physical_time_unit",
+        "claim_that_transition_density_has_predictive_value"
       ],
       "depends_on": [],
       "support": {
         "historical_cases": [
           "HM-DEFECT-EVENT-COUNT-SLOW-UPDATE-V01"
         ],
-        "structural_tests": [],
+        "structural_tests": [
+          "test_one_receipt_per_processed_occurrence_and_qualified_subset",
+          "test_transition_window_keeps_count_and_density_distinct"
+        ],
         "empirical_datasets": []
       },
       "failure_condition": {
         "type": "INVALID_CONSTRUCTION",
-        "description": "A canonical schema stores elapsed time and qualified transition count or density as the same untyped value, uses transport deliveries as transitions, or permits an unrecorded cast between the quantities."
+        "description": "A canonical schema aliases processed receipt, qualified transition, elapsed duration, qualified count, and density; uses transport deliveries as transitions; or permits an unrecorded cast between these quantities."
       },
-      "notes": "The temporal separation is adopted as research hygiene. It does not adopt the associated transition-density hypothesis."
+      "notes": "IMPLEMENTED is limited to Q-v1 simulation types and derived reports. It does not adopt HM-DYN-001 or identify a natural unit of consciousness."
     },
     {
       "id": "HM-TYPE-002",
@@ -414,6 +515,46 @@
         "type": "CALIBRATION_OR_IDENTIFIABILITY_FAILURE",
         "description": "Demand cannot be estimated before the modeled update, demand and capacity contributions to load are not separately identifiable, achieved work cannot be distinguished from residual strain, or trace retention cannot be calibrated at the preregistered horizon."
       }
+    },
+    {
+      "id": "HM-MEAS-002",
+      "kind": "MEASUREMENT_MODEL",
+      "adoption_status": "ADOPTED",
+      "implementation_status": "IMPLEMENTED",
+      "statement": "Q-v1 is a simulation measurement model that evaluates one processed-occurrence checkpoint at a time over versioned literal persistent descriptive fields, records typed before/after deltas, qualifies a receipt when at least one absolute delta reaches 0.01 normalized_simulation_unit by default, and reports qualified count and density as distinct typed quantities.",
+      "scope": [
+        "mental_transition_measurement_q_v1",
+        "simulation_trace_only"
+      ],
+      "exclusions": [
+        "human_calibrated_change_threshold",
+        "subjective_time_measurement",
+        "predictive_validity_of_transition_density",
+        "morphic_load_or_phenomenal_measurement",
+        "queue_access_semantic_deconfounding",
+        "same_timestamp_serialization_or_semantic_bundle_stability"
+      ],
+      "depends_on": [
+        "HM-TYPE-001",
+        "HM-INV-007",
+        "HM-INV-008",
+        "HM-INV-009"
+      ],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [
+          "test_one_receipt_per_processed_occurrence_and_qualified_subset",
+          "test_policy_digest_changes_with_threshold_or_scope",
+          "test_policy_rejects_unknown_or_duplicate_state_fields",
+          "test_transition_window_keeps_count_and_density_distinct"
+        ],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "CALIBRATION_OR_IDENTIFIABILITY_FAILURE",
+        "description": "The declared policy cannot reproduce its typed deltas or qualification from the current checkpoint trace, threshold or field-scope changes are not identified by the policy digest, undeclared fields enter the scope, or count, duration, and density cannot be recovered as distinct report quantities."
+      },
+      "notes": "Calibration here means internal reproducibility and identifiability in normalized simulation units. No human threshold, natural mental-time unit, or predictive advantage has been calibrated. The default scope includes access fields still influenced by legacy_v01_access_pressure_bridge; excluding the queue object does not remove that indirect confound. Per-processed-occurrence Q-v1 also does not guarantee stability under unresolved same-time ordering or alternative semantic bundling. Queue/access decoupling or scope ablation and a separate serialization failure probe are required before HM-DYN-001 evaluation."
     },
     {
       "id": "HM-META-001",

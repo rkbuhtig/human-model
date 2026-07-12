@@ -52,7 +52,15 @@ def _imports(path: Path) -> set[str]:
 
 class PackageBoundaryTests(unittest.TestCase):
     def test_contract_does_not_import_model_protocol_or_facade(self) -> None:
-        forbidden = ("..models", "..protocol", "..types", "dynamics.models", "dynamics.protocol")
+        forbidden = (
+            "..models",
+            "..protocol",
+            "..types",
+            "..mental_transitions",
+            "dynamics.models",
+            "dynamics.protocol",
+            "dynamics.mental_transitions",
+        )
         for path in (PACKAGE / "contract").rglob("*.py"):
             imports = _imports(path)
             self.assertFalse(
@@ -61,7 +69,14 @@ class PackageBoundaryTests(unittest.TestCase):
             )
 
     def test_models_do_not_import_protocol_or_facade(self) -> None:
-        forbidden = ("..protocol", "..types", "dynamics.protocol", "dynamics.types")
+        forbidden = (
+            "..protocol",
+            "..types",
+            "..mental_transitions",
+            "dynamics.protocol",
+            "dynamics.types",
+            "dynamics.mental_transitions",
+        )
         for path in (PACKAGE / "models").rglob("*.py"):
             imports = _imports(path)
             self.assertFalse(
@@ -70,7 +85,14 @@ class PackageBoundaryTests(unittest.TestCase):
             )
 
     def test_protocol_does_not_import_human_state_or_facade(self) -> None:
-        forbidden = ("..models", "..types", "dynamics.models", "dynamics.types")
+        forbidden = (
+            "..models",
+            "..types",
+            "..mental_transitions",
+            "dynamics.models",
+            "dynamics.types",
+            "dynamics.mental_transitions",
+        )
         for path in (PACKAGE / "protocol").rglob("*.py"):
             imports = _imports(path)
             self.assertFalse(

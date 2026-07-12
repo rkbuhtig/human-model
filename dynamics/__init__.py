@@ -1,4 +1,4 @@
-"""Executable simulation contracts for Human Model Dynamics v0.2 Slice A.
+"""Executable Human Model Dynamics v0.2 temporal and measurement slices.
 
 The package tests type boundaries and transition behavior.  It is not an
 empirically calibrated model of human psychology or a theory of qualia.

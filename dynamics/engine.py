@@ -1,4 +1,4 @@
-"""Deterministic typed hybrid engine for Human Model Dynamics v0.2 Slice A."""
+"""Deterministic typed hybrid engine for Human Model Dynamics v0.2."""
 
 from __future__ import annotations
 
@@ -38,6 +38,11 @@ from .models import (
     validate_routing_distribution,
     validate_state_bounds,
 )
+from .mental_transitions import (
+    MentalTransitionLedger,
+    MentalTransitionQualificationPolicy,
+    build_mental_transition_ledger,
+)
 from .protocol import (
     IngressDecision,
     IngressQueue,
@@ -60,6 +65,9 @@ class EngineConfig:
     release_threshold: float = 0.55
     minimum_ground_mass: float = 0.50
     ingress_policy: str = "priority"
+    mental_transition_policy: MentalTransitionQualificationPolicy = field(
+        default_factory=MentalTransitionQualificationPolicy
+    )
 
     def __post_init__(self) -> None:
         if self.base_capacity_per_tick < 1 or self.queue_limit < 1 or self.drain_ticks < 0:
@@ -73,6 +81,12 @@ class EngineConfig:
             raise ValueError("minimum_ground_mass must be finite and non-negative")
         if self.ingress_policy not in {"fifo", "priority"}:
             raise ValueError("ingress_policy must be 'fifo' or 'priority'")
+        if not isinstance(
+            self.mental_transition_policy, MentalTransitionQualificationPolicy
+        ):
+            raise TypeError(
+                "mental_transition_policy must be MentalTransitionQualificationPolicy"
+            )
 
 
 @dataclass(slots=True)
@@ -105,6 +119,9 @@ class SimulationLedger:
     unique_received: int = 0
     processed: int = 0
     final_sim_time: SimTime = SimTime(0)
+    mental_transitions: MentalTransitionLedger = field(
+        default_factory=MentalTransitionLedger
+    )
 
 
 @dataclass(frozen=True, slots=True)
@@ -179,6 +196,19 @@ class SimulationResult:
                 self.ledger.same_timestamp_order_debts
             ),
             "final_sim_time": int(self.ledger.final_sim_time),
+            "mental_transition_receipts": len(
+                self.ledger.mental_transitions.receipts
+            ),
+            "qualified_mental_transitions": len(
+                self.ledger.mental_transitions.transitions
+            ),
+            "mental_transition_qualifier": (
+                f"{self.ledger.mental_transitions.policy.qualifier_id}@"
+                f"{self.ledger.mental_transitions.policy.qualifier_version}"
+            ),
+            "mental_transition_policy_digest": (
+                self.ledger.mental_transitions.policy.policy_digest
+            ),
             "input_accounting_ok": self.input_accounting_ok,
             "evidence_links": len(self.ledger.evidence_links),
             "attempts": len(self.ledger.attempts),
@@ -212,7 +242,11 @@ class DynamicsEngine:
         """Run only on observable events; hidden scenario truth is never accepted."""
 
         ordered = list(events)
-        ledger = SimulationLedger()
+        ledger = SimulationLedger(
+            mental_transitions=MentalTransitionLedger(
+                policy=self.config.mental_transition_policy
+            )
+        )
         initial_errors = validate_state_bounds(initial_state)
         initial_errors.extend(
             validate_evidence_assessment(
@@ -347,6 +381,10 @@ class DynamicsEngine:
             )
         )
         ledger.invariant_errors.extend(f"final:{error}" for error in final_errors)
+        ledger.mental_transitions = build_mental_transition_ledger(
+            tuple(ledger.tick_traces),
+            self.config.mental_transition_policy,
+        )
 
         return SimulationResult(initial_state=initial_state, final_state=state, ledger=ledger)
 
