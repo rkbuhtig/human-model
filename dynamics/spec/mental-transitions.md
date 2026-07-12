@@ -99,8 +99,11 @@ relationship.trust
 relationship.boundary_strain
 ```
 
-각 값은 현재 Dynamics의 normalized `[0, 1]` simulation unit이다. 다음은 scope에서
-제외한다.
+각 field의 정상 운영 범위는 normalized `[0, 1]` simulation unit이다.
+다만 기존 engine은 범위를 벗어난 finite 초기 상태를 invariant error로 남기고
+실행을 계속할 수 있다. derived measurement는 그 audit path를 예외로 바꾸지
+않도록 해당 finite before value를 receipt에 보존한다. 범위 위반은 여전히
+invariant error이며 정상 상태로 승격되지 않는다. 다음은 scope에서 제외한다.
 
 - `HumanState.clock`
 - `EvidenceAssessmentState`와 certification record

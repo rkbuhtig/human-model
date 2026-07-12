@@ -1,7 +1,8 @@
-"""Executable Human Model Dynamics v0.2 temporal and measurement slices.
+"""Executable Human Model Dynamics v0.2 temporal and audit slices.
 
-The package tests type boundaries and transition behavior.  It is not an
-empirically calibrated model of human psychology or a theory of qualia.
+The package tests type boundaries, transition behavior, and reducer proposal
+instrumentation.  It is not an empirically calibrated model of human
+psychology or a theory of qualia.
 """
 
 from .engine import DynamicsEngine, EngineConfig, SimulationResult

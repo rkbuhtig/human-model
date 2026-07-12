@@ -1,4 +1,4 @@
-"""Deterministic typed hybrid engine for Human Model Dynamics v0.2."""
+"""Deterministic typed hybrid engine for Human Model Dynamics v0.2 slices."""
 
 from __future__ import annotations
 
@@ -26,8 +26,9 @@ from .contract import (
 )
 from .models import (
     HumanState,
-    apply_fast_update,
-    apply_slow_update,
+    ReducerProposalContext,
+    apply_fast_update_traced,
+    apply_slow_update_traced,
     iter_unit_values,
     phenomenal_activation,
     processing_capacity,
@@ -42,6 +43,10 @@ from .mental_transitions import (
     MentalTransitionLedger,
     MentalTransitionQualificationPolicy,
     build_mental_transition_ledger,
+)
+from .reducer_proposals import (
+    ReducerProposalLedger,
+    build_reducer_proposal_ledger,
 )
 from .protocol import (
     IngressDecision,
@@ -121,6 +126,9 @@ class SimulationLedger:
     final_sim_time: SimTime = SimTime(0)
     mental_transitions: MentalTransitionLedger = field(
         default_factory=MentalTransitionLedger
+    )
+    reducer_proposals: ReducerProposalLedger = field(
+        default_factory=ReducerProposalLedger
     )
 
 
@@ -209,6 +217,16 @@ class SimulationResult:
             "mental_transition_policy_digest": (
                 self.ledger.mental_transitions.policy.policy_digest
             ),
+            "reducer_proposal_receipts": len(
+                self.ledger.reducer_proposals.receipts
+            ),
+            "reducer_proposal_measurement_model": (
+                f"{self.ledger.reducer_proposals.policy.measurement_model_id}@"
+                f"{self.ledger.reducer_proposals.policy.measurement_model_version}"
+            ),
+            "reducer_proposal_policy_digest": (
+                self.ledger.reducer_proposals.policy.policy_digest
+            ),
             "input_accounting_ok": self.input_accounting_ok,
             "evidence_links": len(self.ledger.evidence_links),
             "attempts": len(self.ledger.attempts),
@@ -245,7 +263,8 @@ class DynamicsEngine:
         ledger = SimulationLedger(
             mental_transitions=MentalTransitionLedger(
                 policy=self.config.mental_transition_policy
-            )
+            ),
+            reducer_proposals=ReducerProposalLedger(),
         )
         initial_errors = validate_state_bounds(initial_state)
         initial_errors.extend(
@@ -385,6 +404,9 @@ class DynamicsEngine:
             tuple(ledger.tick_traces),
             self.config.mental_transition_policy,
         )
+        ledger.reducer_proposals = build_reducer_proposal_ledger(
+            tuple(ledger.tick_traces)
+        )
 
         return SimulationResult(initial_state=initial_state, final_state=state, ledger=ledger)
 
@@ -440,12 +462,13 @@ class DynamicsEngine:
             stance_anchor=assessment_anchor,
             policy=self._assessment_policy,
         )
-        state = apply_fast_update(
+        fast_result = apply_fast_update_traced(
             state,
             model_input,
             processed_tick=processed_tick,
             access_pressure=access_pressure,
         )
+        state = fast_result.state_after
         state = replace(state, evidence_assessment=assessment)
 
         phenomenal = phenomenal_activation(state, model_input)
@@ -472,7 +495,24 @@ class DynamicsEngine:
         if occurrence is not None:
             ledger.action_occurrences.append(occurrence)
 
-        state = apply_slow_update(state, model_input, phenomenal, performance)
+        slow_result = apply_slow_update_traced(
+            state,
+            model_input,
+            phenomenal,
+            performance,
+            write_sequence_start=len(fast_result.proposals) + 1,
+        )
+        state = slow_result.state_after
+        reducer_proposals = (*fast_result.proposals, *slow_result.proposals)
+        reducer_proposal_context = ReducerProposalContext(
+            encoded_soothing=model_input.soothing,
+            performance_receipt_id=(
+                None if performance is None else performance.receipt_id
+            ),
+            performance_action_kind=(
+                None if performance is None else performance.action_kind
+            ),
+        )
         deltas = self._numeric_deltas(before, state, event.event_id)
 
         lane = "internal" if not event.external else (
@@ -538,6 +578,8 @@ class DynamicsEngine:
             state_before=before,
             state_after=state,
             processing_sequence=processing_sequence,
+            reducer_proposals=reducer_proposals,
+            reducer_proposal_context=reducer_proposal_context,
         )
         ledger.tick_traces.append(trace)
 

@@ -284,6 +284,47 @@
       }
     },
     {
+      "id": "HM-INV-010",
+      "kind": "INVARIANT",
+      "adoption_status": "ADOPTED",
+      "implementation_status": "IMPLEMENTED",
+      "statement": "MORPH-001A reducer-proposal instrumentation records exactly one occurrence-lineage-bound and operator-schema-bound receipt per processed occurrence from current reducer information, remains independent of Q qualification, preserves traced/compatibility committed-state equality, and does not supply proposal artifacts as inputs to state, routing, evidence, or action updates.",
+      "scope": [
+        "MORPH-001A_reducer_proposal_instrumentation",
+        "simulation_trace_only"
+      ],
+      "exclusions": [
+        "future_outcome_based_demand_reconstruction",
+        "human_latent_demand_identification",
+        "morphic_load_or_qualia_measurement",
+        "subjective_time_measurement",
+        "cryptographic_source_authenticity_or_capability_secure_construction"
+      ],
+      "depends_on": [
+        "HM-TYPE-006",
+        "HM-TYPE-004",
+        "HM-TYPE-005"
+      ],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [
+          "test_one_reducer_proposal_receipt_per_processed_occurrence",
+          "test_transport_redelivery_does_not_create_reducer_proposal_receipt",
+          "test_current_reexposure_creates_new_reducer_proposal_with_source_provenance",
+          "test_future_events_cannot_rewrite_reducer_proposal_prefix",
+          "test_reducer_proposal_instrumentation_preserves_committed_runtime_semantics",
+          "test_reducer_proposal_ledger_rejects_inconsistent_lineage_and_content_identity",
+          "test_reducer_proposal_capture_preserves_invalid_initial_audit_path"
+        ],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "COUNTEREXAMPLE_TRACE",
+        "description": "A processed occurrence has zero or multiple proposal receipts, a transport redelivery adds a receipt, receipt content changes without changing content identity, inconsistent occurrence lineage is accepted, a later event rewrites an identical receipt prefix, proposals are emitted only for Q-qualified transitions, traced and compatibility reducers commit different states, proposal capture converts the existing finite-invalid-state audit path into an exception, or proposal artifacts become downstream update inputs."
+      },
+      "notes": "Current reducer information includes stage/write-local pre-constraint and committed targets plus typed driver contributions. Driver channels are an algebraic decomposition under a fixed operator schema, not independently reproduced source causality; constructor validation proves structural admissibility while the inline reducer builder is the trusted writer for evaluated values. Content-bound IDs and state chains enforce internal schema consistency under the canonical builder; they are not cryptographic proof of external source truth. This invariant establishes trace integrity only; ReducerProposal is not an independently identified DeformationDemand."
+    },
+    {
       "id": "HM-TYPE-001",
       "kind": "TYPE",
       "adoption_status": "ADOPTED",
@@ -320,14 +361,16 @@
       "kind": "TYPE",
       "adoption_status": "ADOPTED",
       "implementation_status": "UNIMPLEMENTED",
-      "statement": "Pre-transition DeformationDemand, typed CapacityProfile, their relative MorphicLoadProfile, achieved MorphicWorkReceipt, ResidualStrain, TraceCandidate, and horizon-qualified PersistentTrace are distinct quantities and records.",
+      "statement": "Independently identified pre-transition DeformationDemand, typed AccommodationEnvelope or CapacityProfile, ExcessDemand, CommittedDeformation, UncommittedResidual, MorphicLoadProfile, TraceCandidate, and horizon-qualified PersistentTrace are distinct quantities or records and cannot be freely cast into one another.",
       "scope": [
         "morphic_load_design",
         "MORPH-001"
       ],
       "exclusions": [
         "claim_that_any_component_is_empirically_identified",
-        "single_scalar_load_without_validation"
+        "single_scalar_load_without_validation",
+        "state_storage_bound_as_accommodation_envelope",
+        "requested_minus_committed_as_residual_strain"
       ],
       "depends_on": [],
       "support": {
@@ -337,9 +380,9 @@
       },
       "failure_condition": {
         "type": "INVALID_CONSTRUCTION",
-        "description": "A canonical schema defines demand using post-update change, applies capacity both inside demand and again inside load, or records an immediate TraceCandidate as PersistentTrace without a retention horizon."
+        "description": "A canonical schema defines demand from post-update committed change, aliases demand with commit, treats the storage bound as an accommodation envelope, labels the arithmetic demand-commit gap as residual strain without a separate operator, applies capacity both inside demand and again inside load, or records an immediate TraceCandidate as PersistentTrace without a retention horizon."
       },
-      "notes": "This is a proposed-model hygiene constraint, not support for the existence or predictive value of morphic load."
+      "notes": "HM-MEAS-003 instruments the current reducer's pre-constraint proposal, but that proxy already includes model-specific drivers and does not implement this capacity-independent demand/load type claim. This type hygiene is not support for the existence or predictive value of morphic load."
     },
     {
       "id": "HM-TYPE-003",
@@ -432,6 +475,38 @@
       "notes": "The type split is a protocol provenance contract and makes no empirical claim about human event segmentation."
     },
     {
+      "id": "HM-TYPE-006",
+      "kind": "TYPE",
+      "adoption_status": "ADOPTED",
+      "implementation_status": "IMPLEMENTED",
+      "statement": "A stage/write-local pre-constraint ReducerProposal, its bounded committed target, and an occurrence-level net state delta are distinct simulation trace quantities and cannot be freely substituted for one another.",
+      "scope": [
+        "MORPH-001A_reducer_proposal_instrumentation",
+        "simulation_reducer_trace_only"
+      ],
+      "exclusions": [
+        "independently_identified_deformation_demand",
+        "accommodation_envelope_or_capacity",
+        "morphic_load_or_residual_strain",
+        "qualia_or_subjective_time"
+      ],
+      "depends_on": [],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [
+          "test_pre_constraint_reducer_proposal_is_distinct_from_committed_delta",
+          "test_saturated_reducer_proposal_can_exist_without_mental_transition",
+          "test_reducer_proposal_records_require_immutable_typed_components"
+        ],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "INVALID_CONSTRUCTION",
+        "description": "A canonical trace reconstructs the requested target from final after-minus-before change, aliases requested and committed targets, loses ordered repeated writes to the same field, or casts a reducer proposal into DeformationDemand, MorphicLoad, qualia, or subjective time."
+      },
+      "notes": "The operational type split is implemented by ReducerDriverContribution and ReducerFieldProposal, with ReducerStepResult used only as a traced-reducer runtime wrapper. TickTrace and ReducerProposalReceipt/Ledger retain one flat occurrence-wide ordered proposals tuple under descriptive-reducer-preclamp-proxy@1.0.0. ReducerProposalContext binds encoded soothing and performance identity so conditional action/soothing writes and drivers must match the runtime context."
+    },
+    {
       "id": "HM-DYN-001",
       "kind": "DYNAMICAL_HYPOTHESIS",
       "adoption_status": "PROPOSED",
@@ -476,7 +551,8 @@
         "single_scalar_load_without_validation"
       ],
       "depends_on": [
-        "HM-TYPE-002"
+        "HM-TYPE-002",
+        "HM-MEAS-001"
       ],
       "support": {
         "historical_cases": [],
@@ -504,7 +580,8 @@
         "biophysical_energy_units"
       ],
       "depends_on": [
-        "HM-TYPE-002"
+        "HM-TYPE-002",
+        "HM-MEAS-003"
       ],
       "support": {
         "historical_cases": [],
@@ -514,7 +591,8 @@
       "failure_condition": {
         "type": "CALIBRATION_OR_IDENTIFIABILITY_FAILURE",
         "description": "Demand cannot be estimated before the modeled update, demand and capacity contributions to load are not separately identifiable, achieved work cannot be distinguished from residual strain, or trace retention cannot be calibrated at the preregistered horizon."
-      }
+      },
+      "notes": "MORPH-001A supplies only reducer proposal/commit instrumentation. It does not implement DeformationDemand and does not satisfy this load measurement claim because AccommodationEnvelope, excess, residual, recovery, and retention mappings remain undefined."
     },
     {
       "id": "HM-MEAS-002",
@@ -555,6 +633,43 @@
         "description": "The declared policy cannot reproduce its typed deltas or qualification from the current checkpoint trace, threshold or field-scope changes are not identified by the policy digest, undeclared fields enter the scope, or count, duration, and density cannot be recovered as distinct report quantities."
       },
       "notes": "Calibration here means internal reproducibility and identifiability in normalized simulation units. No human threshold, natural mental-time unit, or predictive advantage has been calibrated. The default scope includes access fields still influenced by legacy_v01_access_pressure_bridge; excluding the queue object does not remove that indirect confound. Per-processed-occurrence Q-v1 also does not guarantee stability under unresolved same-time ordering or alternative semantic bundling. Queue/access decoupling or scope ablation and a separate serialization failure probe are required before HM-DYN-001 evaluation."
+    },
+    {
+      "id": "HM-MEAS-003",
+      "kind": "MEASUREMENT_MODEL",
+      "adoption_status": "ADOPTED",
+      "implementation_status": "IMPLEMENTED",
+      "statement": "MORPH-001A is a simulation instrumentation model that preserves one flat occurrence-wide ordered tuple of stage/write-qualified pre-constraint reducer targets, bounded committed targets, and typed driver contributions in one ReducerProposalReceipt per processed occurrence.",
+      "scope": [
+        "MORPH-001A_reducer_proposal_instrumentation",
+        "simulation_reducer_trace_only"
+      ],
+      "exclusions": [
+        "human_calibrated_deformation_demand",
+        "accommodation_envelope_measurement",
+        "excess_or_residual_strain_measurement",
+        "morphic_load_measurement",
+        "qualia_or_phenomenal_measurement",
+        "subjective_or_mental_time_measurement"
+      ],
+      "depends_on": [
+        "HM-TYPE-006",
+        "HM-INV-010"
+      ],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [
+          "test_pre_constraint_reducer_proposal_is_distinct_from_committed_delta",
+          "test_saturated_reducer_proposal_can_exist_without_mental_transition",
+          "test_reducer_proposal_records_require_immutable_typed_components"
+        ],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "CALIBRATION_OR_IDENTIFIABILITY_FAILURE",
+        "description": "The trace cannot identify the versioned writer and stage that produced a proposal, reconstruct requested and committed field deltas in normalized simulation units, reproduce their dissociation under a preregistered saturation control, or keep the record distinct from Q qualification and future envelope/load quantities."
+      },
+      "notes": "The measurement identity is descriptive-reducer-preclamp-proxy@1.0.0. ReducerProposal is not DeformationDemand: the proposal can already include model-specific access pressure, update rate, phenomenal activation, performance, and other current drivers. Passing structural probes supplies no support for HM-DYN-002."
     },
     {
       "id": "HM-META-001",

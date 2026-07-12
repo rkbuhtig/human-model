@@ -459,12 +459,12 @@ class MentalTransitionPolicyTests(unittest.TestCase):
                 qualifier_version="999.0.0",
                 state_fields=(HABIT_FIELD,),
             )
-        with self.assertRaisesRegex(ValueError, "must be in"):
+        with self.assertRaisesRegex(ValueError, "must be finite"):
             MentalStateDelta(
                 field=HABIT_FIELD,
-                before=-1.0,
-                after=-1.0005,
-                delta=-0.0005,
+                before=float("nan"),
+                after=0.5,
+                delta=0.0,
                 unit="normalized_simulation_unit",
             )
         self.assertIn(HABIT_FIELD, PERSISTENT_DESCRIPTIVE_FIELDS)

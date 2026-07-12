@@ -1,11 +1,11 @@
-# Human Model Dynamics v0.2 — Temporal Provenance + Read-only Transition Measurement
+# Human Model Dynamics v0.2 — Temporal Provenance + Read-only Measurement
 
 Chapter 01–11의 권한 척추와 분리 원칙을 보존하면서, 인간 내부 상태에 관한 `BRIDGE`를 실행 가능한 가설로 명시해 시험한다.
 
 이 패키지는 실제 인간의 감정값이나 행동을 예측하도록 보정되지 않았다. 퀄리아의
 존재를 증명하지도 않는다. v0.1.1의 동역학 위에 v0.2가 시간·사건 provenance와
-post-run read-only mental-transition measurement를 추가했다. 현재 검증 대상은 다음
-다섯 가지다.
+post-run read-only mental-transition measurement와 current-reducer proposal
+instrumentation을 추가했다. 현재 검증 대상은 다음 여섯 가지다.
 
 ```text
 개념 간 전이가 타입을 보존하는가
@@ -13,6 +13,7 @@ post-run read-only mental-transition measurement를 추가했다. 현재 검증 
 경로 의존적 변화와 비리셋 회복을 표현할 수 있는가
 사건 발생·전달·처리 시각과 원천 occurrence·delivery가 섞이지 않는가
 처리된 occurrence의 변화 receipt와 count/density report가 base run에 되먹임되지 않는가
+clamp 전 reducer proposal과 실제 committed target을 순서와 provenance를 잃지 않고 분리하는가
 ```
 
 이 구현의 연구 지위와 후속 범위는 다음 문서에서 관리한다.
@@ -55,6 +56,7 @@ dynamics/
 ├─ adapters.py           명시적 cross-layer adapter와 legacy bridge
 ├─ temporal.py           canonical time과 occurrence/delivery stamp
 ├─ mental_transitions.py processed-occurrence Q-v1 derived ledger와 report
+├─ reducer_proposals.py  ordered pre-clamp reducer proposal derived ledger
 ├─ types.py              v0.1 compatibility re-export
 ├─ epistemics.py         v0.1 compatibility wrapper
 ├─ routing.py            v0.1 compatibility wrapper
@@ -73,6 +75,8 @@ contract  ← protocol
 engine → contract + models + protocol
 mental_transitions → completed trace + models + temporal
 engine → mental_transitions only after core execution
+reducer_proposals → captured reducer trace + models + temporal
+engine → reducer_proposals only as a read-only audit surface
 ```
 
 `contract/`는 model·protocol을 import하지 않고, `models/`는 protocol queue를
@@ -160,6 +164,9 @@ python -m unittest discover -s dynamics/tests -v
 - 처리된 occurrence마다 Q receipt 하나를 남기고 qualified subset만 transition으로 둔다.
 - Q policy threshold/scope를 바꿔도 base state·trace·evidence/action record는 바뀌지 않는다.
 - transition window의 canonical duration, qualified count, density를 별도 타입으로 둔다.
+- reducer write마다 pre-clamp requested target과 bounded committed target을 분리한다.
+- 같은 field의 반복 write는 occurrence net delta로 뭉개지 않고 순서대로 연결한다.
+- 포화로 committed delta가 0이어도 reducer proposal receipt는 보존할 수 있다.
 - 입력 손실은 `processed / dropped / unresolved`로 회계된다.
 
 시간·사건 동일성의 정확한 범위와 아직 구현하지 않은 flow는
@@ -167,10 +174,17 @@ python -m unittest discover -s dynamics/tests -v
 `Q-v1`의 literal field scope, `0.01 normalized_simulation_unit` threshold,
 per-processed-occurrence checkpoint와 read-only 경계는
 [Mental Transition Measurement Contract](spec/mental-transitions.md)에 고정했다.
+[Reducer Proposal Instrumentation Contract](spec/reducer-proposals.md)는 current reducer의
+pre-clamp proxy와 commit을 분리하는 정확한 구현 범위를 고정한다.
 
 이 ledger 구현은 measurement surface의 구조적 재현성만 보인다. transition density의
 predictive value(`HM-DYN-001`), 정신 시간의 자연 단위, `MorphicLoadProfile`,
 phenomenal bridge는 구현하거나 검증하지 않았다.
+
+`ReducerProposal`도 independently identified `DeformationDemand`가 아니다. 현재
+proposal에는 legacy access pressure, phenomenal/evidence coupling, update rate와 action
+consequence가 포함될 수 있다. `AccommodationEnvelope`, excess/residual, load와 퀄리아
+대응은 여전히 미구현이다.
 
 ### Canonical semantic baseline
 
