@@ -1,14 +1,18 @@
-# Human Model Dynamics v0.2 — Temporal Provenance Slice
+# Human Model Dynamics v0.2 — Temporal Provenance + Read-only Transition Measurement
 
 Chapter 01–11의 권한 척추와 분리 원칙을 보존하면서, 인간 내부 상태에 관한 `BRIDGE`를 실행 가능한 가설로 명시해 시험한다.
 
-이 패키지는 실제 인간의 감정값이나 행동을 예측하도록 보정되지 않았다. 퀄리아의 존재를 증명하지도 않는다. v0.1.1의 동역학 위에 v0.2 첫 slice가 시간·사건 provenance를 추가했다. 현재 검증 대상은 다음 네 가지다.
+이 패키지는 실제 인간의 감정값이나 행동을 예측하도록 보정되지 않았다. 퀄리아의
+존재를 증명하지도 않는다. v0.1.1의 동역학 위에 v0.2가 시간·사건 provenance와
+post-run read-only mental-transition measurement를 추가했다. 현재 검증 대상은 다음
+다섯 가지다.
 
 ```text
 개념 간 전이가 타입을 보존하는가
 부하 아래에서도 권한 경계가 유지되는가
 경로 의존적 변화와 비리셋 회복을 표현할 수 있는가
 사건 발생·전달·처리 시각과 원천 occurrence·delivery가 섞이지 않는가
+처리된 occurrence의 변화 receipt와 count/density report가 base run에 되먹임되지 않는가
 ```
 
 이 구현의 연구 지위와 후속 범위는 다음 문서에서 관리한다.
@@ -50,11 +54,12 @@ dynamics/
 ├─ protocol/             사건 encoding과 ingress queue
 ├─ adapters.py           명시적 cross-layer adapter와 legacy bridge
 ├─ temporal.py           canonical time과 occurrence/delivery stamp
+├─ mental_transitions.py processed-occurrence Q-v1 derived ledger와 report
 ├─ types.py              v0.1 compatibility re-export
 ├─ epistemics.py         v0.1 compatibility wrapper
 ├─ routing.py            v0.1 compatibility wrapper
 ├─ invariants.py         v0.1 compatibility validator wrapper
-├─ engine.py             세 층의 composition root
+├─ engine.py             core 실행 + post-run measurement composition root
 ├─ scenario.py           JSON 로더와 기준 실행 CLI
 └─ stress.py             다축 부하 생성기와 soak 측정
 ```
@@ -66,6 +71,8 @@ contract  ← models
 contract  ← protocol
 
 engine → contract + models + protocol
+mental_transitions → completed trace + models + temporal
+engine → mental_transitions only after core execution
 ```
 
 `contract/`는 model·protocol을 import하지 않고, `models/`는 protocol queue를
@@ -150,10 +157,20 @@ python -m unittest discover -s dynamics/tests -v
 - 동일 occurrence의 새 delivery는 인간·Evidence update를 반복하지 않는다.
 - 과거 `occurred_at`과 현재 `available_at / processed_at`을 함께 보존한다.
 - 현재 reexposure는 새 내부 occurrence로 처리하되 원천 Evidence를 복제하지 않는다.
+- 처리된 occurrence마다 Q receipt 하나를 남기고 qualified subset만 transition으로 둔다.
+- Q policy threshold/scope를 바꿔도 base state·trace·evidence/action record는 바뀌지 않는다.
+- transition window의 canonical duration, qualified count, density를 별도 타입으로 둔다.
 - 입력 손실은 `processed / dropped / unresolved`로 회계된다.
 
 시간·사건 동일성의 정확한 범위와 아직 구현하지 않은 flow는
 [Temporal Envelope Contract](spec/temporal.md)에 구분했다.
+`Q-v1`의 literal field scope, `0.01 normalized_simulation_unit` threshold,
+per-processed-occurrence checkpoint와 read-only 경계는
+[Mental Transition Measurement Contract](spec/mental-transitions.md)에 고정했다.
+
+이 ledger 구현은 measurement surface의 구조적 재현성만 보인다. transition density의
+predictive value(`HM-DYN-001`), 정신 시간의 자연 단위, `MorphicLoadProfile`,
+phenomenal bridge는 구현하거나 검증하지 않았다.
 
 ### Canonical semantic baseline
 

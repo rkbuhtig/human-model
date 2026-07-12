@@ -96,6 +96,9 @@ PastOccurrence ≠ CurrentReexposure
 - transport partition 안정성과 burst/spaced 판별
 - 시간 경과가 Evidence ledger를 수정하지 않음
 
+이 second slice는 독립 temporal-comparison 축이다. read-only transition ledger나
+`MORPH-001`을 시작하기 위한 선행 blocker가 아니다.
+
 따라서 v0.2는 provenance-capable temporal envelope까지만 구현되었다.
 `FlowUpdate/EventJump`, no-event recovery/decay, burst/spaced 결과는 아직 구현 성취가
 아니며 인간의 정신 시간에 대한 경험적 지지는 전혀 없다. 구현된 타입·writer·
@@ -105,17 +108,49 @@ identity 경계는 [Temporal Envelope Contract](../dynamics/spec/temporal.md)에
 
 ## 3A. Read-only Mental Transition Ledger
 
-**상태: `PROPOSED` — RFC 0003**
+**상태: type/measurement slice `IMPLEMENTED`; predictive hypothesis `PROPOSED` — RFC 0003**
 
 ```text
 canonical elapsed time
 ≠ qualified mental-transition count / density
 ```
 
-사전 등록한 판정자 `Q`를 통과한 상태 전이만 append-only ledger에 기록한다.
-처음에는 report만 만들고 update kernel에 재입력하지 않는다. transport duplicate는
-자동 계수하지 않는다. 동일 원천을 현재 실제로 다시 접근한 경우는 별도
-reexposure/access identity를 가져야 하며, 그 현재 전이가 `Q`를 통과할 수는 있다.
+구현된 `Q-v1`은 processed occurrence마다 receipt 하나를 post-run에 파생한다.
+`body/access/associative/affective/habit/narrative/relationship`의 literal persistent
+field 중 하나라도 `0.01 normalized_simulation_unit` 이상 변한 receipt만 qualified
+transition subset에 들어간다.
+
+```text
+checkpoint                  per processed occurrence
+transition_effective_at     processed_at
+qualification information  current trace only
+ledger                      immutable / post-run derived / read-only
+report                      count ≠ canonical duration ≠ density
+```
+
+transport duplicate와 redundant delivery는 receipt를 추가하지 않는다. qualification
+policy를 바꿔도 base HumanState·processing trace·evidence/action ledger는 바뀌지
+않으며, count/density report는 update kernel에 재입력되지 않는다. 동일 원천을 현재
+실제로 다시 접근한 경우는 별도 reexposure occurrence로 처리되므로 독립적으로
+qualify할 수 있다.
+
+구조 테스트:
+
+- `test_one_receipt_per_processed_occurrence_and_qualified_subset`
+- `test_transport_redelivery_does_not_create_mental_transition`
+- `test_policy_ablation_changes_only_read_only_ledger`
+- `test_future_events_cannot_requalify_prefix`
+- `test_transition_window_keeps_count_and_density_distinct`
+
+이 구현은 [Q-v1 measurement contract](../dynamics/spec/mental-transitions.md)를
+실행화한다. transition density가 이후 access/recovery를 예측한다는
+`HM-DYN-001`은 여전히 `PROPOSED / UNIMPLEMENTED`이며, 정신 시간의 실재 단위나
+인간 경험적 타당성은 검증되지 않았다.
+
+또한 default Q scope의 `access.*` field에는 `legacy_v01_access_pressure_bridge`의
+간접 영향이 남아 있고, per-occurrence checkpoint는 unresolved same-time ordering과
+semantic bundling에 안정적이라고 검증되지 않았다. queue/access decoupling 또는
+scope ablation과 serialization failure probe가 `HM-DYN-001` 평가 전에 필요하다.
 
 ## 3B. `MORPH-001` — Count–Load Dissociation
 

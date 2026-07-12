@@ -3,7 +3,7 @@
 | 항목 | 지위 |
 |---|---|
 | 설계 방향 | `ADOPTED` |
-| 코드 반영 | `PARTIAL — v0.1.1 import boundary + v0.2 temporal provenance; legacy access bridge retained` |
+| 코드 반영 | `PARTIAL — v0.1.1 boundaries + v0.2 temporal provenance/Q-v1 projection; legacy access bridge retained` |
 | 인간 경험적 지위 | `OPEN` |
 
 v0.1.1은 다음 core import 경계를 코드와 test로 구현했다. 다만 frozen semantics를
@@ -60,6 +60,23 @@ backlog/current-reexposure provenance를 구현했다. `FlowUpdate/EventJump`와
 개입·측정 protocol은 아직 계획 단계다. Protocol queue는 인간 내부 Access
 backlog라는 존재론적 주장이 아니다.
 
+### Derived Measurement — `IMPLEMENTED / Q-v1 SIMULATION SCOPE`
+
+완료된 processing trace에서 `TransitionQualificationReceipt`와 qualified
+`MentalTransition` subset을 post-run에 파생한다. policy threshold·scope·digest와
+count/density type은 기록하지만, 그 report를 같은 run의 `HumanState`, routing,
+Evidence 또는 action pipeline에 재입력하지 않는다.
+
+```text
+completed processing trace
+→ Q-v1 derived ledger
+↛ generating run update
+```
+
+이는 현재 model trajectory의 재현 가능한 측정 surface다. 인간의 정신 시간 단위나
+예측 타당성은 아니며, legacy queue→access confound와 same-time serialization 문제도
+남아 있다.
+
 ### 알려진 v0.1 bridge
 
 ```text
@@ -82,6 +99,7 @@ Dynamics ↛ Protocol queue를 직접 조회
 Protocol ↛ HumanState를 직접 mutate
 Protocol oracle ↛ HumanState에 주입
 Engine → 세 층을 계약에 따라 조립
+Engine → core 실행 완료 뒤 derived measurement를 조립
 ```
 
 v0.1.1에서 import 방향을 test로 잠갔다. 위 legacy bridge 때문에
@@ -98,6 +116,7 @@ v0.1.1에서 import 방향을 test로 잠갔다. 위 legacy bridge 때문에
 | Agency | 후보→의도→시도→수행→발생 | 부분 구현 |
 | Persistent traces | 이후 경로를 기울이는 흔적 | 탐색적 부분 구현 |
 | Plasticity | 경험과 시간에 따른 update kernel | 재정의 `PLANNED` |
+| Qualified mental transition | post-run receipt/subset/count/density | Q-v1 simulation measurement 구현; predictive value `OPEN` |
 
 Plasticity는 Truth/Access/Agency와 같은 종류의 인증 평면이 아니다. Persistence는
 남아 있는 흔적이고 Plasticity는 그 흔적을 바꾸는 연산 가설이다.
