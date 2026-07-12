@@ -9,6 +9,21 @@
 - 강하게 주장되었지만 근거가 부족했던 부분
 - 아직 검증이 필요한 열린 문제
 
+## Research program
+
+이 저장소는 역사 복원, 채택된 연구 방향, 구현된 계약, 실행 결과와 인간 경험적 근거를 같은 권위로 취급하지 않는다.
+
+```text
+Assessment ≠ Adoption ≠ Implementation ≠ Run ≠ Human-Empirical Evidence
+```
+
+- [연구의 현재 정체성과 주장 범위](research/README.md)
+- [Contract / Descriptive Dynamics / Experimental Protocol 경계](research/architecture.md)
+- [단계별 연구 로드맵](research/roadmap.md)
+- [Claim registry](research/claims/README.md)
+- [Defect–Principle Abduction Corpus](research/defects/README.md)
+- [비정본 assessment 기록](assessments/2026-07-13-research-program-plan-assessment.md)
+
 ## Volume I
 
 현재 범위는 인간 모델의 내부 구조다.
@@ -75,3 +90,5 @@ Chapter 01–11은 인간 내부 모델의 첫 번째 정리 경계다. 생명·
 Chapter 01–11의 분리 원칙을 실행 가능한 가설로 시험하는 최소 동역학 모델은 [dynamics/](dynamics/README.md)에 있다.
 
 현재 모델은 경험적으로 보정된 인간 예측기가 아니다. 관측·증거·후보·의도·시도·수행과, 수행된 행동의 세계 진입인 `ActionOccurrence`까지만 다른 타입으로 구현했다. 실제 `WorldOutcome`은 아직 구현하지 않았다. 시나리오 및 다축 부하 아래에서 권한 누수와 경로 의존성을 검사하는 simulation contract다.
+
+리팩터링 전 v0.1의 의미적 실행은 [canonical baseline](dynamics/reports/baseline-v0.1.md)으로 동결했다.

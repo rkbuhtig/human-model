@@ -10,6 +10,12 @@ Chapter 01–11의 권한 척추와 분리 원칙을 보존하면서, 인간 내
 경로 의존적 변화와 비리셋 회복을 표현할 수 있는가
 ```
 
+이 구현의 연구 지위와 후속 범위는 다음 문서에서 관리한다.
+
+- [Human Model Research Program](../research/README.md)
+- [Research Architecture](../research/architecture.md)
+- [Research Roadmap](../research/roadmap.md)
+
 ## 핵심 분리
 
 ```text
@@ -109,6 +115,17 @@ python -m unittest discover -s dynamics/tests -v
 - 중복 `event_id`는 한 번만 적용된다.
 - 같은 ID의 다른 payload는 duplicate가 아니라 HARD collision이다.
 - 입력 손실은 `processed / dropped / unresolved`로 회계된다.
+
+### Canonical semantic baseline
+
+원격 revision `9b731b7f92700227de1fae8adc79e1d8e687d25f`의 `delayed_reply` 의미적 실행을 [baseline-v0.1](reports/baseline-v0.1.md)으로 동결했다.
+
+```bash
+python -m dynamics.baseline
+python -m unittest dynamics.tests.test_baseline -v
+```
+
+이 baseline은 클래스명·모듈 경로·성능값이 아니라 Evidence digest, claim 전이, routing, 행동 계보, 느린 상태 궤적과 입력 회계를 비교한다. 인간 예측 정확도의 기준선은 아니다.
 
 ## 부하 실행
 

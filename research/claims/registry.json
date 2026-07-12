@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0.0",
+  "claims": [
+    {
+      "id": "HM-INV-001",
+      "kind": "INVARIANT",
+      "adoption_status": "ADOPTED",
+      "implementation_status": "PARTIAL",
+      "statement": "Local causal influence does not imply cross-domain certification authority.",
+      "scope": [
+        "certification_contract",
+        "human_model_dynamics_v0.1"
+      ],
+      "exclusions": [
+        "human_empirical_law",
+        "subjective_belief_dynamics",
+        "world_truth_definition"
+      ],
+      "depends_on": [],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [
+          "test_stake_changes_routing_not_evidence",
+          "test_rejection_history_changes_routing_not_evidence",
+          "test_internal_simulation_never_becomes_evidence"
+        ],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "COUNTEREXAMPLE_TRACE",
+        "description": "A routing-only or persistent internal state creates or strengthens an EvidenceLink without a declared grounding rule and observation artifact."
+      },
+      "notes": "ADOPTED records program adoption, not empirical confirmation. Historical defect case IDs remain empty until the Volume 0 source manifest and case files exist; the current implementation covers only part of the possible certification domains."
+    }
+  ]
+}

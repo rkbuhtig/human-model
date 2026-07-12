@@ -1,0 +1,44 @@
+{
+  "baseline_id": "dynamics-v0.1.0-baseline",
+  "captured_on": "2026-07-13",
+  "source_revision": "9b731b7f92700227de1fae8adc79e1d8e687d25f",
+  "runtime": {
+    "python": "3.12.13",
+    "platform": "Linux 6.12.47 x86_64",
+    "external_dependencies": []
+  },
+  "semantic_golden": {
+    "path": "dynamics/reports/baseline-v0.1.json",
+    "sha256": "5197e267606a3062c01f430f743ef222d9183c9bef4f642f0d80c39f3569f0b5",
+    "scenario": "delayed_reply",
+    "seed": null
+  },
+  "stress_baseline": {
+    "path": "dynamics/reports/stress-v0.1.md",
+    "seed": 20260712,
+    "original_test_count": 25,
+    "original_result": "PASS"
+  },
+  "freeze_validation": {
+    "command": "python -m unittest discover -s dynamics/tests -v",
+    "baseline_test_count": 4,
+    "suite_test_count_without_research_artifact_tests": 29,
+    "current_suite_test_count_at_capture": 32,
+    "result": "PASS"
+  },
+  "scope": [
+    "evidence digest",
+    "claim transitions",
+    "candidate routing",
+    "intent-attempt-performance-occurrence lineage",
+    "slow-state trajectory",
+    "input accounting"
+  ],
+  "excluded": [
+    "Python class and module identity",
+    "generated technical IDs",
+    "wall-clock performance",
+    "memory measurements",
+    "human empirical validity"
+  ]
+}

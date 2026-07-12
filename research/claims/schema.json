@@ -1,0 +1,259 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rkbuhtig/human-model/research/claims/schema.json",
+  "title": "Human Model Claim Registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "claims"],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "claims": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/claim"
+      }
+    }
+  },
+  "$defs": {
+    "stringList": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "support": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "historical_cases",
+        "structural_tests",
+        "empirical_datasets"
+      ],
+      "properties": {
+        "historical_cases": {
+          "$ref": "#/$defs/stringList"
+        },
+        "structural_tests": {
+          "$ref": "#/$defs/stringList"
+        },
+        "empirical_datasets": {
+          "$ref": "#/$defs/stringList"
+        }
+      }
+    },
+    "failureCondition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "description"],
+      "properties": {
+        "type": {
+          "enum": [
+            "INVALID_CONSTRUCTION",
+            "COUNTEREXAMPLE_TRACE",
+            "DISCRIMINATING_OBSERVATION",
+            "CALIBRATION_OR_IDENTIFIABILITY_FAILURE",
+            "MISUSE_AS_EVIDENCE"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "adoption_status",
+        "implementation_status",
+        "statement",
+        "scope",
+        "exclusions",
+        "depends_on",
+        "support",
+        "failure_condition"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^HM-(TYPE|INV|DYN|MEAS|META)-[0-9]{3}$"
+        },
+        "kind": {
+          "enum": [
+            "TYPE",
+            "INVARIANT",
+            "DYNAMICAL_HYPOTHESIS",
+            "MEASUREMENT_MODEL",
+            "METAPHOR"
+          ]
+        },
+        "adoption_status": {
+          "enum": [
+            "DRAFT",
+            "PROPOSED",
+            "ADOPTED",
+            "REVISED",
+            "REJECTED",
+            "HOLD"
+          ]
+        },
+        "implementation_status": {
+          "enum": [
+            "NOT_APPLICABLE",
+            "UNIMPLEMENTED",
+            "PARTIAL",
+            "IMPLEMENTED"
+          ]
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "exclusions": {
+          "$ref": "#/$defs/stringList"
+        },
+        "depends_on": {
+          "$ref": "#/$defs/stringList"
+        },
+        "support": {
+          "$ref": "#/$defs/support"
+        },
+        "failure_condition": {
+          "$ref": "#/$defs/failureCondition"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "TYPE"
+              }
+            },
+            "required": ["kind"]
+          },
+          "then": {
+            "properties": {
+              "failure_condition": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "const": "INVALID_CONSTRUCTION"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "INVARIANT"
+              }
+            },
+            "required": ["kind"]
+          },
+          "then": {
+            "properties": {
+              "failure_condition": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "const": "COUNTEREXAMPLE_TRACE"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "DYNAMICAL_HYPOTHESIS"
+              }
+            },
+            "required": ["kind"]
+          },
+          "then": {
+            "properties": {
+              "failure_condition": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "const": "DISCRIMINATING_OBSERVATION"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "MEASUREMENT_MODEL"
+              }
+            },
+            "required": ["kind"]
+          },
+          "then": {
+            "properties": {
+              "failure_condition": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "const": "CALIBRATION_OR_IDENTIFIABILITY_FAILURE"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "METAPHOR"
+              }
+            },
+            "required": ["kind"]
+          },
+          "then": {
+            "properties": {
+              "failure_condition": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "const": "MISUSE_AS_EVIDENCE"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

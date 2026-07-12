@@ -1,0 +1,128 @@
+# Research Architecture
+
+| 항목 | 지위 |
+|---|---|
+| 설계 방향 | `ADOPTED` |
+| 코드 반영 | `PROPOSED` |
+| 인간 경험적 지위 | `OPEN` |
+
+이 문서는 현재 코드가 이미 다음 구조를 구현했다고 주장하지 않는다. v0.1.1
+이후에 적용할 목표 경계다.
+
+## 기본 원리
+
+```text
+Local causal influence
+≠ cross-domain certification authority
+```
+
+신체, 기억, affect, 접근성은 각자의 상태를 바꿀 수 있다. 금지되는 것은 그
+국소 인과 능력이 타 관할의 사실·의도·수행·세계 사건 인증으로 승격되는 것이다.
+
+## 세 연구층
+
+### Contract Layer — `PROPOSED`
+
+| 계약 | 책임 |
+|---|---|
+| Certification | 어떤 typed record가 무엇을 성립시킬 수 있는가 |
+| Provenance / Integrity | 출처, scope, 동일성, payload, 독립성 보존 |
+| Transition Lineage | 어떤 사건과 writer가 상태를 바꿨는가 |
+| Accounting | ingress가 processed/dropped/unresolved 중 어디에 갔는가 |
+
+하나의 보편적 인증 record로 관할을 다시 합치지 않는다.
+
+```text
+EvidenceAssessmentRecord
+PerformanceReceipt
+ActionOccurrenceRecord
+WorldOutcomeRecord          # HOLD
+```
+
+### Descriptive Dynamics — `PROPOSED`
+
+믿음, 느낌, 접근성, 지속 흔적, 후보와 수행 가능성이 실제로 변하는 방식을
+기술한다. 심리적 오류는 발생할 수 있지만 인증 근거로 cast되지 않는다.
+
+```text
+BeliefUpdateRecord ≠ EvidenceAssessmentRecord
+```
+
+첫 오류 동역학 `affect → SubjectiveBelief`는 v0.3에 `PLANNED`되어 있으며 현재
+구현된 기능이 아니다.
+
+### Experimental Protocol — `PROPOSED`
+
+시나리오, 기준 시간, ingress queue, seed, 개입, 오라클, 측정을 관리한다.
+Protocol queue는 인간 내부 Access backlog라는 존재론적 주장이 아니다.
+
+## 의존 경계
+
+```text
+Contract ↛ Dynamics 또는 Protocol에 의존
+Dynamics ↛ Protocol queue를 직접 조회
+Protocol ↛ HumanState를 직접 mutate
+Protocol oracle ↛ HumanState에 주입
+Engine → 세 층을 계약에 따라 조립
+```
+
+v0.1.1에서 import boundary test로 잠그는 것이 목표다.
+
+## 상태와 연산
+
+| 개념 | 목표 표현 | 현재 지위 |
+|---|---|---|
+| World / truth | 인간 상태 밖의 사건·테스트 oracle | 부분 구현; 일반 world model `HOLD` |
+| Evidence assessment | claim별 출처 제한 평가 | 이름 교정 `PROPOSED` |
+| Subjective belief | 사람이 실제로 갖는 확신 | v0.3 `PLANNED` |
+| Access | 접근·주의·처리 가능성 | 부분 구현 |
+| Agency | 후보→의도→시도→수행→발생 | 부분 구현 |
+| Persistent traces | 이후 경로를 기울이는 흔적 | 탐색적 부분 구현 |
+| Plasticity | 경험과 시간에 따른 update kernel | 재정의 `PLANNED` |
+
+Plasticity는 Truth/Access/Agency와 같은 종류의 인증 평면이 아니다. Persistence는
+남아 있는 흔적이고 Plasticity는 그 흔적을 바꾸는 연산 가설이다.
+
+## 가까운 명칭 교정
+
+```text
+EpistemicState → EvidenceAssessmentState
+BodyAuthorization → MotorFeasibility 또는 MotorExecutionGate
+```
+
+신체 타입의 최종 이름은 현재 역할이 상태인지 gate인지 코드 감사 후 결정한다.
+`WarrantState`는 reliability, defeater, validity, revalidation 규칙이 정의될
+때까지 `HOLD`다.
+
+## Claim과 결함의 거버넌스
+
+claim은 `TYPE / INVARIANT / DYNAMICAL_HYPOTHESIS / MEASUREMENT_MODEL /
+METAPHOR`를 구분하고 다음 필드를 가져야 한다.
+
+```text
+adoption_status, implementation_status, scope, exclusions, depends_on
+support: historical_cases / structural_tests / empirical_datasets
+failure_condition
+```
+
+결함 corpus는 다음을 분리한다.
+
+```text
+Contemporaneous record
+≠ Retrospective interpretation
+```
+
+결함에서 원리를 찾는 일은 유일한 연역이 아니라 경쟁 수리를 가진 귀추다.
+새 원리는 결함 제거, 판별 예측, 정상 사례 차단 비용, 추가 복잡도를 함께
+평가받는다.
+
+## 검증 경계
+
+| Suite | 질문 |
+|---|---|
+| Contract mutation | 월권을 실제로 검출하는가 |
+| Structural ablation | 어떤 typed separation이 필요한가 |
+| Temporal comparison | 어떤 시간 가설이 관측을 구분하는가 |
+
+계약 준수는 구조적 건전성이고 인간 자료 예측은 설명력이다.
+
