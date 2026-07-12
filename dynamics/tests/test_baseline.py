@@ -10,7 +10,11 @@ from dynamics.baseline import (
     BASELINE_SOURCE_REVISION,
     build_delayed_reply_baseline,
     canonical_json,
+    DELAYED_REPLY_ENGINE_CONFIG,
+    DELAYED_REPLY_SCENARIO,
 )
+from dynamics.engine import DynamicsEngine
+from dynamics.scenario import load_scenario
 
 
 GOLDEN = Path(__file__).parents[1] / "reports" / "baseline-v0.1.json"
@@ -23,6 +27,11 @@ class SemanticBaselineTests(unittest.TestCase):
         actual = build_delayed_reply_baseline()
         self.assertEqual(actual, expected)
         self.assertEqual(canonical_json(actual), GOLDEN.read_text(encoding="utf-8"))
+
+    def test_frozen_valid_scenario_has_no_invariant_errors(self) -> None:
+        scenario = load_scenario(DELAYED_REPLY_SCENARIO)
+        result = scenario.run(DynamicsEngine(DELAYED_REPLY_ENGINE_CONFIG))
+        self.assertEqual(result.ledger.invariant_errors, [])
 
     def test_projection_has_no_runtime_performance_or_python_identity(self) -> None:
         projection = build_delayed_reply_baseline()

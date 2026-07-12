@@ -15,8 +15,9 @@ from pathlib import Path
 from typing import Any
 
 from .engine import DynamicsEngine, EngineConfig, SimulationResult
+from .contract import ClaimState
+from .models import HumanState
 from .scenario import load_scenario
-from .types import ClaimState, HumanState
 
 
 BASELINE_SCHEMA = "human-model-semantic-baseline/0.1"
@@ -137,11 +138,11 @@ def _claim_transitions(result: SimulationResult) -> list[dict[str, Any]]:
     for trace in result.ledger.tick_traces:
         before = {
             (claim.claim_id, claim.scope): claim
-            for claim in trace.state_before.epistemic.claims
+            for claim in trace.state_before.evidence_assessment.claims
         }
         after = {
             (claim.claim_id, claim.scope): claim
-            for claim in trace.state_after.epistemic.claims
+            for claim in trace.state_after.evidence_assessment.claims
         }
         for claim_id, scope in sorted(set(before) | set(after)):
             before_claim = before.get((claim_id, scope), ClaimState(claim_id, scope))
@@ -230,12 +231,12 @@ def _action_chains(result: SimulationResult) -> list[dict[str, Any]]:
             attempt = {
                 "action": trace.attempt.action_kind,
                 "tick": trace.attempt.tick,
-                "allowed": trace.attempt.authorization.allowed,
+                "allowed": trace.attempt.motor_feasibility.feasible,
                 "available_capacity": _number(
-                    trace.attempt.authorization.available_capacity
+                    trace.attempt.motor_feasibility.available_capacity
                 ),
                 "required_capacity": _number(
-                    trace.attempt.authorization.required_capacity
+                    trace.attempt.motor_feasibility.required_capacity
                 ),
                 "references_intent": (
                     trace.intent is not None

@@ -3,11 +3,13 @@
 | 항목 | 지위 |
 |---|---|
 | 설계 방향 | `ADOPTED` |
-| 코드 반영 | `PROPOSED` |
+| 코드 반영 | `PARTIAL — v0.1.1 import boundary; legacy access bridge retained` |
 | 인간 경험적 지위 | `OPEN` |
 
-이 문서는 현재 코드가 이미 다음 구조를 구현했다고 주장하지 않는다. v0.1.1
-이후에 적용할 목표 경계다.
+v0.1.1은 다음 core import 경계를 코드와 test로 구현했다. 다만 frozen semantics를
+보존하기 위해 protocol queue pressure를 descriptive AccessState에 전달하는 v0.1
+bridge가 하나 남아 있다. 따라서 완전한 semantic decoupling을 주장하지 않는다.
+이것은 인간에 대한 경험적 설명력이 아니라 소프트웨어·인증 관할의 구조적 성질이다.
 
 ## 기본 원리
 
@@ -21,7 +23,7 @@ Local causal influence
 
 ## 세 연구층
 
-### Contract Layer — `PROPOSED`
+### Contract Layer — `IMPLEMENTED / PARTIAL-SCOPE`
 
 | 계약 | 책임 |
 |---|---|
@@ -39,7 +41,7 @@ ActionOccurrenceRecord
 WorldOutcomeRecord          # HOLD
 ```
 
-### Descriptive Dynamics — `PROPOSED`
+### Descriptive Dynamics — `IMPLEMENTED / EXPLORATORY`
 
 믿음, 느낌, 접근성, 지속 흔적, 후보와 수행 가능성이 실제로 변하는 방식을
 기술한다. 심리적 오류는 발생할 수 있지만 인증 근거로 cast되지 않는다.
@@ -51,10 +53,25 @@ BeliefUpdateRecord ≠ EvidenceAssessmentRecord
 첫 오류 동역학 `affect → SubjectiveBelief`는 v0.3에 `PLANNED`되어 있으며 현재
 구현된 기능이 아니다.
 
-### Experimental Protocol — `PROPOSED`
+### Experimental Protocol — `IMPLEMENTED / v0.1 SCOPE`
 
-시나리오, 기준 시간, ingress queue, seed, 개입, 오라클, 측정을 관리한다.
-Protocol queue는 인간 내부 Access backlog라는 존재론적 주장이 아니다.
+v0.1.1에서는 사건 encoding과 ingress queue를 관리한다. canonical time,
+occurrence/delivery identity, 개입·측정 protocol은 v0.2에서 확장한다. Protocol
+queue는 인간 내부 Access backlog라는 존재론적 주장이 아니다.
+
+### 알려진 v0.1 bridge
+
+```text
+protocol ingress pending / queue_limit
+→ legacy_v01_access_pressure_bridge
+→ descriptive AccessState.queue_load / interference
+```
+
+이 결합은 `queue_limit` 같은 실험 설정이 동일 처리열의 인간 궤적을 바꿀 수 있는
+confound다. v0.1.1은 의미적 golden을 보존하기 위해 이름을 붙여 격리했을 뿐
+정당화하지 않는다. v0.2에서는 occurrence/access identity를 먼저 도입한 뒤,
+protocol buffer pressure와 모델이 실제로 접근한 demand를 분리하는 competing
+repair를 시험해야 한다.
 
 ## 의존 경계
 
@@ -66,14 +83,15 @@ Protocol oracle ↛ HumanState에 주입
 Engine → 세 층을 계약에 따라 조립
 ```
 
-v0.1.1에서 import boundary test로 잠그는 것이 목표다.
+v0.1.1에서 import 방향을 test로 잠갔다. 위 legacy bridge 때문에
+`Dynamics ↛ Protocol queue`의 의미적 독립은 아직 `PARTIAL`이다.
 
 ## 상태와 연산
 
 | 개념 | 목표 표현 | 현재 지위 |
 |---|---|---|
 | World / truth | 인간 상태 밖의 사건·테스트 oracle | 부분 구현; 일반 world model `HOLD` |
-| Evidence assessment | claim별 출처 제한 평가 | 이름 교정 `PROPOSED` |
+| Evidence assessment | claim별 출처 제한 평가 | `EvidenceAssessmentState` 구현 |
 | Subjective belief | 사람이 실제로 갖는 확신 | v0.3 `PLANNED` |
 | Access | 접근·주의·처리 가능성 | 부분 구현 |
 | Agency | 후보→의도→시도→수행→발생 | 부분 구현 |
@@ -83,14 +101,14 @@ v0.1.1에서 import boundary test로 잠그는 것이 목표다.
 Plasticity는 Truth/Access/Agency와 같은 종류의 인증 평면이 아니다. Persistence는
 남아 있는 흔적이고 Plasticity는 그 흔적을 바꾸는 연산 가설이다.
 
-## 가까운 명칭 교정
+## v0.1.1 명칭 교정
 
 ```text
-EpistemicState → EvidenceAssessmentState
-BodyAuthorization → MotorFeasibility 또는 MotorExecutionGate
+EpistemicState → EvidenceAssessmentState       # 완료
+BodyAuthorization → MotorFeasibility           # 완료
 ```
 
-신체 타입의 최종 이름은 현재 역할이 상태인지 gate인지 코드 감사 후 결정한다.
+기존 이름은 v0.1 compatibility façade에서만 유지한다.
 `WarrantState`는 reliability, defeater, validity, revalidation 규칙이 정의될
 때까지 `HOLD`다.
 
@@ -125,4 +143,3 @@ Contemporaneous record
 | Temporal comparison | 어떤 시간 가설이 관측을 구분하는가 |
 
 계약 준수는 구조적 건전성이고 인간 자료 예측은 설명력이다.
-

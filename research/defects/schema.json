@@ -37,7 +37,14 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["path", "sha256", "line_ranges"],
+            "required": [
+              "path",
+              "sha256",
+              "line_ranges",
+              "upstream_git_blob_sha",
+              "original_path",
+              "original_line_ranges"
+            ],
             "properties": {
               "path": {
                 "type": "string",
@@ -48,6 +55,21 @@
                 "pattern": "^[0-9a-f]{64}$"
               },
               "line_ranges": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[0-9]+(-[0-9]+)?$"
+                }
+              },
+              "upstream_git_blob_sha": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{40}$"
+              },
+              "original_path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "original_line_ranges": {
                 "type": "array",
                 "items": {
                   "type": "string",

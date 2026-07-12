@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import ast
 import hashlib
 import json
 from pathlib import Path
@@ -73,6 +74,13 @@ class ResearchArtifactTests(unittest.TestCase):
             "MEASUREMENT_MODEL": "CALIBRATION_OR_IDENTIFIABILITY_FAILURE",
             "METAPHOR": "MISUSE_AS_EVIDENCE",
         }
+        expected_prefix = {
+            "TYPE": "HM-TYPE-",
+            "INVARIANT": "HM-INV-",
+            "DYNAMICAL_HYPOTHESIS": "HM-DYN-",
+            "MEASUREMENT_MODEL": "HM-MEAS-",
+            "METAPHOR": "HM-META-",
+        }
         ids: set[str] = set()
         for claim in registry["claims"]:
             self.assertEqual(set(claim) - CLAIM_OPTIONAL, CLAIM_REQUIRED)
@@ -81,6 +89,7 @@ class ResearchArtifactTests(unittest.TestCase):
             self.assertNotIn(claim["id"], ids)
             ids.add(claim["id"])
             self.assertIn(claim["kind"], CLAIM_KINDS)
+            self.assertTrue(claim["id"].startswith(expected_prefix[claim["kind"]]))
             self.assertIn(claim["adoption_status"], ADOPTION_STATUSES)
             self.assertIn(claim["implementation_status"], IMPLEMENTATION_STATUSES)
             _assert_string_list(self, claim["scope"], nonempty=True)
@@ -100,6 +109,44 @@ class ResearchArtifactTests(unittest.TestCase):
             )
             for values in claim["support"].values():
                 _assert_string_list(self, values)
+
+        claims_by_id = {claim["id"]: claim for claim in registry["claims"]}
+        defect_ids = {
+            json.loads(path.read_text())["id"]
+            for path in (ROOT / "research/defects/cases").glob("*.json")
+        }
+        test_names = set()
+        for path in (ROOT / "dynamics/tests").glob("test_*.py"):
+            tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+            test_names.update(
+                node.name
+                for node in ast.walk(tree)
+                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+                and node.name.startswith("test_")
+            )
+
+        for claim in registry["claims"]:
+            self.assertNotIn(claim["id"], claim["depends_on"])
+            self.assertTrue(set(claim["depends_on"]) <= ids)
+            self.assertTrue(set(claim["support"]["historical_cases"]) <= defect_ids)
+            self.assertTrue(set(claim["support"]["structural_tests"]) <= test_names)
+
+        visiting: set[str] = set()
+        visited: set[str] = set()
+
+        def visit(claim_id: str) -> None:
+            if claim_id in visiting:
+                self.fail(f"claim dependency cycle at {claim_id}")
+            if claim_id in visited:
+                return
+            visiting.add(claim_id)
+            for dependency in claims_by_id[claim_id]["depends_on"]:
+                visit(dependency)
+            visiting.remove(claim_id)
+            visited.add(claim_id)
+
+        for claim_id in ids:
+            visit(claim_id)
 
     def test_defect_case_separates_record_from_retrospective_reading(self) -> None:
         path = ROOT / "research/defects/cases/event-count-slow-update-v01.json"
@@ -132,8 +179,20 @@ class ResearchArtifactTests(unittest.TestCase):
         self.assertIn("retrospective_interpretation", case)
         self.assertRegex(case["source"]["baseline_commit"], HEX_40)
         for artifact in case["source"]["artifacts"]:
-            self.assertEqual(set(artifact), {"path", "sha256", "line_ranges"})
+            self.assertEqual(
+                set(artifact),
+                {
+                    "path",
+                    "sha256",
+                    "line_ranges",
+                    "upstream_git_blob_sha",
+                    "original_path",
+                    "original_line_ranges",
+                },
+            )
             self.assertRegex(artifact["sha256"], HEX_64)
+            self.assertRegex(artifact["upstream_git_blob_sha"], HEX_40)
+            self.assertTrue(artifact["original_path"])
             source = ROOT / artifact["path"]
             self.assertTrue(source.is_file(), artifact["path"])
             self.assertEqual(
@@ -145,6 +204,11 @@ class ResearchArtifactTests(unittest.TestCase):
                 bounds = [int(value) for value in line_range.split("-")]
                 self.assertGreaterEqual(bounds[0], 1)
                 self.assertLessEqual(bounds[-1], line_count)
+                self.assertEqual(bounds, sorted(bounds))
+            for line_range in artifact["original_line_ranges"]:
+                self.assertRegex(line_range, LINE_RANGE)
+                bounds = [int(value) for value in line_range.split("-")]
+                self.assertGreaterEqual(bounds[0], 1)
                 self.assertEqual(bounds, sorted(bounds))
 
         self.assertEqual(

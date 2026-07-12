@@ -336,6 +336,78 @@ class HardInvariantTests(unittest.TestCase):
         )
         self.assertIn("AUTHORITY_LINK_RULE_MISMATCH:link:forged", errors)
 
+    def test_validator_rejects_forged_assessment_multiplicity_and_nonfinite_mass(self) -> None:
+        artifact = ObservationArtifact(
+            artifact_id="artifact:mass-forgery",
+            event_id="mass-forgery",
+            source_tick=0,
+            observed_tick=0,
+            kind="platform_online_indicator",
+            source_id="platform",
+            provenance_kind=ProvenanceKind.DIRECT_OBSERVATION,
+            external=True,
+        )
+        link = EvidenceLink(
+            link_id="link:mass-forgery:C1_platform_displayed_online:scenario:supports",
+            artifact_id=artifact.artifact_id,
+            claim_id="C1_platform_displayed_online",
+            relation=EvidenceRelation.SUPPORTS,
+            strength=0.5,
+            scope="scenario",
+            independence_key="same-source",
+            provenance_kind=ProvenanceKind.DIRECT_OBSERVATION,
+            grounding_rule_id="observe-platform-online",
+        )
+        duplicate_contribution = SourceContribution(
+            "same-source",
+            link.link_id,
+            0.5,
+        )
+        duplicated = ClaimState(
+            claim_id=link.claim_id,
+            supports=(duplicate_contribution, duplicate_contribution),
+            grounds=(link.link_id, link.link_id),
+        )
+        duplicate_errors = validate_epistemics(
+            EpistemicState((duplicated, duplicated)),
+            {link.link_id: link},
+            {artifact.artifact_id: artifact},
+            adoption_threshold=0.75,
+            release_threshold=0.55,
+            minimum_ground_mass=0.50,
+        )
+        self.assertTrue(
+            any("AUTHORITY_DUPLICATE_INDEPENDENCE_KEY" in error for error in duplicate_errors)
+        )
+        self.assertIn(
+            "AUTHORITY_DUPLICATE_CLAIM_KEY:C1_platform_displayed_online:scenario",
+            duplicate_errors,
+        )
+
+        nonfinite_link = replace(link, strength=float("nan"))
+        nonfinite = ClaimState(
+            claim_id=link.claim_id,
+            supports=(
+                SourceContribution(
+                    "same-source",
+                    link.link_id,
+                    float("nan"),
+                ),
+            ),
+            grounds=(link.link_id,),
+        )
+        nonfinite_errors = validate_epistemics(
+            EpistemicState((nonfinite,)),
+            {link.link_id: nonfinite_link},
+            {artifact.artifact_id: artifact},
+            adoption_threshold=0.75,
+            release_threshold=0.55,
+            minimum_ground_mass=0.50,
+        )
+        self.assertTrue(
+            any("NONFINITE" in error or "INVALID_LINK_STRENGTH" in error for error in nonfinite_errors)
+        )
+
     def test_empty_run_still_validates_initial_state(self) -> None:
         invalid = HumanState(body=BodyState(energy=1.5, arousal=0.2, action_capacity=0.5))
         result = DynamicsEngine().run(invalid, ())

@@ -8,20 +8,19 @@ import json
 from pathlib import Path
 from typing import Any
 
+from .contract import ProvenanceKind
 from .engine import DynamicsEngine, EngineConfig, SimulationResult
-from .types import (
+from .models import (
     AccessState,
     AffectivePrior,
     AssociativeState,
     BodyState,
-    ClaimSignal,
     HabitPolicy,
     HumanState,
     NarrativeState,
-    ProvenanceKind,
     RelationalProfile,
-    ScenarioEvent,
 )
+from .protocol import ClaimSignal, ScenarioEvent
 
 
 @dataclass(frozen=True, slots=True)

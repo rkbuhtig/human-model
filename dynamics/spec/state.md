@@ -2,7 +2,7 @@
 
 ## 모델 지위
 
-`Human Model Dynamics v0.1`은 인간 내부 상태에 관한 실행 가설이다. Chapter 01–11이 직접 도출한 완성 이론이 아니다.
+`Human Model Dynamics v0.1.1`은 인간 내부 상태에 관한 실행 가설이다. Chapter 01–11이 직접 도출한 완성 이론이 아니다.
 
 | 표지 | 의미 |
 |---|---|
@@ -17,15 +17,15 @@
 |---|---|---|---|---|---|
 | Scenario oracle | `hidden_worlds` | scenario author | 외부 | 테스트만 읽음 | `SIMULATION-ONLY` |
 | Persistent human | `BodyState`, `AccessState`, `AssociativeState`, `AffectivePrior`, `HabitPolicy`, `NarrativeState`, `RelationalProfile` | human reducer | 빠름·느림 혼합 | 외부 사실 쓰기 금지 | `BRIDGE-HUMAN` |
-| Epistemic | `ObservationArtifact`, `EvidenceLink`, `ClaimState` | evidence linker·adjudicator | 사건 | claim별 내부 채택 | `DIRECT-LINEAGE + BRIDGE-HUMAN` |
-| Momentary runtime | `PhenomenalActivation`, `Candidate`, `RoutedCandidate`, `IntentDecision` | 현재 tick 연산 | 빠름 | routing만 | `BRIDGE-HUMAN / SIMULATION-ONLY` |
-| Action | `BodyAuthorization`, `ActionAttempt`, `PerformanceReceipt` | action pipeline | 사건 | 수행 범위만 | `DIRECT-LINEAGE + BRIDGE-HUMAN` |
+| Evidence assessment | `ObservationArtifact`, `EvidenceLink`, `EvidenceAssessmentState`, `ClaimState` | certification grounder·assessment reducer | 사건 | claim별 근거 제한 평가 | `DIRECT-LINEAGE + BRIDGE-HUMAN` |
+| Momentary runtime | `PhenomenalActivation`, `Candidate`, `RoutedCandidate`, `ActionOpportunity`, `IntentDecision` | model routing + protocol opportunity writer | 빠름 | routing과 선언된 decision surface만 | `BRIDGE-HUMAN / SIMULATION-ONLY` |
+| Action | `MotorFeasibility`, `ActionAttempt`, `PerformanceReceipt` | model action pipeline + contract validator | 사건 | 수행 가능성과 계보 범위만 | `DIRECT-LINEAGE + BRIDGE-HUMAN` |
 | World-facing | `ActionOccurrence` | performed receipt를 받은 occurrence writer | 외부 접촉 | 수행된 행동 범위만 | `DIRECT-LINEAGE` |
 | Audit | `EpisodeTrace`, `TickTrace`, `StateDelta` | engine logger | append-only | 인간 근거로 자동 재입력 금지 | `SIMULATION-ONLY` |
 
 ## 지속 상태를 하나의 PlasticState로 두지 않은 이유
 
-느린 변화를 하나의 만능 상태로 합치면 어떤 원인이 어떤 경로를 바꿨는지 알 수 없다. v0.1은 최소한 다음을 분리한다.
+느린 변화를 하나의 만능 상태로 합치면 어떤 원인이 어떤 경로를 바꿨는지 알 수 없다. v0.1.1은 최소한 다음을 분리한다.
 
 ```text
 AssociativeState  기억 단서와 접근 경사
@@ -54,4 +54,4 @@ CandidateSet
 ≠ 통시적 자아
 ```
 
-`Ghost`와 `Editor`는 v0.1에서 독립 실체로 구현하지 않는다. Ghost는 현재 조립된 후보 활성의 해석 이름이고, Editor는 deliberation·selection 연산의 해석 이름으로만 남는다.
+`Ghost`와 `Editor`는 v0.1.1에서 독립 실체로 구현하지 않는다. Ghost는 현재 조립된 후보 활성의 해석 이름이고, Editor는 deliberation·selection 연산의 해석 이름으로만 남는다.
