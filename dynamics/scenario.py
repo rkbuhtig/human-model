@@ -20,7 +20,12 @@ from .models import (
     NarrativeState,
     RelationalProfile,
 )
-from .protocol import ClaimSignal, ScenarioEvent
+from .protocol import (
+    ClaimSignal,
+    EventTemporalEnvelope,
+    ScenarioEvent,
+    SimTime,
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -85,6 +90,88 @@ def _event(item: dict[str, Any]) -> ScenarioEvent:
     )
 
 
+def _canonical_id(item: dict[str, Any], key: str) -> str:
+    if key not in item:
+        raise KeyError(f"missing required temporal field: {key}")
+    value = item[key]
+    if not isinstance(value, str) or not value:
+        raise ValueError(f"{key} must be a non-empty string")
+    return value
+
+
+def _event_v02(item: dict[str, Any]) -> ScenarioEvent:
+    if "temporal" in item:
+        raise ValueError(
+            "v0.2 temporal fields must use the flat canonical schema"
+        )
+    engine_owned = {"processed_at", "processing_sequence", "final_sim_time"}
+    supplied_engine_fields = sorted(engine_owned.intersection(item))
+    if supplied_engine_fields:
+        raise ValueError(
+            "engine-owned temporal fields are not scenario inputs: "
+            + ", ".join(supplied_engine_fields)
+        )
+    delivery_id = _canonical_id(item, "delivery_id")
+    occurrence_id = _canonical_id(item, "occurrence_id")
+    if "occurred_at" not in item or "available_at" not in item:
+        missing = "occurred_at" if "occurred_at" not in item else "available_at"
+        raise KeyError(f"missing required temporal field: {missing}")
+    occurred_at = SimTime(item["occurred_at"])
+    available_at = SimTime(item["available_at"])
+
+    reexposure = item.get("reexposure_of_occurrence_id")
+    if reexposure is not None and (
+        not isinstance(reexposure, str) or not reexposure
+    ):
+        raise ValueError("reexposure_of_occurrence_id must be a non-empty string")
+    delivery_sequence = item.get("delivery_sequence")
+    envelope = EventTemporalEnvelope(
+        occurrence_id=occurrence_id,
+        delivery_id=delivery_id,
+        occurred_at=occurred_at,
+        available_at=available_at,
+        reexposure_of_occurrence_id=reexposure,
+        delivery_sequence=delivery_sequence,
+    )
+
+    if "event_id" in item and item["event_id"] != delivery_id:
+        raise ValueError("event_id must match canonical delivery_id")
+    if "tick" in item and SimTime(item["tick"]) != available_at:
+        raise ValueError("tick must match canonical available_at")
+
+    return ScenarioEvent(
+        event_id=delivery_id,
+        tick=int(available_at),
+        kind=str(item["kind"]),
+        external=_strict_bool(item, "external", True),
+        source_id=str(item.get("source_id", "unknown")),
+        provenance_kind=ProvenanceKind(
+            item.get("provenance_kind", "direct_observation")
+        ),
+        independence_key=str(
+            item.get("independence_key", item.get("source_id", "unknown"))
+        ),
+        ambiguity=float(item.get("ambiguity", 0.0)),
+        salience=float(item.get("salience", 0.5)),
+        time_pressure=float(item.get("time_pressure", 0.0)),
+        memory_interference=float(item.get("memory_interference", 0.0)),
+        candidate_fanout=float(item.get("candidate_fanout", 0.0)),
+        ingress_priority=float(item.get("ingress_priority", 0.5)),
+        energy_delta=float(item.get("energy_delta", 0.0)),
+        arousal_delta=float(item.get("arousal_delta", 0.0)),
+        capacity_delta=float(item.get("capacity_delta", 0.0)),
+        attention_delta=float(item.get("attention_delta", 0.0)),
+        soothing=float(item.get("soothing", 0.0)),
+        trust_delta=float(item.get("trust_delta", 0.0)),
+        boundary_delta=float(item.get("boundary_delta", 0.0)),
+        action_window=_strict_bool(item, "action_window", False),
+        coercion=float(item.get("coercion", 0.0)),
+        supports=_signals(item.get("supports")),
+        contradicts=_signals(item.get("contradicts")),
+        temporal=envelope,
+    )
+
+
 def _initial_state(item: dict[str, Any]) -> HumanState:
     return HumanState(
         body=BodyState(**item.get("body", {})).bounded(),
@@ -100,10 +187,18 @@ def _initial_state(item: dict[str, Any]) -> HumanState:
 def load_scenario(path: str | Path) -> Scenario:
     source = Path(path)
     data = json.loads(source.read_text(encoding="utf-8"))
-    if data.get("schema_version") != "human-model-scenario/0.1":
+    schema_version = data.get("schema_version")
+    if schema_version not in {
+        "human-model-scenario/0.1",
+        "human-model-scenario/0.2",
+    }:
         raise ValueError(f"unsupported scenario schema: {data.get('schema_version')!r}")
-    events = tuple(_event(item) for item in data.get("events", []))
-    if len({event.event_id for event in events}) != len(events):
+    event_loader = _event if schema_version == "human-model-scenario/0.1" else _event_v02
+    events = tuple(event_loader(item) for item in data.get("events", []))
+    if (
+        schema_version == "human-model-scenario/0.1"
+        and len({event.event_id for event in events}) != len(events)
+    ):
         # Duplicate IDs are allowed only in explicit idempotence tests assembled in code.
         raise ValueError("scenario source contains duplicate event_id")
     return Scenario(

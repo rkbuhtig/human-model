@@ -5,6 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from enum import Enum
 
+from ..temporal import ProcessingStamp, SimTime
+
 
 ACTION_OPPORTUNITY_RULE_V01 = "internal-decision-window-v01"
 
@@ -96,6 +98,60 @@ class ObservationArtifact:
     source_id: str
     provenance_kind: ProvenanceKind
     external: bool
+    processing_stamp: ProcessingStamp | None = None
+
+    def __post_init__(self) -> None:
+        stamp = self.processing_stamp
+        if stamp is None:
+            return
+        mismatches = []
+        if self.event_id != stamp.envelope.delivery_id:
+            mismatches.append("delivery_id")
+        if self.source_tick != int(stamp.envelope.occurred_at):
+            mismatches.append("occurred_at")
+        if self.observed_tick != int(stamp.processed_at):
+            mismatches.append("processed_at")
+        if mismatches:
+            raise ValueError(
+                "observation legacy surface does not match processing stamp: "
+                + ", ".join(mismatches)
+            )
+
+    @property
+    def occurrence_id(self) -> str:
+        if self.processing_stamp is None:
+            return self.event_id
+        return self.processing_stamp.envelope.occurrence_id
+
+    @property
+    def delivery_id(self) -> str:
+        if self.processing_stamp is None:
+            return self.event_id
+        return self.processing_stamp.envelope.delivery_id
+
+    @property
+    def occurred_at(self) -> SimTime:
+        if self.processing_stamp is None:
+            return SimTime(self.source_tick)
+        return self.processing_stamp.envelope.occurred_at
+
+    @property
+    def available_at(self) -> SimTime:
+        if self.processing_stamp is None:
+            return SimTime(self.source_tick)
+        return self.processing_stamp.envelope.available_at
+
+    @property
+    def processed_at(self) -> SimTime:
+        if self.processing_stamp is None:
+            return SimTime(self.observed_tick)
+        return self.processing_stamp.processed_at
+
+    @property
+    def processing_sequence(self) -> int | None:
+        if self.processing_stamp is None:
+            return None
+        return self.processing_stamp.processing_sequence
 
 
 @dataclass(frozen=True, slots=True)

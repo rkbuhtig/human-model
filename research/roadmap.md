@@ -62,7 +62,7 @@ queue pressure → AccessState 결합은 `legacy_v01_access_pressure_bridge`로 
 
 ## 3. Dynamics v0.2 — Temporal Kernel
 
-**상태: `PLANNED`**
+**상태: first provenance slice `IMPLEMENTED`; full temporal dynamics `PARTIAL / PLANNED`**
 
 ```text
 sim_time
@@ -72,13 +72,34 @@ occurrence_id ≠ delivery_id
 PastOccurrence ≠ CurrentReexposure
 ```
 
-종료 조건:
+구현된 first slice:
+
+- `occurred_at ≤ available_at ≤ processed_at ≤ final_sim_time`
+- `processed_at`의 engine-owned stamp
+- occurrence와 delivery identity 분리
+- 동일 occurrence/payload transport redelivery 멱등성
+- 동일 occurrence ID의 payload collision hard failure
+- backlog의 원래 발생시각 보존
+- 별도 현재 reexposure provenance와 evidence independence
+
+구조 테스트:
+
+- `test_temporal_ordering_and_engine_owned_processing`
+- `test_transport_redelivery_is_idempotent`
+- `test_occurrence_payload_collision_is_hard_error`
+- `test_backlog_preserves_occurrence_time`
+- `test_current_reexposure_changes_state_not_evidence`
+
+아직 계획된 second slice:
 
 - 무입력 flow의 step-size consistency
-- 중복 전달의 원장 멱등성과 payload collision 검출
 - transport partition 안정성과 burst/spaced 판별
-- 과거 발생 시각 보존과 현재 재노출 효과의 공존
 - 시간 경과가 Evidence ledger를 수정하지 않음
+
+따라서 v0.2는 provenance-capable temporal envelope까지만 구현되었다.
+`FlowUpdate/EventJump`, no-event recovery/decay, burst/spaced 결과는 아직 구현 성취가
+아니며 인간의 정신 시간에 대한 경험적 지지는 전혀 없다. 구현된 타입·writer·
+identity 경계는 [Temporal Envelope Contract](../dynamics/spec/temporal.md)에 고정한다.
 
 몸 상세, 기억 archive, `WorldOutcome`, 주관적 시간은 범위 밖이다.
 

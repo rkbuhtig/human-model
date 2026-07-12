@@ -43,7 +43,10 @@ Recovery ≠ HistoryDeletion
 
 ### H5 중복 멱등성
 
-같은 `event_id`의 재전송은 한 번만 처리한다. 별도 ID를 가진 실제 반복 사건과 구분한다.
+같은 `delivery_id`와 payload의 재전송은 한 번만 처리한다. 새 delivery라도 같은
+`occurrence_id`와 canonical payload면 transport redelivery로 무시한다. 같은
+occurrence ID의 다른 payload는 hard collision이며, 현재 reexposure는 과거를
+가리키는 별도 occurrence로 표현한다.
 
 ### H6 명시적 과부하
 

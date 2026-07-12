@@ -37,7 +37,7 @@ EvidenceLink는 scenario payload의 자유 선언이 아니다. `grounding_rule_
 
 ## Tick 순서
 
-1. 사건 ID를 중복 검사한다.
+1. delivery와 occurrence의 ID·payload를 각각 검사하고 transport redelivery와 현재 reexposure를 구분한다.
 2. 입력 용량을 계산하고 초과 입력을 `deferred / dropped / unresolved`로 기록한다.
 3. 처리된 입력에서 `ObservationArtifact`를 만든다.
 4. 외부이며 grounding allowlist를 통과한 신호만 EvidenceLink로 연결한다.
@@ -68,13 +68,21 @@ EvidenceLink는 scenario payload의 자유 선언이 아니다. `grounding_rule_
 
 ```text
 raw_received
-= unique_received + duplicate_ignored + payload_collision
+= unique_received
+  + duplicate_delivery
+  + redundant_delivery
+  + identity_collision
+  + dangling_reexposure
+  + invalid_reexposure_time
 
 unique_received
 = processed + dropped + unresolved
 ```
 
-`deferred_unique`는 처리 여부와 별개로 한 번 이상 지연된 사건 수다. 지연 후 처리된 사건을 손실로 다시 계산하지 않는다.
+`unique_received`는 v0.1 호환 필드명이며 현재 뜻은 queue에 받아들인 delivery 수다.
+drop 뒤 같은 occurrence가 새 delivery로 재시도되면 두 admission을 각각 회계한다.
+`deferred_unique`는 처리 여부와 별개로 한 번 이상 지연된 delivery 수다. 지연 후
+처리된 delivery를 손실로 다시 계산하지 않는다.
 
 ### Ingress priority
 

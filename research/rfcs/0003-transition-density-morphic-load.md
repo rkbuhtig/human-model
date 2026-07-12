@@ -259,8 +259,8 @@ measurement mapping, 복잡도 보정이 필요하다.
 
 ## 구현 순서
 
-1. v0.2 canonical time과 occurrence/delivery identity를 먼저 구현한다.
-2. semantic checkpoint 사이의 state projection에서 파생되는 read-only
+1. **완료:** v0.2 canonical timestamp와 occurrence/delivery/reexposure provenance를 구현한다. (`FlowUpdate/EventJump`는 별도 후속 slice.)
+2. **계획:** semantic checkpoint 사이의 state projection에서 파생되는 read-only
    `MentalTransitionLedger`를 추가한다.
 3. `Q`의 scope, aggregation window, minimum-change, qualification 시점,
    typed delta, threshold/unit, 이용 가능한 정보 집합을 버전 고정한다.
