@@ -30,7 +30,202 @@
         "type": "COUNTEREXAMPLE_TRACE",
         "description": "A routing-only or persistent internal state creates or strengthens an EvidenceLink without a declared grounding rule and observation artifact."
       },
-      "notes": "ADOPTED records program adoption, not empirical confirmation. Historical defect case IDs remain empty until the Volume 0 source manifest and case files exist; the current implementation covers only part of the possible certification domains."
+      "notes": "ADOPTED records program adoption, not empirical confirmation. No authority-specific historical case is linked yet; the current implementation covers only part of the possible certification domains."
+    },
+    {
+      "id": "HM-TYPE-001",
+      "kind": "TYPE",
+      "adoption_status": "ADOPTED",
+      "implementation_status": "UNIMPLEMENTED",
+      "statement": "Canonical elapsed time and preregistered qualified mental-transition count or density are distinct quantities and cannot be freely cast into one another.",
+      "scope": [
+        "temporal_kernel_design",
+        "mental_transition_ledger"
+      ],
+      "exclusions": [
+        "claim_that_any_quantity_is_already_empirically_identified",
+        "claim_that_mental_transition_is_a_fundamental_physical_time_unit"
+      ],
+      "depends_on": [],
+      "support": {
+        "historical_cases": [
+          "HM-DEFECT-EVENT-COUNT-SLOW-UPDATE-V01"
+        ],
+        "structural_tests": [],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "INVALID_CONSTRUCTION",
+        "description": "A canonical schema stores elapsed time and qualified transition count or density as the same untyped value, uses transport deliveries as transitions, or permits an unrecorded cast between the quantities."
+      },
+      "notes": "The temporal separation is adopted as research hygiene. It does not adopt the associated transition-density hypothesis."
+    },
+    {
+      "id": "HM-TYPE-002",
+      "kind": "TYPE",
+      "adoption_status": "ADOPTED",
+      "implementation_status": "UNIMPLEMENTED",
+      "statement": "Pre-transition DeformationDemand, typed CapacityProfile, their relative MorphicLoadProfile, achieved MorphicWorkReceipt, ResidualStrain, TraceCandidate, and horizon-qualified PersistentTrace are distinct quantities and records.",
+      "scope": [
+        "morphic_load_design",
+        "MORPH-001"
+      ],
+      "exclusions": [
+        "claim_that_any_component_is_empirically_identified",
+        "single_scalar_load_without_validation"
+      ],
+      "depends_on": [],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "INVALID_CONSTRUCTION",
+        "description": "A canonical schema defines demand using post-update change, applies capacity both inside demand and again inside load, or records an immediate TraceCandidate as PersistentTrace without a retention horizon."
+      },
+      "notes": "This is a proposed-model hygiene constraint, not support for the existence or predictive value of morphic load."
+    },
+    {
+      "id": "HM-TYPE-003",
+      "kind": "TYPE",
+      "adoption_status": "ADOPTED",
+      "implementation_status": "UNIMPLEMENTED",
+      "statement": "MorphicLoadProfile, a future PhenomenalStrainReadout, a phenomenal report, and external EvidenceLink are distinct records with no automatic cast between them.",
+      "scope": [
+        "phenomenal_bridge_governance",
+        "certification_boundary"
+      ],
+      "exclusions": [
+        "claim_that_qualia_is_morphic_load",
+        "claim_that_phenomenal_readout_is_already_measurable"
+      ],
+      "depends_on": [
+        "HM-INV-001",
+        "HM-TYPE-002"
+      ],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "INVALID_CONSTRUCTION",
+        "description": "A schema aliases load, phenomenal readout, report, and evidence or permits one of them to instantiate another without an explicit typed bridge and the required certification provenance."
+      },
+      "notes": "The separation is adopted; the phenomenal bridge itself remains HOLD."
+    },
+    {
+      "id": "HM-DYN-001",
+      "kind": "DYNAMICAL_HYPOTHESIS",
+      "adoption_status": "PROPOSED",
+      "implementation_status": "UNIMPLEMENTED",
+      "statement": "Preregistered qualified mental-transition density predicts held-out descriptive trajectories beyond canonical elapsed time, occurrence identity, and simpler event-count alternatives.",
+      "scope": [
+        "read_only_mental_transition_ledger",
+        "within_model_temporal_comparison"
+      ],
+      "exclusions": [
+        "transport_delivery_count",
+        "unqualified_numeric_noise",
+        "independent_subjective_clock_state"
+      ],
+      "depends_on": [
+        "HM-TYPE-001"
+      ],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "DISCRIMINATING_OBSERVATION",
+        "description": "Under preregistered qualification and held-out comparisons, transition density adds no predictive or explanatory discrimination beyond canonical elapsed time, occurrence identity, and simpler event-count alternatives."
+      },
+      "notes": "HM-DEFECT-EVENT-COUNT-SLOW-UPDATE-V01 motivates separating time from event count but does not support this predictive human hypothesis."
+    },
+    {
+      "id": "HM-DYN-002",
+      "kind": "DYNAMICAL_HYPOTHESIS",
+      "adoption_status": "PROPOSED",
+      "implementation_status": "UNIMPLEMENTED",
+      "statement": "At matched canonical time and qualified transition count, preregistered DeformationDemand and CapacityProfile relations predict held-out recovery, residual strain, or horizon-qualified trace retention better than a count-only model after complexity penalties.",
+      "scope": [
+        "MORPH-001",
+        "descriptive_human_dynamics"
+      ],
+      "exclusions": [
+        "evidence_strength",
+        "world_occurrence_certification",
+        "single_scalar_load_without_validation"
+      ],
+      "depends_on": [
+        "HM-TYPE-002"
+      ],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "DISCRIMINATING_OBSERVATION",
+        "description": "Across preregistered count-load dissociation and capacity-relative tests, typed demand and capacity add no held-out discrimination over a simpler transition-count model after complexity penalties."
+      }
+    },
+    {
+      "id": "HM-MEAS-001",
+      "kind": "MEASUREMENT_MODEL",
+      "adoption_status": "DRAFT",
+      "implementation_status": "UNIMPLEMENTED",
+      "statement": "A morphic-load measurement must define units, normalization, and missingness rules; estimate typed DeformationDemand from pre-transition shape and incoming constraint; separately derive MorphicLoadProfile from demand and pre-transition CapacityProfile; record achieved work and residual strain; and withhold PersistentTrace status until a preregistered retention horizon.",
+      "scope": [
+        "MORPH-001_measurement",
+        "simulation_trace"
+      ],
+      "exclusions": [
+        "post_hoc_after_minus_before_as_demand",
+        "direct_qualia_measurement",
+        "biophysical_energy_units"
+      ],
+      "depends_on": [
+        "HM-TYPE-002"
+      ],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "CALIBRATION_OR_IDENTIFIABILITY_FAILURE",
+        "description": "Demand cannot be estimated before the modeled update, demand and capacity contributions to load are not separately identifiable, achieved work cannot be distinguished from residual strain, or trace retention cannot be calibrated at the preregistered horizon."
+      }
+    },
+    {
+      "id": "HM-META-001",
+      "kind": "METAPHOR",
+      "adoption_status": "ADOPTED",
+      "implementation_status": "NOT_APPLICABLE",
+      "statement": "The slime-shape image is an explanatory metaphor for current form, admissible deformation range, incoming constraint, required reformation, and residual strain.",
+      "scope": [
+        "explanatory_prose"
+      ],
+      "exclusions": [
+        "physical_material_law",
+        "viscosity_or_energy_measurement",
+        "empirical_support"
+      ],
+      "depends_on": [
+        "HM-TYPE-002"
+      ],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "MISUSE_AS_EVIDENCE",
+        "description": "The slime metaphor is cited as empirical or physical evidence, used to supply an unmeasured unit, or treated as proof of the morphic-load hypothesis."
+      }
     }
   ]
 }

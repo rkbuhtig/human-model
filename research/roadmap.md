@@ -20,7 +20,7 @@
 - machine-readable [golden trace](../dynamics/reports/baseline-v0.1.json)
 - 실행 환경과 범위를 고정한 [baseline manifest](../dynamics/reports/baseline-v0.1-manifest.json)
 
-golden trace는 Evidence digest, Claim transition, Routed candidate, Intent,
+golden trace는 Evidence digest, Claim transition, decision-window Routed candidate, Intent,
 Attempt, Performance, ActionOccurrence, slow-state trajectory, 입력 회계를
 포함한다.
 
@@ -28,24 +28,24 @@ Attempt, Performance, ActionOccurrence, slow-state trajectory, 입력 회계를
 
 ## 1. Research program documentation
 
-**상태: `IMPLEMENTED`**
+**상태: `IMPLEMENTED — package boundary`; semantic queue/access decoupling `PARTIAL`**
 
 - assessment와 adoption record 분리
 - 연구 정체성·근거 층·아키텍처
-- claim schema + 실제 claim 1건
+- claim schema + typed claim registry
 - defect schema + 실제 case 1건
-- RFC 0001, RFC 0002
+- RFC 0001, RFC 0002, RFC 0003
 
 종료 조건 통과: `Assessment ≠ Adoption ≠ Implementation ≠ Run ≠ Empirical Evidence`가
 문서 구조와 metadata에서 구분된다.
 
 ## 2. Dynamics v0.1.1 — 의미·모듈 경계
 
-**상태: `PLANNED`**
+**상태: `IMPLEMENTED`**
 
 ```text
 EpistemicState → EvidenceAssessmentState
-BodyAuthorization → MotorFeasibility 또는 MotorExecutionGate
+BodyAuthorization → MotorFeasibility
 Contract / Dynamics / Protocol 분리
 ```
 
@@ -54,6 +54,11 @@ Contract / Dynamics / Protocol 분리
 - import boundary test가 의존 금지를 검사한다.
 - 동일 입력·seed에서 baseline과 의미적 trace가 동등하다.
 - 새 인간 행동과 `WarrantState`를 추가하지 않는다.
+
+종료 판정: canonical package 의존 방향과 compatibility façade를 분리했고, import
+boundary suite와 v0.1 semantic golden exact match를 통과했다. 다만 frozen v0.1의
+queue pressure → AccessState 결합은 `legacy_v01_access_pressure_bridge`로 격리만
+했으며, v0.2 실험에서 protocol buffer와 실제 access demand를 분리해야 한다.
 
 ## 3. Dynamics v0.2 — Temporal Kernel
 
@@ -76,6 +81,40 @@ PastOccurrence ≠ CurrentReexposure
 - 시간 경과가 Evidence ledger를 수정하지 않음
 
 몸 상세, 기억 archive, `WorldOutcome`, 주관적 시간은 범위 밖이다.
+
+## 3A. Read-only Mental Transition Ledger
+
+**상태: `PROPOSED` — RFC 0003**
+
+```text
+canonical elapsed time
+≠ qualified mental-transition count / density
+```
+
+사전 등록한 판정자 `Q`를 통과한 상태 전이만 append-only ledger에 기록한다.
+처음에는 report만 만들고 update kernel에 재입력하지 않는다. transport duplicate는
+자동 계수하지 않는다. 동일 원천을 현재 실제로 다시 접근한 경우는 별도
+reexposure/access identity를 가져야 하며, 그 현재 전이가 `Q`를 통과할 수는 있다.
+
+## 3B. `MORPH-001` — Count–Load Dissociation
+
+**상태: `PROPOSED` — RFC 0003**
+
+```text
+transition count
+≠ pre-transition DeformationDemand / CapacityProfile relation
+≠ MorphicLoadProfile
+≠ MorphicWorkReceipt / ResidualStrain / TraceCandidate
+≠ horizon-qualified PersistentTrace
+```
+
+작은 전이 다수와 큰 적응 소수를 비교한다. Demand와 Capacity는 단위·정규화가
+선언된 commensurate typed vector로 시작하고, load는 둘의 preregistered
+`MorphicLoadProfile` 관계로 표현한다.
+
+count-only 경쟁 모델보다 회복·잔여·지속 흔적에서 판별 이득이 없으면 축소하거나
+기각한다. synthetic comparison은 구현 sanity일 뿐 claim support가 아니며,
+`PhenomenalStrainReadout` 연결은 `HOLD`다.
 
 ## 4. Dynamics v0.3 — 첫 descriptive transgression
 
@@ -119,7 +158,7 @@ v0.2의 blocker가 아니다.
 ## 명시적 HOLD
 
 - 완성된 `WarrantState`
-- 주관적/생물학적 독립 시계
+- 주관적/생물학적 독립 시계 상태
 - 물리 은유의 측정량 승격
 - 생리학 계수와 인간 일반 정확도 주장
 - 몸·기억·세계·관계의 동시 확장

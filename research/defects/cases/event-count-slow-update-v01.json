@@ -5,9 +5,15 @@
     "baseline_commit": "9b731b7f92700227de1fae8adc79e1d8e687d25f",
     "artifacts": [
       {
-        "path": "dynamics/engine.py",
-        "sha256": "16bff6bf0d10451bfa65524a5eedcd4a0bded6ac2781ba4baa97ea6b0a8cb03e",
+        "path": "research/defects/sources/engine-v01-slow-update-excerpt.txt",
+        "sha256": "0a5d3ab50791ead60d6e0dae31e23847bf75cb0d9d89d73025c7a094864bf990",
         "line_ranges": [
+          "7",
+          "10-82"
+        ],
+        "upstream_git_blob_sha": "53f9c81ac1acd37cb88b5b53d0d1428a2d5b7542",
+        "original_path": "dynamics/engine.py",
+        "original_line_ranges": [
           "374",
           "551-623"
         ]
@@ -16,6 +22,13 @@
         "path": "dynamics/reports/stress-v0.1.md",
         "sha256": "03f64b04a356d810c2d335a1ee733a143c9a751964a68ae28a1dc7b5e8b5e832",
         "line_ranges": [
+          "130-161",
+          "194",
+          "215"
+        ],
+        "upstream_git_blob_sha": "9ff94cda35c980fcc233a77f4bd36b8674107578",
+        "original_path": "dynamics/reports/stress-v0.1.md",
+        "original_line_ranges": [
           "130-161",
           "194",
           "215"

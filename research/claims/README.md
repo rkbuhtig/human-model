@@ -29,4 +29,6 @@ npx --yes ajv-cli validate --spec=draft2020 \
   -d research/claims/registry.json
 ```
 
-현재 registry의 claim 수는 작게 유지한다. 실제 역사 사례, 구조 테스트 또는 경험 자료와 연결하지 못하는 문장은 먼저 `DRAFT`나 `HOLD`에 둔다.
+현재 registry에는 구현된 핵심 invariant와 RFC 0003의 타입 구분·가설·측정 전제·
+비유 지위를 함께 둔다. 근거가 없는 dynamical claim은 `PROPOSED` 또는 `HOLD`이며,
+타입 구분을 채택했다고 그 안의 인간 가설까지 채택된 것으로 읽지 않는다.

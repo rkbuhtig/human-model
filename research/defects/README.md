@@ -20,7 +20,11 @@ Defect
 
 원리의 가치는 결함 제거 수만으로 평가하지 않는다. 새롭게 구분하는 예측, 정상 통제 사례를 막는 비용, 추가 자유도도 함께 기록한다.
 
-repository tests는 source artifact의 SHA-256과 행 범위, 당시 기록/소급 해석 분리, 후보 원리·경쟁 수리·정상 통제 사례의 존재를 검사한다. 전체 Draft 2020-12 schema는 다음 release check로 검증한다.
+repository tests는 보존 artifact의 SHA-256과 행 범위, 원격 baseline commit의
+원본 path·git blob SHA·원본 행 범위, 당시 기록/소급 해석 분리, 후보 원리·경쟁
+수리·정상 통제 사례의 존재를 검사한다. git blob SHA는 원본 동일성을 외부에서
+재검증할 포인터이며 local excerpt의 SHA-256을 대신하지 않는다. 전체 Draft
+2020-12 schema는 다음 release check로 검증한다.
 
 ```bash
 npx --yes ajv-cli validate --spec=draft2020 \

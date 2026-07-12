@@ -1,4 +1,4 @@
-# Human Model Dynamics v0.1
+# Human Model Dynamics v0.1.1
 
 Chapter 01–11의 권한 척추와 분리 원칙을 보존하면서, 인간 내부 상태에 관한 `BRIDGE`를 실행 가능한 가설로 명시해 시험한다.
 
@@ -26,6 +26,7 @@ Chapter 01–11의 권한 척추와 분리 원칙을 보존하면서, 인간 내
 ≠ evidence strength
 
 Candidate
+≠ ActionOpportunity
 ≠ Intent
 ≠ Attempt
 ≠ PerformedAction
@@ -43,13 +44,40 @@ dynamics/
 ├─ spec/                 상태·전이·불변식 계약
 ├─ scenarios/            versioned JSON 시나리오
 ├─ tests/                HARD·counterfactual·stress 테스트
-├─ types.py              residence별 타입
-├─ epistemics.py         EvidenceLink와 claim별 판단
-├─ routing.py            비권위적 후보 재가중
-├─ engine.py             이벤트 스케줄러와 전이 엔진
+├─ contract/             인증·근거·행동 계보 record와 validator
+├─ models/               기술적 인간 상태·routing·update 가설
+├─ protocol/             사건 encoding과 ingress queue
+├─ adapters.py           명시적 cross-layer adapter와 legacy bridge
+├─ types.py              v0.1 compatibility re-export
+├─ epistemics.py         v0.1 compatibility wrapper
+├─ routing.py            v0.1 compatibility wrapper
+├─ invariants.py         v0.1 compatibility validator wrapper
+├─ engine.py             세 층의 composition root
 ├─ scenario.py           JSON 로더와 기준 실행 CLI
 └─ stress.py             다축 부하 생성기와 soak 측정
 ```
+
+Canonical 의존 방향은 다음과 같다.
+
+```text
+contract  ← models
+contract  ← protocol
+
+engine → contract + models + protocol
+```
+
+`contract/`는 model·protocol을 import하지 않고, `models/`는 protocol queue를
+import하지 않으며, `protocol/`은 HumanState를 직접 mutate하지 않는다. 이 경계는
+`test_package_boundaries.py`가 검사한다.
+
+단, v0.1 semantic golden을 보존하기 위해 protocol queue pressure를 descriptive
+AccessState에 전달하는 `legacy_v01_access_pressure_bridge`가 남아 있다. 이는
+인간 내부 backlog의 존재론이나 정당한 장기 설계가 아니라 v0.1의 알려진
+experimental confound다.
+
+v0.1 compatibility façade는 구형 import, constructor keyword, read property를
+지원한다. 구형 dataclass field 이름을 사용한 `dataclasses.replace`·`asdict`,
+`repr`, class identity까지 보존하는 binary/reflective compatibility는 아니다.
 
 외부 패키지는 사용하지 않는다. Python 3.11 이상이면 실행할 수 있다.
 
@@ -66,7 +94,7 @@ dynamics/
 }
 ```
 
-`epistemics.GROUNDING_RULES`는 다음 조합을 allowlist로 검사한다.
+`contract.GROUNDING_RULES`는 다음 조합을 allowlist로 검사한다.
 
 ```text
 event kind

@@ -13,8 +13,13 @@ ObservationArtifact
 PhenomenalActivation
 → Candidate
 → RoutedCandidate
+
+validated protocol decision window
+→ ActionOpportunity
+
+RoutedCandidate + ActionOpportunity
 → IntentDecision
-→ BodyAuthorization
+→ MotorFeasibility
 → ActionAttempt
 → PerformanceReceipt
 → ActionOccurrence
@@ -24,7 +29,9 @@ PhenomenalActivation
 → ObservationArtifact
 ```
 
-`routing.py`는 `EvidenceLink`를 읽지 않고 salience 성분만 출력한다. `epistemics.py`는 RoutedCandidate를 받지 않는다. 이 API 분리가 `Influence ≠ Warrant`의 코드 수준 방화벽이다.
+`models/routing.py`는 `EvidenceLink`를 읽지 않고 salience 성분만 출력한다.
+`contract/`는 HumanState나 RoutedCandidate를 받지 않는다. 이 API 분리가
+`Influence ≠ cross-domain certification authority`의 코드 수준 방화벽이다.
 
 EvidenceLink는 scenario payload의 자유 선언이 아니다. `grounding_rule_id`를 보존하며 producer와 validator가 각각 `event kind × claim × relation × provenance × maximum strength` allowlist를 검사한다. claim state는 `(claim_id, scope)`로 분리된다.
 
@@ -37,9 +44,9 @@ EvidenceLink는 scenario payload의 자유 선언이 아니다. `grounding_rule_
 5. claim별 support·contradiction을 갱신하고 채택·철회 히스테리시스를 적용한다.
 6. 신체·접근 상태와 현재 입력으로 `PhenomenalActivation`을 계산한다.
 7. 후보를 생성하고 비권위적 routing 분포를 계산한다.
-8. action window라면 intent를 선택한다.
-9. BodyAuthorization 뒤에 ActionAttempt를 기록한다.
-10. 허가된 시도만 PerformanceReceipt와 ActionOccurrence를 만든다.
+8. 유효한 action window만 ActionOpportunity를 만들고, 그 record를 참조해 intent를 선택한다.
+9. MotorFeasibility와 함께 ActionAttempt를 기록한다.
+10. 수행 가능한 시도만 PerformanceReceipt와 ActionOccurrence를 만든다.
 11. 느린 내부 상태를 갱신하고 StateDelta를 남긴다.
 12. 구현된 per-tick HARD validator를 실행한다. 오라클 격리·append-only 전체 이력 등 시나리오 수준 속성은 별도 metamorphic test가 담당한다.
 

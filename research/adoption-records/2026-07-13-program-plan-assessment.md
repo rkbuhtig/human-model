@@ -5,7 +5,7 @@
 | Date | 2026-07-13 |
 | Source | [External non-peer assessment](../../assessments/2026-07-13-research-program-plan-assessment.md) |
 | Decision | `ADOPTED WITH REVISIONS` |
-| Implementation | 문서·baseline `IMPLEMENTED`; 코드 분리 `PLANNED` |
+| Implementation | 문서·baseline·v0.1.1 import 분리 `IMPLEMENTED`; queue/access 의미 분리 `PARTIAL` |
 | Human-empirical status | `OPEN` |
 
 `ADOPTED`는 연구 방향의 채택이지 구현 완료나 경험적 참을 뜻하지 않는다.
@@ -15,8 +15,8 @@
 | 결정 | 채택 내용 | 구현 지위 |
 |---|---|---|
 | A-01 | Assessment / Adoption / Implementation / Run / Empirical Evidence 분리 | 문서 `IMPLEMENTED` |
-| A-02 | Contract / Descriptive Dynamics / Experimental Protocol 분리 | v0.1.1 `PLANNED` |
-| A-03 | `EpistemicState → EvidenceAssessmentState`; `WarrantState` 유보 | v0.1.1 `PLANNED` |
+| A-02 | Contract / Descriptive Dynamics / Experimental Protocol 분리 | v0.1.1 package `IMPLEMENTED`; legacy bridge `PARTIAL` |
+| A-03 | `EpistemicState → EvidenceAssessmentState`; `WarrantState` 유보 | v0.1.1 `IMPLEMENTED` |
 | A-04 | claim 근거를 history/tests/datasets 독립 축으로 기록; scope/exclusions 필수 | schema + 첫 claim `IMPLEMENTED` |
 | A-05 | Contract mutation / Structural ablation / Temporal comparison 분리 | 설계 문서 `IMPLEMENTED`; 실행 `PLANNED` |
 | A-06 | 하나의 canonical `sim_time`과 여러 event timestamp | v0.2 `PLANNED` |
@@ -74,6 +74,7 @@ EvidenceAssessment 독립성, 인증 경계를 검증한다.
 
 - [RFC 0001 — 층 분리](../rfcs/0001-certification-descriptive-split.md)
 - [RFC 0002 — 시간 kernel](../rfcs/0002-temporal-kernel.md)
+- [RFC 0003 — 정신 전이 밀도와 형태 변형 부하](../rfcs/0003-transition-density-morphic-load.md)
 - [Roadmap](../roadmap.md)
 
 이 기록은 RFC 승인이나 구현 완료를 대신하지 않는다.

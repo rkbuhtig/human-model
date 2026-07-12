@@ -29,7 +29,7 @@
   "scope": [
     "evidence digest",
     "claim transitions",
-    "candidate routing",
+    "decision-window candidate routing",
     "intent-attempt-performance-occurrence lineage",
     "slow-state trajectory",
     "input accounting"

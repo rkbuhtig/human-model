@@ -10,21 +10,20 @@ import random
 import time
 import tracemalloc
 
+from .contract import ProvenanceKind
 from .engine import DynamicsEngine, EngineConfig, SimulationResult
-from .types import (
+from .interfaces import clamp01
+from .models import (
     AccessState,
     AffectivePrior,
     AssociativeState,
     BodyState,
-    ClaimSignal,
     HabitPolicy,
     HumanState,
     NarrativeState,
-    ProvenanceKind,
     RelationalProfile,
-    ScenarioEvent,
-    clamp01,
 )
+from .protocol import ClaimSignal, ScenarioEvent
 
 
 @dataclass(frozen=True, slots=True)

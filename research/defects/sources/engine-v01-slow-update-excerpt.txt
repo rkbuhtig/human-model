@@ -1,0 +1,84 @@
+Immutable source excerpt for HM-DEFECT-EVENT-COUNT-SLOW-UPDATE-V01
+Repository: rkbuhtig/human-model
+Commit: 9b731b7f92700227de1fae8adc79e1d8e687d25f
+Original path: dynamics/engine.py
+
+Original line 374:
+        state = self._slow_update(state, event, phenomenal, performance)
+
+Original lines 551-623:
+    def _slow_update(
+        self,
+        state: HumanState,
+        event: ScenarioEvent,
+        phenomenal: PhenomenalActivation,
+        performance: PerformanceReceipt | None,
+    ) -> HumanState:
+        associative = replace(
+            state.associative,
+            rejection_access=clamp01(
+                state.associative.rejection_access
+                + 0.0030 * phenomenal.distress * event.salience
+                - 0.0025 * event.soothing * state.relationship.trust
+            ),
+            ambiguity_sensitivity=clamp01(
+                state.associative.ambiguity_sensitivity
+                + 0.0010 * event.ambiguity
+                - 0.0010 * event.soothing
+            ),
+        )
+        affective = replace(
+            state.affective,
+            residual_distress=clamp01(
+                state.affective.residual_distress
+                + state.affective.update_rate
+                * (phenomenal.distress - state.affective.residual_distress)
+                - 0.025 * event.soothing
+            ),
+        )
+        rejected = self._rejection_confidence(state)
+        narrative_target = clamp01(0.55 * phenomenal.distress + 0.45 * rejected)
+        narrative = replace(
+            state.narrative,
+            rejection_story=clamp01(
+                state.narrative.rejection_story
+                + 0.0040 * (narrative_target - state.narrative.rejection_story)
+            ),
+            relational_security=clamp01(
+                state.narrative.relational_security
+                + 0.0035
+                * (
+                    state.relationship.trust
+                    - 0.40 * phenomenal.distress
+                    - state.narrative.relational_security
+                )
+                + 0.0020 * event.soothing
+            ),
+        )
+        habit = state.habit
+        relationship = state.relationship
+        body = state.body
+        if performance is not None:
+            cost = {"ask": 0.025, "accuse": 0.045, "withdraw": 0.020}.get(
+                performance.action_kind, 0.0
+            )
+            body = replace(body, energy=clamp01(body.energy - cost))
+            if performance.action_kind == "accuse":
+                habit = replace(habit, impulsivity=clamp01(habit.impulsivity + 0.0010))
+                relationship = replace(
+                    relationship,
+                    trust=clamp01(relationship.trust - 0.020),
+                    boundary_strain=clamp01(relationship.boundary_strain + 0.040),
+                )
+        if event.soothing > 0.0:
+            habit = replace(habit, impulsivity=clamp01(habit.impulsivity - 0.0005 * event.soothing))
+
+        return replace(
+            state,
+            body=body,
+            associative=associative,
+            affective=affective,
+            narrative=narrative,
+            habit=habit,
+            relationship=relationship,
+        )

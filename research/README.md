@@ -19,7 +19,7 @@ Local causal influence
 
 ## 현재 상태
 
-현재 Dynamics v0.1은 일부 구조적 구분과 동역학적 반례를 실행화한 최소
+현재 Dynamics v0.1.1은 일부 구조적 구분과 동역학적 반례를 실행화한 최소
 모델이다. 인간에 대한 경험적 예측 정확도는 아직 검증되지 않았다.
 
 | 근거 층 | 지위 |
@@ -64,8 +64,10 @@ Descriptive Dynamics
 Experimental Protocol
 ```
 
-v0.1 baseline은 [원격 source revision과 semantic golden](../dynamics/reports/baseline-v0.1.md)으로 동결했다. 가까운 순서는 v0.1.1 의미·모듈 경계 → v0.2 temporal
-kernel → v0.3 `affect → SubjectiveBelief`다. `WarrantState`, 주관적 시간, 다른
-기억 오귀속, 물리 은유의 측정량 승격은 `HOLD`다.
+v0.1 baseline은 [원격 source revision과 semantic golden](../dynamics/reports/baseline-v0.1.md)으로 동결했다. v0.1.1 package 경계는 구현되었고, 기존 queue→Access
+결합은 명명된 legacy bridge로 남아 있다. 가까운 순서는
+v0.2 canonical-time kernel → read-only mental-transition ledger → `MORPH-001`
+count–load 비교다. `affect → SubjectiveBelief`는 독립 v0.3 축이고,
+`WarrantState`, 독립 주관 시계, 퀄리아–부하 대응식, 다른 기억 오귀속은 `HOLD`다.
 
-상세 범위는 [roadmap](roadmap.md)과 두 RFC를 따른다.
+상세 범위는 [roadmap](roadmap.md)과 세 RFC를 따른다.

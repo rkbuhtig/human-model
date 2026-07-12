@@ -15,6 +15,7 @@ ScenarioTruth ≠ ObservationArtifact
 RoutingInfluence ≠ EvidenceLink
 Stake ≠ EvidenceStrength
 Candidate ≠ Intent
+Raw action_window flag ≠ ActionOpportunity
 Intent ≠ Attempt
 Attempt ≠ PerformanceReceipt
 PerformanceReceipt ≠ ActionOccurrence
@@ -58,7 +59,7 @@ Recovery ≠ HistoryDeletion
 |---|---|---|
 | 관계 Stake | 느낌·routing·관계 비용 | EvidenceLink 내용·strength |
 | rejection access | 후보 우선순위·느린 update | 현재 외부 근거 |
-| action capacity | BodyAuthorization·PerformanceReceipt | 차단 전 route·claim grounds |
+| action capacity | MotorFeasibility·PerformanceReceipt | 차단 전 route·claim grounds |
 | 숨은 세계 | 관측 분기 뒤 궤적 | 동일 관측 구간의 궤적 |
 | 내부 상상 | 느낌·routing·associative residue, 후속 별도 decision window | 그 상상 자체의 EvidenceLink·ActionOccurrence |
 | 같은 declared independence group 반복 | salience·노출 흔적 | 독립 support mass |
