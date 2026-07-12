@@ -1,0 +1,898 @@
+{
+  "action_chains": [
+    {
+      "attempt": {
+        "action": "ask",
+        "allowed": true,
+        "available_capacity": 0.42,
+        "references_intent": true,
+        "required_capacity": 0.35,
+        "tick": 5
+      },
+      "event_id": "dr-05-decision",
+      "intent": {
+        "action": "ask",
+        "coercion": 0.0,
+        "selected_candidate_action": "ask"
+      },
+      "occurrence": {
+        "action": "ask",
+        "references_performance": true,
+        "tick": 5
+      },
+      "performance": {
+        "action": "ask",
+        "agency": 1.0,
+        "references_attempt": true,
+        "tick": 5
+      },
+      "processed_tick": 5
+    }
+  ],
+  "claim_transitions": [
+    {
+      "after": {
+        "confidence": 0.830508474576,
+        "contradiction_mass": 0.0,
+        "contradicts": [],
+        "ground_count": 1,
+        "stance": "adopted",
+        "support_mass": 0.98,
+        "supports": [
+          {
+            "independence_key": "self-send-dr-00",
+            "strength": 0.98
+          }
+        ]
+      },
+      "before": {
+        "confidence": 0.0,
+        "contradiction_mass": 0.0,
+        "contradicts": [],
+        "ground_count": 0,
+        "stance": "held",
+        "support_mass": 0.0,
+        "supports": []
+      },
+      "claim_id": "C_SENT_message_was_sent",
+      "event_id": "dr-00-sent",
+      "processed_tick": 0,
+      "scope": "scenario"
+    },
+    {
+      "after": {
+        "confidence": 0.826086956522,
+        "contradiction_mass": 0.0,
+        "contradicts": [],
+        "ground_count": 1,
+        "stance": "adopted",
+        "support_mass": 0.95,
+        "supports": [
+          {
+            "independence_key": "inbox-state-t1",
+            "strength": 0.95
+          }
+        ]
+      },
+      "before": {
+        "confidence": 0.0,
+        "contradiction_mass": 0.0,
+        "contradicts": [],
+        "ground_count": 0,
+        "stance": "held",
+        "support_mass": 0.0,
+        "supports": []
+      },
+      "claim_id": "C0_no_reply_observed_by_t1",
+      "event_id": "dr-01-no-reply",
+      "processed_tick": 1,
+      "scope": "scenario"
+    },
+    {
+      "after": {
+        "confidence": 0.814814814815,
+        "contradiction_mass": 0.0,
+        "contradicts": [],
+        "ground_count": 1,
+        "stance": "adopted",
+        "support_mass": 0.88,
+        "supports": [
+          {
+            "independence_key": "platform-indicator-t2",
+            "strength": 0.88
+          }
+        ]
+      },
+      "before": {
+        "confidence": 0.0,
+        "contradiction_mass": 0.0,
+        "contradicts": [],
+        "ground_count": 0,
+        "stance": "held",
+        "support_mass": 0.0,
+        "supports": []
+      },
+      "claim_id": "C1_platform_displayed_online",
+      "event_id": "dr-02-online",
+      "processed_tick": 2,
+      "scope": "scenario"
+    },
+    {
+      "after": {
+        "confidence": 0.5,
+        "contradiction_mass": 0.0,
+        "contradicts": [],
+        "ground_count": 1,
+        "stance": "held",
+        "support_mass": 0.2,
+        "supports": [
+          {
+            "independence_key": "friend-a-interpretation",
+            "strength": 0.2
+          }
+        ]
+      },
+      "before": {
+        "confidence": 0.0,
+        "contradiction_mass": 0.0,
+        "contradicts": [],
+        "ground_count": 0,
+        "stance": "held",
+        "support_mass": 0.0,
+        "supports": []
+      },
+      "claim_id": "C3_counterpart_intentionally_avoids",
+      "event_id": "dr-03-friend",
+      "processed_tick": 3,
+      "scope": "scenario"
+    },
+    {
+      "after": {
+        "confidence": 0.826086956522,
+        "contradiction_mass": 0.0,
+        "contradicts": [],
+        "ground_count": 1,
+        "stance": "adopted",
+        "support_mass": 0.95,
+        "supports": [
+          {
+            "independence_key": "friend-a-interpretation",
+            "strength": 0.95
+          }
+        ]
+      },
+      "before": {
+        "confidence": 0.0,
+        "contradiction_mass": 0.0,
+        "contradicts": [],
+        "ground_count": 0,
+        "stance": "held",
+        "support_mass": 0.0,
+        "supports": []
+      },
+      "claim_id": "C5_friend_said_avoidance",
+      "event_id": "dr-03-friend",
+      "processed_tick": 3,
+      "scope": "scenario"
+    },
+    {
+      "after": {
+        "confidence": 0.190476190476,
+        "contradiction_mass": 0.65,
+        "contradicts": [
+          {
+            "independence_key": "counterpart-explanation-dr-06",
+            "strength": 0.65
+          }
+        ],
+        "ground_count": 1,
+        "stance": "held",
+        "support_mass": 0.2,
+        "supports": [
+          {
+            "independence_key": "friend-a-interpretation",
+            "strength": 0.2
+          }
+        ]
+      },
+      "before": {
+        "confidence": 0.5,
+        "contradiction_mass": 0.0,
+        "contradicts": [],
+        "ground_count": 1,
+        "stance": "held",
+        "support_mass": 0.2,
+        "supports": [
+          {
+            "independence_key": "friend-a-interpretation",
+            "strength": 0.2
+          }
+        ]
+      },
+      "claim_id": "C3_counterpart_intentionally_avoids",
+      "event_id": "dr-06-explanation",
+      "processed_tick": 6,
+      "scope": "scenario"
+    },
+    {
+      "after": {
+        "confidence": 0.0,
+        "contradiction_mass": 0.6,
+        "contradicts": [
+          {
+            "independence_key": "counterpart-explanation-dr-06",
+            "strength": 0.6
+          }
+        ],
+        "ground_count": 0,
+        "stance": "held",
+        "support_mass": 0.0,
+        "supports": []
+      },
+      "before": {
+        "confidence": 0.0,
+        "contradiction_mass": 0.0,
+        "contradicts": [],
+        "ground_count": 0,
+        "stance": "held",
+        "support_mass": 0.0,
+        "supports": []
+      },
+      "claim_id": "C4_counterpart_rejects_relationship",
+      "event_id": "dr-06-explanation",
+      "processed_tick": 6,
+      "scope": "scenario"
+    },
+    {
+      "after": {
+        "confidence": 0.830508474576,
+        "contradiction_mass": 0.0,
+        "contradicts": [],
+        "ground_count": 1,
+        "stance": "adopted",
+        "support_mass": 0.98,
+        "supports": [
+          {
+            "independence_key": "counterpart-explanation-dr-06",
+            "strength": 0.98
+          }
+        ]
+      },
+      "before": {
+        "confidence": 0.0,
+        "contradiction_mass": 0.0,
+        "contradicts": [],
+        "ground_count": 0,
+        "stance": "held",
+        "support_mass": 0.0,
+        "supports": []
+      },
+      "claim_id": "C6_counterpart_stated_busy",
+      "event_id": "dr-06-explanation",
+      "processed_tick": 6,
+      "scope": "scenario"
+    },
+    {
+      "after": {
+        "confidence": 0.733333333333,
+        "contradiction_mass": 0.0,
+        "contradicts": [],
+        "ground_count": 1,
+        "stance": "held",
+        "support_mass": 0.55,
+        "supports": [
+          {
+            "independence_key": "counterpart-explanation-dr-06",
+            "strength": 0.55
+          }
+        ]
+      },
+      "before": {
+        "confidence": 0.0,
+        "contradiction_mass": 0.0,
+        "contradicts": [],
+        "ground_count": 0,
+        "stance": "held",
+        "support_mass": 0.0,
+        "supports": []
+      },
+      "claim_id": "C8_busy_was_actual_cause",
+      "event_id": "dr-06-explanation",
+      "processed_tick": 6,
+      "scope": "scenario"
+    },
+    {
+      "after": {
+        "confidence": 0.166666666667,
+        "contradiction_mass": 0.8,
+        "contradicts": [
+          {
+            "independence_key": "calendar-record-dr-07",
+            "strength": 0.15
+          },
+          {
+            "independence_key": "counterpart-explanation-dr-06",
+            "strength": 0.65
+          }
+        ],
+        "ground_count": 1,
+        "stance": "held",
+        "support_mass": 0.2,
+        "supports": [
+          {
+            "independence_key": "friend-a-interpretation",
+            "strength": 0.2
+          }
+        ]
+      },
+      "before": {
+        "confidence": 0.190476190476,
+        "contradiction_mass": 0.65,
+        "contradicts": [
+          {
+            "independence_key": "counterpart-explanation-dr-06",
+            "strength": 0.65
+          }
+        ],
+        "ground_count": 1,
+        "stance": "held",
+        "support_mass": 0.2,
+        "supports": [
+          {
+            "independence_key": "friend-a-interpretation",
+            "strength": 0.2
+          }
+        ]
+      },
+      "claim_id": "C3_counterpart_intentionally_avoids",
+      "event_id": "dr-07-confirmation",
+      "processed_tick": 7,
+      "scope": "scenario"
+    },
+    {
+      "after": {
+        "confidence": 0.818181818182,
+        "contradiction_mass": 0.0,
+        "contradicts": [],
+        "ground_count": 1,
+        "stance": "adopted",
+        "support_mass": 0.9,
+        "supports": [
+          {
+            "independence_key": "calendar-record-dr-07",
+            "strength": 0.9
+          }
+        ]
+      },
+      "before": {
+        "confidence": 0.0,
+        "contradiction_mass": 0.0,
+        "contradicts": [],
+        "ground_count": 0,
+        "stance": "held",
+        "support_mass": 0.0,
+        "supports": []
+      },
+      "claim_id": "C7_schedule_conflict_existed",
+      "event_id": "dr-07-confirmation",
+      "processed_tick": 7,
+      "scope": "scenario"
+    }
+  ],
+  "decision_routes": [
+    {
+      "candidates": [
+        {
+          "action": "accuse",
+          "influences": [
+            {
+              "channel": "base",
+              "delta": -0.1
+            },
+            {
+              "channel": "distress",
+              "delta": 0.340495231954
+            },
+            {
+              "channel": "pressure",
+              "delta": 0.4875
+            },
+            {
+              "channel": "habit",
+              "delta": 0.221
+            },
+            {
+              "channel": "rejection_claim",
+              "delta": 0.289130434783
+            },
+            {
+              "channel": "trust_brake",
+              "delta": -0.468
+            }
+          ],
+          "probability": 0.130660904503,
+          "salience": 0.770125666737
+        },
+        {
+          "action": "ask",
+          "influences": [
+            {
+              "channel": "base",
+              "delta": 0.15
+            },
+            {
+              "channel": "ambiguity",
+              "delta": 0.52046856108
+            },
+            {
+              "channel": "distress",
+              "delta": 0.14020391904
+            },
+            {
+              "channel": "trust",
+              "delta": 0.252
+            },
+            {
+              "channel": "access",
+              "delta": 0.186598921
+            }
+          ],
+          "probability": 0.28299271424,
+          "salience": 1.24927140112
+        },
+        {
+          "action": "recheck",
+          "influences": [
+            {
+              "channel": "base",
+              "delta": 0.05
+            },
+            {
+              "channel": "ambiguity",
+              "delta": 0.56050460424
+            },
+            {
+              "channel": "attention",
+              "delta": 0.1548
+            }
+          ],
+          "probability": 0.129648837398,
+          "salience": 0.76530460424
+        },
+        {
+          "action": "ruminate",
+          "influences": [
+            {
+              "channel": "base",
+              "delta": -0.05
+            },
+            {
+              "channel": "distress",
+              "delta": 0.320466100663
+            },
+            {
+              "channel": "interference",
+              "delta": 0.139482373799
+            }
+          ],
+          "probability": 0.073088752963,
+          "salience": 0.409948474462
+        },
+        {
+          "action": "wait",
+          "influences": [
+            {
+              "channel": "base",
+              "delta": 0.2
+            },
+            {
+              "channel": "trust",
+              "delta": 0.648
+            },
+            {
+              "channel": "low_distress",
+              "delta": 0.299708687086
+            },
+            {
+              "channel": "low_pressure",
+              "delta": 0.0875
+            }
+          ],
+          "probability": 0.276646178495,
+          "salience": 1.235208687086
+        },
+        {
+          "action": "withdraw",
+          "influences": [
+            {
+              "channel": "base",
+              "delta": 0.0
+            },
+            {
+              "channel": "distress",
+              "delta": 0.300436969372
+            },
+            {
+              "channel": "association",
+              "delta": 0.31452922344
+            },
+            {
+              "channel": "habit",
+              "delta": 0.171
+            },
+            {
+              "channel": "interference",
+              "delta": 0.0760812948
+            },
+            {
+              "channel": "trust_brake",
+              "delta": -0.216
+            }
+          ],
+          "probability": 0.106962612402,
+          "salience": 0.646047487611
+        }
+      ],
+      "event_id": "dr-05-decision",
+      "processed_tick": 5
+    }
+  ],
+  "engine_policy": {
+    "adoption_threshold": 0.75,
+    "base_capacity_per_tick": 6,
+    "drain_ticks": 20,
+    "ingress_policy": "priority",
+    "minimum_ground_mass": 0.5,
+    "queue_limit": 64,
+    "release_threshold": 0.55,
+    "routing_temperature": 0.62
+  },
+  "evidence_digest": [
+    {
+      "claim_id": "C_SENT_message_was_sent",
+      "event_id": "dr-00-sent",
+      "grounding_rule": "self-performed-send",
+      "independence_key": "self-send-dr-00",
+      "observed_tick": 0,
+      "provenance": "performed_action",
+      "relation": "supports",
+      "scope": "scenario",
+      "source_tick": 0,
+      "strength": 0.98
+    },
+    {
+      "claim_id": "C0_no_reply_observed_by_t1",
+      "event_id": "dr-01-no-reply",
+      "grounding_rule": "observe-no-reply",
+      "independence_key": "inbox-state-t1",
+      "observed_tick": 1,
+      "provenance": "direct_observation",
+      "relation": "supports",
+      "scope": "scenario",
+      "source_tick": 1,
+      "strength": 0.95
+    },
+    {
+      "claim_id": "C1_platform_displayed_online",
+      "event_id": "dr-02-online",
+      "grounding_rule": "observe-platform-online",
+      "independence_key": "platform-indicator-t2",
+      "observed_tick": 2,
+      "provenance": "direct_observation",
+      "relation": "supports",
+      "scope": "scenario",
+      "source_tick": 2,
+      "strength": 0.88
+    },
+    {
+      "claim_id": "C3_counterpart_intentionally_avoids",
+      "event_id": "dr-03-friend",
+      "grounding_rule": "testimony-avoidance",
+      "independence_key": "friend-a-interpretation",
+      "observed_tick": 3,
+      "provenance": "testimony",
+      "relation": "supports",
+      "scope": "scenario",
+      "source_tick": 3,
+      "strength": 0.2
+    },
+    {
+      "claim_id": "C5_friend_said_avoidance",
+      "event_id": "dr-03-friend",
+      "grounding_rule": "observe-friend-speech",
+      "independence_key": "friend-a-interpretation",
+      "observed_tick": 3,
+      "provenance": "testimony",
+      "relation": "supports",
+      "scope": "scenario",
+      "source_tick": 3,
+      "strength": 0.95
+    },
+    {
+      "claim_id": "C3_counterpart_intentionally_avoids",
+      "event_id": "dr-06-explanation",
+      "grounding_rule": "testimony-denies-avoidance",
+      "independence_key": "counterpart-explanation-dr-06",
+      "observed_tick": 6,
+      "provenance": "testimony",
+      "relation": "contradicts",
+      "scope": "scenario",
+      "source_tick": 6,
+      "strength": 0.65
+    },
+    {
+      "claim_id": "C4_counterpart_rejects_relationship",
+      "event_id": "dr-06-explanation",
+      "grounding_rule": "testimony-denies-rejection",
+      "independence_key": "counterpart-explanation-dr-06",
+      "observed_tick": 6,
+      "provenance": "testimony",
+      "relation": "contradicts",
+      "scope": "scenario",
+      "source_tick": 6,
+      "strength": 0.6
+    },
+    {
+      "claim_id": "C6_counterpart_stated_busy",
+      "event_id": "dr-06-explanation",
+      "grounding_rule": "testimony-busy-statement",
+      "independence_key": "counterpart-explanation-dr-06",
+      "observed_tick": 6,
+      "provenance": "testimony",
+      "relation": "supports",
+      "scope": "scenario",
+      "source_tick": 6,
+      "strength": 0.98
+    },
+    {
+      "claim_id": "C8_busy_was_actual_cause",
+      "event_id": "dr-06-explanation",
+      "grounding_rule": "testimony-causal-explanation",
+      "independence_key": "counterpart-explanation-dr-06",
+      "observed_tick": 6,
+      "provenance": "testimony",
+      "relation": "supports",
+      "scope": "scenario",
+      "source_tick": 6,
+      "strength": 0.55
+    },
+    {
+      "claim_id": "C3_counterpart_intentionally_avoids",
+      "event_id": "dr-07-confirmation",
+      "grounding_rule": "schedule-weighs-against-avoidance",
+      "independence_key": "calendar-record-dr-07",
+      "observed_tick": 7,
+      "provenance": "public_record",
+      "relation": "contradicts",
+      "scope": "scenario",
+      "source_tick": 7,
+      "strength": 0.15
+    },
+    {
+      "claim_id": "C7_schedule_conflict_existed",
+      "event_id": "dr-07-confirmation",
+      "grounding_rule": "public-schedule-record",
+      "independence_key": "calendar-record-dr-07",
+      "observed_tick": 7,
+      "provenance": "public_record",
+      "relation": "supports",
+      "scope": "scenario",
+      "source_tick": 7,
+      "strength": 0.9
+    }
+  ],
+  "input_accounting": {
+    "accounting_ok": true,
+    "collision_event_ids": [],
+    "deferred_event_ids": [],
+    "dropped_event_ids": [],
+    "duplicate_event_ids": [],
+    "processed": 10,
+    "raw_received": 10,
+    "unique_received": 10,
+    "unresolved_event_ids": []
+  },
+  "scenario": {
+    "id": "delayed_reply",
+    "schema_version": "human-model-scenario/0.1"
+  },
+  "schema_version": "human-model-semantic-baseline/0.1",
+  "slow_state_trajectory": {
+    "after_events": [
+      {
+        "event_id": "dr-00-sent",
+        "processed_tick": 0,
+        "source_tick": 0,
+        "state": {
+          "affective.residual_distress": 0.239993616,
+          "affective.update_rate": 0.12,
+          "associative.ambiguity_sensitivity": 0.55,
+          "associative.rejection_access": 0.52061186434,
+          "habit.impulsivity": 0.34,
+          "habit.withdrawal_bias": 0.38,
+          "narrative.rejection_story": 0.32920788296,
+          "narrative.relational_security": 0.61004907448,
+          "relationship.boundary_strain": 0.18,
+          "relationship.stake": 0.9,
+          "relationship.trust": 0.72
+        }
+      },
+      {
+        "event_id": "dr-01-no-reply",
+        "processed_tick": 1,
+        "source_tick": 1,
+        "state": {
+          "affective.residual_distress": 0.248335903219,
+          "affective.update_rate": 0.12,
+          "associative.ambiguity_sensitivity": 0.55078,
+          "associative.rejection_access": 0.521308267861,
+          "habit.impulsivity": 0.34,
+          "habit.withdrawal_bias": 0.38,
+          "narrative.rejection_story": 0.328571979316,
+          "narrative.relational_security": 0.610000584973,
+          "relationship.boundary_strain": 0.18,
+          "relationship.stake": 0.9,
+          "relationship.trust": 0.72
+        }
+      },
+      {
+        "event_id": "dr-02-online",
+        "processed_tick": 2,
+        "source_tick": 2,
+        "state": {
+          "affective.residual_distress": 0.256746845795,
+          "affective.update_rate": 0.12,
+          "associative.ambiguity_sensitivity": 0.5516,
+          "associative.rejection_access": 0.522110704132,
+          "habit.impulsivity": 0.34,
+          "habit.withdrawal_bias": 0.38,
+          "narrative.rejection_story": 0.327958230999,
+          "narrative.relational_security": 0.609939784997,
+          "relationship.boundary_strain": 0.18,
+          "relationship.stake": 0.9,
+          "relationship.trust": 0.72
+        }
+      },
+      {
+        "event_id": "dr-03-friend",
+        "processed_tick": 3,
+        "source_tick": 3,
+        "state": {
+          "affective.residual_distress": 0.269203600486,
+          "affective.update_rate": 0.12,
+          "associative.ambiguity_sensitivity": 0.55236,
+          "associative.rejection_access": 0.523084197596,
+          "habit.impulsivity": 0.34,
+          "habit.withdrawal_bias": 0.38,
+          "narrative.rejection_story": 0.328926571494,
+          "narrative.relational_security": 0.609820221361,
+          "relationship.boundary_strain": 0.18,
+          "relationship.stake": 0.9,
+          "relationship.trust": 0.72
+        }
+      },
+      {
+        "event_id": "dr-04-imagination",
+        "processed_tick": 4,
+        "source_tick": 4,
+        "state": {
+          "affective.residual_distress": 0.284527581211,
+          "affective.update_rate": 0.12,
+          "associative.ambiguity_sensitivity": 0.55326,
+          "associative.rejection_access": 0.524215372399,
+          "habit.impulsivity": 0.34,
+          "habit.withdrawal_bias": 0.38,
+          "narrative.rejection_story": 0.329971009297,
+          "narrative.relational_security": 0.60965018577,
+          "relationship.boundary_strain": 0.18,
+          "relationship.stake": 0.9,
+          "relationship.trust": 0.72
+        }
+      },
+      {
+        "event_id": "dr-05-decision",
+        "processed_tick": 5,
+        "source_tick": 5,
+        "state": {
+          "affective.residual_distress": 0.298454186565,
+          "affective.update_rate": 0.12,
+          "associative.ambiguity_sensitivity": 0.55401,
+          "associative.rejection_access": 0.525296945489,
+          "habit.impulsivity": 0.34,
+          "habit.withdrawal_bias": 0.38,
+          "narrative.rejection_story": 0.331019363559,
+          "narrative.relational_security": 0.609475594444,
+          "relationship.boundary_strain": 0.18,
+          "relationship.stake": 0.9,
+          "relationship.trust": 0.72
+        }
+      },
+      {
+        "event_id": "dr-06-explanation",
+        "processed_tick": 6,
+        "source_tick": 6,
+        "state": {
+          "affective.residual_distress": 0.276351740902,
+          "affective.update_rate": 0.12,
+          "associative.ambiguity_sensitivity": 0.55366,
+          "associative.rejection_access": 0.524789794336,
+          "habit.impulsivity": 0.339675,
+          "habit.withdrawal_bias": 0.38,
+          "narrative.rejection_story": 0.331731547,
+          "narrative.relational_security": 0.610917872535,
+          "relationship.boundary_strain": 0.18,
+          "relationship.stake": 0.9,
+          "relationship.trust": 0.75
+        }
+      },
+      {
+        "event_id": "dr-07-confirmation",
+        "processed_tick": 7,
+        "source_tick": 7,
+        "state": {
+          "affective.residual_distress": 0.256993477634,
+          "affective.update_rate": 0.12,
+          "associative.ambiguity_sensitivity": 0.55321,
+          "associative.rejection_access": 0.524309623249,
+          "habit.impulsivity": 0.3394,
+          "habit.withdrawal_bias": 0.38,
+          "narrative.rejection_story": 0.332396733003,
+          "narrative.relational_security": 0.612183197282,
+          "relationship.boundary_strain": 0.18,
+          "relationship.stake": 0.9,
+          "relationship.trust": 0.75
+        }
+      },
+      {
+        "event_id": "dr-08-repair",
+        "processed_tick": 8,
+        "source_tick": 8,
+        "state": {
+          "affective.residual_distress": 0.226443039437,
+          "affective.update_rate": 0.12,
+          "associative.ambiguity_sensitivity": 0.55247,
+          "associative.rejection_access": 0.523064321273,
+          "habit.impulsivity": 0.33899,
+          "habit.withdrawal_bias": 0.38,
+          "narrative.rejection_story": 0.33293523021,
+          "narrative.relational_security": 0.614203020335,
+          "relationship.boundary_strain": 0.15,
+          "relationship.stake": 0.9,
+          "relationship.trust": 0.79
+        }
+      },
+      {
+        "event_id": "dr-09-rest",
+        "processed_tick": 9,
+        "source_tick": 9,
+        "state": {
+          "affective.residual_distress": 0.193617236839,
+          "affective.update_rate": 0.12,
+          "associative.ambiguity_sensitivity": 0.55157,
+          "associative.rejection_access": 0.521371058084,
+          "habit.impulsivity": 0.33854,
+          "habit.withdrawal_bias": 0.38,
+          "narrative.rejection_story": 0.333399314117,
+          "narrative.relational_security": 0.616421757206,
+          "relationship.boundary_strain": 0.15,
+          "relationship.stake": 0.9,
+          "relationship.trust": 0.79
+        }
+      }
+    ],
+    "initial": {
+      "affective.residual_distress": 0.24,
+      "affective.update_rate": 0.12,
+      "associative.ambiguity_sensitivity": 0.55,
+      "associative.rejection_access": 0.52,
+      "habit.impulsivity": 0.34,
+      "habit.withdrawal_bias": 0.38,
+      "narrative.rejection_story": 0.33,
+      "narrative.relational_security": 0.61,
+      "relationship.boundary_strain": 0.18,
+      "relationship.stake": 0.9,
+      "relationship.trust": 0.72
+    }
+  },
+  "source_revision": "9b731b7f92700227de1fae8adc79e1d8e687d25f"
+}
