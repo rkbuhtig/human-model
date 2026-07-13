@@ -145,9 +145,17 @@ scenario family와 한-factor contrast를 등록해, 풍부한 모델과 단순 
 순위가 아니라 Reception, TargetForm, Ghost와 adjudication의 **선택적 기능 관할**을
 감사할 질문을 먼저 고정한다. 각 contrast는 조작 source lane, 공개 기록 effect, 고정
 factor, `registered_candidate_probe_domains`, 유지되어야 할 동등성과 열린 discriminator를
-기록하지만 exact trace field, signature와 horizon은 후속 `001B` 범위다. 후보 domain은
-비배타적 관측 목록이다. 목록 밖 효과는 fixture 위반이 아니라 현재 기능 분해의 scope
-failure 또는 열린 결과이며, 명시적 out-of-model lane은 `001B`에서 동결한다. 단순 합·threshold·lookup은
-주된 설명력 challenger가 아니라 alias와 degeneracy를 찾는 control로 사용한다. scenario 등록은
-인간 자료, LLM activation, recursive D2 runtime, Episode/Narrative writer 또는 새 claim
-support가 아니다.
+기록한다. 후보 domain은 비배타적 관측 목록이다.
+
+후속 [`INTERP-DIALOGUE-001B`](research/scenarios/interp-dialogue-001/trace-oracle.md)는
+이 질문을 11개 ordinal observation point, 23개 권한 분리 trace field,
+prefix/initial/one-future horizon과 9개 factor별 38개 경쟁 placement hypothesis,
+3개 matched-future oracle과 REL initial×later mood 2×2로 동결했다.
+이는 인간의 숨은 상태를 맞히는 정답표가 아니라 **가설을 구현했다고 주장할 때의 조건부
+trace 계약**이다. 자연 contrast의 최초 차이는 causal residence를 인증하지 않으며 direct
+edge는 아직 실행하지 않은 D2a node-clamp challenge로 분리한다. 관측 무차이는 alias가
+아니고, 한 번의 later access로 durable TargetForm과 slow cache를 구분하지 않는다.
+목록 밖 효과는 raw provenance를 보존한 out-of-model lane으로 보낸다. 단순
+합·threshold·lookup은 주된 설명력 challenger가 아니라 alias와 degeneracy를 찾는
+control로 사용한다. A/B의 schema·validator 통과는 인간 자료, LLM activation, recursive
+D2a runtime, Episode/Narrative writer 또는 새 claim support가 아니다.

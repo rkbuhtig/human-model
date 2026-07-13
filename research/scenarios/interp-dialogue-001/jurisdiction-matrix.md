@@ -1,7 +1,7 @@
 # INTERP-DIALOGUE-001A Jurisdiction Matrix
 
-이 표의 용어는 fixture의 정답이 아니라 `INTERP-DIALOGUE-001B`에서 비교할
-기능 배치 후보다.
+이 표의 용어는 fixture의 정답이 아니라 `INTERP-DIALOGUE-001B`가 조건부 signature로
+동결한 기능 배치 후보다.
 
 | 후보 기능 | 후보 입력 | 허용될 수 있는 영향 | 바뀌어서는 안 되는 것 | 사례에서 열린 질문 |
 |---|---|---|---|---|
@@ -24,11 +24,11 @@
 각 factor의 `registered_candidate_probe_domains`는 이 표에서 먼저 계측할 후보 영역을
 가리킬 뿐, 가능한 효과나 메커니즘의 완전한 관할 목록이 아니다. 등록되지 않았거나
 예상 밖인 효과는 fixture 실패 또는 자동 retirement로 처리하지 않는다.
-`INTERP-DIALOGUE-001B`는 그런 효과를 `OUT_OF_MODEL` 또는
+`INTERP-DIALOGUE-001B`는 그런 효과를 raw provenance와 함께 `OUT_OF_MODEL` 또는
 `CURRENT_FUNCTIONAL_DECOMPOSITION_SCOPE_FAILURE`로 보존하는 명시적 판정 lane을
-pilot과 결과 판정 전에 고정해야 한다.
+pilot과 결과 판정 전에 고정했다.
 
-## 후속 `001B` 판정 기준
+## `001B`에서 동결한 판정 기준
 
 ```text
 Selective effect
@@ -42,5 +42,7 @@ Forbidden-cast preservation
 Out-of-model effect preservation
 ```
 
-이 문서는 위 기준을 정의하지만 아직 어떤 기능 배치도 통과·실패로
-판정하지 않는다.
+[`trace-oracle-v1.json`](trace-oracle-v1.json)은 위 기준을 hypothesis-conditional
+projection으로 구체화하지만 아직 어떤 기능 배치도 실행하거나 통과·실패로 판정하지
+않는다. natural contrast의 최초 차이는 association signature일 뿐 direct causal
+residence가 아니며, direct edge는 별도 D2a-only challenge로 남는다.

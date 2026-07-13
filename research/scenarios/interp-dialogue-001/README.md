@@ -56,8 +56,8 @@ residence를 확정하는 태그가 아니다.
 나와야 하는지는
 `OPEN_NO_EXPECTED_TRACE`로 남긴다.
 
-후속 `INTERP-DIALOGUE-001B`는 pilot이나 결과 판정 전에 이 out-of-model lane을
-명시적인 trace-oracle 계약으로 고정해야 한다.
+`INTERP-DIALOGUE-001B`는 pilot이나 결과 판정 전에 이 out-of-model lane을
+명시적인 trace-oracle 계약으로 고정했다.
 
 RISK family의 미식별 source는 stable resolved-entity TargetForm을 인스턴스화하지 않는다.
 다만 provisional/category-level subjective target representation이 생길 수 있는지는
@@ -107,3 +107,21 @@ JSON Schema와 현재 구현된 구조 validator는 envelope, authority lane, 8-
 완전성과 factor-label 수준의 Hamming-one 쌍을 검사한다. 이 검사는 자연어
 descriptor가 실제로 단일 인과 조작인지나 현실의 기능 residence가 맞는지를
 인증하지 않는다.
+
+## `INTERP-DIALOGUE-001B` follow-up
+
+[`trace-oracle.md`](trace-oracle.md)와
+[`trace-oracle-v1.json`](trace-oracle-v1.json)은 `001A`의 source contract를 digest로
+묶고 다음을 `FROZEN / UNEXECUTED` 상태로 고정한다.
+
+- 11개 ordinal observation point와 prefix/initial/one-future horizon
+- 23개 authority-scoped trace field
+- 9개 factor별 38개 competing placement hypothesis
+- 세 family의 same-future-option oracle
+- REL initial reported mood × later reported mood 2×2 trajectory
+- Ghost/adjudicator/action gate를 위한 3개 D2a-only challenge
+- strict operational-alias, identifiability-limit와 out-of-model 규칙
+
+이 oracle은 사람의 숨은 상태나 올바른 기능 residence를 기록하지 않는다. 각 placement를
+계산적으로 구현했다고 주장할 때의 conditional conformance contract만 정의한다. 아직
+human/LLM/D2a observation, runner, evaluator, placement winner 또는 claim support는 없다.

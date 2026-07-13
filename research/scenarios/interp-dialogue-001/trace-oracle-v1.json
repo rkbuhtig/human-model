@@ -1,0 +1,833 @@
+{
+  "$schema": "./trace-oracle.schema.json",
+  "study_id": "INTERP-DIALOGUE-001B",
+  "oracle_id": "INTERP-DIALOGUE-001B-TRACE-ORACLE-V1",
+  "version": "1.0.0",
+  "status": "INTERNAL_PREREGISTRATION_UNEXECUTED_NO_HUMAN_LLM_OR_D2A_TRACE_DATA",
+  "authority": {
+    "artifact_role": "FUNCTIONAL_JURISDICTION_TRACE_ORACLE",
+    "source_status": "AUTHOR_ORIGIN_METHOD_CONTRACT",
+    "empirical_status": "NO_HUMAN_LLM_OR_D2A_TRACE_DATA",
+    "execution_status": "UNEXECUTED",
+    "mechanism_status": "COMPETING_PLACEMENTS_OPEN",
+    "output_status": "NO_OBSERVED_TRACE_OR_PLACEMENT_RESULT"
+  },
+  "bound_family_files": [
+    {
+      "family_id": "REL-BOUNDARY-001",
+      "path": "families/rel-boundary.json",
+      "content_sha256": "4eb342e655ded940ab8537f4e7827692829967a35f17feb375e731a24d2750e2"
+    },
+    {
+      "family_id": "WORK-FEEDBACK-001",
+      "path": "families/work-feedback.json",
+      "content_sha256": "71cedb46667d1fc2ab76ee1e9711e8f0344e3fea6cf9bd16b577643d292d5823"
+    },
+    {
+      "family_id": "RISK-FOOTSTEPS-001",
+      "path": "families/risk-footsteps.json",
+      "content_sha256": "4fbe69cbe8bd8edb631c9012810dbf935b69f10d5afa7c670638177eabb2a256"
+    }
+  ],
+  "observation_points": [
+    {"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "horizon_id": "H_PREFIX_BEFORE_K", "ordinal": 0, "stage": "PREFIX", "authority": "OBSERVATION_SLOT_NOT_RESULT", "description": "The complete declared vignette input is accepted and the prior prefix is snapshotted before any current-access projection is read."},
+    {"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "horizon_id": "H_INITIAL_ACCESS_K", "ordinal": 1, "stage": "ACCESS", "authority": "OBSERVATION_SLOT_NOT_RESULT", "description": "The bounded initial admission/access window closes; access may be absent, unobserved, or unmapped."},
+    {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "horizon_id": "H_INITIAL_ACCESS_K", "ordinal": 2, "stage": "ENCOUNTER", "authority": "OBSERVATION_SLOT_NOT_RESULT", "description": "The bounded initial encounter-formation window closes without certifying actual qualia."},
+    {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "horizon_id": "H_INITIAL_ACCESS_K", "ordinal": 3, "stage": "CANDIDATE", "authority": "OBSERVATION_SLOT_NOT_RESULT", "description": "The bounded candidate/source-use/affordance window closes."},
+    {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "horizon_id": "H_INITIAL_ACCESS_K", "ordinal": 4, "stage": "ADJUDICATION", "authority": "OBSERVATION_SLOT_NOT_RESULT", "description": "The bounded adjudication window closes; no world result or durable write follows automatically."},
+    {"observation_point_id": "O5_IMMEDIATE_SURFACE_RECORDED", "horizon_id": "H_INITIAL_ACCESS_K", "ordinal": 5, "stage": "SURFACE", "authority": "OBSERVATION_SLOT_NOT_DESIGN_ANCHOR", "description": "An elicited immediate utterance or action is recorded if the later source-specific protocol actually observes one; the 001A design anchor is not an observation."},
+    {"observation_point_id": "O6_MATCHED_FUTURE_PROBE_ACCEPTED_PRE_ACCESS", "horizon_id": "H_REGISTERED_FUTURE_ACCESS_K_PLUS_1", "ordinal": 6, "stage": "FUTURE_PROBE_PREFIX", "authority": "OBSERVATION_SLOT_NOT_RESULT", "description": "One registered future option is applied identically to both prior paths and the pre-probe prefix is snapshotted."},
+    {"observation_point_id": "O7_LATER_ACCESS_WINDOW_CLOSED", "horizon_id": "H_REGISTERED_FUTURE_ACCESS_K_PLUS_1", "ordinal": 7, "stage": "ACCESS", "authority": "OBSERVATION_SLOT_NOT_RESULT", "description": "One bounded later admission/access opportunity closes; presentation does not certify access."},
+    {"observation_point_id": "O8_LATER_ENCOUNTER_WINDOW_CLOSED", "horizon_id": "H_REGISTERED_FUTURE_ACCESS_K_PLUS_1", "ordinal": 8, "stage": "ENCOUNTER", "authority": "OBSERVATION_SLOT_NOT_RESULT", "description": "The later encounter-formation window closes."},
+    {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "horizon_id": "H_REGISTERED_FUTURE_ACCESS_K_PLUS_1", "ordinal": 9, "stage": "LATER_FUNCTIONAL_PROJECTION", "authority": "OBSERVATION_SLOT_NOT_RESULT", "description": "The bounded later candidate, adjudication, and non-durable reorganization projection window closes."},
+    {"observation_point_id": "O10_LATER_SURFACE_RECORDED", "horizon_id": "H_REGISTERED_FUTURE_ACCESS_K_PLUS_1", "ordinal": 10, "stage": "SURFACE", "authority": "OBSERVATION_SLOT_NOT_DESIGN_ANCHOR", "description": "A later utterance or action is recorded only if the source-specific protocol observes one."}
+  ],
+  "horizons": [
+    {
+      "horizon_id": "H_PREFIX_BEFORE_K",
+      "ordinal_relation": "PREFIX_BEFORE_K",
+      "start_observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS",
+      "end_observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS",
+      "authority": "FROZEN_PREFIX_SCOPE_NOT_EMPIRICAL_RESULT",
+      "future_probe_count": 0,
+      "later_processing_opportunity_count": 0
+    },
+    {
+      "horizon_id": "H_INITIAL_ACCESS_K",
+      "ordinal_relation": "INITIAL_ACCESS_K",
+      "start_observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED",
+      "end_observation_point_id": "O5_IMMEDIATE_SURFACE_RECORDED",
+      "authority": "FROZEN_INITIAL_SCOPE_NOT_EMPIRICAL_RESULT",
+      "future_probe_count": 0,
+      "later_processing_opportunity_count": 0
+    },
+    {
+      "horizon_id": "H_REGISTERED_FUTURE_ACCESS_K_PLUS_1",
+      "ordinal_relation": "REGISTERED_FUTURE_ACCESS_K_PLUS_1",
+      "start_observation_point_id": "O6_MATCHED_FUTURE_PROBE_ACCEPTED_PRE_ACCESS",
+      "end_observation_point_id": "O10_LATER_SURFACE_RECORDED",
+      "authority": "FROZEN_ONE_FUTURE_PROBE_SCOPE_NOT_EMPIRICAL_RESULT",
+      "future_probe_count": 1,
+      "later_processing_opportunity_count": 1,
+      "same_option_requirement": "THE_SAME_REGISTERED_FUTURE_OPTION_ID_IS_APPLIED_TO_BOTH_PRIOR_PATHS"
+    }
+  ],
+  "trace_fields": [
+    {"trace_field_id": "base_public_record", "field_role": "BASE_PUBLIC_RECORD", "authority": "PUBLIC_RECORD_ONLY"},
+    {"trace_field_id": "declared_level_public_record", "field_role": "DECLARED_LEVEL_PUBLIC_RECORD", "authority": "INTENTIONALLY_VARIED_INPUT_ONLY"},
+    {"trace_field_id": "world_unknowns", "field_role": "WORLD_UNKNOWNS", "authority": "BOUND_001A_BASE_STIMULUS_WORLD_UNKNOWNS_ONLY_EXCLUDES_LEVEL_SPECIFIC_FACTS"},
+    {"trace_field_id": "prior_occurrence_prefix", "field_role": "PREFIX_GUARD", "authority": "APPEND_ONLY_PREFIX_GUARD"},
+    {"trace_field_id": "external_identity_or_intention_certification", "field_role": "FORBIDDEN_CAST_GUARD", "authority": "MUST_NOT_BE_CREATED_FROM_SUBJECTIVE_TRACE"},
+    {"trace_field_id": "external_target_evidence_link_set", "field_role": "EVIDENCE_LINK_SET", "authority": "CLAIM_SCOPED_LINK_SET_SEPARATE_FROM_ASSESSMENT"},
+    {"trace_field_id": "evidence_assessment_by_claim_scope", "field_role": "EVIDENCE_LEDGER", "authority": "CLAIM_SCOPED_EXTERNAL_ASSESSMENT_LANE"},
+    {"trace_field_id": "future_option_public_record", "field_role": "DECLARED_FUTURE_OPTION_RECORD", "authority": "MATCHED_FUTURE_INPUT_ONLY"},
+    {"trace_field_id": "pre_access_target_scoped_readout", "field_role": "FUNCTIONAL_TRACE", "authority": "MECHANISM_CANDIDATE_PROJECTION_NOT_OBSERVED_HUMAN_STATE"},
+    {"trace_field_id": "material_admission", "field_role": "FUNCTIONAL_TRACE", "authority": "MECHANISM_CANDIDATE_PROJECTION_NOT_OBSERVED_HUMAN_STATE"},
+    {"trace_field_id": "current_access_source_view", "field_role": "FUNCTIONAL_TRACE", "authority": "MECHANISM_CANDIDATE_PROJECTION_NOT_OBSERVED_HUMAN_STATE"},
+    {"trace_field_id": "subjective_encounter_form", "field_role": "FUNCTIONAL_TRACE", "authority": "DESCRIPTIVE_PROXY_NOT_QUALIA"},
+    {"trace_field_id": "provisional_target_representation", "field_role": "FUNCTIONAL_TRACE", "authority": "UNRESOLVED_CATEGORY_CANDIDATE_NOT_ENTITY_CERTIFICATION"},
+    {"trace_field_id": "candidate_set", "field_role": "FUNCTIONAL_TRACE", "authority": "CANDIDATE_ONLY_NO_ADOPTION_AUTHORITY"},
+    {"trace_field_id": "candidate_source_usage", "field_role": "FUNCTIONAL_TRACE", "authority": "SOURCE_LINEAGE_PROJECTION_ONLY"},
+    {"trace_field_id": "adjudication", "field_role": "FUNCTIONAL_TRACE", "authority": "SCOPED_OUTCOME_NOT_WORLD_RESULT"},
+    {"trace_field_id": "action_affordance", "field_role": "FUNCTIONAL_TRACE", "authority": "AFFORDANCE_NOT_INTENT_OR_ACTION_OCCURRENCE"},
+    {"trace_field_id": "reorganization_projection", "field_role": "FUNCTIONAL_TRACE", "authority": "NON_DURABLE_PROJECTION_NO_TARGETFORM_OR_NARRATIVE_WRITE"},
+    {"trace_field_id": "immediate_surface", "field_role": "FUNCTIONAL_TRACE", "authority": "OBSERVABLE_ONLY_IF_ELICITED_NOT_DESIGN_ANCHOR"},
+    {"trace_field_id": "later_surface", "field_role": "FUNCTIONAL_TRACE", "authority": "OBSERVABLE_ONLY_IF_ELICITED"},
+    {"trace_field_id": "action_occurrence", "field_role": "FUNCTIONAL_TRACE", "authority": "EXTERNAL_ACTION_OCCURRENCE_NOT_INTENT_OR_AFFORDANCE"},
+    {"trace_field_id": "durable_targetform_write", "field_role": "FORBIDDEN_CAST_GUARD", "authority": "NO_WRITER_IN_THIS_STUDY"},
+    {"trace_field_id": "narrative_write", "field_role": "FORBIDDEN_CAST_GUARD", "authority": "NO_WRITER_IN_THIS_STUDY"}
+  ],
+  "relation_vocabulary": [
+    {"relation": "MUST_REMAIN_EQUAL", "meaning": "The compared projection is equal by design or by the conditional placement definition; this is not an empirical finding."},
+    {"relation": "MUST_DIFFER_IF_PLACEMENT", "meaning": "The placement is computationally defined to differ here; this is not a correct human answer."},
+    {"relation": "MAY_DIFFER_DOWNSTREAM", "meaning": "A registered upstream difference may propagate here, but direct residence is not asserted."},
+    {"relation": "MUST_DIFFER_BY_DESIGN", "meaning": "The declared operational factor record differs by fixture construction, independently of any placement."},
+    {"relation": "MAY_DIFFER_WITH_DECLARED_PUBLIC_INPUT", "meaning": "A claim-scoped external assessment may differ because the public history or stimulus record differs; no subjective trace is granted Evidence authority."},
+    {"relation": "MUST_REMAIN_ABSENT", "meaning": "The forbidden cast or writer output must be absent in both compared arms."},
+    {"relation": "NOT_EVALUABLE_WITHOUT_FROZEN_REASSESSMENT_POLICY", "meaning": "The evidence-assessment relation is not evaluated until a separate claim-scoped reassessment policy is frozen."},
+    {"relation": "RELATION_NOT_APPLICABLE", "meaning": "The projection is structurally outside this contrast or target scope."}
+  ],
+  "observation_vocabulary": [
+    {"observation": "EQUAL", "meaning": "The frozen source-specific measurement mapping returned equality."},
+    {"observation": "DIFFERENT", "meaning": "The frozen source-specific measurement mapping returned a difference."},
+    {"observation": "NOT_OBSERVED", "meaning": "The protocol did not observe or could not map this field; this is not equality or zero."},
+    {"observation": "OBSERVATION_NOT_APPLICABLE", "meaning": "The field does not apply under the registered scope."}
+  ],
+  "adjudication_vocabulary": [
+    "SIGNATURE_CONFORMS",
+    "SIGNATURE_DOES_NOT_CONFORM_UNDER_SCOPE",
+    "NOT_EVALUABLE",
+    "EMPIRICALLY_UNRESOLVED_UNDER_SCOPE",
+    "NOT_IDENTIFIABLE_UNDER_HORIZON",
+    "OPERATIONALLY_ALIASED",
+    "OUT_OF_MODEL",
+    "CURRENT_FUNCTIONAL_DECOMPOSITION_SCOPE_FAILURE"
+  ],
+  "placement_catalog": [
+    {
+      "placement_family_id": "CONDITION_LOCATION",
+      "placements": [
+        {"placement_id": "C0_REGISTERED_TRACE_NULL", "label": "no registered condition association", "authority": "COMPETING_FUNCTIONAL_PLACEMENT_NOT_RESULT"},
+        {"placement_id": "CA_ACCESS_FIRST_ASSOCIATION", "label": "access-first association", "authority": "COMPETING_FUNCTIONAL_PLACEMENT_NOT_RESULT"},
+        {"placement_id": "CE_ENCOUNTER_FIRST_ASSOCIATION", "label": "encounter-first association", "authority": "COMPETING_FUNCTIONAL_PLACEMENT_NOT_RESULT"},
+        {"placement_id": "CT_THIRD_REGISTERED_PROJECTION_FIRST_ASSOCIATION", "label": "third registered projection-first association", "authority": "COMPETING_FUNCTIONAL_PLACEMENT_NOT_RESULT"},
+        {"placement_id": "CM_MULTIPLE_REGISTERED_LOCATIONS", "label": "multiple registered associations", "authority": "COMPETING_FUNCTIONAL_PLACEMENT_NOT_RESULT"}
+      ]
+    },
+    {
+      "placement_family_id": "TARGET_HISTORY_RESIDENCE",
+      "placements": [
+        {"placement_id": "T0_REGISTERED_TRACE_NULL", "label": "no registered history residence", "authority": "COMPETING_FUNCTIONAL_PLACEMENT_NOT_RESULT"},
+        {"placement_id": "TA_ACTIVE_MATERIAL_READOUT", "label": "active-material readout", "authority": "COMPETING_FUNCTIONAL_PLACEMENT_NOT_RESULT"},
+        {"placement_id": "TS_TARGET_SCOPED_READOUT", "label": "durable target-scoped state candidate", "candidate_kind": "DURABLE_TARGET_SCOPED_STATE_CANDIDATE", "identifiability_status": "NOT_IDENTIFIABLE_UNDER_CURRENT_HORIZON", "authority": "HYPOTHESIS_CANDIDATE_NO_WRITER_RETENTION_OR_EXISTENCE_CLAIM"},
+        {"placement_id": "TC_SLOW_CACHE_READOUT", "label": "slow-cache readout candidate", "candidate_kind": "SLOW_CACHE_READOUT_CANDIDATE", "identifiability_status": "NOT_IDENTIFIABLE_UNDER_CURRENT_HORIZON", "authority": "COMPETING_FUNCTIONAL_PLACEMENT_NOT_RESULT"}
+      ],
+      "horizon_limitation": {"placement_ids": ["TS_TARGET_SCOPED_READOUT", "TC_SLOW_CACHE_READOUT"], "horizon_id": "H_REGISTERED_FUTURE_ACCESS_K_PLUS_1", "status": "NOT_IDENTIFIABLE_UNDER_HORIZON", "precedence": "HORIZON_LIMITATION_OVERRIDES_GENERAL_ALIAS_RULE", "forbidden_conclusions": ["OPERATIONALLY_ALIASED", "PLACEMENT_WINNER", "DURABLE_STATE_CLAIM", "GLOBAL_ALIAS_CLAIM"]}
+    },
+    {
+      "placement_family_id": "EXTERNAL_CUE_ROLE",
+      "placements": [
+        {"placement_id": "Q0_DELIVERY_RECORD_ONLY", "label": "delivery record only", "authority": "COMPETING_FUNCTIONAL_PLACEMENT_NOT_RESULT"},
+        {"placement_id": "QA_ADMISSION_OR_ACCESS_ASSOCIATION", "label": "admission or access association", "authority": "COMPETING_FUNCTIONAL_PLACEMENT_NOT_RESULT"},
+        {"placement_id": "QE_ENCOUNTER_ASSOCIATION", "label": "encounter association", "authority": "COMPETING_FUNCTIONAL_PLACEMENT_NOT_RESULT"},
+        {"placement_id": "QC_CANDIDATE_SOURCE_USE_ASSOCIATION", "label": "candidate source-use association", "authority": "COMPETING_FUNCTIONAL_PLACEMENT_NOT_RESULT"}
+      ]
+    },
+    {
+      "placement_family_id": "WORK_ADDENDUM_ROLE",
+      "placements": [
+        {"placement_id": "W0_PUBLIC_RECORD_ONLY", "label": "public record only", "authority": "COMPETING_FUNCTIONAL_PLACEMENT_NOT_RESULT"},
+        {"placement_id": "WU_INFORMATION_UPTAKE_ASSOCIATION", "label": "information-uptake association", "authority": "COMPETING_FUNCTIONAL_PLACEMENT_NOT_RESULT"},
+        {"placement_id": "WE_ENCOUNTER_ASSOCIATION", "label": "encounter association", "authority": "COMPETING_FUNCTIONAL_PLACEMENT_NOT_RESULT"},
+        {"placement_id": "WC_CANDIDATE_OR_REVISION_AFFORDANCE_ASSOCIATION", "label": "candidate or revision-affordance association", "authority": "COMPETING_FUNCTIONAL_PLACEMENT_NOT_RESULT"}
+      ]
+    },
+    {
+      "placement_family_id": "RISK_HISTORY_ROLE",
+      "placements": [
+        {"placement_id": "RH0_CURRENT_TRACE_NULL", "label": "no registered current history effect", "authority": "COMPETING_FUNCTIONAL_PLACEMENT_NOT_RESULT"},
+        {"placement_id": "RHA_PRIOR_MATERIAL_ACCESS_ASSOCIATION", "label": "prior-material access association", "authority": "COMPETING_FUNCTIONAL_PLACEMENT_NOT_RESULT"},
+        {"placement_id": "RHP_PROVISIONAL_CATEGORY_ASSOCIATION", "label": "provisional-category association", "authority": "COMPETING_FUNCTIONAL_PLACEMENT_NOT_RESULT"}
+      ]
+    },
+    {
+      "placement_family_id": "RISK_ROUTE_ROLE",
+      "placements": [
+        {"placement_id": "RR0_PUBLIC_OBSERVATION_ONLY", "label": "public observation only", "authority": "COMPETING_FUNCTIONAL_PLACEMENT_NOT_RESULT"},
+        {"placement_id": "RRE_ENCOUNTER_ASSOCIATION", "label": "encounter association", "authority": "COMPETING_FUNCTIONAL_PLACEMENT_NOT_RESULT"},
+        {"placement_id": "RRP_PROVISIONAL_REPRESENTATION_ASSOCIATION", "label": "provisional-representation association", "authority": "COMPETING_FUNCTIONAL_PLACEMENT_NOT_RESULT"},
+        {"placement_id": "RRA_ACTION_AFFORDANCE_ASSOCIATION", "label": "action-affordance association", "authority": "COMPETING_FUNCTIONAL_PLACEMENT_NOT_RESULT"}
+      ]
+    }
+  ],
+  "guard_policy_catalog": [
+    {
+      "guard_policy_id": "GUARD_FIRST_PERSON_CONDITION",
+      "source_lane": "FIRST_PERSON_CONDITION_REPORT",
+      "evidence_assessment_scope": "EXTERNAL_TARGET_OR_CURRENT_SOURCE_CLAIMS_ONLY_EXCLUDES_FIRST_PERSON_CONDITION_ATTESTATION",
+      "guard_projection_set": [
+        {"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "base_public_record"},
+        {"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "declared_level_public_record"},
+        {"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "world_unknowns"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "external_target_evidence_link_set"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "evidence_assessment_by_claim_scope"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "external_identity_or_intention_certification"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "durable_targetform_write"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "narrative_write"}
+      ],
+      "unconditional_guard_relations": [
+        {"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "base_public_record", "relation": "MUST_REMAIN_EQUAL"},
+        {"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "declared_level_public_record", "relation": "MUST_DIFFER_BY_DESIGN"},
+        {"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "world_unknowns", "relation": "MUST_REMAIN_EQUAL"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "external_target_evidence_link_set", "relation": "MUST_REMAIN_EQUAL"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "evidence_assessment_by_claim_scope", "relation": "MUST_REMAIN_EQUAL"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "external_identity_or_intention_certification", "relation": "MUST_REMAIN_ABSENT"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "durable_targetform_write", "relation": "MUST_REMAIN_ABSENT"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "narrative_write", "relation": "MUST_REMAIN_ABSENT"}
+      ]
+    },
+    {
+      "guard_policy_id": "GUARD_DECLARED_PUBLIC_HISTORY_OR_STIMULUS",
+      "source_lane": "VIGNETTE_HISTORY_RECORD_OR_PUBLIC_STIMULUS_VARIANT",
+      "guard_projection_set": [
+        {"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "base_public_record"},
+        {"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "declared_level_public_record"},
+        {"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "world_unknowns"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "external_target_evidence_link_set"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "evidence_assessment_by_claim_scope"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "external_identity_or_intention_certification"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "durable_targetform_write"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "narrative_write"}
+      ],
+      "unconditional_guard_relations": [
+        {"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "base_public_record", "relation": "MUST_REMAIN_EQUAL"},
+        {"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "declared_level_public_record", "relation": "MUST_DIFFER_BY_DESIGN"},
+        {"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "world_unknowns", "relation": "MUST_REMAIN_EQUAL"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "external_target_evidence_link_set", "relation": "MAY_DIFFER_WITH_DECLARED_PUBLIC_INPUT"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "evidence_assessment_by_claim_scope", "relation": "MAY_DIFFER_WITH_DECLARED_PUBLIC_INPUT"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "external_identity_or_intention_certification", "relation": "MUST_REMAIN_ABSENT"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "durable_targetform_write", "relation": "MUST_REMAIN_ABSENT"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "narrative_write", "relation": "MUST_REMAIN_ABSENT"}
+      ]
+    },
+    {
+      "guard_policy_id": "GUARD_EXPERIMENTER_CUE",
+      "source_lane": "EXPERIMENTER_CUE",
+      "link_equality_authority": "EQUALITY_DOES_NOT_ASSERT_MEMBERSHIP",
+      "source_material_prerequisite": "BOTH_PRIOR_SOURCE_MATERIALS_EXIST_BY_BOUND_001A_MINIMAL_PAIR_CONTRACT_WITHOUT_ASSERTING_EVIDENCE_LINK_MEMBERSHIP",
+      "guard_projection_set": [
+        {"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "base_public_record"},
+        {"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "declared_level_public_record"},
+        {"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "world_unknowns"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "external_target_evidence_link_set"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "evidence_assessment_by_claim_scope"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "external_identity_or_intention_certification"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "durable_targetform_write"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "narrative_write"}
+      ],
+      "unconditional_guard_relations": [
+        {"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "base_public_record", "relation": "MUST_REMAIN_EQUAL"},
+        {"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "declared_level_public_record", "relation": "MUST_DIFFER_BY_DESIGN"},
+        {"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "world_unknowns", "relation": "MUST_REMAIN_EQUAL"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "external_target_evidence_link_set", "relation": "MUST_REMAIN_EQUAL"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "evidence_assessment_by_claim_scope", "relation": "NOT_EVALUABLE_WITHOUT_FROZEN_REASSESSMENT_POLICY"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "external_identity_or_intention_certification", "relation": "MUST_REMAIN_ABSENT"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "durable_targetform_write", "relation": "MUST_REMAIN_ABSENT"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "narrative_write", "relation": "MUST_REMAIN_ABSENT"}
+      ]
+    },
+    {
+      "guard_policy_id": "GUARD_RISK_SEPARATE_HISTORY",
+      "source_lane": "VIGNETTE_HISTORY_RECORD_CURRENT_SOURCE_SEPARATE",
+      "evidence_assessment_scope": "CURRENT_UNRESOLVED_FOOTSTEP_SOURCE_CLAIM_ONLY_SEPARATE_PRIOR_INCIDENT_CLAIM_IS_OUTSIDE_THIS_EQUALITY_GUARD",
+      "guard_projection_set": [
+        {"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "base_public_record"},
+        {"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "declared_level_public_record"},
+        {"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "world_unknowns"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "external_target_evidence_link_set"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "evidence_assessment_by_claim_scope"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "external_identity_or_intention_certification"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "durable_targetform_write"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "narrative_write"}
+      ],
+      "unconditional_guard_relations": [
+        {"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "base_public_record", "relation": "MUST_REMAIN_EQUAL"},
+        {"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "declared_level_public_record", "relation": "MUST_DIFFER_BY_DESIGN"},
+        {"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "world_unknowns", "relation": "MUST_REMAIN_EQUAL"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "external_target_evidence_link_set", "relation": "MUST_REMAIN_EQUAL"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "evidence_assessment_by_claim_scope", "relation": "MUST_REMAIN_EQUAL"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "external_identity_or_intention_certification", "relation": "MUST_REMAIN_ABSENT"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "durable_targetform_write", "relation": "MUST_REMAIN_ABSENT"},
+        {"observation_point_id": "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "trace_field_id": "narrative_write", "relation": "MUST_REMAIN_ABSENT"}
+      ]
+    }
+  ],
+  "prefix_extension_guard": {
+    "status": "UNEXECUTED",
+    "comparison_unit": "SAME_ARM_SAME_O0_PREFIX_ARTIFACT_ACROSS_BASE_AND_FUTURE_EXTENSION_RUNS",
+    "base_observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS",
+    "trace_field_id": "prior_occurrence_prefix",
+    "relation": "MUST_REMAIN_EQUAL",
+    "cross_factor_arm_equality_required": false,
+    "protected_initial_trace_observation_point_ids": ["O0_INPUT_ACCEPTED_PRE_ACCESS", "O1_INITIAL_ACCESS_WINDOW_CLOSED", "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "O4_INITIAL_ADJUDICATION_WINDOW_CLOSED", "O5_IMMEDIATE_SURFACE_RECORDED"],
+    "initial_trace_comparison_unit": "SAME_ARM_SAME_EMITTED_O0_TO_O5_TRACE_PREFIX_ACROSS_BASE_AND_FUTURE_EXTENSION_RUNS",
+    "initial_trace_relation": "MUST_REMAIN_EQUAL",
+    "initial_trace_digest_status_policy": "MISSING_OR_NOT_OBSERVED_STATUS_IS_PART_OF_FROZEN_DIGEST",
+    "future_extension_append_rule": "FUTURE_EXTENSION_ONLY_APPENDS_AFTER_O5_WITHOUT_REWRITING_EMITTED_INITIAL_TRACE",
+    "execution_source_scope": "D2A_OR_RUNTIME_REPLAY_ONLY_NOT_HUMAN_REEXPERIENCE",
+    "future_extension_rule": "FUTURE_EXTENSION_RUN_MUST_PRESERVE_THE_SAME_EMITTED_O0_PREFIX_ARTIFACT_FROM_ITS_TRUNCATED_BASE_RUN",
+    "forbidden_comparison": "O0_PREFIX_IS_NOT_COMPARED_FOR_EQUALITY_WITH_O6_PRE_FUTURE_PREFIX"
+  },
+  "factor_oracles": [
+    {
+      "oracle_id": "oracle.rel.reported_current_mood",
+      "family_id": "REL-BOUNDARY-001",
+      "factor_id": "reported_current_mood",
+      "placement_family_id": "CONDITION_LOCATION",
+      "guard_policy_id": "GUARD_FIRST_PERSON_CONDITION",
+      "source_contract_snapshot": {
+        "source_lane": "FIRST_PERSON_CONDITION_REPORT",
+        "held_constant_factor_ids": ["target_history", "externally_cued_prior_material"],
+        "public_record_effect": "LEVEL_SPECIFIC_PUBLIC_RECORD_ONLY",
+        "registered_candidate_probe_domains": ["material_admission", "encounter_formation", "candidate_affordance", "later_reorganization"],
+        "must_remain_equal": ["base_utterance_and_world_unknowns", "target_history_record", "externally_presented_cue", "sleep_workload_response_window_and_bodily_demands"],
+        "open_discriminator_refs": ["rel.open.condition_placement", "rel.open.condition_cue_delayed_reorganization"],
+        "status": "OPEN_NO_EXPECTED_TRACE"
+      },
+      "contrast_scope": {"changed_public_record": "DECLARED_FACTOR_LEVEL_RECORD_ONLY", "same_option_pairing": "NOT_APPLICABLE"},
+      "projection_set": [
+        {"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "material_admission"},
+        {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form"},
+        {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "candidate_set"}
+      ],
+      "hypotheses": [
+        {"hypothesis_id": "rel.mood.c0", "placement_id": "C0_REGISTERED_TRACE_NULL", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "material_admission", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "candidate_set", "relation": "MUST_REMAIN_EQUAL"}]},
+        {"hypothesis_id": "rel.mood.ca", "placement_id": "CA_ACCESS_FIRST_ASSOCIATION", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "material_admission", "relation": "MUST_DIFFER_IF_PLACEMENT"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MAY_DIFFER_DOWNSTREAM"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "candidate_set", "relation": "MAY_DIFFER_DOWNSTREAM"}]},
+        {"hypothesis_id": "rel.mood.ce", "placement_id": "CE_ENCOUNTER_FIRST_ASSOCIATION", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "material_admission", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MUST_DIFFER_IF_PLACEMENT"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "candidate_set", "relation": "MAY_DIFFER_DOWNSTREAM"}]},
+        {"hypothesis_id": "rel.mood.ct", "placement_id": "CT_THIRD_REGISTERED_PROJECTION_FIRST_ASSOCIATION", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "material_admission", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "candidate_set", "relation": "MUST_DIFFER_IF_PLACEMENT"}]},
+        {"hypothesis_id": "rel.mood.cm", "placement_id": "CM_MULTIPLE_REGISTERED_LOCATIONS", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "material_admission", "relation": "MUST_DIFFER_IF_PLACEMENT"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MUST_DIFFER_IF_PLACEMENT"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "candidate_set", "relation": "MAY_DIFFER_DOWNSTREAM"}]}
+      ]
+    },
+    {
+      "oracle_id": "oracle.rel.target_history",
+      "family_id": "REL-BOUNDARY-001",
+      "factor_id": "target_history",
+      "placement_family_id": "TARGET_HISTORY_RESIDENCE",
+      "guard_policy_id": "GUARD_DECLARED_PUBLIC_HISTORY_OR_STIMULUS",
+      "source_contract_snapshot": {
+        "source_lane": "VIGNETTE_HISTORY_RECORD",
+        "held_constant_factor_ids": ["reported_current_mood", "externally_cued_prior_material"],
+        "public_record_effect": "LEVEL_SPECIFIC_PUBLIC_RECORD_ONLY",
+        "registered_candidate_probe_domains": ["target_scoped_readout", "encounter_formation", "candidate_fit", "later_trace"],
+        "must_remain_equal": ["base_utterance_and_world_unknowns", "reported_current_mood", "externally_presented_cue", "existence_of_both_prior_cue_items"],
+        "open_discriminator_refs": ["rel.open.target_residence"],
+        "status": "OPEN_NO_EXPECTED_TRACE"
+      },
+      "contrast_scope": {"changed_public_record": "DECLARED_FACTOR_LEVEL_RECORD_ONLY", "same_option_pairing": "NOT_APPLICABLE"},
+      "projection_set": [
+        {"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "pre_access_target_scoped_readout"},
+        {"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "current_access_source_view"},
+        {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form"}
+      ],
+      "hypotheses": [
+        {"hypothesis_id": "rel.history.t0", "placement_id": "T0_REGISTERED_TRACE_NULL", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "pre_access_target_scoped_readout", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "current_access_source_view", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MUST_REMAIN_EQUAL"}]},
+        {"hypothesis_id": "rel.history.ta", "placement_id": "TA_ACTIVE_MATERIAL_READOUT", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "pre_access_target_scoped_readout", "relation": "RELATION_NOT_APPLICABLE"}, {"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "current_access_source_view", "relation": "MUST_DIFFER_IF_PLACEMENT"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MAY_DIFFER_DOWNSTREAM"}]},
+        {"hypothesis_id": "rel.history.ts", "placement_id": "TS_TARGET_SCOPED_READOUT", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "pre_access_target_scoped_readout", "relation": "MUST_DIFFER_IF_PLACEMENT"}, {"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "current_access_source_view", "relation": "MAY_DIFFER_DOWNSTREAM"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MAY_DIFFER_DOWNSTREAM"}]},
+        {"hypothesis_id": "rel.history.tc", "placement_id": "TC_SLOW_CACHE_READOUT", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "pre_access_target_scoped_readout", "relation": "MUST_DIFFER_IF_PLACEMENT"}, {"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "current_access_source_view", "relation": "MAY_DIFFER_DOWNSTREAM"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MAY_DIFFER_DOWNSTREAM"}]}
+      ]
+    },
+    {
+      "oracle_id": "oracle.rel.externally_cued_prior_material",
+      "family_id": "REL-BOUNDARY-001",
+      "factor_id": "externally_cued_prior_material",
+      "placement_family_id": "EXTERNAL_CUE_ROLE",
+      "guard_policy_id": "GUARD_EXPERIMENTER_CUE",
+      "source_contract_snapshot": {
+        "source_lane": "EXPERIMENTER_CUE",
+        "held_constant_factor_ids": ["reported_current_mood", "target_history"],
+        "public_record_effect": "LEVEL_SPECIFIC_PUBLIC_RECORD_ONLY",
+        "registered_candidate_probe_domains": ["material_admission", "encounter_formation", "candidate_generation", "later_reorganization"],
+        "must_remain_equal": ["base_utterance_and_world_unknowns", "reported_current_mood", "target_history_record", "existence_of_both_prior_cue_items"],
+        "open_discriminator_refs": ["rel.open.cue_role", "rel.open.condition_cue_delayed_reorganization"],
+        "status": "OPEN_NO_EXPECTED_TRACE"
+      },
+      "contrast_scope": {"changed_public_record": "DECLARED_FACTOR_LEVEL_RECORD_ONLY", "same_option_pairing": "NOT_APPLICABLE"},
+      "projection_set": [
+        {"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "current_access_source_view"},
+        {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form"},
+        {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "candidate_source_usage"}
+      ],
+      "hypotheses": [
+        {"hypothesis_id": "rel.cue.q0", "placement_id": "Q0_DELIVERY_RECORD_ONLY", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "current_access_source_view", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "candidate_source_usage", "relation": "MUST_REMAIN_EQUAL"}]},
+        {"hypothesis_id": "rel.cue.qa", "placement_id": "QA_ADMISSION_OR_ACCESS_ASSOCIATION", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "current_access_source_view", "relation": "MUST_DIFFER_IF_PLACEMENT"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MAY_DIFFER_DOWNSTREAM"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "candidate_source_usage", "relation": "MAY_DIFFER_DOWNSTREAM"}]},
+        {"hypothesis_id": "rel.cue.qe", "placement_id": "QE_ENCOUNTER_ASSOCIATION", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "current_access_source_view", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MUST_DIFFER_IF_PLACEMENT"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "candidate_source_usage", "relation": "MAY_DIFFER_DOWNSTREAM"}]},
+        {"hypothesis_id": "rel.cue.qc", "placement_id": "QC_CANDIDATE_SOURCE_USE_ASSOCIATION", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "current_access_source_view", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "candidate_source_usage", "relation": "MUST_DIFFER_IF_PLACEMENT"}]}
+      ]
+    },
+    {
+      "oracle_id": "oracle.work.reported_evaluation_threat",
+      "family_id": "WORK-FEEDBACK-001",
+      "factor_id": "reported_evaluation_threat",
+      "placement_family_id": "CONDITION_LOCATION",
+      "guard_policy_id": "GUARD_FIRST_PERSON_CONDITION",
+      "source_contract_snapshot": {
+        "source_lane": "FIRST_PERSON_CONDITION_REPORT",
+        "held_constant_factor_ids": ["evaluator_criterion_history", "public_feedback_addendum"],
+        "public_record_effect": "LEVEL_SPECIFIC_PUBLIC_RECORD_ONLY",
+        "registered_candidate_probe_domains": ["material_admission", "encounter_formation", "candidate_affordance", "later_trace"],
+        "must_remain_equal": ["base_feedback_and_world_unknowns", "evaluator_criterion_history", "public_feedback_addendum", "sleep_workload_deadlines_bodily_state_and_response_opportunity"],
+        "open_discriminator_refs": ["work.open.threat_placement"],
+        "status": "OPEN_NO_EXPECTED_TRACE"
+      },
+      "contrast_scope": {"changed_public_record": "DECLARED_FACTOR_LEVEL_RECORD_ONLY", "same_option_pairing": "NOT_APPLICABLE"},
+      "projection_set": [
+        {"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "material_admission"},
+        {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form"},
+        {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "candidate_set"}
+      ],
+      "hypotheses": [
+        {"hypothesis_id": "work.threat.c0", "placement_id": "C0_REGISTERED_TRACE_NULL", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "material_admission", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "candidate_set", "relation": "MUST_REMAIN_EQUAL"}]},
+        {"hypothesis_id": "work.threat.ca", "placement_id": "CA_ACCESS_FIRST_ASSOCIATION", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "material_admission", "relation": "MUST_DIFFER_IF_PLACEMENT"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MAY_DIFFER_DOWNSTREAM"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "candidate_set", "relation": "MAY_DIFFER_DOWNSTREAM"}]},
+        {"hypothesis_id": "work.threat.ce", "placement_id": "CE_ENCOUNTER_FIRST_ASSOCIATION", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "material_admission", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MUST_DIFFER_IF_PLACEMENT"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "candidate_set", "relation": "MAY_DIFFER_DOWNSTREAM"}]},
+        {"hypothesis_id": "work.threat.ct", "placement_id": "CT_THIRD_REGISTERED_PROJECTION_FIRST_ASSOCIATION", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "material_admission", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "candidate_set", "relation": "MUST_DIFFER_IF_PLACEMENT"}]},
+        {"hypothesis_id": "work.threat.cm", "placement_id": "CM_MULTIPLE_REGISTERED_LOCATIONS", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "material_admission", "relation": "MUST_DIFFER_IF_PLACEMENT"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MUST_DIFFER_IF_PLACEMENT"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "candidate_set", "relation": "MAY_DIFFER_DOWNSTREAM"}]}
+      ]
+    },
+    {
+      "oracle_id": "oracle.work.evaluator_criterion_history",
+      "family_id": "WORK-FEEDBACK-001",
+      "factor_id": "evaluator_criterion_history",
+      "placement_family_id": "TARGET_HISTORY_RESIDENCE",
+      "guard_policy_id": "GUARD_DECLARED_PUBLIC_HISTORY_OR_STIMULUS",
+      "source_contract_snapshot": {
+        "source_lane": "VIGNETTE_HISTORY_RECORD",
+        "held_constant_factor_ids": ["reported_evaluation_threat", "public_feedback_addendum"],
+        "public_record_effect": "LEVEL_SPECIFIC_PUBLIC_RECORD_ONLY",
+        "registered_candidate_probe_domains": ["evaluator_scoped_readout", "encounter_formation", "candidate_fit", "later_trace"],
+        "must_remain_equal": ["base_feedback_and_world_unknowns", "reported_evaluation_threat", "public_feedback_addendum", "submitted_work_item_and_evaluation_occasion"],
+        "open_discriminator_refs": ["work.open.evaluator_scope"],
+        "status": "OPEN_NO_EXPECTED_TRACE"
+      },
+      "contrast_scope": {"changed_public_record": "DECLARED_FACTOR_LEVEL_RECORD_ONLY", "same_option_pairing": "NOT_APPLICABLE"},
+      "projection_set": [
+        {"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "pre_access_target_scoped_readout"},
+        {"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "current_access_source_view"},
+        {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form"}
+      ],
+      "hypotheses": [
+        {"hypothesis_id": "work.history.t0", "placement_id": "T0_REGISTERED_TRACE_NULL", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "pre_access_target_scoped_readout", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "current_access_source_view", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MUST_REMAIN_EQUAL"}]},
+        {"hypothesis_id": "work.history.ta", "placement_id": "TA_ACTIVE_MATERIAL_READOUT", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "pre_access_target_scoped_readout", "relation": "RELATION_NOT_APPLICABLE"}, {"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "current_access_source_view", "relation": "MUST_DIFFER_IF_PLACEMENT"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MAY_DIFFER_DOWNSTREAM"}]},
+        {"hypothesis_id": "work.history.ts", "placement_id": "TS_TARGET_SCOPED_READOUT", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "pre_access_target_scoped_readout", "relation": "MUST_DIFFER_IF_PLACEMENT"}, {"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "current_access_source_view", "relation": "MAY_DIFFER_DOWNSTREAM"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MAY_DIFFER_DOWNSTREAM"}]},
+        {"hypothesis_id": "work.history.tc", "placement_id": "TC_SLOW_CACHE_READOUT", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O0_INPUT_ACCEPTED_PRE_ACCESS", "trace_field_id": "pre_access_target_scoped_readout", "relation": "MUST_DIFFER_IF_PLACEMENT"}, {"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "current_access_source_view", "relation": "MAY_DIFFER_DOWNSTREAM"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MAY_DIFFER_DOWNSTREAM"}]}
+      ]
+    },
+    {
+      "oracle_id": "oracle.work.public_feedback_addendum",
+      "family_id": "WORK-FEEDBACK-001",
+      "factor_id": "public_feedback_addendum",
+      "placement_family_id": "WORK_ADDENDUM_ROLE",
+      "guard_policy_id": "GUARD_DECLARED_PUBLIC_HISTORY_OR_STIMULUS",
+      "source_contract_snapshot": {
+        "source_lane": "PUBLIC_STIMULUS_VARIANT",
+        "held_constant_factor_ids": ["reported_evaluation_threat", "evaluator_criterion_history"],
+        "public_record_effect": "LEVEL_SPECIFIC_PUBLIC_RECORD_ONLY",
+        "registered_candidate_probe_domains": ["public_information_uptake", "encounter_formation", "candidate_affordance", "revision_planning"],
+        "must_remain_equal": ["base_feedback_and_world_unknowns", "reported_evaluation_threat", "evaluator_criterion_history", "submitted_work_item_and_evaluation_occasion"],
+        "open_discriminator_refs": ["work.open.addendum_role"],
+        "status": "OPEN_NO_EXPECTED_TRACE"
+      },
+      "contrast_scope": {"changed_public_record": "DECLARED_FACTOR_LEVEL_RECORD_ONLY", "same_option_pairing": "NOT_APPLICABLE"},
+      "projection_set": [
+        {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form"},
+        {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "candidate_source_usage"},
+        {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "action_affordance"}
+      ],
+      "hypotheses": [
+        {"hypothesis_id": "work.addendum.w0", "placement_id": "W0_PUBLIC_RECORD_ONLY", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "candidate_source_usage", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "action_affordance", "relation": "MUST_REMAIN_EQUAL"}]},
+        {"hypothesis_id": "work.addendum.wu", "placement_id": "WU_INFORMATION_UPTAKE_ASSOCIATION", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "candidate_source_usage", "relation": "MUST_DIFFER_IF_PLACEMENT"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "action_affordance", "relation": "MAY_DIFFER_DOWNSTREAM"}]},
+        {"hypothesis_id": "work.addendum.we", "placement_id": "WE_ENCOUNTER_ASSOCIATION", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MUST_DIFFER_IF_PLACEMENT"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "candidate_source_usage", "relation": "MAY_DIFFER_DOWNSTREAM"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "action_affordance", "relation": "MAY_DIFFER_DOWNSTREAM"}]},
+        {"hypothesis_id": "work.addendum.wc", "placement_id": "WC_CANDIDATE_OR_REVISION_AFFORDANCE_ASSOCIATION", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "candidate_source_usage", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "action_affordance", "relation": "MUST_DIFFER_IF_PLACEMENT"}]}
+      ]
+    },
+    {
+      "oracle_id": "oracle.risk.reported_pre_event_arousal",
+      "family_id": "RISK-FOOTSTEPS-001",
+      "factor_id": "reported_pre_event_arousal",
+      "placement_family_id": "CONDITION_LOCATION",
+      "guard_policy_id": "GUARD_FIRST_PERSON_CONDITION",
+      "source_contract_snapshot": {
+        "source_lane": "FIRST_PERSON_CONDITION_REPORT",
+        "held_constant_factor_ids": ["recent_threat_history", "route_match_observation"],
+        "public_record_effect": "LEVEL_SPECIFIC_PUBLIC_RECORD_ONLY",
+        "registered_candidate_probe_domains": ["observation_formation", "prior_material_admission", "candidate_affordance", "action_affordance"],
+        "must_remain_equal": ["base_auditory_record_and_world_unknowns", "recent_threat_history", "route_match_observation", "sleep_workload_history_window_and_pre_route_circumstances"],
+        "open_discriminator_refs": ["risk.open.arousal_placement"],
+        "status": "OPEN_NO_EXPECTED_TRACE"
+      },
+      "contrast_scope": {"changed_public_record": "DECLARED_FACTOR_LEVEL_RECORD_ONLY", "same_option_pairing": "NOT_APPLICABLE"},
+      "projection_set": [
+        {"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "current_access_source_view"},
+        {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form"},
+        {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "action_affordance"}
+      ],
+      "hypotheses": [
+        {"hypothesis_id": "risk.arousal.c0", "placement_id": "C0_REGISTERED_TRACE_NULL", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "current_access_source_view", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "action_affordance", "relation": "MUST_REMAIN_EQUAL"}]},
+        {"hypothesis_id": "risk.arousal.ca", "placement_id": "CA_ACCESS_FIRST_ASSOCIATION", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "current_access_source_view", "relation": "MUST_DIFFER_IF_PLACEMENT"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MAY_DIFFER_DOWNSTREAM"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "action_affordance", "relation": "MAY_DIFFER_DOWNSTREAM"}]},
+        {"hypothesis_id": "risk.arousal.ce", "placement_id": "CE_ENCOUNTER_FIRST_ASSOCIATION", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "current_access_source_view", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MUST_DIFFER_IF_PLACEMENT"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "action_affordance", "relation": "MAY_DIFFER_DOWNSTREAM"}]},
+        {"hypothesis_id": "risk.arousal.ct", "placement_id": "CT_THIRD_REGISTERED_PROJECTION_FIRST_ASSOCIATION", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "current_access_source_view", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "action_affordance", "relation": "MUST_DIFFER_IF_PLACEMENT"}]},
+        {"hypothesis_id": "risk.arousal.cm", "placement_id": "CM_MULTIPLE_REGISTERED_LOCATIONS", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "current_access_source_view", "relation": "MUST_DIFFER_IF_PLACEMENT"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MUST_DIFFER_IF_PLACEMENT"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "action_affordance", "relation": "MAY_DIFFER_DOWNSTREAM"}]}
+      ]
+    },
+    {
+      "oracle_id": "oracle.risk.recent_threat_history",
+      "family_id": "RISK-FOOTSTEPS-001",
+      "factor_id": "recent_threat_history",
+      "placement_family_id": "RISK_HISTORY_ROLE",
+      "guard_policy_id": "GUARD_RISK_SEPARATE_HISTORY",
+      "source_contract_snapshot": {
+        "source_lane": "VIGNETTE_HISTORY_RECORD",
+        "held_constant_factor_ids": ["reported_pre_event_arousal", "route_match_observation"],
+        "public_record_effect": "LEVEL_SPECIFIC_PUBLIC_RECORD_ONLY",
+        "registered_candidate_probe_domains": ["prior_material_admission", "observation_interpretation", "candidate_affordance", "later_trace"],
+        "must_remain_equal": ["base_auditory_record_and_world_unknowns", "reported_pre_event_arousal", "route_match_observation", "current_source_resolution_status"],
+        "open_discriminator_refs": ["risk.open.history_role"],
+        "status": "OPEN_NO_EXPECTED_TRACE"
+      },
+      "contrast_scope": {"changed_public_record": "DECLARED_FACTOR_LEVEL_RECORD_ONLY", "same_option_pairing": "NOT_APPLICABLE"},
+      "projection_set": [
+        {"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "current_access_source_view"},
+        {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form"},
+        {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "provisional_target_representation"}
+      ],
+      "hypotheses": [
+        {"hypothesis_id": "risk.history.rh0", "placement_id": "RH0_CURRENT_TRACE_NULL", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "current_access_source_view", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "provisional_target_representation", "relation": "MUST_REMAIN_EQUAL"}]},
+        {"hypothesis_id": "risk.history.rha", "placement_id": "RHA_PRIOR_MATERIAL_ACCESS_ASSOCIATION", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "current_access_source_view", "relation": "MUST_DIFFER_IF_PLACEMENT"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MAY_DIFFER_DOWNSTREAM"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "provisional_target_representation", "relation": "MAY_DIFFER_DOWNSTREAM"}]},
+        {"hypothesis_id": "risk.history.rhp", "placement_id": "RHP_PROVISIONAL_CATEGORY_ASSOCIATION", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O1_INITIAL_ACCESS_WINDOW_CLOSED", "trace_field_id": "current_access_source_view", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MAY_DIFFER_DOWNSTREAM"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "provisional_target_representation", "relation": "MUST_DIFFER_IF_PLACEMENT"}]}
+      ]
+    },
+    {
+      "oracle_id": "oracle.risk.route_match_observation",
+      "family_id": "RISK-FOOTSTEPS-001",
+      "factor_id": "route_match_observation",
+      "placement_family_id": "RISK_ROUTE_ROLE",
+      "guard_policy_id": "GUARD_DECLARED_PUBLIC_HISTORY_OR_STIMULUS",
+      "source_contract_snapshot": {
+        "source_lane": "PUBLIC_STIMULUS_VARIANT",
+        "held_constant_factor_ids": ["reported_pre_event_arousal", "recent_threat_history"],
+        "public_record_effect": "LEVEL_SPECIFIC_PUBLIC_RECORD_ONLY",
+        "registered_candidate_probe_domains": ["observation_formation", "provisional_target_representation", "candidate_affordance", "action_affordance"],
+        "must_remain_equal": ["base_auditory_record_and_world_unknowns", "reported_pre_event_arousal", "recent_threat_history", "observation_count_timing_duration_loudness_and_source_resolution"],
+        "open_discriminator_refs": ["risk.open.route_match_role", "risk.open.provisional_target_scope"],
+        "status": "OPEN_NO_EXPECTED_TRACE"
+      },
+      "contrast_scope": {"changed_public_record": "DECLARED_FACTOR_LEVEL_RECORD_ONLY", "same_option_pairing": "NOT_APPLICABLE"},
+      "projection_set": [
+        {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form"},
+        {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "provisional_target_representation"},
+        {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "action_affordance"}
+      ],
+      "hypotheses": [
+        {"hypothesis_id": "risk.route.rr0", "placement_id": "RR0_PUBLIC_OBSERVATION_ONLY", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "provisional_target_representation", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "action_affordance", "relation": "MUST_REMAIN_EQUAL"}]},
+        {"hypothesis_id": "risk.route.rre", "placement_id": "RRE_ENCOUNTER_ASSOCIATION", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MUST_DIFFER_IF_PLACEMENT"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "provisional_target_representation", "relation": "MAY_DIFFER_DOWNSTREAM"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "action_affordance", "relation": "MAY_DIFFER_DOWNSTREAM"}]},
+        {"hypothesis_id": "risk.route.rrp", "placement_id": "RRP_PROVISIONAL_REPRESENTATION_ASSOCIATION", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MAY_DIFFER_DOWNSTREAM"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "provisional_target_representation", "relation": "MUST_DIFFER_IF_PLACEMENT"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "action_affordance", "relation": "MAY_DIFFER_DOWNSTREAM"}]},
+        {"hypothesis_id": "risk.route.rra", "placement_id": "RRA_ACTION_AFFORDANCE_ASSOCIATION", "authority": "HYPOTHESIS_DEFINITION_NOT_EMPIRICAL_EXPECTATION", "direct_edge_claim": "NONE", "d2a_challenge_refs": [], "relations": [{"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O2_INITIAL_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "provisional_target_representation", "relation": "MUST_REMAIN_EQUAL"}, {"observation_point_id": "O3_INITIAL_CANDIDATE_WINDOW_CLOSED", "trace_field_id": "action_affordance", "relation": "MUST_DIFFER_IF_PLACEMENT"}]}
+      ],
+      "adjacent_evidence_lane_rule": "THE_ROUTE_RECORD_MAY_CHANGE_A_SEPARATELY_FROZEN_EVIDENCE_ASSESSMENT_BUT_MUST_NOT_CERTIFY_SOURCE_IDENTITY_HOSTILE_INTENTION_OR_RESOLVED_ENTITY_STATUS"
+    }
+  ],
+  "matched_future_oracles": [
+    {
+      "oracle_id": "future.rel.same_projection",
+      "family_id": "REL-BOUNDARY-001",
+      "source_probe_id": "rel.probe.same_cue_later_mood",
+      "source_option_count": 2,
+      "compared_prior_cell_ids": ["rel-000", "rel-100"],
+      "changed_factor_id": "reported_current_mood",
+      "candidate_anchor_authority": "DESIGN_ONLY_NOT_OBSERVED_IMMEDIATE_SURFACE",
+      "comparison_rule": "SAME_FUTURE_OPTION_APPLIED_TO_BOTH_PRIOR_PATHS",
+      "same_surface_eligibility": {
+        "status": "UNEXECUTED",
+        "observation_point_id": "O5_IMMEDIATE_SURFACE_RECORDED",
+        "trace_field_id": "immediate_surface",
+        "allowed_bases": ["ACTUAL_ELICITED_SURFACE_OBSERVED_EQUAL_UNDER_FROZEN_SOURCE_SPECIFIC_MAPPING", "PREREGISTERED_NO_FEEDBACK_SURFACE_CLAMP_EQUAL"],
+        "required_scope_keys": ["source_kind", "measurement_mapping_version", "elicitation_protocol_version"],
+        "clamp_authority": "D2A_ONLY_PREREGISTERED_NO_FEEDBACK_SURFACE_CLAMP",
+        "forbidden_basis": "DESIGN_ANCHOR_ONLY",
+        "failure_status": "NOT_EVALUABLE"
+      },
+      "matched_option_arms": [
+        {"option_index": 0, "left_prior_cell_id": "rel-000", "right_prior_cell_id": "rel-100", "left_option_index": 0, "right_option_index": 0},
+        {"option_index": 1, "left_prior_cell_id": "rel-000", "right_prior_cell_id": "rel-100", "left_option_index": 1, "right_option_index": 1}
+      ],
+      "source_probe_snapshot": {
+        "probe_id": "rel.probe.same_cue_later_mood",
+        "probe_options": [
+          "At a new access, the same prior-material cue used in the initial cell is re-presented while the recipient reports an ordinary current mood; no new partner utterance, behavior, or external target evidence is added.",
+          "At a new access, the same prior-material cue used in the initial cell is re-presented while the recipient reports a low current mood; no new partner utterance, behavior, or external target evidence is added."
+        ],
+        "open_question": "Would cue admission, interpretation, or delayed-reorganization trace differ between the later reported-mood options while the cue and external target record remain identical?",
+        "distinct_path_requirement": "A_CLAIMED_DISTINCT_INTERNAL_PATH_MUST_DIVERGE_UNDER_AT_LEAST_ONE_PREREGISTERED_FUTURE_OPTION",
+        "no_expected_result": true
+      },
+      "later_projection_refs": [
+        {"observation_point_id": "O7_LATER_ACCESS_WINDOW_CLOSED", "trace_field_id": "current_access_source_view"},
+        {"observation_point_id": "O8_LATER_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "reorganization_projection"}
+      ],
+      "future_guard_projection_set": [
+        {"observation_point_id": "O6_MATCHED_FUTURE_PROBE_ACCEPTED_PRE_ACCESS", "trace_field_id": "future_option_public_record"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "external_target_evidence_link_set"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "evidence_assessment_by_claim_scope"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "external_identity_or_intention_certification"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "durable_targetform_write"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "narrative_write"}
+      ],
+      "future_guard_relations": [
+        {"observation_point_id": "O6_MATCHED_FUTURE_PROBE_ACCEPTED_PRE_ACCESS", "trace_field_id": "future_option_public_record", "relation": "MUST_REMAIN_EQUAL"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "external_target_evidence_link_set", "relation": "MUST_REMAIN_EQUAL"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "evidence_assessment_by_claim_scope", "relation": "MUST_REMAIN_EQUAL"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "external_identity_or_intention_certification", "relation": "MUST_REMAIN_ABSENT"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "durable_targetform_write", "relation": "MUST_REMAIN_ABSENT"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "narrative_write", "relation": "MUST_REMAIN_ABSENT"}
+      ]
+    },
+    {
+      "oracle_id": "future.work.same_projection",
+      "family_id": "WORK-FEEDBACK-001",
+      "source_probe_id": "work.probe.revision_response",
+      "source_option_count": 2,
+      "compared_prior_cell_ids": ["work-000", "work-100"],
+      "changed_factor_id": "reported_evaluation_threat",
+      "candidate_anchor_authority": "DESIGN_ONLY_NOT_OBSERVED_IMMEDIATE_SURFACE",
+      "comparison_rule": "SAME_FUTURE_OPTION_APPLIED_TO_BOTH_PRIOR_PATHS",
+      "same_surface_eligibility": {
+        "status": "UNEXECUTED",
+        "observation_point_id": "O5_IMMEDIATE_SURFACE_RECORDED",
+        "trace_field_id": "immediate_surface",
+        "allowed_bases": ["ACTUAL_ELICITED_SURFACE_OBSERVED_EQUAL_UNDER_FROZEN_SOURCE_SPECIFIC_MAPPING", "PREREGISTERED_NO_FEEDBACK_SURFACE_CLAMP_EQUAL"],
+        "required_scope_keys": ["source_kind", "measurement_mapping_version", "elicitation_protocol_version"],
+        "clamp_authority": "D2A_ONLY_PREREGISTERED_NO_FEEDBACK_SURFACE_CLAMP",
+        "forbidden_basis": "DESIGN_ANCHOR_ONLY",
+        "failure_status": "NOT_EVALUABLE"
+      },
+      "matched_option_arms": [
+        {"option_index": 0, "left_prior_cell_id": "work-000", "right_prior_cell_id": "work-100", "left_option_index": 0, "right_option_index": 0},
+        {"option_index": 1, "left_prior_cell_id": "work-000", "right_prior_cell_id": "work-100", "left_option_index": 1, "right_option_index": 1}
+      ],
+      "source_probe_snapshot": {
+        "probe_id": "work.probe.revision_response",
+        "probe_options": [
+          "After revision, the evaluator identifies the corrected criteria and acknowledges improvement.",
+          "After revision, the evaluator repeats global dissatisfaction without new criteria."
+        ],
+        "open_question": "Would at least one later access, interpretation, or action-affordance trace diverge under either event despite the same immediate surface?",
+        "distinct_path_requirement": "A_CLAIMED_DISTINCT_INTERNAL_PATH_MUST_DIVERGE_UNDER_AT_LEAST_ONE_PREREGISTERED_FUTURE_OPTION",
+        "no_expected_result": true
+      },
+      "later_projection_refs": [
+        {"observation_point_id": "O7_LATER_ACCESS_WINDOW_CLOSED", "trace_field_id": "current_access_source_view"},
+        {"observation_point_id": "O8_LATER_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "action_affordance"}
+      ],
+      "future_guard_projection_set": [
+        {"observation_point_id": "O6_MATCHED_FUTURE_PROBE_ACCEPTED_PRE_ACCESS", "trace_field_id": "future_option_public_record"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "external_target_evidence_link_set"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "evidence_assessment_by_claim_scope"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "external_identity_or_intention_certification"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "durable_targetform_write"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "narrative_write"}
+      ],
+      "future_guard_relations": [
+        {"observation_point_id": "O6_MATCHED_FUTURE_PROBE_ACCEPTED_PRE_ACCESS", "trace_field_id": "future_option_public_record", "relation": "MUST_REMAIN_EQUAL"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "external_target_evidence_link_set", "relation": "MUST_REMAIN_EQUAL"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "evidence_assessment_by_claim_scope", "relation": "MUST_REMAIN_EQUAL"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "external_identity_or_intention_certification", "relation": "MUST_REMAIN_ABSENT"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "durable_targetform_write", "relation": "MUST_REMAIN_ABSENT"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "narrative_write", "relation": "MUST_REMAIN_ABSENT"}
+      ]
+    },
+    {
+      "oracle_id": "future.risk.same_projection",
+      "family_id": "RISK-FOOTSTEPS-001",
+      "source_probe_id": "risk.probe.source_trajectory",
+      "source_option_count": 2,
+      "compared_prior_cell_ids": ["risk-000", "risk-100"],
+      "changed_factor_id": "reported_pre_event_arousal",
+      "candidate_anchor_authority": "DESIGN_ONLY_NOT_OBSERVED_IMMEDIATE_SURFACE",
+      "comparison_rule": "SAME_FUTURE_OPTION_APPLIED_TO_BOTH_PRIOR_PATHS",
+      "same_surface_eligibility": {
+        "status": "UNEXECUTED",
+        "observation_point_id": "O5_IMMEDIATE_SURFACE_RECORDED",
+        "trace_field_id": "immediate_surface",
+        "allowed_bases": ["ACTUAL_ELICITED_SURFACE_OBSERVED_EQUAL_UNDER_FROZEN_SOURCE_SPECIFIC_MAPPING", "PREREGISTERED_NO_FEEDBACK_SURFACE_CLAMP_EQUAL"],
+        "required_scope_keys": ["source_kind", "measurement_mapping_version", "elicitation_protocol_version"],
+        "clamp_authority": "D2A_ONLY_PREREGISTERED_NO_FEEDBACK_SURFACE_CLAMP",
+        "forbidden_basis": "DESIGN_ANCHOR_ONLY",
+        "failure_status": "NOT_EVALUABLE"
+      },
+      "matched_option_arms": [
+        {"option_index": 0, "left_prior_cell_id": "risk-000", "right_prior_cell_id": "risk-100", "left_option_index": 0, "right_option_index": 0},
+        {"option_index": 1, "left_prior_cell_id": "risk-000", "right_prior_cell_id": "risk-100", "left_option_index": 1, "right_option_index": 1}
+      ],
+      "source_probe_snapshot": {
+        "probe_id": "risk.probe.source_trajectory",
+        "probe_options": [
+          "The source passes the walker and continues on another route.",
+          "The source remains behind and matches another turn taken by the walker."
+        ],
+        "open_question": "Would at least one later observation, interpretation, or action-affordance trace differ under either event despite the same immediate precaution?",
+        "distinct_path_requirement": "A_CLAIMED_DISTINCT_INTERNAL_PATH_MUST_DIVERGE_UNDER_AT_LEAST_ONE_PREREGISTERED_FUTURE_OPTION",
+        "no_expected_result": true
+      },
+      "later_projection_refs": [
+        {"observation_point_id": "O8_LATER_ENCOUNTER_WINDOW_CLOSED", "trace_field_id": "subjective_encounter_form"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "provisional_target_representation"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "action_affordance"}
+      ],
+      "future_guard_projection_set": [
+        {"observation_point_id": "O6_MATCHED_FUTURE_PROBE_ACCEPTED_PRE_ACCESS", "trace_field_id": "future_option_public_record"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "external_target_evidence_link_set"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "evidence_assessment_by_claim_scope"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "external_identity_or_intention_certification"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "durable_targetform_write"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "narrative_write"}
+      ],
+      "future_guard_relations": [
+        {"observation_point_id": "O6_MATCHED_FUTURE_PROBE_ACCEPTED_PRE_ACCESS", "trace_field_id": "future_option_public_record", "relation": "MUST_REMAIN_EQUAL"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "external_target_evidence_link_set", "relation": "MUST_REMAIN_EQUAL"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "evidence_assessment_by_claim_scope", "relation": "MUST_REMAIN_EQUAL"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "external_identity_or_intention_certification", "relation": "MUST_REMAIN_ABSENT"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "durable_targetform_write", "relation": "MUST_REMAIN_ABSENT"},
+        {"observation_point_id": "O9_LATER_CANDIDATE_ADJUDICATION_REORGANIZATION_CLOSED", "trace_field_id": "narrative_write", "relation": "MUST_REMAIN_ABSENT"}
+      ]
+    }
+  ],
+  "rel_delayed_reorganization_factorial": {
+    "factorial_id": "REL-DELAYED-REORGANIZATION-INITIAL-X-LATER-MOOD",
+    "family_id": "REL-BOUNDARY-001",
+    "source_probe_id": "rel.probe.same_cue_later_mood",
+    "horizon_id": "H_REGISTERED_FUTURE_ACCESS_K_PLUS_1",
+    "fixed_initial_factor_levels": {
+      "target_history": "reliable_followthrough_history",
+      "externally_cued_prior_material": "cue_prior_small_care"
+    },
+    "later_option_mapping": [
+      {"later_option_id": "later_reported_ordinary_mood", "source_option_index": 0},
+      {"later_option_id": "later_reported_low_mood", "source_option_index": 1}
+    ],
+    "cells": [
+      {"trajectory_cell_id": "rel-delay-ordinary-ordinary", "initial_cell_id": "rel-000", "initial_reported_mood": "reported_ordinary_mood", "later_option_id": "later_reported_ordinary_mood"},
+      {"trajectory_cell_id": "rel-delay-ordinary-low", "initial_cell_id": "rel-000", "initial_reported_mood": "reported_ordinary_mood", "later_option_id": "later_reported_low_mood"},
+      {"trajectory_cell_id": "rel-delay-low-ordinary", "initial_cell_id": "rel-100", "initial_reported_mood": "reported_low_mood", "later_option_id": "later_reported_ordinary_mood"},
+      {"trajectory_cell_id": "rel-delay-low-low", "initial_cell_id": "rel-100", "initial_reported_mood": "reported_low_mood", "later_option_id": "later_reported_low_mood"}
+    ],
+    "edge_classes": [
+      {
+        "edge_class_id": "INITIAL_MOOD_EDGE_AT_MATCHED_LATER_MOOD",
+        "pairs": [["rel-delay-ordinary-ordinary", "rel-delay-low-ordinary"], ["rel-delay-ordinary-low", "rel-delay-low-low"]],
+        "meaning": "Tests an initial-condition residue association while the later reported mood and future option are matched."
+      },
+      {
+        "edge_class_id": "LATER_MOOD_EDGE_AT_MATCHED_INITIAL_MOOD",
+        "pairs": [["rel-delay-ordinary-ordinary", "rel-delay-ordinary-low"], ["rel-delay-low-ordinary", "rel-delay-low-low"]],
+        "meaning": "Tests a current later-condition association while the initial cell is matched."
+      }
+    ],
+    "candidate_patterns": [
+      {"pattern_id": "D0_NO_REGISTERED_LATER_DIFFERENCE", "initial_edge_relation": "MUST_REMAIN_EQUAL", "later_edge_relation": "MUST_REMAIN_EQUAL"},
+      {"pattern_id": "DC_LATER_CURRENT_CONDITION_ONLY", "initial_edge_relation": "MUST_REMAIN_EQUAL", "later_edge_relation": "MUST_DIFFER_IF_PLACEMENT"},
+      {"pattern_id": "DI_INITIAL_RESIDUE_ONLY", "initial_edge_relation": "MUST_DIFFER_IF_PLACEMENT", "later_edge_relation": "MUST_REMAIN_EQUAL"},
+      {"pattern_id": "DX_INITIAL_BY_LATER_INTERACTION", "initial_edge_relation": "MAY_DIFFER_DOWNSTREAM", "later_edge_relation": "MAY_DIFFER_DOWNSTREAM", "aggregate_rule": "AT_LEAST_ONE_EDGE_RELATION_DEPENDS_ON_THE_MATCHED_LEVEL_OF_THE_OTHER_FACTOR"}
+    ],
+    "authority": "CONDITIONAL_PATTERN_DEFINITIONS_NOT_EXPECTED_HUMAN_RESULTS",
+    "no_new_external_target_evidence": true,
+    "no_scalar_recovery_or_ignition_score": true
+  },
+  "d2a_only_challenges": [
+    {
+      "challenge_id": "d2a.ghost_candidate_separation",
+      "function": "GHOST",
+      "status": "NO_001A_NATURAL_INTERVENTION",
+      "varied_input": "ghost_exploration_program",
+      "clamped_fields": ["material_admission", "current_access_source_view", "subjective_encounter_form", "adjudication_policy"],
+      "observed_field": "candidate_set",
+      "conditional_relation": "MUST_DIFFER_IF_PLACEMENT"
+    },
+    {
+      "challenge_id": "d2a.adjudicator_candidate_separation",
+      "function": "ADJUDICATOR",
+      "status": "NO_001A_NATURAL_INTERVENTION",
+      "varied_input": "scoped_adjudication_policy",
+      "clamped_fields": ["material_admission", "current_access_source_view", "subjective_encounter_form", "candidate_set", "candidate_source_usage"],
+      "observed_field": "adjudication",
+      "conditional_relation": "MUST_DIFFER_IF_PLACEMENT"
+    },
+    {
+      "challenge_id": "d2a.action_gate_occurrence_separation",
+      "function": "ACTION_GATE",
+      "status": "NO_001A_NATURAL_INTERVENTION",
+      "varied_input": "motor_feasibility_or_action_opportunity",
+      "clamped_fields": ["subjective_encounter_form", "candidate_set", "adjudication", "action_affordance"],
+      "observed_field": "action_occurrence",
+      "conditional_relation": "MUST_DIFFER_IF_PLACEMENT"
+    }
+  ],
+  "operational_alias_rule": {
+    "status": "PREREGISTERED_NO_ALIAS_RESULT",
+    "required_scope_keys": ["probe_set_id", "projection_set_id", "horizon_id", "source_kind", "measurement_mapping_version"],
+    "definition": "Two placements are OPERATIONALLY_ALIASED only when their complete conditional signatures are identical for every evaluable registered contrast and matched future branch under all required scope keys.",
+    "observed_equality_status": "EMPIRICALLY_UNRESOLVED_UNDER_SCOPE",
+    "observed_equality_is_not_alias": true,
+    "durable_cache_rule": "TS_TARGET_SCOPED_READOUT and TC_SLOW_CACHE_READOUT remain NOT_IDENTIFIABLE_UNDER_HORIZON H_REGISTERED_FUTURE_ACCESS_K_PLUS_1; neither OPERATIONALLY_ALIASED nor placement winner, durable-state, or global alias conclusions are permitted under the current one-future horizon.",
+    "no_factor_retirement": true
+  },
+  "out_of_model_policy": {
+    "status": "RAW_PRESERVATION_PREREGISTERED_NO_RESULT",
+    "record_fields": ["raw_observation_id", "source_kind", "source_provenance", "observation_point_id", "horizon_id", "measurement_mapping_status", "immutable_payload_or_digest"],
+    "result_status": "OUT_OF_MODEL",
+    "forced_cast_to_registered_trace_field": "FORBIDDEN",
+    "same_run_schema_expansion_and_rescoring": "FORBIDDEN",
+    "next_protocol_version_required_for_new_domain": true,
+    "scope_failure_status": "CURRENT_FUNCTIONAL_DECOMPOSITION_SCOPE_FAILURE",
+    "scope_failure_requirements": [
+      "THE_EFFECT_RECURS_UNDER_THE_SAME_REGISTERED_CONTRAST_AND_HORIZON",
+      "NO_REGISTERED_PLACEMENT_CAN_REPRESENT_IT",
+      "REPRESENTING_IT_IN_AN_EXISTING_DOMAIN_WOULD_REQUIRE_A_FORBIDDEN_CAST",
+      "INSTRUMENT_OR_MAPPING_FAILURE_HAS_BEEN_SEPARATELY_EXCLUDED"
+    ],
+    "normative_invariant_violation_is_out_of_model": false
+  },
+  "prohibitions": [
+    "NO_HUMAN_LLM_OR_D2A_TRACE_RESULT_IS_RECORDED",
+    "NO_CORRECT_OUTPUT_OR_PLACEMENT_WINNER_IS_RECORDED",
+    "NO_001A_CANDIDATE_ANCHOR_COUNTS_AS_AN_OBSERVED_IMMEDIATE_SURFACE",
+    "NO_NATURAL_CONTRAST_FIRST_DIFFERENCE_CERTIFIES_A_DIRECT_CAUSAL_EDGE",
+    "ANY_DIRECT_EDGE_CLAIM_REQUIRES_AN_UNEXECUTED_D2A_NODE_CLAMP_CHALLENGE_REFERENCE",
+    "NO_PRESENTED_CUE_IS_CAST_AS_ACCESS_USE_INTEGRATION_EPISODE_OR_NARRATIVE",
+    "NO_PROVISIONAL_TARGET_REPRESENTATION_IS_CAST_AS_A_RESOLVED_ENTITY_IDENTITY_OR_INTENTION",
+    "NO_DURABLE_TARGETFORM_EPISODE_OR_NARRATIVE_WRITER_IS_CREATED",
+    "NO_DIFFERENT_FUTURE_OPTIONS_ARE_USED_TO_CLAIM_PRIOR_PATH_DISCRIMINATION",
+    "NO_OBSERVED_EQUALITY_ALONE_CREATES_AN_OPERATIONAL_ALIAS",
+    "NO_OUT_OF_MODEL_EFFECT_IS_SILENTLY_FORCED_INTO_A_REGISTERED_DOMAIN"
+  ]
+}
