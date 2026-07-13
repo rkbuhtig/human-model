@@ -25,3 +25,8 @@ public record
 - [`INTERP-DIALOGUE-001B`](interp-dialogue-001/trace-oracle.md): 001A를 content digest로
   결박하고 조건부 placement signature, ordinal horizon, same-future-option과 out-of-model
   규칙을 동결한다. human·LLM·D2a trace data나 placement winner는 없다.
+- [`INTERP-DIALOGUE-001P0-v0`](interp-dialogue-001/elicitation/README.md): 001A의 24개 cell과
+  001B oracle을 digest로 결박한 development elicitation instrument다. 무엇을 보여 주고
+  묻고 기록하는지의 schedule을 동결한다. 현재 runner는 scripted adversarial replay만
+  materialize하며 actual delivery/response occurrence가 아니다. measurement mapping,
+  participant data, defect result, `OUT_OF_MODEL` 판정 또는 placement winner는 없다.
