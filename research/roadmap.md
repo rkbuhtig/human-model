@@ -246,7 +246,7 @@ access와 interpretive integration 경계를 먼저 분리한다. 그 전에는
 
 ## 3C. `INTERP-001` — Subjective Encounter and Interpretive Reorganization
 
-**상태: `INTERP-001A BOUNDARY DOCUMENTED; INTERP-001A2 M1 CONTRACT FROZEN; INTERP-001B DETACHED CONFORMANCE IMPLEMENTED; INTERP-001D1 EXECUTED / EVALUATED SYNTHETIC CONFORMANCE; BROADER DYNAMICS OPEN` — RFC 0004**
+**상태: `INTERP-001A BOUNDARY DOCUMENTED; INTERP-001A2 M1 CONTRACT FROZEN; INTERP-001B DETACHED CONFORMANCE IMPLEMENTED; INTERP-001D1 EXECUTED / EVALUATED SYNTHETIC CONFORMANCE; INTERP-DIALOGUE-001A SCENARIO CONTRACT DOCUMENTED / UNEXECUTED; BROADER DYNAMICS OPEN` — RFC 0004**
 
 ```text
 ExternalOccurrence / CurrentAccessOccurrence
@@ -288,7 +288,57 @@ development/sealed도 evaluator-only synthetic isolation이지 예측 또는 외
 검증이 아니다. D1은 feedback/revision, durable TargetForm writer, Episode/Narrative write
 또는 인간 claim을 구현하지 않는다.
 
-후속 detached lab은 다음 순서로만 연다.
+16개 retirement condition 중 RT-congruence와 declared RT lookup만 trigger됐지만,
+두 조건은 coarse projection에서 같은 대수적 equivalence family와 lookup alias control이다.
+이는 Reception/TargetForm factor retirement나 두 개의 독립 challenger 승리가 아니다.
+단순 합·threshold·lookup은 이후 인간 설명력의 주된 순위표가 아니라 alias, degeneracy와
+불필요한 구현 자유도를 찾는 control로 사용한다.
+
+### 3C-A. `INTERP-DIALOGUE-001A` — Functional-jurisdiction scenario gate
+
+**상태: `DOCUMENTED / UNEXECUTED — NO HUMAN OR LATENT DATA`**
+
+D1과 D2 사이에 관계·업무·물리적 위험이라는 현실 영역의 저자 생성 가상 기능 관할
+gate를 둔다. 주된 질문은 풍부한 모델이 가난한 모델보다 더 많은 출력을 표현하는지가
+아니라, declared vignette factor 하나를 선택적으로 바꿨을 때 현재 기능 분해가 예상하는
+관할만 달라지는지다. 이 한-factor contrast는 원시적인 인간 원인 하나를 식별했다는
+뜻이 아니다.
+
+```text
+real-world-domain author-origin hypothetical scenario family
++ one-factor vignette contrast
++ manipulated source lane
++ public-record effect
++ held factor IDs
++ registered candidate probe domains
++ must-remain-equal contract
++ open-discriminator references
++ forbidden cast
++ future discriminating probe
+```
+
+fixture는 다음 authority lane을 분리한다.
+
+```text
+normative invariant
+≠ non-exclusive phenomenological expectation
+≠ open functional-placement discriminator
+```
+
+같은 즉시 출력 아래 서로 다른 내부 경로를 주장하려면 적어도 하나의 사전등록된 후속
+probe에서 later trace가 달라질 가능성이 있어야 한다. `001A`의
+`registered_candidate_probe_domains`는 비배타적인 후보 관측 영역이다. 목록 밖 효과는
+fixture 위반이 아니라 현재 기능 분해의 scope failure 또는 열린 결과로 남긴다. exact trace
+field, competing signature, horizon과 명시적 out-of-model lane은 `001B`에서 결과 전에
+동결한다. 그 동결된 probe에서 구분되지 않는 두 경로만 본질적 동일성으로 폐기하지 않고
+범위가 명시된 `OperationallyAliased` 후보로 다룬다.
+
+`INTERP-DIALOGUE-001A`는 scenario contract 등록과 구조 validation만 수행한다. 인간
+참가자 자료, LLM activation, trace oracle, D2 recursive composition, durable TargetForm,
+Episode integration 또는 Narrative writer를 만들지 않는다. validator 통과도
+`HM-INV-013`이나 `HM-DYN-004`의 support가 아니다.
+
+완료된 detached lineage는 다음과 같다.
 
 1. `INTERP-001B` (`IMPLEMENTED`): frozen M1 phase-complete runner + independent evaluator
 2. `INTERP-001C` (`M1 MECHANICAL SLICE EXECUTED`): RFC 0004의 reception-conditioned
@@ -297,8 +347,18 @@ development/sealed도 evaluator-only synthetic isolation이지 예측 또는 외
 3. `INTERP-001D1` (`EXECUTED / EVALUATED SYNTHETIC CONFORMANCE`): object-scoped source
    compiler, supplied formation intervention와 exact-access Ghost-path ablation을 격리된
    88-cell run에서 판정; runtime/human mechanism으로 승격하지 않음
-4. `INTERP-001D2`: later-access-only target-form feedback와 outcome/retention protocol
-5. 단순 합·threshold와 다른 구조 구분을 재현한 뒤에만 runtime/Narrative integration 검토
+
+후속 연구는 결과를 본 뒤 질문과 protocol을 맞추지 않도록 다음 순서로만 연다.
+
+1. `INTERP-DIALOGUE-001A`: 현실 영역의 저자 생성 가상 scenario family, 한-factor
+   contrast, authority lane과 registered candidate probe domain 등록
+2. `INTERP-DIALOGUE-001B`: competing functional placement, 선택적 intervention signature와
+   trace oracle 동결
+3. author / instrument development pilot: 문항·도구 결함 탐색; confirmatory support로 재사용 금지
+4. human confirmatory, cross-model latent와 `INTERP-001D2a` protocol을 결과 전에 각각 동결
+5. human judgment, latent representation probe와 D2a recursive composition을 독립 실행
+6. `INTERP-DIALOGUE-001C`: 세 source의 일치·불일치와 operational alias 범위를 교차 판정
+7. 살아남은 기능 배치에 한해서만 Dynamics runtime 또는 Narrative integration을 별도 검토
 
 synthetic capability matrix는 predictive support나 인간의 기분·기억·퀄리아 법칙을
 지지하지 않는다. `MORPH-001C`와의 접합도 별도 measurement mapping 전에는 금지한다.

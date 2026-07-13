@@ -1,0 +1,542 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rkbuhtig/human-model/research/scenarios/interp-dialogue-001/scenario.schema.json",
+  "title": "INTERP-DIALOGUE-001A functional-jurisdiction scenario family",
+  "description": "Declaration IDs are unique within one family. Cross-family identity is explicitly family-scoped in INTERP-DIALOGUE-001A.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "study_id",
+    "status",
+    "family_id",
+    "domain",
+    "title",
+    "authority",
+    "reserved_terms",
+    "target_scope",
+    "stimulus",
+    "factors",
+    "minimal_pair_contract",
+    "factor_contrast_contracts",
+    "shared_contract",
+    "cells",
+    "same_immediate_projection_claim"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "../scenario.schema.json"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "study_id": {
+      "const": "INTERP-DIALOGUE-001A"
+    },
+    "status": {
+      "const": "INTERNAL_PREREGISTRATION_UNEXECUTED_NO_HUMAN_DATA"
+    },
+    "family_id": {
+      "$ref": "#/$defs/token"
+    },
+    "domain": {
+      "enum": ["REL", "WORK", "RISK"]
+    },
+    "title": {
+      "$ref": "#/$defs/nonEmptyString"
+    },
+    "authority": {
+      "$ref": "#/$defs/authority"
+    },
+    "reserved_terms": {
+      "$ref": "#/$defs/reservedTerms"
+    },
+    "target_scope": {
+      "$ref": "#/$defs/targetScope"
+    },
+    "stimulus": {
+      "$ref": "#/$defs/stimulus"
+    },
+    "factors": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "$ref": "#/$defs/factor"
+      }
+    },
+    "minimal_pair_contract": {
+      "$ref": "#/$defs/minimalPairContract"
+    },
+    "factor_contrast_contracts": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "$ref": "#/$defs/factorContrastContract"
+      }
+    },
+    "shared_contract": {
+      "$ref": "#/$defs/sharedContract"
+    },
+    "cells": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {
+        "$ref": "#/$defs/cell"
+      }
+    },
+    "same_immediate_projection_claim": {
+      "$ref": "#/$defs/sameProjectionClaim"
+    }
+  },
+  "$defs": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "token": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+    },
+    "uniqueStringList": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/nonEmptyString"
+      },
+      "uniqueItems": true
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_role",
+        "source_status",
+        "empirical_status",
+        "mechanism_status",
+        "output_status"
+      ],
+      "properties": {
+        "artifact_role": {
+          "const": "FUNCTIONAL_JURISDICTION_SCENARIO_FIXTURE"
+        },
+        "source_status": {
+          "const": "AUTHOR_ORIGIN_HYPOTHETICAL_VIGNETTE"
+        },
+        "empirical_status": {
+          "const": "NO_HUMAN_DATA"
+        },
+        "mechanism_status": {
+          "const": "OPEN"
+        },
+        "output_status": {
+          "const": "NO_CORRECT_OUTPUT"
+        }
+      }
+    },
+    "reservedTerms": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["Episode", "Narrative"],
+      "properties": {
+        "Episode": {
+          "const": "RESERVED_LARGE_TIME_UNIT_NOT_INSTANTIATED"
+        },
+        "Narrative": {
+          "const": "RESERVED_LARGE_TIME_UNIT_NOT_INSTANTIATED"
+        }
+      }
+    },
+    "targetScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resolution",
+        "stable_entity_target_form_applicability",
+        "provisional_target_representation_status",
+        "reason"
+      ],
+      "properties": {
+        "resolution": {
+          "enum": ["resolved", "unresolved"]
+        },
+        "stable_entity_target_form_applicability": {
+          "enum": ["OPEN_DISCRIMINATOR", "NOT_APPLICABLE"]
+        },
+        "provisional_target_representation_status": {
+          "enum": ["OPEN_DISCRIMINATOR", "OUT_OF_SCOPE"]
+        },
+        "reason": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "statement"],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/token"
+        },
+        "statement": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "stimulus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "base_surface", "public_record", "world_unknowns"],
+      "properties": {
+        "kind": {
+          "enum": ["utterance", "auditory_observation"]
+        },
+        "base_surface": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "public_record": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/record"
+          }
+        },
+        "world_unknowns": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/record"
+          }
+        }
+      }
+    },
+    "factorLevel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "level_id",
+        "descriptor",
+        "source_lane",
+        "level_specific_public_record"
+      ],
+      "properties": {
+        "level_id": {
+          "$ref": "#/$defs/token"
+        },
+        "descriptor": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "source_lane": {
+          "$ref": "#/$defs/sourceLane"
+        },
+        "level_specific_public_record": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/record"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "factor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["factor_id", "operational_source_kind", "levels"],
+      "properties": {
+        "factor_id": {
+          "$ref": "#/$defs/token"
+        },
+        "operational_source_kind": {
+          "description": "Operational provenance of the authored vignette manipulation; it is not a claim that the factor descriptor names one real causal intervention.",
+          "enum": [
+            "vignette_reported_current_mood",
+            "vignette_relational_history",
+            "vignette_externally_cued_material",
+            "vignette_reported_evaluation_threat",
+            "vignette_evaluator_criterion_history",
+            "vignette_feedback_addendum",
+            "vignette_reported_pre_event_arousal",
+            "vignette_recent_threat_history",
+            "vignette_route_match_observation"
+          ]
+        },
+        "levels": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "$ref": "#/$defs/factorLevel"
+          }
+        }
+      }
+    },
+    "minimalPairContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "comparison_rule",
+        "held_constant_across_cube",
+        "pair_specific_rule"
+      ],
+      "properties": {
+        "comparison_rule": {
+          "const": "HAMMING_DISTANCE_ONE_FACTOR_LEVEL"
+        },
+        "held_constant_across_cube": {
+          "$ref": "#/$defs/uniqueStringList"
+        },
+        "pair_specific_rule": {
+          "const": "THE_TWO_NON_INTERVENED_FACTOR_LEVELS_MUST_MATCH"
+        }
+      }
+    },
+    "sourceLane": {
+      "enum": [
+        "FIRST_PERSON_CONDITION_REPORT",
+        "VIGNETTE_HISTORY_RECORD",
+        "EXPERIMENTER_CUE",
+        "PUBLIC_STIMULUS_VARIANT"
+      ]
+    },
+    "factorContrastContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "factor_id",
+        "source_lane",
+        "held_constant_factor_ids",
+        "public_record_effect",
+        "registered_candidate_probe_domains",
+        "must_remain_equal",
+        "open_discriminator_refs",
+        "status"
+      ],
+      "properties": {
+        "factor_id": {
+          "$ref": "#/$defs/token"
+        },
+        "source_lane": {
+          "$ref": "#/$defs/sourceLane"
+        },
+        "held_constant_factor_ids": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "$ref": "#/$defs/token"
+          },
+          "uniqueItems": true
+        },
+        "public_record_effect": {
+          "enum": ["UNCHANGED", "LEVEL_SPECIFIC_PUBLIC_RECORD_ONLY"]
+        },
+        "registered_candidate_probe_domains": {
+          "description": "Non-exhaustive domains registered for later measurement design; this list is not an allowlist of possible effects.",
+          "$ref": "#/$defs/uniqueStringList"
+        },
+        "must_remain_equal": {
+          "$ref": "#/$defs/uniqueStringList"
+        },
+        "open_discriminator_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/token"
+          },
+          "uniqueItems": true
+        },
+        "status": {
+          "const": "OPEN_NO_EXPECTED_TRACE"
+        }
+      }
+    },
+    "authorityRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "statement", "authority"],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/token"
+        },
+        "statement": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "authority": {
+          "enum": [
+            "AUTHOR_ORIGIN_PHENOMENOLOGICAL_POSSIBILITY",
+            "NONEXHAUSTIVE_POSSIBILITY_NOT_EXPECTED_OUTPUT",
+            "PROGRAM_NORMATIVE_INVARIANT"
+          ]
+        }
+      }
+    },
+    "openDiscriminator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "question", "status"],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/token"
+        },
+        "question": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "status": {
+          "const": "OPEN"
+        }
+      }
+    },
+    "sharedContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "author_origin_possibilities",
+        "phenomenological_expectations",
+        "normative_invariants",
+        "open_discriminators",
+        "prohibited_claims"
+      ],
+      "properties": {
+        "author_origin_possibilities": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/authorityRecord"
+          }
+        },
+        "phenomenological_expectations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/authorityRecord"
+          }
+        },
+        "normative_invariants": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/authorityRecord"
+          }
+        },
+        "open_discriminators": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/openDiscriminator"
+          }
+        },
+        "prohibited_claims": {
+          "$ref": "#/$defs/uniqueStringList"
+        }
+      }
+    },
+    "cell": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cell_id", "factor_levels"],
+      "properties": {
+        "cell_id": {
+          "$ref": "#/$defs/token"
+        },
+        "factor_levels": {
+          "type": "object",
+          "minProperties": 3,
+          "maxProperties": 3,
+          "additionalProperties": {
+            "$ref": "#/$defs/token"
+          }
+        }
+      }
+    },
+    "candidateProjection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "illustration", "authority"],
+      "properties": {
+        "kind": {
+          "enum": ["utterance", "action"]
+        },
+        "illustration": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "authority": {
+          "const": "NON_NORMATIVE_PROBE_ANCHOR_NOT_CORRECT_OUTPUT"
+        }
+      }
+    },
+    "futureProbe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "probe_id",
+        "probe_options",
+        "open_question",
+        "distinct_path_requirement",
+        "no_expected_result"
+      ],
+      "properties": {
+        "probe_id": {
+          "$ref": "#/$defs/token"
+        },
+        "probe_options": {
+          "$ref": "#/$defs/uniqueStringList"
+        },
+        "open_question": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "distinct_path_requirement": {
+          "const": "A_CLAIMED_DISTINCT_INTERNAL_PATH_MUST_DIVERGE_UNDER_AT_LEAST_ONE_PREREGISTERED_FUTURE_OPTION"
+        },
+        "no_expected_result": {
+          "const": true
+        }
+      }
+    },
+    "sameProjectionClaim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim_id",
+        "status",
+        "compared_cell_ids",
+        "changed_factor_id",
+        "candidate_projection",
+        "statement",
+        "future_probe"
+      ],
+      "properties": {
+        "claim_id": {
+          "$ref": "#/$defs/token"
+        },
+        "status": {
+          "const": "OPEN"
+        },
+        "compared_cell_ids": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "$ref": "#/$defs/token"
+          },
+          "uniqueItems": true
+        },
+        "changed_factor_id": {
+          "$ref": "#/$defs/token"
+        },
+        "candidate_projection": {
+          "$ref": "#/$defs/candidateProjection"
+        },
+        "statement": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "future_probe": {
+          "$ref": "#/$defs/futureProbe"
+        }
+      }
+    }
+  }
+}

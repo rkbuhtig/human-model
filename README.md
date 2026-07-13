@@ -138,3 +138,16 @@ runner/evaluator로 실행·판정했다. 상태는 `EXECUTED / EVALUATED SYNTHE
 분리이지 예측 검증이 아니다. D1은 durable TargetForm·feedback·Narrative writer를 만들지
 않으며, 새 runtime behavior, 실제 퀄리아·기분 측정 또는 인간 경험적 지지를 구현하지
 않는다.
+
+D1 뒤에는 곧바로 recursive runtime을 연결하지 않는다. 다음 gate인
+`INTERP-DIALOGUE-001A`는 관계·업무·물리적 위험이라는 현실 영역의 저자 생성 가상
+scenario family와 한-factor contrast를 등록해, 풍부한 모델과 단순 모델의 표현력
+순위가 아니라 Reception, TargetForm, Ghost와 adjudication의 **선택적 기능 관할**을
+감사할 질문을 먼저 고정한다. 각 contrast는 조작 source lane, 공개 기록 effect, 고정
+factor, `registered_candidate_probe_domains`, 유지되어야 할 동등성과 열린 discriminator를
+기록하지만 exact trace field, signature와 horizon은 후속 `001B` 범위다. 후보 domain은
+비배타적 관측 목록이다. 목록 밖 효과는 fixture 위반이 아니라 현재 기능 분해의 scope
+failure 또는 열린 결과이며, 명시적 out-of-model lane은 `001B`에서 동결한다. 단순 합·threshold·lookup은
+주된 설명력 challenger가 아니라 alias와 degeneracy를 찾는 control로 사용한다. scenario 등록은
+인간 자료, LLM activation, recursive D2 runtime, Episode/Narrative writer 또는 새 claim
+support가 아니다.

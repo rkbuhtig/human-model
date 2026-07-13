@@ -54,3 +54,17 @@ empty로 둔다.
 integration, calibration과 human measurement는 구현되지 않았다.
 이 등록은 역사적 Episode ontology의 정본화, mood-congruent ignition의 인간 법칙,
 Narrative writer, actual qualia 또는 predictive support를 만들지 않는다.
+
+`INTERP-DIALOGUE-001A`는 D1과 recursive D2 사이에 real-world-domain, author-origin
+hypothetical functional-jurisdiction scenario contract를 등록한다. factor별 contrast는
+조작 source lane, public-record effect, 고정 factor, `registered_candidate_probe_domains`,
+must-remain-equal 항목과 열린 discriminator reference를 구조화한다. 후보 domain은
+비배타적 관측 목록이며, 목록 밖 효과는 fixture 위반이 아니라 현재 분해의 scope failure
+또는 열린 결과다. exact trace field, signature, horizon과 명시적 out-of-model lane은
+`001B`까지 열어 둔다. 이것은 claim evaluation run이 아니며, 단순
+합·threshold·lookup은 인간 설명력 순위표가 아니라 alias와 degeneracy를 찾는 control로
+재위치시킨다. scenario validator가 통과해도 fixture 구조만 검사할 뿐 인간 자료, LLM
+activation, runtime trace 또는 mechanism support를 만들지 않는다. 따라서 `HM-INV-013`과
+`HM-DYN-004`는 계속 `UNIMPLEMENTED`, structural support empty로 남는다. 계획 순서는
+scenario contract(A) → trace oracle/competing placements(B) → author/instrument
+development pilot → human/latent/D2a protocol freeze → 독립 실행 → cross-source audit(C)다.
