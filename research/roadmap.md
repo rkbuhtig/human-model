@@ -439,6 +439,41 @@ source manifest를 고정한 뒤 당시 진단과 현재 해석을 분리한다.
 필요하면 절대적 기원이 아니라 0101 재컴파일 경계로 재위치시킨다. 이 단계는
 v0.2의 blocker가 아니다.
 
+## 6A. Volume I.5 — Constitutional Consolidation, 2026-01-27–02-04
+
+**상태: `PLANNED — PARALLEL SOURCE-CRITICAL DOCUMENTATION`; runtime·empirical blocker 아님**
+
+후속 제공된 `pluss/만족수면퀄리아통합.txt`는 `0121 만족`의 첫 206행과 `0121 수면`
+407행 전체를 byte-level로 재사용하고, `0122 newqual`을 `ΞM` 문법으로 재작성·확장한
+뒤 CVJU block을 덧붙인다. `0127 maybe통합1:L1`은 같은 이름의 역사적 문서를 세 입력 중
+하나로 직접 열거한다. 두 artifact의 동일성은 미식별이지만 내용 합치는 강한 계보를
+지지한다. 따라서 기존 Chapter 10–11의 “독립 파일 부재”는 내용 계보 복구로 수정하되,
+2026-07-13 ZIP entry 시각만으로 1월의 독립 원본성이나 작성시각을 인증하지 않는다.
+
+이 병렬 권은 최소한 다음 후기 문서군을 source-critical하게 대조한다.
+
+- `Overqorld/0127 maybe통합1`
+- `Overqorld/coreannex.txt`
+- `UNIVERSSE/0130 추상x현실 1`
+- `UNIVERSSE/0203 시간공간부채`
+- `UNIVERSSE/0204 귀결for코어`
+- 복구된 `pluss/만족수면퀄리아통합.txt`와 내용상 연결된 형식화 가지
+
+복원 시 다음 네 층을 분리한다.
+
+```text
+동시대 직접 구조
+≠ 후기 합성·재작성
+≠ 현재 연구의 독립 재발견
+≠ 물리·우주적 과잉 일반화
+```
+
+Volume I.5의 source link는 claim registry의 `historical_cases` 후보를 보강할 수 있지만,
+active adoption, implementation, structural support 또는 human-empirical support를 자동으로
+올리지 않는다. 첫 provenance 판정은
+[`Source-Recovery Record`](adoption-records/2026-07-13-recovered-satisfaction-sleep-qualia-provenance.md)에
+고정한다.
+
 ## 명시적 HOLD
 
 - 완성된 `WarrantState`

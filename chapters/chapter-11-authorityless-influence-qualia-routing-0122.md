@@ -5,7 +5,7 @@
 > **상태:** 역사 복원 + 외부 현실 감사 + 연구 후기 v1.0  
 > **주범위:** 2026-01-22 `ΦΩ-SEALING-UPGRADE` (`NEWQUAL22`)  
 > **직접 전사:** 2026-01-13 `Qualia Surface` (`QUAL13`)와 2026-01-21 `UCXQ` (`UCXQ21`)  
-> **후속 증언:** `REG23`·`SYNTH27`·`CORE26`·life/game·`𝒢_eff` 계열  
+> **후속 증언:** `REG23`·`SSQ-REC`·`SYNTH27`·`CORE26`·life/game·`𝒢_eff` 계열
 > **외부 현실 감사 기준일:** 2026-07-12  
 > **직전 장:** Chapter 10 — 잠을 필연으로 만들려 한 이론  
 > **전방 경계:** `lifeevent*`의 생명·경계·복제·죽음 계열
@@ -124,16 +124,19 @@ NEWQUAL22 ΦΩ
 
 따라서 이 계보는 **동일 객체의 보존 계보**보다, `느낌은 권위가 없지만 미래를 바꾼다`는 문제의 기능 계보다.
 
-### 0.3 사라진 `만족수면퀄리아통합`을 소급 정본으로 쓰지 않는다
+### 0.3 복구된 `만족수면퀄리아통합`을 소급 정본으로 쓰지 않는다
 
-후기 `SYNTH27`은 입력 문서로 `만족수면퀄리아통합`을 언급하고, `MINI27`도 같은 이름을 삽입 대상으로 부른다. 그러나 현재 추출 corpus에는 그 이름의 독립 파일이 없다.
+후기 `SYNTH27`은 입력 문서로 `만족수면퀄리아통합`을 언급하고, `MINI27`도 같은 이름을 삽입 대상으로 부른다. 후속 제공된 `pluss.zip`에는 이제 그 이름을 가진 1,180행의 별도 ZIP entry가 있다. 복구본 `L1–206`은 `SAT22:L1–206`과, `L209–615`는 `SLEEP22` 407행 전체와 byte-for-byte 동일하다. `L620–873`은 `NEWQUAL22`의 exact copy가 아니라 `ΞM` 표기와 추가 봉인으로 재작성·확장된 강한 textual derivative이며, 뒤의 `L879–1175`에는 CallCapability·OpsLog·KnobRegistry·Jurisdiction·Viability·MeaningTriangulation block이 들어 있다. `SYNTH27:L1`의 동명 입력 열거와 downstream 구조 합치는 해당 자료 계열의 강한 내용 계보를 지지하지만, 현재 복구 artifact와 당시 입력 artifact의 동일성을 확정하지는 않는다.
+
+다만 파일 SHA-256 `15fb834c87eda1ae3240a59fb3f73a3354a204f52b222a9e03039b02995c6115`와 ZIP entry 시각은 제공된 artifact의 동일성만 고정한다. entry 시각 `2026-07-13 21:19:14`는 1월의 절대 작성시각이나 독립 원본성을 증명하지 않는다.
 
 따라서:
 
 - `NEWQUAL22`의 보존된 245행을 직접 주자료로 사용한다.
 - `QUAL13`·`UCXQ21`은 직접 전사로 사용한다.
-- `SYNTH27`·`CORE26`은 후대가 무엇을 승계했는지 보여 주는 증언으로만 사용한다.
-- 사라진 통합본이 persistence law나 Ghost handoff를 이미 해결했을 것이라고 추정하지 않는다.
+- 복구본 `SSQ-REC`은 누락됐던 후기 합성의 내용과 downstream 연결을 복원하는 witness로 사용하되 0121–0122의 동시대 정본으로 소급하지 않는다.
+- `SYNTH27`·`CORE26`은 후대가 무엇을 승계했는지 보여 주는 증언으로 사용한다.
+- 복구본이 persistence law나 Ghost handoff를 이미 해결했다고 판정하지 않는다.
 
 ### 0.4 판정 표지
 
@@ -640,7 +643,7 @@ P_call = Norm(K_open, K_ctrl, gate)
 
 같은 식이 필요하지만 없다.
 
-더구나 `Π_rep`과 QG는 이 패치에서 사용되지만 `UCXQ21`의 기본 포트 목록에는 정의되지 않는다. 이들은 삽입 대상 통합본의 다른 지층을 가정한 것으로 보이지만, 현재 보존본만으로 완전한 정의역을 복원할 수 없다.
+더구나 `Π_rep`과 QG는 이 패치에서 사용되지만 `UCXQ21`의 기본 포트 목록에는 정의되지 않는다. 복구된 `SSQ-REC:L620–873`도 `Π_rep` 위의 `ΞM`과 QG가 제공하는 `K_open`을 사용하지만, `Π_rep`의 독립 residence나 QG→kernel mapping을 정의하지 않는다 `[SSQ-REC:L643, L668–696]`. 파일 가용성의 gap은 닫혔지만 완전한 정의역을 복원할 formal-definition gap은 남는다.
 
 ### 6.4 노브의 필드 목록만으로 의미 밀반입을 막을 수는 없다
 
@@ -993,9 +996,9 @@ No Self-Warrant
 
 ---
 
-## 10. 후대 계보 — `ΦΩ`는 `ΞM`으로 살아남고 qualia는 빠진다
+## 10. 자료 계보 비교 — `ΦΩ`는 복구 합본에서 `ΞM`으로 재컴파일되고 `SYNTH27`에는 qualia 세부가 보존되지 않는다
 
-이 절은 하나의 정본이 순서대로 축약된 선형 연대기가 아니다. `CORE26`, `MINI27`, life/game, `SYNTH27`은 서로 다른 후속 분기의 생존 증언이다. 특히 `SYNTH27`은 파일명에 0127이 있지만 archive mtime과 정확 작성일이 불확실하므로, 앞선 자료가 반드시 이 문서를 거쳐 뒤 문서로 갔다고 단정하지 않는다.
+이 절은 하나의 정본이 순서대로 축약된 선형 연대기가 아니다. `SSQ-REC`, `CORE26`, `MINI27`, life/game, `SYNTH27`은 서로 다른 후속 분기의 생존 증언이다. 복구본 자체는 `NEWQUAL22`에서 `ΞM` 문법으로 가는 textual recompilation evidence를 제공한다. 그러나 `SYNTH27:L1`의 동명 입력 증언과 현재 복구 artifact 사이의 동일성, ZIP metadata만으로 절대 작성 순서를 고정할 수는 없다. 특히 `SYNTH27`은 파일명에 0127이 있지만 archive mtime과 정확 작성일이 불확실하므로, 앞선 자료가 반드시 이 문서를 거쳐 뒤 문서로 갔다고 단정하지 않는다.
 
 ### 10.1 `REG23`은 surface `phi`만 registry에 올린다
 
@@ -1011,13 +1014,25 @@ R-Φ surface reservation
 → annex-local / registry omission
 ```
 
-### 10.2 `SYNTH27`에서 `ΦΩ`의 역할이 `ΞM`으로 거의 그대로 재현된다
+### 10.2 복구 합본은 `ΦΩ → ΞM` 재컴파일을 보존하고 `SYNTH27`은 동명 입력의 `ΞM` 압축을 증언한다
+
+`SSQ-REC:L620–873`은 `NEWQUAL22`의 exact copy는 아니지만 제목·정의·공리·정리의 순서를 따라 `ΦΩ`를 `ΞM` 문법으로 체계적으로 재작성하고 추가 봉인을 붙인다. 따라서 현재 복구 artifact 안에서는 독립적인 역할 재현보다 강한 **direct textual recompilation evidence**가 확인된다. 별도로 `SYNTH27:L1`은 같은 이름의 역사적 입력 문서가 존재했다고 증언하고, 본문의 `ΞM` 압축은 복구본 내용과 강한 계보 합치를 보인다.
+
+```text
+NEWQUAL22 ΦΩ block
+→ [SSQ-REC이 보존한 aggregate-form ΞM rewrite / extension]
+
+historical `만족수면퀄리아통합` input attestation
+→ SYNTH27 ΞM compression
+```
+
+두 줄은 같은 artifact chain을 확정한 화살표가 아니다. 현재 `SSQ-REC`이 `SYNTH27`이 읽은 역사적 동명 입력과 동일한 파일인지 후대 재구성본인지 미식별이다. 복구본 내부의 recompilation도 byte-identical rename이나 versioned rename receipt가 아니므로 동일 runtime type의 연속성이나 확정 연대기를 인증하지 않는다.
 
 후기 통합본의 `D11`은 다음을 정의한다.
 
 > `ΞM`: 근거를 생성하지 않으며, 접근 비용 지형으로 `P_call`을 제약하는 매질 층 `[SYNTH27:L162–168]`.
 
-이 문장은 `NEWQUAL22`의 정의를 거의 그대로 잇는다. 명시적인 rename record는 없으므로 **강한 역할 계보**로 판정한다.
+이 문장은 복구 합본의 `ΞM` 정의와 강하게 합치하는 압축을 보존한다. 판정은 **동명 입력 증언과 내용 합치가 지지하는 강한 계보 가설**이되, 현재 복구 artifact에서 `SYNTH27`로 향하는 직접 edge나 정식 rename·동일 타입 인증은 아니다.
 
 ```text
 ΦΩ
@@ -1040,7 +1055,9 @@ authorityless P_call shaping
 
 이다.
 
-### 10.3 `SYNTH27`의 통합·압축에서는 qualia와 update 세부가 사라진다
+### 10.3 `SYNTH27` 압축본에는 qualia와 update 세부가 보존되지 않는다
+
+복구본은 `NEWQUAL22`의 세부가 aggregate 형식에서는 `ΞM` 문법으로 재작성·강화될 수 있었고, `SYNTH27`의 동명 입력 증언 뒤에 남은 압축본에는 그 세부가 없다는 강한 계보 가설을 지지한다. 현재 복구 artifact 자체가 역사적 중간 입력이었다거나 그 세부가 실제로 `SYNTH27`에서 탈락했다는 방향성·연대기까지 증명하지는 않는다.
 
 `SYNTH27`에는 다음이 없다.
 
@@ -3026,8 +3043,9 @@ Chapter 11은 다음 `[BRIDGE-CURRENT]` 문장에서 멈춘다.
 | `QUAL13` | `연구/PARADIM/qualia.txt` | 483 | 2026-01-13 Qualia Surface 직접 선행층 |
 | `UCXQ21` | `연구/fucstrees/0121 이론 1.txt` | 1,589 | `ρ/𝔄`, Two-Cut, Thought/Judgment, port contract |
 | `NEWQUAL22` | `연구/fucstrees/0122 newqual.txt` | 245 | 이 장의 주자료; `ΦΩ-SEALING-UPGRADE` |
+| `SSQ-REC` | `pluss/만족수면퀄리아통합.txt` | 1,180 | 2026-07-13 제공 복구본; 내용 계보 witness, 1월 독립 원본 여부 미식별 |
 | `REG23` | `연구/Overqorld/0121 reg.txt` | 469 | 후속 registry normalization; 파일명 날짜와 archive 순서 구별 |
-| `SYNTH27` | `연구/Overqorld/0127 maybe통합1` | 444 | `ΦΩ/ΞM`의 강한 역할 계보 증언; 명시적 rename record 아님, 정확 작성일 단정 금지 |
+| `SYNTH27` | `연구/Overqorld/0127 maybe통합1` | 444 | `SSQ-REC`과 강한 내용 계보를 보이는 `ΞM` 압축본; artifact 동일성·정확 작성일 미식별 |
 | `CORE26` | `연구/Overqorld/coreannex.txt` | 822 | 병렬 core-style downstream witness; `Φ/ΞM` 봉인 잔존 |
 | `MINI27` | `연구/Overqorld/minipatch.txt` | 245 | `𝒢_eff` 기능적 재발견 |
 | `LIFE22A` | `연구/Overqorld/0122 lifeevent.txt` | 622 | life-event 첫 확장 |
@@ -3047,9 +3065,9 @@ Library의 독립 `0122 newqual.txt`와 `연구.zip` 내부 `연구/fucstrees/01
 
 별칭 숫자는 기본적으로 파일명·archive 위치를 위한 식별자다. `LIFE22C`와 `GAME22A/B`의 파일명은 0122지만 archive mtime은 01-23이며, `CORE26`·`SYNTH27`도 별칭만으로 정확 작성 시각을 보증하지 않는다. 내용 계보와 파일 시간 계보를 구별한다.
 
-### A.2 provenance gap
+### A.2 recovered aggregate identity limit
 
-`만족수면퀄리아통합`은 `SYNTH27:L1`과 `MINI27:L142, L241`에 입력·삽입 대상으로 언급되지만 현재 corpus에 독립 파일로 없다. 따라서 잃어버린 통합본의 내용은 직접 근거로 사용하지 않는다.
+`SSQ-REC`의 대규모 원문 재사용과 `SYNTH27:L1`, `MINI27:L142, L241`의 명시적 참조는 `만족수면퀄리아통합`의 내용 계보를 복구한다. 그러나 현재 artifact metadata만으로 1월 당시 독립 원본과 후대 재구성본을 식별할 수는 없다. 따라서 복구본의 실제 내용은 후기 계보 복원에 직접 사용할 수 있지만, 절대 작성시각·동시대 원본성·persistent qualia substrate의 해결을 인증하지 않는다. 상세 비교는 [`Source-Recovery Record`](../research/adoption-records/2026-07-13-recovered-satisfaction-sleep-qualia-provenance.md)에 있다.
 
 ---
 

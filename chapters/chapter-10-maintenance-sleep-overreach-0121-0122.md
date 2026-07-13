@@ -1807,6 +1807,7 @@ Chapter 10은 다음 `[BRIDGE-CURRENT]` 문장에서 멈춘다.
 | `RTO21` | `연구/fucstrees/0121 runtime seed` | 510 | `B_t` Access bandwidth와 `Θ_t` criticality threshold 선행 의미 |
 | `SAT22` | `연구/fucstrees/0121 만족.txt` | 207 | Safe-Stopping·Continuity Tax 인접 지층 |
 | `SLEEP22` | `연구/fucstrees/0121 수면.txt` | 407 | 이 장의 주자료; 세 append block |
+| `SSQ-REC` | `pluss/만족수면퀄리아통합.txt` | 1,180 | 2026-07-13 제공 복구본; 내용 계보 witness, 1월 독립 원본 여부 미식별 |
 | `REG23` | `연구/Overqorld/0121 reg.txt` | 469 | 후기 lexical registry; 기원 근거 제외 |
 | `NEWQUAL22` | `연구/fucstrees/0122 newqual.txt` | 245 | 다음 장 전방 경계; ΦΩ metric/impedance |
 | `CORE26` | `연구/Overqorld/coreannex.txt` | 822 | downstream 재압축; 계정 재혼합과 yield-repair 변형 |
@@ -1815,11 +1816,13 @@ Chapter 10은 다음 `[BRIDGE-CURRENT]` 문장에서 멈춘다.
 | `MINI27` | `연구/Overqorld/minipatch.txt` | 245 | downstream geometry-repair·creativity patch |
 | `SYNTH27` | `연구/Overqorld/0127 maybe통합1` | 444 | 날짜 불확정 통합 witness; 잔차 분리와 Sleep Necessity 동시 보존 |
 
-### A.1 provenance gap — `만족수면퀄리아통합`
+### A.1 provenance recovery with an identity limit — `만족수면퀄리아통합`
 
-현재 추출 corpus에는 `만족수면퀄리아통합`이라는 독립 파일이 없다. 이름은 `Overqorld/0127 maybe통합1:L1`과 `Overqorld/minipatch.txt:L142, L241`에서 입력 문서·삽입 대상으로만 증언된다.
+후속 제공된 `pluss.zip`에는 `만족수면퀄리아통합`이라는 이름을 가진 1,180행의 별도 ZIP entry가 있다. 파일 SHA-256은 `15fb834c87eda1ae3240a59fb3f73a3354a204f52b222a9e03039b02995c6115`다. 내용 대조에서 `SSQ-REC:L1–206`은 `SAT22:L1–206`과 byte-for-byte 동일하고, `SSQ-REC:L209–615`는 `SLEEP22` 407행 전체와 byte-for-byte 동일하다. `SSQ-REC:L620–873`은 `NEWQUAL22`의 정확한 사본은 아니지만 `ΞM` 표기와 추가 봉인을 사용해 재작성·확장한 강한 textual derivative다. `SYNTH27:L1`이 같은 이름을 세 입력 문서 중 하나로 직접 열거하고 `MINI27:L142, L241`도 동명 자료를 통합·삽입 대상으로 지목하므로 해당 자료 계열의 내용 계보를 강하게 지지한다.
 
-따라서 이 장은 그 이름을 잃어버린 정본의 직접 인용 근거로 사용하지 않는다. `SLEEP22`, `SAT22`, `NEWQUAL22`의 현재 보존본과 downstream monograph를 서로 구별한다.
+그러나 ZIP entry 시각 `2026-07-13 21:19:14`는 archive 저장 metadata일 뿐 실제 작성시각을 증명하지 않는다. 현재 자료만으로 `SSQ-REC`이 1월 당시 보존된 독립 원본인지, 같은 자료를 사용한 후대 재구성본인지 구별할 수 없다. 따라서 이 장은 `SSQ-REC`을 **내용 계보에 부합하는 복구본**으로 사용하되 0121–0122의 동시대 정본으로 소급하지 않는다. 직접 역사 판정은 계속 `SAT22`, `SLEEP22`, `NEWQUAL22`의 당시 보존본에 우선 결박하며, 복구본은 누락됐던 후기 합성의 내용과 downstream 연결을 복원하는 witness로 한정한다.
+
+이 복구는 persistence law, durable qualia substrate, memory archive 또는 Ghost handoff가 이미 해결됐다는 근거가 아니다. 상세 identity·구성 비교와 권위 경계는 [`Source-Recovery Record`](../research/adoption-records/2026-07-13-recovered-satisfaction-sleep-qualia-provenance.md)에 고정한다.
 
 ---
 
