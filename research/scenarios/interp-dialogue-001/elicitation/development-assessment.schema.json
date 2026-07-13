@@ -1,0 +1,255 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rkbuhtig/human-model/research/scenarios/interp-dialogue-001/elicitation/development-assessment.schema.json",
+  "title": "INTERP-DIALOGUE-001P development assessment artifacts",
+  "oneOf": [
+    {"$ref": "#/$defs/mappingCandidateSet"},
+    {"$ref": "#/$defs/mechanicalCandidateSet"},
+    {"$ref": "#/$defs/developmentInspectionReport"},
+    {"$ref": "#/$defs/defectAdjudicationSet"},
+    {"$ref": "#/$defs/revisionProposalSet"}
+  ],
+  "$defs": {
+    "nonEmptyString": {"type": "string", "minLength": 1},
+    "token": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "base64": {"type": "string", "minLength": 1, "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"},
+    "shaList": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/sha256"}
+    },
+    "refList": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/token"}
+    },
+    "stringList": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/nonEmptyString"}
+    },
+    "immediateEligibleCoordinate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["observation_point_id", "trace_field_id"],
+      "properties": {
+        "observation_point_id": {"const": "O5_IMMEDIATE_SURFACE_RECORDED"},
+        "trace_field_id": {"const": "immediate_surface"}
+      }
+    },
+    "laterEligibleCoordinate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["observation_point_id", "trace_field_id"],
+      "properties": {
+        "observation_point_id": {"const": "O10_LATER_SURFACE_RECORDED"},
+        "trace_field_id": {"const": "later_surface"}
+      }
+    },
+    "immediateMappingCandidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mapping_candidate_id", "response_event_id", "source_phase", "eligible_target_coordinate", "mapping_rule_candidate_version", "candidate_status", "analyst_basis", "authority"],
+      "properties": {
+        "mapping_candidate_id": {"$ref": "#/$defs/token"},
+        "response_event_id": {"$ref": "#/$defs/token"},
+        "source_phase": {"const": "IMMEDIATE"},
+        "eligible_target_coordinate": {"$ref": "#/$defs/immediateEligibleCoordinate"},
+        "mapping_rule_candidate_version": {"$ref": "#/$defs/token"},
+        "candidate_status": {"enum": ["PROPOSED_SURFACE_MAPPING", "AMBIGUOUS_SURFACE_MAPPING", "NO_SURFACE_MAPPING_PROPOSED", "OUTSIDE_CURRENT_MAPPING_VOCABULARY_CANDIDATE"]},
+        "analyst_basis": {"$ref": "#/$defs/nonEmptyString"},
+        "authority": {"const": "DEVELOPMENT_MAPPING_CANDIDATE_ONLY_NOT_OBSERVATION"}
+      }
+    },
+    "laterMappingCandidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mapping_candidate_id", "response_event_id", "source_phase", "eligible_target_coordinate", "mapping_rule_candidate_version", "candidate_status", "analyst_basis", "authority"],
+      "properties": {
+        "mapping_candidate_id": {"$ref": "#/$defs/token"},
+        "response_event_id": {"$ref": "#/$defs/token"},
+        "source_phase": {"const": "LATER"},
+        "eligible_target_coordinate": {"$ref": "#/$defs/laterEligibleCoordinate"},
+        "mapping_rule_candidate_version": {"$ref": "#/$defs/token"},
+        "candidate_status": {"enum": ["PROPOSED_SURFACE_MAPPING", "AMBIGUOUS_SURFACE_MAPPING", "NO_SURFACE_MAPPING_PROPOSED", "OUTSIDE_CURRENT_MAPPING_VOCABULARY_CANDIDATE"]},
+        "analyst_basis": {"$ref": "#/$defs/nonEmptyString"},
+        "authority": {"const": "DEVELOPMENT_MAPPING_CANDIDATE_ONLY_NOT_OBSERVATION"}
+      }
+    },
+    "mappingCandidate": {
+      "oneOf": [
+        {"$ref": "#/$defs/immediateMappingCandidate"},
+        {"$ref": "#/$defs/laterMappingCandidate"}
+      ]
+    },
+    "mappingCandidateSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["$schema", "schema_version", "artifact_type", "artifact_id", "instrument_sha256", "source_run_sha256", "status", "candidates"],
+      "properties": {
+        "$schema": {"const": "./development-assessment.schema.json"},
+        "schema_version": {"const": "1.0.0"},
+        "artifact_type": {"const": "DEVELOPMENT_MAPPING_CANDIDATE_SET"},
+        "artifact_id": {"$ref": "#/$defs/token"},
+        "instrument_sha256": {"$ref": "#/$defs/sha256"},
+        "source_run_sha256": {"$ref": "#/$defs/sha256"},
+        "status": {"const": "CANDIDATES_ONLY_NO_FROZEN_MAPPING"},
+        "candidates": {"type": "array", "items": {"$ref": "#/$defs/mappingCandidate"}}
+      }
+    },
+    "mechanicalCandidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["candidate_id", "defect_code", "artifact_pointer", "basis", "authority"],
+      "properties": {
+        "candidate_id": {"$ref": "#/$defs/token"},
+        "defect_code": {"enum": ["DESIGN_ANCHOR_LITERAL_LEAK", "INTERNAL_IDENTIFIER_LITERAL_LEAK", "DELIVERY_PAYLOAD_MISMATCH", "SESSION_BINDING_MISMATCH", "MATCHED_FUTURE_OPTION_MISMATCH", "MATCHED_COMPARISON_BINDING_MISMATCH", "UNLOGGED_PROMPT_DELIVERY", "PROMPT_ORDER_VIOLATION", "MISSINGNESS_COLLAPSE", "RAW_PAYLOAD_PROVENANCE_BREAK", "RESPONSE_PROVENANCE_LINK_MISMATCH", "POST_TRACE_DIAGNOSTIC_EARLY_DELIVERY"]},
+        "artifact_pointer": {"$ref": "#/$defs/nonEmptyString"},
+        "basis": {"$ref": "#/$defs/nonEmptyString"},
+        "authority": {"const": "MECHANICAL_DEFECT_CANDIDATE_NOT_INSTRUMENT_DEFECT_RECEIPT"}
+      }
+    },
+    "mechanicalCandidateSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["$schema", "schema_version", "artifact_type", "artifact_id", "instrument_sha256", "source_run_sha256", "status", "candidates"],
+      "properties": {
+        "$schema": {"const": "./development-assessment.schema.json"},
+        "schema_version": {"const": "1.0.0"},
+        "artifact_type": {"const": "MECHANICAL_DEFECT_CANDIDATE_SET"},
+        "artifact_id": {"$ref": "#/$defs/token"},
+        "instrument_sha256": {"$ref": "#/$defs/sha256"},
+        "source_run_sha256": {"$ref": "#/$defs/sha256"},
+        "status": {"const": "CANDIDATES_ONLY_NO_AUTOMATIC_DEFECT_RECEIPT"},
+        "candidates": {"type": "array", "items": {"$ref": "#/$defs/mechanicalCandidate"}}
+      }
+    },
+    "inspectionPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["encoding", "raw_payload_utf8_base64", "byte_length", "content_sha256", "normalization"],
+      "properties": {
+        "encoding": {"const": "BASE64_OF_EXACT_UTF8_BYTES"},
+        "raw_payload_utf8_base64": {"$ref": "#/$defs/base64"},
+        "byte_length": {"type": "integer", "minimum": 1},
+        "content_sha256": {"$ref": "#/$defs/sha256"},
+        "normalization": {"const": "NONE"}
+      }
+    },
+    "inspectionCandidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["inspection_candidate_id", "instrument_item_ref", "candidate_code", "note_pointer", "authority"],
+      "properties": {
+        "inspection_candidate_id": {"$ref": "#/$defs/token"},
+        "instrument_item_ref": {"$ref": "#/$defs/nonEmptyString"},
+        "candidate_code": {"enum": ["AMBIGUOUS_ITEM", "MULTI_FACTOR_WORDING", "PARTICIPANT_BURDEN", "UNNATURAL_LANGUAGE", "ANCHORING_RISK", "MAPPING_UNDERSPECIFIED", "TRANSLATION_SEMANTIC_DRIFT", "PERSPECTIVE_AMBIGUITY", "TEMPORAL_ORDER_UNCLEAR"]},
+        "note_pointer": {"$ref": "#/$defs/nonEmptyString"},
+        "authority": {"const": "DEVELOPMENT_INSPECTION_CANDIDATE_NOT_DEFECT_RECEIPT"}
+      }
+    },
+    "inspectionIdentity": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["inspection_kind", "inspector_role"],
+          "properties": {
+            "inspection_kind": {"const": "AUTHOR_COGNITIVE_WALKTHROUGH"},
+            "inspector_role": {"const": "AUTHOR_DEVELOPMENT_INSPECTOR"}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["inspection_kind", "inspector_role"],
+          "properties": {
+            "inspection_kind": {"const": "LANGUAGE_COMPREHENSION_INSPECTION"},
+            "inspector_role": {"const": "LANGUAGE_DEVELOPMENT_INSPECTOR"}
+          }
+        }
+      ]
+    },
+    "developmentInspectionReport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["$schema", "schema_version", "artifact_type", "artifact_id", "instrument_sha256", "inspection_identity", "coverage_refs", "raw_report_payload", "status", "candidate_items", "authority"],
+      "properties": {
+        "$schema": {"const": "./development-assessment.schema.json"},
+        "schema_version": {"const": "1.0.0"},
+        "artifact_type": {"const": "DEVELOPMENT_INSTRUMENT_INSPECTION_REPORT"},
+        "artifact_id": {"$ref": "#/$defs/token"},
+        "instrument_sha256": {"$ref": "#/$defs/sha256"},
+        "inspection_identity": {"$ref": "#/$defs/inspectionIdentity"},
+        "coverage_refs": {"$ref": "#/$defs/stringList"},
+        "raw_report_payload": {"$ref": "#/$defs/inspectionPayload"},
+        "status": {"const": "INSPECTION_SOURCE_ONLY_NO_AUTOMATIC_DEFECT_RECEIPT"},
+        "candidate_items": {"type": "array", "items": {"$ref": "#/$defs/inspectionCandidate"}},
+        "authority": {"const": "EVALUATOR_SIDE_INSPECTION_NOT_RESPONSE_OR_MECHANISM_RESULT"}
+      }
+    },
+    "defectReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["defect_receipt_id", "candidate_refs", "defect_code", "adjudication_status", "analyst_basis", "authority"],
+      "properties": {
+        "defect_receipt_id": {"$ref": "#/$defs/token"},
+        "candidate_refs": {"$ref": "#/$defs/refList"},
+        "defect_code": {"enum": ["DESIGN_ANCHOR_LITERAL_LEAK", "INTERNAL_IDENTIFIER_LITERAL_LEAK", "DELIVERY_PAYLOAD_MISMATCH", "SESSION_BINDING_MISMATCH", "MATCHED_FUTURE_OPTION_MISMATCH", "MATCHED_COMPARISON_BINDING_MISMATCH", "UNLOGGED_PROMPT_DELIVERY", "PROMPT_ORDER_VIOLATION", "MISSINGNESS_COLLAPSE", "RAW_PAYLOAD_PROVENANCE_BREAK", "RESPONSE_PROVENANCE_LINK_MISMATCH", "POST_TRACE_DIAGNOSTIC_EARLY_DELIVERY", "AMBIGUOUS_ITEM", "MULTI_FACTOR_WORDING", "PARTICIPANT_BURDEN", "UNNATURAL_LANGUAGE", "ANCHORING_RISK", "MAPPING_UNDERSPECIFIED", "TRANSLATION_SEMANTIC_DRIFT", "PERSPECTIVE_AMBIGUITY", "TEMPORAL_ORDER_UNCLEAR"]},
+        "adjudication_status": {"enum": ["CONFIRMED", "REJECTED", "DEFERRED", "NOT_EVALUABLE"]},
+        "analyst_basis": {"$ref": "#/$defs/nonEmptyString"},
+        "authority": {"const": "INSTRUMENT_DEFECT_ADJUDICATION_ONLY_NO_MECHANISM_RESULT"}
+      }
+    },
+    "defectAdjudicationSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["$schema", "schema_version", "artifact_type", "artifact_id", "instrument_sha256", "source_artifact_sha256", "status", "receipts"],
+      "properties": {
+        "$schema": {"const": "./development-assessment.schema.json"},
+        "schema_version": {"const": "1.0.0"},
+        "artifact_type": {"const": "INSTRUMENT_DEFECT_ADJUDICATION_SET"},
+        "artifact_id": {"$ref": "#/$defs/token"},
+        "instrument_sha256": {"$ref": "#/$defs/sha256"},
+        "source_artifact_sha256": {"$ref": "#/$defs/shaList"},
+        "status": {"const": "DEVELOPMENT_DEFECT_ADJUDICATION_ONLY"},
+        "receipts": {"type": "array", "items": {"$ref": "#/$defs/defectReceipt"}}
+      }
+    },
+    "revisionProposal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["proposal_id", "defect_receipt_refs", "target_json_pointer", "proposed_change", "rationale", "status", "execution_status", "authority"],
+      "properties": {
+        "proposal_id": {"$ref": "#/$defs/token"},
+        "defect_receipt_refs": {"$ref": "#/$defs/refList"},
+        "target_json_pointer": {"$ref": "#/$defs/nonEmptyString"},
+        "proposed_change": {"$ref": "#/$defs/nonEmptyString"},
+        "rationale": {"$ref": "#/$defs/nonEmptyString"},
+        "status": {"const": "PROPOSED_NOT_ADOPTED"},
+        "execution_status": {"const": "UNEXECUTED"},
+        "authority": {"const": "FUTURE_P0_VERSION_DECISION_REQUIRED"}
+      }
+    },
+    "revisionProposalSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["$schema", "schema_version", "artifact_type", "artifact_id", "base_instrument_sha256", "source_defect_adjudication_sha256", "supporting_source_artifact_sha256", "status", "proposals"],
+      "properties": {
+        "$schema": {"const": "./development-assessment.schema.json"},
+        "schema_version": {"const": "1.0.0"},
+        "artifact_type": {"const": "INSTRUMENT_REVISION_PROPOSAL_SET"},
+        "artifact_id": {"$ref": "#/$defs/token"},
+        "base_instrument_sha256": {"$ref": "#/$defs/sha256"},
+        "source_defect_adjudication_sha256": {"$ref": "#/$defs/shaList"},
+        "supporting_source_artifact_sha256": {"$ref": "#/$defs/shaList"},
+        "status": {"const": "PROPOSED_NOT_ADOPTED"},
+        "proposals": {"type": "array", "items": {"$ref": "#/$defs/revisionProposal"}}
+      }
+    }
+  }
+}

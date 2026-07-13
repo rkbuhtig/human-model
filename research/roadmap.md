@@ -246,7 +246,7 @@ access와 interpretive integration 경계를 먼저 분리한다. 그 전에는
 
 ## 3C. `INTERP-001` — Subjective Encounter and Interpretive Reorganization
 
-**상태: `INTERP-001A BOUNDARY DOCUMENTED; INTERP-001A2 M1 CONTRACT FROZEN; INTERP-001B DETACHED CONFORMANCE IMPLEMENTED; INTERP-001D1 EXECUTED / EVALUATED SYNTHETIC CONFORMANCE; INTERP-DIALOGUE-001A SCENARIOS DOCUMENTED / UNEXECUTED; INTERP-DIALOGUE-001B TRACE ORACLE FROZEN / UNEXECUTED; BROADER DYNAMICS OPEN` — RFC 0004**
+**상태: `INTERP-001A BOUNDARY DOCUMENTED; INTERP-001A2 M1 CONTRACT FROZEN; INTERP-001B DETACHED CONFORMANCE IMPLEMENTED; INTERP-001D1 EXECUTED / EVALUATED SYNTHETIC CONFORMANCE; INTERP-DIALOGUE-001A SCENARIOS DOCUMENTED / UNEXECUTED; INTERP-DIALOGUE-001B TRACE ORACLE FROZEN / UNEXECUTED; INTERP-DIALOGUE-001P0-V0 ELICITATION CONTRACT FROZEN / UNEXECUTED; BROADER DYNAMICS OPEN` — RFC 0004**
 
 ```text
 ExternalOccurrence / CurrentAccessOccurrence
@@ -391,14 +391,77 @@ adjudicator와 action gate도 `001A` 자연 factor의 결과로 선택하지 않
    scenario family, 한-factor contrast, authority lane과 registered candidate probe domain 등록
 2. `INTERP-DIALOGUE-001B` (`FROZEN / UNEXECUTED`): competing functional placement,
    선택적 intervention signature, ordinal horizon, out-of-model lane과 trace oracle 동결
-3. author / instrument development pilot: 문항·도구 결함 탐색; confirmatory support로 재사용 금지
-4. human confirmatory, cross-model latent와 `INTERP-001D2a` protocol을 결과 전에 각각 동결
-5. human judgment, latent representation probe와 D2a recursive composition을 독립 실행
-6. `INTERP-DIALOGUE-001C`: 세 source의 일치·불일치와 operational alias 범위를 교차 판정
-7. 살아남은 기능 배치에 한해서만 Dynamics runtime 또는 Narrative integration을 별도 검토
+3. `INTERP-DIALOGUE-001P0-v0` (`FROZEN / UNEXECUTED`): 24개 presentation,
+   prompt/response schedule, scripted replay provenance, runner/scanner/analyst 경계와 P1
+   proposal-only 권한 동결
+4. `INTERP-DIALOGUE-001P1-v0`: exact v0의 immutable scripted adversarial replay,
+   evaluator-side walkthrough/inspection, defect receipt와 revision proposal만 발행; actual
+   acquisition과 수정 instrument 채택·실행 금지
+5. 필요 시 `INTERP-DIALOGUE-001P0-v1`: proposal을 `ACCEPTED / REJECTED / DEFERRED`로
+   별도 판정하고 채택된 변경만 새 immutable instrument로 동결
+6. source-specific acquisition, human confirmatory, cross-model latent와 `INTERP-001D2a`
+   protocol을 결과 전에 각각 동결
+7. human judgment, latent representation probe와 D2a recursive composition을 독립 실행
+8. `INTERP-DIALOGUE-001C`: 세 source의 일치·불일치와 operational alias 범위를 교차 판정
+9. 살아남은 기능 배치에 한해서만 Dynamics runtime 또는 Narrative integration을 별도 검토
 
 synthetic capability matrix는 predictive support나 인간의 기분·기억·퀄리아 법칙을
 지지하지 않는다. `MORPH-001C`와의 접합도 별도 measurement mapping 전에는 금지한다.
+
+### 3C-P0. `INTERP-DIALOGUE-001P0-v0` — Development elicitation instrument
+
+**상태: `FROZEN / UNEXECUTED — DEVELOPMENT ELICITATION ONLY`**
+
+P0는 `001B`의 observation point를 질문 slot으로 바꾸지 않는다. 세 `001A` family와
+`001B` oracle을 digest로 묶고, 미래 acquisition이 따라야 할 delivery/response schedule을
+별도 namespace로 동결한다.
+
+```text
+E0 initial vignette delivery
+E1 generic immediate-response prompt delivery
+R1 immediate response event
+E2 matched future-option delivery
+E3 generic later-response prompt delivery
+R2 later response event
+D0 / RD0 optional retrospective diagnostic, after R2 only
+```
+
+R1/R2는 미래에 별도로 동결된 mapping의 O5/O10 surface 입력 후보일 뿐 observation이
+아니다. D0/RD0는 retrospective diagnostic이며 oracle coordinate가 없다. O1–O4와
+O7–O9는 mapping이 없으면 `NOT_OBSERVED`로 남기고 질문을 추가해 채우지 않는다. 현재
+runner가 만드는 E/R record는 이 schedule의 scripted replay이며 실제 delivery/response
+occurrence가 아니다.
+
+```text
+ScriptedReplayMaterializer
+→ immutable scripted replay / provenance artifact
+↛ actual acquisition occurrence
+
+MechanicalDefectScanner
+→ MechanicalDefectCandidate only
+
+Analyst adjudication
+→ InstrumentDefectReceipt
+```
+
+runner는 `SCRIPTED_ADVERSARIAL_RESPONSE`만 받아 declared response status와 payload를
+replay record로 materialize한다. `RESPONDED / REFUSED / NO_RESPONSE / TECHNICAL_FAILURE`는
+scripted record vocabulary이지 실제 participant 상태가 아니다. scripted raw payload는
+`OUT_OF_MODEL`이 아니며, 그 판정은 future frozen mapping과 analyst adjudication을
+요구한다. author walkthrough와 language/comprehension inspection은 evaluator-side defect
+source이고 response occurrence가 아니다. scenario judgment를 first-person attestation이나
+내부 mechanism trace로 직접 cast하지 않는다.
+
+P0는 pilot을 실행하지 않는다. P1은 exact v0의 immutable scripted replay,
+evaluator-side inspection, defect receipt와
+`InstrumentRevisionProposal(PROPOSED_NOT_ADOPTED / UNEXECUTED)`만 발행할 수 있다. P1은
+actual acquisition을 실행하거나 proposal을 채택하거나 수정 instrument를 실행할 수 없다.
+새 version 채택은 별도 P0 decision/freeze이고, 수정 효과 확인은 그 뒤의 별도 P1 replay다.
+실제 human/LLM/other-source acquisition은 source identity, delivery, consent/privacy,
+mapping과 missingness를 별도 pre-run freeze한 뒤에만 연다.
+
+P0의 schema·validator 통과는 human/LLM/D2a trace, placement winner, D2a k→k+1 recursion,
+durable TargetForm, Episode/Narrative writer 또는 claim support가 아니다.
 
 ## 4. Dynamics v0.3 — 첫 descriptive transgression
 

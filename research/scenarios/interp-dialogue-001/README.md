@@ -125,3 +125,33 @@ descriptor가 실제로 단일 인과 조작인지나 현실의 기능 residence
 이 oracle은 사람의 숨은 상태나 올바른 기능 residence를 기록하지 않는다. 각 placement를
 계산적으로 구현했다고 주장할 때의 conditional conformance contract만 정의한다. 아직
 human/LLM/D2a observation, runner, evaluator, placement winner 또는 claim support는 없다.
+
+## `INTERP-DIALOGUE-001P0-v0` follow-up
+
+[`elicitation/README.md`](elicitation/README.md)와
+[`elicitation/instrument-v0.json`](elicitation/instrument-v0.json)은 세 family의 24개 cell과
+`001B` oracle을 content digest로 결박한 development elicitation instrument를 동결한다.
+
+```text
+O0–O10 oracle coordinate
+≠ E0–E3 delivery occurrence
+≠ R1/R2 response event
+```
+
+P0는 vignette, generic immediate/later prompt, matched future option과 optional post-trace
+diagnostic의 순서를 고정한다. 현재 runner는 `SCRIPTED_ADVERSARIAL_RESPONSE` input만 받아
+그 schedule의 replay record와 exact scripted payload provenance를 materialize한다. 이
+record는 실제 prompt delivery나 participant/model response occurrence를 인증하지 않는다.
+R1/R2를 O5/O10 surface에 연결하려면 별도 future mapping freeze가 필요하고, materializer는
+mapping, observation status, `OUT_OF_MODEL`, defect 또는 placement result를 발행하지 않는다.
+author walkthrough와 language/comprehension inspection은 evaluator-side defect source이며
+replay response source가 아니다.
+
+P0의 상태는 `FROZEN / UNEXECUTED — DEVELOPMENT ELICITATION ONLY`다. P1은 exact v0에
+결박된 immutable scripted replay, analyst defect receipt와 revision proposal만 발행할 수
+있다. proposal은 `PROPOSED_NOT_ADOPTED / UNEXECUTED`이며, P1은 revised instrument를
+채택하거나 실행하지 않는다. 다음 P0 version만 proposal을 판정하고 새 instrument를 동결할
+수 있다. 실제 human, LLM 또는 다른 source acquisition은 각 source의 delivery, consent,
+identity, mapping과 missingness를 별도 pre-run freeze한 뒤에만 가능하다. 이 follow-up도
+human/LLM/D2a data, internal mechanism observation, claim support, durable TargetForm,
+Episode 또는 Narrative writer를 만들지 않는다.

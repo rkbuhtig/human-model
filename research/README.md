@@ -121,10 +121,21 @@ discriminator를 구분한다. 후보 domain은 비배타적 관측 목록이므
 contract다. natural contrast는 association signature만 주며 direct edge는 D2a-only
 node clamp로 남는다. observed equality는 alias가 아니고, durable state와 slow cache는
 현재 one-future-access horizon에서 `NOT_IDENTIFIABLE_UNDER_HORIZON`이다. 단순 challenger는 표현력 순위표가
-아니라 alias·degeneracy control이다. 후속 순서는 완료된 scenario contract(A)와 trace
-oracle(B) 뒤에 저자/도구 development pilot, human·latent·D2a protocol 동결, 세 독립
-실행, cross-source audit(C)를 둔다. 현재 freeze는 human support, LLM latent 측정, D2a
-runtime, durable TargetForm 또는 Narrative writer를 구현하지 않는다.
+아니라 alias·degeneracy control이다.
+
+후속 [`INTERP-DIALOGUE-001P0-v0`](scenarios/interp-dialogue-001/elicitation/README.md)는
+[`development elicitation adoption`](adoption-records/2026-07-13-development-elicitation-instrument.md)에
+따라 24개 presentation, generic immediate/later prompt, matched future option과 scripted
+replay provenance를 동결했다. observation coordinate와 prompt/response schedule을 분리하며,
+current runner는 `SCRIPTED_ADVERSARIAL_RESPONSE`만 replay record로 materialize한다. 그
+record는 실제 delivery/response occurrence가 아니며 mapping·`OUT_OF_MODEL`·defect·placement를
+발행하지 않는다. author walkthrough와 language inspection은 evaluator-side source다. 상태는
+`FROZEN / UNEXECUTED — DEVELOPMENT ELICITATION ONLY`다. 이후 순서는 P1-v0 immutable
+scripted replay와 defect/revision proposal → 별도 P0-v1 revision decision/freeze →
+source-specific acquisition·human·latent·D2a protocol 동결 → 독립 실행 → cross-source
+audit(C)다. P1은 수정된 instrument를 채택하거나 실행할 수 없다. 현재 freeze는 actual
+participant/model occurrence, human support, LLM latent 측정, D2a runtime, durable TargetForm
+또는 Narrative writer를 구현하지 않는다.
 
 ```text
 implemented Q-v1 receipt/count/density types

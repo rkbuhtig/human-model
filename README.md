@@ -159,3 +159,15 @@ edge는 아직 실행하지 않은 D2a node-clamp challenge로 분리한다. 관
 합·threshold·lookup은 주된 설명력 challenger가 아니라 alias와 degeneracy를 찾는
 control로 사용한다. A/B의 schema·validator 통과는 인간 자료, LLM activation, recursive
 D2a runtime, Episode/Narrative writer 또는 새 claim support가 아니다.
+
+다음 [`INTERP-DIALOGUE-001P0-v0`](research/scenarios/interp-dialogue-001/elicitation/README.md)는
+24개 cell을 development elicitation presentation으로 묶고, vignette·generic prompt·scripted
+response·동일 future option의 E/R schedule을 동결한다. 이는 내부 상태를 재는 measurement
+instrument가 아니다. 현재 runner는 `SCRIPTED_ADVERSARIAL_RESPONSE`만 받는 replay
+materializer이며, 생성한 delivery/response record는 실제 participant 또는 model occurrence가
+아니다. author walkthrough와 language inspection도 evaluator-side defect source일 뿐 run
+source가 아니다. P0는 `FROZEN / UNEXECUTED`이고, 후속 P1도 immutable scripted v0 replay,
+defect receipt와 revision proposal만 발행할 수 있다. 실제 acquisition은 source-specific
+pre-run freeze 뒤로 남고, 수정 instrument의 채택은 별도 P0 version의 권한이다. 이 freeze는
+participant data, human mechanism, `HM-INV-013`/`HM-DYN-004` support 또는 D2a recursion을
+만들지 않는다.

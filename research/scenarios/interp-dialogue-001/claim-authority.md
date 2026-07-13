@@ -115,3 +115,61 @@ probe·projection·horizon·measurement mapping에서 전체 hypothesis signatur
 주장은 아직 실행되지 않은 D2a node-clamp challenge를 요구한다. 인간 판단이나 LLM
 activation은 source-specific mapping이 별도로 동결되기 전에는 내부 trace field 값이나
 causal residence 증거가 아니다.
+
+## `001P0-v0` elicitation instrument의 추가 권한 경계
+
+P0는 measurement instrument가 아니다. presentation·prompt·response schedule을 고정하는
+development elicitation contract다. 현재 제공되는 runner는
+`SCRIPTED_ADVERSARIAL_RESPONSE`-only replay materializer이며 실제 acquisition recorder가
+아니다.
+
+```text
+what the instrument schedules and scripted replay materializes
+≠ actual acquisition occurrence
+≠ what internal state existed
+```
+
+향후 acquisition protocol에서 모든 prompt delivery는 별도 사건이어야 한다. generic
+immediate prompt와 later prompt도 관측을 수동적으로 읽는 창이 아니라 이후 response에
+영향을 줄 수 있는 occurrence로 보존해야 한다. 현재 scripted replay의 delivery/response
+record는 이 순서를 시험하는 materialized record일 뿐, 실제 occurrence가 아니다. structured
+choice와 retrospective diagnostic은 R2 뒤에만 허용하며, diagnostic response는 O1–O10의
+직접 관측으로 cast하지 않는다.
+
+현재 replay의 response record와 `ResponseProvenanceLink`가 인증할 수 있는 것은 scripted
+record가 declared prompt와 context에 연결되고 payload bytes·length·digest가 보존됐다는
+사실뿐이다. 실제 사람이 보거나 답했다는 사실은 인증하지 않는다.
+
+```text
+response provenance
+↛ actual participant or model occurrence
+↛ encounter / candidate-set observation
+↛ TargetForm / Ghost residence
+↛ external identity, intention or truth
+↛ general human mechanism
+```
+
+vignette 속 사람에 대한 scenario judgment는 자동으로 first-person attestation이 아니다.
+또한 raw response 자체는 `OUT_OF_MODEL`이 아니다. 그 status는 별도 frozen mapping을 적용한
+뒤 현재 vocabulary가 응답을 수용하지 못했다는 analyst adjudication에만 허용한다.
+
+```text
+NOT_OBSERVED ≠ NO_RESPONSE ≠ REFUSED ≠ TECHNICAL_FAILURE
+
+raw response
+≠ OUT_OF_MODEL response
+```
+
+runner는 immutable scripted replay/provenance artifact만 발행한다. author walkthrough와
+language inspection은 evaluator-side source이며 response occurrence로 저장하지 않는다.
+mechanical scanner는
+`MechanicalDefectCandidate`만 발행하며, `InstrumentDefectReceipt`는 명시적 analyst
+adjudication을 요구한다. P1의 `InstrumentRevisionProposal`은 채택이나 수정 실행이 아니다.
+새 instrument를 채택할 권한은 별도 P0 version에만 있다.
+
+P0 schema·validator conformance는 participant data, human/latent mapping, placement winner,
+D2a recursion, `HM-INV-013`/`HM-DYN-004` support 또는 `HM-MEAS-005` measurement completion이
+아니다.
+
+실제 human, LLM 또는 다른 source acquisition은 source identity, delivery, consent/privacy,
+response provenance, mapping과 missingness를 결과 전에 별도 동결한 protocol을 요구한다.

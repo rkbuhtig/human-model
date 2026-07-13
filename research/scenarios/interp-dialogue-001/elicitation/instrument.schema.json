@@ -1,0 +1,345 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rkbuhtig/human-model/research/scenarios/interp-dialogue-001/elicitation/instrument.schema.json",
+  "title": "INTERP-DIALOGUE-001P0-v0 development elicitation instrument",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "study_id",
+    "instrument_id",
+    "instrument_version",
+    "status",
+    "authority",
+    "bound_source_artifacts",
+    "language_policy",
+    "rendering_policy",
+    "prompt_catalog",
+    "event_schedule",
+    "response_status_vocabulary",
+    "development_source_kinds",
+    "presentations",
+    "future_option_catalog",
+    "matched_future_comparisons",
+    "response_provenance_contract",
+    "mapping_boundary",
+    "processing_role_contract",
+    "defect_taxonomy",
+    "revision_proposal_contract",
+    "prohibitions"
+  ],
+  "properties": {
+    "$schema": {"const": "./instrument.schema.json"},
+    "schema_version": {"const": "1.0.0"},
+    "study_id": {"const": "INTERP-DIALOGUE-001P0"},
+    "instrument_id": {"const": "INTERP-DIALOGUE-001P0-ELICITATION-INSTRUMENT-V0"},
+    "instrument_version": {"const": "0.0.0"},
+    "status": {"const": "FROZEN_UNEXECUTED_DEVELOPMENT_ELICITATION_ONLY"},
+    "authority": {"$ref": "#/$defs/authority"},
+    "bound_source_artifacts": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {"$ref": "#/$defs/boundSource"}
+    },
+    "language_policy": {"$ref": "#/$defs/languagePolicy"},
+    "rendering_policy": {"$ref": "#/$defs/renderingPolicy"},
+    "prompt_catalog": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {"$ref": "#/$defs/prompt"}
+    },
+    "event_schedule": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {"$ref": "#/$defs/scheduleStep"}
+    },
+    "response_status_vocabulary": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {"$ref": "#/$defs/statusMeaning"}
+    },
+    "development_source_kinds": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/token"}
+    },
+    "presentations": {
+      "type": "array",
+      "minItems": 24,
+      "maxItems": 24,
+      "items": {"$ref": "#/$defs/presentation"}
+    },
+    "future_option_catalog": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {"$ref": "#/$defs/futureOption"}
+    },
+    "matched_future_comparisons": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {"$ref": "#/$defs/matchedComparison"}
+    },
+    "response_provenance_contract": {"$ref": "#/$defs/responseProvenance"},
+    "mapping_boundary": {"$ref": "#/$defs/mappingBoundary"},
+    "processing_role_contract": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {"$ref": "#/$defs/processingRole"}
+    },
+    "defect_taxonomy": {"$ref": "#/$defs/defectTaxonomy"},
+    "revision_proposal_contract": {"$ref": "#/$defs/revisionProposalContract"},
+    "prohibitions": {
+      "type": "array",
+      "minItems": 16,
+      "maxItems": 16,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/token"}
+    }
+  },
+  "$defs": {
+    "nonEmptyString": {"type": "string", "minLength": 1},
+    "token": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "stringList": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/nonEmptyString"}
+    },
+    "tokenList": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/token"}
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifact_role", "execution_status", "measurement_status", "empirical_status", "output_status"],
+      "properties": {
+        "artifact_role": {"const": "DEVELOPMENT_ELICITATION_INSTRUMENT_CONTRACT"},
+        "execution_status": {"const": "UNEXECUTED"},
+        "measurement_status": {"const": "NO_FROZEN_RESPONSE_TO_INTERNAL_TRACE_MAPPING"},
+        "empirical_status": {"const": "NO_RESPONSE_DATA"},
+        "output_status": {"const": "NO_OBSERVATION_PLACEMENT_OR_CLAIM_RESULT"}
+      }
+    },
+    "boundSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_id", "role", "path", "content_sha256"],
+      "properties": {
+        "source_id": {"$ref": "#/$defs/token"},
+        "role": {"enum": ["SCENARIO_FAMILY", "TRACE_ORACLE"]},
+        "path": {"$ref": "#/$defs/nonEmptyString"},
+        "content_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "languagePolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["participant_locale", "source_descriptor_policy", "source_future_option_policy", "base_surface_translation_authority", "mixed_locale_source_text_forbidden"],
+      "properties": {
+        "participant_locale": {"const": "en"},
+        "source_descriptor_policy": {"const": "VERBATIM_BOUND_SOURCE_TEXT"},
+        "source_future_option_policy": {"const": "VERBATIM_BOUND_SOURCE_TEXT"},
+        "base_surface_translation_authority": {"const": "AUTHOR_RENDERED_INSTRUMENT_TEXT_NOT_CERTIFIED_EQUIVALENCE"},
+        "mixed_locale_source_text_forbidden": {"const": true}
+      }
+    },
+    "renderingPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["initial_block_order", "initial_joiner", "factor_line_prefix", "factor_joiner", "base_surface_by_family"],
+      "properties": {
+        "initial_block_order": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {"$ref": "#/$defs/token"}
+        },
+        "initial_joiner": {"$ref": "#/$defs/nonEmptyString"},
+        "factor_line_prefix": {"$ref": "#/$defs/nonEmptyString"},
+        "factor_joiner": {"$ref": "#/$defs/nonEmptyString"},
+        "base_surface_by_family": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {"$ref": "#/$defs/baseSurface"}
+        }
+      }
+    },
+    "baseSurface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["family_id", "participant_text"],
+      "properties": {
+        "family_id": {"$ref": "#/$defs/token"},
+        "participant_text": {"$ref": "#/$defs/nonEmptyString"}
+      }
+    },
+    "prompt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["prompt_id", "role", "participant_text", "authority"],
+      "properties": {
+        "prompt_id": {"$ref": "#/$defs/token"},
+        "role": {"enum": ["GENERIC_IMMEDIATE_RESPONSE", "GENERIC_LATER_RESPONSE", "POST_TRACE_DIAGNOSTIC"]},
+        "participant_text": {"$ref": "#/$defs/nonEmptyString"},
+        "authority": {"$ref": "#/$defs/token"}
+      }
+    },
+    "scheduleStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["step_id", "sequence_ordinal", "event_kind", "required", "payload_source"],
+      "properties": {
+        "step_id": {"$ref": "#/$defs/token"},
+        "sequence_ordinal": {"type": "integer", "minimum": 0, "maximum": 7},
+        "event_kind": {"enum": ["STIMULUS_DELIVERY", "PROMPT_DELIVERY", "SCRIPTED_RESPONSE_RECORD"]},
+        "required": {"type": "boolean"},
+        "payload_source": {"$ref": "#/$defs/token"}
+      }
+    },
+    "statusMeaning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "meaning"],
+      "properties": {
+        "status": {"enum": ["RESPONDED", "REFUSED", "NO_RESPONSE", "TECHNICAL_FAILURE"]},
+        "meaning": {"$ref": "#/$defs/nonEmptyString"}
+      }
+    },
+    "presentation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["presentation_id", "family_id", "source_cell_id", "factor_level_bindings"],
+      "properties": {
+        "presentation_id": {"$ref": "#/$defs/token"},
+        "family_id": {"$ref": "#/$defs/token"},
+        "source_cell_id": {"$ref": "#/$defs/token"},
+        "factor_level_bindings": {
+          "type": "object",
+          "minProperties": 3,
+          "maxProperties": 3,
+          "additionalProperties": {"$ref": "#/$defs/token"}
+        }
+      }
+    },
+    "futureOption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["future_option_id", "family_id", "source_probe_id", "source_option_index"],
+      "properties": {
+        "future_option_id": {"$ref": "#/$defs/token"},
+        "family_id": {"$ref": "#/$defs/token"},
+        "source_probe_id": {"$ref": "#/$defs/token"},
+        "source_option_index": {"type": "integer", "minimum": 0, "maximum": 1}
+      }
+    },
+    "matchedPair": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {"$ref": "#/$defs/token"}
+    },
+    "matchedComparison": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["comparison_id", "family_id", "left_prior_cell_id", "right_prior_cell_id", "allowed_matched_option_pairs"],
+      "properties": {
+        "comparison_id": {"$ref": "#/$defs/token"},
+        "family_id": {"$ref": "#/$defs/token"},
+        "left_prior_cell_id": {"$ref": "#/$defs/token"},
+        "right_prior_cell_id": {"$ref": "#/$defs/token"},
+        "allowed_matched_option_pairs": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {"$ref": "#/$defs/matchedPair"}
+        }
+      }
+    },
+    "responseProvenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["payload_encoding", "normalization", "receipt_authority", "response_proves", "response_does_not_prove"],
+      "properties": {
+        "payload_encoding": {"const": "BASE64_OF_EXACT_UTF8_BYTES"},
+        "normalization": {"const": "NONE"},
+        "receipt_authority": {"const": "SCRIPTED_RESPONSE_RECORD_AND_PAYLOAD_PROVENANCE_ONLY"},
+        "response_proves": {"$ref": "#/$defs/stringList"},
+        "response_does_not_prove": {"$ref": "#/$defs/tokenList"}
+      }
+    },
+    "eligibleCandidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["response_step_id", "observation_point_id", "trace_field_id", "authority"],
+      "properties": {
+        "response_step_id": {"$ref": "#/$defs/token"},
+        "observation_point_id": {"$ref": "#/$defs/token"},
+        "trace_field_id": {"$ref": "#/$defs/token"},
+        "authority": {"const": "DEVELOPMENT_MAPPING_CANDIDATE_ONLY"}
+      }
+    },
+    "mappingBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["runner_mapping_output", "eligible_future_candidates", "post_trace_diagnostic_coordinate", "raw_response_out_of_model_status"],
+      "properties": {
+        "runner_mapping_output": {"const": "FORBIDDEN"},
+        "eligible_future_candidates": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {"$ref": "#/$defs/eligibleCandidate"}
+        },
+        "post_trace_diagnostic_coordinate": {"const": "NONE_RETROSPECTIVE_DIAGNOSTIC_ONLY"},
+        "raw_response_out_of_model_status": {"const": "FORBIDDEN_MAPPING_RELATIVE_ADJUDICATION_ONLY"}
+      }
+    },
+    "processingRole": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "may_emit", "may_not_emit"],
+      "properties": {
+        "role": {"enum": ["SCRIPTED_REPLAY_MATERIALIZER", "MECHANICAL_DEFECT_SCANNER", "ANALYST_ADJUDICATOR"]},
+        "may_emit": {"$ref": "#/$defs/token"},
+        "may_not_emit": {"$ref": "#/$defs/tokenList"}
+      }
+    },
+    "defectTaxonomy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mechanical_candidate_codes", "structural_rejection_codes", "analyst_only_codes", "scanner_output_authority"],
+      "properties": {
+        "mechanical_candidate_codes": {"$ref": "#/$defs/tokenList"},
+        "structural_rejection_codes": {"$ref": "#/$defs/tokenList"},
+        "analyst_only_codes": {"$ref": "#/$defs/tokenList"},
+        "scanner_output_authority": {"const": "CANDIDATE_ONLY_NO_AUTOMATIC_DEFECT_RECEIPT"}
+      }
+    },
+    "revisionProposalContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["allowed_status", "allowed_execution_status", "adoption_authority", "p1_may_execute_revised_instrument"],
+      "properties": {
+        "allowed_status": {"const": "PROPOSED_NOT_ADOPTED"},
+        "allowed_execution_status": {"const": "UNEXECUTED"},
+        "adoption_authority": {"const": "FUTURE_P0_VERSION_ONLY"},
+        "p1_may_execute_revised_instrument": {"const": false}
+      }
+    }
+  }
+}
