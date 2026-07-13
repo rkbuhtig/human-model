@@ -77,6 +77,27 @@ records. P1 cannot perform actual acquisition, adopt a proposal, or execute a
 revised instrument. A later P0 version must accept, reject, or defer each
 proposal and freeze the next instrument artifact.
 
+## Next registered development step
+
+[`INTERP-DIALOGUE-001P1-v0`](p1-development-pilot-preregistration.md) is
+`PLANNED / UNEXECUTED — SCRIPTED DEVELOPMENT PILOT ONLY`. It freezes the minimum
+30-session coverage, adversarial response classes, evaluator inspections,
+analyst adjudication states, proposal-only revision authority and merge
+conditions before any pilot output exists.
+
+```text
+P1 preregistration
+!= P1 execution
+!= actual acquisition contract
+!= prompt-reactivity identification
+!= persona or latent-state study
+```
+
+P1 execution belongs in a separate PR. Actual delivery/response occurrences,
+source identity, clocks, consent/privacy/withdrawal and acquisition lineage
+remain an `ACQ0` gate. Interpreting prior-response-exposed later surfaces as
+natural persistence also remains blocked on a separate prompt-reactivity study.
+
 ## Frozen raw-byte integrity
 
 | Artifact | SHA-256 |
