@@ -153,7 +153,7 @@ ordered proxy-excess profile ≠ ExcessDemand / ResidualStrain / MorphicLoad
 
 따라서 이 층도 qualia·주관적 시간 또는 `HM-DYN-002`의 근거가 아니다.
 
-### Proposed Interpretive Dynamics — `INTERP-001A BOUNDARY DOCUMENTED / MANIFEST DRAFT / UNIMPLEMENTED`
+### Proposed Interpretive Dynamics — `INTERP-001A BOUNDARY DOCUMENTED / A2 M1 MANIFEST FROZEN-UNEXECUTED / RUNNER UNIMPLEMENTED`
 
 Chapter 02에서 반복되는 기능 경계와 Checkpoint 05-A의 현행 synthesis를 분리한다.
 

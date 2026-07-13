@@ -2,8 +2,8 @@
 
 | 항목 | 값 |
 |---|---|
-| Status | `DRAFT PREREGISTRATION / UNIMPLEMENTED — OPERATOR AND FIXTURE MANIFEST OPEN` |
-| Current slice | `INTERP-001A` terminology, lineage and falsification contract |
+| Status | `DRAFT PREREGISTRATION — INTERP-001A2 M1 MANIFEST FROZEN / UNEXECUTED; BROADER MANIFEST OPEN` |
+| Current slice | `INTERP-001A2` reception access/coherence executable manifest freeze |
 | Future execution | detached lab before Dynamics integration |
 | Evaluation kind | structural capability/discriminability matrix; not predictive validation |
 | Human empirical status | `OPEN` |
@@ -82,11 +82,15 @@ SubjectiveEncounterFormProxy:
   activation
 ```
 
-- unit: `declared_ordinal_simulation_component`
+- unit: `declared_ordinal_simulation_component`, integer rank `0/1/2`
 - missing: explicit reason; never zero-imputed
 - source/writer: detached experiment policy
 - identity: model ID/version, policy digest, pre-access snapshot digest
 - aggregation: no cross-component addition or cancellation
+
+rank에는 equality, ordering, `min`, `max`와 rank threshold만 쓴다. addition, average,
+difference, multiplication, division, L1/L2 또는 positive-negative cancellation은
+ordinal scale에 정의되지 않는다.
 
 이 component는 expected-output label이 아니다. formation/adjudication operator가 fixture의
 정답 label을 직접 읽으면 실패다.
@@ -174,34 +178,172 @@ EF1  episode-material candidate
 identity, provenance와 구조 구분 결과가 같으면 별도 `ExperienceFragment` residence를
 만들지 않는다.
 
-## Implementation-blocking manifest
+## Executable manifest freeze
 
-이 문서는 type, lineage, comparison surface와 failure boundary를 먼저 고정한
-`DRAFT PREREGISTRATION`이다. 코드를 시작하기 전 별도 manifest에서 다음을 exact
-value/operator로 동결하고 digest를 발급해야 한다.
+`INTERP-001A2`는 전체 INTERP 동역학이 아니라 첫 reception-mechanism M1만
+machine-readable contract로 동결한다.
+
+- [JSON Schema](interp-001-manifest.schema.json)
+- [M1 v1 execution manifest](interp-001-m1-v1-execution.json)
+- [M1 v1 evaluation manifest](interp-001-m1-v1-evaluation.json)
+- [M1 v1 closed-world result schema](interp-001-m1-v1-result.schema.json)
+
+runner는 execution manifest만 받고 evaluator만 evaluation manifest를 읽는다. fixture
+입력에는 family name, mirror relation, congruent/incongruent label, semantic alias,
+expected signature 또는 pass/fail cell이 없다. operator도 `fixture_key`, evaluator alias나
+expected predicate로 branch할 수 없다.
+
+orchestrator만 opaque fixture/material/profile key를 resolve하고 각 operator에는
+identity-free `iv001`–`iv011` input view를 전달한다. lineage ref는 명시된 field에서
+pass-through만 가능하고 inspect/branch할 수 없다. result의 invocation log는 operator별
+input view, inspected/pass-through field와 invocation count를 남긴다. present access에서는
+active operator가 phase DAG 순서로 정확히 한 번, absent access나 transport redelivery에서는
+모두 0회여야 한다.
 
 ```text
-complete fixture IDs and component values
-model별 allowed input fields
-access operator
-candidate-coherence operator
-bridge/topology construction rule
-Ghost exploration operation semantics
-BindingAdjudicatorPolicy
-fixture별 exact semantic predicates
-expected pass/fail model × fixture cells
-freeze timestamp / policy digest / no-retuning rule
+current occurrence key ≠ current delivery key ≠ current access key
+
+transport redelivery
+= same current occurrence + new delivery + no CurrentAccessOccurrence
+
+protocol current reexposure
+= new current occurrence + new delivery + new access
+ + reexposure_of_occurrence/access lineage
 ```
 
-manifest freeze 뒤 outcome을 보고 operator, fixture value 또는 expected predicate를
-바꾸면 새 version과 preregistration이 필요하다.
+closed-world result schema는 semantic field 외 임의 출력을 거부하고, EvidenceLink,
+EvidenceAssessment, Observation, Action, authority, Narrative, WorldOutcome과 source
+occurrence/encounter/material ledger의 before/after digest equality와 zero delta를 매 step
+요구한다. evaluation predicate는 versioned catalog의 exact arity/semantics에 등록된 것만
+사용하며 unspecified semantic field는 frozen default relation을 적용한다.
+
+Draft 2020-12 schema는 release check에서 실제로 실행한다. repository unit test도 frozen
+schema가 사용하는 `$ref`, `oneOf`, `const`, `enum`, type, shape, pattern, cardinality,
+`uniqueItems` subset을 dependency-free로 검사하고, exact semantic validator와 adversarial
+mutation을 추가로 실행한다.
+
+```bash
+npx --yes ajv-cli validate --spec=draft2020 \
+  -s research/benchmarks/interp-001-manifest.schema.json \
+  -d research/benchmarks/interp-001-m1-v1-execution.json
+npx --yes ajv-cli validate --spec=draft2020 \
+  -s research/benchmarks/interp-001-manifest.schema.json \
+  -d research/benchmarks/interp-001-m1-v1-evaluation.json
+npx --yes ajv-cli compile --spec=draft2020 \
+  -s research/benchmarks/interp-001-m1-v1-result.schema.json
+```
+
+M1에서 exact 동결한 것은 다음이다.
+
+```text
+integer ordinal component profiles and missingness tags
+R0 state-independent baseline
+R1 reception-conditioned access only
+R2 reception-conditioned candidate coherence only
+R3 separately factorized R1 access + R2 coherence
+fixed encounter formation / TargetForm / Ghost / fixture topology
+F1–F8 mirrored inputs, 16 fixtures × 4 models = 64 cells
+step-level semantic signatures and global negative controls
+exact assembly membership / fixture-induced topology / candidate profile / adjudication chain
+manifest / contract SHA-256 boundaries and no-retuning rule
+```
+
+M1 encounter formation은 source subjective-form proxy의 componentwise max 또는 declared
+neutral profile이며 reception을 읽지 않는다. topology는 execution 전에 fixture가
+선언하고 model이나 outcome이 만들거나 수정하지 않는다. TargetForm은 neutral/no-effect,
+Ghost는 fixed connected-component traversal이다.
+
+```text
+R3.access == R1.access
+R3.coherence == R2.coherence       # same emitted assembly에서
+```
+
+hidden interaction은 M1에 없다. 필요해 보여도 결과를 본 뒤 추가하지 않고 새 manifest
+version에서 사전등록한다. freeze 뒤 operator, fixture value, expected predicate 또는 cell을
+바꾸면 새 version·digest와 prior run 보존이 필요하다.
+
+### M1 operator semantics
+
+아래 비교는 ordinal rank의 order만 사용한다. `+`, 평균 또는 방향 간 상쇄가 아니다.
+
+```text
+base_access(m)
+: relevant(m) and activation(m) >= 1
+
+directional_match(m, r)
+: (positive_fit(m) > 0 and positive_receptivity(r) >= 1)
+  or (negative_fit(m) > 0 and negative_receptivity(r) >= 1)
+  or (ambiguity(m) > 0 and ambiguity_tolerance(r) >= 1)
+
+strong_access_override(m)
+: activation(m) == 2
+
+R0 / R2 access
+: declared input order를 보존하며 base_access material만 filter
+
+R1 / R3 access
+: declared input order를 보존하며
+  base_access and (strong_access_override or directional_match) material만 filter
+```
+
+accessible material과 frozen topology가 만드는 induced graph의 connected component 중
+node가 2개 이상인 것만 `EpisodeAssemblyCandidate`다. singleton은
+`accessible_unassembled`, 현재 filter를 통과하지 못한 ref는 `not_accessed_currently`
+relation으로 남는다.
+
+```text
+raw_support[d]
+: assembly member의 direction_fit[d] componentwise max
+
+strong_coherence_override(d)
+: strength == 2 frozen edge가 하나 이상 있고
+  양 endpoint 모두 activation == 2 and direction_fit[d] == 2
+
+R0 / R1 eligible(d)
+: raw_support[d] >= 1
+
+R2 / R3 eligible(d)
+: raw_support[d] >= 1
+  and (receptivity[d] >= 1 or strong_coherence_override(d))
+```
+
+adjudicator의 전체 truth table도 고정한다.
+
+```text
+eligible = {positive}           → adopted_positive
+eligible = {negative}           → adopted_negative
+eligible = {positive, negative} → contested
+eligible = {}                   → deferred
+```
+
+adopted만 `EpisodeIntegrationReceipt`와 `BindingIgnitionReceipt`을 만든다. M1은
+`rejected`를 출력하지 않는다. 같은 material pair가 prior prefix의 어느 assembly에도
+함께 없고 현재 frozen edge predicate를 처음 만족할 때만 `AssemblyIgnitionReceipt`가
+생긴다.
+
+TargetForm/Ghost variation, state-dependent encounter formation, I0–I4/TF0–TF2/EF0–EF1의
+전체 crossed manifest는 아직 `OPEN`이다. M1 freeze는 그 blocker를 닫지 않는다.
+
+| M1 family | frozen contrast | primary purpose |
+|---|---|---|
+| F1 | weak direction-matched pair + congruent reception | common adoption baseline |
+| F2 | same weak pair + incongruent reception | R0/R1/R2/R3 main dissociation |
+| F3 | strong-access pair + incongruent reception | exact-access coherence isolation |
+| F4 | strong-access pair + strong frozen edge | reception is not an absolute gate |
+| F5 | balanced mixed-direction pair | no forced direction / no scalar cancellation |
+| F6 | current access with no source material | reception cannot create content |
+| F7 | reception change with no current access | no background historical rewrite |
+| F8 | incongruent access → transport redelivery → congruent current reaccess | redelivery/reaccess and delayed assembly lineage |
+
+각 family는 positive/negative mirror 또는 order mirror를 explicit fixture로 가지며,
+evaluation manifest가 step별 expected semantic signature를 R0–R3 모두에 지정한다.
 
 ## Semantic comparison view
 
 raw artifact 전체나 content digest에는 model/policy identity가 포함되므로 model
 동치·차이를 판정하는 데 사용하지 않는다. 다음 metadata-free projection을
-`semantic_comparison_view@1` 후보로 고정하고, exact schema는 위 manifest에서
-동결한다.
+`semantic_comparison_view@1`로 M1 exact schema를 동결했다. 후속 slice가 field를
+추가하면 새 view version이 필요하다.
 
 ```text
 EncounterFormationReceipt presence / count
@@ -393,16 +535,21 @@ content digest를 보존한다. candidate는 immutable하고 outcome은 append-o
 
 ## 성공 조건
 
-1. manifest freeze 뒤 retuning 없이 같은 evidence/material 총량에서 R0–R3와 I2–I4의 declared capability difference가 재현된다.
-2. exact access-set control에서 I3와 I2를 구분하는 fixture가 있다.
+1. M1 manifest freeze 뒤 retuning 없이 R0–R3의 access/coherence signature가 64개
+   frozen cell에서 재현된다.
+2. exact-access control에서 R1/R3 access와 R2/R3 coherence 기여를 따로 관측한다.
 3. 과거 artifact, external Evidence와 source identity가 모든 condition에서 보존된다.
-4. reception/access/coherence/TargetForm/Ghost path 효과를 ablation으로 각각 제거할 수 있다.
-5. future events를 추가해도 동일 prefix receipt가 바뀌지 않는다.
-6. 이 성공을 predictive 또는 human-empirical support로 보고하지 않는다.
+4. state-only step과 transport redelivery는 새 current access/artifact를 만들지 않는다.
+5. 실제 current reaccess만 distinct encounter와 later assembly 기회를 만들고 과거
+   prefix를 바꾸지 않는다.
+6. 이 성공을 I4/TargetForm/Ghost 판별, predictive support 또는 human-empirical
+   support로 보고하지 않는다.
 
 ## 즉시 실패 조건
 
 - reception/subjective proxy가 Evidence strength, source truth 또는 target identity를 바꿈
+- runner/operator가 evaluation manifest, semantic alias 또는 expected signature를 읽음
+- ordinal rank를 합·평균·차이·곱·나눗셈 또는 scalar valence로 계산함
 - formation/adjudication operator가 허용 입력 대신 expected-output label을 직접 읽음
 - 상태 변화만으로 모든 과거 material을 자동 재처리함
 - 결과를 본 뒤 bridge edge나 accessed subset을 선택함
