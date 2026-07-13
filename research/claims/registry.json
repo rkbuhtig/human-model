@@ -368,7 +368,7 @@
       "id": "HM-INV-012",
       "kind": "INVARIANT",
       "adoption_status": "ADOPTED",
-      "implementation_status": "UNIMPLEMENTED",
+      "implementation_status": "PARTIAL",
       "statement": "Within any future INTERP detached lab, ReceptionState, TargetForm readouts, subjective encounter proxies, private traces, Ghost candidates, assembly candidates, adjudication receipts, and Episode integration artifacts may influence simulated access or interpretation but cannot create or strengthen EvidenceLink, certify source or target identity, rewrite a past occurrence or first-encounter receipt, or bypass a separate Narrative writer.",
       "scope": [
         "INTERP-001_detached_lab",
@@ -387,14 +387,18 @@
       ],
       "support": {
         "historical_cases": [],
-        "structural_tests": [],
+        "structural_tests": [
+          "test_guard_digests_are_real_recomputed_before_after_projections",
+          "test_runner_ast_has_no_evaluator_or_runtime_model_dependency",
+          "test_transport_audit_lineage_redelivery_reaccess_and_prefix"
+        ],
         "empirical_datasets": []
       },
       "failure_condition": {
         "type": "COUNTEREXAMPLE_TRACE",
         "description": "Changing an INTERP reception, target-form, Ghost, assembly, adjudication, or integration fixture changes external evidence strength, certifies an unresolved source or target identity, mutates a past source or encounter receipt, creates a world occurrence, or performs a Narrative write without its separately declared writer path."
       },
-      "notes": "This is an adopted future implementation boundary, not an implemented invariant of current main and not evidence that the proposed subjective dynamics describe humans."
+      "notes": "INTERP-001B implements this boundary only for the frozen M1 reception/assembly/adjudication slice through detached projections and package/API isolation. TargetForm, variable Ghost exploration, private-trace residence, Dynamics integration, and human validity remain unimplemented."
     },
     {
       "id": "HM-INV-013",
@@ -768,8 +772,8 @@
       "id": "HM-DYN-003",
       "kind": "DYNAMICAL_HYPOTHESIS",
       "adoption_status": "PROPOSED",
-      "implementation_status": "UNIMPLEMENTED",
-      "statement": "In future manifest-frozen matched synthetic fixtures with external evidence held fixed, separately declared ReceptionState access and candidate-coherence profiles can produce different material-access subset or order, assembly, or adjudication capability patterns, including delayed participation of a preserved material reference after a later access occurrence, beyond a state-independent baseline.",
+      "implementation_status": "PARTIAL",
+      "statement": "In manifest-frozen matched synthetic fixtures with external evidence held fixed, separately declared ReceptionState access and candidate-coherence profiles can produce different material-access subset or order, assembly, or adjudication capability patterns, including delayed participation of a preserved material reference after a later access occurrence, beyond a state-independent baseline.",
       "scope": [
         "INTERP-001_R0_R3_reception_mechanisms",
         "synthetic_structural_discriminability_only"
@@ -788,14 +792,19 @@
       ],
       "support": {
         "historical_cases": [],
-        "structural_tests": [],
+        "structural_tests": [
+          "test_all_f1_through_f8_cells_have_exact_closed_semantics",
+          "test_complete_matrix_step_count_schema_and_determinism",
+          "test_operator_api_and_runtime_calls_never_receive_raw_identity_keys",
+          "test_transport_audit_lineage_redelivery_reaccess_and_prefix"
+        ],
         "empirical_datasets": []
       },
       "failure_condition": {
         "type": "DISCRIMINATING_OBSERVATION",
         "description": "After exact manifest freeze, R0 through R3 cannot produce the declared access-versus-coherence distinctions under matched evidence and exact-access-set controls, the apparent effect is only an expected-output label or scalar threshold alias, or a reception change without a current access occurrence rewrites past material."
       },
-      "notes": "INTERP-001A2 freezes but does not execute the first reception-only M1 contract: R0 state-independent, R1 access-only, R2 coherence-only, and factorized R3 over 16 mirrored fixtures and 64 model cells. TargetForm, Ghost variation, state-dependent encounter formation, and broader I/TF/EF manifests remain open. A future conforming runner would still provide synthetic structural capability only; predictive or human support requires an independent measurement mapping and held-out protocol."
+      "notes": "INTERP-001B executes the frozen M1 contract with R0 state-independent, R1 access-only, R2 coherence-only, and factorized R3 over 16 mirrored fixtures and 64 isolated model cells. All 88 signatures and 54 non-retirement assertions conform in the versioned synthetic report, and five retirement rules are not triggered. Implementation remains PARTIAL because the preregistered single-threshold alias rule is NOT_EVALUABLE without its absent baseline, while the HM-INV-013 dependency remains UNIMPLEMENTED beyond a structural no-feedback reception/prefix probe in this frozen slice. TargetForm, Ghost variation, state-dependent encounter formation, broader I/TF/EF manifests, prediction, and human support remain open."
     },
     {
       "id": "HM-DYN-004",
@@ -981,7 +990,7 @@
       "id": "HM-MEAS-005",
       "kind": "MEASUREMENT_MODEL",
       "adoption_status": "DRAFT",
-      "implementation_status": "UNIMPLEMENTED",
+      "implementation_status": "PARTIAL",
       "statement": "Any future ReceptionStateSnapshot, SubjectiveEncounterFormProxy, or TargetFormReadout measurement model must declare non-cancelling component axes, scale or units, missingness, source and writer, interpreted-target and external-entity resolution, pre-access snapshot and effective ordinal, available information, model and policy digest, and calibration status before emitting comparable receipts.",
       "scope": [
         "INTERP-001_proxy_measurement_preconditions",
@@ -1000,14 +1009,18 @@
       ],
       "support": {
         "historical_cases": [],
-        "structural_tests": [],
+        "structural_tests": [
+          "test_complete_matrix_step_count_schema_and_determinism",
+          "test_boolean_is_not_accepted_as_an_ordinal_integer",
+          "test_all_f1_through_f8_cells_have_exact_closed_semantics"
+        ],
         "empirical_datasets": []
       },
       "failure_condition": {
         "type": "CALIBRATION_OR_IDENTIFIABILITY_FAILURE",
         "description": "A proxy omits axes, units or declared scale, missingness, writer, source resolution, pre-access snapshot, effective ordinal, policy digest, or calibration status; cancels positive and negative components into an unvalidated scalar; or is interpreted as actual qualia, measured mood, external identity, or human-calibrated TargetForm."
       },
-      "notes": "INTERP-001A2 freezes integer ordinal rank 0/1/2, explicit missingness, non-cancellation, source/writer and digest boundaries for the unexecuted reception-only M1 contract. It forbids interval arithmetic on the ordinal ranks. No comparable receipt runner or TargetForm measurement is implemented, and synthetic reproducibility would not identify a human latent variable."
+      "notes": "INTERP-001B executes only the integer ordinal rank 0/1/2, explicit missingness, non-cancellation and frozen manifest/contract/access-ordinal-bound reception/encounter proxy slice. It does not emit an HM-MEAS-005-complete comparable receipt: source/writer, pre-access snapshot receipt, available-information, model/policy receipt identity, interpreted-target/external-entity mapping, and calibration requirements are not all carried by one output. TargetForm measurement and comparable human measurement remain unimplemented, and synthetic reproducibility does not identify a human latent variable."
     },
     {
       "id": "HM-META-001",

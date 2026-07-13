@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rkbuhtig/human-model/research/benchmarks/interp-001b-m1-run.schema.json",
+  "title": "INTERP-001B M1 detached run envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "run", "integrity"],
+  "properties": {
+    "$schema": { "const": "./interp-001b-m1-run.schema.json" },
+    "run": { "$ref": "#/$defs/run" },
+    "integrity": { "$ref": "#/$defs/integrity" }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "run_id",
+        "run_version",
+        "status",
+        "runner_input_kind",
+        "evaluation_manifest_visible",
+        "execution_manifest_sha256",
+        "execution_contract_sha256",
+        "runner_implementation_sha256",
+        "runner_bundle_sha256",
+        "fixed_factor_sha256",
+        "cells"
+      ],
+      "properties": {
+        "run_id": { "const": "INTERP-001B-M1-RUN" },
+        "run_version": { "const": "1.0.0" },
+        "status": { "const": "EXECUTED_SYNTHETIC_RESULT" },
+        "runner_input_kind": { "const": "execution_manifest_only" },
+        "evaluation_manifest_visible": { "const": false },
+        "execution_manifest_sha256": { "$ref": "#/$defs/sha256" },
+        "execution_contract_sha256": { "$ref": "#/$defs/sha256" },
+        "runner_implementation_sha256": { "$ref": "#/$defs/sha256" },
+        "runner_bundle_sha256": { "$ref": "#/$defs/sha256" },
+        "fixed_factor_sha256": { "$ref": "#/$defs/sha256" },
+        "cells": {
+          "type": "array",
+          "minItems": 64,
+          "maxItems": 64,
+          "items": { "type": "object" },
+          "uniqueItems": true
+        }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "run_sha256"],
+      "properties": {
+        "algorithm": { "const": "sha256" },
+        "run_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    }
+  }
+}
