@@ -84,10 +84,11 @@ independently identified `DeformationDemand`가 아니다. 이어
 `DEFERRED`한다. 먼저 [`INTERP-001`](benchmarks/interp-001-subjective-encounter-binding.md)이
 subjective encounter, current access, Episode candidate, interpretive adjudication과
 object-scoped target-form readout의 타입·시간·권한 경계를 문서화한다.
-`INTERP-001A2`는 reception→access와 reception→candidate-coherence만 다루는 첫 M1
-execution/evaluation manifest를 `FROZEN / UNEXECUTED`로 고정했다. TargetForm·Ghost·
-state-dependent encounter formation과 전체 I/TF/EF manifest는 아직 `OPEN`이며,
-code/runtime behavior는 없다. residual·load와
+`INTERP-001A2`는 reception→access와 reception→candidate-coherence를 다루는 첫 M1
+execution/evaluation contract를 동결했고, [`INTERP-001B`](benchmarks/interp-001b-m1-conformance.md)가
+manifest에 고정된 assembly/adjudication phase까지 포함해 detached conformance를
+실행했다. TargetForm·Ghost variation·state-dependent encounter formation과 전체
+I/TF/EF manifest는 아직 `OPEN`이며 Dynamics runtime behavior는 없다. residual·load와
 INTERP/MORPH 접합은 detached lab 판별 뒤에 남아 있다.
 `FlowUpdate/EventJump`·no-event flow·burst/spaced와
 `HM-DYN-001` predictive comparison은 독립적인 planned temporal-comparison 축이며

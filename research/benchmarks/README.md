@@ -34,6 +34,8 @@ Contract mutant는 인간 모델 후보가 아니다. 반대로 descriptive mode
   외부 occurrence·Evidence, current access, experimenter-defined subjective encounter
   proxy, Episode candidate, adjudication과 target-form readout을 분리한다. `INTERP-001A2`
   M1은 R0–R3 reception access/coherence의 schema, execution/evaluation manifest와
-  64-cell expectation을 `FROZEN / UNEXECUTED`로 둔다. I0–I4와 TF0–TF2의 broader
+  64-cell expectation을 동결했고, [`INTERP-001B`](interp-001b-m1-conformance.md)가
+  이를 64-cell/88-step detached run과 독립 conformance evaluation으로 실행했다.
+  I0–I4와 TF0–TF2의 broader
   manifest는 여전히 open이며 predictive validation이나 인간 mood·memory·qualia
   evidence가 아니다.

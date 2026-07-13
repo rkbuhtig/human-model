@@ -246,7 +246,7 @@ access와 interpretive integration 경계를 먼저 분리한다. 그 전에는
 
 ## 3C. `INTERP-001` — Subjective Encounter and Interpretive Reorganization
 
-**상태: `INTERP-001A BOUNDARY DOCUMENTED; INTERP-001A2 M1 MANIFEST FROZEN / UNEXECUTED; RUNNER UNIMPLEMENTED` — RFC 0004**
+**상태: `INTERP-001A BOUNDARY DOCUMENTED; INTERP-001A2 M1 CONTRACT FROZEN; INTERP-001B DETACHED CONFORMANCE IMPLEMENTED; BROADER DYNAMICS OPEN` — RFC 0004**
 
 ```text
 ExternalOccurrence / CurrentAccessOccurrence
@@ -263,16 +263,21 @@ ExternalOccurrence / CurrentAccessOccurrence
 
 현재 boundary slice는 역사적 기능 경계와 현행 synthesis를 구분하고, 신규 candidate의
 identity·writer·persistence·effective order와 금지 cast를 문서로 고정한다.
-`INTERP-001A2`는 그중 reception→access와 reception→candidate-coherence만 R0–R3,
+`INTERP-001A2`는 그중 reception→access와 reception→candidate-coherence를 R0–R3,
 16 mirrored fixtures, 64 cells와 별도 execution/evaluation manifest로 동결했다.
+`INTERP-001B`는 manifest에 함께 고정된 encounter→assembly→adjudication phase를 포함한
+64-cell/88-step M1을 detached runner로 실행하고 독립 evaluator로 conformance를 판정한다.
 Dynamics code, HumanState, Narrative writer와 새 runtime behavior는 변경하지 않는다.
 
 후속 detached lab은 다음 순서로만 연다.
 
-1. `INTERP-001B`: frozen M1 manifest를 읽는 detached subjective encounter/access runner
-2. `INTERP-001C`: reception-conditioned assembly candidate와 scoped adjudication
-3. `INTERP-001D`: object-scoped target-form readout과 ordinal-delayed feedback
-4. 단순 합·threshold와 다른 구조 구분을 재현한 뒤에만 runtime/Narrative integration 검토
+1. `INTERP-001B` (`IMPLEMENTED`): frozen M1 phase-complete runner + independent evaluator
+2. `INTERP-001C` (`M1 MECHANICAL SLICE EXECUTED`): RFC 0004의 reception-conditioned
+   assembly/adjudication 범위는 B report 안에서 판정하되, 이를 variable Ghost 또는 durable
+   receipt 구현으로 승격하지 않음
+3. `INTERP-001D1`: object-scoped TargetForm source와 Ghost-path ablation의 competing manifest
+4. `INTERP-001D2`: later-access-only target-form feedback와 outcome/retention protocol
+5. 단순 합·threshold와 다른 구조 구분을 재현한 뒤에만 runtime/Narrative integration 검토
 
 synthetic capability matrix는 predictive support나 인간의 기분·기억·퀄리아 법칙을
 지지하지 않는다. `MORPH-001C`와의 접합도 별도 measurement mapping 전에는 금지한다.

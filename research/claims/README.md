@@ -37,11 +37,14 @@ npx --yes ajv-cli validate --spec=draft2020 \
 확장되지 않는다.
 
 `INTERP-001A`는 subjective/current-access/Episode-candidate/adjudication/readout
-경계를 신규 `ADOPTED / UNIMPLEMENTED` type·invariant로, reception·assembly·target
-form의 방향성은 `PROPOSED / UNIMPLEMENTED` dynamical hypothesis로 등록한다.
-`INTERP-001A2`의 frozen/unexecuted M1 manifest와 validator tests는 hypothesis 결과가
-아니라 향후 R0–R3 runner의 사전등록·입력권한·expectation 격리를 검증한다.
-`HM-MEAS-005`는 proxy component, 단위, missingness, source/writer, snapshot과
-calibration status가 정의되기 전 구현할 수 없는 `DRAFT` measurement contract다.
+경계를 type·invariant·dynamical hypothesis·measurement contract로 나눠 등록한다.
+`INTERP-001A2`의 manifest는 역사적 `FROZEN / UNEXECUTED` 상태와 digest를 그대로
+보존하고, `INTERP-001B`가 그 exact input을 별도 runner/evaluator로 실행했다.
+`HM-INV-012`와 `HM-MEAS-005`는 frozen M1에 실제 구현된 경계만 `PARTIAL`이다.
+`HM-DYN-003`도 88개 signature와 54개 non-retirement assertion의 synthetic
+conformance는 얻었지만 single-threshold alias retirement rule이 baseline 부재로
+`NOT_EVALUABLE`이고 TargetForm-recursion dependency가 열려 있어 `PARTIAL`이다.
+`HM-MEAS-005`의 complete comparable receipt, TargetForm/Ghost variation, runtime
+integration, calibration과 human measurement는 구현되지 않았다.
 이 등록은 역사적 Episode ontology의 정본화, mood-congruent ignition의 인간 법칙,
 Narrative writer, actual qualia 또는 predictive support를 만들지 않는다.
