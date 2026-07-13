@@ -34,7 +34,7 @@ Attempt, Performance, ActionOccurrence, slow-state trajectory, 입력 회계를
 - 연구 정체성·근거 층·아키텍처
 - claim schema + typed claim registry
 - defect schema + 실제 case 1건
-- RFC 0001, RFC 0002, RFC 0003
+- RFC 0001, RFC 0002, RFC 0003, RFC 0004
 
 종료 조건 통과: `Assessment ≠ Adoption ≠ Implementation ≠ Run ≠ Empirical Evidence`가
 문서 구조와 metadata에서 구분된다.
@@ -235,16 +235,50 @@ normalized·max·L1·L2 operator는 competing candidate로만 사전등록했고
 
 ### 3B-C. Load와 outcome comparison
 
-**상태: `PROPOSED / UNIMPLEMENTED`**
+**상태: `DEFERRED / UNIMPLEMENTED — INTERP-001 boundary first`**
 
 independent demand/capacity measurement와 outcome protocol이 식별된 뒤에만
 `MorphicLoadProfile`과 residual/recovery/retention outcome을 정의한다. 현재 synthetic
-proposal/band comparison은 이 조건을 만족하지 않는다. 이 단계까지 완료되기 전에는
+proposal/band comparison은 이 조건을 만족하지 않는다. 회복을 선형 exposure count나
+단일 threshold로 성급히 고정하지 않도록 subjective encounter, delayed current
+access와 interpretive integration 경계를 먼저 분리한다. 그 전에는
 퀄리아·주관적 시간·정신 시간량을 출력하지 않는다.
+
+## 3C. `INTERP-001` — Subjective Encounter and Interpretive Reorganization
+
+**상태: `INTERP-001A BOUNDARY DOCUMENTED; OPERATOR/FIXTURE MANIFEST DRAFT; CODE UNIMPLEMENTED` — RFC 0004**
+
+```text
+ExternalOccurrence / CurrentAccessOccurrence
+≠ SubjectiveEncounterFormProxy
+≠ EpisodeMaterialReference
+≠ AssemblyMaterialMembershipCandidate
+≠ EpisodeAssemblyCandidate
+≠ InterpretiveBindingCandidate
+≠ BindingAdjudicationReceipt
+≠ EpisodeIntegrationReceipt
+≠ Narrative Field write
+≠ TargetFormReadout
+```
+
+현재 slice는 역사적 기능 경계와 현행 synthesis를 구분하고, 신규 candidate의
+identity·writer·persistence·effective order, 금지 cast, R0–R3 / I0–I4 / TF0–TF2
+경쟁 모델과 폐기 조건을 문서로 고정한다. Dynamics code, HumanState, Narrative writer와
+새 runtime behavior는 변경하지 않는다.
+
+후속 detached lab은 다음 순서로만 연다.
+
+1. `INTERP-001B`: pre-access snapshots에서 subjective encounter proxy와 material ref를 파생
+2. `INTERP-001C`: reception-conditioned access, assembly candidate와 scoped adjudication
+3. `INTERP-001D`: object-scoped target-form readout과 ordinal-delayed feedback
+4. 단순 합·threshold와 다른 구조 구분을 재현한 뒤에만 runtime/Narrative integration 검토
+
+synthetic capability matrix는 predictive support나 인간의 기분·기억·퀄리아 법칙을
+지지하지 않는다. `MORPH-001C`와의 접합도 별도 measurement mapping 전에는 금지한다.
 
 ## 4. Dynamics v0.3 — 첫 descriptive transgression
 
-**상태: `PLANNED`**
+**상태: `PLANNED`; INTERP detached-lab integration은 별도 gate**
 
 한 사례만 구현한다.
 

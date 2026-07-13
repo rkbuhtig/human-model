@@ -365,6 +365,68 @@
       "notes": "Source IDs, proposal and state digests, snapshot identity, policy digest, comparison digest, and exact source-ledger validation provide internal consistency under the canonical builder. They are not electronic signatures or proof that a directly constructed self-consistent synthetic record describes an external fact."
     },
     {
+      "id": "HM-INV-012",
+      "kind": "INVARIANT",
+      "adoption_status": "ADOPTED",
+      "implementation_status": "UNIMPLEMENTED",
+      "statement": "Within any future INTERP detached lab, ReceptionState, TargetForm readouts, subjective encounter proxies, private traces, Ghost candidates, assembly candidates, adjudication receipts, and Episode integration artifacts may influence simulated access or interpretation but cannot create or strengthen EvidenceLink, certify source or target identity, rewrite a past occurrence or first-encounter receipt, or bypass a separate Narrative writer.",
+      "scope": [
+        "INTERP-001_detached_lab",
+        "influence_without_cross_domain_warrant"
+      ],
+      "exclusions": [
+        "current_dynamics_engine_support",
+        "human_empirical_validity",
+        "claim_that_subjective_influence_is_epiphenomenal"
+      ],
+      "depends_on": [
+        "HM-INV-001",
+        "HM-INV-006",
+        "HM-TYPE-008",
+        "HM-TYPE-009"
+      ],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "COUNTEREXAMPLE_TRACE",
+        "description": "Changing an INTERP reception, target-form, Ghost, assembly, adjudication, or integration fixture changes external evidence strength, certifies an unresolved source or target identity, mutates a past source or encounter receipt, creates a world occurrence, or performs a Narrative write without its separately declared writer path."
+      },
+      "notes": "This is an adopted future implementation boundary, not an implemented invariant of current main and not evidence that the proposed subjective dynamics describe humans."
+    },
+    {
+      "id": "HM-INV-013",
+      "kind": "INVARIANT",
+      "adoption_status": "ADOPTED",
+      "implementation_status": "UNIMPLEMENTED",
+      "statement": "A future INTERP access occurrence at processing or access ordinal k must form its encounter from pre-access ReceptionState and TargetForm snapshots; artifacts derived at k cannot affect formation of that same encounter and may become effective only at a strictly later access ordinal, while future events cannot rewrite the unchanged receipt prefix.",
+      "scope": [
+        "INTERP-001_detached_lab",
+        "ordinal_causality_and_prefix_stability"
+      ],
+      "exclusions": [
+        "wall_clock_next_tick_equivalence",
+        "current_dynamics_engine_support"
+      ],
+      "depends_on": [
+        "HM-TYPE-004",
+        "HM-TYPE-008",
+        "HM-TYPE-009"
+      ],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "COUNTEREXAMPLE_TRACE",
+        "description": "An encounter reads ReceptionState or TargetForm output produced by its own access ordinal, effective order is inferred only from a wall-clock timestamp despite same-time sequencing, or adding a later access or event changes an already emitted prefix artifact."
+      },
+      "notes": "Multiple access occurrences may share a canonical timestamp; processing_sequence or access_ordinal, not wall-clock time alone, defines the causal order."
+    },
+    {
       "id": "HM-TYPE-001",
       "kind": "TYPE",
       "adoption_status": "ADOPTED",
@@ -584,6 +646,67 @@
       "notes": "The code-level policy name denotes an explicit reducer-write simulation parameter. It does not implement the broader human-model AccommodationEnvelope or CapacityProfile in HM-TYPE-002."
     },
     {
+      "id": "HM-TYPE-008",
+      "kind": "TYPE",
+      "adoption_status": "ADOPTED",
+      "implementation_status": "UNIMPLEMENTED",
+      "statement": "A source occurrence, ObservationEvent or EvidenceLink, RFC-0002 current reexposure, detached CurrentAccessOccurrence, experimenter-defined SubjectiveEncounterFormProxy, private experience trace, and EpisodeMaterialReference are distinct candidate records or roles and cannot be freely cast into one another.",
+      "scope": [
+        "INTERP-001_subjective_encounter_lineage",
+        "detached_simulation_candidate_types"
+      ],
+      "exclusions": [
+        "actual_qualia_or_first_person_report",
+        "human_calibrated_mood_or_memory",
+        "external_source_or_target_identity_certification",
+        "current_runtime_implementation"
+      ],
+      "depends_on": [
+        "HM-TYPE-004",
+        "HM-TYPE-005"
+      ],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "INVALID_CONSTRUCTION",
+        "description": "A canonical construction aliases protocol redelivery or current reexposure with detached current access, casts a subjective encounter or private trace into external evidence, invents unknown source identity or time, or treats an EpisodeMaterialReference as the source occurrence itself."
+      },
+      "notes": "Adoption fixes the separation requirement only. All new INTERP artifacts remain unimplemented simulation candidates; SubjectiveEncounterFormProxy is not qualia, a first-person report, or a human measurement."
+    },
+    {
+      "id": "HM-TYPE-009",
+      "kind": "TYPE",
+      "adoption_status": "ADOPTED",
+      "implementation_status": "UNIMPLEMENTED",
+      "statement": "An assembly-independent EpisodeMaterialReference, AssemblyMaterialMembershipCandidate, EpisodeAssemblyCandidate, immutable InterpretiveBindingCandidate, append-only BindingAdjudicationReceipt, optional EpisodeIntegrationReceipt, authored Narrative Field write, and TargetFormReadout are distinct candidate artifacts or transitions and cannot be freely cast into one another.",
+      "scope": [
+        "INTERP-001_episode_integration_lineage",
+        "detached_simulation_candidate_types"
+      ],
+      "exclusions": [
+        "historical_episode_ontology_as_stable_canon",
+        "universal_narrative_writer",
+        "implicit_formation_elimination",
+        "current_runtime_implementation"
+      ],
+      "depends_on": [
+        "HM-TYPE-008"
+      ],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "INVALID_CONSTRUCTION",
+        "description": "An EpisodeMaterialReference depends on assembly identity while that assembly depends on the same material reference, membership is stored by mutating material, a candidate is mutated into its adjudication outcome, a rejected or deferred candidate is treated as a persistent binding, Ghost writes integration directly, Episode integration automatically writes Narrative, or TargetFormReadout is cast into an external target property or persistent state without a separate writer contract."
+      },
+      "notes": "Checkpoint 05-A's bare EpisodeMaterial/EpisodeAssembly/NarrativeBinding labels were synthesis candidates; RFC 0004 does not adopt those bare labels as implemented types or as one stable ontology recovered from every historical epoch. Authored Narrative gates do not eliminate endorsement-free implicit formation candidates."
+    },
+    {
       "id": "HM-DYN-001",
       "kind": "DYNAMICAL_HYPOTHESIS",
       "adoption_status": "PROPOSED",
@@ -640,6 +763,71 @@
         "type": "DISCRIMINATING_OBSERVATION",
         "description": "Across preregistered count-load dissociation and capacity-relative tests, typed demand and capacity add no held-out discrimination over a simpler transition-count model after complexity penalties."
       }
+    },
+    {
+      "id": "HM-DYN-003",
+      "kind": "DYNAMICAL_HYPOTHESIS",
+      "adoption_status": "PROPOSED",
+      "implementation_status": "UNIMPLEMENTED",
+      "statement": "In future manifest-frozen matched synthetic fixtures with external evidence held fixed, separately declared ReceptionState access and candidate-coherence profiles can produce different material-access subset or order, assembly, or adjudication capability patterns, including delayed participation of a preserved material reference after a later access occurrence, beyond a state-independent baseline.",
+      "scope": [
+        "INTERP-001_R0_R3_reception_mechanisms",
+        "synthetic_structural_discriminability_only"
+      ],
+      "exclusions": [
+        "universal_human_mood_congruence_law",
+        "predictive_superiority",
+        "actual_qualia_or_memory_mechanism",
+        "automatic_reprocessing_without_current_access"
+      ],
+      "depends_on": [
+        "HM-TYPE-008",
+        "HM-TYPE-009",
+        "HM-INV-012",
+        "HM-INV-013"
+      ],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "DISCRIMINATING_OBSERVATION",
+        "description": "After exact manifest freeze, R0 through R3 cannot produce the declared access-versus-coherence distinctions under matched evidence and exact-access-set controls, the apparent effect is only an expected-output label or scalar threshold alias, or a reception change without a current access occurrence rewrites past material."
+      },
+      "notes": "The exact executable operator/fixture manifest remains open. After it is frozen, the first benchmark remains a structural capability matrix because direction and policy fixtures are declared inputs. Predictive or human support requires an independent measurement mapping and held-out protocol."
+    },
+    {
+      "id": "HM-DYN-004",
+      "kind": "DYNAMICAL_HYPOTHESIS",
+      "adoption_status": "PROPOSED",
+      "implementation_status": "UNIMPLEMENTED",
+      "statement": "At matched source, evidence, material count and component magnitudes, future manifest-frozen assembly topology, an object-scoped prior TargetForm readout, and Ghost exploration path can create structural adjudication distinctions not reproduced by simple sums, fixed thresholds, or reception-only alternatives, subject to complexity and held-out evaluation before any predictive claim.",
+      "scope": [
+        "INTERP-001_I0_I4_interpretation_models",
+        "synthetic_structural_discriminability_then_future_prediction"
+      ],
+      "exclusions": [
+        "ghost_as_rationality_optimizer",
+        "target_form_as_external_target_truth",
+        "global_positive_or_negative_lens",
+        "human_predictive_support_from_fixture_reproduction"
+      ],
+      "depends_on": [
+        "HM-DYN-003",
+        "HM-INV-012",
+        "HM-INV-013"
+      ],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "DISCRIMINATING_OBSERVATION",
+        "description": "After exact manifest freeze, I3 or I4 makes no declared distinction beyond simpler count, threshold, access-only, or reception-only models; bridge or Ghost paths are selected after observing outcomes; TargetForm differences exist only through unproven direct answer injection; or future hidden-oracle and held-out evaluation shows no complexity-adjusted benefit."
+      },
+      "notes": "The exact executable operator/fixture manifest remains open. Structural fixture success after freeze does not establish prediction. Ghost may broaden, rehearse, moderate, reinforce, polarize, or leave candidates contested; no direction is defined as its universal objective."
     },
     {
       "id": "HM-MEAS-001",
@@ -788,6 +976,38 @@
         "description": "The declared field ranges, unit, source proposal identity, componentwise operator, or ordered write mapping cannot reproduce the proxy profile; storage clamp loss substitutes for the band comparison; direction is lost; repeated writes collapse; or a policy change is not identified by policy and receipt identity."
       },
       "notes": "The measurement identity is reducer-proposal-envelope-comparison@1.0.0. Policy bands are synthetic author-declared parameters. Internal reproducibility does not calibrate human accommodation, identify DeformationDemand, define ExcessDemand or MorphicLoad, or support HM-DYN-002."
+    },
+    {
+      "id": "HM-MEAS-005",
+      "kind": "MEASUREMENT_MODEL",
+      "adoption_status": "DRAFT",
+      "implementation_status": "UNIMPLEMENTED",
+      "statement": "Any future ReceptionStateSnapshot, SubjectiveEncounterFormProxy, or TargetFormReadout measurement model must declare non-cancelling component axes, scale or units, missingness, source and writer, interpreted-target and external-entity resolution, pre-access snapshot and effective ordinal, available information, model and policy digest, and calibration status before emitting comparable receipts.",
+      "scope": [
+        "INTERP-001_proxy_measurement_preconditions",
+        "detached_simulation_measurement_contract"
+      ],
+      "exclusions": [
+        "actual_qualia_measurement",
+        "human_mood_or_clinical_measurement",
+        "external_truth_or_identity_certification",
+        "cross_component_scalar_without_validation"
+      ],
+      "depends_on": [
+        "HM-TYPE-008",
+        "HM-TYPE-009",
+        "HM-INV-013"
+      ],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "CALIBRATION_OR_IDENTIFIABILITY_FAILURE",
+        "description": "A proxy omits axes, units or declared scale, missingness, writer, source resolution, pre-access snapshot, effective ordinal, policy digest, or calibration status; cancels positive and negative components into an unvalidated scalar; or is interpreted as actual qualia, measured mood, external identity, or human-calibrated TargetForm."
+      },
+      "notes": "INTERP-001A preregisters only declared ordinal simulation components. Their synthetic reproducibility does not identify a human latent variable."
     },
     {
       "id": "HM-META-001",

@@ -29,3 +29,9 @@ Contract mutant는 인간 모델 후보가 아니다. 반대로 descriptive mode
   `MORPH-001A`의 ordered proposal을 실험자가 선언한 asymmetric simulation band와
   componentwise로 비교한다. 출력은 read-only proxy profile이며 인간의 수용 능력,
   `ExcessDemand`, residual, load, 퀄리아 또는 정신 시간 측정값이 아니다.
+
+- [`INTERP-001` subjective encounter / delayed assembly / adjudication](interp-001-subjective-encounter-binding.md):
+  `DRAFT PREREGISTRATION`으로 외부 occurrence·Evidence, current access, experimenter-defined subjective encounter
+  proxy, Episode candidate, adjudication과 target-form readout을 분리한다. R0–R3,
+  I0–I4와 TF0–TF2의 structural capability matrix이며 predictive validation이나
+  인간 mood·memory·qualia evidence가 아니다.
