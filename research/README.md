@@ -57,6 +57,7 @@ assessment
 - [`claims/`](claims/): claim의 종류·범위·근거·실패 조건
 - [`defects/`](defects/): 당시 기록과 현재 해석을 분리한 결함 corpus
 - [`benchmarks/`](benchmarks/): 계약 mutation, 구조 ablation, 시간 비교 계획
+- [`scenarios/`](scenarios/): 현실 영역의 저자 생성 가상 scenario와 기능 관할 contrast 계약
 
 ## 목표 아키텍처
 
@@ -103,6 +104,20 @@ INTERP/MORPH 접합은 detached lab 판별 뒤에 남아 있다.
 `HM-DYN-001` predictive comparison은 독립적인 planned temporal-comparison 축이며
 `MORPH-001`의 선행 blocker가 아니다. `affect → SubjectiveBelief`는 독립 v0.3 축이고,
 `WarrantState`, 독립 주관 시계, 퀄리아–부하 대응식, 다른 기억 오귀속은 `HOLD`다.
+
+D1과 recursive D2 사이에는
+[`INTERP-DIALOGUE-001A`](adoption-records/2026-07-13-functional-jurisdiction-scenarios.md)
+기능 관할 gate를 둔다. 관찰·보고된 현상군을 기능 residence의 정답으로 취급하지 않고,
+관계·업무·위험이라는 현실 영역의 저자 생성 가상 scenario에서 한 declared factor만
+바꾸는 contrast를 등록한다. factor별 contract는 조작 source lane, public-record effect,
+고정 factor, `registered_candidate_probe_domains`, must-remain-equal 항목과 열린
+discriminator를 구분한다. 후보 domain은 비배타적 관측 목록이므로 목록 밖 효과는 fixture
+위반이 아니라 현재 기능 분해의 scope failure 또는 열린 결과다. exact trace field,
+signature, horizon과 명시적 out-of-model lane은 `001B`에서 동결한다. 단순 challenger는 표현력
+순위표가 아니라 alias·degeneracy control이다. 후속 순서는 scenario contract(A), trace
+oracle과 경쟁 기능 배치(B), 저자/도구 development pilot, human·latent·D2a protocol
+동결, 세 독립 실행, cross-source audit(C)다. 이 순서는 아직 human support, LLM latent
+측정, D2a runtime, durable TargetForm 또는 Narrative writer를 구현하지 않는다.
 
 ```text
 implemented Q-v1 receipt/count/density types
