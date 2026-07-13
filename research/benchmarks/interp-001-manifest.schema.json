@@ -1,0 +1,986 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rkbuhtig/human-model/research/benchmarks/interp-001-manifest.schema.json",
+  "title": "INTERP-001 frozen manifest envelope",
+  "oneOf": [
+    { "$ref": "#/$defs/executionEnvelope" },
+    { "$ref": "#/$defs/evaluationEnvelope" }
+  ],
+  "$defs": {
+    "token": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:@/-]*$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "gitSha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "tokenList": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/token" },
+      "uniqueItems": true
+    },
+    "componentValue": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "rank"],
+          "properties": {
+            "status": { "const": "present" },
+            "rank": { "type": "integer", "minimum": 0, "maximum": 2 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "reason"],
+          "properties": {
+            "status": { "const": "missing" },
+            "reason": {
+              "enum": [
+                "not_applicable",
+                "source_unresolved",
+                "not_declared_by_fixture",
+                "withheld_control",
+                "operator_undefined"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "receptionProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile_key",
+        "positive_direction_receptivity",
+        "negative_direction_receptivity",
+        "ambiguity_tolerance",
+        "exploration_bandwidth"
+      ],
+      "properties": {
+        "profile_key": { "$ref": "#/$defs/token" },
+        "positive_direction_receptivity": { "$ref": "#/$defs/componentValue" },
+        "negative_direction_receptivity": { "$ref": "#/$defs/componentValue" },
+        "ambiguity_tolerance": { "$ref": "#/$defs/componentValue" },
+        "exploration_bandwidth": { "$ref": "#/$defs/componentValue" }
+      }
+    },
+    "encounterProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile_key",
+        "positive_direction_fit",
+        "negative_direction_fit",
+        "ambiguity",
+        "activation"
+      ],
+      "properties": {
+        "profile_key": { "$ref": "#/$defs/token" },
+        "positive_direction_fit": { "$ref": "#/$defs/componentValue" },
+        "negative_direction_fit": { "$ref": "#/$defs/componentValue" },
+        "ambiguity": { "$ref": "#/$defs/componentValue" },
+        "activation": { "$ref": "#/$defs/componentValue" }
+      }
+    },
+    "sourceOccurrence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["occurrence_key", "evidence_projection_key"],
+      "properties": {
+        "occurrence_key": { "$ref": "#/$defs/token" },
+        "evidence_projection_key": { "$ref": "#/$defs/token" }
+      }
+    },
+    "evidenceProjection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["projection_key", "content_tokens_ordered"],
+      "properties": {
+        "projection_key": { "$ref": "#/$defs/token" },
+        "content_tokens_ordered": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/token" }
+        }
+      }
+    },
+    "material": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "material_key",
+        "source_occurrence_key",
+        "source_encounter_profile_key",
+        "source_order",
+        "relevant"
+      ],
+      "properties": {
+        "material_key": { "$ref": "#/$defs/token" },
+        "source_occurrence_key": { "$ref": "#/$defs/token" },
+        "source_encounter_profile_key": { "$ref": "#/$defs/token" },
+        "source_order": { "type": "integer", "minimum": 0 },
+        "relevant": { "type": "boolean" }
+      }
+    },
+    "topologyEdge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["left_material_key", "right_material_key", "strength"],
+      "properties": {
+        "left_material_key": { "$ref": "#/$defs/token" },
+        "right_material_key": { "$ref": "#/$defs/token" },
+        "strength": { "$ref": "#/$defs/componentValue" }
+      }
+    },
+    "topology": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["topology_key", "edges"],
+      "properties": {
+        "topology_key": { "$ref": "#/$defs/token" },
+        "edges": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/topologyEdge" }
+        }
+      }
+    },
+    "accessPresent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "present",
+        "access_key",
+        "access_ordinal",
+        "current_occurrence_key",
+        "current_delivery_key",
+        "trigger_mode",
+        "source_resolution_status",
+        "source_material_keys_ordered"
+      ],
+      "properties": {
+        "present": { "const": true },
+        "access_key": { "$ref": "#/$defs/token" },
+        "access_ordinal": { "type": "integer", "minimum": 1 },
+        "current_occurrence_key": { "$ref": "#/$defs/token" },
+        "current_delivery_key": { "$ref": "#/$defs/token" },
+        "trigger_mode": {
+          "enum": ["current_encounter", "protocol_reexposure", "invoked", "spontaneous"]
+        },
+        "source_resolution_status": { "enum": ["resolved", "claimed", "unknown"] },
+        "source_material_keys_ordered": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/token" },
+          "uniqueItems": true
+        },
+        "reaccess_of_access_key": { "$ref": "#/$defs/token" },
+        "reexposure_of_occurrence_key": { "$ref": "#/$defs/token" }
+      }
+    },
+    "accessAbsent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["present"],
+      "properties": {
+        "present": { "const": false }
+      }
+    },
+    "protocolStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["step", "reception_profile_key", "topology_key", "access"],
+      "properties": {
+        "step": { "type": "integer", "minimum": 1 },
+        "reception_profile_key": { "$ref": "#/$defs/token" },
+        "topology_key": { "$ref": "#/$defs/token" },
+        "transport_redelivery": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "occurrence_key",
+            "delivery_key",
+            "redelivery_of_delivery_key",
+            "canonical_payload_unchanged"
+          ],
+          "properties": {
+            "occurrence_key": { "$ref": "#/$defs/token" },
+            "delivery_key": { "$ref": "#/$defs/token" },
+            "redelivery_of_delivery_key": { "$ref": "#/$defs/token" },
+            "canonical_payload_unchanged": { "const": true }
+          }
+        },
+        "access": {
+          "oneOf": [
+            { "$ref": "#/$defs/accessPresent" },
+            { "$ref": "#/$defs/accessAbsent" }
+          ]
+        }
+      }
+    },
+    "fixture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fixture_key",
+        "fixture_version",
+        "isolated_ledger_key",
+        "actor_key",
+        "interpreted_target_scope_key",
+        "target_form_fixture_key",
+        "ghost_fixture_key",
+        "protocol_steps"
+      ],
+      "properties": {
+        "fixture_key": { "$ref": "#/$defs/token" },
+        "fixture_version": { "const": "1.0.0" },
+        "isolated_ledger_key": { "$ref": "#/$defs/token" },
+        "actor_key": { "$ref": "#/$defs/token" },
+        "interpreted_target_scope_key": { "$ref": "#/$defs/token" },
+        "target_form_fixture_key": { "$ref": "#/$defs/token" },
+        "ghost_fixture_key": { "$ref": "#/$defs/token" },
+        "protocol_steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/protocolStep" }
+        }
+      }
+    },
+    "operator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operator_id",
+        "operator_version",
+        "kind",
+        "opcode",
+        "input_view_id",
+        "allowed_input_paths",
+        "ordered_operator_refs",
+        "parameters",
+        "missing_policy",
+        "tie_break_policy",
+        "randomness_policy"
+      ],
+      "properties": {
+        "operator_id": { "$ref": "#/$defs/token" },
+        "operator_version": { "const": "1.0.0" },
+        "kind": { "$ref": "#/$defs/token" },
+        "opcode": {
+          "enum": [
+            "componentwise_max_or_neutral",
+            "filter_activation_threshold",
+            "filter_activation_override_or_direction_match",
+            "connected_components_min_nodes",
+            "componentwise_directional_max",
+            "base_direction_eligibility",
+            "reception_direction_eligibility_with_strong_override",
+            "direction_set_adjudication",
+            "adopted_only_integration",
+            "first_pair_assembly_ignition",
+            "adopted_integration_binding_ignition"
+          ]
+        },
+        "input_view_id": { "type": "string", "pattern": "^iv0(0[1-9]|1[01])$" },
+        "allowed_input_paths": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^/resolved_operator_input/" },
+          "uniqueItems": true
+        },
+        "ordered_operator_refs": { "$ref": "#/$defs/tokenList" },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "oneOf": [
+              { "type": "string" },
+              { "type": "integer" },
+              { "type": "boolean" },
+              {
+                "type": "array",
+                "items": {
+                  "oneOf": [
+                    { "type": "string" },
+                    { "type": "integer" },
+                    { "type": "boolean" }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "missing_policy": { "enum": ["reject_cell", "propagate_missing"] },
+        "tie_break_policy": { "enum": ["preserve_declared_order", "stable_semantic_key", "not_applicable"] },
+        "randomness_policy": { "const": "none" }
+      }
+    },
+    "operatorInputField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["field_id", "value_kind", "operator_use"],
+      "properties": {
+        "field_id": { "$ref": "#/$defs/token" },
+        "value_kind": { "$ref": "#/$defs/token" },
+        "operator_use": { "enum": ["inspect", "pass_through_only"] }
+      }
+    },
+    "operatorInputView": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["view_id", "view_version", "fields", "forbidden_fields"],
+      "properties": {
+        "view_id": { "type": "string", "pattern": "^iv0(0[1-9]|1[01])$" },
+        "view_version": { "const": "1.0.0" },
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/operatorInputField" }
+        },
+        "forbidden_fields": { "$ref": "#/$defs/tokenList" }
+      }
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "model_id",
+        "model_version",
+        "family",
+        "ordered_operator_refs",
+        "allowed_input_paths",
+        "emitted_artifact_kinds",
+        "ablation_parent_model_ids",
+        "complexity_rank",
+        "semantic_view_version",
+        "determinism",
+        "randomness_policy"
+      ],
+      "properties": {
+        "model_id": { "enum": ["R0", "R1", "R2", "R3"] },
+        "model_version": { "const": "1.0.0" },
+        "family": { "const": "reception" },
+        "ordered_operator_refs": { "$ref": "#/$defs/tokenList" },
+        "allowed_input_paths": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^/resolved_operator_input_view/iv0(0[1-9]|1[01])$" },
+          "uniqueItems": true
+        },
+        "emitted_artifact_kinds": { "$ref": "#/$defs/tokenList" },
+        "ablation_parent_model_ids": {
+          "type": "array",
+          "items": { "enum": ["R0", "R1", "R2"] },
+          "uniqueItems": true
+        },
+        "complexity_rank": { "type": "integer", "minimum": 0, "maximum": 2 },
+        "semantic_view_version": { "const": "semantic-comparison-view@1" },
+        "determinism": { "const": "deterministic" },
+        "randomness_policy": { "const": "none" }
+      }
+    },
+    "documentRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["document_id", "path", "content_sha256"],
+      "properties": {
+        "document_id": { "$ref": "#/$defs/token" },
+        "path": { "type": "string", "minLength": 1 },
+        "content_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "canonicalization_id", "manifest_sha256", "contract_sha256"],
+      "properties": {
+        "algorithm": { "const": "sha256" },
+        "canonicalization_id": { "const": "interp-canonical-json-v1" },
+        "manifest_sha256": { "$ref": "#/$defs/sha256" },
+        "contract_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "executionEnvelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["$schema", "manifest", "integrity"],
+      "properties": {
+        "$schema": { "const": "./interp-001-manifest.schema.json" },
+        "manifest": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "manifest_kind",
+            "schema_version",
+            "manifest_id",
+            "manifest_version",
+            "status",
+            "frozen_at",
+            "implementation_base_revision",
+            "governing_documents",
+            "canonicalization_contract",
+            "no_retuning_rule",
+            "execution_contract"
+          ],
+          "properties": {
+            "manifest_kind": { "const": "execution" },
+            "schema_version": { "const": "1.0.0" },
+            "manifest_id": { "const": "INTERP-001A2-M1-EXECUTION" },
+            "manifest_version": { "const": "1.0.0" },
+            "status": { "const": "FROZEN_UNEXECUTED" },
+            "frozen_at": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$" },
+            "implementation_base_revision": { "$ref": "#/$defs/gitSha" },
+            "governing_documents": {
+              "type": "array",
+              "minItems": 2,
+              "items": { "$ref": "#/$defs/documentRef" }
+            },
+            "canonicalization_contract": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["canonicalization_id", "encoding", "rules"],
+              "properties": {
+                "canonicalization_id": { "const": "interp-canonical-json-v1" },
+                "encoding": { "const": "UTF-8" },
+                "rules": {
+                  "type": "array",
+                  "minItems": 8,
+                  "items": { "type": "string", "minLength": 1 },
+                  "uniqueItems": true
+                }
+              }
+            },
+            "no_retuning_rule": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "rule_id",
+                "post_freeze_change_requires",
+                "prior_run_preservation",
+                "predecessor_status",
+                "immutable_versioned_filename_required",
+                "successor_required_fields"
+              ],
+              "properties": {
+                "rule_id": { "const": "version-bump-required-after-freeze" },
+                "post_freeze_change_requires": { "const": "new-manifest-version-and-digest" },
+                "prior_run_preservation": { "const": true },
+                "predecessor_status": { "const": "none_initial_version" },
+                "immutable_versioned_filename_required": { "const": true },
+                "successor_required_fields": {
+                  "const": [
+                    "supersedes_manifest_id",
+                    "supersedes_manifest_version",
+                    "supersedes_manifest_sha256"
+                  ]
+                }
+              }
+            },
+            "execution_contract": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "scope",
+                "unit_definition",
+                "axis_definitions",
+                "fixed_factors",
+                "reception_profiles",
+                "source_encounter_profiles",
+                "evidence_projections",
+                "source_occurrences",
+                "materials",
+                "topologies",
+                "identity_contracts",
+                "operator_input_views",
+                "operator_declarations",
+                "model_declarations",
+                "fixture_declarations",
+                "execution_matrix",
+                "missingness_contract",
+                "phase_contract",
+                "prior_prefix_contract",
+                "output_guard_contract",
+                "semantic_comparison_view",
+                "non_outputs"
+              ],
+              "properties": {
+                "scope": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["isolated_effects", "fixed_effects", "execution_status", "evaluation_kind", "human_empirical_status"],
+                  "properties": {
+                    "isolated_effects": { "$ref": "#/$defs/tokenList" },
+                    "fixed_effects": { "$ref": "#/$defs/tokenList" },
+                    "execution_status": { "const": "not_executed" },
+                    "evaluation_kind": { "const": "synthetic_structural_capability" },
+                    "human_empirical_status": { "const": "not_tested" }
+                  }
+                },
+                "unit_definition": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["unit_id", "allowed_ranks", "allowed_operations", "forbidden_operations", "missing_value_encoding"],
+                  "properties": {
+                    "unit_id": { "const": "declared_ordinal_simulation_component" },
+                    "allowed_ranks": { "const": [0, 1, 2] },
+                    "allowed_operations": { "$ref": "#/$defs/tokenList" },
+                    "forbidden_operations": { "$ref": "#/$defs/tokenList" },
+                    "missing_value_encoding": { "const": "tagged_union_only" }
+                  }
+                },
+                "axis_definitions": {
+                  "type": "array",
+                  "minItems": 8,
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": ["profile_kind", "axis_id", "unit_id", "aggregation"],
+                    "properties": {
+                      "profile_kind": { "enum": ["reception_state", "subjective_encounter_form_proxy"] },
+                      "axis_id": { "$ref": "#/$defs/token" },
+                      "unit_id": { "const": "declared_ordinal_simulation_component" },
+                      "aggregation": { "const": "no_cross_axis_cancellation" }
+                    }
+                  }
+                },
+                "fixed_factors": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["target_form", "ghost", "encounter_formation", "topology_generation"],
+                  "properties": {
+                    "target_form": { "$ref": "#/$defs/fixedFactor" },
+                    "ghost": { "$ref": "#/$defs/fixedFactor" },
+                    "encounter_formation": { "$ref": "#/$defs/fixedFactor" },
+                    "topology_generation": { "$ref": "#/$defs/fixedFactor" }
+                  }
+                },
+                "reception_profiles": { "type": "array", "items": { "$ref": "#/$defs/receptionProfile" }, "minItems": 3 },
+                "source_encounter_profiles": { "type": "array", "items": { "$ref": "#/$defs/encounterProfile" }, "minItems": 5 },
+                "evidence_projections": { "type": "array", "items": { "$ref": "#/$defs/evidenceProjection" }, "minItems": 1 },
+                "source_occurrences": { "type": "array", "items": { "$ref": "#/$defs/sourceOccurrence" }, "minItems": 1 },
+                "materials": { "type": "array", "items": { "$ref": "#/$defs/material" }, "minItems": 8 },
+                "topologies": { "type": "array", "items": { "$ref": "#/$defs/topology" }, "minItems": 7 },
+                "identity_contracts": { "$ref": "#/$defs/identityContracts" },
+                "operator_input_views": { "type": "array", "items": { "$ref": "#/$defs/operatorInputView" }, "minItems": 11, "maxItems": 11 },
+                "operator_declarations": { "type": "array", "items": { "$ref": "#/$defs/operator" }, "minItems": 11 },
+                "model_declarations": { "type": "array", "items": { "$ref": "#/$defs/model" }, "minItems": 4, "maxItems": 4 },
+                "fixture_declarations": { "type": "array", "items": { "$ref": "#/$defs/fixture" }, "minItems": 16 },
+                "execution_matrix": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["matrix_kind", "cell_key_template", "fixture_keys", "model_ids"],
+                  "properties": {
+                    "matrix_kind": { "const": "cartesian_product" },
+                    "cell_key_template": { "const": "{fixture_key}:{model_id}" },
+                    "fixture_keys": { "$ref": "#/$defs/tokenList" },
+                    "model_ids": { "const": ["R0", "R1", "R2", "R3"] }
+                  }
+                },
+                "missingness_contract": { "$ref": "#/$defs/missingnessContract" },
+                "phase_contract": { "$ref": "#/$defs/phaseContract" },
+                "prior_prefix_contract": { "$ref": "#/$defs/priorPrefixContract" },
+                "output_guard_contract": { "$ref": "#/$defs/outputGuardContract" },
+                "semantic_comparison_view": { "$ref": "#/$defs/semanticView" },
+                "non_outputs": { "$ref": "#/$defs/tokenList" }
+              }
+            }
+          }
+        },
+        "integrity": { "$ref": "#/$defs/integrity" }
+      }
+    },
+    "fixedFactor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fixture_key", "version", "operation", "reception_contribution"],
+      "properties": {
+        "fixture_key": { "$ref": "#/$defs/token" },
+        "version": { "const": "1.0.0" },
+        "operation": { "$ref": "#/$defs/token" },
+        "reception_contribution": { "const": "none" }
+      }
+    },
+    "identityContracts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["manifest_keys", "assembly_candidate", "membership", "semantic_normalization"],
+      "properties": {
+        "manifest_keys": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["stable_aliases_only", "runtime_artifact_ids_forbidden"],
+          "properties": {
+            "stable_aliases_only": { "const": true },
+            "runtime_artifact_ids_forbidden": { "const": true }
+          }
+        },
+        "assembly_candidate": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "identity_model_id",
+            "identity_model_version",
+            "ordered_payload_fields",
+            "membership_spec_fields",
+            "role_enum",
+            "assembly_operator_binding",
+            "topology_normalization",
+            "constraints"
+          ],
+          "properties": {
+            "identity_model_id": { "$ref": "#/$defs/token" },
+            "identity_model_version": { "const": "1.0.0" },
+            "ordered_payload_fields": { "$ref": "#/$defs/tokenList" },
+            "membership_spec_fields": { "const": ["material_ref_id", "role", "order"] },
+            "role_enum": { "const": ["member"] },
+            "assembly_operator_binding": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["selected_operator_id", "declaration_digest_boundary"],
+              "properties": {
+                "selected_operator_id": { "const": "op004" },
+                "declaration_digest_boundary": { "const": "canonical_full_operator_declaration" }
+              }
+            },
+            "topology_normalization": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["edge_direction", "endpoint_order", "edge_order", "duplicates", "reversed_duplicates"],
+              "properties": {
+                "edge_direction": { "const": "undirected" },
+                "endpoint_order": { "const": "ascending_membership_order" },
+                "edge_order": { "const": "lexicographic_left_right_strength" },
+                "duplicates": { "const": "reject" },
+                "reversed_duplicates": { "const": "reject" }
+              }
+            },
+            "constraints": { "$ref": "#/$defs/tokenList" }
+          }
+        },
+        "membership": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["identity_model_id", "identity_model_version", "ordered_payload_fields"],
+          "properties": {
+            "identity_model_id": { "$ref": "#/$defs/token" },
+            "identity_model_version": { "const": "1.0.0" },
+            "ordered_payload_fields": { "$ref": "#/$defs/tokenList" }
+          }
+        },
+        "semantic_normalization": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["requires_recorded_provenance", "untraceable_runtime_id", "preserve_semantic_order", "sort_true_sets_only"],
+          "properties": {
+            "requires_recorded_provenance": { "const": true },
+            "untraceable_runtime_id": { "const": "error" },
+            "preserve_semantic_order": { "const": true },
+            "sort_true_sets_only": { "const": true }
+          }
+        }
+      }
+    },
+    "semanticView": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["view_id", "result_schema_path", "semantic_root", "ordered_fields", "true_set_paths", "excluded_fields"],
+      "properties": {
+        "view_id": { "const": "semantic-comparison-view@1" },
+        "result_schema_path": { "const": "research/benchmarks/interp-001-m1-v1-result.schema.json" },
+        "semantic_root": { "const": "/steps/*/semantic" },
+        "ordered_fields": { "$ref": "#/$defs/tokenList" },
+        "true_set_paths": { "const": ["/semantic/binding_candidates/*/eligible_directions"] },
+        "excluded_fields": { "$ref": "#/$defs/tokenList" }
+      }
+    },
+    "missingnessContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["missing_reason_precedence", "componentwise_propagation", "zero_imputation", "axis_skipping"],
+      "properties": {
+        "missing_reason_precedence": {
+          "const": [
+            "source_unresolved",
+            "withheld_control",
+            "not_declared_by_fixture",
+            "operator_undefined",
+            "not_applicable"
+          ]
+        },
+        "componentwise_propagation": { "const": "any_missing_input_on_axis_yields_highest_precedence_missing_reason_on_same_output_axis" },
+        "zero_imputation": { "const": "forbidden" },
+        "axis_skipping": { "const": "forbidden" }
+      }
+    },
+    "phaseContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["phase_order", "present_access_invocation", "absent_access_invocation", "back_edges", "reentry"],
+      "properties": {
+        "phase_order": {
+          "const": [
+            "encounter_formation",
+            "access_selection",
+            "episode_assembly",
+            "candidate_profile",
+            "candidate_coherence",
+            "binding_adjudication",
+            "episode_integration",
+            "ignition_projection"
+          ]
+        },
+        "present_access_invocation": { "const": "each_active_model_operator_exactly_once" },
+        "absent_access_invocation": { "const": "all_active_model_operator_invocation_counts_zero" },
+        "back_edges": { "const": "forbidden" },
+        "reentry": { "const": "forbidden_within_access_ordinal" }
+      }
+    },
+    "priorPrefixContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pair_basis", "included_assemblies", "cell_isolation", "redelivery_effect", "append_timing"],
+      "properties": {
+        "pair_basis": { "const": "unordered_source_material_lineage_pair" },
+        "included_assemblies": { "const": "all_emitted_episode_assembly_candidates_regardless_of_adjudication" },
+        "cell_isolation": { "const": "per_fixture_model_cell" },
+        "redelivery_effect": { "const": "none" },
+        "append_timing": { "const": "after_current_access_step_completes" }
+      }
+    },
+    "outputGuardContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["result_schema_path", "guard_ledger_names", "required_relation"],
+      "properties": {
+        "result_schema_path": { "const": "research/benchmarks/interp-001-m1-v1-result.schema.json" },
+        "guard_ledger_names": {
+          "const": [
+            "action_occurrences",
+            "authority_outputs",
+            "evidence_assessment",
+            "evidence_links",
+            "narrative_writes",
+            "observation_artifacts",
+            "source_encounters",
+            "source_materials",
+            "source_occurrences",
+            "world_outcomes"
+          ]
+        },
+        "required_relation": { "const": "before_sha256_equals_after_sha256_and_delta_count_zero_for_every_step" }
+      }
+    },
+    "predicateDeclaration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["predicate_id", "predicate_version", "minimum_arity", "maximum_arity", "operand_kinds", "opcode_semantics"],
+      "properties": {
+        "predicate_id": { "$ref": "#/$defs/token" },
+        "predicate_version": { "const": "1.0.0" },
+        "minimum_arity": { "type": "integer", "minimum": 1 },
+        "maximum_arity": { "type": "integer", "minimum": 1 },
+        "operand_kinds": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/token" },
+          "minItems": 1
+        },
+        "opcode_semantics": { "type": "string", "minLength": 1 }
+      }
+    },
+    "expectedRelation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "predicate", "value"],
+      "properties": {
+        "path": { "type": "string", "pattern": "^/semantic/" },
+        "predicate": {
+          "enum": ["eq", "list_eq", "set_eq", "count_eq", "all_supplied", "none_supplied", "prefix_eq", "same_as_fixture", "same_source_lineage", "distinct_from_prior"]
+        },
+        "value": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "integer" },
+            { "type": "boolean" },
+            {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  { "type": "string" },
+                  { "type": "integer" },
+                  { "type": "boolean" }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["signature_id", "expected_relations"],
+      "properties": {
+        "signature_id": { "$ref": "#/$defs/token" },
+        "expected_relations": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/expectedRelation" }
+        }
+      }
+    },
+    "cellAssertion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fixture_key", "expected_by_model"],
+      "properties": {
+        "fixture_key": { "$ref": "#/$defs/token" },
+        "expected_by_model": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["R0", "R1", "R2", "R3"],
+          "properties": {
+            "R0": { "$ref": "#/$defs/tokenList" },
+            "R1": { "$ref": "#/$defs/tokenList" },
+            "R2": { "$ref": "#/$defs/tokenList" },
+            "R3": { "$ref": "#/$defs/tokenList" }
+          }
+        }
+      }
+    },
+    "namedAssertion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["assertion_id", "predicate", "operands"],
+      "properties": {
+        "assertion_id": { "$ref": "#/$defs/token" },
+        "predicate": { "$ref": "#/$defs/token" },
+        "operands": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              { "type": "string" },
+              { "type": "integer" },
+              { "type": "boolean" }
+            ]
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "evaluationEnvelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["$schema", "manifest", "integrity"],
+      "properties": {
+        "$schema": { "const": "./interp-001-manifest.schema.json" },
+        "manifest": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "manifest_kind",
+            "schema_version",
+            "manifest_id",
+            "manifest_version",
+            "status",
+            "frozen_at",
+            "execution_manifest_sha256",
+            "canonicalization_id",
+            "evaluation_contract"
+          ],
+          "properties": {
+            "manifest_kind": { "const": "evaluation" },
+            "schema_version": { "const": "1.0.0" },
+            "manifest_id": { "const": "INTERP-001A2-M1-EVALUATION" },
+            "manifest_version": { "const": "1.0.0" },
+            "status": { "const": "FROZEN_UNEXECUTED" },
+            "frozen_at": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$" },
+            "execution_manifest_sha256": { "$ref": "#/$defs/sha256" },
+            "canonicalization_id": { "const": "interp-canonical-json-v1" },
+            "evaluation_contract": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "evaluation_kind",
+                "human_empirical_status",
+                "predicate_language_version",
+                "predicate_declarations",
+                "closed_world_signatures",
+                "runner_visibility",
+                "evaluator_aliases",
+                "lineage_normalization",
+                "mirror_relations",
+                "semantic_signatures",
+                "cell_assertions",
+                "pair_assertions",
+                "matrix_assertions",
+                "global_invariants",
+                "retirement_rules",
+                "report_disclaimers"
+              ],
+              "properties": {
+                "evaluation_kind": { "const": "synthetic_structural_conformance" },
+                "human_empirical_status": { "const": "not_tested" },
+                "predicate_language_version": { "const": "1.0.0" },
+                "predicate_declarations": { "type": "array", "items": { "$ref": "#/$defs/predicateDeclaration" }, "minItems": 10 },
+                "closed_world_signatures": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["unspecified_field_policy", "default_relations", "override_rule"],
+                  "properties": {
+                    "unspecified_field_policy": { "const": "apply_default_relations" },
+                    "default_relations": { "type": "array", "items": { "$ref": "#/$defs/expectedRelation" }, "minItems": 16 },
+                    "override_rule": { "const": "signature_relation_replaces_all_defaults_for_same_top_level_field" }
+                  }
+                },
+                "runner_visibility": { "const": "forbidden" },
+                "lineage_normalization": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "current_occurrence_role",
+                    "source_occurrence_role",
+                    "reexposure_role",
+                    "sign_mirror_rule",
+                    "order_mirror_rule",
+                    "raw_cross_ledger_key_equality"
+                  ],
+                  "properties": {
+                    "current_occurrence_role": { "const": "fixture_local_access_ordinal" },
+                    "source_occurrence_role": { "const": "source_material_position" },
+                    "reexposure_role": { "const": "prior_current_occurrence_ordinal" },
+                    "sign_mirror_rule": { "const": "compare_role_graph_after_direction_swap" },
+                    "order_mirror_rule": { "const": "reverse_source_positions_with_material_order" },
+                    "raw_cross_ledger_key_equality": { "const": "forbidden" }
+                  }
+                },
+                "evaluator_aliases": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": ["semantic_key", "alias"],
+                    "properties": {
+                      "semantic_key": { "$ref": "#/$defs/token" },
+                      "alias": { "$ref": "#/$defs/token" }
+                    }
+                  }
+                },
+                "mirror_relations": { "type": "array", "items": { "$ref": "#/$defs/namedAssertion" }, "minItems": 8 },
+                "semantic_signatures": { "type": "array", "items": { "$ref": "#/$defs/signature" }, "minItems": 10 },
+                "cell_assertions": { "type": "array", "items": { "$ref": "#/$defs/cellAssertion" }, "minItems": 16 },
+                "pair_assertions": { "type": "array", "items": { "$ref": "#/$defs/namedAssertion" }, "minItems": 8 },
+                "matrix_assertions": { "type": "array", "items": { "$ref": "#/$defs/namedAssertion" }, "minItems": 4 },
+                "global_invariants": { "type": "array", "items": { "$ref": "#/$defs/namedAssertion" }, "minItems": 8 },
+                "retirement_rules": { "type": "array", "items": { "$ref": "#/$defs/namedAssertion" }, "minItems": 4 },
+                "report_disclaimers": { "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 3, "uniqueItems": true }
+              }
+            }
+          }
+        },
+        "integrity": { "$ref": "#/$defs/integrity" }
+      }
+    }
+  }
+}

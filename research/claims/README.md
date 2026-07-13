@@ -39,6 +39,8 @@ npx --yes ajv-cli validate --spec=draft2020 \
 `INTERP-001A`는 subjective/current-access/Episode-candidate/adjudication/readout
 경계를 신규 `ADOPTED / UNIMPLEMENTED` type·invariant로, reception·assembly·target
 form의 방향성은 `PROPOSED / UNIMPLEMENTED` dynamical hypothesis로 등록한다.
+`INTERP-001A2`의 frozen/unexecuted M1 manifest와 validator tests는 hypothesis 결과가
+아니라 향후 R0–R3 runner의 사전등록·입력권한·expectation 격리를 검증한다.
 `HM-MEAS-005`는 proxy component, 단위, missingness, source/writer, snapshot과
 calibration status가 정의되기 전 구현할 수 없는 `DRAFT` measurement contract다.
 이 등록은 역사적 Episode ontology의 정본화, mood-congruent ignition의 인간 법칙,

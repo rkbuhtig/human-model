@@ -5,7 +5,7 @@
 | Date | 2026-07-13 |
 | Source | 사용자 주도 이론 보정과 Chapter 02 / Interchapter Note 03-A / Checkpoint 05-A 기능 경계 대조 |
 | Decision | `ADOPTED WITH REVISIONS` |
-| Implementation | `INTERP-001A` terminology/lineage boundary `DOCUMENTED`; operator/fixture manifest `DRAFT`; detached lab과 runtime integration `UNIMPLEMENTED` |
+| Implementation | `INTERP-001A` boundary `DOCUMENTED`; `INTERP-001A2` reception M1 manifest `FROZEN / UNEXECUTED`; broader manifest, detached lab과 runtime integration `UNIMPLEMENTED` |
 | Human-empirical status | `OPEN` |
 
 `ADOPTED`는 연구 방향과 금지 등식을 채택한다는 뜻이다. 실제 인간의 퀄리아,
@@ -21,7 +21,7 @@
 | I-A-04 | 과거 material의 현재 재접근은 별도 access occurrence이며 과거 occurrence, 최초 encounter receipt와 EvidenceLink를 다시 쓰지 않는다. | provenance 방향 `ADOPTED` |
 | I-A-05 | Ghost는 interpretation candidate를 생성·탐색하지만 scoped adjudication, Episode integration, Narrative write 또는 external truth를 인증하지 않는다. | 방향 `ADOPTED` |
 | I-A-06 | 대상 형태는 전역 긍정·부정 lens가 아니라 actor, interpreted-target, relation/context scope에 한정된 readout 후보로 시작한다. | `HOLD / TYPE CANDIDATE` |
-| I-A-07 | 같은 event/material 수·크기에서 access, assembly topology, reception profile과 탐색 경로가 단순 합·threshold와 다른 구조 구분을 만드는지 비교한다. | hypothesis `PROPOSED`; exact operator/fixture manifest `DRAFT` |
+| I-A-07 | 같은 event/material 수·크기에서 access, assembly topology, reception profile과 탐색 경로가 단순 합·threshold와 다른 구조 구분을 만드는지 비교한다. | hypothesis `PROPOSED`; reception access/coherence M1 manifest `FROZEN / UNEXECUTED`; broader manifest `OPEN` |
 
 ## Revise
 

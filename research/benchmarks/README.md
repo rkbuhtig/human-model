@@ -31,7 +31,9 @@ Contract mutant는 인간 모델 후보가 아니다. 반대로 descriptive mode
   `ExcessDemand`, residual, load, 퀄리아 또는 정신 시간 측정값이 아니다.
 
 - [`INTERP-001` subjective encounter / delayed assembly / adjudication](interp-001-subjective-encounter-binding.md):
-  `DRAFT PREREGISTRATION`으로 외부 occurrence·Evidence, current access, experimenter-defined subjective encounter
-  proxy, Episode candidate, adjudication과 target-form readout을 분리한다. R0–R3,
-  I0–I4와 TF0–TF2의 structural capability matrix이며 predictive validation이나
-  인간 mood·memory·qualia evidence가 아니다.
+  외부 occurrence·Evidence, current access, experimenter-defined subjective encounter
+  proxy, Episode candidate, adjudication과 target-form readout을 분리한다. `INTERP-001A2`
+  M1은 R0–R3 reception access/coherence의 schema, execution/evaluation manifest와
+  64-cell expectation을 `FROZEN / UNEXECUTED`로 둔다. I0–I4와 TF0–TF2의 broader
+  manifest는 여전히 open이며 predictive validation이나 인간 mood·memory·qualia
+  evidence가 아니다.

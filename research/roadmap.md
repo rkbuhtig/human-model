@@ -246,7 +246,7 @@ access와 interpretive integration 경계를 먼저 분리한다. 그 전에는
 
 ## 3C. `INTERP-001` — Subjective Encounter and Interpretive Reorganization
 
-**상태: `INTERP-001A BOUNDARY DOCUMENTED; OPERATOR/FIXTURE MANIFEST DRAFT; CODE UNIMPLEMENTED` — RFC 0004**
+**상태: `INTERP-001A BOUNDARY DOCUMENTED; INTERP-001A2 M1 MANIFEST FROZEN / UNEXECUTED; RUNNER UNIMPLEMENTED` — RFC 0004**
 
 ```text
 ExternalOccurrence / CurrentAccessOccurrence
@@ -261,15 +261,16 @@ ExternalOccurrence / CurrentAccessOccurrence
 ≠ TargetFormReadout
 ```
 
-현재 slice는 역사적 기능 경계와 현행 synthesis를 구분하고, 신규 candidate의
-identity·writer·persistence·effective order, 금지 cast, R0–R3 / I0–I4 / TF0–TF2
-경쟁 모델과 폐기 조건을 문서로 고정한다. Dynamics code, HumanState, Narrative writer와
-새 runtime behavior는 변경하지 않는다.
+현재 boundary slice는 역사적 기능 경계와 현행 synthesis를 구분하고, 신규 candidate의
+identity·writer·persistence·effective order와 금지 cast를 문서로 고정한다.
+`INTERP-001A2`는 그중 reception→access와 reception→candidate-coherence만 R0–R3,
+16 mirrored fixtures, 64 cells와 별도 execution/evaluation manifest로 동결했다.
+Dynamics code, HumanState, Narrative writer와 새 runtime behavior는 변경하지 않는다.
 
 후속 detached lab은 다음 순서로만 연다.
 
-1. `INTERP-001B`: pre-access snapshots에서 subjective encounter proxy와 material ref를 파생
-2. `INTERP-001C`: reception-conditioned access, assembly candidate와 scoped adjudication
+1. `INTERP-001B`: frozen M1 manifest를 읽는 detached subjective encounter/access runner
+2. `INTERP-001C`: reception-conditioned assembly candidate와 scoped adjudication
 3. `INTERP-001D`: object-scoped target-form readout과 ordinal-delayed feedback
 4. 단순 합·threshold와 다른 구조 구분을 재현한 뒤에만 runtime/Narrative integration 검토
 

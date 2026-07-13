@@ -1,0 +1,707 @@
+{
+  "$schema": "./interp-001-manifest.schema.json",
+  "manifest": {
+    "manifest_kind": "evaluation",
+    "schema_version": "1.0.0",
+    "manifest_id": "INTERP-001A2-M1-EVALUATION",
+    "manifest_version": "1.0.0",
+    "status": "FROZEN_UNEXECUTED",
+    "frozen_at": "2026-07-13T02:33:36Z",
+    "execution_manifest_sha256": "d055ad2f3943adb616551510260700c145eeaa311d912e005729393e0d7e07c1",
+    "canonicalization_id": "interp-canonical-json-v1",
+    "evaluation_contract": {
+      "evaluation_kind": "synthetic_structural_conformance",
+      "human_empirical_status": "not_tested",
+      "predicate_language_version": "1.0.0",
+      "predicate_declarations": [
+        { "predicate_id": "access_differs_coherence_policy_same", "predicate_version": "1.0.0", "minimum_arity": 2, "maximum_arity": 2, "operand_kinds": ["cell_ref", "cell_ref"], "opcode_semantics": "access projection differs while selected coherence operator identity is equal" },
+        { "predicate_id": "access_same_coherence_differs", "predicate_version": "1.0.0", "minimum_arity": 2, "maximum_arity": 2, "operand_kinds": ["cell_ref", "cell_ref"], "opcode_semantics": "access projection is equal while candidate coherence projection differs" },
+        { "predicate_id": "all_declared_cells_reported_once", "predicate_version": "1.0.0", "minimum_arity": 3, "maximum_arity": 3, "operand_kinds": ["fixture_count", "model_count", "cell_count"], "opcode_semantics": "reported cell keys equal the exact declared fixture by model cartesian product with no duplicate" },
+        { "predicate_id": "all_models_adopt_fixture_direction", "predicate_version": "1.0.0", "minimum_arity": 2, "maximum_arity": 2, "operand_kinds": ["fixture_key", "fixture_key"], "opcode_semantics": "each R0 through R3 cell adopts the evaluator-declared mirror direction for both fixtures" },
+        { "predicate_id": "assembly_identity_normalization_holds", "predicate_version": "1.0.0", "minimum_arity": 5, "maximum_arity": 5, "operand_kinds": ["normalization_rule", "normalization_rule", "normalization_rule", "normalization_rule", "normalization_rule"], "opcode_semantics": "every emitted assembly has unique material membership contiguous zero-based membership order undirected edges with left order less than right order lexicographically sorted edges and no duplicate or reversed duplicate edge" },
+        { "predicate_id": "assembly_membership_and_topology_equal_fixture_induced_component", "predicate_version": "1.0.0", "minimum_arity": 1, "maximum_arity": 1, "operand_kinds": ["cell_domain"], "opcode_semantics": "in every named cell each emitted assembly membership equals the current access supplied material set in access order and its induced topology equals exactly the normalized edges selected from the fixture topology whose endpoints are both assembly members with no omitted extra or altered edge" },
+        { "predicate_id": "all_supplied", "predicate_version": "1.0.0", "minimum_arity": 2, "maximum_arity": 2, "operand_kinds": ["semantic_path", "relation_value"], "opcode_semantics": "the semantic collection contains exactly one declared relation for every material supplied by the current access and no other material" },
+        { "predicate_id": "candidate_raw_profile_equals_componentwise_max_of_assembly_members", "predicate_version": "1.0.0", "minimum_arity": 1, "maximum_arity": 1, "operand_kinds": ["cell_domain"], "opcode_semantics": "in every named cell each emitted binding candidate raw positive support raw negative support and raw ambiguity rank equals the separately computed componentwise maximum of the corresponding subjective-profile axis ranks of exactly its assembly members with no scalar cancellation" },
+        { "predicate_id": "count_eq", "predicate_version": "1.0.0", "minimum_arity": 2, "maximum_arity": 2, "operand_kinds": ["semantic_path", "integer"], "opcode_semantics": "collection length or integer count at path equals the expected integer" },
+        { "predicate_id": "eq", "predicate_version": "1.0.0", "minimum_arity": 2, "maximum_arity": 2, "operand_kinds": ["semantic_path", "expected_value"], "opcode_semantics": "canonical value at path equals expected value" },
+        { "predicate_id": "evidence_projection_prefix_equal_before_after", "predicate_version": "1.0.0", "minimum_arity": 1, "maximum_arity": 1, "operand_kinds": ["projection_key"], "opcode_semantics": "every result step preserves the declared evidence projection key and matching guard ledger digest" },
+        { "predicate_id": "guard_ledgers_equal_every_step", "predicate_version": "1.0.0", "minimum_arity": 10, "maximum_arity": 10, "operand_kinds": ["guard_ledger", "guard_ledger", "guard_ledger", "guard_ledger", "guard_ledger", "guard_ledger", "guard_ledger", "guard_ledger", "guard_ledger", "guard_ledger"], "opcode_semantics": "for each named guard ledger in every step before_sha256 equals after_sha256 and delta_count equals zero" },
+        { "predicate_id": "if_all_results_equal_single_threshold_retire_extra_degrees", "predicate_version": "1.0.0", "minimum_arity": 4, "maximum_arity": 4, "operand_kinds": ["model_id", "model_id", "model_id", "model_id"], "opcode_semantics": "if every frozen signature equals a preregistered single-threshold baseline then retire extra multicomponent degrees" },
+        { "predicate_id": "if_r1_equals_r0_all_access_predicates_remove_op003", "predicate_version": "1.0.0", "minimum_arity": 3, "maximum_arity": 3, "operand_kinds": ["model_id", "model_id", "operator_id"], "opcode_semantics": "if R1 and R0 access projections are equal in every cell remove op003 in the successor manifest" },
+        { "predicate_id": "if_r2_equals_r0_all_coherence_predicates_remove_op007", "predicate_version": "1.0.0", "minimum_arity": 3, "maximum_arity": 3, "operand_kinds": ["model_id", "model_id", "operator_id"], "opcode_semantics": "if R2 and R0 coherence projections are equal in every cell remove op007 in the successor manifest" },
+        { "predicate_id": "if_r3_equals_r1_all_predicates_remove_coherence_contribution", "predicate_version": "1.0.0", "minimum_arity": 2, "maximum_arity": 2, "operand_kinds": ["model_id", "model_id"], "opcode_semantics": "if R3 and R1 semantic views are equal in every cell remove the R3 coherence contribution" },
+        { "predicate_id": "if_r3_equals_r2_all_predicates_remove_access_contribution", "predicate_version": "1.0.0", "minimum_arity": 2, "maximum_arity": 2, "operand_kinds": ["model_id", "model_id"], "opcode_semantics": "if R3 and R2 semantic views are equal in every cell remove the R3 access contribution" },
+        { "predicate_id": "if_r3_factorization_fails_reject_r3", "predicate_version": "1.0.0", "minimum_arity": 3, "maximum_arity": 3, "operand_kinds": ["model_id", "model_id", "model_id"], "opcode_semantics": "reject R3 when its access differs from R1 or its coherence differs from R2 given the same emitted assembly" },
+        { "predicate_id": "list_eq", "predicate_version": "1.0.0", "minimum_arity": 2, "maximum_arity": 2, "operand_kinds": ["semantic_path", "ordered_list"], "opcode_semantics": "ordered list at path equals expected list element by element" },
+        { "predicate_id": "none_supplied", "predicate_version": "1.0.0", "minimum_arity": 2, "maximum_arity": 2, "operand_kinds": ["semantic_path", "boolean"], "opcode_semantics": "semantic collection contains none of the current access supplied materials and is otherwise empty" },
+        { "predicate_id": "one_binding_candidate_and_adjudication_per_emitted_assembly", "predicate_version": "1.0.0", "minimum_arity": 1, "maximum_arity": 1, "operand_kinds": ["cell_domain"], "opcode_semantics": "in every named cell step the assembly binding-candidate and adjudication collection lengths are equal and each length is either zero or one so the single ordered payload in each nonempty collection forms the M1 per-step cardinality chain with no orphan collection entry" },
+        { "predicate_id": "operator_access_log_excludes_evaluator_alias_fixture_key_expected_fields", "predicate_version": "1.0.0", "minimum_arity": 4, "maximum_arity": 4, "operand_kinds": ["forbidden_field", "forbidden_field", "forbidden_field", "forbidden_field"], "opcode_semantics": "for every operator invocation inspected_fields equals exactly the bound input-view inspect fields pass_through_fields equals exactly the pass-through-only fields and both are disjoint from all forbidden fields; pass-through values cannot be compared hashed stringified or used for branching" },
+        { "predicate_id": "order_mirror_eq", "predicate_version": "1.0.0", "minimum_arity": 2, "maximum_arity": 2, "operand_kinds": ["fixture_key", "fixture_key"], "opcode_semantics": "reverse declared material access membership and source-occurrence position roles then require equal normalized lineage topology set candidate directions adjudication guards and counts" },
+        { "predicate_id": "positive_negative_axes_preserved_separately", "predicate_version": "1.0.0", "minimum_arity": 4, "maximum_arity": 4, "operand_kinds": ["axis_id", "axis_id", "axis_id", "axis_id"], "opcode_semantics": "all four named axes remain separate fields in input output and digest with no scalar cancellation" },
+        { "predicate_id": "prefix_eq", "predicate_version": "1.0.0", "minimum_arity": 2, "maximum_arity": 2, "operand_kinds": ["semantic_path", "boolean"], "opcode_semantics": "all artifacts and guard digests before the current step remain byte-identical" },
+        { "predicate_id": "prior_source_encounter_and_material_prefix_equal", "predicate_version": "1.0.0", "minimum_arity": 2, "maximum_arity": 2, "operand_kinds": ["fixture_key", "fixture_key"], "opcode_semantics": "all source encounter source material and source occurrence guard ledgers remain unchanged in every step of both fixtures" },
+        { "predicate_id": "r0_operator_access_log_excludes_reception", "predicate_version": "1.0.0", "minimum_arity": 1, "maximum_arity": 1, "operand_kinds": ["model_id"], "opcode_semantics": "every active R0 operator inspected_fields excludes all reception fields and R0 uses no reception input view" },
+        { "predicate_id": "r1_access_equals_r0_and_r3_coherence_equals_r2", "predicate_version": "1.0.0", "minimum_arity": 5, "maximum_arity": 5, "operand_kinds": ["fixture_key", "model_id", "model_id", "model_id", "model_id"], "opcode_semantics": "on the exact-access fixture R1 access equals R0 and R3 candidate coherence equals R2" },
+        { "predicate_id": "r2_access_equals_r0_for_every_step", "predicate_version": "1.0.0", "minimum_arity": 2, "maximum_arity": 2, "operand_kinds": ["model_id", "model_id"], "opcode_semantics": "R2 accessed and not-accessed ordered material projections equal R0 for every fixture step" },
+        { "predicate_id": "r3_access_equals_r1_for_every_step", "predicate_version": "1.0.0", "minimum_arity": 2, "maximum_arity": 2, "operand_kinds": ["model_id", "model_id"], "opcode_semantics": "R3 accessed and not-accessed ordered material projections equal R1 for every fixture step" },
+        { "predicate_id": "r3_coherence_equals_r2_given_same_assembly", "predicate_version": "1.0.0", "minimum_arity": 2, "maximum_arity": 2, "operand_kinds": ["model_id", "model_id"], "opcode_semantics": "when R3 and R2 emit the same assembly membership and induced topology their candidate profile eligible directions and adjudication are equal" },
+        { "predicate_id": "reaccess_new_encounter_same_source_prefix_unchanged", "predicate_version": "1.0.0", "minimum_arity": 4, "maximum_arity": 4, "operand_kinds": ["fixture_key", "fixture_key", "prior_step", "reaccess_step"], "opcode_semantics": "reaccess step has distinct current occurrence delivery access and encounter identities points to prior occurrence and access preserves source lineage and prior prefix" },
+        { "predicate_id": "runner_receives_execution_manifest_only", "predicate_version": "1.0.0", "minimum_arity": 2, "maximum_arity": 2, "operand_kinds": ["execution_manifest_id", "evaluation_manifest_id"], "opcode_semantics": "runner input contains only the execution manifest and resolved identity-free input views and never the evaluation manifest" },
+        { "predicate_id": "same_as_fixture", "predicate_version": "1.0.0", "minimum_arity": 2, "maximum_arity": 2, "operand_kinds": ["semantic_path", "fixture_projection"], "opcode_semantics": "semantic value equals the declared fixture-derived projection selected by the second operand without exposing fixture identity to operators" },
+        { "predicate_id": "same_fixed_factor_all_cells", "predicate_version": "1.0.0", "minimum_arity": 1, "maximum_arity": 1, "operand_kinds": ["fixed_factor_key"], "opcode_semantics": "every cell records the same declared fixed-factor content under the execution contract digest" },
+        { "predicate_id": "same_semantic_signature", "predicate_version": "1.0.0", "minimum_arity": 2, "maximum_arity": 2, "operand_kinds": ["cell_ref", "cell_ref"], "opcode_semantics": "closed-world semantic step results satisfy the same signature after allowed mirror normalization" },
+        { "predicate_id": "same_source_lineage", "predicate_version": "1.0.0", "minimum_arity": 2, "maximum_arity": 2, "operand_kinds": ["semantic_path", "boolean"], "opcode_semantics": "current encounter lineage source occurrence set equals the prior access source occurrence set while current occurrence is distinct" },
+        { "predicate_id": "same_source_same_subjective_profile_across_models", "predicate_version": "1.0.0", "minimum_arity": 1, "maximum_arity": 1, "operand_kinds": ["formation_fixture_key"], "opcode_semantics": "within each fixture step all R0 through R3 cells emit the same reception-independent subjective profile" },
+        { "predicate_id": "set_eq", "predicate_version": "1.0.0", "minimum_arity": 2, "maximum_arity": 2, "operand_kinds": ["semantic_path", "canonical_set"], "opcode_semantics": "deduplicated semantic set equals the expected stable-key-sorted set" },
+        { "predicate_id": "sign_mirror_eq", "predicate_version": "1.0.0", "minimum_arity": 4, "maximum_arity": 4, "operand_kinds": ["fixture_key", "fixture_key", "direction", "direction"], "opcode_semantics": "swap positive and negative reception encounter axes material roles raw supports eligible directions and adopted outcome then compare fixture-local access-ordinal and source-position normalized lineage while preserving counts topology strengths evidence guards and order" },
+        { "predicate_id": "single_pass_phase_order", "predicate_version": "1.0.0", "minimum_arity": 8, "maximum_arity": 8, "operand_kinds": ["phase", "phase", "phase", "phase", "phase", "phase", "phase", "phase"], "opcode_semantics": "operator invocation trace follows the frozen phase DAG each active operator exactly once for present access zero for absent access with no back edge or reentry" },
+        { "predicate_id": "step_signature_all_models", "predicate_version": "1.0.0", "minimum_arity": 4, "maximum_arity": 4, "operand_kinds": ["fixture_key", "fixture_key", "protocol_step", "signature_id"], "opcode_semantics": "the named step in both fixtures satisfies the named closed-world signature for R0 through R3" },
+        { "predicate_id": "transport_redelivery_lineage_exact", "predicate_version": "1.0.0", "minimum_arity": 4, "maximum_arity": 4, "operand_kinds": ["fixture_key", "fixture_key", "prior_step", "redelivery_step"], "opcode_semantics": "redelivery audit preserves prior current occurrence uses a distinct transport delivery pointing to the prior delivery emits no access key and records transport_redelivery_present true" }
+      ],
+      "closed_world_signatures": {
+        "unspecified_field_policy": "apply_default_relations",
+        "default_relations": [
+          { "path": "/semantic/access_ordinal_delta", "predicate": "count_eq", "value": 0 },
+          { "path": "/semantic/current_access_count_delta", "predicate": "count_eq", "value": 0 },
+          { "path": "/semantic/encounter_count_delta", "predicate": "count_eq", "value": 0 },
+          { "path": "/semantic/subjective_form_profile", "predicate": "same_as_fixture", "value": "encounter_policy_projection_or_not_applicable" },
+          { "path": "/semantic/encounter_source_lineage", "predicate": "same_as_fixture", "value": "current_access_lineage_or_empty" },
+          { "path": "/semantic/accessed_material_keys_ordered", "predicate": "list_eq", "value": [] },
+          { "path": "/semantic/not_accessed_material_keys_ordered", "predicate": "list_eq", "value": [] },
+          { "path": "/semantic/assemblies", "predicate": "count_eq", "value": 0 },
+          { "path": "/semantic/binding_candidates", "predicate": "count_eq", "value": 0 },
+          { "path": "/semantic/adjudications", "predicate": "count_eq", "value": 0 },
+          { "path": "/semantic/settlement_relations", "predicate": "list_eq", "value": [] },
+          { "path": "/semantic/episode_integration_count", "predicate": "count_eq", "value": 0 },
+          { "path": "/semantic/assembly_ignition_count", "predicate": "count_eq", "value": 0 },
+          { "path": "/semantic/binding_ignition_count", "predicate": "count_eq", "value": 0 },
+          { "path": "/semantic/evidence_projection_keys_ordered", "predicate": "same_as_fixture", "value": "evidence_projection_keys_ordered" },
+          { "path": "/semantic/prior_prefix_relation", "predicate": "prefix_eq", "value": true }
+        ],
+        "override_rule": "signature_relation_replaces_all_defaults_for_same_top_level_field"
+      },
+      "runner_visibility": "forbidden",
+      "evaluator_aliases": [
+        { "semantic_key": "fx001", "alias": "F1-positive-congruent" },
+        { "semantic_key": "fx002", "alias": "F1-negative-congruent" },
+        { "semantic_key": "fx003", "alias": "F2-positive-incongruent" },
+        { "semantic_key": "fx004", "alias": "F2-negative-incongruent" },
+        { "semantic_key": "fx005", "alias": "F3-positive-exact-access" },
+        { "semantic_key": "fx006", "alias": "F3-negative-exact-access" },
+        { "semantic_key": "fx007", "alias": "F4-positive-strong-override" },
+        { "semantic_key": "fx008", "alias": "F4-negative-strong-override" },
+        { "semantic_key": "fx009", "alias": "F5-balanced-mixed-forward" },
+        { "semantic_key": "fx010", "alias": "F5-balanced-mixed-reverse" },
+        { "semantic_key": "fx011", "alias": "F6-positive-no-material" },
+        { "semantic_key": "fx012", "alias": "F6-negative-no-material" },
+        { "semantic_key": "fx013", "alias": "F7-positive-state-change-no-access" },
+        { "semantic_key": "fx014", "alias": "F7-negative-state-change-no-access" },
+        { "semantic_key": "fx015", "alias": "F8-positive-delayed-reaccess" },
+        { "semantic_key": "fx016", "alias": "F8-negative-delayed-reaccess" },
+        { "semantic_key": "m001", "alias": "weak-positive-1" },
+        { "semantic_key": "m002", "alias": "weak-positive-2" },
+        { "semantic_key": "m003", "alias": "weak-negative-1" },
+        { "semantic_key": "m004", "alias": "weak-negative-2" },
+        { "semantic_key": "m005", "alias": "strong-positive-1" },
+        { "semantic_key": "m006", "alias": "strong-positive-2" },
+        { "semantic_key": "m007", "alias": "strong-negative-1" },
+        { "semantic_key": "m008", "alias": "strong-negative-2" }
+      ],
+      "lineage_normalization": {
+        "current_occurrence_role": "fixture_local_access_ordinal",
+        "source_occurrence_role": "source_material_position",
+        "reexposure_role": "prior_current_occurrence_ordinal",
+        "sign_mirror_rule": "compare_role_graph_after_direction_swap",
+        "order_mirror_rule": "reverse_source_positions_with_material_order",
+        "raw_cross_ledger_key_equality": "forbidden"
+      },
+      "mirror_relations": [
+        {
+          "assertion_id": "mirror-f1",
+          "predicate": "sign_mirror_eq",
+          "operands": ["fx001", "fx002", "positive", "negative"]
+        },
+        {
+          "assertion_id": "mirror-f2",
+          "predicate": "sign_mirror_eq",
+          "operands": ["fx003", "fx004", "positive", "negative"]
+        },
+        {
+          "assertion_id": "mirror-f3",
+          "predicate": "sign_mirror_eq",
+          "operands": ["fx005", "fx006", "positive", "negative"]
+        },
+        {
+          "assertion_id": "mirror-f4",
+          "predicate": "sign_mirror_eq",
+          "operands": ["fx007", "fx008", "positive", "negative"]
+        },
+        {
+          "assertion_id": "mirror-f5",
+          "predicate": "order_mirror_eq",
+          "operands": ["fx009", "fx010"]
+        },
+        {
+          "assertion_id": "mirror-f6",
+          "predicate": "sign_mirror_eq",
+          "operands": ["fx011", "fx012", "positive", "negative"]
+        },
+        {
+          "assertion_id": "mirror-f7",
+          "predicate": "sign_mirror_eq",
+          "operands": ["fx013", "fx014", "positive", "negative"]
+        },
+        {
+          "assertion_id": "mirror-f8",
+          "predicate": "sign_mirror_eq",
+          "operands": ["fx015", "fx016", "positive", "negative"]
+        }
+      ],
+      "semantic_signatures": [
+        {
+          "signature_id": "sig-adopt-positive-new",
+          "expected_relations": [
+            { "path": "/semantic/access_ordinal_delta", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/current_access_count_delta", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/encounter_count_delta", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/accessed_material_keys_ordered", "predicate": "all_supplied", "value": true },
+            { "path": "/semantic/assemblies", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/binding_candidates", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/binding_candidates/*/eligible_directions", "predicate": "set_eq", "value": ["positive"] },
+            { "path": "/semantic/adjudications", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/adjudications/*/outcome", "predicate": "eq", "value": "adopted_positive" },
+            { "path": "/semantic/episode_integration_count", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/assembly_ignition_count", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/binding_ignition_count", "predicate": "count_eq", "value": 1 }
+          ]
+        },
+        {
+          "signature_id": "sig-adopt-negative-new",
+          "expected_relations": [
+            { "path": "/semantic/access_ordinal_delta", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/current_access_count_delta", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/encounter_count_delta", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/accessed_material_keys_ordered", "predicate": "all_supplied", "value": true },
+            { "path": "/semantic/assemblies", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/binding_candidates", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/binding_candidates/*/eligible_directions", "predicate": "set_eq", "value": ["negative"] },
+            { "path": "/semantic/adjudications", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/adjudications/*/outcome", "predicate": "eq", "value": "adopted_negative" },
+            { "path": "/semantic/episode_integration_count", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/assembly_ignition_count", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/binding_ignition_count", "predicate": "count_eq", "value": 1 }
+          ]
+        },
+        {
+          "signature_id": "sig-adopt-positive-existing",
+          "expected_relations": [
+            { "path": "/semantic/access_ordinal_delta", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/current_access_count_delta", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/encounter_count_delta", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/encounter_source_lineage", "predicate": "same_source_lineage", "value": true },
+            { "path": "/semantic/accessed_material_keys_ordered", "predicate": "all_supplied", "value": true },
+            { "path": "/semantic/assemblies", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/binding_candidates", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/binding_candidates/*/eligible_directions", "predicate": "set_eq", "value": ["positive"] },
+            { "path": "/semantic/adjudications", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/adjudications/*/outcome", "predicate": "eq", "value": "adopted_positive" },
+            { "path": "/semantic/episode_integration_count", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/assembly_ignition_count", "predicate": "count_eq", "value": 0 },
+            { "path": "/semantic/binding_ignition_count", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/prior_prefix_relation", "predicate": "prefix_eq", "value": true }
+          ]
+        },
+        {
+          "signature_id": "sig-adopt-negative-existing",
+          "expected_relations": [
+            { "path": "/semantic/access_ordinal_delta", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/current_access_count_delta", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/encounter_count_delta", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/encounter_source_lineage", "predicate": "same_source_lineage", "value": true },
+            { "path": "/semantic/accessed_material_keys_ordered", "predicate": "all_supplied", "value": true },
+            { "path": "/semantic/assemblies", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/binding_candidates", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/binding_candidates/*/eligible_directions", "predicate": "set_eq", "value": ["negative"] },
+            { "path": "/semantic/adjudications", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/adjudications/*/outcome", "predicate": "eq", "value": "adopted_negative" },
+            { "path": "/semantic/episode_integration_count", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/assembly_ignition_count", "predicate": "count_eq", "value": 0 },
+            { "path": "/semantic/binding_ignition_count", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/prior_prefix_relation", "predicate": "prefix_eq", "value": true }
+          ]
+        },
+        {
+          "signature_id": "sig-no-access",
+          "expected_relations": [
+            { "path": "/semantic/access_ordinal_delta", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/current_access_count_delta", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/encounter_count_delta", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/accessed_material_keys_ordered", "predicate": "none_supplied", "value": true },
+            { "path": "/semantic/not_accessed_material_keys_ordered", "predicate": "all_supplied", "value": true },
+            { "path": "/semantic/assemblies", "predicate": "count_eq", "value": 0 },
+            { "path": "/semantic/binding_candidates", "predicate": "count_eq", "value": 0 },
+            { "path": "/semantic/adjudications", "predicate": "count_eq", "value": 0 },
+            { "path": "/semantic/episode_integration_count", "predicate": "count_eq", "value": 0 },
+            { "path": "/semantic/assembly_ignition_count", "predicate": "count_eq", "value": 0 },
+            { "path": "/semantic/binding_ignition_count", "predicate": "count_eq", "value": 0 },
+            { "path": "/semantic/settlement_relations", "predicate": "all_supplied", "value": "not_accessed_currently" }
+          ]
+        },
+        {
+          "signature_id": "sig-defer-positive-new",
+          "expected_relations": [
+            { "path": "/semantic/access_ordinal_delta", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/current_access_count_delta", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/encounter_count_delta", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/accessed_material_keys_ordered", "predicate": "all_supplied", "value": true },
+            { "path": "/semantic/assemblies", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/binding_candidates", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/binding_candidates/*/raw_positive_support/rank", "predicate": "eq", "value": 2 },
+            { "path": "/semantic/binding_candidates/*/eligible_directions", "predicate": "set_eq", "value": [] },
+            { "path": "/semantic/adjudications", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/adjudications/*/outcome", "predicate": "eq", "value": "deferred" },
+            { "path": "/semantic/episode_integration_count", "predicate": "count_eq", "value": 0 },
+            { "path": "/semantic/assembly_ignition_count", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/binding_ignition_count", "predicate": "count_eq", "value": 0 },
+            { "path": "/semantic/settlement_relations", "predicate": "all_supplied", "value": "assembled_without_adopted_binding" }
+          ]
+        },
+        {
+          "signature_id": "sig-defer-negative-new",
+          "expected_relations": [
+            { "path": "/semantic/access_ordinal_delta", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/current_access_count_delta", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/encounter_count_delta", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/accessed_material_keys_ordered", "predicate": "all_supplied", "value": true },
+            { "path": "/semantic/assemblies", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/binding_candidates", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/binding_candidates/*/raw_negative_support/rank", "predicate": "eq", "value": 2 },
+            { "path": "/semantic/binding_candidates/*/eligible_directions", "predicate": "set_eq", "value": [] },
+            { "path": "/semantic/adjudications", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/adjudications/*/outcome", "predicate": "eq", "value": "deferred" },
+            { "path": "/semantic/episode_integration_count", "predicate": "count_eq", "value": 0 },
+            { "path": "/semantic/assembly_ignition_count", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/binding_ignition_count", "predicate": "count_eq", "value": 0 },
+            { "path": "/semantic/settlement_relations", "predicate": "all_supplied", "value": "assembled_without_adopted_binding" }
+          ]
+        },
+        {
+          "signature_id": "sig-contested-new",
+          "expected_relations": [
+            { "path": "/semantic/access_ordinal_delta", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/current_access_count_delta", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/encounter_count_delta", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/accessed_material_keys_ordered", "predicate": "all_supplied", "value": true },
+            { "path": "/semantic/assemblies", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/binding_candidates", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/binding_candidates/*/eligible_directions", "predicate": "set_eq", "value": ["negative", "positive"] },
+            { "path": "/semantic/adjudications", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/adjudications/*/outcome", "predicate": "eq", "value": "contested" },
+            { "path": "/semantic/episode_integration_count", "predicate": "count_eq", "value": 0 },
+            { "path": "/semantic/assembly_ignition_count", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/binding_ignition_count", "predicate": "count_eq", "value": 0 },
+            { "path": "/semantic/settlement_relations", "predicate": "all_supplied", "value": "assembled_without_adopted_binding" }
+          ]
+        },
+        {
+          "signature_id": "sig-empty-access",
+          "expected_relations": [
+            { "path": "/semantic/access_ordinal_delta", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/current_access_count_delta", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/encounter_count_delta", "predicate": "count_eq", "value": 1 },
+            { "path": "/semantic/subjective_form_profile", "predicate": "same_as_fixture", "value": "neutral_profile_sp005" },
+            { "path": "/semantic/accessed_material_keys_ordered", "predicate": "list_eq", "value": [] },
+            { "path": "/semantic/assemblies", "predicate": "count_eq", "value": 0 },
+            { "path": "/semantic/binding_candidates", "predicate": "count_eq", "value": 0 },
+            { "path": "/semantic/adjudications", "predicate": "count_eq", "value": 0 },
+            { "path": "/semantic/episode_integration_count", "predicate": "count_eq", "value": 0 }
+          ]
+        },
+        {
+          "signature_id": "sig-noop",
+          "expected_relations": [
+            { "path": "/semantic/current_access_count_delta", "predicate": "count_eq", "value": 0 },
+            { "path": "/semantic/access_ordinal_delta", "predicate": "count_eq", "value": 0 },
+            { "path": "/semantic/encounter_count_delta", "predicate": "count_eq", "value": 0 },
+            { "path": "/semantic/assemblies", "predicate": "count_eq", "value": 0 },
+            { "path": "/semantic/binding_candidates", "predicate": "count_eq", "value": 0 },
+            { "path": "/semantic/adjudications", "predicate": "count_eq", "value": 0 },
+            { "path": "/semantic/episode_integration_count", "predicate": "count_eq", "value": 0 },
+            { "path": "/semantic/prior_prefix_relation", "predicate": "prefix_eq", "value": true }
+          ]
+        }
+      ],
+      "cell_assertions": [
+        {
+          "fixture_key": "fx001",
+          "expected_by_model": {
+            "R0": ["sig-adopt-positive-new"],
+            "R1": ["sig-adopt-positive-new"],
+            "R2": ["sig-adopt-positive-new"],
+            "R3": ["sig-adopt-positive-new"]
+          }
+        },
+        {
+          "fixture_key": "fx002",
+          "expected_by_model": {
+            "R0": ["sig-adopt-negative-new"],
+            "R1": ["sig-adopt-negative-new"],
+            "R2": ["sig-adopt-negative-new"],
+            "R3": ["sig-adopt-negative-new"]
+          }
+        },
+        {
+          "fixture_key": "fx003",
+          "expected_by_model": {
+            "R0": ["sig-adopt-positive-new"],
+            "R1": ["sig-no-access"],
+            "R2": ["sig-defer-positive-new"],
+            "R3": ["sig-no-access"]
+          }
+        },
+        {
+          "fixture_key": "fx004",
+          "expected_by_model": {
+            "R0": ["sig-adopt-negative-new"],
+            "R1": ["sig-no-access"],
+            "R2": ["sig-defer-negative-new"],
+            "R3": ["sig-no-access"]
+          }
+        },
+        {
+          "fixture_key": "fx005",
+          "expected_by_model": {
+            "R0": ["sig-adopt-positive-new"],
+            "R1": ["sig-adopt-positive-new"],
+            "R2": ["sig-defer-positive-new"],
+            "R3": ["sig-defer-positive-new"]
+          }
+        },
+        {
+          "fixture_key": "fx006",
+          "expected_by_model": {
+            "R0": ["sig-adopt-negative-new"],
+            "R1": ["sig-adopt-negative-new"],
+            "R2": ["sig-defer-negative-new"],
+            "R3": ["sig-defer-negative-new"]
+          }
+        },
+        {
+          "fixture_key": "fx007",
+          "expected_by_model": {
+            "R0": ["sig-adopt-positive-new"],
+            "R1": ["sig-adopt-positive-new"],
+            "R2": ["sig-adopt-positive-new"],
+            "R3": ["sig-adopt-positive-new"]
+          }
+        },
+        {
+          "fixture_key": "fx008",
+          "expected_by_model": {
+            "R0": ["sig-adopt-negative-new"],
+            "R1": ["sig-adopt-negative-new"],
+            "R2": ["sig-adopt-negative-new"],
+            "R3": ["sig-adopt-negative-new"]
+          }
+        },
+        {
+          "fixture_key": "fx009",
+          "expected_by_model": {
+            "R0": ["sig-contested-new"],
+            "R1": ["sig-contested-new"],
+            "R2": ["sig-contested-new"],
+            "R3": ["sig-contested-new"]
+          }
+        },
+        {
+          "fixture_key": "fx010",
+          "expected_by_model": {
+            "R0": ["sig-contested-new"],
+            "R1": ["sig-contested-new"],
+            "R2": ["sig-contested-new"],
+            "R3": ["sig-contested-new"]
+          }
+        },
+        {
+          "fixture_key": "fx011",
+          "expected_by_model": {
+            "R0": ["sig-empty-access"],
+            "R1": ["sig-empty-access"],
+            "R2": ["sig-empty-access"],
+            "R3": ["sig-empty-access"]
+          }
+        },
+        {
+          "fixture_key": "fx012",
+          "expected_by_model": {
+            "R0": ["sig-empty-access"],
+            "R1": ["sig-empty-access"],
+            "R2": ["sig-empty-access"],
+            "R3": ["sig-empty-access"]
+          }
+        },
+        {
+          "fixture_key": "fx013",
+          "expected_by_model": {
+            "R0": ["sig-adopt-positive-new", "sig-noop"],
+            "R1": ["sig-adopt-positive-new", "sig-noop"],
+            "R2": ["sig-adopt-positive-new", "sig-noop"],
+            "R3": ["sig-adopt-positive-new", "sig-noop"]
+          }
+        },
+        {
+          "fixture_key": "fx014",
+          "expected_by_model": {
+            "R0": ["sig-adopt-negative-new", "sig-noop"],
+            "R1": ["sig-adopt-negative-new", "sig-noop"],
+            "R2": ["sig-adopt-negative-new", "sig-noop"],
+            "R3": ["sig-adopt-negative-new", "sig-noop"]
+          }
+        },
+        {
+          "fixture_key": "fx015",
+          "expected_by_model": {
+            "R0": ["sig-adopt-positive-new", "sig-noop", "sig-adopt-positive-existing"],
+            "R1": ["sig-no-access", "sig-noop", "sig-adopt-positive-new"],
+            "R2": ["sig-defer-positive-new", "sig-noop", "sig-adopt-positive-existing"],
+            "R3": ["sig-no-access", "sig-noop", "sig-adopt-positive-new"]
+          }
+        },
+        {
+          "fixture_key": "fx016",
+          "expected_by_model": {
+            "R0": ["sig-adopt-negative-new", "sig-noop", "sig-adopt-negative-existing"],
+            "R1": ["sig-no-access", "sig-noop", "sig-adopt-negative-new"],
+            "R2": ["sig-defer-negative-new", "sig-noop", "sig-adopt-negative-existing"],
+            "R3": ["sig-no-access", "sig-noop", "sig-adopt-negative-new"]
+          }
+        }
+      ],
+      "pair_assertions": [
+        {
+          "assertion_id": "r0-reception-blind-positive",
+          "predicate": "same_semantic_signature",
+          "operands": ["fx001:R0:1", "fx003:R0:1"]
+        },
+        {
+          "assertion_id": "r0-reception-blind-negative",
+          "predicate": "same_semantic_signature",
+          "operands": ["fx002:R0:1", "fx004:R0:1"]
+        },
+        {
+          "assertion_id": "r1-access-only-positive",
+          "predicate": "access_differs_coherence_policy_same",
+          "operands": ["fx001:R1:1", "fx003:R1:1"]
+        },
+        {
+          "assertion_id": "r2-coherence-only-positive",
+          "predicate": "access_same_coherence_differs",
+          "operands": ["fx001:R2:1", "fx003:R2:1"]
+        },
+        {
+          "assertion_id": "exact-access-positive",
+          "predicate": "r1_access_equals_r0_and_r3_coherence_equals_r2",
+          "operands": ["fx005", "R0", "R1", "R2", "R3"]
+        },
+        {
+          "assertion_id": "strong-opposite-survives",
+          "predicate": "all_models_adopt_fixture_direction",
+          "operands": ["fx007", "fx008"]
+        },
+        {
+          "assertion_id": "state-change-without-access-noop",
+          "predicate": "step_signature_all_models",
+          "operands": ["fx013", "fx014", 2, "sig-noop"]
+        },
+        {
+          "assertion_id": "transport-redelivery-noop",
+          "predicate": "step_signature_all_models",
+          "operands": ["fx015", "fx016", 2, "sig-noop"]
+        },
+        {
+          "assertion_id": "transport-redelivery-lineage",
+          "predicate": "transport_redelivery_lineage_exact",
+          "operands": ["fx015", "fx016", 1, 2]
+        },
+        {
+          "assertion_id": "current-reaccess-distinct-lineage",
+          "predicate": "reaccess_new_encounter_same_source_prefix_unchanged",
+          "operands": ["fx015", "fx016", 1, 3]
+        },
+        {
+          "assertion_id": "reception-without-material-no-content",
+          "predicate": "same_semantic_signature",
+          "operands": ["fx011:R3:1", "fx012:R3:1"]
+        }
+      ],
+      "matrix_assertions": [
+        {
+          "assertion_id": "complete-cartesian-run-matrix",
+          "predicate": "all_declared_cells_reported_once",
+          "operands": [16, 4, 64]
+        },
+        {
+          "assertion_id": "r3-access-factorization",
+          "predicate": "r3_access_equals_r1_for_every_step",
+          "operands": ["R3", "R1"]
+        },
+        {
+          "assertion_id": "r3-coherence-factorization",
+          "predicate": "r3_coherence_equals_r2_given_same_assembly",
+          "operands": ["R3", "R2"]
+        },
+        {
+          "assertion_id": "r2-access-blindness",
+          "predicate": "r2_access_equals_r0_for_every_step",
+          "operands": ["R2", "R0"]
+        },
+        {
+          "assertion_id": "r0-reception-blindness",
+          "predicate": "r0_operator_access_log_excludes_reception",
+          "operands": ["R0"]
+        }
+      ],
+      "global_invariants": [
+        {
+          "assertion_id": "execution-evaluation-separation",
+          "predicate": "runner_receives_execution_manifest_only",
+          "operands": ["INTERP-001A2-M1-EXECUTION", "INTERP-001A2-M1-EVALUATION"]
+        },
+        {
+          "assertion_id": "evidence-content-unchanged",
+          "predicate": "evidence_projection_prefix_equal_before_after",
+          "operands": ["ep001"]
+        },
+        {
+          "assertion_id": "no-authority-writes",
+          "predicate": "guard_ledgers_equal_every_step",
+          "operands": [
+            "action_occurrences",
+            "authority_outputs",
+            "evidence_assessment",
+            "evidence_links",
+            "narrative_writes",
+            "observation_artifacts",
+            "source_encounters",
+            "source_materials",
+            "source_occurrences",
+            "world_outcomes"
+          ]
+        },
+        {
+          "assertion_id": "fixed-target-form",
+          "predicate": "same_fixed_factor_all_cells",
+          "operands": ["tf001"]
+        },
+        {
+          "assertion_id": "fixed-ghost",
+          "predicate": "same_fixed_factor_all_cells",
+          "operands": ["gh001"]
+        },
+        {
+          "assertion_id": "state-independent-encounter-formation",
+          "predicate": "same_source_same_subjective_profile_across_models",
+          "operands": ["ef001"]
+        },
+        {
+          "assertion_id": "no-same-ordinal-recursion",
+          "predicate": "single_pass_phase_order",
+          "operands": [
+            "encounter_formation",
+            "access_selection",
+            "episode_assembly",
+            "candidate_profile",
+            "candidate_coherence",
+            "binding_adjudication",
+            "episode_integration",
+            "ignition_projection"
+          ]
+        },
+        {
+          "assertion_id": "source-artifacts-immutable",
+          "predicate": "prior_source_encounter_and_material_prefix_equal",
+          "operands": ["fx015", "fx016"]
+        },
+        {
+          "assertion_id": "no-scalar-cancellation",
+          "predicate": "positive_negative_axes_preserved_separately",
+          "operands": ["positive_direction_fit", "negative_direction_fit", "positive_direction_receptivity", "negative_direction_receptivity"]
+        },
+        {
+          "assertion_id": "assembly-identity-normalization",
+          "predicate": "assembly_identity_normalization_holds",
+          "operands": [
+            "unique_material_membership",
+            "contiguous_zero_based_order",
+            "left_order_less_than_right_order",
+            "lexicographic_edge_order",
+            "no_duplicate_or_reversed_edge"
+          ]
+        },
+        {
+          "assertion_id": "assembly-content-exact",
+          "predicate": "assembly_membership_and_topology_equal_fixture_induced_component",
+          "operands": ["all_64_cells"]
+        },
+        {
+          "assertion_id": "candidate-profile-exact",
+          "predicate": "candidate_raw_profile_equals_componentwise_max_of_assembly_members",
+          "operands": ["all_64_cells"]
+        },
+        {
+          "assertion_id": "assembly-candidate-adjudication-bijection",
+          "predicate": "one_binding_candidate_and_adjudication_per_emitted_assembly",
+          "operands": ["all_64_cells"]
+        },
+        {
+          "assertion_id": "no-fixture-branching",
+          "predicate": "operator_access_log_excludes_evaluator_alias_fixture_key_expected_fields",
+          "operands": ["fixture_key", "alias", "expected_by_model", "semantic_signatures"]
+        }
+      ],
+      "retirement_rules": [
+        {
+          "assertion_id": "retire-access-effect",
+          "predicate": "if_r1_equals_r0_all_access_predicates_remove_op003",
+          "operands": ["R1", "R0", "op003"]
+        },
+        {
+          "assertion_id": "retire-coherence-effect",
+          "predicate": "if_r2_equals_r0_all_coherence_predicates_remove_op007",
+          "operands": ["R2", "R0", "op007"]
+        },
+        {
+          "assertion_id": "reject-hidden-r3-interaction",
+          "predicate": "if_r3_factorization_fails_reject_r3",
+          "operands": ["R3", "R1", "R2"]
+        },
+        {
+          "assertion_id": "remove-r3-coherence",
+          "predicate": "if_r3_equals_r1_all_predicates_remove_coherence_contribution",
+          "operands": ["R3", "R1"]
+        },
+        {
+          "assertion_id": "remove-r3-access",
+          "predicate": "if_r3_equals_r2_all_predicates_remove_access_contribution",
+          "operands": ["R3", "R2"]
+        },
+        {
+          "assertion_id": "collapse-multicomponent-alias",
+          "predicate": "if_all_results_equal_single_threshold_retire_extra_degrees",
+          "operands": ["R0", "R1", "R2", "R3"]
+        }
+      ],
+      "report_disclaimers": [
+        "ReceptionStateSnapshot is not measured human mood.",
+        "SubjectiveEncounterFormProxy is not qualia or a first-person report.",
+        "Synthetic structural conformance is not a human law, predictive support, recovery measurement, or mental-time measurement."
+      ]
+    }
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "canonicalization_id": "interp-canonical-json-v1",
+    "manifest_sha256": "6e7c422f7e43bf55d7e1a7c2aac0e03c382deb309f3798e09377e01d86f152e6",
+    "contract_sha256": "f56cbf33ad06ac3fa769231f349521927b4c2372fe121635bc4121e9981bb528"
+  }
+}

@@ -1,0 +1,411 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rkbuhtig/human-model/research/benchmarks/interp-001-m1-v1-result.schema.json",
+  "title": "INTERP-001A2 M1 v1 cell result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "execution_manifest_sha256",
+    "execution_contract_sha256",
+    "fixture_key",
+    "model_id",
+    "steps"
+  ],
+  "properties": {
+    "execution_manifest_sha256": { "$ref": "#/$defs/sha256" },
+    "execution_contract_sha256": { "$ref": "#/$defs/sha256" },
+    "fixture_key": { "$ref": "#/$defs/token" },
+    "model_id": { "enum": ["R0", "R1", "R2", "R3"] },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/stepResult" }
+    }
+  },
+  "$defs": {
+    "token": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:@/-]*$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "componentValue": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "rank"],
+          "properties": {
+            "status": { "const": "present" },
+            "rank": { "type": "integer", "minimum": 0, "maximum": 2 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "reason"],
+          "properties": {
+            "status": { "const": "missing" },
+            "reason": {
+              "enum": [
+                "not_applicable",
+                "source_unresolved",
+                "not_declared_by_fixture",
+                "withheld_control",
+                "operator_undefined"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "refValue": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "key"],
+          "properties": {
+            "status": { "const": "present" },
+            "key": { "$ref": "#/$defs/token" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "reason"],
+          "properties": {
+            "status": { "const": "missing" },
+            "reason": { "const": "not_applicable" }
+          }
+        }
+      ]
+    },
+    "subjectiveProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "positive_direction_fit",
+        "negative_direction_fit",
+        "ambiguity",
+        "activation"
+      ],
+      "properties": {
+        "positive_direction_fit": { "$ref": "#/$defs/componentValue" },
+        "negative_direction_fit": { "$ref": "#/$defs/componentValue" },
+        "ambiguity": { "$ref": "#/$defs/componentValue" },
+        "activation": { "$ref": "#/$defs/componentValue" }
+      }
+    },
+    "profileOrMissing": {
+      "oneOf": [
+        { "$ref": "#/$defs/subjectiveProfile" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "reason"],
+          "properties": {
+            "status": { "const": "missing" },
+            "reason": { "const": "not_applicable" }
+          }
+        }
+      ]
+    },
+    "operatorInvocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operator_id",
+        "phase",
+        "input_view_id",
+        "inspected_fields",
+        "pass_through_fields",
+        "invocation_count"
+      ],
+      "properties": {
+        "operator_id": { "type": "string", "pattern": "^op0(0[1-9]|1[01])$" },
+        "phase": {
+          "enum": [
+            "encounter_formation",
+            "access_selection",
+            "episode_assembly",
+            "candidate_profile",
+            "candidate_coherence",
+            "binding_adjudication",
+            "episode_integration",
+            "ignition_projection"
+          ]
+        },
+        "input_view_id": { "type": "string", "pattern": "^iv0(0[1-9]|1[01])$" },
+        "inspected_fields": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/token" },
+          "uniqueItems": true
+        },
+        "pass_through_fields": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/token" },
+          "uniqueItems": true
+        },
+        "invocation_count": { "enum": [0, 1] }
+      }
+    },
+    "lineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["current_occurrence_key", "source_occurrence_keys_ordered", "relation"],
+      "properties": {
+        "current_occurrence_key": { "$ref": "#/$defs/token" },
+        "source_occurrence_keys_ordered": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/token" },
+          "uniqueItems": true
+        },
+        "relation": { "enum": ["new_access_to_sources", "reexposure_to_prior_access_sources"] }
+      }
+    },
+    "membership": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["material_key", "role", "order"],
+      "properties": {
+        "material_key": { "$ref": "#/$defs/token" },
+        "role": { "const": "member" },
+        "order": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["left_order", "right_order", "strength"],
+      "properties": {
+        "left_order": { "type": "integer", "minimum": 0 },
+        "right_order": { "type": "integer", "minimum": 1 },
+        "strength": { "$ref": "#/$defs/componentValue" }
+      }
+    },
+    "assembly": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["memberships", "induced_topology_edges", "assembly_ignition_present"],
+      "properties": {
+        "memberships": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "$ref": "#/$defs/membership" },
+          "uniqueItems": true
+        },
+        "induced_topology_edges": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/edge" },
+          "uniqueItems": true
+        },
+        "assembly_ignition_present": { "type": "boolean" }
+      }
+    },
+    "bindingCandidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "raw_positive_support",
+        "raw_negative_support",
+        "raw_ambiguity",
+        "eligible_directions"
+      ],
+      "properties": {
+        "raw_positive_support": { "$ref": "#/$defs/componentValue" },
+        "raw_negative_support": { "$ref": "#/$defs/componentValue" },
+        "raw_ambiguity": { "$ref": "#/$defs/componentValue" },
+        "eligible_directions": {
+          "oneOf": [
+            { "const": [] },
+            { "const": ["negative"] },
+            { "const": ["positive"] },
+            { "const": ["negative", "positive"] }
+          ]
+        }
+      }
+    },
+    "adjudication": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["outcome"],
+      "properties": {
+        "outcome": {
+          "enum": ["adopted_negative", "adopted_positive", "contested", "deferred"]
+        }
+      }
+    },
+    "settlementRelation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["material_key", "relation"],
+      "properties": {
+        "material_key": { "$ref": "#/$defs/token" },
+        "relation": {
+          "enum": [
+            "accessible_unassembled",
+            "assembled_without_adopted_binding",
+            "not_accessed_currently"
+          ]
+        }
+      }
+    },
+    "guardLedger": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["before_sha256", "after_sha256", "delta_count"],
+      "properties": {
+        "before_sha256": { "$ref": "#/$defs/sha256" },
+        "after_sha256": { "$ref": "#/$defs/sha256" },
+        "delta_count": { "const": 0 }
+      }
+    },
+    "guardLedgers": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "action_occurrences",
+        "authority_outputs",
+        "evidence_assessment",
+        "evidence_links",
+        "narrative_writes",
+        "observation_artifacts",
+        "source_encounters",
+        "source_materials",
+        "source_occurrences",
+        "world_outcomes"
+      ],
+      "properties": {
+        "action_occurrences": { "$ref": "#/$defs/guardLedger" },
+        "authority_outputs": { "$ref": "#/$defs/guardLedger" },
+        "evidence_assessment": { "$ref": "#/$defs/guardLedger" },
+        "evidence_links": { "$ref": "#/$defs/guardLedger" },
+        "narrative_writes": { "$ref": "#/$defs/guardLedger" },
+        "observation_artifacts": { "$ref": "#/$defs/guardLedger" },
+        "source_encounters": { "$ref": "#/$defs/guardLedger" },
+        "source_materials": { "$ref": "#/$defs/guardLedger" },
+        "source_occurrences": { "$ref": "#/$defs/guardLedger" },
+        "world_outcomes": { "$ref": "#/$defs/guardLedger" }
+      }
+    },
+    "transportAccessAudit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "access_present",
+        "transport_redelivery_present",
+        "access_key",
+        "current_occurrence_key",
+        "current_delivery_key",
+        "transport_delivery_key",
+        "redelivery_of_delivery_key",
+        "reaccess_of_access_key",
+        "reexposure_of_occurrence_key"
+      ],
+      "properties": {
+        "access_present": { "type": "boolean" },
+        "transport_redelivery_present": { "type": "boolean" },
+        "access_key": { "$ref": "#/$defs/refValue" },
+        "current_occurrence_key": { "$ref": "#/$defs/refValue" },
+        "current_delivery_key": { "$ref": "#/$defs/refValue" },
+        "transport_delivery_key": { "$ref": "#/$defs/refValue" },
+        "redelivery_of_delivery_key": { "$ref": "#/$defs/refValue" },
+        "reaccess_of_access_key": { "$ref": "#/$defs/refValue" },
+        "reexposure_of_occurrence_key": { "$ref": "#/$defs/refValue" }
+      }
+    },
+    "semantic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "access_ordinal_delta",
+        "current_access_count_delta",
+        "encounter_count_delta",
+        "subjective_form_profile",
+        "encounter_source_lineage",
+        "accessed_material_keys_ordered",
+        "not_accessed_material_keys_ordered",
+        "assemblies",
+        "binding_candidates",
+        "adjudications",
+        "settlement_relations",
+        "episode_integration_count",
+        "assembly_ignition_count",
+        "binding_ignition_count",
+        "evidence_projection_keys_ordered",
+        "prior_prefix_relation"
+      ],
+      "properties": {
+        "access_ordinal_delta": { "enum": [0, 1] },
+        "current_access_count_delta": { "enum": [0, 1] },
+        "encounter_count_delta": { "enum": [0, 1] },
+        "subjective_form_profile": { "$ref": "#/$defs/profileOrMissing" },
+        "encounter_source_lineage": {
+          "type": "array",
+          "maxItems": 1,
+          "items": { "$ref": "#/$defs/lineage" }
+        },
+        "accessed_material_keys_ordered": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/token" },
+          "uniqueItems": true
+        },
+        "not_accessed_material_keys_ordered": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/token" },
+          "uniqueItems": true
+        },
+        "assemblies": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/assembly" }
+        },
+        "binding_candidates": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/bindingCandidate" }
+        },
+        "adjudications": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/adjudication" }
+        },
+        "settlement_relations": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/settlementRelation" }
+        },
+        "episode_integration_count": { "enum": [0, 1] },
+        "assembly_ignition_count": { "enum": [0, 1] },
+        "binding_ignition_count": { "enum": [0, 1] },
+        "evidence_projection_keys_ordered": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/token" },
+          "uniqueItems": true
+        },
+        "prior_prefix_relation": { "enum": ["initial", "unchanged", "extended"] }
+      }
+    },
+    "stepResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "protocol_step",
+        "operator_invocations",
+        "transport_access_audit",
+        "semantic",
+        "guard_ledgers"
+      ],
+      "properties": {
+        "protocol_step": { "type": "integer", "minimum": 1 },
+        "operator_invocations": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/operatorInvocation" }
+        },
+        "transport_access_audit": { "$ref": "#/$defs/transportAccessAudit" },
+        "semantic": { "$ref": "#/$defs/semantic" },
+        "guard_ledgers": { "$ref": "#/$defs/guardLedgers" }
+      }
+    }
+  }
+}
