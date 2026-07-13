@@ -1,0 +1,2027 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rkbuhtig/human-model/research/benchmarks/interp-001d1-manifest.schema.json",
+  "title": "INTERP-001D1 frozen three-block manifest envelope",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/executionEnvelope"
+    },
+    {
+      "$ref": "#/$defs/evaluationEnvelope"
+    }
+  ],
+  "$defs": {
+    "token": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:@/-]*$"
+    },
+    "tokenList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/token"
+      },
+      "uniqueItems": true
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "gitSha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "componentValue": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "rank"
+          ],
+          "properties": {
+            "status": {
+              "const": "present"
+            },
+            "rank": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "reason"
+          ],
+          "properties": {
+            "status": {
+              "const": "missing"
+            },
+            "reason": {
+              "enum": [
+                "not_applicable",
+                "source_unresolved",
+                "not_declared_by_fixture",
+                "withheld_control",
+                "operator_undefined"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "directionProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "positive_direction_support",
+        "negative_direction_support"
+      ],
+      "properties": {
+        "positive_direction_support": {
+          "$ref": "#/$defs/componentValue"
+        },
+        "negative_direction_support": {
+          "$ref": "#/$defs/componentValue"
+        }
+      }
+    },
+    "encounterProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "positive_direction_fit",
+        "negative_direction_fit",
+        "ambiguity",
+        "activation"
+      ],
+      "properties": {
+        "positive_direction_fit": {
+          "$ref": "#/$defs/componentValue"
+        },
+        "negative_direction_fit": {
+          "$ref": "#/$defs/componentValue"
+        },
+        "ambiguity": {
+          "$ref": "#/$defs/componentValue"
+        },
+        "activation": {
+          "$ref": "#/$defs/componentValue"
+        }
+      }
+    },
+    "receptionProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "positive_direction_receptivity",
+        "negative_direction_receptivity",
+        "ambiguity_tolerance",
+        "exploration_bandwidth"
+      ],
+      "properties": {
+        "positive_direction_receptivity": {
+          "$ref": "#/$defs/componentValue"
+        },
+        "negative_direction_receptivity": {
+          "$ref": "#/$defs/componentValue"
+        },
+        "ambiguity_tolerance": {
+          "$ref": "#/$defs/componentValue"
+        },
+        "exploration_bandwidth": {
+          "$ref": "#/$defs/componentValue"
+        }
+      }
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "actor_alias",
+        "interpreted_target_scope_alias",
+        "relation_scope_alias",
+        "context_scope_alias",
+        "target_resolution"
+      ],
+      "properties": {
+        "actor_alias": {
+          "$ref": "#/$defs/token"
+        },
+        "interpreted_target_scope_alias": {
+          "$ref": "#/$defs/token"
+        },
+        "relation_scope_alias": {
+          "$ref": "#/$defs/token"
+        },
+        "context_scope_alias": {
+          "$ref": "#/$defs/token"
+        },
+        "target_resolution": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "status"
+              ],
+              "properties": {
+                "status": {
+                  "enum": [
+                    "claimed",
+                    "unknown"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "status",
+                "external_entity_alias"
+              ],
+              "properties": {
+                "status": {
+                  "const": "resolved"
+                },
+                "external_entity_alias": {
+                  "$ref": "#/$defs/token"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "documentRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "document_id",
+        "path",
+        "content_sha256"
+      ],
+      "properties": {
+        "document_id": {
+          "$ref": "#/$defs/token"
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "canonicalization_id",
+        "manifest_sha256",
+        "contract_sha256"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "sha256"
+        },
+        "canonicalization_id": {
+          "const": "interp-canonical-json-v1"
+        },
+        "manifest_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "contract_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "sourceRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_position",
+        "source_alias",
+        "source_kind",
+        "source_scope",
+        "effective_from_access_ordinal",
+        "direction_profile",
+        "status"
+      ],
+      "properties": {
+        "source_position": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "source_alias": {
+          "$ref": "#/$defs/token"
+        },
+        "source_kind": {
+          "enum": [
+            "narrative_terrain_fixture",
+            "episode_integration_receipt_fixture",
+            "contested_binding_receipt_fixture",
+            "implicit_plastic_trace_fixture",
+            "pre_access_accessibility_snapshot"
+          ]
+        },
+        "source_scope": {
+          "$ref": "#/$defs/scope"
+        },
+        "effective_from_access_ordinal": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "direction_profile": {
+          "$ref": "#/$defs/directionProfile"
+        },
+        "status": {
+          "enum": [
+            "declared",
+            "adopted_fixture",
+            "contested_fixture",
+            "accessible_fixture",
+            "withheld_fixture"
+          ]
+        }
+      }
+    },
+    "sourceFixture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fixture_key",
+        "fixture_version",
+        "isolated_ledger_key",
+        "scope",
+        "access_ordinal_k",
+        "source_records"
+      ],
+      "properties": {
+        "fixture_key": {
+          "type": "string",
+          "pattern": "^srcfx00[1-8]$"
+        },
+        "fixture_version": {
+          "const": "1.0.0"
+        },
+        "isolated_ledger_key": {
+          "$ref": "#/$defs/token"
+        },
+        "scope": {
+          "$ref": "#/$defs/scope"
+        },
+        "access_ordinal_k": {
+          "type": "integer",
+          "minimum": 2
+        },
+        "source_records": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 6,
+          "items": {
+            "$ref": "#/$defs/sourceRecord"
+          }
+        }
+      }
+    },
+    "sourceCompiler": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "model_id",
+        "model_version",
+        "family",
+        "allowed_source_kinds",
+        "operator_sequence",
+        "outcome_input",
+        "arithmetic_policy"
+      ],
+      "properties": {
+        "model_id": {
+          "enum": [
+            "TF0",
+            "TF1",
+            "TF2"
+          ]
+        },
+        "model_version": {
+          "const": "1.0.0"
+        },
+        "family": {
+          "const": "target_form_source_compiler"
+        },
+        "allowed_source_kinds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/token"
+          },
+          "uniqueItems": true
+        },
+        "operator_sequence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/token"
+          },
+          "uniqueItems": true
+        },
+        "outcome_input": {
+          "const": "forbidden"
+        },
+        "arithmetic_policy": {
+          "const": "componentwise_max_with_no_cross_direction_cancellation"
+        }
+      }
+    },
+    "formationFixture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fixture_key",
+        "fixture_version",
+        "isolated_ledger_key",
+        "scope",
+        "access_ordinal_k",
+        "current_access_present",
+        "source_materials_present",
+        "base_encounter_profile",
+        "declared_reception_intervention",
+        "declared_reception_intervention_scope",
+        "declared_target_form_intervention",
+        "declared_target_form_intervention_scope",
+        "intervention_declaration_time"
+      ],
+      "properties": {
+        "fixture_key": {
+          "type": "string",
+          "pattern": "^encfx00[1-8]$"
+        },
+        "fixture_version": {
+          "const": "1.0.0"
+        },
+        "isolated_ledger_key": {
+          "$ref": "#/$defs/token"
+        },
+        "scope": {
+          "$ref": "#/$defs/scope"
+        },
+        "access_ordinal_k": {
+          "type": "integer",
+          "minimum": 2
+        },
+        "current_access_present": {"type": "boolean"},
+        "source_materials_present": {"type": "boolean"},
+        "base_encounter_profile": {
+          "$ref": "#/$defs/encounterProfile"
+        },
+        "declared_reception_intervention": {
+          "$ref": "#/$defs/receptionProfile"
+        },
+        "declared_reception_intervention_scope": {"$ref": "#/$defs/scope"},
+        "declared_target_form_intervention": {
+          "$ref": "#/$defs/directionProfile"
+        },
+        "declared_target_form_intervention_scope": {"$ref": "#/$defs/scope"},
+        "intervention_declaration_time": {
+          "const": "before_execution_and_without_source_compiler_output"
+        }
+      }
+    },
+    "formationModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "model_id",
+        "model_version",
+        "family",
+        "uses_reception_intervention",
+        "uses_target_form_intervention",
+        "operator_sequence",
+        "cross_factor_arithmetic"
+      ],
+      "properties": {
+        "model_id": {
+          "enum": [
+            "E0",
+            "ER",
+            "ET",
+            "ERT"
+          ]
+        },
+        "model_version": {
+          "const": "1.0.0"
+        },
+        "family": {
+          "const": "declared_encounter_formation_intervention"
+        },
+        "uses_reception_intervention": {
+          "type": "boolean"
+        },
+        "uses_target_form_intervention": {
+          "type": "boolean"
+        },
+        "operator_sequence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/token"
+          },
+          "uniqueItems": true
+        },
+        "cross_factor_arithmetic": {
+          "const": "forbidden"
+        }
+      }
+    },
+    "ghostMaterial": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "position",
+        "direction_profile",
+        "activation_rank"
+      ],
+      "properties": {
+        "position": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "direction_profile": {
+          "$ref": "#/$defs/directionProfile"
+        },
+        "activation_rank": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2
+        }
+      }
+    },
+    "positionEdge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "left_position",
+        "right_position",
+        "strength_rank"
+      ],
+      "properties": {
+        "left_position": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "right_position": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "strength_rank": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2
+        }
+      }
+    },
+    "ghostProgram": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "program_id",
+        "operations_ordered",
+        "authority"
+      ],
+      "properties": {
+        "program_id": {
+          "enum": [
+            "broaden_contrast_counterfactual",
+            "confirmation_rehearsal"
+          ]
+        },
+        "operations_ordered": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/token"
+          },
+          "uniqueItems": true
+        },
+        "authority": {
+          "const": "candidate_generation_only"
+        }
+      }
+    },
+    "ghostFixture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fixture_key",
+        "fixture_version",
+        "isolated_ledger_key",
+        "scope",
+        "access_ordinal_k",
+        "current_access_present",
+        "source_materials_present",
+        "accessible_materials_ordered",
+        "topology_edges",
+        "target_guidance_profile",
+        "target_guidance_scope",
+        "declared_ghost_program",
+        "adjudicator_policy_id"
+      ],
+      "properties": {
+        "fixture_key": {
+          "type": "string",
+          "pattern": "^ghfx00[1-8]$"
+        },
+        "fixture_version": {
+          "const": "1.0.0"
+        },
+        "isolated_ledger_key": {
+          "$ref": "#/$defs/token"
+        },
+        "scope": {
+          "$ref": "#/$defs/scope"
+        },
+        "access_ordinal_k": {
+          "type": "integer",
+          "minimum": 2
+        },
+        "current_access_present": {"type": "boolean"},
+        "source_materials_present": {"type": "boolean"},
+        "accessible_materials_ordered": {
+          "type": "array",
+          "maxItems": 4,
+          "items": {
+            "$ref": "#/$defs/ghostMaterial"
+          }
+        },
+        "topology_edges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/positionEdge"
+          }
+        },
+        "target_guidance_profile": {
+          "$ref": "#/$defs/directionProfile"
+        },
+        "target_guidance_scope": {"$ref": "#/$defs/scope"},
+        "declared_ghost_program": {
+          "$ref": "#/$defs/ghostProgram"
+        },
+        "adjudicator_policy_id": {"const": "d1_scoped_adjudicator_v1"}
+      }
+    },
+    "ghostModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "model_id",
+        "model_version",
+        "family",
+        "uses_target_guidance",
+        "uses_declared_ghost_program",
+        "operator_sequence",
+        "sequence_expansion_policy",
+        "phase_order",
+        "adjudication_authority",
+        "integration_authority"
+      ],
+      "properties": {
+        "model_id": {
+          "enum": [
+            "G0",
+            "GT",
+            "GP",
+            "GTP"
+          ]
+        },
+        "model_version": {
+          "const": "1.0.0"
+        },
+        "family": {
+          "const": "ghost_path_factorial"
+        },
+        "uses_target_guidance": {
+          "type": "boolean"
+        },
+        "uses_declared_ghost_program": {
+          "type": "boolean"
+        },
+        "operator_sequence": {"$ref": "#/$defs/tokenList"},
+        "sequence_expansion_policy": {
+          "enum": [
+            "none",
+            "replace_fixture_operations_ordered_token_with_exact_fixture_declared_sequence"
+          ]
+        },
+        "phase_order": {
+          "const": [
+            "seed",
+            "traverse",
+            "bind"
+          ]
+        },
+        "adjudication_authority": {
+          "const": "none"
+        },
+        "integration_authority": {
+          "const": "none"
+        }
+      }
+    },
+    "operatorInputField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["field_id", "value_kind", "operator_use"],
+      "properties": {
+        "field_id": {"$ref": "#/$defs/token"},
+        "value_kind": {"$ref": "#/$defs/token"},
+        "operator_use": {"enum": ["inspect", "pass_through_only"]}
+      }
+    },
+    "operatorInputView": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["view_id", "view_version", "fields", "forbidden_fields"],
+      "properties": {
+        "view_id": {"$ref": "#/$defs/token"},
+        "view_version": {"const": "1.0.0"},
+        "fields": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/operatorInputField"}},
+        "forbidden_fields": {"$ref": "#/$defs/tokenList"}
+      }
+    },
+    "operatorDeclaration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operator_id", "operator_version", "block_id", "input_view_id", "exact_inspected_field_ids", "exact_opaque_pass_through_field_ids", "opcode_semantics", "allowed_ordinal_operations", "output_kind", "authority", "identity_access", "expected_output_access", "randomness_policy"],
+      "properties": {
+        "operator_id": {"$ref": "#/$defs/token"},
+        "operator_version": {"const": "1.0.0"},
+        "block_id": {"enum": ["COMMON", "SOURCE_COMPILER", "ENCOUNTER_FORMATION", "GHOST_PATH"]},
+        "input_view_id": {"$ref": "#/$defs/token"},
+        "exact_inspected_field_ids": {"$ref": "#/$defs/tokenList"},
+        "exact_opaque_pass_through_field_ids": {"$ref": "#/$defs/tokenList"},
+        "opcode_semantics": {"type": "string", "minLength": 1},
+        "allowed_ordinal_operations": {"$ref": "#/$defs/tokenList"},
+        "output_kind": {"$ref": "#/$defs/token"},
+        "authority": {"enum": ["readout_only", "formation_only", "candidate_only", "closure_only", "binder_only"]},
+        "identity_access": {"const": "forbidden"},
+        "expected_output_access": {"const": "forbidden"},
+        "randomness_policy": {"const": "none"}
+      }
+    },
+    "adjudicatorContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["policy_id", "policy_version", "input_view_id", "exact_inspected_field_ids", "exact_opaque_pass_through_field_ids", "opcode_semantics", "output_kind", "writer_authority", "ghost_model_input", "post_candidate_tail_sequence", "external_truth_authority", "randomness_policy"],
+      "properties": {
+        "policy_id": {"const": "d1_scoped_adjudicator_v1"},
+        "policy_version": {"const": "1.0.0"},
+        "input_view_id": {"const": "iv_adjudication"},
+        "exact_inspected_field_ids": {"const": ["candidate_direction_set", "binding_relation"]},
+        "exact_opaque_pass_through_field_ids": {"const": []},
+        "opcode_semantics": {"type": "string", "minLength": 1},
+        "output_kind": {"const": "detached_adjudication_projection"},
+        "writer_authority": {"const": "adjudication_only"},
+        "ghost_model_input": {"const": "candidate_projection_only"},
+        "post_candidate_tail_sequence": {"const": ["d1_scoped_adjudicator_v1", "close_ghost_semantic", "bind_opaque_sources"]},
+        "external_truth_authority": {"const": "none"},
+        "randomness_policy": {"const": "none"}
+      }
+    },
+    "operatorRawBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operator_id", "field_ids"],
+      "properties": {
+        "operator_id": {"$ref": "#/$defs/token"},
+        "field_ids": {"$ref": "#/$defs/tokenList"}
+      }
+    },
+    "operatorRawOpaqueBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operator_id", "field_id", "value_kind", "raw_source_path", "transfer_policy"],
+      "properties": {
+        "operator_id": {"const": "bind_opaque_sources"},
+        "field_id": {"const": "opaque_scope_lineage"},
+        "value_kind": {"const": "scope_lineage"},
+        "raw_source_path": {"const": "/fixture/scope"},
+        "transfer_policy": {"const": "identity_pass_through_without_field_inspection"}
+      }
+    },
+    "operatorDataflowEdge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["edge_id", "producer_operator_ids", "producer_output_kinds", "consumer_operator_id", "consumer_input_field_id", "consumer_value_kind", "selection_policy", "transfer_policy"],
+      "properties": {
+        "edge_id": {"$ref": "#/$defs/token"},
+        "producer_operator_ids": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/token"}, "uniqueItems": true},
+        "producer_output_kinds": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/token"}, "uniqueItems": true},
+        "consumer_operator_id": {"$ref": "#/$defs/token"},
+        "consumer_input_field_id": {"$ref": "#/$defs/token"},
+        "consumer_value_kind": {"$ref": "#/$defs/token"},
+        "selection_policy": {"enum": ["nearest_prior_one", "all_prior_matching_zero_or_more", "all_prior_matching_one_or_more"]},
+        "transfer_policy": {"enum": ["identity", "collect_receipts", "extract_direction_profiles", "extract_accessible_positions", "extract_candidate_fields"]}
+      }
+    },
+    "deterministicPreprocessor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["preprocessor_id", "output_field_id", "output_value_kind", "raw_source_paths", "opcode_semantics"],
+      "properties": {
+        "preprocessor_id": {"$ref": "#/$defs/token"},
+        "output_field_id": {"$ref": "#/$defs/token"},
+        "output_value_kind": {"$ref": "#/$defs/token"},
+        "raw_source_paths": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^/fixture/"}, "uniqueItems": true},
+        "opcode_semantics": {"type": "string", "minLength": 1}
+      }
+    },
+    "operatorPreprocessedBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operator_id", "field_id", "preprocessor_id"],
+      "properties": {
+        "operator_id": {"$ref": "#/$defs/token"},
+        "field_id": {"$ref": "#/$defs/token"},
+        "preprocessor_id": {"$ref": "#/$defs/token"}
+      }
+    },
+    "executionMatrix": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "block_id",
+        "matrix_kind",
+        "cell_key_template",
+        "fixture_keys",
+        "model_ids",
+        "cell_count"
+      ],
+      "properties": {
+        "block_id": {
+          "enum": [
+            "SOURCE_COMPILER",
+            "ENCOUNTER_FORMATION",
+            "GHOST_PATH"
+          ]
+        },
+        "matrix_kind": {
+          "const": "cartesian_product"
+        },
+        "cell_key_template": {
+          "const": "{block_id}:{fixture_key}:{model_id}"
+        },
+        "fixture_keys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/token"
+          },
+          "uniqueItems": true
+        },
+        "model_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/token"
+          },
+          "uniqueItems": true
+        },
+        "cell_count": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "relationValue": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "integer"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "boolean"
+              }
+            ]
+          }
+        },
+        {
+          "$ref": "#/$defs/directionProfile"
+        },
+        {
+          "$ref": "#/$defs/encounterProfile"
+        }
+      ]
+    },
+    "expectedRelation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "predicate",
+        "value"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^/semantic/"
+        },
+        "predicate": {
+          "enum": [
+            "eq",
+            "set_eq",
+            "ordered_eq",
+            "count_eq"
+          ]
+        },
+        "value": {
+          "$ref": "#/$defs/relationValue"
+        }
+      }
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "signature_id",
+        "block_id",
+        "expected_relations"
+      ],
+      "properties": {
+        "signature_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:@/-]*$"
+        },
+        "block_id": {
+          "enum": [
+            "SOURCE_COMPILER",
+            "ENCOUNTER_FORMATION",
+            "GHOST_PATH"
+          ]
+        },
+        "expected_relations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/expectedRelation"
+          }
+        }
+      }
+    },
+    "cellAssertion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "block_id",
+        "fixture_key",
+        "expected_by_model"
+      ],
+      "properties": {
+        "block_id": {
+          "enum": [
+            "SOURCE_COMPILER",
+            "ENCOUNTER_FORMATION",
+            "GHOST_PATH"
+          ]
+        },
+        "fixture_key": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:@/-]*$"
+        },
+        "expected_by_model": {
+          "type": "object",
+          "minProperties": 3,
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:@/-]*$"
+          }
+        }
+      }
+    },
+    "splitDeclaration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "block_id",
+        "development_fixture_keys",
+        "sealed_fixture_keys"
+      ],
+      "properties": {
+        "block_id": {
+          "enum": [
+            "SOURCE_COMPILER",
+            "ENCOUNTER_FORMATION",
+            "GHOST_PATH"
+          ]
+        },
+        "development_fixture_keys": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:@/-]*$"
+          },
+          "uniqueItems": true
+        },
+        "sealed_fixture_keys": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:@/-]*$"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "namedAssertion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assertion_id",
+        "predicate_id",
+        "operands"
+      ],
+      "properties": {
+        "assertion_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:@/-]*$"
+        },
+        "predicate_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:@/-]*$"
+        },
+        "operands": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/relationValue"
+          }
+        }
+      }
+    },
+    "challengerDeclaration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["challenger_id", "challenger_version", "challenger_role", "block_id", "input_paths", "opcode", "parameters", "algorithm_steps", "deterministic_semantics", "raw_output_kind", "comparison_target_id", "comparison_adapter", "randomness_policy"],
+      "properties": {
+        "challenger_id": {"$ref": "#/$defs/token"},
+        "challenger_version": {"const": "1.0.0"},
+        "challenger_role": {"enum": ["distinct_challenger", "algebraic_alias_control_reference", "algebraic_alias_control_replica"]},
+        "block_id": {"enum": ["SOURCE_COMPILER", "ENCOUNTER_FORMATION", "GHOST_PATH"]},
+        "input_paths": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^/execution/"}, "uniqueItems": true},
+        "opcode": {"enum": ["source_kind_blind_componentwise_max", "material_count_or_max_profile", "base_encounter_passthrough", "dominant_direction_category", "fixed_rank_activation_threshold", "reception_target_congruence_boolean", "declared_rt_lookup", "visited_direction_set_only", "fixed_ghost_baseline"]},
+        "parameters": {"type": "object", "additionalProperties": {"oneOf": [{"type": "string"}, {"type": "integer"}, {"type": "boolean"}]}},
+        "algorithm_steps": {"$ref": "#/$defs/tokenList"},
+        "deterministic_semantics": {"type": "string", "minLength": 1},
+        "raw_output_kind": {"$ref": "#/$defs/token"},
+        "comparison_target_id": {"$ref": "#/$defs/token"},
+        "comparison_adapter": {"$ref": "#/$defs/challengerAdapter"},
+        "randomness_policy": {"const": "none"}
+      }
+    },
+    "comparisonTargetField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["field_id", "value_kind"],
+      "properties": {
+        "field_id": {"$ref": "#/$defs/token"},
+        "value_kind": {
+          "enum": [
+            "boolean",
+            "direction_profile",
+            "direction_set",
+            "binding_relation",
+            "adjudication_outcome"
+          ]
+        }
+      }
+    },
+    "comparisonTarget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["comparison_target_id", "block_id", "fields", "model_adapter", "equality_contract", "mismatch_policy"],
+      "properties": {
+        "comparison_target_id": {"$ref": "#/$defs/token"},
+        "block_id": {"enum": ["SOURCE_COMPILER", "ENCOUNTER_FORMATION", "GHOST_PATH"]},
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "items": {"$ref": "#/$defs/comparisonTargetField"}
+        },
+        "model_adapter": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["adapter_id", "adapter_version", "input_result_paths", "output_fields", "exact_semantics"],
+          "properties": {
+            "adapter_id": {"$ref": "#/$defs/token"},
+            "adapter_version": {"const": "1.0.0"},
+            "input_result_paths": {
+              "type": "array",
+              "minItems": 1,
+              "items": {"type": "string", "pattern": "^/semantic/"},
+              "uniqueItems": true
+            },
+            "output_fields": {"$ref": "#/$defs/tokenList"},
+            "exact_semantics": {"type": "string", "minLength": 1}
+          }
+        },
+        "equality_contract": {"const": "canonical_json_equality_after_both_adapters"},
+        "mismatch_policy": {"const": "CONTRACT_ERROR_never_substantive_difference"}
+      }
+    },
+    "challengerAdapter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["adapter_id", "adapter_version", "input_paths", "output_fields", "exact_semantics", "missingness_policy", "expected_output_access", "mismatch_policy", "adjudicator_policy"],
+      "properties": {
+        "adapter_id": {"$ref": "#/$defs/token"},
+        "adapter_version": {"const": "1.0.0"},
+        "input_paths": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "pattern": "^/(raw|execution)/"},
+          "uniqueItems": true
+        },
+        "output_fields": {"$ref": "#/$defs/tokenList"},
+        "exact_semantics": {"type": "string", "minLength": 1},
+        "missingness_policy": {"type": "string", "minLength": 1},
+        "expected_output_access": {"const": "forbidden"},
+        "mismatch_policy": {"const": "CONTRACT_ERROR_never_substantive_difference"},
+        "adjudicator_policy": {
+          "enum": ["none", "derive_only_with_D1_FIXED_ADJUDICATOR_V1"]
+        }
+      }
+    },
+    "comparisonProjection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["projection_id", "block_id", "included_result_paths", "excluded_bookkeeping_paths", "comparison_purpose"],
+      "properties": {
+        "projection_id": {"$ref": "#/$defs/token"},
+        "block_id": {"enum": ["SOURCE_COMPILER", "ENCOUNTER_FORMATION", "GHOST_PATH"]},
+        "included_result_paths": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^/semantic/"}, "uniqueItems": true},
+        "excluded_bookkeeping_paths": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^/(semantic|operator_trace)/"}, "uniqueItems": true},
+        "comparison_purpose": {"enum": ["substantive_model_equivalence", "access_selection_explanation"]}
+      }
+    },
+    "retirementRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rule_id",
+        "condition_predicate_id",
+        "condition_operands",
+        "disposition",
+        "freeze_status"
+      ],
+      "properties": {
+        "rule_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:@/-]*$"
+        },
+        "condition_predicate_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:@/-]*$"
+        },
+        "condition_operands": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/relationValue"
+          }
+        },
+        "disposition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "freeze_status": {
+          "const": "NOT_EVALUATED"
+        }
+      }
+    },
+    "executionEnvelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "$schema",
+        "manifest",
+        "integrity"
+      ],
+      "properties": {
+        "$schema": {
+          "const": "./interp-001d1-manifest.schema.json"
+        },
+        "manifest": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "manifest_kind",
+            "schema_version",
+            "manifest_id",
+            "manifest_version",
+            "status",
+            "frozen_at",
+            "implementation_base_revision",
+            "governing_documents",
+            "canonicalization_contract",
+            "no_retuning_rule",
+            "execution_contract"
+          ],
+          "properties": {
+            "manifest_kind": {
+              "const": "execution"
+            },
+            "schema_version": {
+              "const": "1.0.0"
+            },
+            "manifest_id": {
+              "const": "INTERP-001D1-V1-EXECUTION"
+            },
+            "manifest_version": {
+              "const": "1.0.0"
+            },
+            "status": {
+              "const": "FROZEN_UNEXECUTED"
+            },
+            "frozen_at": {
+              "type": "string",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+            },
+            "implementation_base_revision": {
+              "$ref": "#/$defs/gitSha"
+            },
+            "governing_documents": {
+              "type": "array",
+              "minItems": 5,
+              "items": {
+                "$ref": "#/$defs/documentRef"
+              }
+            },
+            "canonicalization_contract": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "canonicalization_id",
+                "encoding",
+                "rules"
+              ],
+              "properties": {
+                "canonicalization_id": {
+                  "const": "interp-canonical-json-v1"
+                },
+                "encoding": {
+                  "const": "UTF-8"
+                },
+                "rules": {
+                  "type": "array",
+                  "minItems": 10,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "uniqueItems": true
+                }
+              }
+            },
+            "no_retuning_rule": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "rule_id",
+                "post_freeze_change_requires",
+                "prior_run_preservation",
+                "predecessor_status",
+                "immutable_versioned_filename_required",
+                "successor_required_fields"
+              ],
+              "properties": {
+                "rule_id": {
+                  "const": "version-bump-required-after-freeze"
+                },
+                "post_freeze_change_requires": {
+                  "const": "new-manifest-version-and-digest"
+                },
+                "prior_run_preservation": {
+                  "const": true
+                },
+                "predecessor_status": {
+                  "const": "none_initial_version"
+                },
+                "immutable_versioned_filename_required": {
+                  "const": true
+                },
+                "successor_required_fields": {
+                  "const": [
+                    "supersedes_manifest_id",
+                    "supersedes_manifest_version",
+                    "supersedes_manifest_sha256"
+                  ]
+                }
+              }
+            },
+            "execution_contract": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "scope",
+                "unit_contract",
+                "identity_contract",
+                "operator_input_contract",
+                "operator_input_views",
+                "operator_declarations",
+                "operator_trace_phase_map",
+                "operator_typed_dataflow_contract",
+                "adjudicator_contract",
+                "block_declarations",
+                "source_fixtures",
+                "source_compilers",
+                "source_dataflow_contract",
+                "formation_transition_state_contract",
+                "formation_fixtures",
+                "formation_models",
+                "ghost_candidate_state_contract",
+                "ghost_fixtures",
+                "ghost_models",
+                "execution_matrices",
+                "phase_contract",
+                "output_guard_contract",
+                "runner_contract",
+                "non_outputs"
+              ],
+              "properties": {
+                "scope": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "execution_status",
+                    "evaluation_kind",
+                    "human_empirical_status",
+                    "predictive_status",
+                    "runtime_integration_status",
+                    "runner_status",
+                    "feedback_status",
+                    "isolated_blocks"
+                  ],
+                  "properties": {
+                    "execution_status": {
+                      "const": "not_executed"
+                    },
+                    "evaluation_kind": {
+                      "const": "synthetic_structural_capability"
+                    },
+                    "human_empirical_status": {
+                      "const": "not_tested"
+                    },
+                    "predictive_status": {
+                      "const": "not_tested"
+                    },
+                    "runtime_integration_status": {
+                      "const": "not_implemented"
+                    },
+                    "runner_status": {
+                      "const": "not_implemented"
+                    },
+                    "feedback_status": {
+                      "const": "out_of_scope_d1"
+                    },
+                    "isolated_blocks": {
+                      "const": [
+                        "SOURCE_COMPILER",
+                        "ENCOUNTER_FORMATION",
+                        "GHOST_PATH"
+                      ]
+                    }
+                  }
+                },
+                "unit_contract": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "unit_id",
+                    "allowed_ranks",
+                    "allowed_operations",
+                    "forbidden_operations",
+                    "missing_value_encoding"
+                  ],
+                  "properties": {
+                    "unit_id": {
+                      "const": "declared_ordinal_simulation_component"
+                    },
+                    "allowed_ranks": {
+                      "const": [
+                        0,
+                        1,
+                        2
+                      ]
+                    },
+                    "allowed_operations": {
+                      "const": [
+                        "equality",
+                        "ordering",
+                        "min",
+                        "max",
+                        "rank_threshold"
+                      ]
+                    },
+                    "forbidden_operations": {
+                      "const": [
+                        "addition",
+                        "average",
+                        "difference",
+                        "division",
+                        "l1",
+                        "l2",
+                        "multiplication",
+                        "scalar_cancellation"
+                      ]
+                    },
+                    "missing_value_encoding": {
+                      "const": "tagged_union_only"
+                    }
+                  }
+                },
+                "identity_contract": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "manifest_aliases",
+                    "operator_identity_access",
+                    "binder_rule",
+                    "scope_resolution"
+                  ],
+                  "properties": {
+                    "manifest_aliases": {
+                      "const": "stable_role_blind_fixture_aliases_only_not_runtime_ids"
+                    },
+                    "operator_identity_access": {
+                      "const": "forbidden"
+                    },
+                    "binder_rule": {
+                      "const": "copy_exact_fixture_scope_object_to_scope_lineage_after_semantic_decision_without_field_inspection"
+                    },
+                    "scope_resolution": {
+                      "const": "exact_actor_target_relation_context_and_canonical_target_resolution_equality_resolved_before_operator_as_boolean_or_position"
+                    }
+                  }
+                },
+                "operator_input_contract": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "inspectable_fields",
+                    "opaque_pass_through_fields",
+                    "forbidden_fields",
+                    "expected_output_access"
+                  ],
+                  "properties": {
+                    "inspectable_fields": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/token"
+                      },
+                      "uniqueItems": true
+                    },
+                    "opaque_pass_through_fields": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/token"
+                      },
+                      "uniqueItems": true
+                    },
+                    "forbidden_fields": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/token"
+                      },
+                      "uniqueItems": true
+                    },
+                    "expected_output_access": {
+                      "const": "forbidden"
+                    }
+                  }
+                },
+                "operator_input_views": {
+                  "type": "array",
+                  "minItems": 8,
+                  "items": {"$ref": "#/$defs/operatorInputView"}
+                },
+                "operator_declarations": {
+                  "type": "array",
+                  "minItems": 20,
+                  "items": {"$ref": "#/$defs/operatorDeclaration"}
+                },
+                "operator_trace_phase_map": {
+                  "type": "object",
+                  "minProperties": 26,
+                  "additionalProperties": {
+                    "enum": ["resolve_scope", "normalize", "source_projection", "formation", "seed", "traverse", "bind", "adjudicate", "emit"]
+                  }
+                },
+                "operator_typed_dataflow_contract": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["raw_input_bindings", "deterministic_preprocessor_declarations", "deterministic_preprocessor_bindings", "raw_opaque_pass_through_bindings", "edges", "ghost_sequence_expansion_token", "pre_lineage_semantic_producers", "final_result_semantic_producer", "hidden_intermediate_state"],
+                  "properties": {
+                    "raw_input_bindings": {"type": "array", "items": {"$ref": "#/$defs/operatorRawBinding"}},
+                    "deterministic_preprocessor_declarations": {"type": "array", "minItems": 8, "items": {"$ref": "#/$defs/deterministicPreprocessor"}},
+                    "deterministic_preprocessor_bindings": {"type": "array", "minItems": 8, "items": {"$ref": "#/$defs/operatorPreprocessedBinding"}},
+                    "raw_opaque_pass_through_bindings": {"type": "array", "minItems": 1, "maxItems": 1, "items": {"$ref": "#/$defs/operatorRawOpaqueBinding"}},
+                    "edges": {"type": "array", "minItems": 15, "items": {"$ref": "#/$defs/operatorDataflowEdge"}},
+                    "ghost_sequence_expansion_token": {"const": "fixture_operations_ordered"},
+                    "pre_lineage_semantic_producers": {
+                      "const": {
+                        "SOURCE_COMPILER": "close_source_readout",
+                        "ENCOUNTER_FORMATION": "emit_proxy",
+                        "GHOST_PATH": "close_ghost_semantic"
+                      }
+                    },
+                    "final_result_semantic_producer": {"const": "bind_opaque_sources"},
+                    "hidden_intermediate_state": {"const": "forbidden"}
+                  }
+                },
+                "adjudicator_contract": {"$ref": "#/$defs/adjudicatorContract"},
+                "block_declarations": {
+                  "type": "array",
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "block_id",
+                      "block_version",
+                      "purpose",
+                      "input_from_other_d1_blocks"
+                    ],
+                    "properties": {
+                      "block_id": {
+                        "enum": [
+                          "SOURCE_COMPILER",
+                          "ENCOUNTER_FORMATION",
+                          "GHOST_PATH"
+                        ]
+                      },
+                      "block_version": {
+                        "const": "1.0.0"
+                      },
+                      "purpose": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:@/-]*$"
+                      },
+                      "input_from_other_d1_blocks": {
+                        "const": false
+                      }
+                    }
+                  }
+                },
+                "source_fixtures": {
+                  "type": "array",
+                  "minItems": 8,
+                  "maxItems": 8,
+                  "items": {
+                    "$ref": "#/$defs/sourceFixture"
+                  }
+                },
+                "source_compilers": {
+                  "type": "array",
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "items": {
+                    "$ref": "#/$defs/sourceCompiler"
+                  }
+                },
+                "source_dataflow_contract": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "profile_aggregator_operator_id",
+                    "accepted_projection_operator_ids",
+                    "accepted_output_kind",
+                    "no_present_component_output",
+                    "forbidden_input_output_kinds",
+                    "unsettled_operator_id",
+                    "unsettled_sink_fields",
+                    "accepted_projection_sink_fields",
+                    "accessibility_sink_fields",
+                    "projection_receipt_cardinality",
+                    "empty_projection_collection_policy",
+                    "declared_order_input_field",
+                    "ordered_union_policy",
+                    "source_kind_order_policy",
+                    "contested_profile_sink",
+                    "wiring_policy"
+                  ],
+                  "properties": {
+                    "profile_aggregator_operator_id": {"const": "componentwise_max"},
+                    "accepted_projection_operator_ids": {
+                      "const": [
+                        "project_narrative_terrain",
+                        "project_adopted_integration",
+                        "project_accessible_implicit_trace"
+                      ]
+                    },
+                    "accepted_output_kind": {"const": "source_profile_projection"},
+                    "no_present_component_output": {
+                      "const": {"status": "missing", "reason": "source_unresolved"}
+                    },
+                    "forbidden_input_output_kinds": {
+                      "const": ["unsettled_source_diagnostic"]
+                    },
+                    "unsettled_operator_id": {"const": "preserve_contested_unsettled"},
+                    "unsettled_sink_fields": {
+                      "const": ["contested_present", "source_kinds_used", "eligible_source_positions_ordered"]
+                    },
+                    "accepted_projection_sink_fields": {
+                      "const": ["source_kinds_used", "eligible_source_positions_ordered"]
+                    },
+                    "accessibility_sink_fields": {
+                      "const": ["accessibility_relation", "source_kinds_used", "eligible_source_positions_ordered"]
+                    },
+                    "projection_receipt_cardinality": {
+                      "const": "zero_or_more_exactly_one_receipt_per_joined_row"
+                    },
+                    "empty_projection_collection_policy": {
+                      "const": "valid_empty_collection_no_placeholder_receipt"
+                    },
+                    "declared_order_input_field": {
+                      "const": "declared_source_positions_ordered"
+                    },
+                    "ordered_union_policy": {
+                      "const": "stable_filter_declared_order_by_unique_positions_from_accepted_unsettled_and_accessibility_receipts"
+                    },
+                    "source_kind_order_policy": {
+                      "const": "duplicate_free_lexicographic"
+                    },
+                    "contested_profile_sink": {"const": "forbidden"},
+                    "wiring_policy": {
+                      "const": "exact_typed_edges_only_no_implicit_operator_output_flow"
+                    }
+                  }
+                },
+                "formation_transition_state_contract": {
+                  "const": {
+                    "state_kind": "formation_transition_state",
+                    "initialization_operator_id": "base_profile",
+                    "immutable_fields": ["current_access_present", "source_materials_present", "declared_base_encounter_profile"],
+                    "mutable_fields": ["current_profile_or_missing", "reception_intervention_used", "target_form_intervention_used", "formation_operator_order"],
+                    "missing_reason_precedence": ["no_current_access", "no_source_material"],
+                    "transition_rule": "every_factor_operator_consumes_and_emits_one_complete_state_preserving_all_immutable_fields_and_exact_tagged_missing",
+                    "emit_rule": "emit_proxy_derives_every_formation_result_field_only_from_complete_state_and_always_preserves_declared_base_encounter_profile"
+                  }
+                },
+                "formation_fixtures": {
+                  "type": "array",
+                  "minItems": 8,
+                  "maxItems": 8,
+                  "items": {
+                    "$ref": "#/$defs/formationFixture"
+                  }
+                },
+                "formation_models": {
+                  "type": "array",
+                  "minItems": 4,
+                  "maxItems": 4,
+                  "items": {
+                    "$ref": "#/$defs/formationModel"
+                  }
+                },
+                "ghost_candidate_state_contract": {
+                  "const": {
+                    "state_kind": "candidate_relation_state",
+                    "activity_field": "activity",
+                    "activity_values": ["active", "inactive"],
+                    "inactive_reason_field": "inactive_reason",
+                    "inactive_reason_values": ["empty_traversal"],
+                    "stage_status_field": "application_status",
+                    "stage_status_values": ["initialized_active", "initialized_inactive", "applied", "skipped_inactive", "skipped_scope_mismatch"],
+                    "initialization_operator_id": "project_visited_direction_candidates",
+                    "program_operator_ids": ["broaden", "contrast", "counterfactual", "confirmation_only", "rehearsal"],
+                    "target_operator_id": "apply_target_candidate_eligibility",
+                    "inactive_transition_rule": "preserve_complete_inactive_state_append_skipped_inactive_stage_receipt_add_no_registered_relation",
+                    "used_flag_rule": "factor_used_true_iff_matching_factor_has_at_least_one_applied_stage_receipt_never_from_invocation_or_skipped_receipt",
+                    "trace_rule": "exact_invocation_trace_is_preserved_even_when_candidate_state_is_inactive"
+                  }
+                },
+                "ghost_fixtures": {
+                  "type": "array",
+                  "minItems": 8,
+                  "maxItems": 8,
+                  "items": {
+                    "$ref": "#/$defs/ghostFixture"
+                  }
+                },
+                "ghost_models": {
+                  "type": "array",
+                  "minItems": 4,
+                  "maxItems": 4,
+                  "items": {
+                    "$ref": "#/$defs/ghostModel"
+                  }
+                },
+                "execution_matrices": {
+                  "type": "array",
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "items": {
+                    "$ref": "#/$defs/executionMatrix"
+                  }
+                },
+                "phase_contract": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "phase_order",
+                    "cross_block_data_flow",
+                    "same_access_feedback",
+                    "source_effective_order",
+                    "back_edges",
+                    "future_prefix_rewrite"
+                  ],
+                  "properties": {
+                    "phase_order": {
+                      "const": [
+                        "resolve_scope",
+                        "normalize_operator_input",
+                        "execute_detached_operator",
+                        "bind_opaque_lineage",
+                        "emit_guard_projection"
+                      ]
+                    },
+                    "cross_block_data_flow": {
+                      "const": "forbidden_in_d1"
+                    },
+                    "same_access_feedback": {
+                      "const": "forbidden"
+                    },
+                    "source_effective_order": {
+                      "const": "source_effective_ordinal_strictly_less_than_access_ordinal_k"
+                    },
+                    "back_edges": {
+                      "const": "forbidden"
+                    },
+                    "future_prefix_rewrite": {
+                      "const": "forbidden"
+                    }
+                  }
+                },
+                "output_guard_contract": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "guard_ledger_names",
+                    "required_relation",
+                    "source_fact_authority",
+                    "narrative_authority"
+                  ],
+                  "properties": {
+                    "guard_ledger_names": {
+                      "const": [
+                        "actions",
+                        "authority_grants",
+                        "episode_material_references",
+                        "evidence_assessments",
+                        "evidence_links",
+                        "narrative_writes",
+                        "observation_artifacts",
+                        "receipt_prefix",
+                        "runtime_state",
+                        "source_encounters",
+                        "source_occurrences",
+                        "world_outcomes"
+                      ]
+                    },
+                    "required_relation": {
+                      "const": "before_sha256_equals_after_sha256_every_cell"
+                    },
+                    "source_fact_authority": {
+                      "const": "none"
+                    },
+                    "narrative_authority": {
+                      "const": "none"
+                    }
+                  }
+                },
+                "runner_contract": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "runner_visibility",
+                    "cell_isolation",
+                    "evaluation_manifest_access",
+                    "other_cell_access",
+                    "cell_content_digest_scope",
+                    "randomness_policy"
+                  ],
+                  "properties": {
+                    "runner_visibility": {
+                      "const": "execution_manifest_only"
+                    },
+                    "cell_isolation": {
+                      "const": "fresh_detached_ledger_per_cell"
+                    },
+                    "evaluation_manifest_access": {
+                      "const": "forbidden"
+                    },
+                    "other_cell_access": {
+                      "const": "forbidden"
+                    },
+                    "cell_content_digest_scope": {
+                      "const": "sha256_interp_canonical_json_v1_over_complete_cell_with_only_integrity_cell_content_sha256_member_omitted"
+                    },
+                    "randomness_policy": {
+                      "const": "none"
+                    }
+                  }
+                },
+                "non_outputs": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/token"
+                  },
+                  "uniqueItems": true
+                }
+              }
+            }
+          }
+        },
+        "integrity": {
+          "$ref": "#/$defs/integrity"
+        }
+      }
+    },
+    "evaluationEnvelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "$schema",
+        "manifest",
+        "integrity"
+      ],
+      "properties": {
+        "$schema": {
+          "const": "./interp-001d1-manifest.schema.json"
+        },
+        "manifest": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "manifest_kind",
+            "schema_version",
+            "manifest_id",
+            "manifest_version",
+            "status",
+            "frozen_at",
+            "implementation_base_revision",
+            "execution_manifest_sha256",
+            "canonicalization_id",
+            "evaluation_contract"
+          ],
+          "properties": {
+            "manifest_kind": {
+              "const": "evaluation"
+            },
+            "schema_version": {
+              "const": "1.0.0"
+            },
+            "manifest_id": {
+              "const": "INTERP-001D1-V1-EVALUATION"
+            },
+            "manifest_version": {
+              "const": "1.0.0"
+            },
+            "status": {
+              "const": "FROZEN_UNEXECUTED"
+            },
+            "frozen_at": {
+              "type": "string",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+            },
+            "implementation_base_revision": {
+              "$ref": "#/$defs/gitSha"
+            },
+            "execution_manifest_sha256": {
+              "$ref": "#/$defs/sha256"
+            },
+            "canonicalization_id": {
+              "const": "interp-canonical-json-v1"
+            },
+            "evaluation_contract": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "evaluation_kind",
+                "human_empirical_status",
+                "predictive_status",
+                "runner_visibility",
+                "synthetic_split_contract",
+                "predicate_declarations",
+                "challenger_declarations",
+                "common_comparison_targets",
+                "substantive_comparison_projections",
+                "semantic_signatures",
+                "cell_assertions",
+                "pair_assertions",
+                "global_invariants",
+                "retirement_rules",
+                "report_disclaimers"
+              ],
+              "properties": {
+                "evaluation_kind": {
+                  "const": "synthetic_structural_capability"
+                },
+                "human_empirical_status": {
+                  "const": "not_tested"
+                },
+                "predictive_status": {
+                  "const": "not_tested"
+                },
+                "runner_visibility": {
+                  "const": "evaluation_manifest_forbidden"
+                },
+                "synthetic_split_contract": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "purpose",
+                    "independent_prediction_claim",
+                    "assignments"
+                  ],
+                  "properties": {
+                    "purpose": {
+                      "const": "evaluator_isolation_only"
+                    },
+                    "independent_prediction_claim": {
+                      "const": false
+                    },
+                    "assignments": {
+                      "type": "array",
+                      "minItems": 3,
+                      "maxItems": 3,
+                      "items": {
+                        "$ref": "#/$defs/splitDeclaration"
+                      }
+                    }
+                  }
+                },
+                "predicate_declarations": {
+                  "type": "array",
+                  "minItems": 8,
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "predicate_id",
+                      "arity",
+                      "operand_kinds",
+                      "opcode_semantics"
+                    ],
+                    "properties": {
+                      "predicate_id": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:@/-]*$"
+                      },
+                      "arity": {"type": "integer", "minimum": 1},
+                      "operand_kinds": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/token"}},
+                      "opcode_semantics": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                },
+                "challenger_declarations": {
+                  "type": "array",
+                  "minItems": 9,
+                  "maxItems": 9,
+                  "items": {"$ref": "#/$defs/challengerDeclaration"}
+                },
+                "common_comparison_targets": {
+                  "type": "array",
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "items": {"$ref": "#/$defs/comparisonTarget"}
+                },
+                "substantive_comparison_projections": {
+                  "type": "array",
+                  "minItems": 4,
+                  "maxItems": 4,
+                  "items": {"$ref": "#/$defs/comparisonProjection"}
+                },
+                "semantic_signatures": {
+                  "type": "array",
+                  "minItems": 10,
+                  "items": {
+                    "$ref": "#/$defs/signature"
+                  }
+                },
+                "cell_assertions": {
+                  "type": "array",
+                  "minItems": 24,
+                  "maxItems": 24,
+                  "items": {
+                    "$ref": "#/$defs/cellAssertion"
+                  }
+                },
+                "pair_assertions": {
+                  "type": "array",
+                  "minItems": 8,
+                  "items": {
+                    "$ref": "#/$defs/namedAssertion"
+                  }
+                },
+                "global_invariants": {
+                  "type": "array",
+                  "minItems": 8,
+                  "items": {
+                    "$ref": "#/$defs/namedAssertion"
+                  }
+                },
+                "retirement_rules": {
+                  "type": "array",
+                  "minItems": 6,
+                  "items": {
+                    "$ref": "#/$defs/retirementRule"
+                  }
+                },
+                "report_disclaimers": {
+                  "type": "array",
+                  "minItems": 10,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "uniqueItems": true
+                }
+              }
+            }
+          }
+        },
+        "integrity": {
+          "$ref": "#/$defs/integrity"
+        }
+      }
+    }
+  }
+}

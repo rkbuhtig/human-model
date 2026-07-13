@@ -428,7 +428,7 @@
         "type": "COUNTEREXAMPLE_TRACE",
         "description": "An encounter reads ReceptionState or TargetForm output produced by its own access ordinal, effective order is inferred only from a wall-clock timestamp despite same-time sequencing, or adding a later access or event changes an already emitted prefix artifact."
       },
-      "notes": "Multiple access occurrences may share a canonical timestamp; processing_sequence or access_ordinal, not wall-clock time alone, defines the causal order."
+      "notes": "Multiple access occurrences may share a canonical timestamp; processing_sequence or access_ordinal, not wall-clock time alone, defines the causal order. INTERP-001D1 freezes a cell-local no-consumption contract: source, formation and Ghost-path cells use fresh detached ledgers, emit no TargetForm revision or feedback, and cannot read a current-cell output as a pre-access input. A future D1 runner may test those no-back-edge and declared effective-order constraints, but it will not implement a later-access temporal extension sequence; full future-extension prefix stability remains an INTERP-001D2 gate. This claim stays UNIMPLEMENTED, and manifest/schema validation alone is not structural support."
     },
     {
       "id": "HM-TYPE-001",
@@ -836,7 +836,7 @@
         "type": "DISCRIMINATING_OBSERVATION",
         "description": "After exact manifest freeze, I3 or I4 makes no declared distinction beyond simpler count, threshold, access-only, or reception-only models; bridge or Ghost paths are selected after observing outcomes; TargetForm differences exist only through unproven direct answer injection; or future hidden-oracle and held-out evaluation shows no complexity-adjusted benefit."
       },
-      "notes": "The INTERP-001A2 M1 manifest fixes TargetForm and Ghost to no-effect/fixed controls and therefore does not test this claim. The broader topology/TargetForm/Ghost executable manifest remains open. Structural fixture success after a future freeze does not establish prediction. Ghost may broaden, rehearse, moderate, reinforce, polarize, or leave candidates contested; no direction is defined as its universal objective."
+      "notes": "INTERP-001D1 freezes, but has not executed, three isolated blocks: outcome-blind TF0-TF2 source compilation, supplied E0/ER/ET/ERT ReceptionState/TargetForm encounter formation, and exact-access G0/GT/GP/GTP Ghost-path ablation, with development/sealed membership available only to the evaluator. Supplied-input sensitivity is not Episode/Narrative source support, and source-compiler distinction is not downstream necessity. The implementation status therefore remains UNIMPLEMENTED and structural support stays empty. Future structural success would not establish prediction or a human mechanism. Ghost may broaden, rehearse, moderate, reinforce, polarize, or leave candidates contested; no direction is its universal objective."
     },
     {
       "id": "HM-MEAS-001",

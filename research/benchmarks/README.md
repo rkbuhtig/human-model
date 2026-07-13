@@ -36,6 +36,9 @@ Contract mutant는 인간 모델 후보가 아니다. 반대로 descriptive mode
   M1은 R0–R3 reception access/coherence의 schema, execution/evaluation manifest와
   64-cell expectation을 동결했고, [`INTERP-001B`](interp-001b-m1-conformance.md)가
   이를 64-cell/88-step detached run과 독립 conformance evaluation으로 실행했다.
-  I0–I4와 TF0–TF2의 broader
-  manifest는 여전히 open이며 predictive validation이나 인간 mood·memory·qualia
-  evidence가 아니다.
+  [`INTERP-001D1`](interp-001d1-target-form-ghost-ablation.md)은 source compiler
+  `TF0–TF2`, supplied encounter-formation intervention `E0/ER/ET/ERT`와 exact-access
+  Ghost ablation `G0/GT/GP/GTP`를 세 개의 격리된 block, 88개 cell과 evaluator-only
+  development/sealed split으로 동결했다. 아직 실행되지 않았으며 durable TargetForm,
+  Episode/Narrative writer, predictive validation이나 인간 mood·memory·qualia evidence가
+  아니다.

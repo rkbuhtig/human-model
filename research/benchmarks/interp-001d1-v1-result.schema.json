@@ -1,0 +1,661 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rkbuhtig/human-model/research/benchmarks/interp-001d1-v1-result.schema.json",
+  "title": "INTERP-001D1 detached cell result v1",
+  "$comment": "cell_content_sha256 is SHA-256 over interp-canonical-json-v1 bytes of the complete result after omitting only integrity.cell_content_sha256.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "execution_manifest_sha256",
+    "execution_contract_sha256",
+    "cell_key",
+    "block_id",
+    "fixture_key",
+    "model_id",
+    "semantic",
+    "operator_trace",
+    "guard_ledgers",
+    "integrity"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "./interp-001d1-v1-result.schema.json"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "execution_manifest_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "execution_contract_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "cell_key": {
+      "$ref": "#/$defs/token"
+    },
+    "block_id": {
+      "enum": [
+        "SOURCE_COMPILER",
+        "ENCOUNTER_FORMATION",
+        "GHOST_PATH"
+      ]
+    },
+    "fixture_key": {
+      "$ref": "#/$defs/token"
+    },
+    "model_id": {
+      "enum": [
+        "TF0",
+        "TF1",
+        "TF2",
+        "E0",
+        "ER",
+        "ET",
+        "ERT",
+        "G0",
+        "GT",
+        "GP",
+        "GTP"
+      ]
+    },
+    "semantic": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/sourceSemantic"
+        },
+        {
+          "$ref": "#/$defs/formationSemantic"
+        },
+        {
+          "$ref": "#/$defs/ghostSemantic"
+        }
+      ]
+    },
+    "operator_trace": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/operatorInvocation"
+      }
+    },
+    "guard_ledgers": {
+      "$ref": "#/$defs/guardLedgers"
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "canonicalization_id",
+        "cell_content_sha256"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "sha256"
+        },
+        "canonicalization_id": {
+          "const": "interp-canonical-json-v1"
+        },
+        "cell_content_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "oneOf": [
+        {
+          "required": ["block_id", "model_id", "semantic"],
+          "properties": {
+            "block_id": {"const": "SOURCE_COMPILER"},
+            "model_id": {"enum": ["TF0", "TF1", "TF2"]},
+            "semantic": {"$ref": "#/$defs/sourceSemantic"}
+          }
+        },
+        {
+          "required": ["block_id", "model_id", "semantic"],
+          "properties": {
+            "block_id": {"const": "ENCOUNTER_FORMATION"},
+            "model_id": {"enum": ["E0", "ER", "ET", "ERT"]},
+            "semantic": {"$ref": "#/$defs/formationSemantic"}
+          }
+        },
+        {
+          "required": ["block_id", "model_id", "semantic"],
+          "properties": {
+            "block_id": {"const": "GHOST_PATH"},
+            "model_id": {"enum": ["G0", "GT", "GP", "GTP"]},
+            "semantic": {"$ref": "#/$defs/ghostSemantic"}
+          }
+        }
+      ]
+    }
+  ],
+  "$defs": {
+    "token": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:@/-]*$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "targetResolution": {
+      "allOf": [
+        {
+          "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status"],
+          "properties": {"status": {"enum": ["claimed", "unknown"]}}
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "external_entity_alias"],
+          "properties": {
+            "status": {"const": "resolved"},
+            "external_entity_alias": {"$ref": "#/$defs/token"}
+          }
+        }
+          ]
+        }
+      ]
+    },
+    "scopeLineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actor_alias", "interpreted_target_scope_alias", "relation_scope_alias", "context_scope_alias", "target_resolution"],
+      "properties": {
+        "actor_alias": {"$ref": "#/$defs/token"},
+        "interpreted_target_scope_alias": {"$ref": "#/$defs/token"},
+        "relation_scope_alias": {"$ref": "#/$defs/token"},
+        "context_scope_alias": {"$ref": "#/$defs/token"},
+        "target_resolution": {"$ref": "#/$defs/targetResolution"}
+      }
+    },
+    "operatorInvocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operator_id", "operator_version", "phase", "input_view_id", "inspected_field_ids", "opaque_pass_through_field_ids", "output_kind", "authority"],
+      "properties": {
+        "operator_id": {"$ref": "#/$defs/token"},
+        "operator_version": {"const": "1.0.0"},
+        "phase": {"enum": ["resolve_scope", "normalize", "source_projection", "formation", "seed", "traverse", "bind", "adjudicate", "emit"]},
+        "input_view_id": {"$ref": "#/$defs/token"},
+        "inspected_field_ids": {"type": "array", "items": {"$ref": "#/$defs/token"}, "uniqueItems": true},
+        "opaque_pass_through_field_ids": {"type": "array", "items": {"$ref": "#/$defs/token"}, "uniqueItems": true},
+        "output_kind": {"$ref": "#/$defs/token"},
+        "authority": {"enum": ["readout_only", "formation_only", "candidate_only", "adjudication_only", "closure_only", "binder_only"]}
+      }
+    },
+    "componentValue": {
+      "allOf": [
+        {
+          "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "rank"
+          ],
+          "properties": {
+            "status": {
+              "const": "present"
+            },
+            "rank": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "reason"
+          ],
+          "properties": {
+            "status": {
+              "const": "missing"
+            },
+            "reason": {
+              "enum": [
+                "not_applicable",
+                "source_unresolved",
+                "not_declared_by_fixture",
+                "withheld_control",
+                "operator_undefined"
+              ]
+            }
+          }
+        }
+          ]
+        }
+      ]
+    },
+    "directionProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "positive_direction_support",
+        "negative_direction_support"
+      ],
+      "properties": {
+        "positive_direction_support": {
+          "$ref": "#/$defs/componentValue"
+        },
+        "negative_direction_support": {
+          "$ref": "#/$defs/componentValue"
+        }
+      }
+    },
+    "encounterProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "positive_direction_fit",
+        "negative_direction_fit",
+        "ambiguity",
+        "activation"
+      ],
+      "properties": {
+        "positive_direction_fit": {
+          "$ref": "#/$defs/componentValue"
+        },
+        "negative_direction_fit": {
+          "$ref": "#/$defs/componentValue"
+        },
+        "ambiguity": {
+          "$ref": "#/$defs/componentValue"
+        },
+        "activation": {
+          "$ref": "#/$defs/componentValue"
+        }
+      }
+    },
+    "encounterProfileOrMissing": {
+      "oneOf": [
+        {"$ref": "#/$defs/encounterProfile"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "reason"],
+          "properties": {
+            "status": {"const": "missing"},
+            "reason": {"enum": ["no_current_access", "no_source_material"]}
+          }
+        }
+      ]
+    },
+    "guardLedger": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "before_sha256",
+        "after_sha256"
+      ],
+      "properties": {
+        "before_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "after_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "guardLedgers": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_links",
+        "evidence_assessments",
+        "authority_grants",
+        "source_occurrences",
+        "source_encounters",
+        "episode_material_references",
+        "observation_artifacts",
+        "world_outcomes",
+        "actions",
+        "narrative_writes",
+        "runtime_state"
+        ,"receipt_prefix"
+      ],
+      "properties": {
+        "evidence_links": {
+          "$ref": "#/$defs/guardLedger"
+        },
+        "evidence_assessments": {
+          "$ref": "#/$defs/guardLedger"
+        },
+        "authority_grants": {
+          "$ref": "#/$defs/guardLedger"
+        },
+        "source_occurrences": {
+          "$ref": "#/$defs/guardLedger"
+        },
+        "source_encounters": {
+          "$ref": "#/$defs/guardLedger"
+        },
+        "episode_material_references": {
+          "$ref": "#/$defs/guardLedger"
+        },
+        "observation_artifacts": {
+          "$ref": "#/$defs/guardLedger"
+        },
+        "world_outcomes": {
+          "$ref": "#/$defs/guardLedger"
+        },
+        "actions": {
+          "$ref": "#/$defs/guardLedger"
+        },
+        "narrative_writes": {
+          "$ref": "#/$defs/guardLedger"
+        },
+        "runtime_state": {
+          "$ref": "#/$defs/guardLedger"
+        },
+        "receipt_prefix": {
+          "$ref": "#/$defs/guardLedger"
+        }
+      }
+    },
+    "sourceSemantic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "semantic_kind",
+        "scope_lineage",
+        "access_ordinal_k",
+        "source_kinds_used",
+        "target_form_readout_profile",
+        "contested_present",
+        "accessibility_relation",
+        "effective_before_access_ordinal",
+        "eligible_source_position_count",
+        "eligible_source_positions_ordered"
+      ],
+      "properties": {
+        "semantic_kind": {
+          "const": "source_compiler"
+        },
+        "scope_lineage": {"$ref": "#/$defs/scopeLineage"},
+        "access_ordinal_k": {"type": "integer", "minimum": 2, "maximum": 9007199254740991},
+        "source_kinds_used": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "narrative_terrain_fixture",
+              "episode_integration_receipt_fixture",
+              "contested_binding_receipt_fixture",
+              "implicit_plastic_trace_fixture",
+              "pre_access_accessibility_snapshot"
+            ]
+          }
+        },
+        "target_form_readout_profile": {
+          "$ref": "#/$defs/directionProfile"
+        },
+        "contested_present": {
+          "type": "boolean"
+        },
+        "accessibility_relation": {
+          "enum": [
+            "not_applicable",
+            "all_eligible",
+            "partially_withheld",
+            "all_withheld"
+          ]
+        },
+        "effective_before_access_ordinal": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "eligible_source_position_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "eligible_source_positions_ordered": {
+          "type": "array",
+          "items": {"type": "integer", "minimum": 0, "maximum": 9007199254740991},
+          "uniqueItems": true
+        }
+      }
+    },
+    "formationSemantic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "semantic_kind",
+        "scope_lineage",
+        "current_access_present",
+        "source_materials_present",
+        "encounter_emitted",
+        "base_encounter_profile",
+        "formed_encounter_profile",
+        "reception_intervention_used",
+        "target_form_intervention_used",
+        "formation_operator_order"
+      ],
+      "properties": {
+        "semantic_kind": {
+          "const": "encounter_formation"
+        },
+        "scope_lineage": {"$ref": "#/$defs/scopeLineage"},
+        "current_access_present": {"type": "boolean"},
+        "source_materials_present": {"type": "boolean"},
+        "encounter_emitted": {"type": "boolean"},
+        "base_encounter_profile": {
+          "$ref": "#/$defs/encounterProfile"
+        },
+        "formed_encounter_profile": {
+          "$ref": "#/$defs/encounterProfileOrMissing"
+        },
+        "reception_intervention_used": {
+          "type": "boolean"
+        },
+        "target_form_intervention_used": {
+          "type": "boolean"
+        },
+        "formation_operator_order": {
+          "enum": [
+            ["base_profile", "emit_proxy"],
+            ["base_profile", "apply_reception_eligibility", "emit_proxy"],
+            ["base_profile", "apply_target_directional_compatibility", "emit_proxy"],
+            [
+              "base_profile",
+              "apply_target_directional_compatibility",
+              "apply_reception_eligibility",
+              "emit_proxy"
+            ]
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "oneOf": [
+        {
+          "properties": {
+            "current_access_present": {"const": false},
+            "encounter_emitted": {"const": false},
+            "formed_encounter_profile": {"const": {"status": "missing", "reason": "no_current_access"}},
+            "reception_intervention_used": {"const": false},
+            "target_form_intervention_used": {"const": false}
+          }
+        },
+        {
+          "properties": {
+            "current_access_present": {"const": true},
+            "source_materials_present": {"const": false},
+            "encounter_emitted": {"const": false},
+            "formed_encounter_profile": {"const": {"status": "missing", "reason": "no_source_material"}},
+            "reception_intervention_used": {"const": false},
+            "target_form_intervention_used": {"const": false}
+          }
+        },
+        {
+          "properties": {
+            "current_access_present": {"const": true},
+            "source_materials_present": {"const": true},
+            "encounter_emitted": {"const": true},
+            "formed_encounter_profile": {"$ref": "#/$defs/encounterProfile"}
+          }
+        }
+          ]
+        }
+      ]
+    },
+    "ghostSemantic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "semantic_kind",
+        "scope_lineage",
+        "current_access_present",
+        "source_materials_present",
+        "accessed_material_positions_ordered",
+        "visited_material_positions_ordered",
+        "operation_phase_order",
+        "target_guidance_used",
+        "ghost_program_used",
+        "candidate_projection",
+        "adjudication_projection"
+      ],
+      "properties": {
+        "semantic_kind": {
+          "const": "ghost_path"
+        },
+        "scope_lineage": {"$ref": "#/$defs/scopeLineage"},
+        "current_access_present": {"type": "boolean"},
+        "source_materials_present": {"type": "boolean"},
+        "accessed_material_positions_ordered": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "uniqueItems": true
+        },
+        "visited_material_positions_ordered": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "uniqueItems": true
+        },
+        "operation_phase_order": {
+          "const": [
+            "seed",
+            "traverse",
+            "bind"
+          ]
+        },
+        "target_guidance_used": {
+          "type": "boolean"
+        },
+        "ghost_program_used": {
+          "type": "boolean"
+        },
+        "candidate_projection": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["writer_authority", "binding_candidate_directions", "binding_relation", "registered_operation_relations"],
+          "properties": {
+            "writer_authority": {"const": "ghost_candidate_only"},
+            "binding_candidate_directions": {"enum": [[], ["negative"], ["positive"], ["negative", "positive"]]},
+            "binding_relation": {"enum": ["none", "single_direction", "contested"]},
+            "registered_operation_relations": {"type": "array", "items": {"$ref": "#/$defs/token"}, "uniqueItems": true}
+          }
+        },
+        "adjudication_projection": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["writer_authority", "adjudication_outcome"],
+          "properties": {
+            "writer_authority": {"const": "scoped_adjudicator_only"},
+            "adjudication_outcome": {"enum": ["deferred", "adopted_negative", "adopted_positive", "contested"]}
+          }
+        }
+      },
+      "allOf": [
+        {
+          "oneOf": [
+        {
+          "properties": {
+            "candidate_projection": {
+              "type": "object",
+              "properties": {
+                "binding_candidate_directions": {"const": []},
+                "binding_relation": {"const": "none"}
+              }
+            },
+            "adjudication_projection": {
+              "type": "object",
+              "properties": {"adjudication_outcome": {"const": "deferred"}}
+            }
+          }
+        },
+        {
+          "properties": {
+            "candidate_projection": {
+              "type": "object",
+              "properties": {
+                "binding_candidate_directions": {"const": ["negative"]},
+                "binding_relation": {"const": "single_direction"}
+              }
+            },
+            "adjudication_projection": {
+              "type": "object",
+              "properties": {"adjudication_outcome": {"const": "adopted_negative"}}
+            }
+          }
+        },
+        {
+          "properties": {
+            "candidate_projection": {
+              "type": "object",
+              "properties": {
+                "binding_candidate_directions": {"const": ["positive"]},
+                "binding_relation": {"const": "single_direction"}
+              }
+            },
+            "adjudication_projection": {
+              "type": "object",
+              "properties": {"adjudication_outcome": {"const": "adopted_positive"}}
+            }
+          }
+        },
+        {
+          "properties": {
+            "candidate_projection": {
+              "type": "object",
+              "properties": {
+                "binding_candidate_directions": {"const": ["negative", "positive"]},
+                "binding_relation": {"const": "contested"}
+              }
+            },
+            "adjudication_projection": {
+              "type": "object",
+              "properties": {"adjudication_outcome": {"const": "contested"}}
+            }
+          }
+        }
+          ]
+        }
+      ]
+    }
+  }
+}

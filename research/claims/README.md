@@ -44,6 +44,9 @@ npx --yes ajv-cli validate --spec=draft2020 \
 `HM-DYN-003`도 88개 signature와 54개 non-retirement assertion의 synthetic
 conformance는 얻었지만 single-threshold alias retirement rule이 baseline 부재로
 `NOT_EVALUABLE`이고 TargetForm-recursion dependency가 열려 있어 `PARTIAL`이다.
+`INTERP-001D1`은 source compiler, supplied encounter-formation intervention와
+exact-access Ghost ablation을 세 block으로 동결했지만 아직 실행하지 않았으므로
+`HM-INV-013`과 `HM-DYN-004`의 status나 structural support를 올리지 않는다.
 `HM-MEAS-005`의 complete comparable receipt, TargetForm/Ghost variation, runtime
 integration, calibration과 human measurement는 구현되지 않았다.
 이 등록은 역사적 Episode ontology의 정본화, mood-congruent ignition의 인간 법칙,
