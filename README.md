@@ -127,5 +127,9 @@ Episode candidate, interpretive adjudication과 target-form readout을 서로 �
 [INTERP-001 benchmark](research/benchmarks/interp-001-subjective-encounter-binding.md)에
 더해 `INTERP-001A2`가 reception access/coherence M1 contract를 고정했고,
 [`INTERP-001B`](research/benchmarks/interp-001b-m1-conformance.md)가 64-cell/88-step
-detached run과 독립 conformance evaluation을 구현했다. 이는 새 runtime behavior,
-실제 퀄리아·기분 측정, Narrative writer 또는 인간 경험적 지지를 구현하지 않는다.
+detached run과 독립 conformance evaluation을 구현했다. 이어
+[`INTERP-001D1`](research/benchmarks/interp-001d1-target-form-ghost-ablation.md)은
+TargetForm source compiler, supplied Reception/TargetForm formation과 exact-access Ghost
+path를 분리한 3-block/88-cell contract를 동결했다. D1은 아직 실행되지 않았고 durable
+TargetForm·feedback·Narrative writer를 만들지 않는다. 이는 새 runtime behavior,
+실제 퀄리아·기분 측정 또는 인간 경험적 지지를 구현하지 않는다.

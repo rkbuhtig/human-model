@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rkbuhtig/human-model/research/benchmarks/interp-001d1-v1-run.schema.json",
+  "title": "INTERP-001D1 V1 future run carrier",
+  "$comment": "FROZEN_CARRIER_SCHEMA only. No executed run artifact exists or is authorized by INTERP-001D1. A future validator must additionally require unique cell_key values in exact frozen matrix order, exact execution-matrix membership, equality of every cell execution digest to this envelope, direct content-digest equality for the frozen result schema, recomputed/registry-bound runner implementation and bundle digests, and recomputed run integrity.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "run_id",
+    "run_version",
+    "status",
+    "execution_manifest_sha256",
+    "execution_contract_sha256",
+    "result_schema_sha256",
+    "runner_implementation_sha256",
+    "runner_bundle_sha256",
+    "runner_input_kind",
+    "evaluation_manifest_visible",
+    "cells",
+    "integrity"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "./interp-001d1-v1-run.schema.json"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "run_id": {
+      "type": "string",
+      "pattern": "^INTERP-001D1-V1-RUN-[A-Za-z0-9._:-]+$"
+    },
+    "run_version": {
+      "const": "1.0.0"
+    },
+    "status": {
+      "const": "EXECUTED_SYNTHETIC_RESULT"
+    },
+    "execution_manifest_sha256": {
+      "$ref": "#/$defs/nonzeroSha256"
+    },
+    "execution_contract_sha256": {
+      "$ref": "#/$defs/nonzeroSha256"
+    },
+    "result_schema_sha256": {
+      "$ref": "#/$defs/nonzeroSha256"
+    },
+    "runner_implementation_sha256": {
+      "$ref": "#/$defs/nonzeroSha256"
+    },
+    "runner_bundle_sha256": {
+      "$ref": "#/$defs/nonzeroSha256"
+    },
+    "runner_input_kind": {
+      "const": "execution_manifest_only"
+    },
+    "evaluation_manifest_visible": {
+      "const": false
+    },
+    "cells": {
+      "type": "array",
+      "minItems": 88,
+      "maxItems": 88,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "./interp-001d1-v1-result.schema.json"
+      },
+      "allOf": [
+        {
+          "contains": {
+            "type": "object",
+            "required": [
+              "block_id"
+            ],
+            "properties": {
+              "block_id": {
+                "const": "SOURCE_COMPILER"
+              }
+            }
+          },
+          "minContains": 24,
+          "maxContains": 24
+        },
+        {
+          "contains": {
+            "type": "object",
+            "required": [
+              "block_id"
+            ],
+            "properties": {
+              "block_id": {
+                "const": "ENCOUNTER_FORMATION"
+              }
+            }
+          },
+          "minContains": 32,
+          "maxContains": 32
+        },
+        {
+          "contains": {
+            "type": "object",
+            "required": [
+              "block_id"
+            ],
+            "properties": {
+              "block_id": {
+                "const": "GHOST_PATH"
+              }
+            }
+          },
+          "minContains": 32,
+          "maxContains": 32
+        }
+      ]
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "canonicalization_id",
+        "canonical_scope",
+        "run_sha256"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "sha256"
+        },
+        "canonicalization_id": {
+          "const": "interp-canonical-json-v1"
+        },
+        "canonical_scope": {
+          "const": "whole_run_envelope_excluding_only_integrity.run_sha256"
+        },
+        "run_sha256": {
+          "$ref": "#/$defs/nonzeroSha256"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "token": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:@/-]*$"
+    },
+    "nonzeroSha256": {
+      "type": "string",
+      "pattern": "^(?!0{64}$)[0-9a-f]{64}$"
+    }
+  }
+}
