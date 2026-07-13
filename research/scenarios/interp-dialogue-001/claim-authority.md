@@ -48,8 +48,8 @@ unregistered or unexpected effect
 ```
 
 `INTERP-DIALOGUE-001B`는 pilot이나 결과 판정 전에 이 out-of-model lane의 기록 및
-판정 권한을 명시적으로 고정해야 한다. 목록 밖 효과를 사후에 기존 domain으로
-강제 cast해서는 안 된다.
+판정 권한을 명시적으로 고정했다. 목록 밖 효과를 사후에 기존 domain으로 강제
+cast해서는 안 된다.
 
 ## 저자 기원 사례의 경계
 
@@ -94,3 +94,24 @@ design-only candidate anchor
 
 후속 인간 자료가 추가되더라도 first-person attestation, 행동 선택, 외부 사실과
 기능 메커니즘을 별도 record로 보존해야 한다.
+
+## `001B` trace oracle의 추가 권한 경계
+
+`001B`는 세 vocabulary를 분리한다.
+
+```text
+hypothesis relation
+≠ future observation status
+≠ adjudication result
+```
+
+`MUST_DIFFER_IF_PLACEMENT`는 placement 정의에 따른 계산 약속이지 인간이 반드시 다르게
+느껴야 한다는 예측이 아니다. `EQUAL`은 미래 source-specific mapping의 관측 상태이지 두
+기능이 본질적으로 같다는 판정이 아니다. `OPERATIONALLY_ALIASED`는 같은
+probe·projection·horizon·measurement mapping에서 전체 hypothesis signature가 같은 경우에만
+허용한다.
+
+자연 contrast의 earliest divergence도 direct causal edge를 인증하지 않는다. direct-edge
+주장은 아직 실행되지 않은 D2a node-clamp challenge를 요구한다. 인간 판단이나 LLM
+activation은 source-specific mapping이 별도로 동결되기 전에는 내부 trace field 값이나
+causal residence 증거가 아니다.

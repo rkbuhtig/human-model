@@ -112,12 +112,19 @@ D1과 recursive D2 사이에는
 바꾸는 contrast를 등록한다. factor별 contract는 조작 source lane, public-record effect,
 고정 factor, `registered_candidate_probe_domains`, must-remain-equal 항목과 열린
 discriminator를 구분한다. 후보 domain은 비배타적 관측 목록이므로 목록 밖 효과는 fixture
-위반이 아니라 현재 기능 분해의 scope failure 또는 열린 결과다. exact trace field,
-signature, horizon과 명시적 out-of-model lane은 `001B`에서 동결한다. 단순 challenger는 표현력
-순위표가 아니라 alias·degeneracy control이다. 후속 순서는 scenario contract(A), trace
-oracle과 경쟁 기능 배치(B), 저자/도구 development pilot, human·latent·D2a protocol
-동결, 세 독립 실행, cross-source audit(C)다. 이 순서는 아직 human support, LLM latent
-측정, D2a runtime, durable TargetForm 또는 Narrative writer를 구현하지 않는다.
+위반이 아니라 현재 기능 분해의 scope failure 또는 열린 결과다.
+
+[`INTERP-DIALOGUE-001B`](adoption-records/2026-07-13-functional-jurisdiction-trace-oracle.md)는
+23개 exact trace field, prefix/initial/one-future ordinal horizon, 9개 factor별 38개 competing placement hypothesis,
+동일 future option 비교, REL initial×later mood 2×2와 명시적 out-of-model lane을 결과 전에
+동결했다. 이 oracle은 mental ground truth가 아니라 hypothesis-conditional conformance
+contract다. natural contrast는 association signature만 주며 direct edge는 D2a-only
+node clamp로 남는다. observed equality는 alias가 아니고, durable state와 slow cache는
+현재 one-future-access horizon에서 `NOT_IDENTIFIABLE_UNDER_HORIZON`이다. 단순 challenger는 표현력 순위표가
+아니라 alias·degeneracy control이다. 후속 순서는 완료된 scenario contract(A)와 trace
+oracle(B) 뒤에 저자/도구 development pilot, human·latent·D2a protocol 동결, 세 독립
+실행, cross-source audit(C)를 둔다. 현재 freeze는 human support, LLM latent 측정, D2a
+runtime, durable TargetForm 또는 Narrative writer를 구현하지 않는다.
 
 ```text
 implemented Q-v1 receipt/count/density types
