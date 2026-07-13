@@ -48,6 +48,11 @@ from .reducer_proposals import (
     ReducerProposalLedger,
     build_reducer_proposal_ledger,
 )
+from .reducer_envelope_comparisons import (
+    ReducerProposalEnvelopeLedger,
+    ReducerProposalEnvelopePolicy,
+    build_reducer_proposal_envelope_ledger,
+)
 from .protocol import (
     IngressDecision,
     IngressQueue,
@@ -73,6 +78,9 @@ class EngineConfig:
     mental_transition_policy: MentalTransitionQualificationPolicy = field(
         default_factory=MentalTransitionQualificationPolicy
     )
+    reducer_proposal_envelope_policy: (
+        ReducerProposalEnvelopePolicy | None
+    ) = None
 
     def __post_init__(self) -> None:
         if self.base_capacity_per_tick < 1 or self.queue_limit < 1 or self.drain_ticks < 0:
@@ -91,6 +99,15 @@ class EngineConfig:
         ):
             raise TypeError(
                 "mental_transition_policy must be MentalTransitionQualificationPolicy"
+            )
+        if (
+            self.reducer_proposal_envelope_policy is not None
+            and type(self.reducer_proposal_envelope_policy)
+            is not ReducerProposalEnvelopePolicy
+        ):
+            raise TypeError(
+                "reducer_proposal_envelope_policy must be "
+                "ReducerProposalEnvelopePolicy or None"
             )
 
 
@@ -130,6 +147,7 @@ class SimulationLedger:
     reducer_proposals: ReducerProposalLedger = field(
         default_factory=ReducerProposalLedger
     )
+    reducer_proposal_envelopes: ReducerProposalEnvelopeLedger | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -226,6 +244,27 @@ class SimulationResult:
             ),
             "reducer_proposal_policy_digest": (
                 self.ledger.reducer_proposals.policy.policy_digest
+            ),
+            "reducer_proposal_envelope_enabled": (
+                self.ledger.reducer_proposal_envelopes is not None
+            ),
+            "reducer_proposal_envelope_receipts": (
+                0
+                if self.ledger.reducer_proposal_envelopes is None
+                else len(self.ledger.reducer_proposal_envelopes.receipts)
+            ),
+            "reducer_proposal_envelope_measurement_model": (
+                None
+                if self.ledger.reducer_proposal_envelopes is None
+                else (
+                    f"{self.ledger.reducer_proposal_envelopes.policy.measurement_model_id}@"
+                    f"{self.ledger.reducer_proposal_envelopes.policy.measurement_model_version}"
+                )
+            ),
+            "reducer_proposal_envelope_policy_digest": (
+                None
+                if self.ledger.reducer_proposal_envelopes is None
+                else self.ledger.reducer_proposal_envelopes.policy.policy_digest
             ),
             "input_accounting_ok": self.input_accounting_ok,
             "evidence_links": len(self.ledger.evidence_links),
@@ -407,6 +446,13 @@ class DynamicsEngine:
         ledger.reducer_proposals = build_reducer_proposal_ledger(
             tuple(ledger.tick_traces)
         )
+        if self.config.reducer_proposal_envelope_policy is not None:
+            ledger.reducer_proposal_envelopes = (
+                build_reducer_proposal_envelope_ledger(
+                    ledger.reducer_proposals,
+                    self.config.reducer_proposal_envelope_policy,
+                )
+            )
 
         return SimulationResult(initial_state=initial_state, final_state=state, ledger=ledger)
 

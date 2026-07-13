@@ -8,7 +8,8 @@
 | one receipt per processed occurrence | `IMPLEMENTED` |
 | requested target / bounded committed target 분리 | `IMPLEMENTED` |
 | independently identified `DeformationDemand` | `UNIMPLEMENTED` |
-| `AccommodationEnvelope`, excess, residual, load | `UNIMPLEMENTED` |
+| declared simulation envelope comparison | `IMPLEMENTED SEPARATELY — MORPH-001B` |
+| measured human `AccommodationEnvelope`, excess, residual, load | `UNIMPLEMENTED` |
 | qualia 또는 subjective-time bridge | `HOLD` |
 | 인간 경험적 검증 | `OPEN` |
 
@@ -29,6 +30,10 @@ ReducerProposal
 ≠ MorphicLoad
 ≠ qualia / subjective time
 ```
+
+후속 [`MORPH-001B`](reducer-envelope-comparisons.md)는 이 proposal을 실험자가 선언한
+simulation band와 비교하지만, proposal 자체의 지위를 바꾸거나 이를 human demand로
+소급 개명하지 않는다.
 
 ## 포착 위치
 

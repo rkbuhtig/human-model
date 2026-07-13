@@ -32,3 +32,6 @@ npx --yes ajv-cli validate --spec=draft2020 \
 현재 registry에는 구현된 핵심 invariant와 RFC 0003의 타입 구분·가설·측정 전제·
 비유 지위를 함께 둔다. 근거가 없는 dynamical claim은 `PROPOSED` 또는 `HOLD`이며,
 타입 구분을 채택했다고 그 안의 인간 가설까지 채택된 것으로 읽지 않는다.
+`MORPH-001B`의 implemented claim도 experimenter-declared simulation comparison에만
+적용되며 measured human accommodation, load, qualia 또는 mental-time claim으로
+확장되지 않는다.

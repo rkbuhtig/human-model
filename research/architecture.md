@@ -3,7 +3,7 @@
 | 항목 | 지위 |
 |---|---|
 | 설계 방향 | `ADOPTED` |
-| 코드 반영 | `PARTIAL — v0.1.1 boundaries + v0.2 provenance/Q-v1 + MORPH-001A proposal–commit instrumentation; legacy access bridge retained` |
+| 코드 반영 | `PARTIAL — v0.1.1 boundaries + v0.2 provenance/Q-v1 + MORPH-001A instrumentation + MORPH-001B simulation proxy comparison; legacy access bridge retained` |
 | 인간 경험적 지위 | `OPEN` |
 
 v0.1.1은 다음 core import 경계를 코드와 test로 구현했다. 다만 frozen semantics를
@@ -101,7 +101,8 @@ runtime의 traced reducer는 `ReducerStepResult`로 committed state와 해당 st
 proposal을 함께 반환한다. engine은 fast/slow proposal을 write sequence 순서로 평탄화해
 `TickTrace.reducer_proposals`에 보존하며, post-run projection은 occurrence-scoped
 `ReducerProposalReceipt.proposals` flat tuple과 `ReducerProposalLedger`를 만든다.
-ledger는 `ReducerStepResult` sequence를 저장하지 않는다. measurement identity는
+ledger는 `ReducerStepResult` sequence를 저장하지 않는다. `MORPH-001A` proposal
+ledger의 measurement identity는
 `descriptive-reducer-preclamp-proxy@1.0.0`이다.
 
 고정 policy는 mandatory/conditional operator order와 operator별 field·constraint·driver
@@ -119,6 +120,38 @@ ReducerProposal ≠ independently identified DeformationDemand ≠ MorphicLoad
 
 `AccommodationEnvelope`, excess/residual, `MorphicLoadProfile`, qualia, 주관적 시간은
 이 층의 출력이 아니다.
+
+### Derived Proposal Envelope Comparison — `MORPH-001B IMPLEMENTED / SIMULATION PROXY ONLY`
+
+완성된 `ReducerProposalLedger`를 명시적으로 선택한
+`ReducerProposalEnvelopePolicy`와 post-run에 비교한다. policy는 current proposal
+operator가 쓰는 field마다 signed band를 선언하며, 같은 field의 반복 write를
+합산하지 않는다.
+
+`MORPH-001B` comparison의 measurement identity는
+`reducer-proposal-envelope-comparison@1.0.0`이다.
+
+```text
+ReducerProposal.requested_delta
++ experimenter-declared reducer-write band
+→ ReducerProposalEnvelopeComparison
+→ ordered proxy-excess profile
+```
+
+기준 operator는 componentwise clipping 하나뿐이며 occurrence aggregate나 scalar load를
+만들지 않는다. snapshot은 source proposal receipt와 pre-update state-projection digest에
+결부되지만, v1 band는 state에서 추정한 값이 아니라 synthetic policy parameter다.
+
+이 projection은 opt-in이고 생성 실행이 끝난 뒤 source ledger만 읽는다. policy를
+바꾸거나 끄더라도 `HumanState`, trace, Evidence, routing, action, Q-v1과
+`ReducerProposalLedger`는 바뀌지 않아야 한다.
+
+```text
+ReducerProposalEnvelopePolicy ≠ measured human AccommodationEnvelope
+ordered proxy-excess profile ≠ ExcessDemand / ResidualStrain / MorphicLoad
+```
+
+따라서 이 층도 qualia·주관적 시간 또는 `HM-DYN-002`의 근거가 아니다.
 
 ### 알려진 v0.1 bridge
 
@@ -161,6 +194,7 @@ v0.1.1에서 import 방향을 test로 잠갔다. 위 legacy bridge 때문에
 | Plasticity | 경험과 시간에 따른 update kernel | 재정의 `PLANNED` |
 | Qualified mental transition | post-run receipt/subset/count/density | Q-v1 simulation measurement 구현; predictive value `OPEN` |
 | Reducer proposal / committed target | current reducer instrumentation precursor | `MORPH-001A` 구현; DeformationDemand/envelope/load/phenomenal interpretation 제외 |
+| Proposal / declared envelope comparison | opt-in ordered post-run proxy profile | `MORPH-001B` simulation comparison 구현; human capacity/load/phenomenal interpretation 제외 |
 
 Plasticity는 Truth/Access/Agency와 같은 종류의 인증 평면이 아니다. Persistence는
 남아 있는 흔적이고 Plasticity는 그 흔적을 바꾸는 연산 가설이다.
