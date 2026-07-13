@@ -90,10 +90,15 @@ manifest에 고정된 assembly/adjudication phase까지 포함해 detached confo
 실행했다. [`INTERP-001D1`](benchmarks/interp-001d1-target-form-ghost-ablation.md)은
 outcome-blind `TF0–TF2` source compiler, supplied TargetForm/Reception formation
 intervention과 exact-access Ghost path를 서로 다른 세 block으로 분리한 88-cell
-execution/evaluation contract를 동결했다. D1은 `FROZEN / UNEXECUTED`이고 source
-compiler 성공과 supplied-input sensitivity를 같은 주장으로 합치지 않는다. durable
-TargetForm writer, later-access feedback, 전체 EF manifest와 Dynamics runtime behavior는
-여전히 `OPEN`이다. residual·load와 INTERP/MORPH 접합은 detached lab 판별 뒤에 남아 있다.
+execution/evaluation contract로 동결했고,
+[`D1 conformance run`](benchmarks/interp-001d1-v1-conformance.md)이 88/88 signature와
+91/91 non-retirement assertion을 통과했다. 상태는
+`EXECUTED / EVALUATED SYNTHETIC CONFORMANCE`다. source compiler 성공, supplied-input
+sensitivity와 Ghost-path distinction은 서로 다른 격리 판정이며 block 사이에 output을
+전달하는 end-to-end pipeline이 아니다. development/sealed도 evaluator-only synthetic
+분리이지 예측 partition이 아니다. durable TargetForm writer, later-access feedback, 전체
+EF manifest와 Dynamics runtime behavior는 여전히 `OPEN`이다. residual·load와
+INTERP/MORPH 접합은 detached lab 판별 뒤에 남아 있다.
 `FlowUpdate/EventJump`·no-event flow·burst/spaced와
 `HM-DYN-001` predictive comparison은 독립적인 planned temporal-comparison 축이며
 `MORPH-001`의 선행 blocker가 아니다. `affect → SubjectiveBelief`는 독립 v0.3 축이고,

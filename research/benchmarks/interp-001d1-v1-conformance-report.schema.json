@@ -1,0 +1,257 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rkbuhtig/human-model/research/benchmarks/interp-001d1-v1-conformance-report.schema.json",
+  "title": "INTERP-001D1 V1 detached conformance report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "report", "integrity"],
+  "properties": {
+    "$schema": {"const": "./interp-001d1-v1-conformance-report.schema.json"},
+    "report": {"$ref": "#/$defs/report"},
+    "integrity": {"$ref": "#/$defs/integrity"}
+  },
+  "$defs": {
+    "token": {"type": "string", "minLength": 1},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "status": {"enum": ["PASS", "FAIL"]},
+    "failureCodes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]*$"}
+    },
+    "artifactBindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "execution_manifest_file_sha256", "execution_manifest_sha256", "execution_contract_sha256",
+        "evaluation_manifest_file_sha256", "evaluation_manifest_sha256", "evaluation_contract_sha256",
+        "cell_result_schema_sha256", "run_artifact_schema_sha256", "evaluator_policy_sha256",
+        "conformance_report_schema_sha256", "run_sha256"
+      ],
+      "properties": {
+        "execution_manifest_file_sha256": {"$ref": "#/$defs/sha256"},
+        "execution_manifest_sha256": {"$ref": "#/$defs/sha256"},
+        "execution_contract_sha256": {"$ref": "#/$defs/sha256"},
+        "evaluation_manifest_file_sha256": {"$ref": "#/$defs/sha256"},
+        "evaluation_manifest_sha256": {"$ref": "#/$defs/sha256"},
+        "evaluation_contract_sha256": {"$ref": "#/$defs/sha256"},
+        "cell_result_schema_sha256": {"$ref": "#/$defs/sha256"},
+        "run_artifact_schema_sha256": {"$ref": "#/$defs/sha256"},
+        "evaluator_policy_sha256": {"$ref": "#/$defs/sha256"},
+        "conformance_report_schema_sha256": {"$ref": "#/$defs/sha256"},
+        "run_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "implementationBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["implementation_id", "implementation_version", "source_sha256", "bundle_sha256"],
+      "properties": {
+        "implementation_id": {"$ref": "#/$defs/token"},
+        "implementation_version": {"const": "1.0.0"},
+        "source_sha256": {"$ref": "#/$defs/sha256"},
+        "bundle_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "implementationBindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["runner", "evaluator"],
+      "properties": {
+        "runner": {"$ref": "#/$defs/implementationBinding"},
+        "evaluator": {"$ref": "#/$defs/implementationBinding"}
+      }
+    },
+    "inputSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "run_id", "expected_cell_count", "reported_cell_count", "source_cell_count",
+        "formation_cell_count", "ghost_cell_count", "development_signature_count", "sealed_signature_count"
+      ],
+      "properties": {
+        "run_id": {"const": "INTERP-001D1-V1-RUN-001"},
+        "expected_cell_count": {"const": 88},
+        "reported_cell_count": {"const": 88},
+        "source_cell_count": {"const": 24},
+        "formation_cell_count": {"const": 32},
+        "ghost_cell_count": {"const": 32},
+        "development_signature_count": {"const": 44},
+        "sealed_signature_count": {"const": 44}
+      }
+    },
+    "schemaValidation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "validated_cell_count", "failure_codes"],
+      "properties": {
+        "status": {"const": "PASS"},
+        "validated_cell_count": {"const": 88},
+        "failure_codes": {"const": []}
+      }
+    },
+    "signatureResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "signature_id", "block_id", "fixture_key", "model_id", "evaluation_role",
+        "status", "evaluated_relation_count", "failed_relation_paths", "failure_codes"
+      ],
+      "properties": {
+        "signature_id": {"$ref": "#/$defs/token"},
+        "block_id": {"enum": ["SOURCE_COMPILER", "ENCOUNTER_FORMATION", "GHOST_PATH"]},
+        "fixture_key": {"$ref": "#/$defs/token"},
+        "model_id": {"$ref": "#/$defs/token"},
+        "evaluation_role": {"enum": ["development", "sealed"]},
+        "status": {"$ref": "#/$defs/status"},
+        "evaluated_relation_count": {"type": "integer", "minimum": 1, "maximum": 64},
+        "failed_relation_paths": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^/"}},
+        "failure_codes": {"$ref": "#/$defs/failureCodes"}
+      }
+    },
+    "cellAssertionResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cell_assertion_id", "block_id", "fixture_key", "evaluation_role", "status", "failure_codes"],
+      "properties": {
+        "cell_assertion_id": {"$ref": "#/$defs/token"},
+        "block_id": {"enum": ["SOURCE_COMPILER", "ENCOUNTER_FORMATION", "GHOST_PATH"]},
+        "fixture_key": {"$ref": "#/$defs/token"},
+        "evaluation_role": {"enum": ["development", "sealed"]},
+        "status": {"$ref": "#/$defs/status"},
+        "failure_codes": {"$ref": "#/$defs/failureCodes"}
+      }
+    },
+    "assertionResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["assertion_id", "predicate_id", "assertion_group", "evaluation_role", "status", "failure_codes"],
+      "properties": {
+        "assertion_id": {"$ref": "#/$defs/token"},
+        "predicate_id": {"$ref": "#/$defs/token"},
+        "assertion_group": {"enum": ["pair", "global"]},
+        "evaluation_role": {"enum": ["development", "sealed", "mixed", "all"]},
+        "status": {"$ref": "#/$defs/status"},
+        "failure_codes": {"$ref": "#/$defs/failureCodes"}
+      }
+    },
+    "challengerResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "challenger_id", "challenger_role", "block_id", "fixture_key", "evaluation_role",
+        "reference_model_id", "comparison_target_id", "model_target_sha256",
+        "challenger_target_sha256", "targets_equal"
+      ],
+      "properties": {
+        "challenger_id": {"$ref": "#/$defs/token"},
+        "challenger_role": {"enum": ["distinct_challenger", "algebraic_alias_control_reference", "algebraic_alias_control_replica"]},
+        "block_id": {"enum": ["SOURCE_COMPILER", "ENCOUNTER_FORMATION", "GHOST_PATH"]},
+        "fixture_key": {"$ref": "#/$defs/token"},
+        "evaluation_role": {"enum": ["development", "sealed"]},
+        "reference_model_id": {"enum": ["TF2", "ERT", "GTP"]},
+        "comparison_target_id": {"enum": ["SOURCE_READOUT_TARGET", "FORMATION_DIRECTION_TARGET", "GHOST_CANDIDATE_TARGET"]},
+        "model_target_sha256": {"$ref": "#/$defs/sha256"},
+        "challenger_target_sha256": {"$ref": "#/$defs/sha256"},
+        "targets_equal": {"type": "boolean"}
+      }
+    },
+    "retirementResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rule_id", "condition_predicate_id", "condition_status", "disposition", "authoritative_mutation", "failure_codes"],
+      "properties": {
+        "rule_id": {"$ref": "#/$defs/token"},
+        "condition_predicate_id": {"$ref": "#/$defs/token"},
+        "condition_status": {"enum": ["TRIGGERED", "NOT_TRIGGERED"]},
+        "disposition": {"type": "string", "minLength": 1},
+        "authoritative_mutation": {"const": false},
+        "failure_codes": {"const": []}
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "signature_pass_count", "signature_fail_count", "cell_assertion_pass_count", "cell_assertion_fail_count",
+        "pair_assertion_pass_count", "pair_assertion_fail_count", "global_assertion_pass_count", "global_assertion_fail_count",
+        "retirement_triggered_count", "retirement_not_triggered_count", "rt_equivalence_family_count",
+        "rt_alias_control_confirmation_count", "distinct_challenger_reduction_count"
+      ],
+      "properties": {
+        "signature_pass_count": {"type": "integer", "minimum": 0, "maximum": 88},
+        "signature_fail_count": {"type": "integer", "minimum": 0, "maximum": 88},
+        "cell_assertion_pass_count": {"type": "integer", "minimum": 0, "maximum": 24},
+        "cell_assertion_fail_count": {"type": "integer", "minimum": 0, "maximum": 24},
+        "pair_assertion_pass_count": {"type": "integer", "minimum": 0, "maximum": 30},
+        "pair_assertion_fail_count": {"type": "integer", "minimum": 0, "maximum": 30},
+        "global_assertion_pass_count": {"type": "integer", "minimum": 0, "maximum": 37},
+        "global_assertion_fail_count": {"type": "integer", "minimum": 0, "maximum": 37},
+        "retirement_triggered_count": {"type": "integer", "minimum": 0, "maximum": 16},
+        "retirement_not_triggered_count": {"type": "integer", "minimum": 0, "maximum": 16},
+        "rt_equivalence_family_count": {"enum": [0, 1]},
+        "rt_alias_control_confirmation_count": {"enum": [0, 1]},
+        "distinct_challenger_reduction_count": {"type": "integer", "minimum": 0, "maximum": 7}
+      }
+    },
+    "observability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evaluation_domain", "intermediate_typed_values_serialized", "typed_dataflow_claim", "runner_blinding_claim",
+        "guard_claim", "runtime_ledgers_observed", "human_empirical_evidence", "predictive_support"
+      ],
+      "properties": {
+        "evaluation_domain": {"const": "detached_synthetic_structural_conformance"},
+        "intermediate_typed_values_serialized": {"const": false},
+        "typed_dataflow_claim": {"const": "static_frozen_dag_plus_independent_final_semantic_recomputation"},
+        "runner_blinding_claim": {"const": "implementation_bound_process_separation_not_cryptographic_non_access_proof"},
+        "guard_claim": {"const": "detached_digest_equality_not_runtime_ledger_observation"},
+        "runtime_ledgers_observed": {"const": false},
+        "human_empirical_evidence": {"const": false},
+        "predictive_support": {"const": false}
+      }
+    },
+    "report": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "report_id", "report_version", "status", "policy_id", "policy_version", "artifact_bindings",
+        "implementation_bindings", "input_summary", "schema_validation", "signature_results",
+        "cell_assertion_results", "pair_assertion_results", "global_assertion_results", "challenger_results",
+        "retirement_results", "summary", "failure_codes", "observability", "disclaimers"
+      ],
+      "properties": {
+        "report_id": {"const": "INTERP-001D1-V1-CONFORMANCE-REPORT"},
+        "report_version": {"const": "1.0.0"},
+        "status": {"$ref": "#/$defs/status"},
+        "policy_id": {"const": "INTERP-001D1-V1-EVALUATOR-POLICY"},
+        "policy_version": {"const": "1.0.0"},
+        "artifact_bindings": {"$ref": "#/$defs/artifactBindings"},
+        "implementation_bindings": {"$ref": "#/$defs/implementationBindings"},
+        "input_summary": {"$ref": "#/$defs/inputSummary"},
+        "schema_validation": {"$ref": "#/$defs/schemaValidation"},
+        "signature_results": {"type": "array", "minItems": 88, "maxItems": 88, "items": {"$ref": "#/$defs/signatureResult"}},
+        "cell_assertion_results": {"type": "array", "minItems": 24, "maxItems": 24, "items": {"$ref": "#/$defs/cellAssertionResult"}},
+        "pair_assertion_results": {"type": "array", "minItems": 30, "maxItems": 30, "items": {"$ref": "#/$defs/assertionResult"}},
+        "global_assertion_results": {"type": "array", "minItems": 37, "maxItems": 37, "items": {"$ref": "#/$defs/assertionResult"}},
+        "challenger_results": {"type": "array", "minItems": 72, "maxItems": 72, "items": {"$ref": "#/$defs/challengerResult"}},
+        "retirement_results": {"type": "array", "minItems": 16, "maxItems": 16, "items": {"$ref": "#/$defs/retirementResult"}},
+        "summary": {"$ref": "#/$defs/summary"},
+        "failure_codes": {"$ref": "#/$defs/failureCodes"},
+        "observability": {"$ref": "#/$defs/observability"},
+        "disclaimers": {"type": "array", "minItems": 16, "maxItems": 16, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "canonicalization_id", "report_sha256"],
+      "properties": {
+        "algorithm": {"const": "sha256"},
+        "canonicalization_id": {"const": "interp-canonical-json-v1"},
+        "report_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  }
+}

@@ -246,7 +246,7 @@ access와 interpretive integration 경계를 먼저 분리한다. 그 전에는
 
 ## 3C. `INTERP-001` — Subjective Encounter and Interpretive Reorganization
 
-**상태: `INTERP-001A BOUNDARY DOCUMENTED; INTERP-001A2 M1 CONTRACT FROZEN; INTERP-001B DETACHED CONFORMANCE IMPLEMENTED; INTERP-001D1 THREE-BLOCK CONTRACT FROZEN / UNEXECUTED; BROADER DYNAMICS OPEN` — RFC 0004**
+**상태: `INTERP-001A BOUNDARY DOCUMENTED; INTERP-001A2 M1 CONTRACT FROZEN; INTERP-001B DETACHED CONFORMANCE IMPLEMENTED; INTERP-001D1 EXECUTED / EVALUATED SYNTHETIC CONFORMANCE; BROADER DYNAMICS OPEN` — RFC 0004**
 
 ```text
 ExternalOccurrence / CurrentAccessOccurrence
@@ -280,8 +280,13 @@ GHOST_PATH          G0 / GT / GP / GTP                 8 fixtures × 4 = 32 cell
 execution manifest는 development/sealed membership과 expected signature를 갖지 않고,
 별도 evaluation manifest만 block별 `001–004` development, `005–008` sealed split을
 읽는다. source compiler 성공, supplied-input sensitivity와 Ghost-path distinction은 서로
-다른 판정이다. D1은 `FROZEN / UNEXECUTED`이며 feedback/revision, durable TargetForm writer,
-Episode/Narrative write 또는 인간 claim을 구현하지 않는다.
+다른 판정이다. [`D1 conformance run`](benchmarks/interp-001d1-v1-conformance.md)은
+88/88 closed-world signature와 24/24 cell + 30/30 pair + 37/37 global assertion을
+통과했다. 상태는 `EXECUTED / EVALUATED SYNTHETIC CONFORMANCE`다. 그러나 세 block은
+서로 output을 전달하지 않는 독립 cell 집합이며 end-to-end pipeline이 아니다.
+development/sealed도 evaluator-only synthetic isolation이지 예측 또는 외부 타당도
+검증이 아니다. D1은 feedback/revision, durable TargetForm writer, Episode/Narrative write
+또는 인간 claim을 구현하지 않는다.
 
 후속 detached lab은 다음 순서로만 연다.
 
@@ -289,8 +294,9 @@ Episode/Narrative write 또는 인간 claim을 구현하지 않는다.
 2. `INTERP-001C` (`M1 MECHANICAL SLICE EXECUTED`): RFC 0004의 reception-conditioned
    assembly/adjudication 범위는 B report 안에서 판정하되, 이를 variable Ghost 또는 durable
    receipt 구현으로 승격하지 않음
-3. `INTERP-001D1` (`THREE-BLOCK CONTRACT FROZEN / UNEXECUTED`): object-scoped source
-   compiler, supplied formation intervention와 exact-access Ghost-path ablation
+3. `INTERP-001D1` (`EXECUTED / EVALUATED SYNTHETIC CONFORMANCE`): object-scoped source
+   compiler, supplied formation intervention와 exact-access Ghost-path ablation을 격리된
+   88-cell run에서 판정; runtime/human mechanism으로 승격하지 않음
 4. `INTERP-001D2`: later-access-only target-form feedback와 outcome/retention protocol
 5. 단순 합·threshold와 다른 구조 구분을 재현한 뒤에만 runtime/Narrative integration 검토
 

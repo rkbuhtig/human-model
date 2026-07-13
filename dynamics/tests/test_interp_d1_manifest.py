@@ -23,6 +23,7 @@ EVALUATION_PATH = BENCHMARKS / "interp-001d1-v1-evaluation.json"
 MANIFEST_SCHEMA_PATH = BENCHMARKS / "interp-001d1-manifest.schema.json"
 RESULT_SCHEMA_PATH = BENCHMARKS / "interp-001d1-v1-result.schema.json"
 RUN_SCHEMA_PATH = BENCHMARKS / "interp-001d1-v1-run.schema.json"
+RUN_ARTIFACT_PATH = BENCHMARKS / "interp-001d1-v1-run.json"
 PREREG_PATH = BENCHMARKS / "interp-001d1-target-form-ghost-ablation.md"
 
 EXPECTED_EXECUTION_MANIFEST_SHA256 = "ad627e9b27dbcf517d6dc16736974b8e8f2547ab98cb7a4bea8a4694cbcd1740"
@@ -2747,10 +2748,19 @@ class InterpD1ManifestTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "cell content digest"):
             _validate_result_envelope(stale_content)
 
-    def test_future_run_carrier_is_closed_but_no_run_artifact_exists(self) -> None:
+    def test_run_carrier_is_closed_and_versioned_artifact_exists(self) -> None:
         self.assertEqual(
-            list(BENCHMARKS.glob("interp-001d1-v1-run*.json")),
-            [RUN_SCHEMA_PATH],
+            set(BENCHMARKS.glob("interp-001d1-v1-run*.json")),
+            {RUN_SCHEMA_PATH, RUN_ARTIFACT_PATH},
+        )
+        committed = load_exact(RUN_ARTIFACT_PATH)
+        _validate_future_run_envelope(
+            committed,
+            self.execution,
+            expected_runner_implementation_sha256=hashlib.sha256(
+                (ROOT / "dynamics/labs/interp_d1_runner.py").read_bytes()
+            ).hexdigest(),
+            expected_runner_bundle_sha256=committed["runner_bundle_sha256"],
         )
         run = _future_run_example(self.execution)
         runner_implementation = "1" * 64
@@ -3123,10 +3133,22 @@ class InterpD1ManifestTests(unittest.TestCase):
         self.assertEqual(split["purpose"], "evaluator_isolation_only")
         self.assertIs(split["independent_prediction_claim"], False)
 
-    def test_no_d1_runner_or_runtime_integration_was_added(self) -> None:
+    def test_d1_execution_remains_a_closed_detached_lab(self) -> None:
         self.assertEqual(
-            list((ROOT / "dynamics" / "labs").glob("interp_d1*.py")),
-            [],
+            {
+                path.name
+                for path in (ROOT / "dynamics" / "labs").glob("interp_d1*.py")
+            },
+            {
+                "interp_d1_challengers.py",
+                "interp_d1_cli.py",
+                "interp_d1_common.py",
+                "interp_d1_evaluate_cli.py",
+                "interp_d1_evaluator.py",
+                "interp_d1_operators.py",
+                "interp_d1_run_cli.py",
+                "interp_d1_runner.py",
+            },
         )
         runtime_paths = [
             ROOT / "dynamics" / "engine.py",

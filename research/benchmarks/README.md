@@ -39,6 +39,9 @@ Contract mutant는 인간 모델 후보가 아니다. 반대로 descriptive mode
   [`INTERP-001D1`](interp-001d1-target-form-ghost-ablation.md)은 source compiler
   `TF0–TF2`, supplied encounter-formation intervention `E0/ER/ET/ERT`와 exact-access
   Ghost ablation `G0/GT/GP/GTP`를 세 개의 격리된 block, 88개 cell과 evaluator-only
-  development/sealed split으로 동결했다. 아직 실행되지 않았으며 durable TargetForm,
-  Episode/Narrative writer, predictive validation이나 인간 mood·memory·qualia evidence가
-  아니다.
+  development/sealed split으로 동결했다.
+  [`D1 conformance run`](interp-001d1-v1-conformance.md)은 88/88 signature와 91/91
+  non-retirement assertion을 통과해 `EXECUTED / EVALUATED SYNTHETIC CONFORMANCE` 상태다.
+  세 block은 end-to-end pipeline이 아니며 development/sealed는 예측 partition이 아니다.
+  이는 durable TargetForm, Episode/Narrative writer, predictive validation이나 인간
+  mood·memory·qualia evidence가 아니다.

@@ -5,7 +5,7 @@
 | Date | 2026-07-13 |
 | Source | 사용자 주도 이론 보정과 Chapter 02 / Interchapter Note 03-A / Checkpoint 05-A 기능 경계 대조 |
 | Decision | `ADOPTED WITH REVISIONS` |
-| Implementation | `INTERP-001A` boundary `DOCUMENTED`; `INTERP-001A2` reception M1 contract `FROZEN`; `INTERP-001B` detached conformance `IMPLEMENTED`; `INTERP-001D1` three-block contract `FROZEN / UNEXECUTED`; runtime integration `UNIMPLEMENTED` |
+| Implementation | `INTERP-001A` boundary `DOCUMENTED`; `INTERP-001A2` reception M1 contract `FROZEN`; `INTERP-001B` detached conformance `IMPLEMENTED`; `INTERP-001D1` `EXECUTED / EVALUATED SYNTHETIC CONFORMANCE`; runtime integration `UNIMPLEMENTED` |
 | Human-empirical status | `OPEN` |
 
 `ADOPTED`는 연구 방향과 금지 등식을 채택한다는 뜻이다. 실제 인간의 퀄리아,
@@ -21,8 +21,8 @@
 | I-A-04 | 과거 material의 현재 재접근은 별도 access occurrence이며 과거 occurrence, 최초 encounter receipt와 EvidenceLink를 다시 쓰지 않는다. | provenance 방향 `ADOPTED` |
 | I-A-05 | Ghost는 interpretation candidate를 생성·탐색하지만 scoped adjudication, Episode integration, Narrative write 또는 external truth를 인증하지 않는다. | 방향 `ADOPTED` |
 | I-A-06 | 대상 형태는 전역 긍정·부정 lens가 아니라 actor, interpreted-target, relation/context scope에 한정된 readout 후보로 시작한다. | `HOLD / TYPE CANDIDATE` |
-| I-A-07 | 같은 event/material 수·크기에서 access, assembly topology, reception profile과 탐색 경로가 단순 합·threshold와 다른 구조 구분을 만드는지 비교한다. | hypothesis `PROPOSED`; reception access/coherence M1 synthetic conformance `IMPLEMENTED`; TargetForm/Ghost D1 contract `FROZEN / UNEXECUTED` |
-| I-A-08 | TargetForm source compiler, supplied Reception/TargetForm formation intervention와 exact-access Ghost path를 별도 block으로 판정하고 evaluator-only development/sealed split을 둔다. | protocol `ADOPTED`; D1 execution `UNIMPLEMENTED` |
+| I-A-07 | 같은 event/material 수·크기에서 access, assembly topology, reception profile과 탐색 경로가 단순 합·threshold와 다른 구조 구분을 만드는지 비교한다. | hypothesis `PROPOSED`; reception access/coherence M1 synthetic conformance `IMPLEMENTED`; TargetForm/Ghost D1 `EXECUTED / EVALUATED SYNTHETIC CONFORMANCE` |
+| I-A-08 | TargetForm source compiler, supplied Reception/TargetForm formation intervention와 exact-access Ghost path를 별도 block으로 판정하고 evaluator-only development/sealed split을 둔다. | protocol `ADOPTED`; D1 detached execution/evaluation `IMPLEMENTED` |
 
 ## Revise
 
@@ -116,6 +116,38 @@ Block B나 C의 성공을 Block A source claim으로 소급하지 않는다. `Ep
 `Narrative Field`는 계속 큰 시간·승격 예약어이며 D1 fixture는 실제 human
 Episode/Narrative residence가 아니다.
 
+## D1 실행 결과와 한계
+
+[`INTERP-001D1 conformance run`](../benchmarks/interp-001d1-v1-conformance.md)은 frozen
+execution manifest만 읽는 detached runner와 별도 evaluator로 88-cell matrix를 실행했다.
+report는 `PASS`이며 88/88 closed-world signature와 24/24 cell + 30/30 pair + 37/37 global,
+즉 91/91 non-retirement assertion이 통과했다. development와 sealed signature는 각각
+44개다.
+
+```text
+SOURCE_COMPILER output
+↛ ENCOUNTER_FORMATION input
+
+ENCOUNTER_FORMATION output
+↛ GHOST_PATH input
+```
+
+따라서 세 block의 통과를 하나의 완성된 인간 해석 pipeline으로 읽지 않는다.
+development/sealed는 runner에서 evaluation metadata를 격리하는 synthetic 역할이며 hidden
+human outcome에 대한 prediction test가 아니다. runner blinding과 12개 guard ledger의
+digest equality도 implementation-bound process/API·detached-ledger attestation이지
+cryptographic non-access proof나 Dynamics runtime ledger 관측이 아니다.
+
+16개 retirement condition 중 `retire.challenger.ch_rt_congruence`와
+`retire.challenger.ch_declared_rt_lookup`만 trigger됐다. 후자는 전자와 대수적으로 같은
+lookup alias control이므로 결과는 RT-equivalence family 1개와 alias confirmation 1개다.
+두 개의 독립 challenger 승리가 아니며 `distinct_challenger_reduction_count`는 0이다.
+retirement receipt도 조건 보고일 뿐 model/factor를 자동 변경하지 않는다.
+
+이 결과는 durable TargetForm, writer/retention, later-access feedback, 인간 퀄리아·기분·
+기억·Episode/Narrative mechanism 또는 predictive support를 추가하지 않는다. 그 경계는
+`INTERP-001D2`와 별도 인간 측정 protocol에 남아 있다.
+
 ## Hold
 
 | 항목 | 재개 조건 |
@@ -134,6 +166,7 @@ Episode/Narrative residence가 아니다.
 - [INTERP-001 preregistration](../benchmarks/interp-001-subjective-encounter-binding.md)
 - [INTERP-001B detached M1 conformance](../benchmarks/interp-001b-m1-conformance.md)
 - [INTERP-001D1 target-form / Ghost ablation](../benchmarks/interp-001d1-target-form-ghost-ablation.md)
+- [INTERP-001D1 detached conformance run](../benchmarks/interp-001d1-v1-conformance.md)
 - [Roadmap](../roadmap.md)
 
 이 기록은 RFC 승인, 코드 구현, synthetic 결과, predictive support 또는 인간 경험적
