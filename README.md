@@ -22,7 +22,10 @@ Assessment ≠ Adoption ≠ Implementation ≠ Run ≠ Human-Empirical Evidence
 - [단계별 연구 로드맵](research/roadmap.md)
 - [Claim registry](research/claims/README.md)
 - [Defect–Principle Abduction Corpus](research/defects/README.md)
-- [비정본 assessment 기록](assessments/2026-07-13-research-program-plan-assessment.md)
+- [비정본 research-program assessment](assessments/2026-07-13-research-program-plan-assessment.md)
+- [P0 provenance/persona-scope 비정본 assessment](assessments/2026-07-14-interp-dialogue-p0-provenance-persona-scope-assessment.md)
+- [P0 provenance/persona-scope 채택 기록](research/adoption-records/2026-07-14-interp-dialogue-p0-provenance-persona-scope.md)
+- [P1 development-pilot 사전등록](research/scenarios/interp-dialogue-001/elicitation/p1-development-pilot-preregistration.md)
 
 ## Volume I
 
@@ -171,3 +174,12 @@ defect receipt와 revision proposal만 발행할 수 있다. 실제 acquisition�
 pre-run freeze 뒤로 남고, 수정 instrument의 채택은 별도 P0 version의 권한이다. 이 freeze는
 participant data, human mechanism, `HM-INV-013`/`HM-DYN-004` support 또는 D2a recursion을
 만들지 않는다.
+
+P0의 관측·persona 범위에 대한
+[비정본 assessment](assessments/2026-07-14-interp-dialogue-p0-provenance-persona-scope-assessment.md)와
+[채택 기록](research/adoption-records/2026-07-14-interp-dialogue-p0-provenance-persona-scope.md)은
+surface와 latent transition, role과 persona, scripted response와 actual occurrence를
+분리한다. 후속 [`INTERP-DIALOGUE-001P1-v0`](research/scenarios/interp-dialogue-001/elicitation/p1-development-pilot-preregistration.md)은
+30-session minimum coverage와 proposal-only authority를 `PLANNED / UNEXECUTED`로 사전등록한다.
+P1 실행, actual acquisition, prompt-reactivity identification과 persona 연구는 모두 별도
+후속 gate다.
