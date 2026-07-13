@@ -153,6 +153,62 @@ ordered proxy-excess profile ≠ ExcessDemand / ResidualStrain / MorphicLoad
 
 따라서 이 층도 qualia·주관적 시간 또는 `HM-DYN-002`의 근거가 아니다.
 
+### Proposed Interpretive Dynamics — `INTERP-001A BOUNDARY DOCUMENTED / MANIFEST DRAFT / UNIMPLEMENTED`
+
+Chapter 02에서 반복되는 기능 경계와 Checkpoint 05-A의 현행 synthesis를 분리한다.
+
+```text
+Recovered functional boundary:
+Ghost candidate
+≠ Editor / JOT.court 계열 판정
+≠ Episode buffer / write
+≠ Narrative Field write
+
+Current synthesis / new candidates:
+CurrentAccessOccurrence
+→ SubjectiveEncounterFormProxy
+→ EpisodeMaterialReference
+→ EpisodeAssemblyCandidate + AssemblyMaterialMembershipCandidate[]
+→ InterpretiveBindingCandidate
+→ BindingAdjudicationReceipt
+→ optional EpisodeIntegrationReceipt
+→ later TargetFormReadoutChangeReceipt
+```
+
+두 객체열 전체를 역사적 정본으로 소급하지 않는다. `JOT`는 epoch마다
+court/sketch/store 의미가 충돌했고, current main에는 위 interpretation types나
+Narrative writer가 구현되어 있지 않다.
+
+이 축은 Descriptive Dynamics의 future detached lab이다. Contract와 Protocol의
+사실·identity·time 권한을 가져오지 않는다.
+
+```text
+ReceptionState / subjective encounter / Ghost / integration
+→ simulated access and interpretation influence 가능
+
+ReceptionState / subjective encounter / Ghost / integration
+↛ EvidenceLink strength
+↛ source or target identity certification
+↛ past occurrence rewrite
+↛ direct Narrative Field write
+```
+
+RFC 0002 `CurrentReexposure`는 새 access를 trigger할 수 있지만
+`CurrentAccessOccurrence`와 동일 타입이 아니다. access ordinal k의 산출은 encounter
+k에 되먹임되지 않고 `effective_from_access_ordinal > k`인 후속 access에서만 읽을 수
+있다. candidate, adjudication과 integration은 immutable/append-only artifacts로
+분리한다.
+
+`TargetFormReadout`은 actor, interpreted-target, optional external-entity resolution,
+relation/context scope를 가진 `HOLD` candidate다. source definition, writer,
+retention과 revalidation이 식별되기 전에는 persistent HumanState가 아니다.
+
+상세 용어, identity와 판별 조건은
+[RFC 0004](rfcs/0004-subjective-encounter-interpretive-reorganization.md)와
+[INTERP-001 preregistration](benchmarks/interp-001-subjective-encounter-binding.md)에
+고정한다. 이 문서 계약은 code implementation, predictive support, 인간 mood·memory
+법칙 또는 actual qualia measurement가 아니다.
+
 ### 알려진 v0.1 bridge
 
 ```text

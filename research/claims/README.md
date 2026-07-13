@@ -35,3 +35,11 @@ npx --yes ajv-cli validate --spec=draft2020 \
 `MORPH-001B`의 implemented claim도 experimenter-declared simulation comparison에만
 적용되며 measured human accommodation, load, qualia 또는 mental-time claim으로
 확장되지 않는다.
+
+`INTERP-001A`는 subjective/current-access/Episode-candidate/adjudication/readout
+경계를 신규 `ADOPTED / UNIMPLEMENTED` type·invariant로, reception·assembly·target
+form의 방향성은 `PROPOSED / UNIMPLEMENTED` dynamical hypothesis로 등록한다.
+`HM-MEAS-005`는 proxy component, 단위, missingness, source/writer, snapshot과
+calibration status가 정의되기 전 구현할 수 없는 `DRAFT` measurement contract다.
+이 등록은 역사적 Episode ontology의 정본화, mood-congruent ignition의 인간 법칙,
+Narrative writer, actual qualia 또는 predictive support를 만들지 않는다.

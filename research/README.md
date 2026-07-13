@@ -80,8 +80,13 @@ independently identified `DeformationDemand`가 아니다. 이어
 [`MORPH-001B`](benchmarks/morph-001b-proposal-envelope-comparison.md)는 proposal을
 실험자가 선언한 asymmetric reducer-write band와 비교하는 read-only surface를
 구현했다. 이는 measured human `AccommodationEnvelope`나 `MorphicLoad`가 아니다.
-다음 조각은 outcome과 competing model을 먼저 고정하는 `MORPH-001C`이며,
-residual·load는 그 뒤에 남아 있다.
+`MORPH-001C` outcome/load comparison은 해석·회복 outcome을 성급히 선형화하지 않도록
+`DEFERRED`한다. 먼저 [`INTERP-001`](benchmarks/interp-001-subjective-encounter-binding.md)이
+subjective encounter, current access, Episode candidate, interpretive adjudication과
+object-scoped target-form readout의 타입·시간·권한 경계를 문서화한다. exact executable
+manifest는 아직 `DRAFT`다. 현재 구현
+slice는 문서 계약 `INTERP-001A`뿐이며 code/runtime behavior는 없다. residual·load와
+INTERP/MORPH 접합은 detached lab 판별 뒤에 남아 있다.
 `FlowUpdate/EventJump`·no-event flow·burst/spaced와
 `HM-DYN-001` predictive comparison은 독립적인 planned temporal-comparison 축이며
 `MORPH-001`의 선행 blocker가 아니다. `affect → SubjectiveBelief`는 독립 v0.3 축이고,
@@ -98,4 +103,5 @@ ReducerProposal ≠ DeformationDemand ≠ AccommodationEnvelope ≠ MorphicLoad
 declared simulation envelope comparison ≠ measured human capacity or load
 ```
 
-상세 범위는 [roadmap](roadmap.md)과 세 RFC를 따른다.
+상세 범위는 [roadmap](roadmap.md), 기존 세 RFC와
+[RFC 0004](rfcs/0004-subjective-encounter-interpretive-reorganization.md)를 따른다.
