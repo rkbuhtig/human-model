@@ -25,3 +25,7 @@ Contract mutant는 인간 모델 후보가 아니다. 반대로 descriptive mode
 - [`MORPH-001A` reducer proposal–commit instrumentation](morph-001-demand-commit.md):
   현재 reducer의 pre-constraint proposal과 실제 commit을 먼저 분리한다. 이는 아직
   `DeformationDemand`가 아니며 envelope·load·퀄리아·정신 시간도 계산하지 않는다.
+- [`MORPH-001B` proposal / declared-band proxy comparison](morph-001b-proposal-envelope-comparison.md):
+  `MORPH-001A`의 ordered proposal을 실험자가 선언한 asymmetric simulation band와
+  componentwise로 비교한다. 출력은 read-only proxy profile이며 인간의 수용 능력,
+  `ExcessDemand`, residual, load, 퀄리아 또는 정신 시간 측정값이 아니다.

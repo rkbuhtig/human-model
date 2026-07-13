@@ -21,12 +21,13 @@ Local causal influence
 
 현재 Dynamics는 v0.1.1의 구조적 구분과 동역학적 반례에 v0.2 temporal provenance
 slice, read-only mental-transition measurement, `MORPH-001A` reducer-proposal
-instrumentation을 추가한 최소 모델이다.
+instrumentation과 opt-in `MORPH-001B` proposal/declared-band proxy comparison을 추가한 최소 모델이다.
 `Q-v1`은 processed occurrence마다 literal persistent field delta를 측정해 immutable
 receipt와 count/density report를 파생한다. proposal ledger는 각 occurrence의 flat
 ordered pre-clamp proposal/commit tuple을 별도 receipt로 보존한다. 어느 쪽도 인간의
-정신 시간·DeformationDemand·MorphicLoad를 식별하지 않았으며, 인간에 대한 경험적
-예측 정확도도 아직 검증되지 않았다.
+정신 시간·DeformationDemand·MorphicLoad를 식별하지 않았다. `MORPH-001B`의 band도
+인간 능력의 측정값이 아니라 명시적으로 선택한 synthetic simulation parameter다.
+인간에 대한 경험적 예측 정확도도 아직 검증되지 않았다.
 
 | 근거 층 | 지위 |
 |---|---|
@@ -75,8 +76,11 @@ v0.1 baseline은 [원격 source revision과 semantic golden](../dynamics/reports
 mental-transition type/measurement surface는 구현되었다. 그 위에
 [`MORPH-001A`](benchmarks/morph-001-demand-commit.md)가 pre-constraint reducer
 proposal과 committed target을 분리하는 instrumentation을 구현했다. 이 proposal은
-independently identified `DeformationDemand`가 아니다. 다음 조각은 별도
-`AccommodationEnvelope`와 competing excess definition을 고정하는 `MORPH-001B`다.
+independently identified `DeformationDemand`가 아니다. 이어
+[`MORPH-001B`](benchmarks/morph-001b-proposal-envelope-comparison.md)는 proposal을
+실험자가 선언한 asymmetric reducer-write band와 비교하는 read-only surface를
+구현했다. 이는 measured human `AccommodationEnvelope`나 `MorphicLoad`가 아니다.
+다음 조각은 outcome과 competing model을 먼저 고정하는 `MORPH-001C`이며,
 residual·load는 그 뒤에 남아 있다.
 `FlowUpdate/EventJump`·no-event flow·burst/spaced와
 `HM-DYN-001` predictive comparison은 독립적인 planned temporal-comparison 축이며
@@ -90,6 +94,8 @@ implemented Q-v1 receipt/count/density types
 ≠ MorphicLoad or qualia measured
 
 ReducerProposal ≠ DeformationDemand ≠ AccommodationEnvelope ≠ MorphicLoad
+
+declared simulation envelope comparison ≠ measured human capacity or load
 ```
 
 상세 범위는 [roadmap](roadmap.md)과 세 RFC를 따른다.

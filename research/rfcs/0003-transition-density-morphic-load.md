@@ -2,8 +2,8 @@
 
 | 항목 | 값 |
 |---|---|
-| Status | read-only transition ledger와 `MORPH-001A` reducer proposal–commit proxy `IMPLEMENTED`; DeformationDemand/envelope/load prediction `PROPOSED` |
-| Target | v0.2 derived mental-transition ledger, `MORPH-001A`, 이후 envelope/load comparison |
+| Status | read-only transition ledger, `MORPH-001A`, `MORPH-001B` declared-band proxy comparison `IMPLEMENTED`; human DeformationDemand/capacity/load prediction `PROPOSED` |
+| Target | v0.2 derived mental-transition ledger, `MORPH-001A/B`, 이후 outcome/load comparison |
 | Kind | Type separation / dynamical hypotheses / measurement preconditions |
 | Prerequisites | RFC 0001 구현, RFC 0002 canonical time |
 | Human empirical status | `OPEN` |
@@ -328,21 +328,30 @@ proposal / receipt artifacts
 세부 사전 등록과 saturation control은
 [`MORPH-001A` benchmark](../benchmarks/morph-001-demand-commit.md)에 고정한다.
 
-### 3B. 아직 구현하지 않는 envelope와 load
+### 3B. 구현된 simulation envelope comparison과 아직 구현하지 않는 human load
 
-`AccommodationEnvelope`는 현재 형태가 가설적으로 수용할 수 있는 typed 범위를
-정의할 미래 policy다. `[0, 1]` state bound나 bound까지 남은 거리는 storage validity
-constraint일 뿐 accommodation capacity가 아니다.
-
-따라서 첫 조각에서는 다음을 계산하거나 이름 붙이지 않는다.
+`MORPH-001B`는 `MORPH-001A`의 reducer-write proposal을 실험자가 선언한 signed
+simulation band와 비교한다. `ReducerProposalEnvelopePolicy`와 ordered
+`ReducerProposalEnvelopeComparison`은 구현됐지만, measured human
+`AccommodationEnvelope / CapacityProfile`은 아니다. `[0, 1]` state bound나 bound까지
+남은 거리도 storage validity constraint일 뿐 accommodation capacity가 아니다.
 
 ```text
-AccommodationEnvelope                    # PLANNED
-ExcessDemand                             # PLANNED
-requested_delta - committed_delta        # arithmetic gap only
-UncommittedResidual / ResidualStrain      # PLANNED
-MorphicLoadProfile                       # PROPOSED / UNIMPLEMENTED
+ReducerProposal + declared simulation band
+→ ordered proxy-excess profile                     # IMPLEMENTED
+
+measured human AccommodationEnvelope               # UNIMPLEMENTED
+ExcessDemand                                       # UNIMPLEMENTED
+requested_delta - committed_delta                  # arithmetic gap only
+UncommittedResidual / ResidualStrain                # UNIMPLEMENTED
+MorphicLoadProfile                                 # PROPOSED / UNIMPLEMENTED
 ```
+
+기준 comparison은 componentwise signed clipping 하나이며 normalized·max·L1·L2는
+competing candidate로만 사전 등록한다. policy는 opt-in synthetic fixture이고 생성
+실행에 되먹임되지 않는다. 상세 범위는
+[`MORPH-001B` benchmark](../benchmarks/morph-001b-proposal-envelope-comparison.md)에
+고정한다.
 
 요청–commit 차이에는 clamp, 감쇠, stage 상호작용과 구현 artifact가 섞일 수 있다.
 별도 operator와 단위 없이 이를 residual strain으로 승격하지 않는다.
@@ -474,8 +483,9 @@ measurement mapping, 복잡도 보정이 필요하다.
 4. **완료:** transition count/density report만 만들고 상태 update에는 사용하지 않는다.
 5. **완료 — `MORPH-001A`:** pre-constraint reducer proposal과 committed target을
    stage-qualified immutable receipt로 분리한다. 아직 envelope나 load를 계산하지 않는다.
-6. **`MORPH-001B`:** 별도 `AccommodationEnvelope` policy와 competing excess
-   definition을 사전 등록한다. state bound를 envelope로 재사용하지 않는다.
+6. **완료 — `MORPH-001B`:** experimenter-declared reducer-write band와
+   componentwise proxy comparison을 사전 등록하고 구현한다. state bound를 band로
+   재사용하거나 human capacity/load로 승격하지 않는다.
 7. 이후에만 vector `MorphicLoadProfile`, residual, recovery와 count-only 경쟁 모델을
    한 최소 사례에서 비교한다.
 8. retention horizon 뒤 `PersistentTrace` 승격 여부를 별도 측정한다.
@@ -521,6 +531,25 @@ measurement mapping, 복잡도 보정이 필요하다.
 2. persistent라는 이름은 retention horizon 통과 뒤에만 부여된다.
 3. 단위·정규화·결측 규칙 없이는 demand/capacity의 `벗어남`을 계산하지 않는다.
 4. 경쟁 모델, 정상 통제, 폐기 조건이 report에 함께 기록된다.
+
+### `MORPH-001B` declared-envelope comparison — `SATISFIED / SIMULATION PROXY ONLY`
+
+1. policy는 exact reducer field scope, signed band, unit, source measurement identity와
+   componentwise operator를 digest에 고정한다.
+2. 같은 proposal은 다른 declared band에서 다른 proxy excess를 만들 수 있고, source
+   proposal ledger는 동일하다.
+3. same committed delta 또는 same qualified-transition count가 different ordered proxy
+   profile을 숨길 수 있다.
+4. storage clamp gap과 declared band 밖의 양은 독립적이다.
+5. 모든 source receipt/write가 하나의 derived receipt/component와 순서대로 대응하며,
+   repeated write·saturation·cancellation도 component를 삭제하지 않는다.
+6. policy variation은 state, trace, Evidence, routing, action, Q와 source proposal
+   ledger를 바꾸지 않는다.
+7. transport/reexposure/prefix와 finite-invalid-initial audit 경계를 보존한다.
+
+이 조건은 synthetic simulation comparison의 구조적 재현성만 판정한다. human
+accommodation capacity, `DeformationDemand`, `MorphicLoad`, qualia 또는 mental time의
+support가 아니다.
 
 ### `MORPH-001A` instrumentation — `SATISFIED`
 

@@ -325,6 +325,46 @@
       "notes": "Current reducer information includes stage/write-local pre-constraint and committed targets plus typed driver contributions. Driver channels are an algebraic decomposition under a fixed operator schema, not independently reproduced source causality; constructor validation proves structural admissibility while the inline reducer builder is the trusted writer for evaluated values. Content-bound IDs and state chains enforce internal schema consistency under the canonical builder; they are not cryptographic proof of external source truth. This invariant establishes trace integrity only; ReducerProposal is not an independently identified DeformationDemand."
     },
     {
+      "id": "HM-INV-011",
+      "kind": "INVARIANT",
+      "adoption_status": "ADOPTED",
+      "implementation_status": "IMPLEMENTED",
+      "statement": "MORPH-001B is an opt-in immutable post-run projection with one source-bound comparison receipt per ReducerProposalReceipt and one ordered component per source proposal; changing its declared band policy cannot change the source proposal ledger or the generating state, routing, evidence, action, or Q-v1 trajectory.",
+      "scope": [
+        "MORPH-001B_reducer_proposal_envelope_comparison",
+        "simulation_derived_measurement_only"
+      ],
+      "exclusions": [
+        "human_accommodation_capacity",
+        "runtime_capacity_depletion_or_cross_write_redistribution",
+        "morphic_load_or_residual_strain",
+        "qualia_or_subjective_time",
+        "cryptographic_source_authenticity"
+      ],
+      "depends_on": [
+        "HM-TYPE-007",
+        "HM-INV-010"
+      ],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [
+          "test_envelope_projection_is_explicit_opt_in",
+          "test_transport_redelivery_does_not_create_envelope_receipt",
+          "test_reexposure_gets_new_comparison_with_source_provenance",
+          "test_future_events_cannot_rewrite_comparison_prefix",
+          "test_policy_variation_has_no_runtime_feedback",
+          "test_comparison_ledger_requires_complete_ordered_source_mapping",
+          "test_invalid_initial_state_keeps_existing_audit_path_when_enabled"
+        ],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "COUNTEREXAMPLE_TRACE",
+        "description": "A source proposal receipt or ordered write is missing, duplicated, reordered, or spliced in the comparison ledger; transport redelivery adds a comparison; reexposure or later-prefix provenance changes; policy variation changes the generating execution or source proposal ledger; or the opt-in comparison changes the existing finite-invalid-state audit path."
+      },
+      "notes": "Source IDs, proposal and state digests, snapshot identity, policy digest, comparison digest, and exact source-ledger validation provide internal consistency under the canonical builder. They are not electronic signatures or proof that a directly constructed self-consistent synthetic record describes an external fact."
+    },
+    {
       "id": "HM-TYPE-001",
       "kind": "TYPE",
       "adoption_status": "ADOPTED",
@@ -507,6 +547,43 @@
       "notes": "The operational type split is implemented by ReducerDriverContribution and ReducerFieldProposal, with ReducerStepResult used only as a traced-reducer runtime wrapper. TickTrace and ReducerProposalReceipt/Ledger retain one flat occurrence-wide ordered proposals tuple under descriptive-reducer-preclamp-proxy@1.0.0. ReducerProposalContext binds encoded soothing and performance identity so conditional action/soothing writes and drivers must match the runtime context."
     },
     {
+      "id": "HM-TYPE-007",
+      "kind": "TYPE",
+      "adoption_status": "ADOPTED",
+      "implementation_status": "IMPLEMENTED",
+      "statement": "A versioned experimenter-declared ReducerProposalEnvelopePolicy, an ordered ReducerProposal, a ReducerProposalEnvelopeComparison and its ordered proxy profile, and the reducer state-storage constraint are distinct simulation artifacts and cannot be freely substituted for one another.",
+      "scope": [
+        "MORPH-001B_reducer_proposal_envelope_comparison",
+        "simulation_derived_measurement_only"
+      ],
+      "exclusions": [
+        "measured_human_accommodation_capacity",
+        "independently_identified_deformation_demand",
+        "excess_demand_or_residual_strain",
+        "morphic_load",
+        "qualia_or_phenomenal_measurement",
+        "subjective_or_mental_time_measurement"
+      ],
+      "depends_on": [
+        "HM-TYPE-006"
+      ],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [
+          "test_same_proposal_under_different_envelopes_yields_different_proxy_excess",
+          "test_storage_constraint_gap_is_not_envelope_excess",
+          "test_policy_digest_binds_exact_typed_bands",
+          "test_component_arithmetic_and_source_mapping_tampering_is_rejected"
+        ],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "INVALID_CONSTRUCTION",
+        "description": "A canonical object aliases the declared simulation band with the storage bound or human accommodation capacity, derives proxy excess from committed clamp loss, loses ordered proposal identity, or freely casts the comparison profile into DeformationDemand, ExcessDemand, ResidualStrain, MorphicLoad, qualia, or mental time."
+      },
+      "notes": "The code-level policy name denotes an explicit reducer-write simulation parameter. It does not implement the broader human-model AccommodationEnvelope or CapacityProfile in HM-TYPE-002."
+    },
+    {
       "id": "HM-DYN-001",
       "kind": "DYNAMICAL_HYPOTHESIS",
       "adoption_status": "PROPOSED",
@@ -581,7 +658,8 @@
       ],
       "depends_on": [
         "HM-TYPE-002",
-        "HM-MEAS-003"
+        "HM-MEAS-003",
+        "HM-MEAS-004"
       ],
       "support": {
         "historical_cases": [],
@@ -592,7 +670,7 @@
         "type": "CALIBRATION_OR_IDENTIFIABILITY_FAILURE",
         "description": "Demand cannot be estimated before the modeled update, demand and capacity contributions to load are not separately identifiable, achieved work cannot be distinguished from residual strain, or trace retention cannot be calibrated at the preregistered horizon."
       },
-      "notes": "MORPH-001A supplies only reducer proposal/commit instrumentation. It does not implement DeformationDemand and does not satisfy this load measurement claim because AccommodationEnvelope, excess, residual, recovery, and retention mappings remain undefined."
+      "notes": "MORPH-001A supplies reducer proposal/commit instrumentation and MORPH-001B supplies an experimenter-declared simulation-band proxy comparison. Neither identifies DeformationDemand or measured human AccommodationEnvelope, and they do not satisfy this load measurement claim because residual, recovery, retention, calibration, and separate demand/capacity identification remain undefined."
     },
     {
       "id": "HM-MEAS-002",
@@ -670,6 +748,46 @@
         "description": "The trace cannot identify the versioned writer and stage that produced a proposal, reconstruct requested and committed field deltas in normalized simulation units, reproduce their dissociation under a preregistered saturation control, or keep the record distinct from Q qualification and future envelope/load quantities."
       },
       "notes": "The measurement identity is descriptive-reducer-preclamp-proxy@1.0.0. ReducerProposal is not DeformationDemand: the proposal can already include model-specific access pressure, update rate, phenomenal activation, performance, and other current drivers. Passing structural probes supplies no support for HM-DYN-002."
+    },
+    {
+      "id": "HM-MEAS-004",
+      "kind": "MEASUREMENT_MODEL",
+      "adoption_status": "ADOPTED",
+      "implementation_status": "IMPLEMENTED",
+      "statement": "MORPH-001B is a simulation-only measurement model that compares each MORPH-001A signed requested_delta with an explicit asymmetric per-field declared policy band using componentwise clipping and preserves the ordered signed result as a source- and policy-identified proxy profile.",
+      "scope": [
+        "MORPH-001B_reducer_proposal_envelope_comparison",
+        "simulation_derived_measurement_only"
+      ],
+      "exclusions": [
+        "human_calibrated_accommodation_capacity",
+        "capacity_independent_deformation_demand",
+        "normalized_or_scalar_load_aggregation",
+        "residual_recovery_or_retention_measurement",
+        "qualia_or_phenomenal_measurement",
+        "subjective_or_mental_time_measurement"
+      ],
+      "depends_on": [
+        "HM-TYPE-007",
+        "HM-INV-011",
+        "HM-MEAS-003"
+      ],
+      "support": {
+        "historical_cases": [],
+        "structural_tests": [
+          "test_same_committed_delta_can_hide_different_proposal_excess",
+          "test_equal_transition_counts_can_have_different_proxy_excess_profiles",
+          "test_asymmetric_envelope_preserves_direction",
+          "test_snapshot_is_bound_to_pre_update_state_projection_and_source_receipt",
+          "test_repeated_field_writes_remain_separate_ordered_comparisons"
+        ],
+        "empirical_datasets": []
+      },
+      "failure_condition": {
+        "type": "CALIBRATION_OR_IDENTIFIABILITY_FAILURE",
+        "description": "The declared field ranges, unit, source proposal identity, componentwise operator, or ordered write mapping cannot reproduce the proxy profile; storage clamp loss substitutes for the band comparison; direction is lost; repeated writes collapse; or a policy change is not identified by policy and receipt identity."
+      },
+      "notes": "The measurement identity is reducer-proposal-envelope-comparison@1.0.0. Policy bands are synthetic author-declared parameters. Internal reproducibility does not calibrate human accommodation, identify DeformationDemand, define ExcessDemand or MorphicLoad, or support HM-DYN-002."
     },
     {
       "id": "HM-META-001",

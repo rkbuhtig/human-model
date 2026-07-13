@@ -114,3 +114,8 @@ scope와 threshold가 있다. 이 구현은 정신 시간의 자연 단위, tran
 [Reducer Proposal Instrumentation Contract](dynamics/spec/reducer-proposals.md)에
 고정한 simulation proxy이며, 독립적으로 식별된 `DeformationDemand`, 인간의
 `AccommodationEnvelope`, `MorphicLoad` 또는 정신 시간량은 아니다.
+`MORPH-001B`는 이 proposal을 명시적으로 선택한 비대칭 simulation band와 비교해
+ordered proxy-excess profile을 만드는 opt-in post-run projection을 추가했다.
+[Envelope Comparison Contract](dynamics/spec/reducer-envelope-comparisons.md)에 고정된
+band는 실험자가 선언한 fixture이며 인간의 수용 능력 측정값이 아니다. 출력 역시
+`ExcessDemand`, `ResidualStrain`, `MorphicLoad`, 퀄리아 또는 정신 시간량이 아니다.

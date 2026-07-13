@@ -117,17 +117,19 @@ PhenomenalStrainReadout
 subjective / mental time
 ```
 
-`AccommodationEnvelope` will be a future declared policy for a range that can be
-accommodated without the hypothesized reconfiguration. The current `[0, 1]` state bound
-and the distance to that bound are storage constraints, not an accommodation envelope.
+At the `MORPH-001A` freeze, `AccommodationEnvelope` was deferred. `MORPH-001B` later
+introduced only an experimenter-declared reducer-write simulation band; a measured human
+accommodation range remains deferred. The current `[0, 1]` state bound and the distance
+to that bound are storage constraints, not an accommodation envelope.
 
 Likewise, the arithmetic difference between requested and committed displacement is not
 yet `ResidualStrain`. It can contain clamp loss, ordinary update attenuation, staged
 interaction, or model artifacts. Naming it residual strain requires a separate operator,
 unit, and validation plan.
 
-Because no envelope is implemented, neither excess nor `MorphicLoadProfile` can be
-computed in this slice. No bridge to qualia or subjective time is permitted.
+Because this `MORPH-001A` slice implements no envelope, neither excess nor
+`MorphicLoadProfile` can be computed here. The later `MORPH-001B` proxy is a separate
+derived artifact and still permits no bridge to qualia or subjective time.
 
 ## Preregistered structural probes
 
@@ -222,8 +224,11 @@ Executable checks for this slice:
 - `test_reducer_proposal_ledger_rejects_inconsistent_lineage_and_content_identity`
 - `test_reducer_proposal_capture_preserves_invalid_initial_audit_path`
 
-## Planned next slice
+## Implemented next slice
 
-Only after this distinction is stable may `MORPH-001B` preregister an explicit
-`AccommodationEnvelope` and compare competing definitions of excess. That later slice
-must not retroactively rename storage-bound clipping as accommodation failure.
+[`MORPH-001B`](morph-001b-proposal-envelope-comparison.md) now compares this
+proposal with an explicit experimenter-declared simulation band. It does not
+retroactively rename storage-bound clipping as accommodation failure, and its
+ordered proxy-excess profile is not a measured human `AccommodationEnvelope`,
+`ExcessDemand`, residual strain, or morphic load. Outcome/load interpretation
+remains a later `MORPH-001C` task.
