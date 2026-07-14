@@ -106,8 +106,12 @@ participant-visible realization in a closed-world surface, and freezes 37 final
 delivery byte strings. It changes no 001A/001B semantic artifact and makes no
 defect-resolution claim.
 
-The next authority step is a separate P1-v1 preregistration bound to the merged
-P0-v1 digest. Actual delivery/response occurrences, source identity, clocks,
+P1-v1 preregistration remains required before defect-resolution claims, but it
+is now a non-mainline hold. The immediate research-program step is the separate
+[`INTERP-001D2a0`](../d2a0/README.md) frozen contract, followed by detached D2a1
+and `OBS-MAP-000`. That mapping decides whether this elicitation surface is
+kept, revised or replaced; it does not pre-authorize P0-v2. Actual
+delivery/response occurrences, source identity, clocks,
 consent/privacy/withdrawal and acquisition lineage remain an `ACQ0` gate.
 Interpreting prior-response-exposed later surfaces as natural persistence also
 remains blocked on a separate prompt-reactivity study.

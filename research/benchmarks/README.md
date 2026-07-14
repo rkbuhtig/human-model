@@ -45,3 +45,7 @@ Contract mutant는 인간 모델 후보가 아니다. 반대로 descriptive mode
   세 block은 end-to-end pipeline이 아니며 development/sealed는 예측 partition이 아니다.
   이는 durable TargetForm, Episode/Narrative writer, predictive validation이나 인간
   mood·memory·qualia evidence가 아니다.
+  후속 [`INTERP-001D2a0`](../scenarios/interp-dialogue-001/d2a0/README.md)는 이 detached
+  경계를 유지한 채 current access에서 future-effective interpretation까지의 최소 spine,
+  독립 T/P/H 전략 축, trace schema와 synthetic distinguishing witness를 실행 전에 동결한다.
+  상태는 `FROZEN / UNEXECUTED`이며 runner/evaluator/result 또는 `HumanState` write는 없다.

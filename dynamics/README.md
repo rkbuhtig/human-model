@@ -89,6 +89,7 @@ labs/interp_m1_evaluator → completed run + frozen evaluation artifacts
 labs/interp_dialogue_elicitation_contract → compiled frozen source context
 labs/interp_dialogue_p1_runner → immutable scripted replay + development assessment artifacts
 labs/interp_dialogue_p0_v1_builder → exact decisions + closed-world surface/catalog freeze
+labs/interp_d2a0_contract → frozen spine/manifests/fixtures semantic verification only
 runner process → serialized artifact → evaluator process
 ```
 
