@@ -1,0 +1,62 @@
+{
+  "$schema": "./contract.schema.json",
+  "document_kind": "digest_contract",
+  "schema_version": "1.0.0",
+  "contract_id": "INTERP-001D2A0-MAT0-V0",
+  "status": "FROZEN_UNEXECUTED",
+  "predecessor_manifest_sha256": "8ee62993fbf302d8037f8cf898a0edca4fe7bbff7b01f73f6a71e8b6c04c3efd",
+  "exec0_manifest_sha256": "1a7203d93a341c3b4570d4070d95457441da190e4c8ff167f86d89d0135c40f3",
+  "payload": {
+    "contract_id": "INTERP-001D2A0-MAT0-DIGEST-V0",
+    "canonicalization": {
+      "canonicalization_id": "interp-canonical-json-v1",
+      "parser": "UTF-8 strict JSON with duplicate object keys rejected",
+      "encoding": "UTF-8",
+      "object_keys": "ASCII-only keys in lexicographic order",
+      "separators": "comma and colon without surrounding whitespace",
+      "unicode": "NFC strings emitted without ASCII escaping; surrogate code points rejected",
+      "numbers": "integers only; floating-point literals NaN and infinities rejected",
+      "line_ending": "canonical value bytes contain no trailing newline"
+    },
+    "digest_rules": [
+      {
+        "target": "record.payload_digest",
+        "algorithm": "sha256",
+        "bytes": "canonical bytes of the payload object exactly"
+      },
+      {
+        "target": "SubjectiveEncounterFormCandidate.payload.subjective_path_digest",
+        "algorithm": "sha256",
+        "bytes": "canonical bytes of the exact object declared by operator-program intermediate_construction"
+      },
+      {
+        "target": "trace.content_sha256",
+        "algorithm": "sha256",
+        "bytes": "canonical bytes of the trace object with exactly the top-level content_sha256 member omitted"
+      },
+      {
+        "target": "run_artifact_sha256",
+        "algorithm": "sha256",
+        "bytes": "raw bytes of canonical run object followed by one LF byte"
+      },
+      {
+        "target": "evaluation_artifact_sha256",
+        "algorithm": "sha256",
+        "bytes": "raw bytes of canonical evaluation object followed by one LF byte"
+      },
+      {
+        "target": "resolved_value_digest",
+        "algorithm": "sha256",
+        "bytes": "canonical bytes of the resolved JSON value"
+      },
+      {
+        "target": "source_bundle_sha256",
+        "algorithm": "sha256",
+        "bytes": "canonical bytes of sorted relative-path/raw-file-sha256 entry array"
+      }
+    ],
+    "self_digest_rule": "run and evaluation documents have no self digest; publication manifest carries their external raw-file digests",
+    "serialization_rule": "persisted JSON artifact equals canonical value bytes plus exactly one LF",
+    "path_independence_rule": "absolute paths timestamps git metadata Python version and working directory are never digest inputs"
+  }
+}

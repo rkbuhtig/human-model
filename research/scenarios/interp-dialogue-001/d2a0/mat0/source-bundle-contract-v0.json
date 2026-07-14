@@ -1,0 +1,62 @@
+{
+  "$schema": "./contract.schema.json",
+  "document_kind": "source_bundle_contract",
+  "schema_version": "1.0.0",
+  "contract_id": "INTERP-001D2A0-MAT0-V0",
+  "status": "FROZEN_UNEXECUTED",
+  "predecessor_manifest_sha256": "8ee62993fbf302d8037f8cf898a0edca4fe7bbff7b01f73f6a71e8b6c04c3efd",
+  "exec0_manifest_sha256": "1a7203d93a341c3b4570d4070d95457441da190e4c8ff167f86d89d0135c40f3",
+  "payload": {
+    "contract_id": "INTERP-001D2A0-MAT0-SOURCE-BUNDLES-V0",
+    "bundles": [
+      {
+        "bundle_id": "INTERP-001D2A1-RUNNER-SOURCE-BUNDLE-V0",
+        "role": "RUNNER",
+        "paths": [
+          "dynamics/labs/interp_d2a1_common.py",
+          "dynamics/labs/interp_d2a1_operators.py",
+          "dynamics/labs/interp_d2a1_runner.py",
+          "dynamics/labs/interp_d2a1_runner_cli.py"
+        ]
+      },
+      {
+        "bundle_id": "INTERP-001D2A1-EVALUATOR-SOURCE-BUNDLE-V0",
+        "role": "EVALUATOR",
+        "paths": [
+          "dynamics/labs/interp_d2a1_common.py",
+          "dynamics/labs/interp_d2a1_evaluator.py",
+          "dynamics/labs/interp_d2a1_evaluator_cli.py"
+        ]
+      }
+    ],
+    "entry_shape": [
+      "relative_path",
+      "raw_file_sha256"
+    ],
+    "entry_order": "ascending relative_path byte order",
+    "bundle_digest_rule": "sha256 of canonical entry array",
+    "shared_file_rule": "a shared file is independently listed in each role bundle",
+    "excluded": [
+      "generated run",
+      "generated evaluation",
+      "publication manifest",
+      "tests",
+      "cache",
+      "timestamp",
+      "absolute path",
+      "git metadata"
+    ],
+    "cross_role_import_policy": [
+      "RUNNER_MUST_NOT_IMPORT_EVALUATOR",
+      "EVALUATOR_MUST_NOT_IMPORT_RUNNER",
+      "EVALUATOR_MUST_NOT_IMPORT_OPERATOR_IMPLEMENTATION"
+    ],
+  "publication_rule": "D2a1 publication manifest records actual per-entry hashes and bundle digest after implementation exists",
+  "publication_carrier": {
+    "schema_path": "publication-v1.schema.json",
+    "source_bundle_order": ["RUNNER", "EVALUATOR"],
+    "artifact_order": ["run_artifact", "evaluation_artifact"],
+    "timestamp_policy": "FORBIDDEN"
+  }
+}
+}

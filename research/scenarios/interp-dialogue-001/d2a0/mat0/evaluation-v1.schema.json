@@ -1,0 +1,290 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/human-model/interp-001d2a1/evaluation-v1.schema.json",
+  "title": "INTERP-001D2a1 post-run evaluation artifact",
+  "x-semantic-rules": [
+    "assertion_results follow frozen evaluation-manifest assertion order exactly",
+    "VIOLATED interpretation_code equals the assertion violation_interpretation_code",
+    "summary status counts sum to registered_assertion_count 20",
+    "any NOT_EVALUABLE yields PARTIALLY_EVALUABLE unless a VIOLATED result yields DOES_NOT_CONFORM",
+    "all SATISFIED yields CONFORMS_WITHIN_REGISTERED_SCOPE"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "evaluation_id",
+    "contract_id",
+    "mat0_manifest_sha256",
+    "run_artifact_sha256",
+    "execution_manifest_sha256",
+    "execution_unit_manifest_sha256",
+    "evaluation_manifest_sha256",
+    "evaluator_policy_sha256",
+    "evaluator_source_bundle_sha256",
+    "assertion_results",
+    "run_evaluation_status",
+    "summary"
+  ],
+  "properties": {
+    "evaluation_id": {
+      "$ref": "#/$defs/token"
+    },
+    "contract_id": {
+      "const": "INTERP-001D2A0-MAT0-V0"
+    },
+    "mat0_manifest_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "run_artifact_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "execution_manifest_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "execution_unit_manifest_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "evaluation_manifest_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "evaluator_policy_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "evaluator_source_bundle_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "assertion_results": {
+      "type": "array",
+      "minItems": 20,
+      "maxItems": 20,
+      "items": {
+        "$ref": "#/$defs/assertionResult"
+      }
+    },
+    "run_evaluation_status": {
+      "enum": [
+        "CONFORMS_WITHIN_REGISTERED_SCOPE",
+        "DOES_NOT_CONFORM",
+        "PARTIALLY_EVALUABLE"
+      ]
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "registered_assertion_count",
+        "satisfied_count",
+        "violated_count",
+        "not_applicable_count",
+        "not_evaluable_count"
+      ],
+      "properties": {
+        "registered_assertion_count": {
+          "const": 20
+        },
+        "satisfied_count": {
+          "$ref": "#/$defs/count"
+        },
+        "violated_count": {
+          "$ref": "#/$defs/count"
+        },
+        "not_applicable_count": {
+          "$ref": "#/$defs/count"
+        },
+        "not_evaluable_count": {
+          "$ref": "#/$defs/count"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "token": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "count": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 20
+    },
+    "nullableToken": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/token"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "nullableOrdinal": {
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "resolvedOperand": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "execution_unit_id",
+        "trace_id",
+        "source_kind",
+        "record_id",
+        "access_ordinal",
+        "json_pointer",
+        "resolved_value",
+        "resolved_value_digest"
+      ],
+      "properties": {
+        "execution_unit_id": {
+          "$ref": "#/$defs/token"
+        },
+        "trace_id": {
+          "$ref": "#/$defs/token"
+        },
+        "source_kind": {
+          "enum": [
+            "TRACE",
+            "RECORD"
+          ]
+        },
+        "record_id": {
+          "$ref": "#/$defs/nullableToken"
+        },
+        "access_ordinal": {
+          "$ref": "#/$defs/nullableOrdinal"
+        },
+        "json_pointer": {
+          "type": "string",
+          "pattern": "^/"
+        },
+        "resolved_value": {},
+        "resolved_value_digest": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "assertionResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assertion_id",
+        "evaluation_status",
+        "observed_relation",
+        "interpretation_code",
+        "reason_code",
+        "resolved_operands"
+      ],
+      "properties": {
+        "assertion_id": {
+          "$ref": "#/$defs/token"
+        },
+        "evaluation_status": {
+          "enum": [
+            "SATISFIED",
+            "VIOLATED",
+            "NOT_APPLICABLE",
+            "NOT_EVALUABLE"
+          ]
+        },
+        "observed_relation": {
+          "enum": [
+            "EQUAL",
+            "NOT_EQUAL",
+            "ALL_COMPLETED",
+            "ALL_REJECTED",
+            "ALL_DISTINCT",
+            "GREATER_THAN",
+            "UNRESOLVED"
+          ]
+        },
+        "interpretation_code": {
+          "enum": [
+            "NONE",
+            "AUTHORITY_FAILURE",
+            "HARD_INVARIANT_FAILURE",
+            "STAGE_EXERCISED_AND_TRACE_CHANGED",
+            "STAGE_EXERCISED_NO_REGISTERED_EFFECT",
+            "NOT_EXERCISED",
+            "OPERATIONALLY_ALIASED_UNDER_SCOPE",
+            "NOT_IDENTIFIABLE_UNDER_FIXTURE_SET",
+            "NON_FALSIFIABLE_ESCAPE_USED"
+          ]
+        },
+        "reason_code": {
+          "enum": [
+            "NONE",
+            "ZERO_MATCH",
+            "MULTIPLE_MATCH",
+            "POINTER_UNRESOLVED",
+            "PREDICATE_NOT_APPLICABLE"
+          ]
+        },
+        "resolved_operands": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 16,
+          "items": {
+            "$ref": "#/$defs/resolvedOperand"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "evaluation_status": { "const": "SATISFIED" } } },
+          "then": {
+            "properties": {
+              "observed_relation": { "not": { "const": "UNRESOLVED" } },
+              "interpretation_code": { "const": "NONE" },
+              "reason_code": { "const": "NONE" },
+              "resolved_operands": { "minItems": 1 }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "evaluation_status": { "const": "VIOLATED" } } },
+          "then": {
+            "properties": {
+              "observed_relation": { "not": { "const": "UNRESOLVED" } },
+              "interpretation_code": { "not": { "const": "NONE" } },
+              "reason_code": { "const": "NONE" },
+              "resolved_operands": { "minItems": 1 }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "evaluation_status": { "const": "NOT_APPLICABLE" } } },
+          "then": {
+            "properties": {
+              "observed_relation": { "const": "UNRESOLVED" },
+              "interpretation_code": { "const": "NONE" },
+              "reason_code": { "const": "PREDICATE_NOT_APPLICABLE" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "evaluation_status": { "const": "NOT_EVALUABLE" } } },
+          "then": {
+            "properties": {
+              "observed_relation": { "const": "UNRESOLVED" },
+              "interpretation_code": { "const": "NONE" },
+              "reason_code": {
+                "enum": ["ZERO_MATCH", "MULTIPLE_MATCH", "POINTER_UNRESOLVED"]
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

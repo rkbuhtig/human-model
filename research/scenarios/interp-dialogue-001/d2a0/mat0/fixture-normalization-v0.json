@@ -1,0 +1,315 @@
+{
+  "$schema": "./contract.schema.json",
+  "document_kind": "fixture_normalization",
+  "schema_version": "1.0.0",
+  "contract_id": "INTERP-001D2A0-MAT0-V0",
+  "status": "FROZEN_UNEXECUTED",
+  "predecessor_manifest_sha256": "8ee62993fbf302d8037f8cf898a0edca4fe7bbff7b01f73f6a71e8b6c04c3efd",
+  "exec0_manifest_sha256": "1a7203d93a341c3b4570d4070d95457441da190e4c8ff167f86d89d0135c40f3",
+  "payload": {
+    "adapter_id": "INTERP-001D2A0-MAT0-FIXTURE-NORMALIZATION-V0",
+    "normalized_input_shape": {
+      "required_fields": [
+        "fixture_id",
+        "arm_id",
+        "access_plan",
+        "declared_surface_role",
+        "gate_mode",
+        "profile_id",
+        "candidate_escape_mode",
+        "lifecycle_program"
+      ],
+      "access_required_fields": [
+        "access_id",
+        "runtime_id",
+        "target_scope_id",
+        "interpretation_scope_id",
+        "access_ordinal",
+        "mode",
+        "source_path_identity",
+        "supplied_path",
+        "prior_adverse_count"
+      ],
+      "access_modes": [
+        "FULL_INTERPRETATION",
+        "LIFECYCLE_VIEW_ONLY"
+      ]
+    },
+    "source_shape_rules": [
+      {
+        "fixture_source": "PREDECESSOR",
+        "clamps": "clamped_fields array converted to map in array order; duplicate field is contract failure",
+        "assignments": "assignments array converted to map in array order; duplicate field is contract failure"
+      },
+      {
+        "fixture_source": "EXEC0",
+        "clamps": "clamps object copied exactly",
+        "assignments": "assignments object copied exactly"
+      }
+    ],
+    "merge_precedence": [
+      "NORMALIZATION_DEFAULTS",
+      "FIXTURE_CLAMPS",
+      "ARM_ASSIGNMENTS",
+      "ACCESS_ORDINAL_OVERRIDES"
+    ],
+    "collision_rule": "ARM_ASSIGNMENT_MAY_OVERRIDE_ONLY_A_FIELD_LISTED_BY_PREDECESSOR_MANIPULATED_FIELDS_OR_EXEC0_ARM_ASSIGNMENTS",
+    "field_adapters": [
+      {
+        "source_field": "supplied_interpretation_path",
+        "targets": [
+          "source_path_identity",
+          "supplied_path"
+        ],
+        "rule": "preserve raw token as source_path_identity and map supplied_path by path_value_adapter"
+      },
+      {
+        "source_field": "supplied_path",
+        "targets": [
+          "source_path_identity",
+          "supplied_path"
+        ],
+        "rule": "copy token to source_path_identity and supplied_path"
+      },
+      {
+        "source_field": "declared_surface_role",
+        "targets": [
+          "declared_surface_role"
+        ],
+        "rule": "identity"
+      },
+      {
+        "source_field": "later_external_occurrence",
+        "targets": [
+          "later_source_path_identity",
+          "later_supplied_path"
+        ],
+        "rule": "map by later_occurrence_adapter"
+      },
+      {
+        "source_field": "lifecycle_program",
+        "targets": [
+          "lifecycle_program"
+        ],
+        "rule": "identity"
+      },
+      {
+        "source_field": "candidate_escape_mode",
+        "targets": [
+          "candidate_escape_mode"
+        ],
+        "rule": "identity"
+      }
+    ],
+    "path_value_adapter": {
+      "PATH-NEGATIVE": "PATH-ADVERSE",
+      "PATH-AMBIGUOUS": "PATH-AMBIGUOUS",
+      "PATH-SHARED": "PATH-ADVERSE",
+      "PATH-A": "PATH-AMBIGUOUS",
+      "PATH-B": "PATH-AMBIGUOUS",
+      "PATH-BENIGN": "PATH-BENIGN",
+      "PATH-ADVERSE": "PATH-ADVERSE"
+    },
+    "later_occurrence_adapter": {
+      "EVENT-FOLLOWUP-SAME": "PATH-BENIGN"
+    },
+    "source_identity_rule": "raw predecessor path token is preserved even when multiple tokens map to the same ranked supplied_path",
+    "absent_evidence_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "fixture_programs": [
+      {
+        "fixture_id": "FX-EQUAL-SURFACE-DIFFERENT-PATH",
+        "defaults": {
+          "declared_surface_role": "PRIVATE",
+          "gate_mode": "OPEN",
+          "candidate_escape_mode": "NONE",
+        "lifecycle_program": "FUTURE_APPLY_NEXT_ACCESS"
+        },
+        "access_rules": [
+          {
+            "access_ordinal": 1,
+            "mode": "FULL_INTERPRETATION",
+            "path_source": "ARM.supplied_interpretation_path",
+            "surface_override": "SURFACE-NEUTRAL"
+          },
+          {
+            "access_ordinal": 2,
+            "mode": "FULL_INTERPRETATION",
+            "path_source": "CLAMP.later_external_occurrence",
+            "surface_override": "NONE"
+          }
+        ]
+      },
+      {
+        "fixture_id": "FX-ROLE-PROJECTION-ONLY",
+        "defaults": {
+          "gate_mode": "OPEN",
+          "candidate_escape_mode": "NONE",
+          "lifecycle_program": "DEFAULT"
+        },
+        "access_rules": [
+          {
+            "access_ordinal": 1,
+            "mode": "FULL_INTERPRETATION",
+            "path_source": "CLAMP.supplied_interpretation_path",
+            "surface_override": "NONE"
+          },
+          {
+            "access_ordinal": 2,
+            "mode": "FULL_INTERPRETATION",
+            "path_source": "CLAMP.supplied_interpretation_path",
+            "surface_override": "NONE"
+          }
+        ]
+      },
+      {
+        "fixture_id": "FX-EVIDENCE-SUBJECTIVE-PATH",
+        "defaults": {
+          "declared_surface_role": "PRIVATE",
+          "gate_mode": "OPEN",
+          "candidate_escape_mode": "NONE",
+          "lifecycle_program": "DEFAULT"
+        },
+        "access_rules": [
+          {
+            "access_ordinal": 1,
+            "mode": "FULL_INTERPRETATION",
+            "path_source": "ARM.supplied_interpretation_path",
+            "surface_override": "NONE"
+          }
+        ]
+      },
+      {
+        "fixture_id": "FX-SAME-ACCESS-REJECTION",
+        "defaults": {
+          "declared_surface_role": "PRIVATE",
+          "gate_mode": "OPEN",
+          "candidate_escape_mode": "NONE",
+          "lifecycle_program": "SAME_ACCESS_READ",
+          "supplied_path": "PATH-ADVERSE",
+          "source_path_identity": "MAT0-DEFAULT-ADVERSE",
+          "prior_adverse_count": 1
+        },
+        "access_rules": [
+          {
+            "access_ordinal": 1,
+            "mode": "FULL_INTERPRETATION",
+            "path_source": "DEFAULT",
+            "surface_override": "NONE"
+          }
+        ]
+      },
+      {
+        "fixture_id": "FX-REVISION-LIFECYCLE-SEPARATION",
+        "defaults": {
+          "declared_surface_role": "PRIVATE",
+          "gate_mode": "OPEN",
+          "candidate_escape_mode": "NONE",
+          "supplied_path": "PATH-ADVERSE",
+          "source_path_identity": "MAT0-LIFECYCLE-ADVERSE",
+          "prior_adverse_count": 1
+        },
+        "access_rules": [
+          {
+            "access_ordinal": 1,
+            "mode": "FULL_INTERPRETATION",
+            "path_source": "DEFAULT",
+            "surface_override": "NONE"
+          },
+          {
+            "access_ordinal": 2,
+            "mode": "LIFECYCLE_VIEW_ONLY",
+            "path_source": "MAT0-LATER-BENIGN",
+            "surface_override": "NONE"
+          },
+          {
+            "access_ordinal": 3,
+            "mode": "LIFECYCLE_VIEW_ONLY",
+            "path_source": "MAT0-LATER-BENIGN",
+            "surface_override": "NONE"
+          }
+        ]
+      },
+      {
+        "fixture_id": "FX-NON-FALSIFIABLE-ESCAPE",
+        "defaults": {
+          "declared_surface_role": "PRIVATE",
+          "gate_mode": "OPEN",
+          "lifecycle_program": "DEFAULT",
+          "supplied_path": "PATH-AMBIGUOUS",
+          "source_path_identity": "MAT0-ESCAPE-AMBIGUOUS",
+          "prior_adverse_count": 0
+        },
+        "access_rules": [
+          {
+            "access_ordinal": 1,
+            "mode": "FULL_INTERPRETATION",
+            "path_source": "DEFAULT",
+            "surface_override": "NONE"
+          }
+        ]
+      },
+      {
+        "fixture_id": "FX-TRANSIENT-GATE",
+        "defaults": {
+          "declared_surface_role": "PRIVATE",
+          "candidate_escape_mode": "NONE",
+          "lifecycle_program": "DEFAULT",
+          "prior_adverse_count": 0
+        },
+        "access_rules": [
+          {
+            "access_ordinal": 1,
+            "mode": "FULL_INTERPRETATION",
+            "path_source": "CLAMP.supplied_path",
+            "gate_source": "ARM.gate_mode",
+            "surface_override": "NONE"
+          },
+          {
+            "access_ordinal": 2,
+            "mode": "FULL_INTERPRETATION",
+            "path_source": "CLAMP.supplied_path",
+            "gate_source": "CLAMP.later_gate_mode",
+            "surface_override": "NONE"
+          }
+        ]
+      },
+      {
+        "fixture_id": "FX-BOUNDED-ACCUMULATION",
+        "defaults": {
+          "declared_surface_role": "PRIVATE",
+          "gate_mode": "OPEN",
+          "candidate_escape_mode": "NONE",
+          "lifecycle_program": "DEFAULT"
+        },
+        "access_rules": [
+          {
+            "access_ordinal": "ARM.source_access_ordinal",
+            "mode": "FULL_INTERPRETATION",
+            "path_source": "CLAMP.supplied_path",
+            "prior_adverse_count_source": "ARM.prior_adverse_count",
+            "surface_override": "NONE"
+          }
+        ]
+      },
+      {
+        "fixture_id": "FX-DECLARED-PROFILE-DISSOCIATION",
+        "defaults": {
+          "candidate_escape_mode": "NONE",
+          "lifecycle_program": "DEFAULT",
+          "prior_adverse_count": 0
+        },
+        "access_rules": [
+          {
+            "access_ordinal": 1,
+            "mode": "FULL_INTERPRETATION",
+            "path_source": "CLAMP.supplied_path",
+            "gate_source": "CLAMP.gate_mode",
+            "role_source": "CLAMP.declared_surface_role",
+            "surface_override": "NONE"
+          }
+        ]
+      }
+    ],
+    "undeclared_field_policy": "HARD_CONTRACT_FAILURE"
+  }
+}

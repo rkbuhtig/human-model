@@ -1,0 +1,130 @@
+{
+  "$schema": "./contract.schema.json",
+  "document_kind": "rejection_materialization",
+  "schema_version": "1.0.0",
+  "contract_id": "INTERP-001D2A0-MAT0-V0",
+  "status": "FROZEN_UNEXECUTED",
+  "predecessor_manifest_sha256": "8ee62993fbf302d8037f8cf898a0edca4fe7bbff7b01f73f6a71e8b6c04c3efd",
+  "exec0_manifest_sha256": "1a7203d93a341c3b4570d4070d95457441da190e4c8ff167f86d89d0135c40f3",
+  "payload": {
+    "table_id": "INTERP-001D2A0-MAT0-REJECTION-MATERIALIZATION-V0",
+    "selection_rule": "evaluate rows in ascending priority and materialize the first matching row only",
+    "rows": [
+      {
+        "priority": 1,
+        "rejection_code": "UNDECLARED_RUNTIME_VIEW_READ",
+        "rejected_stage": "MATERIALIZE_DECLARED_VIEW",
+        "authority_rule_id": "DECLARED_RUNTIME_VIEW_ONLY",
+        "condition": "requested field is outside runtime_spine.runtime_view.allowed_fields",
+        "source_record_types": [],
+        "offending_input_refs": [
+          "REQUESTED-RUNTIME-VIEW-FIELD"
+        ]
+      },
+      {
+        "priority": 2,
+        "rejection_code": "UNREGISTERED_FREE_CANDIDATE",
+        "rejected_stage": "EMIT_INTERPRETATION_CANDIDATES",
+        "authority_rule_id": "CLOSED_WORLD_CANDIDATE_VOCABULARY",
+        "condition": "candidate_escape_mode equals UNDECLARED_FREE_CANDIDATE",
+        "source_record_types": [
+          "SubjectiveEncounterFormCandidate"
+        ],
+        "offending_input_refs": [
+          "FIXTURE-FIELD:candidate_escape_mode:UNDECLARED_FREE_CANDIDATE"
+        ]
+      },
+      {
+        "priority": 3,
+        "rejection_code": "UNBOUNDED_OUT_OF_MODEL_ESCAPE",
+        "rejected_stage": "EMIT_INTERPRETATION_CANDIDATES",
+        "authority_rule_id": "DECLARED_BOUNDED_OUT_OF_MODEL_ONLY",
+        "condition": "candidate_escape_mode equals UNBOUNDED_OUT_OF_MODEL",
+        "source_record_types": [
+          "SubjectiveEncounterFormCandidate"
+        ],
+        "offending_input_refs": [
+          "FIXTURE-FIELD:candidate_escape_mode:UNBOUNDED_OUT_OF_MODEL"
+        ]
+      },
+      {
+        "priority": 4,
+        "rejection_code": "SAME_ACCESS_REVISION_FEEDBACK",
+        "rejected_stage": "READ_ELIGIBLE_REVISION",
+        "authority_rule_id": "FUTURE_ACCESS_ONLY",
+        "condition": "read access ordinal is less than or equal to revision source access ordinal",
+        "source_record_types": [
+          "RevisionEligibilityDecisionReceipt",
+          "DeclaredRuntimeViewReceipt"
+        ],
+        "offending_input_refs": [
+          "REVISION-SOURCE-ACCESS",
+          "REQUESTED-READ-ACCESS"
+        ]
+      },
+      {
+        "priority": 5,
+        "rejection_code": "REVISION_NOT_YET_EFFECTIVE",
+        "rejected_stage": "READ_ELIGIBLE_REVISION",
+        "authority_rule_id": "EFFECTIVE_BEFORE_READ",
+        "condition": "read access ordinal is less than revision effective_from_ordinal",
+        "source_record_types": [
+          "RevisionEligibilityDecisionReceipt",
+          "DeclaredRuntimeViewReceipt"
+        ],
+        "offending_input_refs": [
+          "REVISION-EFFECTIVE-FROM",
+          "REQUESTED-READ-ACCESS"
+        ]
+      },
+      {
+        "priority": 6,
+        "rejection_code": "CROSS_RUNTIME_REVISION_READ",
+        "rejected_stage": "READ_ELIGIBLE_REVISION",
+        "authority_rule_id": "SAME_RUNTIME",
+        "condition": "read runtime_id differs from revision runtime_id",
+        "source_record_types": [
+          "RevisionEligibilityDecisionReceipt",
+          "DeclaredRuntimeViewReceipt"
+        ],
+        "offending_input_refs": [
+          "REVISION-RUNTIME",
+          "READ-RUNTIME"
+        ]
+      },
+      {
+        "priority": 7,
+        "rejection_code": "CROSS_TARGET_SCOPE_REVISION_READ",
+        "rejected_stage": "READ_ELIGIBLE_REVISION",
+        "authority_rule_id": "SAME_TARGET_SCOPE",
+        "condition": "read target_scope_id differs from revision target_scope_id",
+        "source_record_types": [
+          "RevisionEligibilityDecisionReceipt",
+          "DeclaredRuntimeViewReceipt"
+        ],
+        "offending_input_refs": [
+          "REVISION-TARGET-SCOPE",
+          "READ-TARGET-SCOPE"
+        ]
+      },
+      {
+        "priority": 8,
+        "rejection_code": "CROSS_INTERPRETATION_SCOPE_REVISION_READ",
+        "rejected_stage": "READ_ELIGIBLE_REVISION",
+        "authority_rule_id": "SAME_INTERPRETATION_SCOPE",
+        "condition": "read interpretation_scope_id differs from revision interpretation_scope_id",
+        "source_record_types": [
+          "RevisionEligibilityDecisionReceipt",
+          "DeclaredRuntimeViewReceipt"
+        ],
+        "offending_input_refs": [
+          "REVISION-INTERPRETATION-SCOPE",
+          "READ-INTERPRETATION-SCOPE"
+        ]
+      }
+    ],
+    "source_record_id_rule": "resolve source_record_types in listed order using records already emitted in the same trace",
+    "offending_input_ref_rule": "use exact literal tokens from the selected row; no free-form diagnostic text",
+    "terminal_rule": "typed rejection terminates one unit and the run continues; unknown row or missing source binding aborts the whole run"
+  }
+}

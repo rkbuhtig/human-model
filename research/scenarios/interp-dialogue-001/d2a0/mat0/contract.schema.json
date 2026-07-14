@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/human-model/interp-001d2a0-mat0/contract.schema.json",
+  "title": "INTERP-001D2a0-MAT0 frozen materialization ABI document",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "document_kind",
+    "schema_version",
+    "contract_id",
+    "status",
+    "predecessor_manifest_sha256",
+    "exec0_manifest_sha256",
+    "payload"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "./contract.schema.json"
+    },
+    "document_kind": {
+      "enum": [
+        "composed_runner_input",
+        "fixture_normalization",
+        "operator_program",
+        "record_materialization",
+        "lifecycle_emission",
+        "rejection_materialization",
+        "digest_contract",
+        "source_bundle_contract",
+        "materialization_golden_traces",
+        "frozen_artifact_manifest"
+      ]
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "contract_id": {
+      "const": "INTERP-001D2A0-MAT0-V0"
+    },
+    "status": {
+      "const": "FROZEN_UNEXECUTED"
+    },
+    "predecessor_manifest_sha256": {
+      "const": "8ee62993fbf302d8037f8cf898a0edca4fe7bbff7b01f73f6a71e8b6c04c3efd"
+    },
+    "exec0_manifest_sha256": {
+      "const": "1a7203d93a341c3b4570d4070d95457441da190e4c8ff167f86d89d0135c40f3"
+    },
+    "payload": {
+      "type": "object",
+      "minProperties": 1
+    }
+  }
+}

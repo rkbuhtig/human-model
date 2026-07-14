@@ -1,0 +1,126 @@
+{
+  "$schema": "./contract.schema.json",
+  "document_kind": "composed_runner_input",
+  "schema_version": "1.0.0",
+  "contract_id": "INTERP-001D2A0-MAT0-V0",
+  "status": "FROZEN_UNEXECUTED",
+  "predecessor_manifest_sha256": "8ee62993fbf302d8037f8cf898a0edca4fe7bbff7b01f73f6a71e8b6c04c3efd",
+  "exec0_manifest_sha256": "1a7203d93a341c3b4570d4070d95457441da190e4c8ff167f86d89d0135c40f3",
+  "payload": {
+    "bundle_id": "INTERP-001D2A0-MAT0-COMPOSED-RUNNER-INPUT-V0",
+    "authority_precedence": [
+      "MAT0_MATERIALIZATION_ABI",
+      "EXEC0_OPERATOR_UNIT_AND_OUTPUT_CARRIERS",
+      "D2A0_SPINE_STRATEGY_FIXTURE_AND_POLICY"
+    ],
+    "binding_authorities": [
+      {
+        "document_kind": "predecessor_execution_manifest",
+        "path": "../execution-manifest-v0.json",
+        "sha256": "1fe9e517df33c0a361d6c9934d573c8a3dc494b42560428a909197f4bd7165a8",
+        "visibility": "VERIFIER_ONLY"
+      },
+      {
+        "document_kind": "predecessor_frozen_manifest",
+        "path": "../frozen-artifact-manifest-v0.json",
+        "sha256": "8ee62993fbf302d8037f8cf898a0edca4fe7bbff7b01f73f6a71e8b6c04c3efd",
+        "visibility": "VERIFIER_ONLY"
+      },
+      {
+        "document_kind": "exec0_frozen_manifest",
+        "path": "../exec0/frozen-artifact-manifest-v0.json",
+        "sha256": "1a7203d93a341c3b4570d4070d95457441da190e4c8ff167f86d89d0135c40f3",
+        "visibility": "VERIFIER_ONLY"
+      }
+    ],
+    "predecessor_runner_visible_documents": [
+      {
+        "document_kind": "runtime_spine",
+        "path": "../runtime-spine-v0.json",
+        "sha256": "b604260073555cb1e72fb8f38eacaaee436c60593fec8f356afe89c428cc2b67"
+      },
+      {
+        "document_kind": "strategy_catalog",
+        "path": "../strategy-catalog-v0.json",
+        "sha256": "a4f81f57d2264b2154b8464e3f32f4a91e9fd44b67508690d77be6a9112784a7"
+      },
+      {
+        "document_kind": "fixture_catalog",
+        "path": "../fixture-catalog-v0.json",
+        "sha256": "679b252ce21e3d9040d744814ad87878788e911ad2120f67af3381e1cb771289"
+      },
+      {
+        "document_kind": "policy",
+        "path": "../policy-v0.json",
+        "sha256": "2201c85e4287e5937138d97df2994dd2ced592d8f2c8ac375c88ebffb1e63cb7"
+      }
+    ],
+    "exec0_runner_visible_documents": [
+      {
+        "document_kind": "operator_catalog",
+        "path": "../exec0/operator-catalog-v0.json",
+        "sha256": "ecad2ca4727eaf45a891999590ca500f64f39c20526973062138d14971308e8f"
+      },
+      {
+        "document_kind": "lifecycle_processor",
+        "path": "../exec0/lifecycle-processor-v0.json",
+        "sha256": "9cbcffe813ef98253b8449bde5b6af2a00728955cd4e9e0c85b8b28f62046dc0"
+      },
+      {
+        "document_kind": "fixture_extension",
+        "path": "../exec0/fixture-extension-v0.json",
+        "sha256": "23b631696bd257fd67ed48cb6c3ec3318977d833e6f7507f13734fdf1d6e0d75"
+      },
+      {
+        "document_kind": "execution_unit_manifest",
+        "path": "../exec0/execution-unit-manifest-v0.json",
+        "sha256": "d6a5db6296fc28064055fc61a7bfa0941448b94b1d3ddd507e182a963e35a26a"
+      },
+      {
+        "document_kind": "trace_v1_schema",
+        "path": "../exec0/trace-v1.schema.json",
+        "sha256": "bec3e60117261a793cbe9713ecd81a37eeb37ab11bc8d9744372f83ccb710237"
+      },
+      {
+        "document_kind": "run_v1_schema",
+        "path": "../exec0/run-v1.schema.json",
+        "sha256": "f639b0064a6fe3c3ea7006aa17d6267bca0b22f407d3de9f2f6b3431c5a301f6"
+      }
+    ],
+    "mat0_runner_visible_document_kinds": [
+      "fixture_normalization",
+      "operator_program",
+      "record_materialization",
+      "lifecycle_emission",
+      "rejection_materialization",
+      "digest_contract"
+    ],
+    "runner_forbidden_document_kinds": [
+      "operator_golden_vectors",
+      "evaluator_policy",
+    "evaluation_manifest",
+    "evaluation_v1_schema",
+    "publication_v1_schema",
+    "materialization_golden_traces",
+      "source_bundle_contract"
+    ],
+    "supersession_rules": [
+      {
+        "superseded_path": "../trace.schema.json",
+        "replacement_path": "../exec0/trace-v1.schema.json",
+        "scope": "D2A1_TRACE_CARRIER_ONLY"
+      },
+      {
+        "superseded_authority": "predecessor_registered_cells_as_inferred_matrix",
+        "replacement_authority": "exec0_execution_units_array",
+        "scope": "D2A1_UNIT_INVENTORY"
+      },
+      {
+        "superseded_authority": "predecessor_evaluation_manifest",
+        "replacement_path": "../exec0/evaluation-manifest-v1.json",
+        "scope": "POST_RUN_EVALUATOR_ONLY"
+      }
+    ],
+    "composition_rule": "NO_FILENAME_DISCOVERY_NO_IMPLICIT_INHERITANCE_NO_CELL_ID_PARSING"
+  }
+}

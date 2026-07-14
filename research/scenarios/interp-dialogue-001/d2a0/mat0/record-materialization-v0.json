@@ -1,0 +1,174 @@
+{
+  "$schema": "./contract.schema.json",
+  "document_kind": "record_materialization",
+  "schema_version": "1.0.0",
+  "contract_id": "INTERP-001D2A0-MAT0-V0",
+  "status": "FROZEN_UNEXECUTED",
+  "predecessor_manifest_sha256": "8ee62993fbf302d8037f8cf898a0edca4fe7bbff7b01f73f6a71e8b6c04c3efd",
+  "exec0_manifest_sha256": "1a7203d93a341c3b4570d4070d95457441da190e4c8ff167f86d89d0135c40f3",
+  "payload": {
+    "materializer_id": "INTERP-001D2A0-MAT0-RECORD-MATERIALIZATION-V0",
+    "record_id_rule": "TRACE-{execution_unit_id}:A{access_ordinal_zero_padded_3}:{stage_rank_zero_padded_2}:{type_id}",
+    "trace_id_rule": "use exact trace_id from execution-unit-manifest-v0.json",
+    "record_sort_rule": "ascending access_ordinal then ascending stage_rank; no secondary lexical sort",
+    "stage_ranks": [
+      {
+        "rank": 1,
+        "type_id": "DeclaredRuntimeViewReceipt",
+        "writer": "MATERIALIZE_DECLARED_VIEW",
+        "emission": "one per access plan row",
+        "source_types": []
+      },
+      {
+        "rank": 2,
+        "type_id": "ReceptionCandidate",
+        "writer": "D2A-RECEPTION-BIAS",
+        "emission": "one per FULL_INTERPRETATION access",
+        "source_types": [
+          "DeclaredRuntimeViewReceipt"
+        ]
+      },
+      {
+        "rank": 3,
+        "type_id": "SubjectiveEncounterFormCandidate",
+        "writer": "FORM_SUBJECTIVE_ENCOUNTER",
+        "emission": "one per FULL_INTERPRETATION access",
+        "source_types": [
+          "DeclaredRuntimeViewReceipt",
+          "ReceptionCandidate"
+        ]
+      },
+      {
+        "rank": 4,
+        "type_id": "InterpretationCandidateSet",
+        "writer": "EMIT_INTERPRETATION_CANDIDATES",
+        "emission": "one unless terminal rejection occurs at this stage",
+        "source_types": [
+          "DeclaredRuntimeViewReceipt",
+          "SubjectiveEncounterFormCandidate"
+        ]
+      },
+      {
+        "rank": 5,
+        "type_id": "ScopedAdjudicationReceipt",
+        "writer": "TEMPORAL_OPERATOR_FROM_EXACT_CELL_TABLE",
+        "emission": "one per non-rejected FULL_INTERPRETATION access",
+        "source_types": [
+          "InterpretationCandidateSet"
+        ]
+      },
+      {
+        "rank": 6,
+        "type_id": "ImmediateSurfaceProjectionCandidate",
+        "writer": "PROJECTION_OPERATOR_FROM_EXACT_CELL_TABLE",
+        "emission": "one per non-rejected FULL_INTERPRETATION access",
+        "source_types": [
+          "ScopedAdjudicationReceipt"
+        ]
+      },
+      {
+        "rank": 7,
+        "type_id": "RevisionCandidateOccurrence",
+        "writer": "EMIT_REVISION_CANDIDATE_IF_ANY",
+        "emission": "only ELIGIBLE_FROM_FUTURE_ACCESS",
+        "source_types": [
+          "ScopedAdjudicationReceipt"
+        ]
+      },
+      {
+        "rank": 8,
+        "type_id": "RevisionEligibilityDecisionReceipt",
+        "writer": "EMIT_REVISION_ELIGIBILITY",
+        "emission": "one per non-rejected FULL_INTERPRETATION access",
+        "source_types": [
+          "ScopedAdjudicationReceipt",
+          "RevisionCandidateOccurrence when emitted"
+        ]
+      },
+      {
+        "rank": 9,
+        "type_id": "RevisionReadReceipt",
+        "writer": "READ_ELIGIBLE_REVISION",
+        "emission": "by lifecycle emission table",
+        "source_types": [
+          "RevisionEligibilityDecisionReceipt",
+          "DeclaredRuntimeViewReceipt at read access"
+        ]
+      },
+      {
+        "rank": 10,
+        "type_id": "AccessLocalApplicationReceipt",
+        "writer": "APPLY_REVISION_FOR_ACCESS",
+        "emission": "by lifecycle emission table",
+        "source_types": [
+          "RevisionReadReceipt",
+          "DeclaredRuntimeViewReceipt at application access"
+        ]
+      },
+      {
+        "rank": 11,
+        "type_id": "RetentionObservationReceipt",
+        "writer": "OBSERVE_RETENTION",
+        "emission": "by lifecycle emission table",
+        "source_types": [
+          "AccessLocalApplicationReceipt",
+          "DeclaredRuntimeViewReceipt at observation access"
+        ]
+      }
+    ],
+    "source_record_id_rule": "resolve source_types in listed order; conditional absent source is omitted; every resolved ID must precede the record",
+    "payload_contract": {
+      "DeclaredRuntimeViewReceipt": [
+        "external_evidence_link_set_digest",
+        "evidence_assessment_digest",
+        "runtime_id",
+        "target_scope_id",
+        "interpretation_scope_id"
+      ],
+      "ReceptionCandidate": [
+        "reception_path",
+        "profile_id"
+      ],
+      "SubjectiveEncounterFormCandidate": [
+        "subjective_path_digest",
+        "reception_path"
+      ],
+      "InterpretationCandidateSet": [
+        "candidate_paths"
+      ],
+      "ScopedAdjudicationReceipt": [
+        "adjudicated_path"
+      ],
+      "ImmediateSurfaceProjectionCandidate": [
+        "surface_code"
+      ],
+      "RevisionCandidateOccurrence": [
+        "revision_path",
+        "source_access_ordinal",
+        "effective_from_ordinal"
+      ],
+      "RevisionEligibilityDecisionReceipt": [
+        "decision_status",
+        "revision_path",
+        "source_access_ordinal",
+        "effective_from_ordinal"
+      ],
+      "RevisionReadReceipt": [
+        "read_status",
+        "revision_record_id"
+      ],
+      "AccessLocalApplicationReceipt": [
+        "application_status",
+        "revision_path"
+      ],
+      "RetentionObservationReceipt": [
+        "observation_status",
+        "prior_application_record_id"
+      ]
+    },
+    "payload_key_rule": "payload has exactly the fields declared for its type; no null values; use NO-REVISION sentinel where a required revision_path is absent",
+    "completed_trace_rule": "records field contains every emitted record in record_sort_rule order and no other record",
+    "rejected_trace_rule": "completed_prefix_records contains only records strictly before rejected_stage; rejection receipt is terminal",
+    "record_cardinality_rule": "at most one record of a type per access ordinal; fixture access plan and lifecycle table decide zero versus one"
+  }
+}

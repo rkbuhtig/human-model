@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/human-model/interp-001d2a1/publication-v1.schema.json",
+  "title": "INTERP-001D2a1 deterministic publication manifest",
+  "x-semantic-rules": [
+    "mat0_manifest_sha256 equals the merged MAT0 frozen manifest raw-file SHA-256",
+    "run_artifact path is run-v1.json and evaluation_artifact path is evaluation-v1.json",
+    "source_bundles order is RUNNER then EVALUATOR and entries equal the frozen source-bundle path lists",
+    "every raw_file_sha256 is computed from canonical JSON plus one LF or raw source file bytes as applicable",
+    "timestamps absolute paths and git working-tree metadata are forbidden"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "publication_id",
+    "contract_id",
+    "predecessor_manifest_sha256",
+    "exec0_manifest_sha256",
+    "mat0_manifest_sha256",
+    "run_artifact",
+    "evaluation_artifact",
+    "source_bundles",
+    "run_evaluation_status"
+  ],
+  "properties": {
+    "publication_id": {
+      "$ref": "#/$defs/token"
+    },
+    "contract_id": {
+      "const": "INTERP-001D2A0-MAT0-V0"
+    },
+    "predecessor_manifest_sha256": {
+      "const": "8ee62993fbf302d8037f8cf898a0edca4fe7bbff7b01f73f6a71e8b6c04c3efd"
+    },
+    "exec0_manifest_sha256": {
+      "const": "1a7203d93a341c3b4570d4070d95457441da190e4c8ff167f86d89d0135c40f3"
+    },
+    "mat0_manifest_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "run_artifact": {
+      "$ref": "#/$defs/artifact"
+    },
+    "evaluation_artifact": {
+      "$ref": "#/$defs/artifact"
+    },
+    "source_bundles": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "$ref": "#/$defs/sourceBundle"
+      }
+    },
+    "run_evaluation_status": {
+      "enum": [
+        "CONFORMS_WITHIN_REGISTERED_SCOPE",
+        "DOES_NOT_CONFORM",
+        "PARTIALLY_EVALUABLE"
+      ]
+    }
+  },
+  "$defs": {
+    "token": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "path": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$"
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "raw_file_sha256"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/path"
+        },
+        "raw_file_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "sourceEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "relative_path",
+        "raw_file_sha256"
+      ],
+      "properties": {
+        "relative_path": {
+          "$ref": "#/$defs/path"
+        },
+        "raw_file_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "sourceBundle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bundle_id",
+        "role",
+        "entries",
+        "bundle_sha256"
+      ],
+      "properties": {
+        "bundle_id": {
+          "$ref": "#/$defs/token"
+        },
+        "role": {
+          "enum": [
+            "RUNNER",
+            "EVALUATOR"
+          ]
+        },
+        "entries": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 4,
+          "items": {
+            "$ref": "#/$defs/sourceEntry"
+          }
+        },
+        "bundle_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    }
+  }
+}

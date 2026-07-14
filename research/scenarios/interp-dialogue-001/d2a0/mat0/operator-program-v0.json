@@ -1,0 +1,178 @@
+{
+  "$schema": "./contract.schema.json",
+  "document_kind": "operator_program",
+  "schema_version": "1.0.0",
+  "contract_id": "INTERP-001D2A0-MAT0-V0",
+  "status": "FROZEN_UNEXECUTED",
+  "predecessor_manifest_sha256": "8ee62993fbf302d8037f8cf898a0edca4fe7bbff7b01f73f6a71e8b6c04c3efd",
+  "exec0_manifest_sha256": "1a7203d93a341c3b4570d4070d95457441da190e4c8ff167f86d89d0135c40f3",
+  "payload": {
+    "program_id": "INTERP-001D2A0-MAT0-OPERATOR-PROGRAM-V0",
+    "operator_program_order": [
+      "D2A-H-BIND",
+      "D2A-RECEPTION-BIAS",
+      "TEMPORAL_OPERATOR_FROM_EXACT_CELL_TABLE",
+      "PROJECTION_OPERATOR_FROM_EXACT_CELL_TABLE"
+    ],
+    "cell_programs": [
+      {
+        "cell_id": "T0-P0-H0",
+        "operator_sequence": [
+          "D2A-H-BIND",
+          "D2A-RECEPTION-BIAS",
+          "D2A-T0-CURRENT",
+          "D2A-P0-DIRECT"
+        ],
+        "temporal_operator": "D2A-T0-CURRENT",
+        "projection_operator": "D2A-P0-DIRECT",
+        "heterogeneity_strategy": "D2A-H0"
+      },
+      {
+        "cell_id": "T0-P1-H0",
+        "operator_sequence": [
+          "D2A-H-BIND",
+          "D2A-RECEPTION-BIAS",
+          "D2A-T0-CURRENT",
+          "D2A-P1-ROLE"
+        ],
+        "temporal_operator": "D2A-T0-CURRENT",
+        "projection_operator": "D2A-P1-ROLE",
+        "heterogeneity_strategy": "D2A-H0"
+      },
+      {
+        "cell_id": "T1-P0-H0",
+        "operator_sequence": [
+          "D2A-H-BIND",
+          "D2A-RECEPTION-BIAS",
+          "D2A-T1-GATE",
+          "D2A-P0-DIRECT"
+        ],
+        "temporal_operator": "D2A-T1-GATE",
+        "projection_operator": "D2A-P0-DIRECT",
+        "heterogeneity_strategy": "D2A-H0"
+      },
+      {
+        "cell_id": "T1-P1-H0",
+        "operator_sequence": [
+          "D2A-H-BIND",
+          "D2A-RECEPTION-BIAS",
+          "D2A-T1-GATE",
+          "D2A-P1-ROLE"
+        ],
+        "temporal_operator": "D2A-T1-GATE",
+        "projection_operator": "D2A-P1-ROLE",
+        "heterogeneity_strategy": "D2A-H0"
+      },
+      {
+        "cell_id": "T2-P0-H0",
+        "operator_sequence": [
+          "D2A-H-BIND",
+          "D2A-RECEPTION-BIAS",
+          "D2A-T2-ACCUMULATE",
+          "D2A-P0-DIRECT"
+        ],
+        "temporal_operator": "D2A-T2-ACCUMULATE",
+        "projection_operator": "D2A-P0-DIRECT",
+        "heterogeneity_strategy": "D2A-H0"
+      },
+      {
+        "cell_id": "T2-P1-H0",
+        "operator_sequence": [
+          "D2A-H-BIND",
+          "D2A-RECEPTION-BIAS",
+          "D2A-T2-ACCUMULATE",
+          "D2A-P1-ROLE"
+        ],
+        "temporal_operator": "D2A-T2-ACCUMULATE",
+        "projection_operator": "D2A-P1-ROLE",
+        "heterogeneity_strategy": "D2A-H0"
+      },
+      {
+        "cell_id": "T3-P0-H0",
+        "operator_sequence": [
+          "D2A-H-BIND",
+          "D2A-RECEPTION-BIAS",
+          "D2A-T3-REVISE",
+          "D2A-P0-DIRECT"
+        ],
+        "temporal_operator": "D2A-T3-REVISE",
+        "projection_operator": "D2A-P0-DIRECT",
+        "heterogeneity_strategy": "D2A-H0"
+      },
+      {
+        "cell_id": "T3-P1-H0",
+        "operator_sequence": [
+          "D2A-H-BIND",
+          "D2A-RECEPTION-BIAS",
+          "D2A-T3-REVISE",
+          "D2A-P1-ROLE"
+        ],
+        "temporal_operator": "D2A-T3-REVISE",
+        "projection_operator": "D2A-P1-ROLE",
+        "heterogeneity_strategy": "D2A-H0"
+      },
+      {
+        "cell_id": "T0-P0-H1",
+        "operator_sequence": [
+          "D2A-H-BIND",
+          "D2A-RECEPTION-BIAS",
+          "D2A-T0-CURRENT",
+          "D2A-P0-DIRECT"
+        ],
+        "temporal_operator": "D2A-T0-CURRENT",
+        "projection_operator": "D2A-P0-DIRECT",
+        "heterogeneity_strategy": "D2A-H1"
+      },
+      {
+        "cell_id": "T3-P0-H1",
+        "operator_sequence": [
+          "D2A-H-BIND",
+          "D2A-RECEPTION-BIAS",
+          "D2A-T3-REVISE",
+          "D2A-P0-DIRECT"
+        ],
+        "temporal_operator": "D2A-T3-REVISE",
+        "projection_operator": "D2A-P0-DIRECT",
+        "heterogeneity_strategy": "D2A-H1"
+      }
+    ],
+    "per_access_stage_order": [
+      "MATERIALIZE_DECLARED_VIEW",
+      "FORM_RECEPTION_CANDIDATE",
+      "FORM_SUBJECTIVE_ENCOUNTER",
+      "EMIT_INTERPRETATION_CANDIDATES",
+      "ADJUDICATE_SCOPED_CANDIDATES",
+      "PROJECT_IMMEDIATE_SURFACE",
+      "EMIT_REVISION_CANDIDATE_IF_ANY",
+      "EMIT_REVISION_ELIGIBILITY",
+      "RUN_LIFECYCLE_PROGRAM"
+    ],
+    "intermediate_construction": {
+      "subjective_path_digest_input": [
+        "source_path_identity",
+        "reception_path",
+        "access_ordinal",
+        "runtime_id",
+        "target_scope_id",
+        "interpretation_scope_id"
+      ],
+      "subjective_path_digest_rule": "sha256 of canonical object with exactly the listed keys",
+      "preserve_candidate_rule": "stable unique [reception_path, access_local_applied_revision_path when present]",
+      "narrow_candidate_rule": "singleton containing rank-max of preserve candidate list",
+      "adjudication_rule": "temporal operator output is authoritative and must be a member of the materialized candidate set",
+      "revision_path_absence_sentinel": "NO-REVISION",
+      "eligibility_receipt_rule": "emit exactly one per FULL_INTERPRETATION access even for NOT_ELIGIBLE NOT_EMITTED or NOT_APPLICABLE_TO_MODEL",
+      "revision_candidate_rule": "emit only when revision_decision is ELIGIBLE_FROM_FUTURE_ACCESS",
+      "surface_override_rule": "a normalized non-NONE surface_override replaces only the emitted ImmediateSurfaceProjectionCandidate.surface_code after the P operator result is computed"
+    },
+    "access_iteration_rule": "use fixture access_plan order; never infer an access from an assertion selector",
+    "state_scope_rule": "T1 gate state is discarded at access close; T2 adverse count is access input/output only; T3 applied revision is available only through lifecycle receipts",
+    "forbidden_shortcuts": [
+      "PARSE_CELL_ID",
+      "READ_EXPECTED_RELATION",
+      "READ_EVALUATION_MANIFEST",
+      "INFER_MISSING_PATH_RANK",
+      "OMIT_INTERMEDIATE_RECORD"
+    ]
+  }
+}

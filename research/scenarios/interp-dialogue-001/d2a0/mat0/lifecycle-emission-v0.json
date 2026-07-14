@@ -1,0 +1,115 @@
+{
+  "$schema": "./contract.schema.json",
+  "document_kind": "lifecycle_emission",
+  "schema_version": "1.0.0",
+  "contract_id": "INTERP-001D2A0-MAT0-V0",
+  "status": "FROZEN_UNEXECUTED",
+  "predecessor_manifest_sha256": "8ee62993fbf302d8037f8cf898a0edca4fe7bbff7b01f73f6a71e8b6c04c3efd",
+  "exec0_manifest_sha256": "1a7203d93a341c3b4570d4070d95457441da190e4c8ff167f86d89d0135c40f3",
+  "payload": {
+    "table_id": "INTERP-001D2A0-MAT0-LIFECYCLE-EMISSION-V0",
+    "source_access_rule": "revision is emitted and eligibility decided at the FULL_INTERPRETATION source access",
+    "programs": [
+    {
+      "program_id": "DEFAULT",
+      "read": [],
+      "apply": [],
+      "observe": []
+    },
+    {
+      "program_id": "FUTURE_APPLY_NEXT_ACCESS",
+      "read": [
+        {
+          "access_ordinal": 2,
+          "read_status": "READ",
+          "condition": "PRIOR_ELIGIBLE_REVISION_EXISTS"
+        }
+      ],
+      "apply": [
+        {
+          "access_ordinal": 2,
+          "application_status": "APPLIED",
+          "condition": "MATCHING_READ_EXISTS"
+        }
+      ],
+      "observe": []
+    },
+      {
+        "program_id": "SAME_ACCESS_READ",
+        "read": [
+          {
+            "access_ordinal": "revision_source_access_ordinal",
+            "expected_terminal_rejection": "SAME_ACCESS_REVISION_FEEDBACK"
+          }
+        ],
+        "apply": [],
+        "observe": []
+      },
+      {
+        "program_id": "ELIGIBLE_NOT_READ",
+        "read": [],
+        "apply": [],
+        "observe": []
+      },
+      {
+        "program_id": "READ_NOT_APPLIED",
+        "read": [
+          {
+            "access_ordinal": 2,
+            "read_status": "READ"
+          }
+        ],
+        "apply": [],
+        "observe": []
+      },
+      {
+        "program_id": "APPLIED_NOT_RETAINED",
+        "read": [
+          {
+            "access_ordinal": 2,
+            "read_status": "READ"
+          }
+        ],
+        "apply": [
+          {
+            "access_ordinal": 2,
+            "application_status": "APPLIED"
+          }
+        ],
+        "observe": [
+          {
+            "access_ordinal": 3,
+            "observation_status": "OBSERVED_NOT_RETAINED"
+          }
+        ]
+      },
+      {
+        "program_id": "RETAINED_AT_LATER_ACCESS",
+        "read": [
+          {
+            "access_ordinal": 2,
+            "read_status": "READ"
+          }
+        ],
+        "apply": [
+          {
+            "access_ordinal": 2,
+            "application_status": "APPLIED"
+          }
+        ],
+        "observe": [
+          {
+            "access_ordinal": 3,
+            "observation_status": "OBSERVED_RETAINED"
+          }
+        ]
+      }
+    ],
+    "negative_receipt_rule": "absence of read or apply is represented by record omission; no NOT_READ or NOT_APPLIED receipt is invented",
+    "observation_rule": "APPLIED_NOT_RETAINED emits a negative retention observation; RETAINED_AT_LATER_ACCESS emits a positive retention observation",
+    "revision_record_binding": "RevisionReadReceipt.revision_record_id names the source RevisionCandidateOccurrence record",
+    "application_binding": "AccessLocalApplicationReceipt.revision_path equals the read revision candidate path",
+    "retention_binding": "RetentionObservationReceipt.prior_application_record_id names the AccessLocalApplicationReceipt",
+    "invalid_program_policy": "ABORT_WHOLE_RUN"
+  }
+}
