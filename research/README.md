@@ -134,9 +134,12 @@ record는 실제 delivery/response occurrence가 아니며 mapping·`OUT_OF_MODE
 [`P1-v0`](scenarios/interp-dialogue-001/elicitation/p1-development-pilot-v0-report.md)은 exact P0-v0를
 30 session/24 run으로 replay하고 96개 생성 artifact와 manifest, 9 confirmed/4 deferred/1 rejected
 defect receipt, 8개의 미채택·미실행 revision proposal을 발행해 `EXECUTED / EVALUATED`가 됐다.
-이후 순서는 별도 P0-v1 revision decision/freeze →
-source-specific acquisition·human·latent·D2a protocol 동결 → 독립 실행 → cross-source
-audit(C)다. P1은 수정된 instrument를 채택하거나 실행하지 않았고, 현재 artifact는 actual
+후속 [`P0-v1 decision/freeze`](scenarios/interp-dialogue-001/elicitation/p0-v1/p0-v1-decision-report.md)는
+18개 exact candidate/decision lineage, closed-world participant surface와 37개 exact rendered
+delivery, mapping-attempt lineage를 `FROZEN / UNEXECUTED`로 동결했다. 001A/001B 의미 source와
+P0-v0/P1-v0 bytes는 바꾸지 않았다. 이후 순서는 P1-v1 사전등록 → 별도 scripted repilot →
+ACQ0/prompt-reactivity → source-specific acquisition·human·latent·D2a protocol 동결 → 독립 실행 →
+cross-source audit(C)다. P0-v1은 confirmed defect를 해결됐다고 선언하지 않으며 현재 artifact는 actual
 participant/model occurrence, human support, LLM latent 측정, D2a runtime, durable TargetForm
 또는 Narrative writer를 구현하지 않는다.
 

@@ -99,11 +99,18 @@ P1 scripted execution
 != persona or latent-state study
 ```
 
-The next registered authority step is a separate P0-v1 decision/freeze that
-accepts, rejects or defers each proposal. Actual delivery/response occurrences,
-source identity, clocks, consent/privacy/withdrawal and acquisition lineage
-remain an `ACQ0` gate. Interpreting prior-response-exposed later surfaces as
-natural persistence also remains blocked on a separate prompt-reactivity study.
+The separate [`P0-v1 decision/freeze`](p0-v1/p0-v1-decision-report.md) is now
+`FROZEN / UNEXECUTED — DEVELOPMENT ELICITATION ONLY`. It atomizes the eight P1
+proposals into 18 exact candidates and separate decision receipts, owns all
+participant-visible realization in a closed-world surface, and freezes 37 final
+delivery byte strings. It changes no 001A/001B semantic artifact and makes no
+defect-resolution claim.
+
+The next authority step is a separate P1-v1 preregistration bound to the merged
+P0-v1 digest. Actual delivery/response occurrences, source identity, clocks,
+consent/privacy/withdrawal and acquisition lineage remain an `ACQ0` gate.
+Interpreting prior-response-exposed later surfaces as natural persistence also
+remains blocked on a separate prompt-reactivity study.
 
 ## Frozen raw-byte integrity
 

@@ -1,0 +1,722 @@
+{
+  "$schema": "./revision-resolution-candidates-v1.schema.json",
+  "schema_version": "1.0.0",
+  "artifact_type": "P0_REVISION_RESOLUTION_CANDIDATE_SET",
+  "artifact_id": "INTERP-DIALOGUE-001P0-V1-RESOLUTION-CANDIDATES",
+  "source_proposal_set_binding": {
+    "artifact_id": "INTERP-DIALOGUE-001P1-V0-REVISION-PROPOSALS",
+    "path": "research/scenarios/interp-dialogue-001/elicitation/p1/proposals/instrument-revision-proposals-v0.json",
+    "content_sha256": "5c1225d90bb7483102fdb29ffd8da129f11c9f300cdac625d080edc1937248b1"
+  },
+  "source_adjudication_binding": {
+    "artifact_id": "INTERP-DIALOGUE-001P1-V0-DEFECT-ADJUDICATION",
+    "path": "research/scenarios/interp-dialogue-001/elicitation/p1/assessment/analyst-adjudication-v0.json",
+    "content_sha256": "8a85d0a5702d99258bfcd44df779d34c40bdd830660f3cc03230c3a900192b9b"
+  },
+  "canonicalization_profile_id": "HM-CANONICAL-JSON-PY-V1",
+  "revision_basis_digest_domain": "HM-REVISION-BASIS-JSON-V1",
+  "authority": "CANDIDATES_ONLY_DECISIONS_ARE_SEPARATE",
+  "candidates": [
+    {
+      "resolution_candidate_id": "RC-RP001-REL",
+      "source_proposal_id": "RP-001",
+      "source_defect_receipt_ids": [
+        "DR-001"
+      ],
+      "semantic_change_classification": "REFERENT_CLARIFICATION",
+      "operations": [
+        {
+          "operation_id": "OP-RC-RP001-REL-01",
+          "operation_kind": "ADD_SURFACE_REALIZATION",
+          "basis_refs": [
+            {
+              "artifact_id": "INTERP-DIALOGUE-001P0-ELICITATION-INSTRUMENT-V0",
+              "artifact_path": "research/scenarios/interp-dialogue-001/elicitation/instrument-v0.json",
+              "artifact_sha256": "52705bc686a69d43360eb0544eda59571c77dc1e29520ec4b156bcd60f413776",
+              "json_pointer": "/prompt_catalog/0/participant_text",
+              "value_canonical_sha256": "c0acb64a486d728e411768e8d3d0a16ea4dbf4b27f9624561c93b2746734c256",
+              "canonicalization_profile_id": "HM-CANONICAL-JSON-PY-V1",
+              "digest_domain": "HM-REVISION-BASIS-JSON-V1"
+            }
+          ],
+          "destination": {
+            "artifact_id": "PARTICIPANT-SURFACE-V1",
+            "json_pointer": "/prompt_surfaces/0/participant_text",
+            "precondition": "MUST_BE_ABSENT"
+          },
+          "replacement_value": "What is the first thing the recipient would say or do next? Respond freely; there is no single correct answer."
+        },
+        {
+          "operation_id": "OP-RC-RP001-REL-02",
+          "operation_kind": "ADD_SURFACE_REALIZATION",
+          "basis_refs": [
+            {
+              "artifact_id": "INTERP-DIALOGUE-001P0-ELICITATION-INSTRUMENT-V0",
+              "artifact_path": "research/scenarios/interp-dialogue-001/elicitation/instrument-v0.json",
+              "artifact_sha256": "52705bc686a69d43360eb0544eda59571c77dc1e29520ec4b156bcd60f413776",
+              "json_pointer": "/prompt_catalog/1/participant_text",
+              "value_canonical_sha256": "6bd2519c91833e61e4c8f086aa21bce45e70f246de99002ad6262a17572fcdb1",
+              "canonicalization_profile_id": "HM-CANONICAL-JSON-PY-V1",
+              "digest_domain": "HM-REVISION-BASIS-JSON-V1"
+            }
+          ],
+          "destination": {
+            "artifact_id": "PARTICIPANT-SURFACE-V1",
+            "json_pointer": "/prompt_surfaces/1/participant_text",
+            "precondition": "MUST_BE_ABSENT"
+          },
+          "replacement_value": "After this additional event, what is the next thing the recipient would say or do? Respond freely; there is no single correct answer."
+        }
+      ],
+      "rationale": "Adopt the exact closed-world surface realization while preserving the frozen semantic artifact as an immutable basis; any declared semantic preservation remains subject to P1-v1 inspection.",
+      "authority": "EXACT_REVISION_CANDIDATE_ONLY_NO_ADOPTION_AUTHORITY"
+    },
+    {
+      "resolution_candidate_id": "RC-RP001-WORK",
+      "source_proposal_id": "RP-001",
+      "source_defect_receipt_ids": [
+        "DR-001"
+      ],
+      "semantic_change_classification": "REFERENT_CLARIFICATION",
+      "operations": [
+        {
+          "operation_id": "OP-RC-RP001-WORK-01",
+          "operation_kind": "ADD_SURFACE_REALIZATION",
+          "basis_refs": [
+            {
+              "artifact_id": "INTERP-DIALOGUE-001P0-ELICITATION-INSTRUMENT-V0",
+              "artifact_path": "research/scenarios/interp-dialogue-001/elicitation/instrument-v0.json",
+              "artifact_sha256": "52705bc686a69d43360eb0544eda59571c77dc1e29520ec4b156bcd60f413776",
+              "json_pointer": "/prompt_catalog/0/participant_text",
+              "value_canonical_sha256": "c0acb64a486d728e411768e8d3d0a16ea4dbf4b27f9624561c93b2746734c256",
+              "canonicalization_profile_id": "HM-CANONICAL-JSON-PY-V1",
+              "digest_domain": "HM-REVISION-BASIS-JSON-V1"
+            }
+          ],
+          "destination": {
+            "artifact_id": "PARTICIPANT-SURFACE-V1",
+            "json_pointer": "/prompt_surfaces/2/participant_text",
+            "precondition": "MUST_BE_ABSENT"
+          },
+          "replacement_value": "What is the first thing the recipient would say or do next? Respond freely; there is no single correct answer."
+        },
+        {
+          "operation_id": "OP-RC-RP001-WORK-02",
+          "operation_kind": "ADD_SURFACE_REALIZATION",
+          "basis_refs": [
+            {
+              "artifact_id": "INTERP-DIALOGUE-001P0-ELICITATION-INSTRUMENT-V0",
+              "artifact_path": "research/scenarios/interp-dialogue-001/elicitation/instrument-v0.json",
+              "artifact_sha256": "52705bc686a69d43360eb0544eda59571c77dc1e29520ec4b156bcd60f413776",
+              "json_pointer": "/prompt_catalog/1/participant_text",
+              "value_canonical_sha256": "6bd2519c91833e61e4c8f086aa21bce45e70f246de99002ad6262a17572fcdb1",
+              "canonicalization_profile_id": "HM-CANONICAL-JSON-PY-V1",
+              "digest_domain": "HM-REVISION-BASIS-JSON-V1"
+            }
+          ],
+          "destination": {
+            "artifact_id": "PARTICIPANT-SURFACE-V1",
+            "json_pointer": "/prompt_surfaces/3/participant_text",
+            "precondition": "MUST_BE_ABSENT"
+          },
+          "replacement_value": "After this additional event, what is the next thing the recipient would say or do? Respond freely; there is no single correct answer."
+        }
+      ],
+      "rationale": "Adopt the exact closed-world surface realization while preserving the frozen semantic artifact as an immutable basis; any declared semantic preservation remains subject to P1-v1 inspection.",
+      "authority": "EXACT_REVISION_CANDIDATE_ONLY_NO_ADOPTION_AUTHORITY"
+    },
+    {
+      "resolution_candidate_id": "RC-RP001-RISK",
+      "source_proposal_id": "RP-001",
+      "source_defect_receipt_ids": [
+        "DR-001"
+      ],
+      "semantic_change_classification": "REFERENT_CLARIFICATION",
+      "operations": [
+        {
+          "operation_id": "OP-RC-RP001-RISK-01",
+          "operation_kind": "ADD_SURFACE_REALIZATION",
+          "basis_refs": [
+            {
+              "artifact_id": "INTERP-DIALOGUE-001P0-ELICITATION-INSTRUMENT-V0",
+              "artifact_path": "research/scenarios/interp-dialogue-001/elicitation/instrument-v0.json",
+              "artifact_sha256": "52705bc686a69d43360eb0544eda59571c77dc1e29520ec4b156bcd60f413776",
+              "json_pointer": "/prompt_catalog/0/participant_text",
+              "value_canonical_sha256": "c0acb64a486d728e411768e8d3d0a16ea4dbf4b27f9624561c93b2746734c256",
+              "canonicalization_profile_id": "HM-CANONICAL-JSON-PY-V1",
+              "digest_domain": "HM-REVISION-BASIS-JSON-V1"
+            }
+          ],
+          "destination": {
+            "artifact_id": "PARTICIPANT-SURFACE-V1",
+            "json_pointer": "/prompt_surfaces/4/participant_text",
+            "precondition": "MUST_BE_ABSENT"
+          },
+          "replacement_value": "What is the first thing the walker would say or do next? Respond freely; there is no single correct answer."
+        },
+        {
+          "operation_id": "OP-RC-RP001-RISK-02",
+          "operation_kind": "ADD_SURFACE_REALIZATION",
+          "basis_refs": [
+            {
+              "artifact_id": "INTERP-DIALOGUE-001P0-ELICITATION-INSTRUMENT-V0",
+              "artifact_path": "research/scenarios/interp-dialogue-001/elicitation/instrument-v0.json",
+              "artifact_sha256": "52705bc686a69d43360eb0544eda59571c77dc1e29520ec4b156bcd60f413776",
+              "json_pointer": "/prompt_catalog/1/participant_text",
+              "value_canonical_sha256": "6bd2519c91833e61e4c8f086aa21bce45e70f246de99002ad6262a17572fcdb1",
+              "canonicalization_profile_id": "HM-CANONICAL-JSON-PY-V1",
+              "digest_domain": "HM-REVISION-BASIS-JSON-V1"
+            }
+          ],
+          "destination": {
+            "artifact_id": "PARTICIPANT-SURFACE-V1",
+            "json_pointer": "/prompt_surfaces/5/participant_text",
+            "precondition": "MUST_BE_ABSENT"
+          },
+          "replacement_value": "After this additional event, what is the next thing the walker would say or do? Respond freely; there is no single correct answer."
+        }
+      ],
+      "rationale": "Adopt the exact closed-world surface realization while preserving the frozen semantic artifact as an immutable basis; any declared semantic preservation remains subject to P1-v1 inspection.",
+      "authority": "EXACT_REVISION_CANDIDATE_ONLY_NO_ADOPTION_AUTHORITY"
+    },
+    {
+      "resolution_candidate_id": "RC-RP002-PARTNER",
+      "source_proposal_id": "RP-002",
+      "source_defect_receipt_ids": [
+        "DR-002"
+      ],
+      "semantic_change_classification": "REFERENT_CLARIFICATION",
+      "operations": [
+        {
+          "operation_id": "OP-RC-RP002-PARTNER-01",
+          "operation_kind": "ADD_SURFACE_REALIZATION",
+          "basis_refs": [
+            {
+              "artifact_id": "INTERP-DIALOGUE-001P0-ELICITATION-INSTRUMENT-V0",
+              "artifact_path": "research/scenarios/interp-dialogue-001/elicitation/instrument-v0.json",
+              "artifact_sha256": "52705bc686a69d43360eb0544eda59571c77dc1e29520ec4b156bcd60f413776",
+              "json_pointer": "/rendering_policy/base_surface_by_family/0/participant_text",
+              "value_canonical_sha256": "1ff7ece4d07bccb67abf0f095a474bfbf6faf0df44e83afce2af1f12a9263bd6",
+              "canonicalization_profile_id": "HM-CANONICAL-JSON-PY-V1",
+              "digest_domain": "HM-REVISION-BASIS-JSON-V1"
+            }
+          ],
+          "destination": {
+            "artifact_id": "PARTICIPANT-SURFACE-V1",
+            "json_pointer": "/base_surfaces/0/participant_text",
+            "precondition": "MUST_BE_ABSENT"
+          },
+          "replacement_value": "The partner says: I want to be alone for a while today. I will contact you tomorrow."
+        }
+      ],
+      "rationale": "Adopt the exact closed-world surface realization while preserving the frozen semantic artifact as an immutable basis; any declared semantic preservation remains subject to P1-v1 inspection.",
+      "authority": "EXACT_REVISION_CANDIDATE_ONLY_NO_ADOPTION_AUTHORITY"
+    },
+    {
+      "resolution_candidate_id": "RC-RP003-SMALL-CARE",
+      "source_proposal_id": "RP-003",
+      "source_defect_receipt_ids": [
+        "DR-003"
+      ],
+      "semantic_change_classification": "SEMANTIC_PRESERVATION_UNVERIFIED",
+      "operations": [
+        {
+          "operation_id": "OP-RC-RP003-SMALL-CARE-01",
+          "operation_kind": "ADD_SURFACE_REALIZATION",
+          "basis_refs": [
+            {
+              "artifact_id": "REL-BOUNDARY-001",
+              "artifact_path": "research/scenarios/interp-dialogue-001/families/rel-boundary.json",
+              "artifact_sha256": "4eb342e655ded940ab8537f4e7827692829967a35f17feb375e731a24d2750e2",
+              "json_pointer": "/factors/2/levels/0/descriptor",
+              "value_canonical_sha256": "fce59a0e6978a777b007247a224bf9d377ea7133f0025e7f1ecd5dd9a7d8ee55",
+              "canonicalization_profile_id": "HM-CANONICAL-JSON-PY-V1",
+              "digest_domain": "HM-REVISION-BASIS-JSON-V1"
+            }
+          ],
+          "destination": {
+            "artifact_id": "PARTICIPANT-SURFACE-V1",
+            "json_pointer": "/factor_level_surfaces/4/participant_text",
+            "precondition": "MUST_BE_ABSENT"
+          },
+          "replacement_value": "An earlier occasion when the partner noticed a need and followed through is mentioned again."
+        }
+      ],
+      "rationale": "Adopt the exact closed-world surface realization while preserving the frozen semantic artifact as an immutable basis; any declared semantic preservation remains subject to P1-v1 inspection.",
+      "authority": "EXACT_REVISION_CANDIDATE_ONLY_NO_ADOPTION_AUTHORITY"
+    },
+    {
+      "resolution_candidate_id": "RC-RP003-DISTANCE",
+      "source_proposal_id": "RP-003",
+      "source_defect_receipt_ids": [
+        "DR-003"
+      ],
+      "semantic_change_classification": "SEMANTIC_PRESERVATION_UNVERIFIED",
+      "operations": [
+        {
+          "operation_id": "OP-RC-RP003-DISTANCE-01",
+          "operation_kind": "ADD_SURFACE_REALIZATION",
+          "basis_refs": [
+            {
+              "artifact_id": "REL-BOUNDARY-001",
+              "artifact_path": "research/scenarios/interp-dialogue-001/families/rel-boundary.json",
+              "artifact_sha256": "4eb342e655ded940ab8537f4e7827692829967a35f17feb375e731a24d2750e2",
+              "json_pointer": "/factors/2/levels/1/descriptor",
+              "value_canonical_sha256": "b62c6b423d2ba51024244a62d4c61ee9f08771af95b6b8708751dba75a903662",
+              "canonicalization_profile_id": "HM-CANONICAL-JSON-PY-V1",
+              "digest_domain": "HM-REVISION-BASIS-JSON-V1"
+            }
+          ],
+          "destination": {
+            "artifact_id": "PARTICIPANT-SURFACE-V1",
+            "json_pointer": "/factor_level_surfaces/5/participant_text",
+            "precondition": "MUST_BE_ABSENT"
+          },
+          "replacement_value": "An earlier occasion when the partner became distant without explanation is mentioned again."
+        }
+      ],
+      "rationale": "Adopt the exact closed-world surface realization while preserving the frozen semantic artifact as an immutable basis; any declared semantic preservation remains subject to P1-v1 inspection.",
+      "authority": "EXACT_REVISION_CANDIDATE_ONLY_NO_ADOPTION_AUTHORITY"
+    },
+    {
+      "resolution_candidate_id": "RC-RP004-NO-INCIDENT",
+      "source_proposal_id": "RP-004",
+      "source_defect_receipt_ids": [
+        "DR-003"
+      ],
+      "semantic_change_classification": "SELF_REFERENCE_REMOVAL",
+      "operations": [
+        {
+          "operation_id": "OP-RC-RP004-NO-INCIDENT-01",
+          "operation_kind": "ADD_SURFACE_REALIZATION",
+          "basis_refs": [
+            {
+              "artifact_id": "RISK-FOOTSTEPS-001",
+              "artifact_path": "research/scenarios/interp-dialogue-001/families/risk-footsteps.json",
+              "artifact_sha256": "4fbe69cbe8bd8edb631c9012810dbf935b69f10d5afa7c670638177eabb2a256",
+              "json_pointer": "/factors/1/levels/0/descriptor",
+              "value_canonical_sha256": "37f59ff0d012ea9b1427c0b9b69d67f267d971ae0022ab92cb13c519136bbc66",
+              "canonicalization_profile_id": "HM-CANONICAL-JSON-PY-V1",
+              "digest_domain": "HM-REVISION-BASIS-JSON-V1"
+            }
+          ],
+          "destination": {
+            "artifact_id": "PARTICIPANT-SURFACE-V1",
+            "json_pointer": "/factor_level_surfaces/14/participant_text",
+            "precondition": "MUST_BE_ABSENT"
+          },
+          "replacement_value": "Nothing like being followed or threatened happened to the walker during the prior week."
+        }
+      ],
+      "rationale": "Adopt the exact closed-world surface realization while preserving the frozen semantic artifact as an immutable basis; any declared semantic preservation remains subject to P1-v1 inspection.",
+      "authority": "EXACT_REVISION_CANDIDATE_ONLY_NO_ADOPTION_AUTHORITY"
+    },
+    {
+      "resolution_candidate_id": "RC-RP005-ORDINARY",
+      "source_proposal_id": "RP-005",
+      "source_defect_receipt_ids": [
+        "DR-004"
+      ],
+      "semantic_change_classification": "SEMANTIC_PRESERVATION_UNVERIFIED",
+      "operations": [
+        {
+          "operation_id": "OP-RC-RP005-ORDINARY-01",
+          "operation_kind": "ADD_SURFACE_REALIZATION",
+          "basis_refs": [
+            {
+              "artifact_id": "INTERP-DIALOGUE-001B-TRACE-ORACLE-V1",
+              "artifact_path": "research/scenarios/interp-dialogue-001/trace-oracle-v1.json",
+              "artifact_sha256": "9caefdf39b9ac41c355f8afed0f4c5d0f780499f571346ef2a7042fa30da74b9",
+              "json_pointer": "/matched_future_oracles/0/source_probe_snapshot/probe_options/0",
+              "value_canonical_sha256": "53e1e8ff776bea6f5b16181e26714e48d00a5b97c25eec4c8dff6f41c2d3be15",
+              "canonicalization_profile_id": "HM-CANONICAL-JSON-PY-V1",
+              "digest_domain": "HM-REVISION-BASIS-JSON-V1"
+            }
+          ],
+          "destination": {
+            "artifact_id": "PARTICIPANT-SURFACE-V1",
+            "json_pointer": "/future_option_surfaces/0/participant_text",
+            "precondition": "MUST_BE_ABSENT"
+          },
+          "replacement_value": "Some time later, the same earlier occasion described at the start is mentioned again while the recipient says their mood feels ordinary. The partner has not said or done anything else, and no new information about the partner is provided."
+        }
+      ],
+      "rationale": "Adopt the exact closed-world surface realization while preserving the frozen semantic artifact as an immutable basis; any declared semantic preservation remains subject to P1-v1 inspection.",
+      "authority": "EXACT_REVISION_CANDIDATE_ONLY_NO_ADOPTION_AUTHORITY"
+    },
+    {
+      "resolution_candidate_id": "RC-RP005-LOW",
+      "source_proposal_id": "RP-005",
+      "source_defect_receipt_ids": [
+        "DR-004"
+      ],
+      "semantic_change_classification": "SEMANTIC_PRESERVATION_UNVERIFIED",
+      "operations": [
+        {
+          "operation_id": "OP-RC-RP005-LOW-01",
+          "operation_kind": "ADD_SURFACE_REALIZATION",
+          "basis_refs": [
+            {
+              "artifact_id": "INTERP-DIALOGUE-001B-TRACE-ORACLE-V1",
+              "artifact_path": "research/scenarios/interp-dialogue-001/trace-oracle-v1.json",
+              "artifact_sha256": "9caefdf39b9ac41c355f8afed0f4c5d0f780499f571346ef2a7042fa30da74b9",
+              "json_pointer": "/matched_future_oracles/0/source_probe_snapshot/probe_options/1",
+              "value_canonical_sha256": "7a3b04e31ed3c264b2546fd240df28cb92ff5c909d6a35584d4884d8b9571a5c",
+              "canonicalization_profile_id": "HM-CANONICAL-JSON-PY-V1",
+              "digest_domain": "HM-REVISION-BASIS-JSON-V1"
+            }
+          ],
+          "destination": {
+            "artifact_id": "PARTICIPANT-SURFACE-V1",
+            "json_pointer": "/future_option_surfaces/1/participant_text",
+            "precondition": "MUST_BE_ABSENT"
+          },
+          "replacement_value": "Some time later, the same earlier occasion described at the start is mentioned again while the recipient says their mood feels low. The partner has not said or done anything else, and no new information about the partner is provided."
+        }
+      ],
+      "rationale": "Adopt the exact closed-world surface realization while preserving the frozen semantic artifact as an immutable basis; any declared semantic preservation remains subject to P1-v1 inspection.",
+      "authority": "EXACT_REVISION_CANDIDATE_ONLY_NO_ADOPTION_AUTHORITY"
+    },
+    {
+      "resolution_candidate_id": "RC-RP006-REL-ORDINARY",
+      "source_proposal_id": "RP-006",
+      "source_defect_receipt_ids": [
+        "DR-005",
+        "DR-006"
+      ],
+      "semantic_change_classification": "SEMANTIC_PRESERVATION_UNVERIFIED",
+      "operations": [
+        {
+          "operation_id": "OP-RC-RP006-REL-ORDINARY-01",
+          "operation_kind": "ADD_SURFACE_REALIZATION",
+          "basis_refs": [
+            {
+              "artifact_id": "REL-BOUNDARY-001",
+              "artifact_path": "research/scenarios/interp-dialogue-001/families/rel-boundary.json",
+              "artifact_sha256": "4eb342e655ded940ab8537f4e7827692829967a35f17feb375e731a24d2750e2",
+              "json_pointer": "/factors/0/levels/0/descriptor",
+              "value_canonical_sha256": "d7199f93c1ce43d30750ece7e04a27c208266035fc6d7038b5f30607f557c972",
+              "canonicalization_profile_id": "HM-CANONICAL-JSON-PY-V1",
+              "digest_domain": "HM-REVISION-BASIS-JSON-V1"
+            }
+          ],
+          "destination": {
+            "artifact_id": "PARTICIPANT-SURFACE-V1",
+            "json_pointer": "/factor_level_surfaces/0/participant_text",
+            "precondition": "MUST_BE_ABSENT"
+          },
+          "replacement_value": "Just before hearing the partner's request, the recipient says their mood feels ordinary."
+        }
+      ],
+      "rationale": "Adopt the exact closed-world surface realization while preserving the frozen semantic artifact as an immutable basis; any declared semantic preservation remains subject to P1-v1 inspection.",
+      "authority": "EXACT_REVISION_CANDIDATE_ONLY_NO_ADOPTION_AUTHORITY"
+    },
+    {
+      "resolution_candidate_id": "RC-RP006-REL-LOW",
+      "source_proposal_id": "RP-006",
+      "source_defect_receipt_ids": [
+        "DR-005",
+        "DR-006"
+      ],
+      "semantic_change_classification": "SEMANTIC_PRESERVATION_UNVERIFIED",
+      "operations": [
+        {
+          "operation_id": "OP-RC-RP006-REL-LOW-01",
+          "operation_kind": "ADD_SURFACE_REALIZATION",
+          "basis_refs": [
+            {
+              "artifact_id": "REL-BOUNDARY-001",
+              "artifact_path": "research/scenarios/interp-dialogue-001/families/rel-boundary.json",
+              "artifact_sha256": "4eb342e655ded940ab8537f4e7827692829967a35f17feb375e731a24d2750e2",
+              "json_pointer": "/factors/0/levels/1/descriptor",
+              "value_canonical_sha256": "5398d3081494e226e54f57c997ce2156e67765253f0fa1cbf81ee861789ba720",
+              "canonicalization_profile_id": "HM-CANONICAL-JSON-PY-V1",
+              "digest_domain": "HM-REVISION-BASIS-JSON-V1"
+            }
+          ],
+          "destination": {
+            "artifact_id": "PARTICIPANT-SURFACE-V1",
+            "json_pointer": "/factor_level_surfaces/1/participant_text",
+            "precondition": "MUST_BE_ABSENT"
+          },
+          "replacement_value": "Just before hearing the partner's request, the recipient says their mood feels low."
+        }
+      ],
+      "rationale": "Adopt the exact closed-world surface realization while preserving the frozen semantic artifact as an immutable basis; any declared semantic preservation remains subject to P1-v1 inspection.",
+      "authority": "EXACT_REVISION_CANDIDATE_ONLY_NO_ADOPTION_AUTHORITY"
+    },
+    {
+      "resolution_candidate_id": "RC-RP006-WORK-LOW",
+      "source_proposal_id": "RP-006",
+      "source_defect_receipt_ids": [
+        "DR-005",
+        "DR-006"
+      ],
+      "semantic_change_classification": "SEMANTIC_PRESERVATION_UNVERIFIED",
+      "operations": [
+        {
+          "operation_id": "OP-RC-RP006-WORK-LOW-01",
+          "operation_kind": "ADD_SURFACE_REALIZATION",
+          "basis_refs": [
+            {
+              "artifact_id": "WORK-FEEDBACK-001",
+              "artifact_path": "research/scenarios/interp-dialogue-001/families/work-feedback.json",
+              "artifact_sha256": "71cedb46667d1fc2ab76ee1e9711e8f0344e3fea6cf9bd16b577643d292d5823",
+              "json_pointer": "/factors/0/levels/0/descriptor",
+              "value_canonical_sha256": "414d1ba509eee7ac03d068a3736826c517d13e6bc15544860fe914aedeb75bc7",
+              "canonicalization_profile_id": "HM-CANONICAL-JSON-PY-V1",
+              "digest_domain": "HM-REVISION-BASIS-JSON-V1"
+            }
+          ],
+          "destination": {
+            "artifact_id": "PARTICIPANT-SURFACE-V1",
+            "json_pointer": "/factor_level_surfaces/6/participant_text",
+            "precondition": "MUST_BE_ABSENT"
+          },
+          "replacement_value": "Just before reading the feedback, the recipient says they are not especially worried about being judged."
+        }
+      ],
+      "rationale": "Adopt the exact closed-world surface realization while preserving the frozen semantic artifact as an immutable basis; any declared semantic preservation remains subject to P1-v1 inspection.",
+      "authority": "EXACT_REVISION_CANDIDATE_ONLY_NO_ADOPTION_AUTHORITY"
+    },
+    {
+      "resolution_candidate_id": "RC-RP006-WORK-HIGH",
+      "source_proposal_id": "RP-006",
+      "source_defect_receipt_ids": [
+        "DR-005",
+        "DR-006"
+      ],
+      "semantic_change_classification": "SEMANTIC_PRESERVATION_UNVERIFIED",
+      "operations": [
+        {
+          "operation_id": "OP-RC-RP006-WORK-HIGH-01",
+          "operation_kind": "ADD_SURFACE_REALIZATION",
+          "basis_refs": [
+            {
+              "artifact_id": "WORK-FEEDBACK-001",
+              "artifact_path": "research/scenarios/interp-dialogue-001/families/work-feedback.json",
+              "artifact_sha256": "71cedb46667d1fc2ab76ee1e9711e8f0344e3fea6cf9bd16b577643d292d5823",
+              "json_pointer": "/factors/0/levels/1/descriptor",
+              "value_canonical_sha256": "4af5db256479f0764bdd061e2bc4376117498ffbb6ebeaac77b9ecb0f7a219cd",
+              "canonicalization_profile_id": "HM-CANONICAL-JSON-PY-V1",
+              "digest_domain": "HM-REVISION-BASIS-JSON-V1"
+            }
+          ],
+          "destination": {
+            "artifact_id": "PARTICIPANT-SURFACE-V1",
+            "json_pointer": "/factor_level_surfaces/7/participant_text",
+            "precondition": "MUST_BE_ABSENT"
+          },
+          "replacement_value": "Just before reading the feedback, the recipient says they are very worried about being judged."
+        }
+      ],
+      "rationale": "Adopt the exact closed-world surface realization while preserving the frozen semantic artifact as an immutable basis; any declared semantic preservation remains subject to P1-v1 inspection.",
+      "authority": "EXACT_REVISION_CANDIDATE_ONLY_NO_ADOPTION_AUTHORITY"
+    },
+    {
+      "resolution_candidate_id": "RC-RP006-RISK-LOW",
+      "source_proposal_id": "RP-006",
+      "source_defect_receipt_ids": [
+        "DR-005",
+        "DR-006"
+      ],
+      "semantic_change_classification": "SEMANTIC_PRESERVATION_UNVERIFIED",
+      "operations": [
+        {
+          "operation_id": "OP-RC-RP006-RISK-LOW-01",
+          "operation_kind": "ADD_SURFACE_REALIZATION",
+          "basis_refs": [
+            {
+              "artifact_id": "RISK-FOOTSTEPS-001",
+              "artifact_path": "research/scenarios/interp-dialogue-001/families/risk-footsteps.json",
+              "artifact_sha256": "4fbe69cbe8bd8edb631c9012810dbf935b69f10d5afa7c670638177eabb2a256",
+              "json_pointer": "/factors/0/levels/0/descriptor",
+              "value_canonical_sha256": "b3441a10312881f8302121fa2dd42db888bf30f77eed58c36c7a259deea0aee9",
+              "canonicalization_profile_id": "HM-CANONICAL-JSON-PY-V1",
+              "digest_domain": "HM-REVISION-BASIS-JSON-V1"
+            }
+          ],
+          "destination": {
+            "artifact_id": "PARTICIPANT-SURFACE-V1",
+            "json_pointer": "/factor_level_surfaces/12/participant_text",
+            "precondition": "MUST_BE_ABSENT"
+          },
+          "replacement_value": "Just before hearing the footsteps, the walker says their body feels calm."
+        }
+      ],
+      "rationale": "Adopt the exact closed-world surface realization while preserving the frozen semantic artifact as an immutable basis; any declared semantic preservation remains subject to P1-v1 inspection.",
+      "authority": "EXACT_REVISION_CANDIDATE_ONLY_NO_ADOPTION_AUTHORITY"
+    },
+    {
+      "resolution_candidate_id": "RC-RP006-RISK-HIGH",
+      "source_proposal_id": "RP-006",
+      "source_defect_receipt_ids": [
+        "DR-005",
+        "DR-006"
+      ],
+      "semantic_change_classification": "SEMANTIC_PRESERVATION_UNVERIFIED",
+      "operations": [
+        {
+          "operation_id": "OP-RC-RP006-RISK-HIGH-01",
+          "operation_kind": "ADD_SURFACE_REALIZATION",
+          "basis_refs": [
+            {
+              "artifact_id": "RISK-FOOTSTEPS-001",
+              "artifact_path": "research/scenarios/interp-dialogue-001/families/risk-footsteps.json",
+              "artifact_sha256": "4fbe69cbe8bd8edb631c9012810dbf935b69f10d5afa7c670638177eabb2a256",
+              "json_pointer": "/factors/0/levels/1/descriptor",
+              "value_canonical_sha256": "d430a87f9015543b00673eb21949080ba5145f41cf16e3c03ce4debb5fbd9674",
+              "canonicalization_profile_id": "HM-CANONICAL-JSON-PY-V1",
+              "digest_domain": "HM-REVISION-BASIS-JSON-V1"
+            }
+          ],
+          "destination": {
+            "artifact_id": "PARTICIPANT-SURFACE-V1",
+            "json_pointer": "/factor_level_surfaces/13/participant_text",
+            "precondition": "MUST_BE_ABSENT"
+          },
+          "replacement_value": "Just before hearing the footsteps, the walker says their body feels tense and activated."
+        }
+      ],
+      "rationale": "Adopt the exact closed-world surface realization while preserving the frozen semantic artifact as an immutable basis; any declared semantic preservation remains subject to P1-v1 inspection.",
+      "authority": "EXACT_REVISION_CANDIDATE_ONLY_NO_ADOPTION_AUTHORITY"
+    },
+    {
+      "resolution_candidate_id": "RC-RP007-PRESENTATION",
+      "source_proposal_id": "RP-007",
+      "source_defect_receipt_ids": [
+        "DR-007"
+      ],
+      "semantic_change_classification": "PRESENTATIONAL_RESTRUCTURING",
+      "operations": [
+        {
+          "operation_id": "OP-RC-RP007-PRESENTATION-01",
+          "operation_kind": "ADD_SURFACE_REALIZATION",
+          "basis_refs": [
+            {
+              "artifact_id": "RISK-FOOTSTEPS-001",
+              "artifact_path": "research/scenarios/interp-dialogue-001/families/risk-footsteps.json",
+              "artifact_sha256": "4fbe69cbe8bd8edb631c9012810dbf935b69f10d5afa7c670638177eabb2a256",
+              "json_pointer": "/factors/2/levels/0/descriptor",
+              "value_canonical_sha256": "d1943381371acf3a0b95597def5bf91a563b36c975267db8b5db94c175fa4271",
+              "canonicalization_profile_id": "HM-CANONICAL-JSON-PY-V1",
+              "digest_domain": "HM-REVISION-BASIS-JSON-V1"
+            }
+          ],
+          "destination": {
+            "artifact_id": "PARTICIPANT-SURFACE-V1",
+            "json_pointer": "/factor_level_surfaces/16/participant_text",
+            "precondition": "MUST_BE_ABSENT"
+          },
+          "replacement_value": "The footsteps do not change in number, timing, duration, or loudness. After the walker makes two turns, the source is no longer behind them."
+        },
+        {
+          "operation_id": "OP-RC-RP007-PRESENTATION-02",
+          "operation_kind": "ADD_SURFACE_REALIZATION",
+          "basis_refs": [
+            {
+              "artifact_id": "RISK-FOOTSTEPS-001",
+              "artifact_path": "research/scenarios/interp-dialogue-001/families/risk-footsteps.json",
+              "artifact_sha256": "4fbe69cbe8bd8edb631c9012810dbf935b69f10d5afa7c670638177eabb2a256",
+              "json_pointer": "/factors/2/levels/1/descriptor",
+              "value_canonical_sha256": "c80998318d715f77becc61da9a327138096c7befec74736662c48f4e29d5a9a8",
+              "canonicalization_profile_id": "HM-CANONICAL-JSON-PY-V1",
+              "digest_domain": "HM-REVISION-BASIS-JSON-V1"
+            }
+          ],
+          "destination": {
+            "artifact_id": "PARTICIPANT-SURFACE-V1",
+            "json_pointer": "/factor_level_surfaces/17/participant_text",
+            "precondition": "MUST_BE_ABSENT"
+          },
+          "replacement_value": "The footsteps do not change in number, timing, duration, or loudness. After the walker makes two turns, the source is still behind them."
+        }
+      ],
+      "rationale": "Adopt the exact closed-world surface realization while preserving the frozen semantic artifact as an immutable basis; any declared semantic preservation remains subject to P1-v1 inspection.",
+      "authority": "EXACT_REVISION_CANDIDATE_ONLY_NO_ADOPTION_AUTHORITY"
+    },
+    {
+      "resolution_candidate_id": "RC-RP007-FOLLOWING",
+      "source_proposal_id": "RP-007",
+      "source_defect_receipt_ids": [
+        "DR-008"
+      ],
+      "semantic_change_classification": "SEMANTIC_PRESERVATION_UNVERIFIED",
+      "operations": [
+        {
+          "operation_id": "OP-RC-RP007-FOLLOWING-01",
+          "operation_kind": "ADD_SURFACE_REALIZATION",
+          "basis_refs": [
+            {
+              "artifact_id": "RISK-FOOTSTEPS-001",
+              "artifact_path": "research/scenarios/interp-dialogue-001/families/risk-footsteps.json",
+              "artifact_sha256": "4fbe69cbe8bd8edb631c9012810dbf935b69f10d5afa7c670638177eabb2a256",
+              "json_pointer": "/factors/1/levels/1/descriptor",
+              "value_canonical_sha256": "54600d0d43b0cb29e9a4b45e9ee01d043b70e627f84932f084bf5e033dbab3e3",
+              "canonicalization_profile_id": "HM-CANONICAL-JSON-PY-V1",
+              "digest_domain": "HM-REVISION-BASIS-JSON-V1"
+            }
+          ],
+          "destination": {
+            "artifact_id": "PARTICIPANT-SURFACE-V1",
+            "json_pointer": "/factor_level_surfaces/15/participant_text",
+            "precondition": "MUST_BE_ABSENT"
+          },
+          "replacement_value": "During the prior week, a different person followed the walker across several turns. It was later confirmed that the person had been following the walker."
+        }
+      ],
+      "rationale": "Adopt the exact closed-world surface realization while preserving the frozen semantic artifact as an immutable basis; any declared semantic preservation remains subject to P1-v1 inspection.",
+      "authority": "EXACT_REVISION_CANDIDATE_ONLY_NO_ADOPTION_AUTHORITY"
+    },
+    {
+      "resolution_candidate_id": "RC-RP008-MAPPING-LINEAGE",
+      "source_proposal_id": "RP-008",
+      "source_defect_receipt_ids": [
+        "DR-009"
+      ],
+      "semantic_change_classification": "MAPPING_LINEAGE_CONTRACT_CHANGE",
+      "operations": [
+        {
+          "operation_id": "OP-RC-RP008-MAPPING-LINEAGE-01",
+          "operation_kind": "ADD_MAPPING_LINEAGE_CONTRACT",
+          "basis_refs": [
+            {
+              "artifact_id": "INTERP-DIALOGUE-001P1-V0-REVISION-PROPOSALS",
+              "artifact_path": "research/scenarios/interp-dialogue-001/elicitation/p1/proposals/instrument-revision-proposals-v0.json",
+              "artifact_sha256": "5c1225d90bb7483102fdb29ffd8da129f11c9f300cdac625d080edc1937248b1",
+              "json_pointer": "/proposals/7",
+              "value_canonical_sha256": "7c72af825e3ee41345ae9459f641eeb39e42b6f3ba6376b3ebbebfe1410cded5",
+              "canonicalization_profile_id": "HM-CANONICAL-JSON-PY-V1",
+              "digest_domain": "HM-REVISION-BASIS-JSON-V1"
+            }
+          ],
+          "destination": {
+            "artifact_id": "INTERP-DIALOGUE-001P0-ELICITATION-INSTRUMENT-V1",
+            "json_pointer": "/mapping_lineage_contract",
+            "precondition": "MUST_BE_ABSENT"
+          },
+          "replacement_value": {
+            "attempt_dispositions": [
+              "APPLIED",
+              "NOT_APPLIED",
+              "NOT_EVALUABLE"
+            ],
+            "candidate_statuses": [
+              "PROPOSED",
+              "AMBIGUOUS",
+              "NO_MAPPING",
+              "OUTSIDE_VOCABULARY"
+            ],
+            "attempt_cardinality": "EXACTLY_ONE_PER_ELIGIBLE_R1_R2_EVENT",
+            "applied_candidate_set_cardinality": "EXACTLY_ONE",
+            "non_applied_candidate_set_cardinality": "ZERO",
+            "ambiguous_alternative_cardinality": "AT_LEAST_TWO",
+            "response_disposition_is_not_evaluability": true
+          }
+        }
+      ],
+      "rationale": "Separate mapping-attempt disposition from candidate-set status so absent or unevaluable payloads retain lineage without being cast to surface mappings.",
+      "authority": "EXACT_REVISION_CANDIDATE_ONLY_NO_ADOPTION_AUTHORITY"
+    }
+  ]
+}

@@ -246,7 +246,7 @@ access와 interpretive integration 경계를 먼저 분리한다. 그 전에는
 
 ## 3C. `INTERP-001` — Subjective Encounter and Interpretive Reorganization
 
-**상태: `INTERP-001A BOUNDARY DOCUMENTED; INTERP-001A2 M1 CONTRACT FROZEN; INTERP-001B DETACHED CONFORMANCE IMPLEMENTED; INTERP-001D1 EXECUTED / EVALUATED SYNTHETIC CONFORMANCE; INTERP-DIALOGUE-001A SCENARIOS DOCUMENTED / UNEXECUTED; INTERP-DIALOGUE-001B TRACE ORACLE FROZEN / UNEXECUTED; INTERP-DIALOGUE-001P0-V0 ELICITATION CONTRACT FROZEN / UNEXECUTED; INTERP-DIALOGUE-001P1-V0 EXECUTED / EVALUATED SCRIPTED DEVELOPMENT PILOT; BROADER DYNAMICS OPEN` — RFC 0004**
+**상태: `INTERP-001A BOUNDARY DOCUMENTED; INTERP-001A2 M1 CONTRACT FROZEN; INTERP-001B DETACHED CONFORMANCE IMPLEMENTED; INTERP-001D1 EXECUTED / EVALUATED SYNTHETIC CONFORMANCE; INTERP-DIALOGUE-001A SCENARIOS DOCUMENTED / UNEXECUTED; INTERP-DIALOGUE-001B TRACE ORACLE FROZEN / UNEXECUTED; INTERP-DIALOGUE-001P0-V0 ELICITATION CONTRACT FROZEN / UNEXECUTED; INTERP-DIALOGUE-001P1-V0 EXECUTED / EVALUATED SCRIPTED DEVELOPMENT PILOT; INTERP-DIALOGUE-001P0-V1 REVISED INSTRUMENT FROZEN / UNEXECUTED; BROADER DYNAMICS OPEN` — RFC 0004**
 
 ```text
 ExternalOccurrence / CurrentAccessOccurrence
@@ -398,13 +398,17 @@ adjudicator와 action gate도 `001A` 자연 factor의 결과로 선택하지 않
    scripted adversarial replay를 24 run으로 실행하고 evaluator-side walkthrough/inspection,
    9 confirmed/4 deferred/1 rejected defect receipt와 8개 미채택·미실행 revision proposal을
    발행; actual acquisition과 수정 instrument 채택·실행 없음
-5. 필요 시 `INTERP-DIALOGUE-001P0-v1`: proposal을 `ACCEPTED / REJECTED / DEFERRED`로
-   별도 판정하고 채택된 변경만 새 immutable instrument로 동결
-6. source-specific acquisition, human confirmatory, cross-model latent와 `INTERP-001D2a`
+5. `INTERP-DIALOGUE-001P0-v1` (`FROZEN / UNEXECUTED`): 8개 proposal을 18개 exact
+   candidate와 별도 decision receipt로 원자화하고, closed-world participant surface·37개
+   rendered delivery·mapping-attempt lineage를 새 instrument로 동결; defect resolution 없음
+6. `INTERP-DIALOGUE-001P1-v1`: merged v1 digest에 결박된 core/delta corpus를 먼저
+   사전등록한 뒤 별도 scripted repilot에서만 재현 여부 판정
+7. ACQ0와 prompt-reactivity gate, source-specific acquisition, human confirmatory,
+   cross-model latent와 `INTERP-001D2a`
    protocol을 결과 전에 각각 동결
-7. human judgment, latent representation probe와 D2a recursive composition을 독립 실행
-8. `INTERP-DIALOGUE-001C`: 세 source의 일치·불일치와 operational alias 범위를 교차 판정
-9. 살아남은 기능 배치에 한해서만 Dynamics runtime 또는 Narrative integration을 별도 검토
+8. human judgment, latent representation probe와 D2a recursive composition을 독립 실행
+9. `INTERP-DIALOGUE-001C`: 세 source의 일치·불일치와 operational alias 범위를 교차 판정
+10. 살아남은 기능 배치에 한해서만 Dynamics runtime 또는 Narrative integration을 별도 검토
 
 synthetic capability matrix는 predictive support나 인간의 기분·기억·퀄리아 법칙을
 지지하지 않는다. `MORPH-001C`와의 접합도 별도 measurement mapping 전에는 금지한다.
@@ -489,9 +493,42 @@ scripted replay determinism
 != registry claim support
 ```
 
-다음 권한 단계는 각 proposal을 `ACCEPTED / REJECTED / DEFERRED`로 판정하는 별도 P0-v1
-decision/freeze다. 채택된 revision도 새 version으로 동결하고 P1-v1에서 다시 실행하기 전에는
-defect가 수정됐다고 선언할 수 없다.
+후속 P0-v1은 별도 exact candidate/decision lineage로 revision을 채택해 새 version을
+동결했다. P1-v1에서 다시 실행하기 전에는 defect가 수정됐다고 선언할 수 없다.
+
+### 3C-P0-v1. `INTERP-DIALOGUE-001P0-v1` — Closed-world revision decision/freeze
+
+**상태: `FROZEN / UNEXECUTED — DEVELOPMENT ELICITATION ONLY`**
+
+[`decision report`](scenarios/interp-dialogue-001/elicitation/p0-v1/p0-v1-decision-report.md)는
+P1-v0의 8개 방향성 proposal을 18개 exact `RevisionResolutionCandidate`로 분해하고 각
+candidate에 별도 `P0DecisionReceipt` 하나를 결박한다. candidate는 결정 권한을 갖지 않고,
+proposal disposition은 부분 채택 같은 새 substantive enum 없이 decision lineage coverage만
+요약한다.
+
+001A family와 001B oracle은 immutable semantic basis로 유지한다. participant-facing
+realization은 34개 component의 `participant-surface-v1`이 전부 소유하고, frozen renderer는
+24 initial + 6 future + 6 family prompt + 1 diagnostic의 최종 UTF-8 delivery 37개를 별도
+catalog로 생성한다. `instrument-v1`은 catalog 밖 output, fallback과 semantic source의 direct
+participant-text read를 금지한다.
+
+RP-008은 mapping attempt 적용 여부와 mapping candidate status를 분리한다. 모든 eligible
+R1/R2 event는 attempt receipt 하나를 가져야 하고, `APPLIED`만 candidate set 하나를 요구한다.
+response disposition은 payload evaluability를 대신하지 않으므로 0-byte/whitespace payload도
+lineage에서 사라지지 않는다.
+
+```text
+accepted exact revision
+!= semantic preservation proven
+!= defect no longer reproduced
+!= actual acquisition occurrence
+!= claim support
+```
+
+DR-001…009는 `CONFIRMED / PENDING P1-v1 REPILOT`, DR-010…013은
+`DEFERRED / OPEN`, DR-014는 `REJECTED / PRESERVED`다. 다음 단계는 merged P0-v1 digest,
+unchanged core replay corpus와 revision-specific delta adversarial corpus를 결과 전에 고정하는
+별도 P1-v1 preregistration이다.
 
 ## 4. Dynamics v0.3 — 첫 descriptive transgression
 

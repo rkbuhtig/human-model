@@ -88,6 +88,7 @@ labs/interp_m1_runner → frozen execution manifest only
 labs/interp_m1_evaluator → completed run + frozen evaluation artifacts
 labs/interp_dialogue_elicitation_contract → compiled frozen source context
 labs/interp_dialogue_p1_runner → immutable scripted replay + development assessment artifacts
+labs/interp_dialogue_p0_v1_builder → exact decisions + closed-world surface/catalog freeze
 runner process → serialized artifact → evaluator process
 ```
 
@@ -197,6 +198,10 @@ python -m unittest discover -s dynamics/tests -v
   24 run/96 generated artifact로 byte-deterministic하게 재구성한다.
 - P1의 scanner, evaluator-side inspection, defect adjudication과 revision proposal은 actual
   acquisition, response-to-observation mapping 또는 claim support를 발행하지 않는다.
+- P0-v1 builder는 001A/001B/P0-v0/P1-v0 bytes를 immutable basis로 검증하고, 18개 exact
+  candidate/decision과 37개 final delivery를 deterministic artifact로 동결한다.
+- P0-v1 instrument는 catalog 밖 participant-visible output, fallback과 semantic source의
+  direct participant-text read를 금지하며 confirmed/deferred defect를 해결됐다고 선언하지 않는다.
 - 입력 손실은 `processed / dropped / unresolved`로 회계된다.
 
 P1 artifact 재생성 및 검증은 다음 명령으로 실행한다.
@@ -205,6 +210,14 @@ P1 artifact 재생성 및 검증은 다음 명령으로 실행한다.
 python -m dynamics.labs.interp_dialogue_p1_run_cli --write
 python -m dynamics.labs.interp_dialogue_p1_run_cli --verify
 python -m unittest dynamics.tests.test_interp_dialogue_p1 -v
+```
+
+P0-v1 decision/freeze 재생성 및 검증은 다음 명령으로 실행한다.
+
+```bash
+python -m dynamics.labs.interp_dialogue_p0_v1_cli --write
+python -m dynamics.labs.interp_dialogue_p0_v1_cli --verify
+python -m unittest dynamics.tests.test_interp_dialogue_p0_v1 -v
 ```
 
 시간·사건 동일성의 정확한 범위와 아직 구현하지 않은 flow는

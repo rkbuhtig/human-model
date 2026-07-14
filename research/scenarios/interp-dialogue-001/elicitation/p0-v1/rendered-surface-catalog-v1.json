@@ -1,0 +1,533 @@
+{
+  "$schema": "./rendered-surface-catalog-v1.schema.json",
+  "schema_version": "1.0.0",
+  "artifact_type": "RENDERED_PARTICIPANT_SURFACE_CATALOG",
+  "artifact_id": "INTERP-DIALOGUE-001P0-V1-RENDERED-SURFACES",
+  "status": "FROZEN_DERIVED_UNEXECUTED",
+  "authority": "EXACT_DELIVERY_BYTES_ONLY_NO_OCCURRENCE_AUTHORITY",
+  "participant_surface_binding": {
+    "artifact_id": "PARTICIPANT-SURFACE-V1",
+    "path": "research/scenarios/interp-dialogue-001/elicitation/p0-v1/participant-surface-v1.json",
+    "content_sha256": "4162390948b5d346d4accbdd42286d66bc32c99174a169b3307a1b05b9d5587f"
+  },
+  "renderer_semantics_version": "INTERP-DIALOGUE-P0-V1-RENDERER-1.0.0",
+  "encoding": "BASE64_OF_EXACT_UTF8_BYTES",
+  "deliveries": [
+    {
+      "delivery_surface_id": "DELIVERY-PRES-REL-000-EN-V1",
+      "delivery_kind": "INITIAL_PRESENTATION",
+      "family_id": "REL-BOUNDARY-001",
+      "source_surface_refs": [
+        "SURFACE-BASE-REL-BOUNDARY-001",
+        "SURFACE-FACTOR-REL-BOUNDARY-001-reported_ordinary_mood",
+        "SURFACE-FACTOR-REL-BOUNDARY-001-reliable_followthrough_history",
+        "SURFACE-FACTOR-REL-BOUNDARY-001-cue_prior_small_care"
+      ],
+      "participant_text": "The partner says: I want to be alone for a while today. I will contact you tomorrow.\n\nContext:\n- Just before hearing the partner's request, the recipient says their mood feels ordinary.\n- Across comparable prior boundary requests, this partner usually resumed contact when they said they would.\n- An earlier occasion when the partner noticed a need and followed through is mentioned again.",
+      "utf8_base64": "VGhlIHBhcnRuZXIgc2F5czogSSB3YW50IHRvIGJlIGFsb25lIGZvciBhIHdoaWxlIHRvZGF5LiBJIHdpbGwgY29udGFjdCB5b3UgdG9tb3Jyb3cuCgpDb250ZXh0OgotIEp1c3QgYmVmb3JlIGhlYXJpbmcgdGhlIHBhcnRuZXIncyByZXF1ZXN0LCB0aGUgcmVjaXBpZW50IHNheXMgdGhlaXIgbW9vZCBmZWVscyBvcmRpbmFyeS4KLSBBY3Jvc3MgY29tcGFyYWJsZSBwcmlvciBib3VuZGFyeSByZXF1ZXN0cywgdGhpcyBwYXJ0bmVyIHVzdWFsbHkgcmVzdW1lZCBjb250YWN0IHdoZW4gdGhleSBzYWlkIHRoZXkgd291bGQuCi0gQW4gZWFybGllciBvY2Nhc2lvbiB3aGVuIHRoZSBwYXJ0bmVyIG5vdGljZWQgYSBuZWVkIGFuZCBmb2xsb3dlZCB0aHJvdWdoIGlzIG1lbnRpb25lZCBhZ2Fpbi4=",
+      "utf8_byte_length": 389,
+      "utf8_sha256": "730f518a32df94f2da1d2ae80d8eb2c83287fa01e52123a0fd1aa74cd394194c"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PRES-REL-001-EN-V1",
+      "delivery_kind": "INITIAL_PRESENTATION",
+      "family_id": "REL-BOUNDARY-001",
+      "source_surface_refs": [
+        "SURFACE-BASE-REL-BOUNDARY-001",
+        "SURFACE-FACTOR-REL-BOUNDARY-001-reported_ordinary_mood",
+        "SURFACE-FACTOR-REL-BOUNDARY-001-reliable_followthrough_history",
+        "SURFACE-FACTOR-REL-BOUNDARY-001-cue_prior_unexplained_distance"
+      ],
+      "participant_text": "The partner says: I want to be alone for a while today. I will contact you tomorrow.\n\nContext:\n- Just before hearing the partner's request, the recipient says their mood feels ordinary.\n- Across comparable prior boundary requests, this partner usually resumed contact when they said they would.\n- An earlier occasion when the partner became distant without explanation is mentioned again.",
+      "utf8_base64": "VGhlIHBhcnRuZXIgc2F5czogSSB3YW50IHRvIGJlIGFsb25lIGZvciBhIHdoaWxlIHRvZGF5LiBJIHdpbGwgY29udGFjdCB5b3UgdG9tb3Jyb3cuCgpDb250ZXh0OgotIEp1c3QgYmVmb3JlIGhlYXJpbmcgdGhlIHBhcnRuZXIncyByZXF1ZXN0LCB0aGUgcmVjaXBpZW50IHNheXMgdGhlaXIgbW9vZCBmZWVscyBvcmRpbmFyeS4KLSBBY3Jvc3MgY29tcGFyYWJsZSBwcmlvciBib3VuZGFyeSByZXF1ZXN0cywgdGhpcyBwYXJ0bmVyIHVzdWFsbHkgcmVzdW1lZCBjb250YWN0IHdoZW4gdGhleSBzYWlkIHRoZXkgd291bGQuCi0gQW4gZWFybGllciBvY2Nhc2lvbiB3aGVuIHRoZSBwYXJ0bmVyIGJlY2FtZSBkaXN0YW50IHdpdGhvdXQgZXhwbGFuYXRpb24gaXMgbWVudGlvbmVkIGFnYWluLg==",
+      "utf8_byte_length": 388,
+      "utf8_sha256": "21e340c94cd7fd20725c9d0aa6a3fa9bbf46916bffd570fc37464731110fb7e0"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PRES-REL-010-EN-V1",
+      "delivery_kind": "INITIAL_PRESENTATION",
+      "family_id": "REL-BOUNDARY-001",
+      "source_surface_refs": [
+        "SURFACE-BASE-REL-BOUNDARY-001",
+        "SURFACE-FACTOR-REL-BOUNDARY-001-reported_ordinary_mood",
+        "SURFACE-FACTOR-REL-BOUNDARY-001-unexplained_withdrawal_history",
+        "SURFACE-FACTOR-REL-BOUNDARY-001-cue_prior_small_care"
+      ],
+      "participant_text": "The partner says: I want to be alone for a while today. I will contact you tomorrow.\n\nContext:\n- Just before hearing the partner's request, the recipient says their mood feels ordinary.\n- Across comparable prior boundary requests, this partner repeatedly promised later contact and then remained unavailable without explanation.\n- An earlier occasion when the partner noticed a need and followed through is mentioned again.",
+      "utf8_base64": "VGhlIHBhcnRuZXIgc2F5czogSSB3YW50IHRvIGJlIGFsb25lIGZvciBhIHdoaWxlIHRvZGF5LiBJIHdpbGwgY29udGFjdCB5b3UgdG9tb3Jyb3cuCgpDb250ZXh0OgotIEp1c3QgYmVmb3JlIGhlYXJpbmcgdGhlIHBhcnRuZXIncyByZXF1ZXN0LCB0aGUgcmVjaXBpZW50IHNheXMgdGhlaXIgbW9vZCBmZWVscyBvcmRpbmFyeS4KLSBBY3Jvc3MgY29tcGFyYWJsZSBwcmlvciBib3VuZGFyeSByZXF1ZXN0cywgdGhpcyBwYXJ0bmVyIHJlcGVhdGVkbHkgcHJvbWlzZWQgbGF0ZXIgY29udGFjdCBhbmQgdGhlbiByZW1haW5lZCB1bmF2YWlsYWJsZSB3aXRob3V0IGV4cGxhbmF0aW9uLgotIEFuIGVhcmxpZXIgb2NjYXNpb24gd2hlbiB0aGUgcGFydG5lciBub3RpY2VkIGEgbmVlZCBhbmQgZm9sbG93ZWQgdGhyb3VnaCBpcyBtZW50aW9uZWQgYWdhaW4u",
+      "utf8_byte_length": 423,
+      "utf8_sha256": "219019153f06ba1b267d93eb86e028d1bdd8a21c8b12e3edd6f825575a8598a6"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PRES-REL-011-EN-V1",
+      "delivery_kind": "INITIAL_PRESENTATION",
+      "family_id": "REL-BOUNDARY-001",
+      "source_surface_refs": [
+        "SURFACE-BASE-REL-BOUNDARY-001",
+        "SURFACE-FACTOR-REL-BOUNDARY-001-reported_ordinary_mood",
+        "SURFACE-FACTOR-REL-BOUNDARY-001-unexplained_withdrawal_history",
+        "SURFACE-FACTOR-REL-BOUNDARY-001-cue_prior_unexplained_distance"
+      ],
+      "participant_text": "The partner says: I want to be alone for a while today. I will contact you tomorrow.\n\nContext:\n- Just before hearing the partner's request, the recipient says their mood feels ordinary.\n- Across comparable prior boundary requests, this partner repeatedly promised later contact and then remained unavailable without explanation.\n- An earlier occasion when the partner became distant without explanation is mentioned again.",
+      "utf8_base64": "VGhlIHBhcnRuZXIgc2F5czogSSB3YW50IHRvIGJlIGFsb25lIGZvciBhIHdoaWxlIHRvZGF5LiBJIHdpbGwgY29udGFjdCB5b3UgdG9tb3Jyb3cuCgpDb250ZXh0OgotIEp1c3QgYmVmb3JlIGhlYXJpbmcgdGhlIHBhcnRuZXIncyByZXF1ZXN0LCB0aGUgcmVjaXBpZW50IHNheXMgdGhlaXIgbW9vZCBmZWVscyBvcmRpbmFyeS4KLSBBY3Jvc3MgY29tcGFyYWJsZSBwcmlvciBib3VuZGFyeSByZXF1ZXN0cywgdGhpcyBwYXJ0bmVyIHJlcGVhdGVkbHkgcHJvbWlzZWQgbGF0ZXIgY29udGFjdCBhbmQgdGhlbiByZW1haW5lZCB1bmF2YWlsYWJsZSB3aXRob3V0IGV4cGxhbmF0aW9uLgotIEFuIGVhcmxpZXIgb2NjYXNpb24gd2hlbiB0aGUgcGFydG5lciBiZWNhbWUgZGlzdGFudCB3aXRob3V0IGV4cGxhbmF0aW9uIGlzIG1lbnRpb25lZCBhZ2Fpbi4=",
+      "utf8_byte_length": 422,
+      "utf8_sha256": "47f203d6c84bedb8672f6f6eb2b8b476542af9ed41a58ae66a52f530e90b0bd5"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PRES-REL-100-EN-V1",
+      "delivery_kind": "INITIAL_PRESENTATION",
+      "family_id": "REL-BOUNDARY-001",
+      "source_surface_refs": [
+        "SURFACE-BASE-REL-BOUNDARY-001",
+        "SURFACE-FACTOR-REL-BOUNDARY-001-reported_low_mood",
+        "SURFACE-FACTOR-REL-BOUNDARY-001-reliable_followthrough_history",
+        "SURFACE-FACTOR-REL-BOUNDARY-001-cue_prior_small_care"
+      ],
+      "participant_text": "The partner says: I want to be alone for a while today. I will contact you tomorrow.\n\nContext:\n- Just before hearing the partner's request, the recipient says their mood feels low.\n- Across comparable prior boundary requests, this partner usually resumed contact when they said they would.\n- An earlier occasion when the partner noticed a need and followed through is mentioned again.",
+      "utf8_base64": "VGhlIHBhcnRuZXIgc2F5czogSSB3YW50IHRvIGJlIGFsb25lIGZvciBhIHdoaWxlIHRvZGF5LiBJIHdpbGwgY29udGFjdCB5b3UgdG9tb3Jyb3cuCgpDb250ZXh0OgotIEp1c3QgYmVmb3JlIGhlYXJpbmcgdGhlIHBhcnRuZXIncyByZXF1ZXN0LCB0aGUgcmVjaXBpZW50IHNheXMgdGhlaXIgbW9vZCBmZWVscyBsb3cuCi0gQWNyb3NzIGNvbXBhcmFibGUgcHJpb3IgYm91bmRhcnkgcmVxdWVzdHMsIHRoaXMgcGFydG5lciB1c3VhbGx5IHJlc3VtZWQgY29udGFjdCB3aGVuIHRoZXkgc2FpZCB0aGV5IHdvdWxkLgotIEFuIGVhcmxpZXIgb2NjYXNpb24gd2hlbiB0aGUgcGFydG5lciBub3RpY2VkIGEgbmVlZCBhbmQgZm9sbG93ZWQgdGhyb3VnaCBpcyBtZW50aW9uZWQgYWdhaW4u",
+      "utf8_byte_length": 384,
+      "utf8_sha256": "37dba63ae815e04dd8a908637a55f81ee6017e80c94ebb7db288a5e09f625c65"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PRES-REL-101-EN-V1",
+      "delivery_kind": "INITIAL_PRESENTATION",
+      "family_id": "REL-BOUNDARY-001",
+      "source_surface_refs": [
+        "SURFACE-BASE-REL-BOUNDARY-001",
+        "SURFACE-FACTOR-REL-BOUNDARY-001-reported_low_mood",
+        "SURFACE-FACTOR-REL-BOUNDARY-001-reliable_followthrough_history",
+        "SURFACE-FACTOR-REL-BOUNDARY-001-cue_prior_unexplained_distance"
+      ],
+      "participant_text": "The partner says: I want to be alone for a while today. I will contact you tomorrow.\n\nContext:\n- Just before hearing the partner's request, the recipient says their mood feels low.\n- Across comparable prior boundary requests, this partner usually resumed contact when they said they would.\n- An earlier occasion when the partner became distant without explanation is mentioned again.",
+      "utf8_base64": "VGhlIHBhcnRuZXIgc2F5czogSSB3YW50IHRvIGJlIGFsb25lIGZvciBhIHdoaWxlIHRvZGF5LiBJIHdpbGwgY29udGFjdCB5b3UgdG9tb3Jyb3cuCgpDb250ZXh0OgotIEp1c3QgYmVmb3JlIGhlYXJpbmcgdGhlIHBhcnRuZXIncyByZXF1ZXN0LCB0aGUgcmVjaXBpZW50IHNheXMgdGhlaXIgbW9vZCBmZWVscyBsb3cuCi0gQWNyb3NzIGNvbXBhcmFibGUgcHJpb3IgYm91bmRhcnkgcmVxdWVzdHMsIHRoaXMgcGFydG5lciB1c3VhbGx5IHJlc3VtZWQgY29udGFjdCB3aGVuIHRoZXkgc2FpZCB0aGV5IHdvdWxkLgotIEFuIGVhcmxpZXIgb2NjYXNpb24gd2hlbiB0aGUgcGFydG5lciBiZWNhbWUgZGlzdGFudCB3aXRob3V0IGV4cGxhbmF0aW9uIGlzIG1lbnRpb25lZCBhZ2Fpbi4=",
+      "utf8_byte_length": 383,
+      "utf8_sha256": "bcb80b8d1b5b47670d839514bdfe97f4cf2fc0d0281f11dd3b264bbc67899280"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PRES-REL-110-EN-V1",
+      "delivery_kind": "INITIAL_PRESENTATION",
+      "family_id": "REL-BOUNDARY-001",
+      "source_surface_refs": [
+        "SURFACE-BASE-REL-BOUNDARY-001",
+        "SURFACE-FACTOR-REL-BOUNDARY-001-reported_low_mood",
+        "SURFACE-FACTOR-REL-BOUNDARY-001-unexplained_withdrawal_history",
+        "SURFACE-FACTOR-REL-BOUNDARY-001-cue_prior_small_care"
+      ],
+      "participant_text": "The partner says: I want to be alone for a while today. I will contact you tomorrow.\n\nContext:\n- Just before hearing the partner's request, the recipient says their mood feels low.\n- Across comparable prior boundary requests, this partner repeatedly promised later contact and then remained unavailable without explanation.\n- An earlier occasion when the partner noticed a need and followed through is mentioned again.",
+      "utf8_base64": "VGhlIHBhcnRuZXIgc2F5czogSSB3YW50IHRvIGJlIGFsb25lIGZvciBhIHdoaWxlIHRvZGF5LiBJIHdpbGwgY29udGFjdCB5b3UgdG9tb3Jyb3cuCgpDb250ZXh0OgotIEp1c3QgYmVmb3JlIGhlYXJpbmcgdGhlIHBhcnRuZXIncyByZXF1ZXN0LCB0aGUgcmVjaXBpZW50IHNheXMgdGhlaXIgbW9vZCBmZWVscyBsb3cuCi0gQWNyb3NzIGNvbXBhcmFibGUgcHJpb3IgYm91bmRhcnkgcmVxdWVzdHMsIHRoaXMgcGFydG5lciByZXBlYXRlZGx5IHByb21pc2VkIGxhdGVyIGNvbnRhY3QgYW5kIHRoZW4gcmVtYWluZWQgdW5hdmFpbGFibGUgd2l0aG91dCBleHBsYW5hdGlvbi4KLSBBbiBlYXJsaWVyIG9jY2FzaW9uIHdoZW4gdGhlIHBhcnRuZXIgbm90aWNlZCBhIG5lZWQgYW5kIGZvbGxvd2VkIHRocm91Z2ggaXMgbWVudGlvbmVkIGFnYWluLg==",
+      "utf8_byte_length": 418,
+      "utf8_sha256": "5797af46532ba4564f19abafd1ceca76da4f212613638604235aa2b647d2e459"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PRES-REL-111-EN-V1",
+      "delivery_kind": "INITIAL_PRESENTATION",
+      "family_id": "REL-BOUNDARY-001",
+      "source_surface_refs": [
+        "SURFACE-BASE-REL-BOUNDARY-001",
+        "SURFACE-FACTOR-REL-BOUNDARY-001-reported_low_mood",
+        "SURFACE-FACTOR-REL-BOUNDARY-001-unexplained_withdrawal_history",
+        "SURFACE-FACTOR-REL-BOUNDARY-001-cue_prior_unexplained_distance"
+      ],
+      "participant_text": "The partner says: I want to be alone for a while today. I will contact you tomorrow.\n\nContext:\n- Just before hearing the partner's request, the recipient says their mood feels low.\n- Across comparable prior boundary requests, this partner repeatedly promised later contact and then remained unavailable without explanation.\n- An earlier occasion when the partner became distant without explanation is mentioned again.",
+      "utf8_base64": "VGhlIHBhcnRuZXIgc2F5czogSSB3YW50IHRvIGJlIGFsb25lIGZvciBhIHdoaWxlIHRvZGF5LiBJIHdpbGwgY29udGFjdCB5b3UgdG9tb3Jyb3cuCgpDb250ZXh0OgotIEp1c3QgYmVmb3JlIGhlYXJpbmcgdGhlIHBhcnRuZXIncyByZXF1ZXN0LCB0aGUgcmVjaXBpZW50IHNheXMgdGhlaXIgbW9vZCBmZWVscyBsb3cuCi0gQWNyb3NzIGNvbXBhcmFibGUgcHJpb3IgYm91bmRhcnkgcmVxdWVzdHMsIHRoaXMgcGFydG5lciByZXBlYXRlZGx5IHByb21pc2VkIGxhdGVyIGNvbnRhY3QgYW5kIHRoZW4gcmVtYWluZWQgdW5hdmFpbGFibGUgd2l0aG91dCBleHBsYW5hdGlvbi4KLSBBbiBlYXJsaWVyIG9jY2FzaW9uIHdoZW4gdGhlIHBhcnRuZXIgYmVjYW1lIGRpc3RhbnQgd2l0aG91dCBleHBsYW5hdGlvbiBpcyBtZW50aW9uZWQgYWdhaW4u",
+      "utf8_byte_length": 417,
+      "utf8_sha256": "7156039c7ec18797ed2185605a76f0d9699bd0d51bebff42a3e7c953b434e57c"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PRES-WORK-000-EN-V1",
+      "delivery_kind": "INITIAL_PRESENTATION",
+      "family_id": "WORK-FEEDBACK-001",
+      "source_surface_refs": [
+        "SURFACE-BASE-WORK-FEEDBACK-001",
+        "SURFACE-FACTOR-WORK-FEEDBACK-001-reported_low_evaluation_threat",
+        "SURFACE-FACTOR-WORK-FEEDBACK-001-consistent_criterion_history",
+        "SURFACE-FACTOR-WORK-FEEDBACK-001-no_addendum"
+      ],
+      "participant_text": "The evaluator says: The direction is good, but this result did not meet expectations.\n\nContext:\n- Just before reading the feedback, the recipient says they are not especially worried about being judged.\n- Across prior comparable evaluations, this evaluator applied the same stated criteria consistently.\n- No revision-information addendum is delivered after the base feedback.",
+      "utf8_base64": "VGhlIGV2YWx1YXRvciBzYXlzOiBUaGUgZGlyZWN0aW9uIGlzIGdvb2QsIGJ1dCB0aGlzIHJlc3VsdCBkaWQgbm90IG1lZXQgZXhwZWN0YXRpb25zLgoKQ29udGV4dDoKLSBKdXN0IGJlZm9yZSByZWFkaW5nIHRoZSBmZWVkYmFjaywgdGhlIHJlY2lwaWVudCBzYXlzIHRoZXkgYXJlIG5vdCBlc3BlY2lhbGx5IHdvcnJpZWQgYWJvdXQgYmVpbmcganVkZ2VkLgotIEFjcm9zcyBwcmlvciBjb21wYXJhYmxlIGV2YWx1YXRpb25zLCB0aGlzIGV2YWx1YXRvciBhcHBsaWVkIHRoZSBzYW1lIHN0YXRlZCBjcml0ZXJpYSBjb25zaXN0ZW50bHkuCi0gTm8gcmV2aXNpb24taW5mb3JtYXRpb24gYWRkZW5kdW0gaXMgZGVsaXZlcmVkIGFmdGVyIHRoZSBiYXNlIGZlZWRiYWNrLg==",
+      "utf8_byte_length": 376,
+      "utf8_sha256": "871142a9f64fe6d399aa2d86692219eec8558d8aa8f9023e1ec979ab93d1df50"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PRES-WORK-001-EN-V1",
+      "delivery_kind": "INITIAL_PRESENTATION",
+      "family_id": "WORK-FEEDBACK-001",
+      "source_surface_refs": [
+        "SURFACE-BASE-WORK-FEEDBACK-001",
+        "SURFACE-FACTOR-WORK-FEEDBACK-001-reported_low_evaluation_threat",
+        "SURFACE-FACTOR-WORK-FEEDBACK-001-consistent_criterion_history",
+        "SURFACE-FACTOR-WORK-FEEDBACK-001-three_criterion_addendum"
+      ],
+      "participant_text": "The evaluator says: The direction is good, but this result did not meet expectations.\n\nContext:\n- Just before reading the feedback, the recipient says they are not especially worried about being judged.\n- Across prior comparable evaluations, this evaluator applied the same stated criteria consistently.\n- The evaluator adds three directly checkable revision items after the base feedback.",
+      "utf8_base64": "VGhlIGV2YWx1YXRvciBzYXlzOiBUaGUgZGlyZWN0aW9uIGlzIGdvb2QsIGJ1dCB0aGlzIHJlc3VsdCBkaWQgbm90IG1lZXQgZXhwZWN0YXRpb25zLgoKQ29udGV4dDoKLSBKdXN0IGJlZm9yZSByZWFkaW5nIHRoZSBmZWVkYmFjaywgdGhlIHJlY2lwaWVudCBzYXlzIHRoZXkgYXJlIG5vdCBlc3BlY2lhbGx5IHdvcnJpZWQgYWJvdXQgYmVpbmcganVkZ2VkLgotIEFjcm9zcyBwcmlvciBjb21wYXJhYmxlIGV2YWx1YXRpb25zLCB0aGlzIGV2YWx1YXRvciBhcHBsaWVkIHRoZSBzYW1lIHN0YXRlZCBjcml0ZXJpYSBjb25zaXN0ZW50bHkuCi0gVGhlIGV2YWx1YXRvciBhZGRzIHRocmVlIGRpcmVjdGx5IGNoZWNrYWJsZSByZXZpc2lvbiBpdGVtcyBhZnRlciB0aGUgYmFzZSBmZWVkYmFjay4=",
+      "utf8_byte_length": 389,
+      "utf8_sha256": "f1e2216a56e93599f87fe17fdc4e23e35a6729194e47a75e7d3f5431abc755a6"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PRES-WORK-010-EN-V1",
+      "delivery_kind": "INITIAL_PRESENTATION",
+      "family_id": "WORK-FEEDBACK-001",
+      "source_surface_refs": [
+        "SURFACE-BASE-WORK-FEEDBACK-001",
+        "SURFACE-FACTOR-WORK-FEEDBACK-001-reported_low_evaluation_threat",
+        "SURFACE-FACTOR-WORK-FEEDBACK-001-inconsistent_criterion_history",
+        "SURFACE-FACTOR-WORK-FEEDBACK-001-no_addendum"
+      ],
+      "participant_text": "The evaluator says: The direction is good, but this result did not meet expectations.\n\nContext:\n- Just before reading the feedback, the recipient says they are not especially worried about being judged.\n- Across prior comparable evaluations, this evaluator changed or omitted the stated criteria between evaluations.\n- No revision-information addendum is delivered after the base feedback.",
+      "utf8_base64": "VGhlIGV2YWx1YXRvciBzYXlzOiBUaGUgZGlyZWN0aW9uIGlzIGdvb2QsIGJ1dCB0aGlzIHJlc3VsdCBkaWQgbm90IG1lZXQgZXhwZWN0YXRpb25zLgoKQ29udGV4dDoKLSBKdXN0IGJlZm9yZSByZWFkaW5nIHRoZSBmZWVkYmFjaywgdGhlIHJlY2lwaWVudCBzYXlzIHRoZXkgYXJlIG5vdCBlc3BlY2lhbGx5IHdvcnJpZWQgYWJvdXQgYmVpbmcganVkZ2VkLgotIEFjcm9zcyBwcmlvciBjb21wYXJhYmxlIGV2YWx1YXRpb25zLCB0aGlzIGV2YWx1YXRvciBjaGFuZ2VkIG9yIG9taXR0ZWQgdGhlIHN0YXRlZCBjcml0ZXJpYSBiZXR3ZWVuIGV2YWx1YXRpb25zLgotIE5vIHJldmlzaW9uLWluZm9ybWF0aW9uIGFkZGVuZHVtIGlzIGRlbGl2ZXJlZCBhZnRlciB0aGUgYmFzZSBmZWVkYmFjay4=",
+      "utf8_byte_length": 389,
+      "utf8_sha256": "5b54623b371929dfa91a7f4b8d343de58d31d87b478c38af2c482f3168c99378"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PRES-WORK-011-EN-V1",
+      "delivery_kind": "INITIAL_PRESENTATION",
+      "family_id": "WORK-FEEDBACK-001",
+      "source_surface_refs": [
+        "SURFACE-BASE-WORK-FEEDBACK-001",
+        "SURFACE-FACTOR-WORK-FEEDBACK-001-reported_low_evaluation_threat",
+        "SURFACE-FACTOR-WORK-FEEDBACK-001-inconsistent_criterion_history",
+        "SURFACE-FACTOR-WORK-FEEDBACK-001-three_criterion_addendum"
+      ],
+      "participant_text": "The evaluator says: The direction is good, but this result did not meet expectations.\n\nContext:\n- Just before reading the feedback, the recipient says they are not especially worried about being judged.\n- Across prior comparable evaluations, this evaluator changed or omitted the stated criteria between evaluations.\n- The evaluator adds three directly checkable revision items after the base feedback.",
+      "utf8_base64": "VGhlIGV2YWx1YXRvciBzYXlzOiBUaGUgZGlyZWN0aW9uIGlzIGdvb2QsIGJ1dCB0aGlzIHJlc3VsdCBkaWQgbm90IG1lZXQgZXhwZWN0YXRpb25zLgoKQ29udGV4dDoKLSBKdXN0IGJlZm9yZSByZWFkaW5nIHRoZSBmZWVkYmFjaywgdGhlIHJlY2lwaWVudCBzYXlzIHRoZXkgYXJlIG5vdCBlc3BlY2lhbGx5IHdvcnJpZWQgYWJvdXQgYmVpbmcganVkZ2VkLgotIEFjcm9zcyBwcmlvciBjb21wYXJhYmxlIGV2YWx1YXRpb25zLCB0aGlzIGV2YWx1YXRvciBjaGFuZ2VkIG9yIG9taXR0ZWQgdGhlIHN0YXRlZCBjcml0ZXJpYSBiZXR3ZWVuIGV2YWx1YXRpb25zLgotIFRoZSBldmFsdWF0b3IgYWRkcyB0aHJlZSBkaXJlY3RseSBjaGVja2FibGUgcmV2aXNpb24gaXRlbXMgYWZ0ZXIgdGhlIGJhc2UgZmVlZGJhY2su",
+      "utf8_byte_length": 402,
+      "utf8_sha256": "0c14afa103fc4a2de593faf435afc26ea159c55bc3ca3e5a4d3ae69fe880c261"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PRES-WORK-100-EN-V1",
+      "delivery_kind": "INITIAL_PRESENTATION",
+      "family_id": "WORK-FEEDBACK-001",
+      "source_surface_refs": [
+        "SURFACE-BASE-WORK-FEEDBACK-001",
+        "SURFACE-FACTOR-WORK-FEEDBACK-001-reported_high_evaluation_threat",
+        "SURFACE-FACTOR-WORK-FEEDBACK-001-consistent_criterion_history",
+        "SURFACE-FACTOR-WORK-FEEDBACK-001-no_addendum"
+      ],
+      "participant_text": "The evaluator says: The direction is good, but this result did not meet expectations.\n\nContext:\n- Just before reading the feedback, the recipient says they are very worried about being judged.\n- Across prior comparable evaluations, this evaluator applied the same stated criteria consistently.\n- No revision-information addendum is delivered after the base feedback.",
+      "utf8_base64": "VGhlIGV2YWx1YXRvciBzYXlzOiBUaGUgZGlyZWN0aW9uIGlzIGdvb2QsIGJ1dCB0aGlzIHJlc3VsdCBkaWQgbm90IG1lZXQgZXhwZWN0YXRpb25zLgoKQ29udGV4dDoKLSBKdXN0IGJlZm9yZSByZWFkaW5nIHRoZSBmZWVkYmFjaywgdGhlIHJlY2lwaWVudCBzYXlzIHRoZXkgYXJlIHZlcnkgd29ycmllZCBhYm91dCBiZWluZyBqdWRnZWQuCi0gQWNyb3NzIHByaW9yIGNvbXBhcmFibGUgZXZhbHVhdGlvbnMsIHRoaXMgZXZhbHVhdG9yIGFwcGxpZWQgdGhlIHNhbWUgc3RhdGVkIGNyaXRlcmlhIGNvbnNpc3RlbnRseS4KLSBObyByZXZpc2lvbi1pbmZvcm1hdGlvbiBhZGRlbmR1bSBpcyBkZWxpdmVyZWQgYWZ0ZXIgdGhlIGJhc2UgZmVlZGJhY2su",
+      "utf8_byte_length": 366,
+      "utf8_sha256": "16addcb1f4c55a132f81fc446425402a17fd74b838da2919aac1312ce129952a"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PRES-WORK-101-EN-V1",
+      "delivery_kind": "INITIAL_PRESENTATION",
+      "family_id": "WORK-FEEDBACK-001",
+      "source_surface_refs": [
+        "SURFACE-BASE-WORK-FEEDBACK-001",
+        "SURFACE-FACTOR-WORK-FEEDBACK-001-reported_high_evaluation_threat",
+        "SURFACE-FACTOR-WORK-FEEDBACK-001-consistent_criterion_history",
+        "SURFACE-FACTOR-WORK-FEEDBACK-001-three_criterion_addendum"
+      ],
+      "participant_text": "The evaluator says: The direction is good, but this result did not meet expectations.\n\nContext:\n- Just before reading the feedback, the recipient says they are very worried about being judged.\n- Across prior comparable evaluations, this evaluator applied the same stated criteria consistently.\n- The evaluator adds three directly checkable revision items after the base feedback.",
+      "utf8_base64": "VGhlIGV2YWx1YXRvciBzYXlzOiBUaGUgZGlyZWN0aW9uIGlzIGdvb2QsIGJ1dCB0aGlzIHJlc3VsdCBkaWQgbm90IG1lZXQgZXhwZWN0YXRpb25zLgoKQ29udGV4dDoKLSBKdXN0IGJlZm9yZSByZWFkaW5nIHRoZSBmZWVkYmFjaywgdGhlIHJlY2lwaWVudCBzYXlzIHRoZXkgYXJlIHZlcnkgd29ycmllZCBhYm91dCBiZWluZyBqdWRnZWQuCi0gQWNyb3NzIHByaW9yIGNvbXBhcmFibGUgZXZhbHVhdGlvbnMsIHRoaXMgZXZhbHVhdG9yIGFwcGxpZWQgdGhlIHNhbWUgc3RhdGVkIGNyaXRlcmlhIGNvbnNpc3RlbnRseS4KLSBUaGUgZXZhbHVhdG9yIGFkZHMgdGhyZWUgZGlyZWN0bHkgY2hlY2thYmxlIHJldmlzaW9uIGl0ZW1zIGFmdGVyIHRoZSBiYXNlIGZlZWRiYWNrLg==",
+      "utf8_byte_length": 379,
+      "utf8_sha256": "b02ede39ac8dd38128e989bd1bd383839bef80239a804bbe964422896915f24e"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PRES-WORK-110-EN-V1",
+      "delivery_kind": "INITIAL_PRESENTATION",
+      "family_id": "WORK-FEEDBACK-001",
+      "source_surface_refs": [
+        "SURFACE-BASE-WORK-FEEDBACK-001",
+        "SURFACE-FACTOR-WORK-FEEDBACK-001-reported_high_evaluation_threat",
+        "SURFACE-FACTOR-WORK-FEEDBACK-001-inconsistent_criterion_history",
+        "SURFACE-FACTOR-WORK-FEEDBACK-001-no_addendum"
+      ],
+      "participant_text": "The evaluator says: The direction is good, but this result did not meet expectations.\n\nContext:\n- Just before reading the feedback, the recipient says they are very worried about being judged.\n- Across prior comparable evaluations, this evaluator changed or omitted the stated criteria between evaluations.\n- No revision-information addendum is delivered after the base feedback.",
+      "utf8_base64": "VGhlIGV2YWx1YXRvciBzYXlzOiBUaGUgZGlyZWN0aW9uIGlzIGdvb2QsIGJ1dCB0aGlzIHJlc3VsdCBkaWQgbm90IG1lZXQgZXhwZWN0YXRpb25zLgoKQ29udGV4dDoKLSBKdXN0IGJlZm9yZSByZWFkaW5nIHRoZSBmZWVkYmFjaywgdGhlIHJlY2lwaWVudCBzYXlzIHRoZXkgYXJlIHZlcnkgd29ycmllZCBhYm91dCBiZWluZyBqdWRnZWQuCi0gQWNyb3NzIHByaW9yIGNvbXBhcmFibGUgZXZhbHVhdGlvbnMsIHRoaXMgZXZhbHVhdG9yIGNoYW5nZWQgb3Igb21pdHRlZCB0aGUgc3RhdGVkIGNyaXRlcmlhIGJldHdlZW4gZXZhbHVhdGlvbnMuCi0gTm8gcmV2aXNpb24taW5mb3JtYXRpb24gYWRkZW5kdW0gaXMgZGVsaXZlcmVkIGFmdGVyIHRoZSBiYXNlIGZlZWRiYWNrLg==",
+      "utf8_byte_length": 379,
+      "utf8_sha256": "0befdaef89e6113ce3818ee7bb4c4aac0581c6d334d163d3fcdba58f0e7c71ff"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PRES-WORK-111-EN-V1",
+      "delivery_kind": "INITIAL_PRESENTATION",
+      "family_id": "WORK-FEEDBACK-001",
+      "source_surface_refs": [
+        "SURFACE-BASE-WORK-FEEDBACK-001",
+        "SURFACE-FACTOR-WORK-FEEDBACK-001-reported_high_evaluation_threat",
+        "SURFACE-FACTOR-WORK-FEEDBACK-001-inconsistent_criterion_history",
+        "SURFACE-FACTOR-WORK-FEEDBACK-001-three_criterion_addendum"
+      ],
+      "participant_text": "The evaluator says: The direction is good, but this result did not meet expectations.\n\nContext:\n- Just before reading the feedback, the recipient says they are very worried about being judged.\n- Across prior comparable evaluations, this evaluator changed or omitted the stated criteria between evaluations.\n- The evaluator adds three directly checkable revision items after the base feedback.",
+      "utf8_base64": "VGhlIGV2YWx1YXRvciBzYXlzOiBUaGUgZGlyZWN0aW9uIGlzIGdvb2QsIGJ1dCB0aGlzIHJlc3VsdCBkaWQgbm90IG1lZXQgZXhwZWN0YXRpb25zLgoKQ29udGV4dDoKLSBKdXN0IGJlZm9yZSByZWFkaW5nIHRoZSBmZWVkYmFjaywgdGhlIHJlY2lwaWVudCBzYXlzIHRoZXkgYXJlIHZlcnkgd29ycmllZCBhYm91dCBiZWluZyBqdWRnZWQuCi0gQWNyb3NzIHByaW9yIGNvbXBhcmFibGUgZXZhbHVhdGlvbnMsIHRoaXMgZXZhbHVhdG9yIGNoYW5nZWQgb3Igb21pdHRlZCB0aGUgc3RhdGVkIGNyaXRlcmlhIGJldHdlZW4gZXZhbHVhdGlvbnMuCi0gVGhlIGV2YWx1YXRvciBhZGRzIHRocmVlIGRpcmVjdGx5IGNoZWNrYWJsZSByZXZpc2lvbiBpdGVtcyBhZnRlciB0aGUgYmFzZSBmZWVkYmFjay4=",
+      "utf8_byte_length": 392,
+      "utf8_sha256": "59a264295e98e1752ef718b9df81a5d9a898ad89588dc36a9c54e74a189641af"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PRES-RISK-000-EN-V1",
+      "delivery_kind": "INITIAL_PRESENTATION",
+      "family_id": "RISK-FOOTSTEPS-001",
+      "source_surface_refs": [
+        "SURFACE-BASE-RISK-FOOTSTEPS-001",
+        "SURFACE-FACTOR-RISK-FOOTSTEPS-001-reported_low_pre_event_arousal",
+        "SURFACE-FACTOR-RISK-FOOTSTEPS-001-no_recent_related_incident",
+        "SURFACE-FACTOR-RISK-FOOTSTEPS-001-route_not_matched"
+      ],
+      "participant_text": "At night on a public route, footsteps are audible behind the walker; their source is not visible.\n\nContext:\n- Just before hearing the footsteps, the walker says their body feels calm.\n- Nothing like being followed or threatened happened to the walker during the prior week.\n- The footsteps do not change in number, timing, duration, or loudness. After the walker makes two turns, the source is no longer behind them.",
+      "utf8_base64": "QXQgbmlnaHQgb24gYSBwdWJsaWMgcm91dGUsIGZvb3RzdGVwcyBhcmUgYXVkaWJsZSBiZWhpbmQgdGhlIHdhbGtlcjsgdGhlaXIgc291cmNlIGlzIG5vdCB2aXNpYmxlLgoKQ29udGV4dDoKLSBKdXN0IGJlZm9yZSBoZWFyaW5nIHRoZSBmb290c3RlcHMsIHRoZSB3YWxrZXIgc2F5cyB0aGVpciBib2R5IGZlZWxzIGNhbG0uCi0gTm90aGluZyBsaWtlIGJlaW5nIGZvbGxvd2VkIG9yIHRocmVhdGVuZWQgaGFwcGVuZWQgdG8gdGhlIHdhbGtlciBkdXJpbmcgdGhlIHByaW9yIHdlZWsuCi0gVGhlIGZvb3RzdGVwcyBkbyBub3QgY2hhbmdlIGluIG51bWJlciwgdGltaW5nLCBkdXJhdGlvbiwgb3IgbG91ZG5lc3MuIEFmdGVyIHRoZSB3YWxrZXIgbWFrZXMgdHdvIHR1cm5zLCB0aGUgc291cmNlIGlzIG5vIGxvbmdlciBiZWhpbmQgdGhlbS4=",
+      "utf8_byte_length": 416,
+      "utf8_sha256": "e22e705cb9f679cae05c39f6941781d8bdee405e9f0ce33a31e9ba65bd8b1b2a"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PRES-RISK-001-EN-V1",
+      "delivery_kind": "INITIAL_PRESENTATION",
+      "family_id": "RISK-FOOTSTEPS-001",
+      "source_surface_refs": [
+        "SURFACE-BASE-RISK-FOOTSTEPS-001",
+        "SURFACE-FACTOR-RISK-FOOTSTEPS-001-reported_low_pre_event_arousal",
+        "SURFACE-FACTOR-RISK-FOOTSTEPS-001-no_recent_related_incident",
+        "SURFACE-FACTOR-RISK-FOOTSTEPS-001-route_matched"
+      ],
+      "participant_text": "At night on a public route, footsteps are audible behind the walker; their source is not visible.\n\nContext:\n- Just before hearing the footsteps, the walker says their body feels calm.\n- Nothing like being followed or threatened happened to the walker during the prior week.\n- The footsteps do not change in number, timing, duration, or loudness. After the walker makes two turns, the source is still behind them.",
+      "utf8_base64": "QXQgbmlnaHQgb24gYSBwdWJsaWMgcm91dGUsIGZvb3RzdGVwcyBhcmUgYXVkaWJsZSBiZWhpbmQgdGhlIHdhbGtlcjsgdGhlaXIgc291cmNlIGlzIG5vdCB2aXNpYmxlLgoKQ29udGV4dDoKLSBKdXN0IGJlZm9yZSBoZWFyaW5nIHRoZSBmb290c3RlcHMsIHRoZSB3YWxrZXIgc2F5cyB0aGVpciBib2R5IGZlZWxzIGNhbG0uCi0gTm90aGluZyBsaWtlIGJlaW5nIGZvbGxvd2VkIG9yIHRocmVhdGVuZWQgaGFwcGVuZWQgdG8gdGhlIHdhbGtlciBkdXJpbmcgdGhlIHByaW9yIHdlZWsuCi0gVGhlIGZvb3RzdGVwcyBkbyBub3QgY2hhbmdlIGluIG51bWJlciwgdGltaW5nLCBkdXJhdGlvbiwgb3IgbG91ZG5lc3MuIEFmdGVyIHRoZSB3YWxrZXIgbWFrZXMgdHdvIHR1cm5zLCB0aGUgc291cmNlIGlzIHN0aWxsIGJlaGluZCB0aGVtLg==",
+      "utf8_byte_length": 412,
+      "utf8_sha256": "81b4791d5397d04023d818d9496643b314547723e1470dcb0a355bc45e9b48a9"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PRES-RISK-010-EN-V1",
+      "delivery_kind": "INITIAL_PRESENTATION",
+      "family_id": "RISK-FOOTSTEPS-001",
+      "source_surface_refs": [
+        "SURFACE-BASE-RISK-FOOTSTEPS-001",
+        "SURFACE-FACTOR-RISK-FOOTSTEPS-001-reported_low_pre_event_arousal",
+        "SURFACE-FACTOR-RISK-FOOTSTEPS-001-recent_confirmed_following_incident",
+        "SURFACE-FACTOR-RISK-FOOTSTEPS-001-route_not_matched"
+      ],
+      "participant_text": "At night on a public route, footsteps are audible behind the walker; their source is not visible.\n\nContext:\n- Just before hearing the footsteps, the walker says their body feels calm.\n- During the prior week, a different person followed the walker across several turns. It was later confirmed that the person had been following the walker.\n- The footsteps do not change in number, timing, duration, or loudness. After the walker makes two turns, the source is no longer behind them.",
+      "utf8_base64": "QXQgbmlnaHQgb24gYSBwdWJsaWMgcm91dGUsIGZvb3RzdGVwcyBhcmUgYXVkaWJsZSBiZWhpbmQgdGhlIHdhbGtlcjsgdGhlaXIgc291cmNlIGlzIG5vdCB2aXNpYmxlLgoKQ29udGV4dDoKLSBKdXN0IGJlZm9yZSBoZWFyaW5nIHRoZSBmb290c3RlcHMsIHRoZSB3YWxrZXIgc2F5cyB0aGVpciBib2R5IGZlZWxzIGNhbG0uCi0gRHVyaW5nIHRoZSBwcmlvciB3ZWVrLCBhIGRpZmZlcmVudCBwZXJzb24gZm9sbG93ZWQgdGhlIHdhbGtlciBhY3Jvc3Mgc2V2ZXJhbCB0dXJucy4gSXQgd2FzIGxhdGVyIGNvbmZpcm1lZCB0aGF0IHRoZSBwZXJzb24gaGFkIGJlZW4gZm9sbG93aW5nIHRoZSB3YWxrZXIuCi0gVGhlIGZvb3RzdGVwcyBkbyBub3QgY2hhbmdlIGluIG51bWJlciwgdGltaW5nLCBkdXJhdGlvbiwgb3IgbG91ZG5lc3MuIEFmdGVyIHRoZSB3YWxrZXIgbWFrZXMgdHdvIHR1cm5zLCB0aGUgc291cmNlIGlzIG5vIGxvbmdlciBiZWhpbmQgdGhlbS4=",
+      "utf8_byte_length": 482,
+      "utf8_sha256": "72f0d8dbbc1c034dc47923529f991aa4febcc5faa2a602b188a7eb8b5c387303"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PRES-RISK-011-EN-V1",
+      "delivery_kind": "INITIAL_PRESENTATION",
+      "family_id": "RISK-FOOTSTEPS-001",
+      "source_surface_refs": [
+        "SURFACE-BASE-RISK-FOOTSTEPS-001",
+        "SURFACE-FACTOR-RISK-FOOTSTEPS-001-reported_low_pre_event_arousal",
+        "SURFACE-FACTOR-RISK-FOOTSTEPS-001-recent_confirmed_following_incident",
+        "SURFACE-FACTOR-RISK-FOOTSTEPS-001-route_matched"
+      ],
+      "participant_text": "At night on a public route, footsteps are audible behind the walker; their source is not visible.\n\nContext:\n- Just before hearing the footsteps, the walker says their body feels calm.\n- During the prior week, a different person followed the walker across several turns. It was later confirmed that the person had been following the walker.\n- The footsteps do not change in number, timing, duration, or loudness. After the walker makes two turns, the source is still behind them.",
+      "utf8_base64": "QXQgbmlnaHQgb24gYSBwdWJsaWMgcm91dGUsIGZvb3RzdGVwcyBhcmUgYXVkaWJsZSBiZWhpbmQgdGhlIHdhbGtlcjsgdGhlaXIgc291cmNlIGlzIG5vdCB2aXNpYmxlLgoKQ29udGV4dDoKLSBKdXN0IGJlZm9yZSBoZWFyaW5nIHRoZSBmb290c3RlcHMsIHRoZSB3YWxrZXIgc2F5cyB0aGVpciBib2R5IGZlZWxzIGNhbG0uCi0gRHVyaW5nIHRoZSBwcmlvciB3ZWVrLCBhIGRpZmZlcmVudCBwZXJzb24gZm9sbG93ZWQgdGhlIHdhbGtlciBhY3Jvc3Mgc2V2ZXJhbCB0dXJucy4gSXQgd2FzIGxhdGVyIGNvbmZpcm1lZCB0aGF0IHRoZSBwZXJzb24gaGFkIGJlZW4gZm9sbG93aW5nIHRoZSB3YWxrZXIuCi0gVGhlIGZvb3RzdGVwcyBkbyBub3QgY2hhbmdlIGluIG51bWJlciwgdGltaW5nLCBkdXJhdGlvbiwgb3IgbG91ZG5lc3MuIEFmdGVyIHRoZSB3YWxrZXIgbWFrZXMgdHdvIHR1cm5zLCB0aGUgc291cmNlIGlzIHN0aWxsIGJlaGluZCB0aGVtLg==",
+      "utf8_byte_length": 478,
+      "utf8_sha256": "6aa7d5dc16a522768bd2ef0a59cb66a678fdbf86b17ce4b44f7a56b99125166c"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PRES-RISK-100-EN-V1",
+      "delivery_kind": "INITIAL_PRESENTATION",
+      "family_id": "RISK-FOOTSTEPS-001",
+      "source_surface_refs": [
+        "SURFACE-BASE-RISK-FOOTSTEPS-001",
+        "SURFACE-FACTOR-RISK-FOOTSTEPS-001-reported_high_pre_event_arousal",
+        "SURFACE-FACTOR-RISK-FOOTSTEPS-001-no_recent_related_incident",
+        "SURFACE-FACTOR-RISK-FOOTSTEPS-001-route_not_matched"
+      ],
+      "participant_text": "At night on a public route, footsteps are audible behind the walker; their source is not visible.\n\nContext:\n- Just before hearing the footsteps, the walker says their body feels tense and activated.\n- Nothing like being followed or threatened happened to the walker during the prior week.\n- The footsteps do not change in number, timing, duration, or loudness. After the walker makes two turns, the source is no longer behind them.",
+      "utf8_base64": "QXQgbmlnaHQgb24gYSBwdWJsaWMgcm91dGUsIGZvb3RzdGVwcyBhcmUgYXVkaWJsZSBiZWhpbmQgdGhlIHdhbGtlcjsgdGhlaXIgc291cmNlIGlzIG5vdCB2aXNpYmxlLgoKQ29udGV4dDoKLSBKdXN0IGJlZm9yZSBoZWFyaW5nIHRoZSBmb290c3RlcHMsIHRoZSB3YWxrZXIgc2F5cyB0aGVpciBib2R5IGZlZWxzIHRlbnNlIGFuZCBhY3RpdmF0ZWQuCi0gTm90aGluZyBsaWtlIGJlaW5nIGZvbGxvd2VkIG9yIHRocmVhdGVuZWQgaGFwcGVuZWQgdG8gdGhlIHdhbGtlciBkdXJpbmcgdGhlIHByaW9yIHdlZWsuCi0gVGhlIGZvb3RzdGVwcyBkbyBub3QgY2hhbmdlIGluIG51bWJlciwgdGltaW5nLCBkdXJhdGlvbiwgb3IgbG91ZG5lc3MuIEFmdGVyIHRoZSB3YWxrZXIgbWFrZXMgdHdvIHR1cm5zLCB0aGUgc291cmNlIGlzIG5vIGxvbmdlciBiZWhpbmQgdGhlbS4=",
+      "utf8_byte_length": 431,
+      "utf8_sha256": "c70e4feac60c84fea2a270ea171cd441793058ae3260aa4e9a26b9de0cd0b70d"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PRES-RISK-101-EN-V1",
+      "delivery_kind": "INITIAL_PRESENTATION",
+      "family_id": "RISK-FOOTSTEPS-001",
+      "source_surface_refs": [
+        "SURFACE-BASE-RISK-FOOTSTEPS-001",
+        "SURFACE-FACTOR-RISK-FOOTSTEPS-001-reported_high_pre_event_arousal",
+        "SURFACE-FACTOR-RISK-FOOTSTEPS-001-no_recent_related_incident",
+        "SURFACE-FACTOR-RISK-FOOTSTEPS-001-route_matched"
+      ],
+      "participant_text": "At night on a public route, footsteps are audible behind the walker; their source is not visible.\n\nContext:\n- Just before hearing the footsteps, the walker says their body feels tense and activated.\n- Nothing like being followed or threatened happened to the walker during the prior week.\n- The footsteps do not change in number, timing, duration, or loudness. After the walker makes two turns, the source is still behind them.",
+      "utf8_base64": "QXQgbmlnaHQgb24gYSBwdWJsaWMgcm91dGUsIGZvb3RzdGVwcyBhcmUgYXVkaWJsZSBiZWhpbmQgdGhlIHdhbGtlcjsgdGhlaXIgc291cmNlIGlzIG5vdCB2aXNpYmxlLgoKQ29udGV4dDoKLSBKdXN0IGJlZm9yZSBoZWFyaW5nIHRoZSBmb290c3RlcHMsIHRoZSB3YWxrZXIgc2F5cyB0aGVpciBib2R5IGZlZWxzIHRlbnNlIGFuZCBhY3RpdmF0ZWQuCi0gTm90aGluZyBsaWtlIGJlaW5nIGZvbGxvd2VkIG9yIHRocmVhdGVuZWQgaGFwcGVuZWQgdG8gdGhlIHdhbGtlciBkdXJpbmcgdGhlIHByaW9yIHdlZWsuCi0gVGhlIGZvb3RzdGVwcyBkbyBub3QgY2hhbmdlIGluIG51bWJlciwgdGltaW5nLCBkdXJhdGlvbiwgb3IgbG91ZG5lc3MuIEFmdGVyIHRoZSB3YWxrZXIgbWFrZXMgdHdvIHR1cm5zLCB0aGUgc291cmNlIGlzIHN0aWxsIGJlaGluZCB0aGVtLg==",
+      "utf8_byte_length": 427,
+      "utf8_sha256": "9a486cbcad1ed9426bb0660908c05d417714cad3e58a38d3760a9d9f42dc5c88"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PRES-RISK-110-EN-V1",
+      "delivery_kind": "INITIAL_PRESENTATION",
+      "family_id": "RISK-FOOTSTEPS-001",
+      "source_surface_refs": [
+        "SURFACE-BASE-RISK-FOOTSTEPS-001",
+        "SURFACE-FACTOR-RISK-FOOTSTEPS-001-reported_high_pre_event_arousal",
+        "SURFACE-FACTOR-RISK-FOOTSTEPS-001-recent_confirmed_following_incident",
+        "SURFACE-FACTOR-RISK-FOOTSTEPS-001-route_not_matched"
+      ],
+      "participant_text": "At night on a public route, footsteps are audible behind the walker; their source is not visible.\n\nContext:\n- Just before hearing the footsteps, the walker says their body feels tense and activated.\n- During the prior week, a different person followed the walker across several turns. It was later confirmed that the person had been following the walker.\n- The footsteps do not change in number, timing, duration, or loudness. After the walker makes two turns, the source is no longer behind them.",
+      "utf8_base64": "QXQgbmlnaHQgb24gYSBwdWJsaWMgcm91dGUsIGZvb3RzdGVwcyBhcmUgYXVkaWJsZSBiZWhpbmQgdGhlIHdhbGtlcjsgdGhlaXIgc291cmNlIGlzIG5vdCB2aXNpYmxlLgoKQ29udGV4dDoKLSBKdXN0IGJlZm9yZSBoZWFyaW5nIHRoZSBmb290c3RlcHMsIHRoZSB3YWxrZXIgc2F5cyB0aGVpciBib2R5IGZlZWxzIHRlbnNlIGFuZCBhY3RpdmF0ZWQuCi0gRHVyaW5nIHRoZSBwcmlvciB3ZWVrLCBhIGRpZmZlcmVudCBwZXJzb24gZm9sbG93ZWQgdGhlIHdhbGtlciBhY3Jvc3Mgc2V2ZXJhbCB0dXJucy4gSXQgd2FzIGxhdGVyIGNvbmZpcm1lZCB0aGF0IHRoZSBwZXJzb24gaGFkIGJlZW4gZm9sbG93aW5nIHRoZSB3YWxrZXIuCi0gVGhlIGZvb3RzdGVwcyBkbyBub3QgY2hhbmdlIGluIG51bWJlciwgdGltaW5nLCBkdXJhdGlvbiwgb3IgbG91ZG5lc3MuIEFmdGVyIHRoZSB3YWxrZXIgbWFrZXMgdHdvIHR1cm5zLCB0aGUgc291cmNlIGlzIG5vIGxvbmdlciBiZWhpbmQgdGhlbS4=",
+      "utf8_byte_length": 497,
+      "utf8_sha256": "4264b53ea29f162773058c39a65aefb888154ce7e46723552b6b528293826d1b"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PRES-RISK-111-EN-V1",
+      "delivery_kind": "INITIAL_PRESENTATION",
+      "family_id": "RISK-FOOTSTEPS-001",
+      "source_surface_refs": [
+        "SURFACE-BASE-RISK-FOOTSTEPS-001",
+        "SURFACE-FACTOR-RISK-FOOTSTEPS-001-reported_high_pre_event_arousal",
+        "SURFACE-FACTOR-RISK-FOOTSTEPS-001-recent_confirmed_following_incident",
+        "SURFACE-FACTOR-RISK-FOOTSTEPS-001-route_matched"
+      ],
+      "participant_text": "At night on a public route, footsteps are audible behind the walker; their source is not visible.\n\nContext:\n- Just before hearing the footsteps, the walker says their body feels tense and activated.\n- During the prior week, a different person followed the walker across several turns. It was later confirmed that the person had been following the walker.\n- The footsteps do not change in number, timing, duration, or loudness. After the walker makes two turns, the source is still behind them.",
+      "utf8_base64": "QXQgbmlnaHQgb24gYSBwdWJsaWMgcm91dGUsIGZvb3RzdGVwcyBhcmUgYXVkaWJsZSBiZWhpbmQgdGhlIHdhbGtlcjsgdGhlaXIgc291cmNlIGlzIG5vdCB2aXNpYmxlLgoKQ29udGV4dDoKLSBKdXN0IGJlZm9yZSBoZWFyaW5nIHRoZSBmb290c3RlcHMsIHRoZSB3YWxrZXIgc2F5cyB0aGVpciBib2R5IGZlZWxzIHRlbnNlIGFuZCBhY3RpdmF0ZWQuCi0gRHVyaW5nIHRoZSBwcmlvciB3ZWVrLCBhIGRpZmZlcmVudCBwZXJzb24gZm9sbG93ZWQgdGhlIHdhbGtlciBhY3Jvc3Mgc2V2ZXJhbCB0dXJucy4gSXQgd2FzIGxhdGVyIGNvbmZpcm1lZCB0aGF0IHRoZSBwZXJzb24gaGFkIGJlZW4gZm9sbG93aW5nIHRoZSB3YWxrZXIuCi0gVGhlIGZvb3RzdGVwcyBkbyBub3QgY2hhbmdlIGluIG51bWJlciwgdGltaW5nLCBkdXJhdGlvbiwgb3IgbG91ZG5lc3MuIEFmdGVyIHRoZSB3YWxrZXIgbWFrZXMgdHdvIHR1cm5zLCB0aGUgc291cmNlIGlzIHN0aWxsIGJlaGluZCB0aGVtLg==",
+      "utf8_byte_length": 493,
+      "utf8_sha256": "b5405a1ac69e094efef70f0ae6bfa0c29bb500712ea9770faf26d41b2000f3b1"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-FUTURE-REL-0-V1",
+      "delivery_kind": "FUTURE_OPTION",
+      "family_id": "REL-BOUNDARY-001",
+      "source_surface_refs": [
+        "SURFACE-FUTURE-REL-0"
+      ],
+      "participant_text": "Some time later, the same earlier occasion described at the start is mentioned again while the recipient says their mood feels ordinary. The partner has not said or done anything else, and no new information about the partner is provided.",
+      "utf8_base64": "U29tZSB0aW1lIGxhdGVyLCB0aGUgc2FtZSBlYXJsaWVyIG9jY2FzaW9uIGRlc2NyaWJlZCBhdCB0aGUgc3RhcnQgaXMgbWVudGlvbmVkIGFnYWluIHdoaWxlIHRoZSByZWNpcGllbnQgc2F5cyB0aGVpciBtb29kIGZlZWxzIG9yZGluYXJ5LiBUaGUgcGFydG5lciBoYXMgbm90IHNhaWQgb3IgZG9uZSBhbnl0aGluZyBlbHNlLCBhbmQgbm8gbmV3IGluZm9ybWF0aW9uIGFib3V0IHRoZSBwYXJ0bmVyIGlzIHByb3ZpZGVkLg==",
+      "utf8_byte_length": 238,
+      "utf8_sha256": "27275fb5505307db549f6819b50da277a76bd56a537953b74027f324091d3a60"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-FUTURE-REL-1-V1",
+      "delivery_kind": "FUTURE_OPTION",
+      "family_id": "REL-BOUNDARY-001",
+      "source_surface_refs": [
+        "SURFACE-FUTURE-REL-1"
+      ],
+      "participant_text": "Some time later, the same earlier occasion described at the start is mentioned again while the recipient says their mood feels low. The partner has not said or done anything else, and no new information about the partner is provided.",
+      "utf8_base64": "U29tZSB0aW1lIGxhdGVyLCB0aGUgc2FtZSBlYXJsaWVyIG9jY2FzaW9uIGRlc2NyaWJlZCBhdCB0aGUgc3RhcnQgaXMgbWVudGlvbmVkIGFnYWluIHdoaWxlIHRoZSByZWNpcGllbnQgc2F5cyB0aGVpciBtb29kIGZlZWxzIGxvdy4gVGhlIHBhcnRuZXIgaGFzIG5vdCBzYWlkIG9yIGRvbmUgYW55dGhpbmcgZWxzZSwgYW5kIG5vIG5ldyBpbmZvcm1hdGlvbiBhYm91dCB0aGUgcGFydG5lciBpcyBwcm92aWRlZC4=",
+      "utf8_byte_length": 233,
+      "utf8_sha256": "ec7614949086d140fe4379c01fe0e3db7801862c4bf68b0487ad6d4dbb8706bf"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-FUTURE-WORK-0-V1",
+      "delivery_kind": "FUTURE_OPTION",
+      "family_id": "WORK-FEEDBACK-001",
+      "source_surface_refs": [
+        "SURFACE-FUTURE-WORK-0"
+      ],
+      "participant_text": "After revision, the evaluator identifies the corrected criteria and acknowledges improvement.",
+      "utf8_base64": "QWZ0ZXIgcmV2aXNpb24sIHRoZSBldmFsdWF0b3IgaWRlbnRpZmllcyB0aGUgY29ycmVjdGVkIGNyaXRlcmlhIGFuZCBhY2tub3dsZWRnZXMgaW1wcm92ZW1lbnQu",
+      "utf8_byte_length": 93,
+      "utf8_sha256": "cc9f59cad726177155a8a243125332ced0ff8ca7b7ecc1853d1fa970d09d7630"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-FUTURE-WORK-1-V1",
+      "delivery_kind": "FUTURE_OPTION",
+      "family_id": "WORK-FEEDBACK-001",
+      "source_surface_refs": [
+        "SURFACE-FUTURE-WORK-1"
+      ],
+      "participant_text": "After revision, the evaluator repeats global dissatisfaction without new criteria.",
+      "utf8_base64": "QWZ0ZXIgcmV2aXNpb24sIHRoZSBldmFsdWF0b3IgcmVwZWF0cyBnbG9iYWwgZGlzc2F0aXNmYWN0aW9uIHdpdGhvdXQgbmV3IGNyaXRlcmlhLg==",
+      "utf8_byte_length": 82,
+      "utf8_sha256": "5604d2bd96617fa300e3bf6cebc4ace1f013a74295a1e9d07e063906163f179d"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-FUTURE-RISK-0-V1",
+      "delivery_kind": "FUTURE_OPTION",
+      "family_id": "RISK-FOOTSTEPS-001",
+      "source_surface_refs": [
+        "SURFACE-FUTURE-RISK-0"
+      ],
+      "participant_text": "The source passes the walker and continues on another route.",
+      "utf8_base64": "VGhlIHNvdXJjZSBwYXNzZXMgdGhlIHdhbGtlciBhbmQgY29udGludWVzIG9uIGFub3RoZXIgcm91dGUu",
+      "utf8_byte_length": 60,
+      "utf8_sha256": "5ded655481c4b29b383c93ee59e4e4ec22771e12098ad978644140f63444ece0"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-FUTURE-RISK-1-V1",
+      "delivery_kind": "FUTURE_OPTION",
+      "family_id": "RISK-FOOTSTEPS-001",
+      "source_surface_refs": [
+        "SURFACE-FUTURE-RISK-1"
+      ],
+      "participant_text": "The source remains behind and matches another turn taken by the walker.",
+      "utf8_base64": "VGhlIHNvdXJjZSByZW1haW5zIGJlaGluZCBhbmQgbWF0Y2hlcyBhbm90aGVyIHR1cm4gdGFrZW4gYnkgdGhlIHdhbGtlci4=",
+      "utf8_byte_length": 71,
+      "utf8_sha256": "9415bc1dea8950240d4c7efc116fb24658c4a82276df8025cfb49fc80519ffaa"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PROMPT-IMMEDIATE_RESPONSE-REL-BOUNDARY-001-V1",
+      "delivery_kind": "IMMEDIATE_PROMPT",
+      "family_id": "REL-BOUNDARY-001",
+      "source_surface_refs": [
+        "SURFACE-PROMPT-IMMEDIATE_RESPONSE-REL-BOUNDARY-001"
+      ],
+      "participant_text": "What is the first thing the recipient would say or do next? Respond freely; there is no single correct answer.",
+      "utf8_base64": "V2hhdCBpcyB0aGUgZmlyc3QgdGhpbmcgdGhlIHJlY2lwaWVudCB3b3VsZCBzYXkgb3IgZG8gbmV4dD8gUmVzcG9uZCBmcmVlbHk7IHRoZXJlIGlzIG5vIHNpbmdsZSBjb3JyZWN0IGFuc3dlci4=",
+      "utf8_byte_length": 110,
+      "utf8_sha256": "b81d4b553ce31c45c949dceff45f0b8a6cfd55e9a07cb98e018df4eb3819f853"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PROMPT-LATER_RESPONSE-REL-BOUNDARY-001-V1",
+      "delivery_kind": "LATER_PROMPT",
+      "family_id": "REL-BOUNDARY-001",
+      "source_surface_refs": [
+        "SURFACE-PROMPT-LATER_RESPONSE-REL-BOUNDARY-001"
+      ],
+      "participant_text": "After this additional event, what is the next thing the recipient would say or do? Respond freely; there is no single correct answer.",
+      "utf8_base64": "QWZ0ZXIgdGhpcyBhZGRpdGlvbmFsIGV2ZW50LCB3aGF0IGlzIHRoZSBuZXh0IHRoaW5nIHRoZSByZWNpcGllbnQgd291bGQgc2F5IG9yIGRvPyBSZXNwb25kIGZyZWVseTsgdGhlcmUgaXMgbm8gc2luZ2xlIGNvcnJlY3QgYW5zd2VyLg==",
+      "utf8_byte_length": 133,
+      "utf8_sha256": "059efbc5d45b187e6ee6a6941b9c736c5bb0b3ef6a98ca23f06ac835485f134f"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PROMPT-IMMEDIATE_RESPONSE-WORK-FEEDBACK-001-V1",
+      "delivery_kind": "IMMEDIATE_PROMPT",
+      "family_id": "WORK-FEEDBACK-001",
+      "source_surface_refs": [
+        "SURFACE-PROMPT-IMMEDIATE_RESPONSE-WORK-FEEDBACK-001"
+      ],
+      "participant_text": "What is the first thing the recipient would say or do next? Respond freely; there is no single correct answer.",
+      "utf8_base64": "V2hhdCBpcyB0aGUgZmlyc3QgdGhpbmcgdGhlIHJlY2lwaWVudCB3b3VsZCBzYXkgb3IgZG8gbmV4dD8gUmVzcG9uZCBmcmVlbHk7IHRoZXJlIGlzIG5vIHNpbmdsZSBjb3JyZWN0IGFuc3dlci4=",
+      "utf8_byte_length": 110,
+      "utf8_sha256": "b81d4b553ce31c45c949dceff45f0b8a6cfd55e9a07cb98e018df4eb3819f853"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PROMPT-LATER_RESPONSE-WORK-FEEDBACK-001-V1",
+      "delivery_kind": "LATER_PROMPT",
+      "family_id": "WORK-FEEDBACK-001",
+      "source_surface_refs": [
+        "SURFACE-PROMPT-LATER_RESPONSE-WORK-FEEDBACK-001"
+      ],
+      "participant_text": "After this additional event, what is the next thing the recipient would say or do? Respond freely; there is no single correct answer.",
+      "utf8_base64": "QWZ0ZXIgdGhpcyBhZGRpdGlvbmFsIGV2ZW50LCB3aGF0IGlzIHRoZSBuZXh0IHRoaW5nIHRoZSByZWNpcGllbnQgd291bGQgc2F5IG9yIGRvPyBSZXNwb25kIGZyZWVseTsgdGhlcmUgaXMgbm8gc2luZ2xlIGNvcnJlY3QgYW5zd2VyLg==",
+      "utf8_byte_length": 133,
+      "utf8_sha256": "059efbc5d45b187e6ee6a6941b9c736c5bb0b3ef6a98ca23f06ac835485f134f"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PROMPT-IMMEDIATE_RESPONSE-RISK-FOOTSTEPS-001-V1",
+      "delivery_kind": "IMMEDIATE_PROMPT",
+      "family_id": "RISK-FOOTSTEPS-001",
+      "source_surface_refs": [
+        "SURFACE-PROMPT-IMMEDIATE_RESPONSE-RISK-FOOTSTEPS-001"
+      ],
+      "participant_text": "What is the first thing the walker would say or do next? Respond freely; there is no single correct answer.",
+      "utf8_base64": "V2hhdCBpcyB0aGUgZmlyc3QgdGhpbmcgdGhlIHdhbGtlciB3b3VsZCBzYXkgb3IgZG8gbmV4dD8gUmVzcG9uZCBmcmVlbHk7IHRoZXJlIGlzIG5vIHNpbmdsZSBjb3JyZWN0IGFuc3dlci4=",
+      "utf8_byte_length": 107,
+      "utf8_sha256": "a0a8db182dff6cc6c3aa28543488c629d482321840be318f0fa09614af18fc10"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PROMPT-LATER_RESPONSE-RISK-FOOTSTEPS-001-V1",
+      "delivery_kind": "LATER_PROMPT",
+      "family_id": "RISK-FOOTSTEPS-001",
+      "source_surface_refs": [
+        "SURFACE-PROMPT-LATER_RESPONSE-RISK-FOOTSTEPS-001"
+      ],
+      "participant_text": "After this additional event, what is the next thing the walker would say or do? Respond freely; there is no single correct answer.",
+      "utf8_base64": "QWZ0ZXIgdGhpcyBhZGRpdGlvbmFsIGV2ZW50LCB3aGF0IGlzIHRoZSBuZXh0IHRoaW5nIHRoZSB3YWxrZXIgd291bGQgc2F5IG9yIGRvPyBSZXNwb25kIGZyZWVseTsgdGhlcmUgaXMgbm8gc2luZ2xlIGNvcnJlY3QgYW5zd2VyLg==",
+      "utf8_byte_length": 130,
+      "utf8_sha256": "97a93e021ed16f9d3d66e9fefaa71902e078f0da56c5a95850a83c726ed3480d"
+    },
+    {
+      "delivery_surface_id": "DELIVERY-PROMPT-POST-TRACE-DIAGNOSTIC-V1",
+      "delivery_kind": "POST_TRACE_DIAGNOSTIC_PROMPT",
+      "family_id": "ALL-FAMILIES",
+      "source_surface_refs": [
+        "SURFACE-PROMPT-POST-TRACE-DIAGNOSTIC"
+      ],
+      "participant_text": "After completing both responses, briefly note which details of the scenario influenced your answers.",
+      "utf8_base64": "QWZ0ZXIgY29tcGxldGluZyBib3RoIHJlc3BvbnNlcywgYnJpZWZseSBub3RlIHdoaWNoIGRldGFpbHMgb2YgdGhlIHNjZW5hcmlvIGluZmx1ZW5jZWQgeW91ciBhbnN3ZXJzLg==",
+      "utf8_byte_length": 100,
+      "utf8_sha256": "26983c700c89ced0b2e017e050f4ef978b465d23144d06c596461fe4f260cf77"
+    }
+  ]
+}

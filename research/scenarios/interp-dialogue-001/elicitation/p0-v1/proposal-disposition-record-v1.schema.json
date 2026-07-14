@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "P0-v1 proposal disposition lineage",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "artifact_type",
+    "artifact_id",
+    "proposal_dispositions",
+    "authority"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "./proposal-disposition-record-v1.schema.json"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "artifact_type": {
+      "const": "P0_PROPOSAL_DISPOSITION_RECORD"
+    },
+    "artifact_id": {
+      "const": "INTERP-DIALOGUE-001P0-V1-PROPOSAL-DISPOSITIONS"
+    },
+    "proposal_dispositions": {
+      "type": "array",
+      "minItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "source_proposal_id",
+          "resolution_candidate_decision_refs",
+          "accepted_resolution_candidate_ids",
+          "rejected_resolution_candidate_ids",
+          "deferred_resolution_candidate_ids",
+          "coverage_status"
+        ],
+        "properties": {
+          "source_proposal_id": {
+            "$ref": "#/$defs/token"
+          },
+          "resolution_candidate_decision_refs": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/$defs/token"
+            }
+          },
+          "accepted_resolution_candidate_ids": {
+            "$ref": "#/$defs/stringArray"
+          },
+          "rejected_resolution_candidate_ids": {
+            "$ref": "#/$defs/stringArray"
+          },
+          "deferred_resolution_candidate_ids": {
+            "$ref": "#/$defs/stringArray"
+          },
+          "coverage_status": {
+            "const": "COVERED_BY_EXACT_CANDIDATE_DECISIONS"
+          }
+        }
+      }
+    },
+    "authority": {
+      "const": "LINEAGE_SUMMARY_ONLY_NO_PROPOSAL_LEVEL_DECISION_ENUM"
+    }
+  },
+  "$defs": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "token": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "stringArray": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
