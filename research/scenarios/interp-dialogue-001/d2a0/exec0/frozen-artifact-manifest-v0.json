@@ -1,0 +1,24 @@
+{
+  "$schema": "./contract.schema.json",
+  "document_kind": "frozen_artifact_manifest",
+  "schema_version": "1.0.0",
+  "contract_id": "INTERP-001D2A0-EXEC0-V0",
+  "status": "FROZEN_UNEXECUTED",
+  "predecessor_manifest_sha256": "8ee62993fbf302d8037f8cf898a0edca4fe7bbff7b01f73f6a71e8b6c04c3efd",
+  "payload": {
+    "manifest_id": "INTERP-001D2A0-EXEC0-FROZEN-ARTIFACTS-V0",
+    "canonicalization_id": "interp-canonical-json-v1",
+    "artifacts": [
+      { "document_kind": "contract_schema", "path": "contract.schema.json", "visibility_lane": "CONTRACT_AUTHORITY", "sha256": "5a6f486b2c5de75e0902e96c9f9331643402b409b874261c6e0fba761ee1ebf3" },
+      { "document_kind": "operator_catalog", "path": "operator-catalog-v0.json", "visibility_lane": "RUNNER_VISIBLE", "sha256": "ecad2ca4727eaf45a891999590ca500f64f39c20526973062138d14971308e8f" },
+      { "document_kind": "operator_golden_vectors", "path": "operator-golden-vectors-v0.json", "visibility_lane": "CONTRACT_TEST_ONLY", "sha256": "5e70bd9e8c9b76e035cb2cf12acc217e9ef0191a5a6cfc2d55dd737a79a37a89" },
+      { "document_kind": "lifecycle_processor", "path": "lifecycle-processor-v0.json", "visibility_lane": "RUNNER_VISIBLE", "sha256": "9cbcffe813ef98253b8449bde5b6af2a00728955cd4e9e0c85b8b28f62046dc0" },
+      { "document_kind": "fixture_extension", "path": "fixture-extension-v0.json", "visibility_lane": "RUNNER_VISIBLE", "sha256": "23b631696bd257fd67ed48cb6c3ec3318977d833e6f7507f13734fdf1d6e0d75" },
+      { "document_kind": "execution_unit_manifest", "path": "execution-unit-manifest-v0.json", "visibility_lane": "RUNNER_VISIBLE", "sha256": "d6a5db6296fc28064055fc61a7bfa0941448b94b1d3ddd507e182a963e35a26a" },
+      { "document_kind": "trace_v1_schema", "path": "trace-v1.schema.json", "visibility_lane": "RUNNER_VISIBLE", "sha256": "bec3e60117261a793cbe9713ecd81a37eeb37ab11bc8d9744372f83ccb710237" },
+      { "document_kind": "run_v1_schema", "path": "run-v1.schema.json", "visibility_lane": "RUNNER_VISIBLE", "sha256": "f639b0064a6fe3c3ea7006aa17d6267bca0b22f407d3de9f2f6b3431c5a301f6" },
+      { "document_kind": "evaluator_policy", "path": "evaluator-policy-v0.json", "visibility_lane": "EVALUATOR_ONLY", "sha256": "b56b5df7ea17cce282d1a61b5fb13efd2c54d095b30cf7c64b28601d484c7d86" },
+      { "document_kind": "evaluation_manifest", "path": "evaluation-manifest-v1.json", "visibility_lane": "EVALUATOR_ONLY", "sha256": "7d7704d88d09664ed528a6863c2f77f24c3d7027242300392ce913d0391cd8ca" }
+    ]
+  }
+}

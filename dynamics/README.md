@@ -90,6 +90,7 @@ labs/interp_dialogue_elicitation_contract → compiled frozen source context
 labs/interp_dialogue_p1_runner → immutable scripted replay + development assessment artifacts
 labs/interp_dialogue_p0_v1_builder → exact decisions + closed-world surface/catalog freeze
 labs/interp_d2a0_contract → frozen spine/manifests/fixtures semantic verification only
+labs/interp_d2a0_exec0_contract → exact operators/units/selectors semantic verification only
 runner process → serialized artifact → evaluator process
 ```
 
@@ -203,6 +204,8 @@ python -m unittest discover -s dynamics/tests -v
   candidate/decision과 37개 final delivery를 deterministic artifact로 동결한다.
 - P0-v1 instrument는 catalog 밖 participant-visible output, fallback과 semantic source의
   direct participant-text read를 금지하며 confirmed/deferred defect를 해결됐다고 선언하지 않는다.
+- D2a0 EXEC0 verifier는 predecessor bytes, operator/lifecycle semantics, 46개 explicit unit과
+  artifact lane을 검사하지만 runner, evaluator implementation 또는 result를 만들지 않는다.
 - 입력 손실은 `processed / dropped / unresolved`로 회계된다.
 
 P1 artifact 재생성 및 검증은 다음 명령으로 실행한다.
@@ -219,6 +222,14 @@ P0-v1 decision/freeze 재생성 및 검증은 다음 명령으로 실행한다.
 python -m dynamics.labs.interp_dialogue_p0_v1_cli --write
 python -m dynamics.labs.interp_dialogue_p0_v1_cli --verify
 python -m unittest dynamics.tests.test_interp_dialogue_p0_v1 -v
+```
+
+D2a0 executable contract closure 검증은 다음 명령으로 실행한다. 이 명령은 runner가 아니며
+trace나 evaluation result를 생성하지 않는다.
+
+```bash
+python -m dynamics.labs.interp_d2a0_exec0_cli --verify
+python -m unittest dynamics.tests.test_interp_d2a0_exec0_contract -v
 ```
 
 시간·사건 동일성의 정확한 범위와 아직 구현하지 않은 flow는

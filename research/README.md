@@ -139,7 +139,11 @@ defect receipt, 8개의 미채택·미실행 revision proposal을 발행해 `EXE
 delivery, mapping-attempt lineage를 `FROZEN / UNEXECUTED`로 동결했다. 001A/001B 의미 source와
 P0-v0/P1-v0 bytes는 바꾸지 않았다. 이후 immediate mainline은
 [`INTERP-001D2a0`](scenarios/interp-dialogue-001/d2a0/README.md) 계약 동결 → detached D2a1 →
-`OBS-MAP-000`이다. P1-v1은 merged v1 digest에 결박된 repilot 의무를 유지하지만 non-mainline
+`OBS-MAP-000`이다. D2a1 전에
+[`INTERP-001D2a0-EXEC0`](scenarios/interp-dialogue-001/d2a0/exec0/README.md)가 predecessor
+byte를 보존한 채 exact operator, lifecycle, explicit execution unit과 typed evaluator selector를
+`FROZEN / UNEXECUTED`로 닫는다. 이 bundle에는 runner, evaluator implementation 또는 결과가 없다.
+P1-v1은 merged v1 digest에 결박된 repilot 의무를 유지하지만 non-mainline
 hold이며, observation mapping 뒤에 재개 여부를 판정한다. P0-v1은 confirmed defect를 해결됐다고 선언하지 않으며 현재 artifact는 actual
 participant/model occurrence, human support, LLM latent 측정, D2a runtime, durable TargetForm
 또는 Narrative writer를 구현하지 않는다.

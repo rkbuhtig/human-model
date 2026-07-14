@@ -49,3 +49,7 @@ Contract mutant는 인간 모델 후보가 아니다. 반대로 descriptive mode
   경계를 유지한 채 current access에서 future-effective interpretation까지의 최소 spine,
   독립 T/P/H 전략 축, trace schema와 synthetic distinguishing witness를 실행 전에 동결한다.
   상태는 `FROZEN / UNEXECUTED`이며 runner/evaluator/result 또는 `HumanState` write는 없다.
+  [`EXEC0 closure`](../scenarios/interp-dialogue-001/d2a0/exec0/README.md)는 predecessor를
+  수정하지 않고 exact operator/lifecycle, 추가 fixture, 46개 explicit execution unit과 typed
+  assertion selector를 추가 동결한다. golden과 evaluator-only artifact는 future runner 입력이
+  아니며, EXEC0 자체에도 실행 결과는 없다.
