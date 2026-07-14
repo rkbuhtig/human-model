@@ -1,0 +1,128 @@
+{
+  "$schema": "./contract.schema.json",
+  "document_kind": "fixture_catalog",
+  "schema_version": "1.0.0",
+  "contract_id": "INTERP-001D2A0-V0",
+  "status": "FROZEN_UNEXECUTED",
+  "evaluation_content_policy": "EXPECTED_SIGNATURES_FORBIDDEN",
+  "fixtures": [
+    {
+      "fixture_id": "FX-EQUAL-SURFACE-DIFFERENT-PATH",
+      "probe_kind": "FUTURE_DIVERGENCE",
+      "purpose": "Hold the immediate surface equal while supplying distinct adjudicated paths, then open the same later access.",
+      "manipulated_fields": ["supplied_interpretation_path"],
+      "clamped_fields": [
+        { "field": "immediate_surface_code", "value": "SURFACE-NEUTRAL" },
+        { "field": "later_external_occurrence", "value": "EVENT-FOLLOWUP-SAME" },
+        { "field": "role_scope", "value": "SURFACE_PROJECTION_ONLY" }
+      ],
+      "access_lineage": [
+        { "access_id": "ACCESS-K", "runtime_id": "RUNTIME-A", "target_scope_id": "TARGET-A", "interpretation_scope_id": "INTERP-A", "access_ordinal": 1 },
+        { "access_id": "ACCESS-K-PLUS-1", "runtime_id": "RUNTIME-A", "target_scope_id": "TARGET-A", "interpretation_scope_id": "INTERP-A", "access_ordinal": 2 }
+      ],
+      "arms": [
+        { "arm_id": "ARM-A", "assignments": [{ "field": "supplied_interpretation_path", "value": "PATH-NEGATIVE" }] },
+        { "arm_id": "ARM-B", "assignments": [{ "field": "supplied_interpretation_path", "value": "PATH-AMBIGUOUS" }] }
+      ]
+    },
+    {
+      "fixture_id": "FX-ROLE-PROJECTION-ONLY",
+      "probe_kind": "PROJECTION_DISSOCIATION",
+      "purpose": "Change only the declared surface role while feedback, self-observation and world outcome are absent.",
+      "manipulated_fields": ["declared_surface_role"],
+      "clamped_fields": [
+        { "field": "role_scope", "value": "SURFACE_PROJECTION_ONLY" },
+        { "field": "action_feedback", "value": "CLAMPED_ABSENT" },
+        { "field": "self_observation_feedback", "value": "CLAMPED_ABSENT" },
+        { "field": "world_outcome", "value": "CLAMPED_ABSENT" },
+        { "field": "supplied_interpretation_path", "value": "PATH-SHARED" }
+      ],
+      "access_lineage": [
+        { "access_id": "ACCESS-K", "runtime_id": "RUNTIME-B", "target_scope_id": "TARGET-B", "interpretation_scope_id": "INTERP-B", "access_ordinal": 1 },
+        { "access_id": "ACCESS-K-PLUS-1", "runtime_id": "RUNTIME-B", "target_scope_id": "TARGET-B", "interpretation_scope_id": "INTERP-B", "access_ordinal": 2 }
+      ],
+      "arms": [
+        { "arm_id": "ROLE-PRIVATE", "assignments": [{ "field": "declared_surface_role", "value": "PRIVATE" }] },
+        { "arm_id": "ROLE-PUBLIC", "assignments": [{ "field": "declared_surface_role", "value": "PUBLIC" }] }
+      ]
+    },
+    {
+      "fixture_id": "FX-EVIDENCE-SUBJECTIVE-PATH",
+      "probe_kind": "EVIDENCE_AUTHORITY",
+      "purpose": "Vary only the supplied subjective path while public evidence and reassessment authority remain fixed.",
+      "manipulated_fields": ["supplied_interpretation_path"],
+      "clamped_fields": [
+        { "field": "external_evidence_link_set_digest", "value": "EVIDENCE-LINKS-SAME" },
+        { "field": "evidence_assessment_digest", "value": "EVIDENCE-ASSESSMENT-SAME" },
+        { "field": "public_information_policy", "value": "NO_NEW_PUBLIC_INFORMATION" },
+        { "field": "reassessment_policy", "value": "NO_REASSESSMENT_POLICY" },
+        { "field": "evidence_writer_authority", "value": "NO_EVIDENCE_WRITER_AUTHORITY" }
+      ],
+      "access_lineage": [
+        { "access_id": "ACCESS-K", "runtime_id": "RUNTIME-C", "target_scope_id": "TARGET-C", "interpretation_scope_id": "INTERP-C", "access_ordinal": 1 }
+      ],
+      "arms": [
+        { "arm_id": "PATH-A", "assignments": [{ "field": "supplied_interpretation_path", "value": "PATH-A" }] },
+        { "arm_id": "PATH-B", "assignments": [{ "field": "supplied_interpretation_path", "value": "PATH-B" }] }
+      ]
+    },
+    {
+      "fixture_id": "FX-SAME-ACCESS-REJECTION",
+      "probe_kind": "TEMPORAL_AUTHORITY",
+      "purpose": "Attempt to read a newly eligible revision in the same access that emitted it.",
+      "manipulated_fields": ["revision_read_access_ordinal"],
+      "clamped_fields": [
+        { "field": "revision_source_access_ordinal", "value": 1 },
+        { "field": "revision_effective_from_ordinal", "value": 2 },
+        { "field": "runtime_id", "value": "RUNTIME-D" },
+        { "field": "target_scope_id", "value": "TARGET-D" },
+        { "field": "interpretation_scope_id", "value": "INTERP-D" }
+      ],
+      "access_lineage": [
+        { "access_id": "ACCESS-K", "runtime_id": "RUNTIME-D", "target_scope_id": "TARGET-D", "interpretation_scope_id": "INTERP-D", "access_ordinal": 1 }
+      ],
+      "arms": [
+        { "arm_id": "SAME-K-READ", "assignments": [{ "field": "revision_read_access_ordinal", "value": 1 }] }
+      ]
+    },
+    {
+      "fixture_id": "FX-REVISION-LIFECYCLE-SEPARATION",
+      "probe_kind": "LIFECYCLE_SEPARATION",
+      "purpose": "Keep emitted, adjudicated, eligible, read, access-local application and later retention observations distinct.",
+      "manipulated_fields": ["lifecycle_program"],
+      "clamped_fields": [
+        { "field": "revision_source_access_ordinal", "value": 1 },
+        { "field": "revision_effective_from_ordinal", "value": 2 },
+        { "field": "retention_requires_later_access", "value": true }
+      ],
+      "access_lineage": [
+        { "access_id": "ACCESS-K", "runtime_id": "RUNTIME-E", "target_scope_id": "TARGET-E", "interpretation_scope_id": "INTERP-E", "access_ordinal": 1 },
+        { "access_id": "ACCESS-J", "runtime_id": "RUNTIME-E", "target_scope_id": "TARGET-E", "interpretation_scope_id": "INTERP-E", "access_ordinal": 2 },
+        { "access_id": "ACCESS-J-PLUS-1", "runtime_id": "RUNTIME-E", "target_scope_id": "TARGET-E", "interpretation_scope_id": "INTERP-E", "access_ordinal": 3 }
+      ],
+      "arms": [
+        { "arm_id": "ELIGIBLE-NOT-READ", "assignments": [{ "field": "lifecycle_program", "value": "ELIGIBLE_NOT_READ" }] },
+        { "arm_id": "READ-NOT-APPLIED", "assignments": [{ "field": "lifecycle_program", "value": "READ_NOT_APPLIED" }] },
+        { "arm_id": "APPLIED-NOT-RETAINED", "assignments": [{ "field": "lifecycle_program", "value": "APPLIED_NOT_RETAINED" }] },
+        { "arm_id": "RETAINED-AT-LATER-ACCESS", "assignments": [{ "field": "lifecycle_program", "value": "RETAINED_AT_LATER_ACCESS" }] }
+      ]
+    },
+    {
+      "fixture_id": "FX-NON-FALSIFIABLE-ESCAPE",
+      "probe_kind": "CLOSED_WORLD_ESCAPE",
+      "purpose": "Attempt to absorb every distinguishing trace into an undeclared free candidate or unbounded out-of-model lane.",
+      "manipulated_fields": ["candidate_escape_mode"],
+      "clamped_fields": [
+        { "field": "candidate_vocabulary", "value": "CLOSED_WORLD" },
+        { "field": "out_of_model_policy", "value": "DECLARED_BOUNDED_ONLY" }
+      ],
+      "access_lineage": [
+        { "access_id": "ACCESS-K", "runtime_id": "RUNTIME-F", "target_scope_id": "TARGET-F", "interpretation_scope_id": "INTERP-F", "access_ordinal": 1 }
+      ],
+      "arms": [
+        { "arm_id": "FREE-CANDIDATE", "assignments": [{ "field": "candidate_escape_mode", "value": "UNDECLARED_FREE_CANDIDATE" }] },
+        { "arm_id": "UNBOUNDED-OUT-OF-MODEL", "assignments": [{ "field": "candidate_escape_mode", "value": "UNBOUNDED_OUT_OF_MODEL" }] }
+      ]
+    }
+  ]
+}
