@@ -167,5 +167,7 @@ Episode 또는 Narrative writer를 만들지 않는다.
 clamp, lifecycle separation과 evaluator-only signature가 등록돼 있다.
 
 D2a0는 `FROZEN / UNEXECUTED`다. runner, evaluator, synthetic result, canonical
-`HumanState` writer, participant/model observation 또는 claim support는 없다. 후속 D2a1
-실행 뒤 `OBS-MAP-000`이 기존 trace field와 participant surface의 측정 적합성을 판정한다.
+`HumanState` writer, participant/model observation 또는 claim support는 없다. 후속
+[`EXEC0`](d2a0/exec0/README.md)는 operator/unit/evaluator-selector를, 이어지는
+[`MAT0`](d2a0/mat0/README.md)는 normalization, record/lifecycle/rejection과 byte publication ABI를
+각각 `FROZEN / UNEXECUTED`로 닫는다. 그 뒤 D2a1 실행과 `OBS-MAP-000`이 이어진다.

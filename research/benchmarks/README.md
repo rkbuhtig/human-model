@@ -53,3 +53,7 @@ Contract mutant는 인간 모델 후보가 아니다. 반대로 descriptive mode
   수정하지 않고 exact operator/lifecycle, 추가 fixture, 46개 explicit execution unit과 typed
   assertion selector를 추가 동결한다. golden과 evaluator-only artifact는 future runner 입력이
   아니며, EXEC0 자체에도 실행 결과는 없다.
+  [`MAT0 closure`](../scenarios/interp-dialogue-001/d2a0/mat0/README.md)는 strategy/runtime/policy
+  input composition, predecessor field/value adapter, exact record lineage와 lifecycle/rejection,
+  digest/evaluation carrier를 별도 동결한다. 세 byte golden trace는 contract-test-only이며
+  MAT0도 runner, evaluator implementation 또는 result를 포함하지 않는다.

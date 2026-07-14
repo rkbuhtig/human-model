@@ -143,6 +143,10 @@ P0-v0/P1-v0 bytes는 바꾸지 않았다. 이후 immediate mainline은
 [`INTERP-001D2a0-EXEC0`](scenarios/interp-dialogue-001/d2a0/exec0/README.md)가 predecessor
 byte를 보존한 채 exact operator, lifecycle, explicit execution unit과 typed evaluator selector를
 `FROZEN / UNEXECUTED`로 닫는다. 이 bundle에는 runner, evaluator implementation 또는 결과가 없다.
+그 다음 [`INTERP-001D2a0-MAT0`](scenarios/interp-dialogue-001/d2a0/mat0/README.md)가
+strategy/runtime/policy input composition, fixture normalization, intermediate record, lifecycle arm,
+rejection과 digest ABI를 별도 review gate로 동결한 뒤에만 D2a1을 실행한다. MAT0 역시
+`FROZEN / UNEXECUTED`이며 golden trace는 contract-test-only다.
 P1-v1은 merged v1 digest에 결박된 repilot 의무를 유지하지만 non-mainline
 hold이며, observation mapping 뒤에 재개 여부를 판정한다. P0-v1은 confirmed defect를 해결됐다고 선언하지 않으며 현재 artifact는 actual
 participant/model occurrence, human support, LLM latent 측정, D2a runtime, durable TargetForm

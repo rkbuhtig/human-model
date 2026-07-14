@@ -31,6 +31,7 @@ Assessment ≠ Adoption ≠ Implementation ≠ Run ≠ Human-Empirical Evidence
 - [D2a0 mainline 전환 채택 기록](research/adoption-records/2026-07-14-interp-d2a0-mainline-priority.md)
 - [D2a0 최소 재귀 해석 spine](research/scenarios/interp-dialogue-001/d2a0/README.md)
 - [D2a0 executable contract closure](research/scenarios/interp-dialogue-001/d2a0/exec0/README.md)
+- [D2a0 materialization ABI closure](research/scenarios/interp-dialogue-001/d2a0/mat0/README.md)
 
 ## Volume I
 
@@ -202,4 +203,7 @@ HumanState write, participant data 또는 claim support가 아니다. 후속
 [`INTERP-001D2a0-EXEC0`](research/scenarios/interp-dialogue-001/d2a0/exec0/README.md)는
 그 predecessor byte를 바꾸지 않고 exact operator, lifecycle, 46개 execution unit과 typed
 post-run assertion을 추가 동결한다. EXEC0 역시 runner, evaluator implementation, run/result를
-포함하지 않는 `FROZEN / UNEXECUTED` 계약이다.
+포함하지 않는 `FROZEN / UNEXECUTED` 계약이다. 별도
+[`INTERP-001D2a0-MAT0`](research/scenarios/interp-dialogue-001/d2a0/mat0/README.md)는
+predecessor/EXEC0 bytes를 유지하면서 input normalization, cell program, record/lifecycle/rejection
+materialization과 digest/publication ABI를 마지막으로 동결한다. MAT0에도 runner나 result는 없다.
