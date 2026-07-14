@@ -1,0 +1,233 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "P0-v1 exact revision resolution candidates",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "artifact_type",
+    "artifact_id",
+    "candidates",
+    "source_proposal_set_binding",
+    "source_adjudication_binding",
+    "canonicalization_profile_id",
+    "revision_basis_digest_domain",
+    "authority"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "./revision-resolution-candidates-v1.schema.json"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "artifact_type": {
+      "const": "P0_REVISION_RESOLUTION_CANDIDATE_SET"
+    },
+    "artifact_id": {
+      "const": "INTERP-DIALOGUE-001P0-V1-RESOLUTION-CANDIDATES"
+    },
+    "candidates": {
+      "type": "array",
+      "minItems": 18,
+      "items": {
+        "$ref": "#/$defs/candidate"
+      }
+    },
+    "source_proposal_set_binding": {
+      "$ref": "#/$defs/binding"
+    },
+    "source_adjudication_binding": {
+      "$ref": "#/$defs/binding"
+    },
+    "canonicalization_profile_id": {
+      "const": "HM-CANONICAL-JSON-PY-V1"
+    },
+    "revision_basis_digest_domain": {
+      "const": "HM-REVISION-BASIS-JSON-V1"
+    },
+    "authority": {
+      "const": "CANDIDATES_ONLY_DECISIONS_ARE_SEPARATE"
+    }
+  },
+  "$defs": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "token": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "stringArray": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "basisRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_id",
+        "artifact_path",
+        "artifact_sha256",
+        "json_pointer",
+        "value_canonical_sha256",
+        "canonicalization_profile_id",
+        "digest_domain"
+      ],
+      "properties": {
+        "artifact_id": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "artifact_path": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "artifact_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "json_pointer": {
+          "type": "string"
+        },
+        "value_canonical_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "canonicalization_profile_id": {
+          "const": "HM-CANONICAL-JSON-PY-V1"
+        },
+        "digest_domain": {
+          "const": "HM-REVISION-BASIS-JSON-V1"
+        }
+      }
+    },
+    "destination": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_id",
+        "json_pointer",
+        "precondition"
+      ],
+      "properties": {
+        "artifact_id": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "json_pointer": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "precondition": {
+          "const": "MUST_BE_ABSENT"
+        }
+      }
+    },
+    "operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operation_id",
+        "operation_kind",
+        "basis_refs",
+        "destination",
+        "replacement_value"
+      ],
+      "properties": {
+        "operation_id": {
+          "$ref": "#/$defs/token"
+        },
+        "operation_kind": {
+          "enum": [
+            "ADD_SURFACE_REALIZATION",
+            "ADD_MAPPING_LINEAGE_CONTRACT"
+          ]
+        },
+        "basis_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/basisRef"
+          }
+        },
+        "destination": {
+          "$ref": "#/$defs/destination"
+        },
+        "replacement_value": {}
+      }
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resolution_candidate_id",
+        "source_proposal_id",
+        "source_defect_receipt_ids",
+        "semantic_change_classification",
+        "operations",
+        "rationale",
+        "authority"
+      ],
+      "properties": {
+        "resolution_candidate_id": {
+          "$ref": "#/$defs/token"
+        },
+        "source_proposal_id": {
+          "$ref": "#/$defs/token"
+        },
+        "source_defect_receipt_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/token"
+          }
+        },
+        "semantic_change_classification": {
+          "enum": [
+            "REFERENT_CLARIFICATION",
+            "SELF_REFERENCE_REMOVAL",
+            "PRESENTATIONAL_RESTRUCTURING",
+            "SEMANTIC_PRESERVATION_UNVERIFIED",
+            "MAPPING_LINEAGE_CONTRACT_CHANGE"
+          ]
+        },
+        "operations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/operation"
+          }
+        },
+        "rationale": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "authority": {
+          "const": "EXACT_REVISION_CANDIDATE_ONLY_NO_ADOPTION_AUTHORITY"
+        }
+      }
+    },
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_id",
+        "path",
+        "content_sha256"
+      ],
+      "properties": {
+        "artifact_id": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "path": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "content_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    }
+  }
+}

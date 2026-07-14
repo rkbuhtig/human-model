@@ -1,0 +1,427 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "P0-v1 closed-world participant surface",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "artifact_type",
+    "artifact_id",
+    "status",
+    "authority",
+    "canonicalization_profile_id",
+    "renderer_semantics_version",
+    "semantic_source_bindings",
+    "rendering_grammar",
+    "base_surfaces",
+    "factor_level_surfaces",
+    "future_option_surfaces",
+    "prompt_surfaces",
+    "diagnostic_surfaces",
+    "prohibitions"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "./participant-surface-v1.schema.json"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "artifact_type": {
+      "const": "CLOSED_WORLD_PARTICIPANT_SURFACE"
+    },
+    "artifact_id": {
+      "const": "PARTICIPANT-SURFACE-V1"
+    },
+    "status": {
+      "const": "FROZEN_UNEXECUTED_DEVELOPMENT_SURFACE"
+    },
+    "authority": {
+      "const": "PARTICIPANT_REALIZATION_ONLY_NO_SEMANTIC_SOURCE_AUTHORITY"
+    },
+    "canonicalization_profile_id": {
+      "const": "HM-CANONICAL-JSON-PY-V1"
+    },
+    "renderer_semantics_version": {
+      "const": "INTERP-DIALOGUE-P0-V1-RENDERER-1.0.0"
+    },
+    "semantic_source_bindings": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "$ref": "#/$defs/binding"
+      }
+    },
+    "rendering_grammar": {
+      "$ref": "#/$defs/renderingGrammar"
+    },
+    "base_surfaces": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "$ref": "#/$defs/surface"
+      }
+    },
+    "factor_level_surfaces": {
+      "type": "array",
+      "minItems": 18,
+      "maxItems": 18,
+      "items": {
+        "$ref": "#/$defs/factorSurface"
+      }
+    },
+    "future_option_surfaces": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "$ref": "#/$defs/futureSurface"
+      }
+    },
+    "prompt_surfaces": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "$ref": "#/$defs/promptSurface"
+      }
+    },
+    "diagnostic_surfaces": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1,
+      "items": {
+        "$ref": "#/$defs/surface"
+      }
+    },
+    "prohibitions": {
+      "type": "array",
+      "minItems": 6,
+      "items": {
+        "$ref": "#/$defs/nonEmptyString"
+      }
+    }
+  },
+  "$defs": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "token": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "stringArray": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "basisRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_id",
+        "artifact_path",
+        "artifact_sha256",
+        "json_pointer",
+        "value_canonical_sha256",
+        "canonicalization_profile_id",
+        "digest_domain"
+      ],
+      "properties": {
+        "artifact_id": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "artifact_path": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "artifact_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "json_pointer": {
+          "type": "string"
+        },
+        "value_canonical_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "canonicalization_profile_id": {
+          "const": "HM-CANONICAL-JSON-PY-V1"
+        },
+        "digest_domain": {
+          "const": "HM-REVISION-BASIS-JSON-V1"
+        }
+      }
+    },
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_id",
+        "path",
+        "content_sha256"
+      ],
+      "properties": {
+        "artifact_id": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "path": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "content_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "surface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "surface_realization_id",
+        "family_id",
+        "participant_text",
+        "semantic_change_classification",
+        "basis_refs",
+        "resolution_candidate_refs",
+        "required_semantic_elements",
+        "prohibited_construct_labels"
+      ],
+      "properties": {
+        "surface_realization_id": {
+          "$ref": "#/$defs/token"
+        },
+        "family_id": {
+          "$ref": "#/$defs/token"
+        },
+        "participant_text": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "semantic_change_classification": {
+          "enum": [
+            "UNCHANGED_SOURCE_REALIZATION",
+            "REFERENT_CLARIFICATION",
+            "SELF_REFERENCE_REMOVAL",
+            "PRESENTATIONAL_RESTRUCTURING",
+            "SEMANTIC_PRESERVATION_UNVERIFIED"
+          ]
+        },
+        "basis_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/basisRef"
+          }
+        },
+        "resolution_candidate_refs": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "required_semantic_elements": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "prohibited_construct_labels": {
+          "$ref": "#/$defs/stringArray"
+        }
+      }
+    },
+    "factorSurface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "surface_realization_id",
+        "family_id",
+        "participant_text",
+        "semantic_change_classification",
+        "basis_refs",
+        "resolution_candidate_refs",
+        "required_semantic_elements",
+        "prohibited_construct_labels",
+        "factor_id",
+        "level_id"
+      ],
+      "properties": {
+        "surface_realization_id": {
+          "$ref": "#/$defs/token"
+        },
+        "family_id": {
+          "$ref": "#/$defs/token"
+        },
+        "participant_text": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "semantic_change_classification": {
+          "enum": [
+            "UNCHANGED_SOURCE_REALIZATION",
+            "REFERENT_CLARIFICATION",
+            "SELF_REFERENCE_REMOVAL",
+            "PRESENTATIONAL_RESTRUCTURING",
+            "SEMANTIC_PRESERVATION_UNVERIFIED"
+          ]
+        },
+        "basis_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/basisRef"
+          }
+        },
+        "resolution_candidate_refs": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "required_semantic_elements": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "prohibited_construct_labels": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "factor_id": {
+          "$ref": "#/$defs/token"
+        },
+        "level_id": {
+          "$ref": "#/$defs/token"
+        }
+      }
+    },
+    "futureSurface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "surface_realization_id",
+        "family_id",
+        "participant_text",
+        "semantic_change_classification",
+        "basis_refs",
+        "resolution_candidate_refs",
+        "required_semantic_elements",
+        "prohibited_construct_labels",
+        "future_option_id"
+      ],
+      "properties": {
+        "surface_realization_id": {
+          "$ref": "#/$defs/token"
+        },
+        "family_id": {
+          "$ref": "#/$defs/token"
+        },
+        "participant_text": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "semantic_change_classification": {
+          "enum": [
+            "UNCHANGED_SOURCE_REALIZATION",
+            "REFERENT_CLARIFICATION",
+            "SELF_REFERENCE_REMOVAL",
+            "PRESENTATIONAL_RESTRUCTURING",
+            "SEMANTIC_PRESERVATION_UNVERIFIED"
+          ]
+        },
+        "basis_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/basisRef"
+          }
+        },
+        "resolution_candidate_refs": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "required_semantic_elements": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "prohibited_construct_labels": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "future_option_id": {
+          "$ref": "#/$defs/token"
+        }
+      }
+    },
+    "promptSurface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "surface_realization_id",
+        "family_id",
+        "participant_text",
+        "semantic_change_classification",
+        "basis_refs",
+        "resolution_candidate_refs",
+        "required_semantic_elements",
+        "prohibited_construct_labels",
+        "prompt_role"
+      ],
+      "properties": {
+        "surface_realization_id": {
+          "$ref": "#/$defs/token"
+        },
+        "family_id": {
+          "$ref": "#/$defs/token"
+        },
+        "participant_text": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "semantic_change_classification": {
+          "enum": [
+            "UNCHANGED_SOURCE_REALIZATION",
+            "REFERENT_CLARIFICATION",
+            "SELF_REFERENCE_REMOVAL",
+            "PRESENTATIONAL_RESTRUCTURING",
+            "SEMANTIC_PRESERVATION_UNVERIFIED"
+          ]
+        },
+        "basis_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/basisRef"
+          }
+        },
+        "resolution_candidate_refs": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "required_semantic_elements": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "prohibited_construct_labels": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "prompt_role": {
+          "enum": [
+            "IMMEDIATE_RESPONSE",
+            "LATER_RESPONSE"
+          ]
+        }
+      }
+    },
+    "renderingGrammar": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "initial_joiner",
+        "factor_line_prefix",
+        "factor_joiner",
+        "factor_order_authority"
+      ],
+      "properties": {
+        "initial_joiner": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "factor_line_prefix": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "factor_joiner": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "factor_order_authority": {
+          "const": "FROZEN_001A_FACTOR_ARRAY_ORDER"
+        }
+      }
+    }
+  }
+}
