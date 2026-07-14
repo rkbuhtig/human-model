@@ -401,14 +401,19 @@ adjudicator와 action gate도 `001A` 자연 factor의 결과로 선택하지 않
 5. `INTERP-DIALOGUE-001P0-v1` (`FROZEN / UNEXECUTED`): 8개 proposal을 18개 exact
    candidate와 별도 decision receipt로 원자화하고, closed-world participant surface·37개
    rendered delivery·mapping-attempt lineage를 새 instrument로 동결; defect resolution 없음
-6. `INTERP-DIALOGUE-001P1-v1`: merged v1 digest에 결박된 core/delta corpus를 먼저
-   사전등록한 뒤 별도 scripted repilot에서만 재현 여부 판정
-7. ACQ0와 prompt-reactivity gate, source-specific acquisition, human confirmatory,
-   cross-model latent와 `INTERP-001D2a`
-   protocol을 결과 전에 각각 동결
-8. human judgment, latent representation probe와 D2a recursive composition을 독립 실행
-9. `INTERP-DIALOGUE-001C`: 세 source의 일치·불일치와 operational alias 범위를 교차 판정
-10. 살아남은 기능 배치에 한해서만 Dynamics runtime 또는 Narrative integration을 별도 검토
+6. `INTERP-001D2a0` (`FROZEN / UNEXECUTED`): P0-v1은 개발 인프라로, P1-v1은
+   non-mainline hold로 보존하고 minimal recursive interpretation spine, T/P/H 전략 축,
+   future-access lineage, synthetic fixture, trace schema와 runner/evaluator 격리를 먼저 동결
+7. `INTERP-001D2a1`: execution manifest만 읽는 detached runner와, serialized trace 뒤에만
+   evaluation manifest를 읽는 독립 evaluator를 구현·실행; canonical `HumanState` mutation 없음
+8. `OBS-MAP-000`: D2a1 결과로 001B trace field와 P0-v1 surface를 `KEEP / REVISE / ADD /
+   UNOBSERVABLE / SOURCE_SPECIFIC_ONLY`로 분류; P0-v2/P1-v2를 미리 예약하지 않음
+9. P1-v1 또는 successor elicitation을 재개할 근거가 생긴 경우에만 exact preregistration과
+   별도 scripted repilot로 confirmed defect의 재현 여부를 판정
+10. ACQ0와 prompt-reactivity gate, source-specific acquisition, human confirmatory와
+    cross-model latent protocol을 결과 전에 각각 동결하고 독립 실행
+11. `INTERP-DIALOGUE-001C`: source 간 일치·불일치와 operational alias 범위를 교차 판정
+12. 살아남은 기능 배치에 한해서만 Dynamics runtime 또는 Narrative integration을 별도 검토
 
 synthetic capability matrix는 predictive support나 인간의 기분·기억·퀄리아 법칙을
 지지하지 않는다. `MORPH-001C`와의 접합도 별도 measurement mapping 전에는 금지한다.
