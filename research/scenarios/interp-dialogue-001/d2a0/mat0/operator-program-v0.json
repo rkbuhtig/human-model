@@ -138,6 +138,8 @@
     ],
     "per_access_stage_order": [
       "MATERIALIZE_DECLARED_VIEW",
+      "READ_PRIOR_ELIGIBLE_REVISION_IF_SCHEDULED",
+      "APPLY_MATCHING_PRIOR_REVISION_FOR_ACCESS_IF_SCHEDULED",
       "FORM_RECEPTION_CANDIDATE",
       "FORM_SUBJECTIVE_ENCOUNTER",
       "EMIT_INTERPRETATION_CANDIDATES",
@@ -145,8 +147,9 @@
       "PROJECT_IMMEDIATE_SURFACE",
       "EMIT_REVISION_CANDIDATE_IF_ANY",
       "EMIT_REVISION_ELIGIBILITY",
-      "RUN_LIFECYCLE_PROGRAM"
+      "OBSERVE_PRIOR_APPLICATION_RETENTION_IF_SCHEDULED"
     ],
+    "stage_phase_rule": "declared view plus scheduled prior-revision read and application complete before reception and temporal adjudication; newly emitted revision and eligibility never feed back into the same access",
     "intermediate_construction": {
       "subjective_path_digest_input": [
         "source_path_identity",
@@ -158,6 +161,7 @@
       ],
       "subjective_path_digest_rule": "sha256 of canonical object with exactly the listed keys",
       "preserve_candidate_rule": "stable unique [reception_path, access_local_applied_revision_path when present]",
+      "applied_revision_provenance_rule": "when access_local_applied_revision_path is present the InterpretationCandidateSet has an exact source edge to the same-access AccessLocalApplicationReceipt",
       "narrow_candidate_rule": "singleton containing rank-max of preserve candidate list",
       "adjudication_rule": "temporal operator output is authoritative and must be a member of the materialized candidate set",
       "revision_path_absence_sentinel": "NO-REVISION",

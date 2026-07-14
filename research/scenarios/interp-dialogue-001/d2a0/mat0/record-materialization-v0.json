@@ -21,6 +21,26 @@
       },
       {
         "rank": 2,
+        "type_id": "RevisionReadReceipt",
+        "writer": "READ_PRIOR_ELIGIBLE_REVISION_IF_SCHEDULED",
+        "emission": "by lifecycle emission table before interpretation",
+        "source_types": [
+          "RevisionEligibilityDecisionReceipt from exact selected prior access",
+          "DeclaredRuntimeViewReceipt at read access"
+        ]
+      },
+      {
+        "rank": 3,
+        "type_id": "AccessLocalApplicationReceipt",
+        "writer": "APPLY_MATCHING_PRIOR_REVISION_FOR_ACCESS_IF_SCHEDULED",
+        "emission": "by lifecycle emission table before interpretation",
+        "source_types": [
+          "RevisionReadReceipt",
+          "DeclaredRuntimeViewReceipt at application access"
+        ]
+      },
+      {
+        "rank": 4,
         "type_id": "ReceptionCandidate",
         "writer": "D2A-RECEPTION-BIAS",
         "emission": "one per FULL_INTERPRETATION access",
@@ -29,7 +49,7 @@
         ]
       },
       {
-        "rank": 3,
+        "rank": 5,
         "type_id": "SubjectiveEncounterFormCandidate",
         "writer": "FORM_SUBJECTIVE_ENCOUNTER",
         "emission": "one per FULL_INTERPRETATION access",
@@ -39,17 +59,18 @@
         ]
       },
       {
-        "rank": 4,
+        "rank": 6,
         "type_id": "InterpretationCandidateSet",
         "writer": "EMIT_INTERPRETATION_CANDIDATES",
         "emission": "one unless terminal rejection occurs at this stage",
         "source_types": [
           "DeclaredRuntimeViewReceipt",
+          "AccessLocalApplicationReceipt when emitted",
           "SubjectiveEncounterFormCandidate"
         ]
       },
       {
-        "rank": 5,
+        "rank": 7,
         "type_id": "ScopedAdjudicationReceipt",
         "writer": "TEMPORAL_OPERATOR_FROM_EXACT_CELL_TABLE",
         "emission": "one per non-rejected FULL_INTERPRETATION access",
@@ -58,7 +79,7 @@
         ]
       },
       {
-        "rank": 6,
+        "rank": 8,
         "type_id": "ImmediateSurfaceProjectionCandidate",
         "writer": "PROJECTION_OPERATOR_FROM_EXACT_CELL_TABLE",
         "emission": "one per non-rejected FULL_INTERPRETATION access",
@@ -67,7 +88,7 @@
         ]
       },
       {
-        "rank": 7,
+        "rank": 9,
         "type_id": "RevisionCandidateOccurrence",
         "writer": "EMIT_REVISION_CANDIDATE_IF_ANY",
         "emission": "only ELIGIBLE_FROM_FUTURE_ACCESS",
@@ -76,33 +97,13 @@
         ]
       },
       {
-        "rank": 8,
+        "rank": 10,
         "type_id": "RevisionEligibilityDecisionReceipt",
         "writer": "EMIT_REVISION_ELIGIBILITY",
         "emission": "one per non-rejected FULL_INTERPRETATION access",
         "source_types": [
           "ScopedAdjudicationReceipt",
           "RevisionCandidateOccurrence when emitted"
-        ]
-      },
-      {
-        "rank": 9,
-        "type_id": "RevisionReadReceipt",
-        "writer": "READ_ELIGIBLE_REVISION",
-        "emission": "by lifecycle emission table",
-        "source_types": [
-          "RevisionEligibilityDecisionReceipt",
-          "DeclaredRuntimeViewReceipt at read access"
-        ]
-      },
-      {
-        "rank": 10,
-        "type_id": "AccessLocalApplicationReceipt",
-        "writer": "APPLY_REVISION_FOR_ACCESS",
-        "emission": "by lifecycle emission table",
-        "source_types": [
-          "RevisionReadReceipt",
-          "DeclaredRuntimeViewReceipt at application access"
         ]
       },
       {
@@ -116,7 +117,7 @@
         ]
       }
     ],
-    "source_record_id_rule": "resolve source_types in listed order; conditional absent source is omitted; every resolved ID must precede the record",
+    "source_record_id_rule": "resolve source_types in listed order; conditional absent source is omitted; same-access sources have lower stage rank and cross-access sources come from a lower access ordinal; every resolved ID must precede the record",
     "payload_contract": {
       "DeclaredRuntimeViewReceipt": [
         "external_evidence_link_set_digest",

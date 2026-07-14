@@ -17,34 +17,34 @@
         "sha256": "8f367f5916ea4df1cbb538169d97d886d3abc80ec729c28fcc993022c01c6f48"
       },
       {
-      "document_kind": "composed_runner_input",
-      "path": "composed-runner-input-v0.json",
-      "visibility_lane": "RUNNER_VISIBLE",
-      "sha256": "17227d4214135977629c48a1ae50e28f50541520c5dad875db5945e654fab4ab"
+        "document_kind": "composed_runner_input",
+        "path": "composed-runner-input-v0.json",
+        "visibility_lane": "RUNNER_VISIBLE",
+        "sha256": "e940b93c9a3be0e7a0bac4c05c85dddf723118eff416ea83bd1a48041ed6f751"
       },
       {
-      "document_kind": "fixture_normalization",
-      "path": "fixture-normalization-v0.json",
-      "visibility_lane": "RUNNER_VISIBLE",
-      "sha256": "b9956cac34fce4e7834fec08f6044c2f681fc5b650c727dc81439d8b0f48b5e7"
+        "document_kind": "fixture_normalization",
+        "path": "fixture-normalization-v0.json",
+        "visibility_lane": "RUNNER_VISIBLE",
+        "sha256": "b9956cac34fce4e7834fec08f6044c2f681fc5b650c727dc81439d8b0f48b5e7"
       },
       {
         "document_kind": "operator_program",
         "path": "operator-program-v0.json",
         "visibility_lane": "RUNNER_VISIBLE",
-        "sha256": "e82fcceba79e69e35cdd327f93cee7667596c37b187fd98189d5c4f5d281a40b"
+        "sha256": "875b40389d0e158999144c0d1d94e29d0b26675a2831bb5f43c56a73c72c074c"
       },
       {
         "document_kind": "record_materialization",
         "path": "record-materialization-v0.json",
         "visibility_lane": "RUNNER_VISIBLE",
-        "sha256": "30baa6e677c25a1599cd5300bb8b97f2bd9a9c35ff6eb17faeba293a1d03b43e"
+        "sha256": "ba25d9280a2ff8f1ea00c27d477129290b71d151ef4ff25872329b80a9b43d40"
       },
       {
-      "document_kind": "lifecycle_emission",
-      "path": "lifecycle-emission-v0.json",
-      "visibility_lane": "RUNNER_VISIBLE",
-      "sha256": "07fe224ead8162e9e1b2410500158b749719a47bf6389511f74084423d685f8e"
+        "document_kind": "lifecycle_emission",
+        "path": "lifecycle-emission-v0.json",
+        "visibility_lane": "RUNNER_VISIBLE",
+        "sha256": "be27ac693e7b69e9678dfce6ebe6c3ec24cf3ee69c4cdd5ac72954b2ecbe8b99"
       },
       {
         "document_kind": "rejection_materialization",
@@ -53,34 +53,34 @@
         "sha256": "bcb3d036954d3febece1bd097056ea69e73a40d9c52af11fa06949c475e3b194"
       },
       {
-      "document_kind": "digest_contract",
-      "path": "digest-contract-v0.json",
-      "visibility_lane": "RUNNER_AND_EVALUATOR_VISIBLE",
-      "sha256": "7e641b92b4ed500b3c9f8fb85e57e4b25451b032aedbf36a0def73afefb1b61d"
+        "document_kind": "digest_contract",
+        "path": "digest-contract-v0.json",
+        "visibility_lane": "RUNNER_AND_EVALUATOR_VISIBLE",
+        "sha256": "7e641b92b4ed500b3c9f8fb85e57e4b25451b032aedbf36a0def73afefb1b61d"
       },
       {
-      "document_kind": "evaluation_v1_schema",
-      "path": "evaluation-v1.schema.json",
-      "visibility_lane": "EVALUATOR_ONLY",
-      "sha256": "288807e621e9e169ebb424309de067da467eae47c5def5b676333e8bbd86787b"
-    },
-    {
-      "document_kind": "publication_v1_schema",
-      "path": "publication-v1.schema.json",
-      "visibility_lane": "PUBLICATION_ONLY",
-      "sha256": "fa970e9c545270f6b5e6befe6d1aa452a2be4ecf173e03f820560c7552ef6ea0"
+        "document_kind": "evaluation_v1_schema",
+        "path": "evaluation-v1.schema.json",
+        "visibility_lane": "EVALUATOR_ONLY",
+        "sha256": "717e57a480840e3dba67475eb3a50abe91af554aa9fc311f402659f42d93d6c2"
       },
       {
-      "document_kind": "source_bundle_contract",
-      "path": "source-bundle-contract-v0.json",
-      "visibility_lane": "PUBLICATION_ONLY",
-      "sha256": "0711a449d86b3cbdd29471fc14808b0d49eb8711a239ae91a17962a0910e0e17"
+        "document_kind": "publication_v1_schema",
+        "path": "publication-v1.schema.json",
+        "visibility_lane": "PUBLICATION_ONLY",
+        "sha256": "fa970e9c545270f6b5e6befe6d1aa452a2be4ecf173e03f820560c7552ef6ea0"
       },
       {
-      "document_kind": "materialization_golden_traces",
-      "path": "materialization-golden-traces-v0.json",
-      "visibility_lane": "CONTRACT_TEST_ONLY",
-      "sha256": "d131780f7594db087355789ba56a5ac55e81bbefc84221f8fe225a289ec7b945"
+        "document_kind": "source_bundle_contract",
+        "path": "source-bundle-contract-v0.json",
+        "visibility_lane": "PUBLICATION_ONLY",
+        "sha256": "43d52a8f5e010a0beebc327136f99c60715533b343676f54cac166ab2fd4ce4f"
+      },
+      {
+        "document_kind": "materialization_golden_traces",
+        "path": "materialization-golden-traces-v0.json",
+        "visibility_lane": "CONTRACT_TEST_ONLY",
+        "sha256": "d42da6b1af037f2eba79395e37ffcdbe6c66d5a08dd8271afb3edab4d73afbff"
       }
     ]
   }

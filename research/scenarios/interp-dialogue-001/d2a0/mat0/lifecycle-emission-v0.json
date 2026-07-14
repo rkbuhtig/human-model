@@ -106,6 +106,8 @@
       }
     ],
     "negative_receipt_rule": "absence of read or apply is represented by record omission; no NOT_READ or NOT_APPLIED receipt is invented",
+    "pre_interpretation_rule": "scheduled read and apply emissions occur after the current DeclaredRuntimeViewReceipt and before ReceptionCandidate materialization",
+    "revision_read_selection_rule": "filter prior RevisionEligibilityDecisionReceipt records to ELIGIBLE_FROM_FUTURE_ACCESS with effective_from_ordinal less than or equal to current access and exact matching runtime_id target_scope_id and interpretation_scope_id; select the unique row with greatest effective_from_ordinal then greatest source_access_ordinal; zero matches emits no read and any tie at the maximum aborts the whole run",
     "observation_rule": "APPLIED_NOT_RETAINED emits a negative retention observation; RETAINED_AT_LATER_ACCESS emits a positive retention observation",
     "revision_record_binding": "RevisionReadReceipt.revision_record_id names the source RevisionCandidateOccurrence record",
     "application_binding": "AccessLocalApplicationReceipt.revision_path equals the read revision candidate path",

@@ -80,6 +80,13 @@ class InterpD2A0Mat0ContractTests(unittest.TestCase):
         rows[:] = [row for row in rows if row["document_kind"] != "strategy_catalog"]
         self.assert_rejected(bundle)
 
+    def test_mat0_manifest_is_the_runner_bootstrap_authority(self) -> None:
+        bootstrap = self.bundle["composed_runner_input"]["payload"]["mat0_bootstrap"]
+        self.assertEqual(bootstrap["path"], "frozen-artifact-manifest-v0.json")
+        bundle = mutated_bundle()
+        bundle["composed_runner_input"]["payload"]["mat0_bootstrap"]["path"] = "discover.json"
+        self.assert_rejected(bundle)
+
     def test_runtime_spine_binding_cannot_change(self) -> None:
         bundle = mutated_bundle()
         bundle["composed_runner_input"]["payload"]["predecessor_runner_visible_documents"][0]["sha256"] = "0" * 64
@@ -146,6 +153,18 @@ class InterpD2A0Mat0ContractTests(unittest.TestCase):
         bundle["operator_program"]["payload"]["intermediate_construction"]["revision_path_absence_sentinel"] = "NONE"
         self.assert_rejected(bundle)
 
+    def test_prior_revision_application_precedes_interpretation(self) -> None:
+        stages = self.bundle["operator_program"]["payload"]["per_access_stage_order"]
+        self.assertLess(
+            stages.index("APPLY_MATCHING_PRIOR_REVISION_FOR_ACCESS_IF_SCHEDULED"),
+            stages.index("FORM_RECEPTION_CANDIDATE"),
+        )
+
+    def test_candidate_set_binds_same_access_application(self) -> None:
+        rows = self.bundle["record_materialization"]["payload"]["stage_ranks"]
+        candidate = next(row for row in rows if row["type_id"] == "InterpretationCandidateSet")
+        self.assertIn("AccessLocalApplicationReceipt when emitted", candidate["source_types"])
+
     def test_record_stage_ranks_are_exact(self) -> None:
         bundle = mutated_bundle()
         bundle["record_materialization"]["payload"]["stage_ranks"][0]["rank"] = 2
@@ -181,6 +200,11 @@ class InterpD2A0Mat0ContractTests(unittest.TestCase):
         bundle = mutated_bundle()
         program = bundle["lifecycle_emission"]["payload"]["programs"][3]
         program["read"] = [{"access_ordinal": 2, "read_status": "READ"}]
+        self.assert_rejected(bundle)
+
+    def test_revision_read_selection_is_exact_and_fail_closed(self) -> None:
+        bundle = mutated_bundle()
+        bundle["lifecycle_emission"]["payload"]["revision_read_selection_rule"] = "take first match"
         self.assert_rejected(bundle)
 
     def test_applied_not_retained_has_negative_observation(self) -> None:
@@ -225,8 +249,24 @@ class InterpD2A0Mat0ContractTests(unittest.TestCase):
 
     def test_evaluation_resolved_operand_is_auditable(self) -> None:
         bundle = mutated_bundle()
-        bundle["evaluation_schema"]["$defs"]["resolvedOperand"]["required"].remove("record_id")
+        bundle["evaluation_schema"]["$defs"]["recordResolvedOperand"]["required"].remove("record_id")
         self.assert_rejected(bundle)
+
+    def test_trace_operand_omits_record_only_fields(self) -> None:
+        trace_operand = self.bundle["evaluation_schema"]["$defs"]["traceResolvedOperand"]
+        self.assertNotIn("record_id", trace_operand["properties"])
+        self.assertNotIn("access_ordinal", trace_operand["properties"])
+
+    def test_run_status_precedence_includes_not_applicable(self) -> None:
+        rules = self.bundle["evaluation_schema"]["x-semantic-rules"]
+        self.assertEqual(
+            rules[-3:],
+            [
+                "one or more VIOLATED results yields DOES_NOT_CONFORM",
+                "otherwise one or more NOT_EVALUABLE results yields PARTIALLY_EVALUABLE",
+                "otherwise SATISFIED and NOT_APPLICABLE results yield CONFORMS_WITHIN_REGISTERED_SCOPE",
+            ],
+        )
 
     def test_evaluation_artifact_must_bind_mat0(self) -> None:
         bundle = mutated_bundle()
@@ -248,6 +288,11 @@ class InterpD2A0Mat0ContractTests(unittest.TestCase):
         bundle["source_bundle_contract"]["payload"]["bundles"][0]["paths"].pop()
         self.assert_rejected(bundle)
 
+    def test_source_bundle_requires_transitive_repo_local_closure(self) -> None:
+        bundle = mutated_bundle()
+        bundle["source_bundle_contract"]["payload"]["repo_local_import_policy"] = "DIRECT_IMPORTS_ONLY"
+        self.assert_rejected(bundle)
+
     def test_runner_evaluator_cross_imports_remain_forbidden(self) -> None:
         bundle = mutated_bundle()
         bundle["source_bundle_contract"]["payload"]["cross_role_import_policy"].pop()
@@ -266,6 +311,28 @@ class InterpD2A0Mat0ContractTests(unittest.TestCase):
         trace = bundle["materialization_golden_traces"]["payload"]["cases"][0]["expected_trace"]
         trace["records"][0]["payload"]["runtime_id"] = "RUNTIME-MUTATED"
         self.assert_rejected(bundle)
+
+    def test_golden_input_mutation_is_rejected_by_semantic_derivation(self) -> None:
+        bundle = mutated_bundle()
+        case = bundle["materialization_golden_traces"]["payload"]["cases"][0]
+        case["normalized_unit_input"]["access_plan"][0]["supplied_path"] = "PATH-BENIGN"
+        self.assert_rejected(bundle)
+
+    def test_multi_access_golden_applies_revision_before_t3(self) -> None:
+        case = next(
+            row for row in self.bundle["materialization_golden_traces"]["payload"]["cases"]
+            if row["case_id"] == "GOLDEN-MULTI-ACCESS-LIFECYCLE"
+        )
+        access_two = [
+            row for row in case["expected_trace"]["records"]
+            if row["access_ordinal"] == 2
+        ]
+        types = [row["type_id"] for row in access_two]
+        self.assertLess(types.index("AccessLocalApplicationReceipt"), types.index("ScopedAdjudicationReceipt"))
+        candidates = next(row for row in access_two if row["type_id"] == "InterpretationCandidateSet")
+        adjudication = next(row for row in access_two if row["type_id"] == "ScopedAdjudicationReceipt")
+        self.assertEqual(candidates["payload"]["candidate_paths"], ["PATH-BENIGN", "PATH-ADVERSE"])
+        self.assertEqual(adjudication["payload"]["adjudicated_path"], "PATH-ADVERSE")
 
     def test_golden_forward_source_reference_is_rejected(self) -> None:
         bundle = mutated_bundle()

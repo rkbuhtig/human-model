@@ -34,7 +34,7 @@ EXEC0_MANIFEST_SHA256 = (
     "1a7203d93a341c3b4570d4070d95457441da190e4c8ff167f86d89d0135c40f3"
 )
 MAT0_MANIFEST_SHA256 = (
-    "a82f3f4c31726107541dbe91654c0f3387491fd11fa984f82669186b02cbd1ef"
+    "a23f16bc3e3c73d1d12c168f10718d03d94e655a3ad4dd971794b174042cb49b"
 )
 
 DOCUMENT_FILES = {
@@ -107,6 +107,8 @@ CELL_OPERATORS = {
 
 RECORD_TYPES = (
     "DeclaredRuntimeViewReceipt",
+    "RevisionReadReceipt",
+    "AccessLocalApplicationReceipt",
     "ReceptionCandidate",
     "SubjectiveEncounterFormCandidate",
     "InterpretationCandidateSet",
@@ -114,8 +116,6 @@ RECORD_TYPES = (
     "ImmediateSurfaceProjectionCandidate",
     "RevisionCandidateOccurrence",
     "RevisionEligibilityDecisionReceipt",
-    "RevisionReadReceipt",
-    "AccessLocalApplicationReceipt",
     "RetentionObservationReceipt",
 )
 
@@ -154,6 +154,54 @@ GOLDEN_CASES = {
     "GOLDEN-COMPLETED-SINGLE-ACCESS",
     "GOLDEN-TYPED-REJECTION",
     "GOLDEN-MULTI-ACCESS-LIFECYCLE",
+}
+
+GOLDEN_INPUTS = {
+    "GOLDEN-COMPLETED-SINGLE-ACCESS": {
+        "cell_id": "T0-P0-H0",
+        "profile_id": "HET-A",
+        "runtime_id": "RUNTIME-I",
+        "target_scope_id": "TARGET-I",
+        "interpretation_scope_id": "INTERP-I",
+        "source_path_identity": "GOLDEN-SOURCE",
+        "lifecycle_program": "DEFAULT",
+        "access_plan": [
+            {"access_ordinal": 1, "mode": "FULL_INTERPRETATION", "supplied_path": "PATH-AMBIGUOUS"},
+        ],
+    },
+    "GOLDEN-TYPED-REJECTION": {
+        "cell_id": "T0-P0-H0",
+        "profile_id": "HET-A",
+        "runtime_id": "RUNTIME-F",
+        "target_scope_id": "TARGET-F",
+        "interpretation_scope_id": "INTERP-F",
+        "source_path_identity": "GOLDEN-SOURCE",
+        "candidate_escape_mode": "UNDECLARED_FREE_CANDIDATE",
+        "lifecycle_program": "DEFAULT",
+        "access_plan": [
+            {"access_ordinal": 1, "mode": "FULL_INTERPRETATION", "supplied_path": "PATH-AMBIGUOUS"},
+        ],
+    },
+    "GOLDEN-MULTI-ACCESS-LIFECYCLE": {
+        "cell_id": "T3-P0-H0",
+        "profile_id": "HET-A",
+        "runtime_id": "RUNTIME-E",
+        "target_scope_id": "TARGET-E",
+        "interpretation_scope_id": "INTERP-E",
+        "source_path_identity": "GOLDEN-SOURCE",
+        "lifecycle_program": "RETAINED_AT_LATER_ACCESS",
+        "access_plan": [
+            {"access_ordinal": 1, "mode": "FULL_INTERPRETATION", "supplied_path": "PATH-ADVERSE"},
+            {"access_ordinal": 2, "mode": "FULL_INTERPRETATION", "supplied_path": "PATH-BENIGN"},
+            {"access_ordinal": 3, "mode": "LIFECYCLE_VIEW_ONLY", "supplied_path": "PATH-BENIGN"},
+        ],
+    },
+}
+
+GOLDEN_TRACE_IDENTITIES = {
+    "GOLDEN-COMPLETED-SINGLE-ACCESS": ("TRACE-GOLDEN-COMPLETED", "GOLDEN-COMPLETED"),
+    "GOLDEN-TYPED-REJECTION": ("TRACE-GOLDEN-REJECTED", "GOLDEN-REJECTED"),
+    "GOLDEN-MULTI-ACCESS-LIFECYCLE": ("TRACE-GOLDEN-MULTI-ACCESS", "GOLDEN-MULTI-ACCESS"),
 }
 
 
@@ -199,11 +247,25 @@ def _validate_composed_inputs(bundle: Mapping[str, Any]) -> None:
     if "strategy_catalog" not in _row_bindings(payload["predecessor_runner_visible_documents"]):
         _fail("strategy catalog is not runner-visible")
     expected_mat0 = {
-        "fixture_normalization", "operator_program", "record_materialization",
-        "lifecycle_emission", "rejection_materialization", "digest_contract",
+        "fixture_normalization": "fixture-normalization-v0.json",
+        "operator_program": "operator-program-v0.json",
+        "record_materialization": "record-materialization-v0.json",
+        "lifecycle_emission": "lifecycle-emission-v0.json",
+        "rejection_materialization": "rejection-materialization-v0.json",
+        "digest_contract": "digest-contract-v0.json",
     }
-    if set(payload["mat0_runner_visible_document_kinds"]) != expected_mat0:
+    mat0_rows = {
+        row["document_kind"]: row["path"]
+        for row in payload["mat0_runner_visible_documents"]
+    }
+    if mat0_rows != expected_mat0:
         _fail("MAT0 runner-visible ABI inventory changed")
+    if payload.get("mat0_bootstrap") != {
+        "document_kind": "frozen_artifact_manifest",
+        "path": "frozen-artifact-manifest-v0.json",
+        "authority_rule": "the D2a1 runner source binds the exact merged raw-file SHA-256 of this manifest and resolves every MAT0 runner-visible document only through its kind path SHA-256 row; the manifest SHA is not embedded in a manifest-covered document because that would be circular",
+    }:
+        _fail("MAT0 manifest bootstrap authority changed")
     forbidden = set(payload["runner_forbidden_document_kinds"])
     if not {
         "operator_golden_vectors", "evaluator_policy", "evaluation_manifest",
@@ -211,13 +273,24 @@ def _validate_composed_inputs(bundle: Mapping[str, Any]) -> None:
         "materialization_golden_traces",
     } <= forbidden:
         _fail("runner forbidden-input lane weakened")
-    if expected_mat0 & forbidden:
+    if set(expected_mat0) & forbidden:
         _fail("runner materialization and forbidden lanes overlap")
     if payload["composition_rule"] != "NO_FILENAME_DISCOVERY_NO_IMPLICIT_INHERITANCE_NO_CELL_ID_PARSING":
         _fail("composed input gained inference authority")
     superseded = {row["superseded_path"]: row["replacement_path"] for row in payload["supersession_rules"] if "superseded_path" in row}
     if superseded.get("../trace.schema.json") != "../exec0/trace-v1.schema.json":
         _fail("predecessor trace carrier supersession changed")
+    application_supersession = next(
+        (row for row in payload["supersession_rules"] if row.get("superseded_field") == "AccessLocalApplicationReceipt.payload.application_status"),
+        None,
+    )
+    if application_supersession != {
+        "superseded_field": "AccessLocalApplicationReceipt.payload.application_status",
+        "superseded_value": "APPLIED_FOR_ACCESS",
+        "replacement_value": "APPLIED",
+        "scope": "D2A1_TRACE_V1_MATERIALIZATION",
+    }:
+        _fail("application status vocabulary supersession changed")
 
 
 def _all_fixtures(exec0: Mapping[str, Any]) -> dict[str, dict[str, Any]]:
@@ -293,6 +366,22 @@ def _validate_operator_program(bundle: Mapping[str, Any], exec0: Mapping[str, An
             _fail(f"cell operator order changed: {cell_id}")
     if "PARSE_CELL_ID" not in payload["forbidden_shortcuts"]:
         _fail("runner may parse cell IDs heuristically")
+    if payload["per_access_stage_order"] != [
+        "MATERIALIZE_DECLARED_VIEW",
+        "READ_PRIOR_ELIGIBLE_REVISION_IF_SCHEDULED",
+        "APPLY_MATCHING_PRIOR_REVISION_FOR_ACCESS_IF_SCHEDULED",
+        "FORM_RECEPTION_CANDIDATE",
+        "FORM_SUBJECTIVE_ENCOUNTER",
+        "EMIT_INTERPRETATION_CANDIDATES",
+        "ADJUDICATE_SCOPED_CANDIDATES",
+        "PROJECT_IMMEDIATE_SURFACE",
+        "EMIT_REVISION_CANDIDATE_IF_ANY",
+        "EMIT_REVISION_ELIGIBILITY",
+        "OBSERVE_PRIOR_APPLICATION_RETENTION_IF_SCHEDULED",
+    ]:
+        _fail("per-access lifecycle and interpretation phase order changed")
+    if payload["stage_phase_rule"] != "declared view plus scheduled prior-revision read and application complete before reception and temporal adjudication; newly emitted revision and eligibility never feed back into the same access":
+        _fail("pre-interpretation lifecycle phase is ambiguous")
     intermediate = payload["intermediate_construction"]
     if intermediate["revision_path_absence_sentinel"] != "NO-REVISION":
         _fail("absent revision representation changed")
@@ -300,6 +389,8 @@ def _validate_operator_program(bundle: Mapping[str, Any], exec0: Mapping[str, An
         _fail("eligibility receipt materialization is ambiguous")
     if "rank-max" not in intermediate["narrow_candidate_rule"]:
         _fail("ambiguity NARROW program is not closed")
+    if intermediate["applied_revision_provenance_rule"] != "when access_local_applied_revision_path is present the InterpretationCandidateSet has an exact source edge to the same-access AccessLocalApplicationReceipt":
+        _fail("applied revision provenance edge changed")
 
 
 def _validate_records(bundle: Mapping[str, Any], exec0: Mapping[str, Any]) -> None:
@@ -314,12 +405,20 @@ def _validate_records(bundle: Mapping[str, Any], exec0: Mapping[str, Any]) -> No
     rank = {row["type_id"]: row["rank"] for row in rows}
     for row in rows:
         for source in row["source_types"]:
-            source_type = source.removesuffix(" when emitted").split(" at ", 1)[0]
-            if source_type not in rank or rank[source_type] >= row["rank"]:
+            source_type = source.split(" ", 1)[0]
+            cross_access = "prior access" in source
+            if source_type not in rank or (rank[source_type] >= row["rank"] and not cross_access):
                 _fail(f"record source does not precede writer: {row['type_id']}")
     if "access_ordinal_zero_padded_3" not in payload["record_id_rule"]:
         _fail("record identity is not access-stable")
-    if payload["source_record_id_rule"] != "resolve source_types in listed order; conditional absent source is omitted; every resolved ID must precede the record":
+    candidate = next(row for row in rows if row["type_id"] == "InterpretationCandidateSet")
+    if candidate["source_types"] != [
+        "DeclaredRuntimeViewReceipt",
+        "AccessLocalApplicationReceipt when emitted",
+        "SubjectiveEncounterFormCandidate",
+    ]:
+        _fail("candidate set does not bind same-access revision application")
+    if payload["source_record_id_rule"] != "resolve source_types in listed order; conditional absent source is omitted; same-access sources have lower stage rank and cross-access sources come from a lower access ordinal; every resolved ID must precede the record":
         _fail("record source lineage order changed")
 
 
@@ -364,6 +463,10 @@ def _validate_lifecycle(bundle: Mapping[str, Any], exec0: Mapping[str, Any]) -> 
         _fail("negative retention observation changed")
     if payload["negative_receipt_rule"] != "absence of read or apply is represented by record omission; no NOT_READ or NOT_APPLIED receipt is invented":
         _fail("negative lifecycle receipt semantics changed")
+    if payload["pre_interpretation_rule"] != "scheduled read and apply emissions occur after the current DeclaredRuntimeViewReceipt and before ReceptionCandidate materialization":
+        _fail("lifecycle application no longer precedes interpretation")
+    if payload["revision_read_selection_rule"] != "filter prior RevisionEligibilityDecisionReceipt records to ELIGIBLE_FROM_FUTURE_ACCESS with effective_from_ordinal less than or equal to current access and exact matching runtime_id target_scope_id and interpretation_scope_id; select the unique row with greatest effective_from_ordinal then greatest source_access_ordinal; zero matches emits no read and any tie at the maximum aborts the whole run":
+        _fail("prior revision read selection is ambiguous")
     fixture = next(row for row in exec0["predecessor_fixture_catalog"]["fixtures"] if row["fixture_id"] == "FX-REVISION-LIFECYCLE-SEPARATION")
     arm_programs = {item["value"] for arm in fixture["arms"] for item in arm["assignments"] if item["field"] == "lifecycle_program"}
     if not arm_programs <= set(by_id):
@@ -429,17 +532,33 @@ def _validate_evaluation_schema(bundle: Mapping[str, Any], exec0: Mapping[str, A
     }
     if status_rules != set(policy["assertion_evaluation_statuses"]):
         _fail("assertion status-to-code rules are incomplete")
-    required = set(schema["$defs"]["resolvedOperand"]["required"])
-    if not {"execution_unit_id", "trace_id", "record_id", "json_pointer", "resolved_value", "resolved_value_digest"} <= required:
-        _fail("resolved operand audit carrier is incomplete")
+    resolved = schema["$defs"]["resolvedOperand"]
+    if resolved != {
+        "oneOf": [
+            {"$ref": "#/$defs/traceResolvedOperand"},
+            {"$ref": "#/$defs/recordResolvedOperand"},
+        ]
+    }:
+        _fail("resolved operand variants changed")
+    trace_operand = schema["$defs"]["traceResolvedOperand"]
+    record_operand = schema["$defs"]["recordResolvedOperand"]
+    if trace_operand["properties"]["source_kind"] != {"const": "TRACE"}:
+        _fail("trace operand source kind changed")
+    if {"record_id", "access_ordinal"} & set(trace_operand["properties"]):
+        _fail("trace operand gained record-only fields")
+    if record_operand["properties"]["source_kind"] != {"const": "RECORD"}:
+        _fail("record operand source kind changed")
+    if not {"record_id", "access_ordinal"} <= set(record_operand["required"]):
+        _fail("record operand audit carrier is incomplete")
     if "mat0_manifest_sha256" not in schema["required"]:
         _fail("evaluation artifact does not bind MAT0")
     if schema.get("x-semantic-rules") != [
         "assertion_results follow frozen evaluation-manifest assertion order exactly",
         "VIOLATED interpretation_code equals the assertion violation_interpretation_code",
         "summary status counts sum to registered_assertion_count 20",
-        "any NOT_EVALUABLE yields PARTIALLY_EVALUABLE unless a VIOLATED result yields DOES_NOT_CONFORM",
-        "all SATISFIED yields CONFORMS_WITHIN_REGISTERED_SCOPE",
+        "one or more VIOLATED results yields DOES_NOT_CONFORM",
+        "otherwise one or more NOT_EVALUABLE results yields PARTIALLY_EVALUABLE",
+        "otherwise SATISFIED and NOT_APPLICABLE results yield CONFORMS_WITHIN_REGISTERED_SCOPE",
     ]:
         _fail("evaluation result semantic rules changed")
 
@@ -449,12 +568,14 @@ def _validate_source_bundles(bundle: Mapping[str, Any]) -> None:
     bundles = {row["role"]: row for row in payload["bundles"]}
     expected = {
         "RUNNER": [
+            "dynamics/labs/interp_d1_common.py",
             "dynamics/labs/interp_d2a1_common.py",
             "dynamics/labs/interp_d2a1_operators.py",
             "dynamics/labs/interp_d2a1_runner.py",
             "dynamics/labs/interp_d2a1_runner_cli.py",
         ],
         "EVALUATOR": [
+            "dynamics/labs/interp_d1_common.py",
             "dynamics/labs/interp_d2a1_common.py",
             "dynamics/labs/interp_d2a1_evaluator.py",
             "dynamics/labs/interp_d2a1_evaluator_cli.py",
@@ -471,6 +592,12 @@ def _validate_source_bundles(bundle: Mapping[str, Any]) -> None:
         "EVALUATOR_MUST_NOT_IMPORT_OPERATOR_IMPLEMENTATION",
     }:
         _fail("runner/evaluator import isolation changed")
+    if payload.get("repo_local_import_policy") != "CLOSED_WORLD_TRANSITIVE_CLOSURE":
+        _fail("source bundles are not transitively closed")
+    if payload.get("repo_local_import_rule") != "every transitively imported repo-local Python source file is listed in the importing role bundle; an unlisted repo-local import is a publication failure":
+        _fail("repo-local import closure rule changed")
+    if payload.get("external_import_rule") != "only Python standard-library modules may be omitted from source bundles":
+        _fail("external source bundle omission rule changed")
     carrier = payload.get("publication_carrier")
     if carrier != {
         "schema_path": "publication-v1.schema.json",
@@ -516,6 +643,192 @@ def _trace_without_content_digest(trace: dict[str, Any]) -> dict[str, Any]:
     return value
 
 
+def _golden_record_id(trace_id: str, access_ordinal: int, type_id: str) -> str:
+    return f"{trace_id}:A{access_ordinal:03d}:{RECORD_TYPES.index(type_id) + 1:02d}:{type_id}"
+
+
+def _validate_golden_semantics(case: Mapping[str, Any], exec0: Mapping[str, Any]) -> None:
+    case_id = case["case_id"]
+    normalized = case["normalized_unit_input"]
+    if normalized != GOLDEN_INPUTS[case_id]:
+        _fail(f"golden normalized input changed: {case_id}")
+    trace = case["expected_trace"]
+    trace_id, execution_unit_id = GOLDEN_TRACE_IDENTITIES[case_id]
+    rejected = normalized.get("candidate_escape_mode") == "UNDECLARED_FREE_CANDIDATE"
+    if {
+        "trace_id": trace["trace_id"],
+        "execution_unit_id": trace["execution_unit_id"],
+        "contract_id": trace["contract_id"],
+        "status": trace["status"],
+    } != {
+        "trace_id": trace_id,
+        "execution_unit_id": execution_unit_id,
+        "contract_id": "INTERP-001D2A0-EXEC0-V0",
+        "status": "REJECTED" if rejected else "COMPLETED",
+    }:
+        _fail(f"golden trace identity changed: {case_id}")
+    records = trace.get("records", trace.get("completed_prefix_records", []))
+    access_plan = {row["access_ordinal"]: row for row in normalized["access_plan"]}
+    expected_order: list[tuple[int, str]] = []
+    for access_ordinal, access in access_plan.items():
+        expected_order.append((access_ordinal, "DeclaredRuntimeViewReceipt"))
+        if normalized["lifecycle_program"] == "RETAINED_AT_LATER_ACCESS" and access_ordinal == 2:
+            expected_order.extend([
+                (access_ordinal, "RevisionReadReceipt"),
+                (access_ordinal, "AccessLocalApplicationReceipt"),
+            ])
+        if access["mode"] == "FULL_INTERPRETATION":
+            expected_order.extend([
+                (access_ordinal, "ReceptionCandidate"),
+                (access_ordinal, "SubjectiveEncounterFormCandidate"),
+            ])
+            if rejected:
+                break
+            expected_order.extend([
+                (access_ordinal, "InterpretationCandidateSet"),
+                (access_ordinal, "ScopedAdjudicationReceipt"),
+                (access_ordinal, "ImmediateSurfaceProjectionCandidate"),
+            ])
+            if normalized["cell_id"].startswith("T3-"):
+                expected_order.append((access_ordinal, "RevisionCandidateOccurrence"))
+            expected_order.append((access_ordinal, "RevisionEligibilityDecisionReceipt"))
+        if normalized["lifecycle_program"] == "RETAINED_AT_LATER_ACCESS" and access_ordinal == 3:
+            expected_order.append((access_ordinal, "RetentionObservationReceipt"))
+    actual_order = [(row["access_ordinal"], row["type_id"]) for row in records]
+    if actual_order != expected_order:
+        _fail(f"golden input-to-record sequence changed: {case_id}")
+    by_key = {(row["access_ordinal"], row["type_id"]): row for row in records}
+    by_id = {row["record_id"]: row for row in records}
+    if len(by_key) != len(records):
+        _fail(f"golden duplicate access-local record type: {case_id}")
+    empty_digest = digest([])
+    path_rank = exec0["operator_catalog"]["payload"]["value_domains"]["path_rank_order"]
+    surface = {
+        "PATH-BENIGN": "SURFACE-OPEN",
+        "PATH-AMBIGUOUS": "SURFACE-NEUTRAL",
+        "PATH-ADVERSE": "SURFACE-GUARDED",
+    }
+    for record in records:
+        if record["record_id"] != _golden_record_id(trace_id, record["access_ordinal"], record["type_id"]):
+            _fail(f"golden record ID is not derived from stage rank: {record['record_id']}")
+    for access_ordinal, access in access_plan.items():
+        view = by_key.get((access_ordinal, "DeclaredRuntimeViewReceipt"))
+        if view is None:
+            continue
+        if view["source_record_ids"] or view["payload"] != {
+            "external_evidence_link_set_digest": empty_digest,
+            "evidence_assessment_digest": empty_digest,
+            "runtime_id": normalized["runtime_id"],
+            "target_scope_id": normalized["target_scope_id"],
+            "interpretation_scope_id": normalized["interpretation_scope_id"],
+        }:
+            _fail(f"golden declared view is not input-derived: {case_id} access {access_ordinal}")
+        read = by_key.get((access_ordinal, "RevisionReadReceipt"))
+        application = by_key.get((access_ordinal, "AccessLocalApplicationReceipt"))
+        if read is not None:
+            eligible = [
+                row for row in records
+                if row["type_id"] == "RevisionEligibilityDecisionReceipt"
+                and row["access_ordinal"] < access_ordinal
+                and row["payload"]["decision_status"] == "ELIGIBLE_FROM_FUTURE_ACCESS"
+                and row["payload"]["effective_from_ordinal"] <= access_ordinal
+            ]
+            selected = max(eligible, key=lambda row: (row["payload"]["effective_from_ordinal"], row["payload"]["source_access_ordinal"]))
+            revision = by_key[(selected["payload"]["source_access_ordinal"], "RevisionCandidateOccurrence")]
+            if read["source_record_ids"] != [selected["record_id"], view["record_id"]] or read["payload"] != {
+                "read_status": "READ",
+                "revision_record_id": revision["record_id"],
+            }:
+                _fail(f"golden revision read is not exact-selected: {case_id} access {access_ordinal}")
+        if application is not None:
+            if read is None or application["source_record_ids"] != [read["record_id"], view["record_id"]] or application["payload"] != {
+                "application_status": "APPLIED",
+                "revision_path": by_id[read["payload"]["revision_record_id"]]["payload"]["revision_path"],
+            }:
+                _fail(f"golden revision application is not read-derived: {case_id} access {access_ordinal}")
+        if access["mode"] != "FULL_INTERPRETATION":
+            continue
+        reception = by_key[(access_ordinal, "ReceptionCandidate")]
+        subjective = by_key[(access_ordinal, "SubjectiveEncounterFormCandidate")]
+        if reception["source_record_ids"] != [view["record_id"]] or reception["payload"] != {
+            "reception_path": access["supplied_path"],
+            "profile_id": normalized["profile_id"],
+        }:
+            _fail(f"golden reception is not input-derived: {case_id} access {access_ordinal}")
+        subjective_input = {
+            "source_path_identity": normalized["source_path_identity"],
+            "reception_path": access["supplied_path"],
+            "access_ordinal": access_ordinal,
+            "runtime_id": normalized["runtime_id"],
+            "target_scope_id": normalized["target_scope_id"],
+            "interpretation_scope_id": normalized["interpretation_scope_id"],
+        }
+        if subjective["source_record_ids"] != [view["record_id"], reception["record_id"]] or subjective["payload"] != {
+            "subjective_path_digest": digest(subjective_input),
+            "reception_path": access["supplied_path"],
+        }:
+            _fail(f"golden subjective form is not input-derived: {case_id} access {access_ordinal}")
+        if rejected:
+            receipt = trace["rejection_receipt"]
+            if receipt != {
+                "rejection_code": "UNREGISTERED_FREE_CANDIDATE",
+                "rejected_stage": "EMIT_INTERPRETATION_CANDIDATES",
+                "authority_rule_id": "CLOSED_WORLD_CANDIDATE_VOCABULARY",
+                "source_record_ids": [subjective["record_id"]],
+                "offending_input_refs": ["FIXTURE-FIELD:candidate_escape_mode:UNDECLARED_FREE_CANDIDATE"],
+            }:
+                _fail(f"golden rejection is not input-derived: {case_id}")
+            continue
+        candidates = by_key[(access_ordinal, "InterpretationCandidateSet")]
+        candidate_paths = [access["supplied_path"]]
+        candidate_sources = [view["record_id"]]
+        if application is not None:
+            candidate_paths.append(application["payload"]["revision_path"])
+            candidate_sources.append(application["record_id"])
+        candidate_paths = list(dict.fromkeys(candidate_paths))
+        candidate_sources.append(subjective["record_id"])
+        if candidates["source_record_ids"] != candidate_sources or candidates["payload"] != {"candidate_paths": candidate_paths}:
+            _fail(f"golden candidate set is not application-derived: {case_id} access {access_ordinal}")
+        adjudication = by_key[(access_ordinal, "ScopedAdjudicationReceipt")]
+        adjudicated_path = max(candidate_paths, key=path_rank.index)
+        if adjudication["source_record_ids"] != [candidates["record_id"]] or adjudication["payload"] != {"adjudicated_path": adjudicated_path}:
+            _fail(f"golden adjudication is not candidate-derived: {case_id} access {access_ordinal}")
+        projection = by_key[(access_ordinal, "ImmediateSurfaceProjectionCandidate")]
+        if projection["source_record_ids"] != [adjudication["record_id"]] or projection["payload"] != {"surface_code": surface[adjudicated_path]}:
+            _fail(f"golden projection is not adjudication-derived: {case_id} access {access_ordinal}")
+        revision = by_key.get((access_ordinal, "RevisionCandidateOccurrence"))
+        eligibility = by_key[(access_ordinal, "RevisionEligibilityDecisionReceipt")]
+        if revision is None:
+            expected_eligibility = {
+                "decision_status": "NOT_APPLICABLE_TO_MODEL",
+                "revision_path": "NO-REVISION",
+                "source_access_ordinal": access_ordinal,
+                "effective_from_ordinal": access_ordinal,
+            }
+            eligibility_sources = [adjudication["record_id"]]
+        else:
+            expected_revision = {
+                "revision_path": adjudicated_path,
+                "source_access_ordinal": access_ordinal,
+                "effective_from_ordinal": access_ordinal + 1,
+            }
+            if revision["source_record_ids"] != [adjudication["record_id"]] or revision["payload"] != expected_revision:
+                _fail(f"golden revision is not adjudication-derived: {case_id} access {access_ordinal}")
+            expected_eligibility = {"decision_status": "ELIGIBLE_FROM_FUTURE_ACCESS", **expected_revision}
+            eligibility_sources = [adjudication["record_id"], revision["record_id"]]
+        if eligibility["source_record_ids"] != eligibility_sources or eligibility["payload"] != expected_eligibility:
+            _fail(f"golden eligibility is not revision-derived: {case_id} access {access_ordinal}")
+    retention = by_key.get((3, "RetentionObservationReceipt"))
+    if retention is not None:
+        application = by_key[(2, "AccessLocalApplicationReceipt")]
+        view = by_key[(3, "DeclaredRuntimeViewReceipt")]
+        if retention["source_record_ids"] != [application["record_id"], view["record_id"]] or retention["payload"] != {
+            "observation_status": "OBSERVED_RETAINED",
+            "prior_application_record_id": application["record_id"],
+        }:
+            _fail(f"golden retention is not application-derived: {case_id}")
+
+
 def _validate_golden_traces(bundle: Mapping[str, Any], exec0: Mapping[str, Any]) -> None:
     payload = bundle["materialization_golden_traces"]["payload"]
     if payload["lane"] != "CONTRACT_TEST_ONLY":
@@ -524,6 +837,7 @@ def _validate_golden_traces(bundle: Mapping[str, Any], exec0: Mapping[str, Any])
     if set(_ids(cases, "case_id")) != GOLDEN_CASES:
         _fail("materialization golden trace inventory changed")
     for case in cases:
+        _validate_golden_semantics(case, exec0)
         trace = case["expected_trace"]
         try:
             validate_json_schema(trace, exec0["trace_schema"])
@@ -573,6 +887,14 @@ def _validate_frozen_files(bundle: Mapping[str, Any]) -> None:
         for row in composed[rows_key]:
             if file_sha256(MAT0_DIR / row["path"]) != row["sha256"]:
                 _fail(f"composed external input digest mismatch: {row['path']}")
+    for row in composed["mat0_runner_visible_documents"]:
+        manifest_row = bindings[row["document_kind"]]
+        if manifest_row["path"] != row["path"] or manifest_row["visibility_lane"] not in {
+            "RUNNER_VISIBLE", "RUNNER_AND_EVALUATOR_VISIBLE",
+        }:
+            _fail(f"MAT0 bootstrap row is not runner-visible: {row['document_kind']}")
+        if file_sha256(MAT0_DIR / row["path"]) != manifest_row["sha256"]:
+            _fail(f"MAT0 bootstrap digest mismatch: {row['path']}")
 
 
 def validate_contract_bundle(
@@ -600,7 +922,7 @@ def validate_contract_bundle(
         "composed_runner_input_count": (
             len(bundle["composed_runner_input"]["payload"]["predecessor_runner_visible_documents"])
             + len(bundle["composed_runner_input"]["payload"]["exec0_runner_visible_documents"])
-            + len(bundle["composed_runner_input"]["payload"]["mat0_runner_visible_document_kinds"])
+            + len(bundle["composed_runner_input"]["payload"]["mat0_runner_visible_documents"])
         ),
         "fixture_program_count": len(bundle["fixture_normalization"]["payload"]["fixture_programs"]),
         "cell_program_count": len(bundle["operator_program"]["payload"]["cell_programs"]),

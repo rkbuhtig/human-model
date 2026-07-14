@@ -13,6 +13,7 @@
         "bundle_id": "INTERP-001D2A1-RUNNER-SOURCE-BUNDLE-V0",
         "role": "RUNNER",
         "paths": [
+          "dynamics/labs/interp_d1_common.py",
           "dynamics/labs/interp_d2a1_common.py",
           "dynamics/labs/interp_d2a1_operators.py",
           "dynamics/labs/interp_d2a1_runner.py",
@@ -23,6 +24,7 @@
         "bundle_id": "INTERP-001D2A1-EVALUATOR-SOURCE-BUNDLE-V0",
         "role": "EVALUATOR",
         "paths": [
+          "dynamics/labs/interp_d1_common.py",
           "dynamics/labs/interp_d2a1_common.py",
           "dynamics/labs/interp_d2a1_evaluator.py",
           "dynamics/labs/interp_d2a1_evaluator_cli.py"
@@ -36,6 +38,9 @@
     "entry_order": "ascending relative_path byte order",
     "bundle_digest_rule": "sha256 of canonical entry array",
     "shared_file_rule": "a shared file is independently listed in each role bundle",
+    "repo_local_import_policy": "CLOSED_WORLD_TRANSITIVE_CLOSURE",
+    "repo_local_import_rule": "every transitively imported repo-local Python source file is listed in the importing role bundle; an unlisted repo-local import is a publication failure",
+    "external_import_rule": "only Python standard-library modules may be omitted from source bundles",
     "excluded": [
       "generated run",
       "generated evaluation",

@@ -87,13 +87,36 @@
         "sha256": "f639b0064a6fe3c3ea7006aa17d6267bca0b22f407d3de9f2f6b3431c5a301f6"
       }
     ],
-    "mat0_runner_visible_document_kinds": [
-      "fixture_normalization",
-      "operator_program",
-      "record_materialization",
-      "lifecycle_emission",
-      "rejection_materialization",
-      "digest_contract"
+    "mat0_bootstrap": {
+      "document_kind": "frozen_artifact_manifest",
+      "path": "frozen-artifact-manifest-v0.json",
+      "authority_rule": "the D2a1 runner source binds the exact merged raw-file SHA-256 of this manifest and resolves every MAT0 runner-visible document only through its kind path SHA-256 row; the manifest SHA is not embedded in a manifest-covered document because that would be circular"
+    },
+    "mat0_runner_visible_documents": [
+      {
+        "document_kind": "fixture_normalization",
+        "path": "fixture-normalization-v0.json"
+      },
+      {
+        "document_kind": "operator_program",
+        "path": "operator-program-v0.json"
+      },
+      {
+        "document_kind": "record_materialization",
+        "path": "record-materialization-v0.json"
+      },
+      {
+        "document_kind": "lifecycle_emission",
+        "path": "lifecycle-emission-v0.json"
+      },
+      {
+        "document_kind": "rejection_materialization",
+        "path": "rejection-materialization-v0.json"
+      },
+      {
+        "document_kind": "digest_contract",
+        "path": "digest-contract-v0.json"
+      }
     ],
     "runner_forbidden_document_kinds": [
       "operator_golden_vectors",
@@ -119,6 +142,12 @@
         "superseded_authority": "predecessor_evaluation_manifest",
         "replacement_path": "../exec0/evaluation-manifest-v1.json",
         "scope": "POST_RUN_EVALUATOR_ONLY"
+      },
+      {
+        "superseded_field": "AccessLocalApplicationReceipt.payload.application_status",
+        "superseded_value": "APPLIED_FOR_ACCESS",
+        "replacement_value": "APPLIED",
+        "scope": "D2A1_TRACE_V1_MATERIALIZATION"
       }
     ],
     "composition_rule": "NO_FILENAME_DISCOVERY_NO_IMPLICIT_INHERITANCE_NO_CELL_ID_PARSING"

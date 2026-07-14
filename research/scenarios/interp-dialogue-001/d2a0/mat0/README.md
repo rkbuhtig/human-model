@@ -19,11 +19,15 @@ MAT0 freezes:
 - predecessor-to-EXEC0 field and path-value normalization with raw subjective
   identity preserved;
 - exact cell-to-operator programs without parsing cell IDs;
-- record IDs, writer order, payload shape, source lineage and digest targets;
+- the pre-interpretation lifecycle phase: a prior eligible revision is selected,
+  read and applied before the same access forms candidates or runs T3;
+- record IDs, writer order, payload shape, source lineage and digest targets,
+  including the application-to-candidate provenance edge;
 - lifecycle-arm emission and typed-rejection truth tables;
-- an auditable post-run evaluation carrier and source-bundle identity rule;
+- disjoint TRACE and RECORD evaluator operands and exact run-status precedence;
+- manifest-rooted runner bootstrap and transitively closed source bundles;
 - completed, rejected and multi-access canonical trace vectors in a
-  contract-test-only lane.
+  contract-test-only lane, with their normalized-input derivation checked.
 
 It contains no runner, evaluator implementation, run, evaluation result or
 publication manifest. The golden traces are conformance vectors and are not
@@ -38,4 +42,6 @@ python -m unittest dynamics.tests.test_interp_d2a0_mat0_contract -v
 After MAT0 is reviewed and merged, `INTERP-001D2a1` may implement the frozen
 runner and separate post-run evaluator. That execution must reproduce the
 frozen materialization bytes rather than inventing adapters, record lineage or
-diagnostic labels.
+diagnostic labels. The runner source must bind the merged MAT0 manifest's exact
+raw-file SHA-256; the manifest then resolves every runner-visible MAT0 document
+by its frozen kind, path and SHA-256 row without a circular self-digest.
