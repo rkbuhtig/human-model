@@ -1,0 +1,181 @@
+{
+  "$schema": "./development-assessment.schema.json",
+  "schema_version": "1.0.0",
+  "artifact_type": "INSTRUMENT_DEFECT_ADJUDICATION_SET",
+  "artifact_id": "INTERP-DIALOGUE-001P1-V0-ANALYST-ADJUDICATION",
+  "instrument_sha256": "52705bc686a69d43360eb0544eda59571c77dc1e29520ec4b156bcd60f413776",
+  "source_artifact_sha256": [
+    "16fcb021fa7453a635e3eaabbd21cab86ba37befb925ec1089487948dac9ec93",
+    "1c1e19d9ac6bd665de56185dc4e24fe0810fb0219bee358d09403401ccb20f0c",
+    "21ae1c2bb0e0340d5ea396adabd5bb085bd310c9f1d9251f098d33f5447d0bef",
+    "249cd5a6a9dccab31a6a3e4799eb7bc210898f5f0a809331a0d80a5d5b5fbea4",
+    "2ed3c92eb3009613e5209cf31f74ee2f3201802371ba24e77c3e0739bf5fae80",
+    "2ffe08a94386255c43a2fe8c596c2ffb87ad5a26fac67ef9f6a1d3dc4f459443",
+    "423bb94f083abc3949eadeb0eef1e6558d2e13e7abc2ef5eb7b73298e44c87a5",
+    "43febf39fea61e75dfc9cd4061f7fe57422f7f43bc8460684d94eadb36fb82e4",
+    "49ee4a7e9db50ec7988315f363d751dc6ed173c440053d2f27865576e1da52a1",
+    "5d455f3449daf6dd5a2dcb584b4282b2dc4b46bb182f698485fcf7c30f0c9913",
+    "6c191048adda20cbb566532e1c1b83aca172b899e41d3f421291f8f14d5c3f98",
+    "80f290fee283b19811deeacc03f2b022b2a9060cbeedd683e2f524d916d08cf6",
+    "81036da038effd81309b5e24696af86a1a6b6e7fbee517782481974a5b326ca1",
+    "89abb63f71eba2b68149ad56afa8728d24696ecc84696ea366999831d86d2333",
+    "8fedf3686edfa1239efb56746f61370769a299cc6cc9169dae5a60c73a9b57b6",
+    "94c1d0648f641b176592cbd6fe1ddf9693c08eb5d7d19664910c602b00a3780a",
+    "9ab5ffcbfe553b60ae6a29b2f3d856de6b1aa8ff01b8512ae30f1931db2404d5",
+    "ac7acd072b9cfc590aec2b9cb59e182de52cea826acecdaa373f65306ffd4264",
+    "c89b6f02ba4e734804dbadace81c7f6dea83847fa75bfcda9871aaa5f9965bac",
+    "d55d99f056d2e9ceacd0be05a8f18abc5dd3f2cc4e2830dbcf025984a39338f2",
+    "df0674c3000601c49745e15759a0aea8a81c235df74185f806f2682e3bdcb2d9",
+    "e024ef726397da8319cadf0aead908942d005309f5930b382f042f74190c7b71",
+    "e6b2709f1557380cc025c5e5a6a0aec0401107f25d89e8a9c8f90a4ae7b841e9",
+    "ecc0e72d552bce4abaec0a9e49bfe5be39c3880f36512a0b7bab3f4af2f61f4e",
+    "f4cb45fdb80963c613f0935af6c642de9fcfe202077549f2e80a8a6f44b0d1fd",
+    "f5be5a9f2a9462d8790467cbac6bd3fbf05199d42b86840ab3012695a154c747"
+  ],
+  "status": "DEVELOPMENT_DEFECT_ADJUDICATION_ONLY",
+  "receipts": [
+    {
+      "defect_receipt_id": "DR-001",
+      "candidate_refs": [
+        "WT-001"
+      ],
+      "defect_code": "PERSPECTIVE_AMBIGUITY",
+      "adjudication_status": "CONFIRMED",
+      "analyst_basis": "Confirmed by inspection alone: both generic prompts say 'the person' while REL and WORK vignettes each contain two eligible referents and no binding rule exists in the instrument; the scripted RS-PERSPECTIVE-QUESTION response is a legal, unmappable reading. Source: author-walkthrough-v0 WT-001 (prompt_catalog/0 and /1).",
+      "authority": "INSTRUMENT_DEFECT_ADJUDICATION_ONLY_NO_MECHANISM_RESULT"
+    },
+    {
+      "defect_receipt_id": "DR-002",
+      "candidate_refs": [
+        "LC-002"
+      ],
+      "defect_code": "PERSPECTIVE_AMBIGUITY",
+      "adjudication_status": "CONFIRMED",
+      "analyst_basis": "Confirmed by inspection alone: REL stimulus introduces 'The speaker' and every REL context bullet says 'this partner'; the identity is required for comprehension and never stated. Source: language-comprehension-inspection-v0 LC-002 (rel-boundary.json stimulus vs bullets).",
+      "authority": "INSTRUMENT_DEFECT_ADJUDICATION_ONLY_NO_MECHANISM_RESULT"
+    },
+    {
+      "defect_receipt_id": "DR-003",
+      "candidate_refs": [
+        "WT-002"
+      ],
+      "defect_code": "UNNATURAL_LANGUAGE",
+      "adjudication_status": "CONFIRMED",
+      "analyst_basis": "Confirmed by inspection alone: participant-facing descriptors say 'The vignette re-presents ...' (both REL cued-material levels) and 'the vignette states that ...' (RISK no-incident level); text delivered to a participant refers to itself as a vignette. Source: author-walkthrough-v0 WT-002.",
+      "authority": "INSTRUMENT_DEFECT_ADJUDICATION_ONLY_NO_MECHANISM_RESULT"
+    },
+    {
+      "defect_receipt_id": "DR-004",
+      "candidate_refs": [
+        "WT-003",
+        "LC-006"
+      ],
+      "defect_code": "ANCHORING_RISK",
+      "adjudication_status": "CONFIRMED",
+      "analyst_basis": "Confirmed by inspection alone: FUTURE-REL probe options expose internal design vocabulary ('At a new access', 'prior-material cue', 'no new ... external target evidence') and restate the manipulated mood level at E2. The literal-leak scanner is silent on these because no registered identifier appears; the leak is semantic. Sources: WT-003, LC-006 (trace-oracle-v1.json probe_options).",
+      "authority": "INSTRUMENT_DEFECT_ADJUDICATION_ONLY_NO_MECHANISM_RESULT"
+    },
+    {
+      "defect_receipt_id": "DR-005",
+      "candidate_refs": [
+        "WT-004"
+      ],
+      "defect_code": "UNNATURAL_LANGUAGE",
+      "adjudication_status": "CONFIRMED",
+      "analyst_basis": "Confirmed by inspection alone: context lines render construct labels as self-reports ('reports low evaluation threat', 'reports high bodily arousal', 'reports an ordinary current mood'); people do not report in construct vocabulary. Source: WT-004 (all three family mood/arousal/threat factor levels).",
+      "authority": "INSTRUMENT_DEFECT_ADJUDICATION_ONLY_NO_MECHANISM_RESULT"
+    },
+    {
+      "defect_receipt_id": "DR-006",
+      "candidate_refs": [
+        "LC-004"
+      ],
+      "defect_code": "TRANSLATION_SEMANTIC_DRIFT",
+      "adjudication_status": "CONFIRMED",
+      "analyst_basis": "Confirmed by inspection alone: within one participant surface, the stimulus line is natural speech while the three bullets are compiled research-register descriptors; the register seam marks which sentences carry manipulated content. Source: LC-004.",
+      "authority": "INSTRUMENT_DEFECT_ADJUDICATION_ONLY_NO_MECHANISM_RESULT"
+    },
+    {
+      "defect_receipt_id": "DR-007",
+      "candidate_refs": [
+        "WT-005",
+        "LC-003"
+      ],
+      "defect_code": "PARTICIPANT_BURDEN",
+      "adjudication_status": "CONFIRMED",
+      "analyst_basis": "Confirmed by inspection alone: the RISK equality bullet packs number/timing/duration/loudness plus a two-turn condition into one sentence with a referent-free 'the same', and RISK bullets are systematically heavier than REL/WORK bullets, so family difficulty is unmatched. Sources: WT-005, LC-003.",
+      "authority": "INSTRUMENT_DEFECT_ADJUDICATION_ONLY_NO_MECHANISM_RESULT"
+    },
+    {
+      "defect_receipt_id": "DR-008",
+      "candidate_refs": [
+        "LC-001"
+      ],
+      "defect_code": "UNNATURAL_LANGUAGE",
+      "adjudication_status": "CONFIRMED",
+      "analyst_basis": "Confirmed by inspection alone: 'the incident was independently resolved as following' uses project-internal 'resolved as following'; a lay reader cannot parse it as intended. Source: LC-001 (risk-footsteps.json history level 1).",
+      "authority": "INSTRUMENT_DEFECT_ADJUDICATION_ONLY_NO_MECHANISM_RESULT"
+    },
+    {
+      "defect_receipt_id": "DR-009",
+      "candidate_refs": [
+        "LC-005"
+      ],
+      "defect_code": "MAPPING_UNDERSPECIFIED",
+      "adjudication_status": "CONFIRMED",
+      "analyst_basis": "Confirmed mechanically: P1 preregistration section 10 registers mapping statuses including NOT_APPLIED and NOT_EVALUABLE, but the frozen development-assessment schema enum has no counterpart, and absent-payload events (REFUSED / NO_RESPONSE / TECHNICAL_FAILURE) admit no mapping status at all; the P1 mapping candidate sets therefore silently skip them. Source: LC-005; observable in every P1 mapping candidate set for runs containing absent-payload scripts.",
+      "authority": "INSTRUMENT_DEFECT_ADJUDICATION_ONLY_NO_MECHANISM_RESULT"
+    },
+    {
+      "defect_receipt_id": "DR-010",
+      "candidate_refs": [
+        "WT-006"
+      ],
+      "defect_code": "ANCHORING_RISK",
+      "adjudication_status": "DEFERRED",
+      "analyst_basis": "Deferred: the fixed three-bullet declared-factor surface is a frozen 001A design decision, and whether it anchors responses is an acquisition-side question that scripted replay cannot answer. Source: WT-006.",
+      "authority": "INSTRUMENT_DEFECT_ADJUDICATION_ONLY_NO_MECHANISM_RESULT"
+    },
+    {
+      "defect_receipt_id": "DR-011",
+      "candidate_refs": [
+        "WT-007"
+      ],
+      "defect_code": "AMBIGUOUS_ITEM",
+      "adjudication_status": "DEFERRED",
+      "analyst_basis": "Deferred: whether fusing 'say or do' into one slot loses information can only be judged against actual responses; the scripted null-action case shows the ambiguity is expressible, not that it occurs. Source: WT-007.",
+      "authority": "INSTRUMENT_DEFECT_ADJUDICATION_ONLY_NO_MECHANISM_RESULT"
+    },
+    {
+      "defect_receipt_id": "DR-012",
+      "candidate_refs": [
+        "WT-008",
+        "LC-007"
+      ],
+      "defect_code": "TEMPORAL_ORDER_UNCLEAR",
+      "adjudication_status": "DEFERRED",
+      "analyst_basis": "Deferred: the missing time-scale anchor for 'first'/'next' and for 'At a new access' is real on inspection, but whether respondents actually diverge in horizon requires acquisition data; a wording fix without evidence risks a premature freeze. Sources: WT-008, LC-007.",
+      "authority": "INSTRUMENT_DEFECT_ADJUDICATION_ONLY_NO_MECHANISM_RESULT"
+    },
+    {
+      "defect_receipt_id": "DR-013",
+      "candidate_refs": [
+        "WT-009"
+      ],
+      "defect_code": "AMBIGUOUS_ITEM",
+      "adjudication_status": "DEFERRED",
+      "analyst_basis": "Deferred: D0's tendency to elicit constructed explanations is demonstrated as expressible by the scripted corpus (RS-D0-NEW-EXPLANATION) but its occurrence rate is an acquisition question; the instrument already denies D0 any oracle coordinate. Source: WT-009.",
+      "authority": "INSTRUMENT_DEFECT_ADJUDICATION_ONLY_NO_MECHANISM_RESULT"
+    },
+    {
+      "defect_receipt_id": "DR-014",
+      "candidate_refs": [
+        "WT-010"
+      ],
+      "defect_code": "MULTI_FACTOR_WORDING",
+      "adjudication_status": "REJECTED",
+      "analyst_basis": "Rejected: on wording inspection the REL aggregate-history factor and the cued-single-episode factor remain distinct (aggregate 'across comparable prior boundary requests' vs single 're-presents a prior occasion'); the surface overlap does not merge attributions. Source: WT-010.",
+      "authority": "INSTRUMENT_DEFECT_ADJUDICATION_ONLY_NO_MECHANISM_RESULT"
+    }
+  ]
+}

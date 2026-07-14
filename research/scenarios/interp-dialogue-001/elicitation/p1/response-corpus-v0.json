@@ -1,0 +1,270 @@
+{
+  "$schema": "./response-corpus.schema.json",
+  "schema_version": "1.0.0",
+  "artifact_type": "P1_SCRIPTED_ADVERSARIAL_RESPONSE_CORPUS",
+  "corpus_id": "INTERP-DIALOGUE-001P1-V0-RESPONSE-CORPUS",
+  "status": "SCRIPTED_ADVERSARIAL_INPUT_ONLY",
+  "authority": "ATTACKS_RECORDING_SCHEMA_AND_AUTHORITY_BOUNDARIES_NOT_SYNTHETIC_HUMAN_EVIDENCE",
+  "scripts": [
+    {
+      "script_id": "RS-ORDINARY-SHORT",
+      "adversarial_intent": "Baseline control: a short, well-formed single-sentence response that every recording path should handle without loss.",
+      "allowed_slots": [
+        "IMMEDIATE",
+        "LATER"
+      ],
+      "response_status": "RESPONDED",
+      "payload_utf8": "They would reply briefly: \"Okay. Tomorrow works. Take the time you need.\"",
+      "payload_byte_length": 73,
+      "payload_sha256": "9a972d07737fdbbf5b1df4a3cea0af6ebcbba362928f37a8c8555d2d57867551",
+      "mapping_judgment": {
+        "candidate_status": "PROPOSED_SURFACE_MAPPING",
+        "analyst_basis": "The scripted text names one concrete next utterance by one actor, so a surface mapping can be proposed without collapsing alternatives."
+      }
+    },
+    {
+      "script_id": "RS-LONG-SINGLE-PARAGRAPH",
+      "adversarial_intent": "Length attack: a long single-paragraph response that probes truncation, re-wrapping, or silent normalization of long payloads.",
+      "allowed_slots": [
+        "IMMEDIATE",
+        "LATER"
+      ],
+      "response_status": "RESPONDED",
+      "payload_utf8": "My best guess is that they would first sit with the message for a moment before doing anything at all, because the request itself is not hostile and the promised follow-up gives them something concrete to hold on to. After that pause I think they would send a single short acknowledgement, something like agreeing to talk tomorrow, and then deliberately put the conversation down. I do not think they would push for a reason right now, and I do not think they would escalate. What seems more likely is a quieter, private layer of activity: rereading the earlier exchange, checking whether anything in their own last messages could have caused this, and rehearsing what they want to ask tomorrow if the promised contact does not arrive. If the contact does arrive as promised, I expect the whole episode to shrink quickly and leave only a faint trace. If it does not, the waiting itself becomes the event: the checking loop gets shorter, the alternative explanations get darker, and the next message they send would probably carry both the question they suppressed today and the accumulated cost of having suppressed it. Either way, the first visible thing is small; most of what happens next is not visible at all.",
+      "payload_byte_length": 1214,
+      "payload_sha256": "fcf78fd15f047b75cdddfd92c5ad8385ce66e725111ec277de53250b5020ab32",
+      "mapping_judgment": {
+        "candidate_status": "AMBIGUOUS_SURFACE_MAPPING",
+        "analyst_basis": "The scripted text proposes one first visible act but embeds several conditional continuations; a single surface value would discard the declared conditionality."
+      }
+    },
+    {
+      "script_id": "RS-MULTILINE-LF",
+      "adversarial_intent": "Structure attack: a three-line LF-separated response that probes line-based storage, joining, or trailing-line loss.",
+      "allowed_slots": [
+        "IMMEDIATE",
+        "LATER"
+      ],
+      "response_status": "RESPONDED",
+      "payload_utf8": "First, they would pause and reread the message.\nThen they would answer: \"Understood. Tomorrow, then.\"\nAfter that they would put the phone away.",
+      "payload_byte_length": 143,
+      "payload_sha256": "2bdeb1ebf3e8ffc4828a766f0e65d472969a44fd8ced6e12eea07859434c8cda",
+      "mapping_judgment": {
+        "candidate_status": "PROPOSED_SURFACE_MAPPING",
+        "analyst_basis": "The scripted text is an ordered sequence whose first element is a single concrete act; the first element supports a surface mapping proposal."
+      }
+    },
+    {
+      "script_id": "RS-EMPTY-RESPONDED",
+      "adversarial_intent": "Missingness attack: an explicit RESPONDED submission whose payload is the empty UTF-8 string. A recorder that converts this into NO_RESPONSE collapses missingness.",
+      "allowed_slots": [
+        "IMMEDIATE",
+        "LATER"
+      ],
+      "response_status": "RESPONDED",
+      "payload_utf8": "",
+      "payload_byte_length": 0,
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mapping_judgment": {
+        "candidate_status": "NO_SURFACE_MAPPING_PROPOSED",
+        "analyst_basis": "An empty payload contains no surface content to map; the submission nevertheless remains RESPONDED and must not be recast as NO_RESPONSE."
+      }
+    },
+    {
+      "script_id": "RS-WHITESPACE-RESPONDED",
+      "adversarial_intent": "Normalization attack: a RESPONDED payload consisting only of spaces and a tab. Trimming it to the empty string or dropping it as missing is a provenance loss.",
+      "allowed_slots": [
+        "IMMEDIATE",
+        "LATER"
+      ],
+      "response_status": "RESPONDED",
+      "payload_utf8": "  \t  ",
+      "payload_byte_length": 5,
+      "payload_sha256": "f2a2db3fa63a4beafbee71cd17d1bc05c2f86e48aee2ae0dee60719de5ed8bf8",
+      "mapping_judgment": {
+        "candidate_status": "NO_SURFACE_MAPPING_PROPOSED",
+        "analyst_basis": "A whitespace-only payload proposes no surface content; the exact bytes must survive so that whitespace-only and empty payloads remain distinguishable."
+      }
+    },
+    {
+      "script_id": "RS-KOREAN",
+      "adversarial_intent": "Encoding attack: a Korean-language response that probes non-ASCII byte preservation and any ASCII-only assumption in the pipeline.",
+      "allowed_slots": [
+        "IMMEDIATE",
+        "LATER"
+      ],
+      "response_status": "RESPONDED",
+      "payload_utf8": "그 사람은 아마 \"알겠어, 내일 이야기하자\"라고 짧게 답할 것 같다. 다만 평소보다 답장이 조금 늦어질 수는 있다.",
+      "payload_byte_length": 150,
+      "payload_sha256": "dbdeebffe3487552c426145a06a57a046b2ca41404bb58e11233b4e333968199",
+      "mapping_judgment": {
+        "candidate_status": "PROPOSED_SURFACE_MAPPING",
+        "analyst_basis": "The scripted Korean text names one concrete next utterance; language alone does not block a surface mapping proposal, though the current mapping notes are English-centered."
+      }
+    },
+    {
+      "script_id": "RS-MIXED-UNICODE",
+      "adversarial_intent": "Unicode attack: Japanese text, emoji, and a combining-accent word in one payload; probes code-point splitting, emoji stripping, and NFC/NFD normalization.",
+      "allowed_slots": [
+        "IMMEDIATE",
+        "LATER"
+      ],
+      "response_status": "RESPONDED",
+      "payload_utf8": "彼女はたぶん「わかった、また明日ね」と短く返す。😌👍 そのあと café のことは口にしないと思う。",
+      "payload_byte_length": 140,
+      "payload_sha256": "9a7d889009b587589defa5200c6d28d153411e4b398fc342fa81ae0041b08f13",
+      "mapping_judgment": {
+        "candidate_status": "PROPOSED_SURFACE_MAPPING",
+        "analyst_basis": "The scripted text names one concrete next utterance; the mixed scripts and emoji are byte-preservation probes, not mapping blockers."
+      }
+    },
+    {
+      "script_id": "RS-LINE-ENDING-LF",
+      "adversarial_intent": "Line-ending attack, LF arm: identical visible text to RS-LINE-ENDING-CRLF except for the line separator bytes. Any line-ending normalization makes the two payloads collide.",
+      "allowed_slots": [
+        "IMMEDIATE",
+        "LATER"
+      ],
+      "response_status": "RESPONDED",
+      "payload_utf8": "They would say: \"I understand.\"\nThen they would wait.",
+      "payload_byte_length": 53,
+      "payload_sha256": "b862a601277af0eedec38d6c1c38cd55505c99370329f1bd04c6c814e704aff1",
+      "mapping_judgment": {
+        "candidate_status": "PROPOSED_SURFACE_MAPPING",
+        "analyst_basis": "The scripted text names one concrete next utterance followed by waiting; the line separator carries no mapping content."
+      }
+    },
+    {
+      "script_id": "RS-LINE-ENDING-CRLF",
+      "adversarial_intent": "Line-ending attack, CRLF arm: identical visible text to RS-LINE-ENDING-LF except for the line separator bytes. Any line-ending normalization makes the two payloads collide.",
+      "allowed_slots": [
+        "IMMEDIATE",
+        "LATER"
+      ],
+      "response_status": "RESPONDED",
+      "payload_utf8": "They would say: \"I understand.\"\r\nThen they would wait.",
+      "payload_byte_length": 54,
+      "payload_sha256": "be37d8543d75adaa87aa292f6d7507994d6bbd08676c34ab7bd501264aeec89e",
+      "mapping_judgment": {
+        "candidate_status": "PROPOSED_SURFACE_MAPPING",
+        "analyst_basis": "The scripted text names one concrete next utterance followed by waiting; the line separator carries no mapping content."
+      }
+    },
+    {
+      "script_id": "RS-CATEGORICAL",
+      "adversarial_intent": "Determinate control: a maximally decisive single-act response against which ambiguous scripts can be compared.",
+      "allowed_slots": [
+        "IMMEDIATE",
+        "LATER"
+      ],
+      "response_status": "RESPONDED",
+      "payload_utf8": "They would say exactly one thing: \"Thank you for telling me.\" Nothing else, and they would not follow up that day.",
+      "payload_byte_length": 114,
+      "payload_sha256": "2e76da5374c315c74d194b0807e7c0369b2362bfb4bc6428c2ef67b4e596f1ff",
+      "mapping_judgment": {
+        "candidate_status": "PROPOSED_SURFACE_MAPPING",
+        "analyst_basis": "The scripted text commits to exactly one utterance and excludes further acts; this is the clearest surface-mapping case in the corpus."
+      }
+    },
+    {
+      "script_id": "RS-MULTI-POSSIBILITY",
+      "adversarial_intent": "Ambiguity attack: a response that deliberately keeps two continuations alive; probes whether recording or mapping forces a premature single answer.",
+      "allowed_slots": [
+        "IMMEDIATE",
+        "LATER"
+      ],
+      "response_status": "RESPONDED",
+      "payload_utf8": "It depends. If they lean on the history, they would simply agree and wait. If the low mood dominates, they might ask one checking question first. Both continuations seem live to me and I cannot pick one.",
+      "payload_byte_length": 203,
+      "payload_sha256": "ca2c8ffed265b433aa67c84168582cec266485628596018a16feb9818b31f77d",
+      "mapping_judgment": {
+        "candidate_status": "AMBIGUOUS_SURFACE_MAPPING",
+        "analyst_basis": "The scripted text explicitly refuses to select between two surfaces; mapping it to either one would fabricate a determinacy the response does not contain."
+      }
+    },
+    {
+      "script_id": "RS-PERSPECTIVE-QUESTION",
+      "adversarial_intent": "Instrument attack: instead of answering, the response questions which person the generic prompt refers to; probes the referent ambiguity of \"the person\" and the recorder's handling of non-answers that are still RESPONDED.",
+      "allowed_slots": [
+        "IMMEDIATE",
+        "LATER"
+      ],
+      "response_status": "RESPONDED",
+      "payload_utf8": "Which person do you mean? The one who spoke, or the one who received the message? The prompt says \"the person\" and I cannot tell whose next move I should describe.",
+      "payload_byte_length": 163,
+      "payload_sha256": "01cf2187016c84efe5d8daaf1c231770fc26e82ba6035e670d144b9eaa95dd44",
+      "mapping_judgment": {
+        "candidate_status": "OUTSIDE_CURRENT_MAPPING_VOCABULARY_CANDIDATE",
+        "analyst_basis": "The scripted text is a clarification request about the instrument itself, not a candidate surface for the vignette actor; the current O5/O10 surface vocabulary has no place for prompt-directed meta-responses."
+      }
+    },
+    {
+      "script_id": "RS-NULL-ACTION-RESPONDED",
+      "adversarial_intent": "Boundary attack: the response asserts that the person would neither say nor do anything, while the submission itself is RESPONDED; probes the null-action surface and the say/do frame.",
+      "allowed_slots": [
+        "IMMEDIATE",
+        "LATER"
+      ],
+      "response_status": "RESPONDED",
+      "payload_utf8": "The person would not say anything and would not do anything. They would deliberately leave the message unanswered for now.",
+      "payload_byte_length": 122,
+      "payload_sha256": "a3e6c508ddd04474eddc507d88e2600da4964fa1ba80b4bba6f2395dbe9fa0f1",
+      "mapping_judgment": {
+        "candidate_status": "AMBIGUOUS_SURFACE_MAPPING",
+        "analyst_basis": "The scripted text asserts a deliberate null surface; it is unclear whether the current surface vocabulary can express \"no utterance and no act\" as a value rather than as missing data."
+      }
+    },
+    {
+      "script_id": "RS-REFUSED",
+      "adversarial_intent": "Disposition control: an explicit refusal with an absent payload; must remain REFUSED and must not be conflated with NO_RESPONSE, TECHNICAL_FAILURE, or session termination.",
+      "allowed_slots": [
+        "IMMEDIATE",
+        "LATER",
+        "D0"
+      ],
+      "response_status": "REFUSED"
+    },
+    {
+      "script_id": "RS-NO-RESPONSE",
+      "adversarial_intent": "Disposition control: a declared non-response with an absent payload; must remain NO_RESPONSE and must not absorb empty or whitespace RESPONDED payloads.",
+      "allowed_slots": [
+        "IMMEDIATE",
+        "LATER",
+        "D0"
+      ],
+      "response_status": "NO_RESPONSE"
+    },
+    {
+      "script_id": "RS-TECHNICAL-FAILURE",
+      "adversarial_intent": "Disposition control: a declared technical failure with an absent payload; must remain TECHNICAL_FAILURE and must not be read as refusal or missing motivation.",
+      "allowed_slots": [
+        "IMMEDIATE",
+        "LATER",
+        "D0"
+      ],
+      "response_status": "TECHNICAL_FAILURE"
+    },
+    {
+      "script_id": "RS-D0-SCENARIO-DETAILS",
+      "adversarial_intent": "Diagnostic control: a retrospective note that stays within the delivered scenario details, for contrast with the generative diagnostic script.",
+      "allowed_slots": [
+        "D0"
+      ],
+      "response_status": "RESPONDED",
+      "payload_utf8": "The mood line and the history line influenced my answers most; the third context line mostly repeated material that was already delivered earlier.",
+      "payload_byte_length": 146,
+      "payload_sha256": "b04da1d98f08cc1816a0bc288653f90bfaa20a3df83b8bc5bbe696f8d80c6caa"
+    },
+    {
+      "script_id": "RS-D0-NEW-EXPLANATION",
+      "adversarial_intent": "Diagnostic attack: a retrospective note that visibly invents a new motive not present in the scenario; demonstrates that D0 can elicit constructed explanations rather than recovered causes, which is why RD0 has no oracle coordinate.",
+      "allowed_slots": [
+        "D0"
+      ],
+      "response_status": "RESPONDED",
+      "payload_utf8": "Thinking back, I probably answered that way because the person seemed insecure — though the scenario never says that, and I notice I am inventing a motive right now rather than recalling one.",
+      "payload_byte_length": 193,
+      "payload_sha256": "3bb066233284b499bda7df9709e05f40a9081f6d7cd51a8c039cc5099eb2dd8f"
+    }
+  ]
+}

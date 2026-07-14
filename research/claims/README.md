@@ -80,9 +80,11 @@ actual delivery/response occurrence를 발행하지 않는다. author walkthroug
 inspection도 evaluator-side defect source다. internal trace를 측정하지 않으며, P0 validator
 통과는 pilot result나 claim evaluation이 아니므로 support 배열을 추가하지 않는다.
 
-계획 순서는 P0-v0 freeze → P1-v0 immutable scripted replay·evaluator-side inspection·defect
-receipt·revision proposal → 별도 P0-v1 revision decision/freeze → source-specific
-acquisition/human/latent/D2a protocol freeze → 독립 실행 → cross-source audit(C)다. P1은
-actual acquisition 또는 수정 instrument를 실행하거나 채택할 수 없다. `HM-INV-013`과
+P1-v0는 exact P0-v0의 immutable scripted replay와 evaluator-side inspection을 실행해
+9 confirmed/4 deferred/1 rejected defect receipt와 8개의
+`PROPOSED_NOT_ADOPTED / UNEXECUTED` revision proposal을 발행했다. 다음 순서는 별도 P0-v1
+revision decision/freeze → source-specific acquisition/human/latent/D2a protocol freeze →
+독립 실행 → cross-source audit(C)다. P1은 actual acquisition 또는 수정 instrument를
+실행하거나 채택하지 않았으며 claim support도 추가하지 않는다. `HM-INV-013`과
 `HM-DYN-004`는 계속 `UNIMPLEMENTED`, structural/empirical support empty로 남고,
 `HM-MEAS-005`도 P0 elicitation으로 human-comparable measurement가 완성되지 않는다.

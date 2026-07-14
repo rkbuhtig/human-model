@@ -86,12 +86,20 @@ reducer_envelope_comparisons → completed reducer_proposal ledger
 engine → reducer_envelope_comparisons only when an explicit opt-in policy exists
 labs/interp_m1_runner → frozen execution manifest only
 labs/interp_m1_evaluator → completed run + frozen evaluation artifacts
+labs/interp_dialogue_elicitation_contract → compiled frozen source context
+labs/interp_dialogue_p1_runner → immutable scripted replay + development assessment artifacts
 runner process → serialized artifact → evaluator process
 ```
 
 `contract/`는 model·protocol을 import하지 않고, `models/`는 protocol queue를
 import하지 않으며, `protocol/`은 HumanState를 직접 mutate하지 않는다. 이 경계는
 `test_package_boundaries.py`가 검사한다.
+
+`CompiledInstrumentContext`는 P0 instrument와 그 source graph를 한 번 검증한 뒤 immutable
+read-only index와 content-addressed identity로 묶는 process-local 실행 최적화다. P1 runner는
+이 context와 미리 읽은 schema bytes를 24개 run에 재사용한다. context는 새 연구 권한이나
+persisted receipt가 아니며, 각 run artifact는 계속 frozen source digest와 canonical payload를
+기록한다.
 
 단, v0.1 semantic golden을 보존하기 위해 protocol queue pressure를 descriptive
 AccessState에 전달하는 `legacy_v01_access_pressure_bridge`가 남아 있다. 이는
@@ -185,7 +193,19 @@ python -m unittest discover -s dynamics/tests -v
   closed-world signature와 assertion을 판정한다.
 - runner와 evaluator는 별도 process·module이며 HumanState, engine, routing, Evidence,
   action 또는 Narrative writer를 import하거나 수정하지 않는다.
+- P1 runner는 frozen source graph를 한 번 compile하고 exact P0-v0에 결박된 30 session을
+  24 run/96 generated artifact로 byte-deterministic하게 재구성한다.
+- P1의 scanner, evaluator-side inspection, defect adjudication과 revision proposal은 actual
+  acquisition, response-to-observation mapping 또는 claim support를 발행하지 않는다.
 - 입력 손실은 `processed / dropped / unresolved`로 회계된다.
+
+P1 artifact 재생성 및 검증은 다음 명령으로 실행한다.
+
+```bash
+python -m dynamics.labs.interp_dialogue_p1_run_cli --write
+python -m dynamics.labs.interp_dialogue_p1_run_cli --verify
+python -m unittest dynamics.tests.test_interp_dialogue_p1 -v
+```
 
 시간·사건 동일성의 정확한 범위와 아직 구현하지 않은 flow는
 [Temporal Envelope Contract](spec/temporal.md)에 구분했다.
