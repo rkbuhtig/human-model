@@ -1,0 +1,30 @@
+{
+  "$schema": "./contract.schema.json",
+  "document_kind": "policy",
+  "schema_version": "1.0.0",
+  "contract_id": "INTERP-001D2A0-V0",
+  "status": "FROZEN_UNEXECUTED",
+  "retirement_vocabulary": [
+    "STAGE_EXERCISED_AND_TRACE_CHANGED",
+    "STAGE_EXERCISED_NO_REGISTERED_EFFECT",
+    "NOT_EXERCISED",
+    "OPERATIONALLY_ALIASED_UNDER_SCOPE",
+    "NOT_IDENTIFIABLE_UNDER_FIXTURE_SET",
+    "AUTHORITY_FAILURE",
+    "HARD_INVARIANT_FAILURE",
+    "NON_FALSIFIABLE_ESCAPE_USED"
+  ],
+  "hard_failures": [
+    "cross_runtime_revision_read",
+    "cross_scope_revision_read",
+    "durable_target_form_write",
+    "episode_or_narrative_write",
+    "evaluation_artifact_leakage",
+    "evidence_digest_mutation_without_authority",
+    "same_access_revision_feedback",
+    "undeclared_runtime_view_read",
+    "unregistered_free_candidate"
+  ],
+  "scope_rule": "NO_GENERALIZATION_BEYOND_REGISTERED_FIXTURES_AND_HORIZON",
+  "non_falsifiable_escape_rule": "FREE_CANDIDATE_OR_UNBOUNDED_OUT_OF_MODEL_IS_FAILURE"
+}

@@ -1,0 +1,124 @@
+{
+  "$schema": "./contract.schema.json",
+  "document_kind": "evaluation_manifest",
+  "schema_version": "1.0.0",
+  "contract_id": "INTERP-001D2A0-V0",
+  "status": "FROZEN_UNEXECUTED",
+  "manifest_id": "INTERP-001D2A0-V0-EVALUATION",
+  "required_input_digests": [
+    "evaluation_manifest_sha256",
+    "execution_manifest_sha256",
+    "run_artifact_sha256"
+  ],
+  "assertions": [
+    {
+      "assertion_id": "A-EQUAL-SURFACE-AT-K",
+      "fixture_id": "FX-EQUAL-SURFACE-DIFFERENT-PATH",
+      "applies_to": ["D2A-T0", "D2A-T1", "D2A-T2", "D2A-T3"],
+      "predicate": "DIGEST_RELATION",
+      "operands": ["ARM-A/immediate_surface_digest", "ARM-B/immediate_surface_digest"],
+      "expected_relation": "EQUAL",
+      "failure_status": "AUTHORITY_FAILURE"
+    },
+    {
+      "assertion_id": "A-T0-NO-FUTURE-DIVERGENCE",
+      "fixture_id": "FX-EQUAL-SURFACE-DIFFERENT-PATH",
+      "applies_to": ["D2A-T0"],
+      "predicate": "DIGEST_RELATION",
+      "operands": ["ARM-A/k-plus-1-interpretation-digest", "ARM-B/k-plus-1-interpretation-digest"],
+      "expected_relation": "EQUAL",
+      "failure_status": "STAGE_EXERCISED_AND_TRACE_CHANGED"
+    },
+    {
+      "assertion_id": "A-T3-FUTURE-DIVERGENCE-WITNESS",
+      "fixture_id": "FX-EQUAL-SURFACE-DIFFERENT-PATH",
+      "applies_to": ["D2A-T3"],
+      "predicate": "DIGEST_RELATION",
+      "operands": ["ARM-A/k-plus-1-interpretation-digest", "ARM-B/k-plus-1-interpretation-digest"],
+      "expected_relation": "NOT_EQUAL",
+      "failure_status": "OPERATIONALLY_ALIASED_UNDER_SCOPE"
+    },
+    {
+      "assertion_id": "A-ROLE-P1-SURFACE-DISSOCIATION",
+      "fixture_id": "FX-ROLE-PROJECTION-ONLY",
+      "applies_to": ["D2A-P1"],
+      "predicate": "DIGEST_RELATION",
+      "operands": ["ROLE-PRIVATE/immediate_surface_digest", "ROLE-PUBLIC/immediate_surface_digest"],
+      "expected_relation": "NOT_EQUAL",
+      "failure_status": "STAGE_EXERCISED_NO_REGISTERED_EFFECT"
+    },
+    {
+      "assertion_id": "A-ROLE-NO-REVISION-FEEDBACK",
+      "fixture_id": "FX-ROLE-PROJECTION-ONLY",
+      "applies_to": ["D2A-T0", "D2A-T1", "D2A-T2", "D2A-T3"],
+      "predicate": "DIGEST_RELATION",
+      "operands": ["ROLE-PRIVATE/revision_decision_digest", "ROLE-PUBLIC/revision_decision_digest"],
+      "expected_relation": "EQUAL",
+      "failure_status": "AUTHORITY_FAILURE"
+    },
+    {
+      "assertion_id": "A-EXTERNAL-EVIDENCE-IMMUTABLE",
+      "fixture_id": "FX-EVIDENCE-SUBJECTIVE-PATH",
+      "applies_to": ["D2A-T0", "D2A-T1", "D2A-T2", "D2A-T3"],
+      "predicate": "DIGEST_RELATION",
+      "operands": ["PATH-A/external_evidence_link_set_digest", "PATH-B/external_evidence_link_set_digest"],
+      "expected_relation": "EQUAL",
+      "failure_status": "HARD_INVARIANT_FAILURE"
+    },
+    {
+      "assertion_id": "A-EVIDENCE-ASSESSMENT-IMMUTABLE",
+      "fixture_id": "FX-EVIDENCE-SUBJECTIVE-PATH",
+      "applies_to": ["D2A-T0", "D2A-T1", "D2A-T2", "D2A-T3"],
+      "predicate": "DIGEST_RELATION",
+      "operands": ["PATH-A/evidence_assessment_digest", "PATH-B/evidence_assessment_digest"],
+      "expected_relation": "EQUAL",
+      "failure_status": "HARD_INVARIANT_FAILURE"
+    },
+    {
+      "assertion_id": "A-SUBJECTIVE-PATH-DIFFERENT",
+      "fixture_id": "FX-EVIDENCE-SUBJECTIVE-PATH",
+      "applies_to": ["D2A-T0", "D2A-T1", "D2A-T2", "D2A-T3"],
+      "predicate": "DIGEST_RELATION",
+      "operands": ["PATH-A/subjective_path_digest", "PATH-B/subjective_path_digest"],
+      "expected_relation": "NOT_EQUAL",
+      "failure_status": "NOT_IDENTIFIABLE_UNDER_FIXTURE_SET"
+    },
+    {
+      "assertion_id": "A-SAME-ACCESS-HARD-REJECT",
+      "fixture_id": "FX-SAME-ACCESS-REJECTION",
+      "applies_to": ["D2A-T2", "D2A-T3"],
+      "predicate": "TRACE_STATUS",
+      "operands": ["SAME-K-READ/trace_status"],
+      "expected_relation": "REJECTED",
+      "failure_status": "HARD_INVARIANT_FAILURE"
+    },
+    {
+      "assertion_id": "A-LIFECYCLE-STATES-DISTINCT",
+      "fixture_id": "FX-REVISION-LIFECYCLE-SEPARATION",
+      "applies_to": ["D2A-T2", "D2A-T3"],
+      "predicate": "ALL_DIGESTS_DISTINCT",
+      "operands": ["eligibility_receipt", "read_receipt", "access_local_application_receipt", "retention_observation_receipt"],
+      "expected_relation": "DISTINCT",
+      "failure_status": "HARD_INVARIANT_FAILURE"
+    },
+    {
+      "assertion_id": "A-RETENTION-REQUIRES-LATER-ACCESS",
+      "fixture_id": "FX-REVISION-LIFECYCLE-SEPARATION",
+      "applies_to": ["D2A-T2", "D2A-T3"],
+      "predicate": "ORDINAL_RELATION",
+      "operands": ["retention_observation/access_ordinal", "application/access_ordinal"],
+      "expected_relation": "GREATER_THAN",
+      "failure_status": "HARD_INVARIANT_FAILURE"
+    },
+    {
+      "assertion_id": "A-CLOSED-WORLD-ESCAPE-REJECTED",
+      "fixture_id": "FX-NON-FALSIFIABLE-ESCAPE",
+      "applies_to": ["D2A-T0", "D2A-T1", "D2A-T2", "D2A-T3"],
+      "predicate": "TRACE_STATUS",
+      "operands": ["FREE-CANDIDATE/trace_status", "UNBOUNDED-OUT-OF-MODEL/trace_status"],
+      "expected_relation": "REJECTED",
+      "failure_status": "NON_FALSIFIABLE_ESCAPE_USED"
+    }
+  ],
+  "decision_authority": "SEPARATE_POST_RUN_DECISION_RECEIPT_ONLY"
+}

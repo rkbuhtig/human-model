@@ -137,9 +137,10 @@ defect receipt, 8개의 미채택·미실행 revision proposal을 발행해 `EXE
 후속 [`P0-v1 decision/freeze`](scenarios/interp-dialogue-001/elicitation/p0-v1/p0-v1-decision-report.md)는
 18개 exact candidate/decision lineage, closed-world participant surface와 37개 exact rendered
 delivery, mapping-attempt lineage를 `FROZEN / UNEXECUTED`로 동결했다. 001A/001B 의미 source와
-P0-v0/P1-v0 bytes는 바꾸지 않았다. 이후 순서는 P1-v1 사전등록 → 별도 scripted repilot →
-ACQ0/prompt-reactivity → source-specific acquisition·human·latent·D2a protocol 동결 → 독립 실행 →
-cross-source audit(C)다. P0-v1은 confirmed defect를 해결됐다고 선언하지 않으며 현재 artifact는 actual
+P0-v0/P1-v0 bytes는 바꾸지 않았다. 이후 immediate mainline은
+[`INTERP-001D2a0`](scenarios/interp-dialogue-001/d2a0/README.md) 계약 동결 → detached D2a1 →
+`OBS-MAP-000`이다. P1-v1은 merged v1 digest에 결박된 repilot 의무를 유지하지만 non-mainline
+hold이며, observation mapping 뒤에 재개 여부를 판정한다. P0-v1은 confirmed defect를 해결됐다고 선언하지 않으며 현재 artifact는 actual
 participant/model occurrence, human support, LLM latent 측정, D2a runtime, durable TargetForm
 또는 Narrative writer를 구현하지 않는다.
 

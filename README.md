@@ -28,6 +28,8 @@ Assessment ≠ Adoption ≠ Implementation ≠ Run ≠ Human-Empirical Evidence
 - [P1 development-pilot 사전등록](research/scenarios/interp-dialogue-001/elicitation/p1-development-pilot-preregistration.md)
 - [P1 development-pilot 실행 보고서](research/scenarios/interp-dialogue-001/elicitation/p1-development-pilot-v0-report.md)
 - [P0-v1 revision decision/freeze 보고서](research/scenarios/interp-dialogue-001/elicitation/p0-v1/p0-v1-decision-report.md)
+- [D2a0 mainline 전환 채택 기록](research/adoption-records/2026-07-14-interp-d2a0-mainline-priority.md)
+- [D2a0 최소 재귀 해석 spine](research/scenarios/interp-dialogue-001/d2a0/README.md)
 
 ## Volume I
 
@@ -191,4 +193,8 @@ revision proposal은 모두 `PROPOSED_NOT_ADOPTED / UNEXECUTED`로 발행됐다.
 수정하지 않은 채 closed-world participant surface 34개 component와 최종 delivery 37개를 새로
 동결했다. 9개 confirmed defect는 여전히 P1-v1 repilot 대기이고 4개 deferred defect는 open이다.
 이 freeze는 actual acquisition, prompt-reactivity identification, persona 연구 또는 registry claim
-support가 아니다. 다음 권한 단계는 merged v1 digest에 결박된 별도 P1-v1 사전등록이다.
+support가 아니다. 새 program-order record는 P0-v1을 개발 인프라로 보존하고 P1-v1을
+non-mainline hold로 둔 채, 먼저 [`INTERP-001D2a0`](research/scenarios/interp-dialogue-001/d2a0/README.md)의
+최소 재귀 해석 spine을 동결한다. D2a0는 T/P/H 전략 축, future-access ordering,
+runner/evaluator 격리와 synthetic witness만 고정한 `FROZEN / UNEXECUTED` 계약이며 runner,
+HumanState write, participant data 또는 claim support가 아니다.

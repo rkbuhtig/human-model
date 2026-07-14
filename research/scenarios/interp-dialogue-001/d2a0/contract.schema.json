@@ -1,0 +1,327 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/human-model/interp-001d2a0/contract.schema.json",
+  "title": "INTERP-001D2a0 frozen contract documents",
+  "oneOf": [
+    { "$ref": "#/$defs/runtimeSpine" },
+    { "$ref": "#/$defs/strategyCatalog" },
+    { "$ref": "#/$defs/fixtureCatalog" },
+    { "$ref": "#/$defs/executionManifest" },
+    { "$ref": "#/$defs/evaluationManifest" },
+    { "$ref": "#/$defs/policy" },
+    { "$ref": "#/$defs/frozenManifest" }
+  ],
+  "$defs": {
+    "token": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "upperToken": {
+      "type": "string",
+      "pattern": "^[A-Z0-9][A-Z0-9_-]*$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "stringList": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "tokenList": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/token" },
+      "uniqueItems": true
+    },
+    "typeEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type_id", "kind", "persistence"],
+      "properties": {
+        "type_id": { "$ref": "#/$defs/token" },
+        "kind": { "enum": ["OCCURRENCE", "VIEW", "CANDIDATE", "SET", "RECEIPT"] },
+        "persistence": { "enum": ["INPUT_IMMUTABLE", "ACCESS_LOCAL", "TRACE_ONLY"] }
+      }
+    },
+    "stageEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage_id", "reads", "emits", "may_write", "must_not_write"],
+      "properties": {
+        "stage_id": { "$ref": "#/$defs/upperToken" },
+        "reads": { "$ref": "#/$defs/tokenList" },
+        "emits": { "$ref": "#/$defs/tokenList" },
+        "may_write": { "$ref": "#/$defs/tokenList" },
+        "must_not_write": { "$ref": "#/$defs/tokenList" }
+      }
+    },
+    "runtimeSpine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["$schema", "document_kind", "schema_version", "contract_id", "status", "scope", "type_catalog", "runtime_view", "stages", "revision_lifecycle", "temporal_invariants", "forbidden_authorities"],
+      "properties": {
+        "$schema": { "const": "./contract.schema.json" },
+        "document_kind": { "const": "runtime_spine" },
+        "schema_version": { "const": "1.0.0" },
+        "contract_id": { "const": "INTERP-001D2A0-V0" },
+        "status": { "const": "FROZEN_UNEXECUTED" },
+        "scope": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "included", "excluded"],
+          "properties": {
+            "name": { "const": "MINIMAL_RECURSIVE_INTERPRETATION_SPINE" },
+            "included": { "$ref": "#/$defs/tokenList" },
+            "excluded": { "$ref": "#/$defs/tokenList" }
+          }
+        },
+        "type_catalog": { "type": "array", "items": { "$ref": "#/$defs/typeEntry" }, "minItems": 9, "uniqueItems": true },
+        "runtime_view": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["materialized_type", "allowed_fields", "undeclared_field_policy", "human_state_read_policy"],
+          "properties": {
+            "materialized_type": { "const": "DeclaredRuntimeViewReceipt" },
+            "allowed_fields": { "$ref": "#/$defs/tokenList" },
+            "undeclared_field_policy": { "const": "HARD_REJECT" },
+            "human_state_read_policy": { "const": "NO_WHOLE_STATE_READ" }
+          }
+        },
+        "stages": { "type": "array", "items": { "$ref": "#/$defs/stageEntry" }, "minItems": 7, "uniqueItems": true },
+        "revision_lifecycle": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["decision_statuses", "ordered_types", "retention_rule"],
+          "properties": {
+            "decision_statuses": { "$ref": "#/$defs/tokenList" },
+            "ordered_types": { "$ref": "#/$defs/tokenList" },
+            "retention_rule": { "const": "RETENTION_REQUIRES_LATER_ACCESS_OBSERVATION" }
+          }
+        },
+        "temporal_invariants": { "type": "array", "items": { "$ref": "#/$defs/temporalInvariant" }, "minItems": 5, "uniqueItems": true },
+        "forbidden_authorities": { "$ref": "#/$defs/tokenList" }
+      }
+    },
+    "temporalInvariant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["invariant_id", "relation", "failure_class"],
+      "properties": {
+        "invariant_id": { "$ref": "#/$defs/upperToken" },
+        "relation": { "type": "string", "minLength": 1 },
+        "failure_class": { "enum": ["HARD_INVARIANT_FAILURE", "AUTHORITY_FAILURE"] }
+      }
+    },
+    "strategyEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["strategy_id", "semantics", "revision_decisions"],
+      "properties": {
+        "strategy_id": { "$ref": "#/$defs/upperToken" },
+        "semantics": { "type": "string", "minLength": 1 },
+        "revision_decisions": { "$ref": "#/$defs/tokenList" }
+      }
+    },
+    "profileEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["profile_id", "reception_bias", "ambiguity_policy", "accumulation_limit"],
+      "properties": {
+        "profile_id": { "$ref": "#/$defs/upperToken" },
+        "reception_bias": { "enum": ["NEUTRAL", "POSITIVE", "NEGATIVE"] },
+        "ambiguity_policy": { "enum": ["PRESERVE", "NARROW"] },
+        "accumulation_limit": { "type": "integer", "minimum": 1, "maximum": 3 }
+      }
+    },
+    "cellEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cell_id", "temporal_strategy", "projection_strategy", "heterogeneity_strategy", "profile_ids"],
+      "properties": {
+        "cell_id": { "$ref": "#/$defs/upperToken" },
+        "temporal_strategy": { "$ref": "#/$defs/upperToken" },
+        "projection_strategy": { "$ref": "#/$defs/upperToken" },
+        "heterogeneity_strategy": { "$ref": "#/$defs/upperToken" },
+        "profile_ids": { "$ref": "#/$defs/tokenList" }
+      }
+    },
+    "strategyCatalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["$schema", "document_kind", "schema_version", "contract_id", "status", "randomness_policy", "temporal_strategies", "projection_strategies", "heterogeneity_strategies", "declared_profiles", "registered_cells"],
+      "properties": {
+        "$schema": { "const": "./contract.schema.json" },
+        "document_kind": { "const": "strategy_catalog" },
+        "schema_version": { "const": "1.0.0" },
+        "contract_id": { "const": "INTERP-001D2A0-V0" },
+        "status": { "const": "FROZEN_UNEXECUTED" },
+        "randomness_policy": { "const": "FORBIDDEN_EXPLICIT_PROFILES_ONLY" },
+        "temporal_strategies": { "type": "array", "items": { "$ref": "#/$defs/strategyEntry" }, "minItems": 4, "uniqueItems": true },
+        "projection_strategies": { "type": "array", "items": { "$ref": "#/$defs/strategyEntry" }, "minItems": 2, "uniqueItems": true },
+        "heterogeneity_strategies": { "type": "array", "items": { "$ref": "#/$defs/strategyEntry" }, "minItems": 2, "uniqueItems": true },
+        "declared_profiles": { "type": "array", "items": { "$ref": "#/$defs/profileEntry" }, "minItems": 3, "uniqueItems": true },
+        "registered_cells": { "type": "array", "items": { "$ref": "#/$defs/cellEntry" }, "minItems": 8, "uniqueItems": true }
+      }
+    },
+    "assignment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["field", "value"],
+      "properties": {
+        "field": { "$ref": "#/$defs/token" },
+        "value": { "oneOf": [{ "type": "string", "minLength": 1 }, { "type": "integer", "minimum": 0 }, { "type": "boolean" }] }
+      }
+    },
+    "arm": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["arm_id", "assignments"],
+      "properties": {
+        "arm_id": { "$ref": "#/$defs/upperToken" },
+        "assignments": { "type": "array", "items": { "$ref": "#/$defs/assignment" }, "minItems": 1, "uniqueItems": true }
+      }
+    },
+    "accessPoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["access_id", "runtime_id", "target_scope_id", "interpretation_scope_id", "access_ordinal"],
+      "properties": {
+        "access_id": { "$ref": "#/$defs/upperToken" },
+        "runtime_id": { "$ref": "#/$defs/upperToken" },
+        "target_scope_id": { "$ref": "#/$defs/upperToken" },
+        "interpretation_scope_id": { "$ref": "#/$defs/upperToken" },
+        "access_ordinal": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "fixture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fixture_id", "probe_kind", "purpose", "manipulated_fields", "clamped_fields", "access_lineage", "arms"],
+      "properties": {
+        "fixture_id": { "$ref": "#/$defs/upperToken" },
+        "probe_kind": { "$ref": "#/$defs/upperToken" },
+        "purpose": { "type": "string", "minLength": 1 },
+        "manipulated_fields": { "$ref": "#/$defs/tokenList" },
+        "clamped_fields": { "type": "array", "items": { "$ref": "#/$defs/assignment" }, "minItems": 1, "uniqueItems": true },
+        "access_lineage": { "type": "array", "items": { "$ref": "#/$defs/accessPoint" }, "minItems": 1, "uniqueItems": true },
+        "arms": { "type": "array", "items": { "$ref": "#/$defs/arm" }, "minItems": 1, "uniqueItems": true }
+      }
+    },
+    "fixtureCatalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["$schema", "document_kind", "schema_version", "contract_id", "status", "evaluation_content_policy", "fixtures"],
+      "properties": {
+        "$schema": { "const": "./contract.schema.json" },
+        "document_kind": { "const": "fixture_catalog" },
+        "schema_version": { "const": "1.0.0" },
+        "contract_id": { "const": "INTERP-001D2A0-V0" },
+        "status": { "const": "FROZEN_UNEXECUTED" },
+        "evaluation_content_policy": { "const": "EXPECTED_SIGNATURES_FORBIDDEN" },
+        "fixtures": { "type": "array", "items": { "$ref": "#/$defs/fixture" }, "minItems": 6, "uniqueItems": true }
+      }
+    },
+    "artifactBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["document_kind", "path", "sha256"],
+      "properties": {
+        "document_kind": { "$ref": "#/$defs/token" },
+        "path": { "type": "string", "minLength": 1 },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "runnerIsolation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["permitted_input_kinds", "forbidden_argument_names", "forbidden_imports", "forbidden_output_fields", "evaluation_working_directory_policy"],
+      "properties": {
+        "permitted_input_kinds": { "$ref": "#/$defs/tokenList" },
+        "forbidden_argument_names": { "$ref": "#/$defs/stringList" },
+        "forbidden_imports": { "$ref": "#/$defs/tokenList" },
+        "forbidden_output_fields": { "$ref": "#/$defs/tokenList" },
+        "evaluation_working_directory_policy": { "const": "EVALUATION_ARTIFACTS_NOT_PROVIDED" }
+      }
+    },
+    "executionManifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["$schema", "document_kind", "schema_version", "contract_id", "status", "manifest_id", "artifact_bindings", "registered_cells", "registered_fixtures", "runner_isolation", "output_kind"],
+      "properties": {
+        "$schema": { "const": "./contract.schema.json" },
+        "document_kind": { "const": "execution_manifest" },
+        "schema_version": { "const": "1.0.0" },
+        "contract_id": { "const": "INTERP-001D2A0-V0" },
+        "status": { "const": "FROZEN_UNEXECUTED" },
+        "manifest_id": { "const": "INTERP-001D2A0-V0-EXECUTION" },
+        "artifact_bindings": { "type": "array", "items": { "$ref": "#/$defs/artifactBinding" }, "minItems": 5, "uniqueItems": true },
+        "registered_cells": { "$ref": "#/$defs/tokenList" },
+        "registered_fixtures": { "$ref": "#/$defs/tokenList" },
+        "runner_isolation": { "$ref": "#/$defs/runnerIsolation" },
+        "output_kind": { "const": "D2A0_DETACHED_TRACE" }
+      }
+    },
+    "assertion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["assertion_id", "fixture_id", "applies_to", "predicate", "operands", "expected_relation", "failure_status"],
+      "properties": {
+        "assertion_id": { "$ref": "#/$defs/upperToken" },
+        "fixture_id": { "$ref": "#/$defs/upperToken" },
+        "applies_to": { "$ref": "#/$defs/tokenList" },
+        "predicate": { "$ref": "#/$defs/upperToken" },
+        "operands": { "$ref": "#/$defs/tokenList" },
+        "expected_relation": { "$ref": "#/$defs/upperToken" },
+        "failure_status": { "$ref": "#/$defs/upperToken" }
+      }
+    },
+    "evaluationManifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["$schema", "document_kind", "schema_version", "contract_id", "status", "manifest_id", "required_input_digests", "assertions", "decision_authority"],
+      "properties": {
+        "$schema": { "const": "./contract.schema.json" },
+        "document_kind": { "const": "evaluation_manifest" },
+        "schema_version": { "const": "1.0.0" },
+        "contract_id": { "const": "INTERP-001D2A0-V0" },
+        "status": { "const": "FROZEN_UNEXECUTED" },
+        "manifest_id": { "const": "INTERP-001D2A0-V0-EVALUATION" },
+        "required_input_digests": { "$ref": "#/$defs/tokenList" },
+        "assertions": { "type": "array", "items": { "$ref": "#/$defs/assertion" }, "minItems": 10, "uniqueItems": true },
+        "decision_authority": { "const": "SEPARATE_POST_RUN_DECISION_RECEIPT_ONLY" }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["$schema", "document_kind", "schema_version", "contract_id", "status", "retirement_vocabulary", "hard_failures", "scope_rule", "non_falsifiable_escape_rule"],
+      "properties": {
+        "$schema": { "const": "./contract.schema.json" },
+        "document_kind": { "const": "policy" },
+        "schema_version": { "const": "1.0.0" },
+        "contract_id": { "const": "INTERP-001D2A0-V0" },
+        "status": { "const": "FROZEN_UNEXECUTED" },
+        "retirement_vocabulary": { "$ref": "#/$defs/tokenList" },
+        "hard_failures": { "$ref": "#/$defs/tokenList" },
+        "scope_rule": { "const": "NO_GENERALIZATION_BEYOND_REGISTERED_FIXTURES_AND_HORIZON" },
+        "non_falsifiable_escape_rule": { "const": "FREE_CANDIDATE_OR_UNBOUNDED_OUT_OF_MODEL_IS_FAILURE" }
+      }
+    },
+    "frozenManifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["$schema", "document_kind", "schema_version", "contract_id", "status", "manifest_id", "canonicalization_id", "artifacts"],
+      "properties": {
+        "$schema": { "const": "./contract.schema.json" },
+        "document_kind": { "const": "frozen_artifact_manifest" },
+        "schema_version": { "const": "1.0.0" },
+        "contract_id": { "const": "INTERP-001D2A0-V0" },
+        "status": { "const": "FROZEN_UNEXECUTED" },
+        "manifest_id": { "const": "INTERP-001D2A0-V0-FROZEN-ARTIFACTS" },
+        "canonicalization_id": { "const": "interp-canonical-json-v1" },
+        "artifacts": { "type": "array", "items": { "$ref": "#/$defs/artifactBinding" }, "minItems": 8, "uniqueItems": true }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "./contract.schema.json",
+  "document_kind": "frozen_artifact_manifest",
+  "schema_version": "1.0.0",
+  "contract_id": "INTERP-001D2A0-V0",
+  "status": "FROZEN_UNEXECUTED",
+  "manifest_id": "INTERP-001D2A0-V0-FROZEN-ARTIFACTS",
+  "canonicalization_id": "interp-canonical-json-v1",
+  "artifacts": [
+    { "document_kind": "contract_schema", "path": "contract.schema.json", "sha256": "e14574cac05f1682b651a5d9b894d4136e308f84e7bbbaa81b8e2db39938d93b" },
+    { "document_kind": "runtime_spine", "path": "runtime-spine-v0.json", "sha256": "b604260073555cb1e72fb8f38eacaaee436c60593fec8f356afe89c428cc2b67" },
+    { "document_kind": "strategy_catalog", "path": "strategy-catalog-v0.json", "sha256": "a4f81f57d2264b2154b8464e3f32f4a91e9fd44b67508690d77be6a9112784a7" },
+    { "document_kind": "fixture_catalog", "path": "fixture-catalog-v0.json", "sha256": "679b252ce21e3d9040d744814ad87878788e911ad2120f67af3381e1cb771289" },
+    { "document_kind": "policy", "path": "policy-v0.json", "sha256": "2201c85e4287e5937138d97df2994dd2ced592d8f2c8ac375c88ebffb1e63cb7" },
+    { "document_kind": "trace_schema", "path": "trace.schema.json", "sha256": "1831c206f1d85ffdaa3859b99f815319b61f5f23d4a4a9a27d2264d6a4034000" },
+    { "document_kind": "execution_manifest", "path": "execution-manifest-v0.json", "sha256": "1fe9e517df33c0a361d6c9934d573c8a3dc494b42560428a909197f4bd7165a8" },
+    { "document_kind": "evaluation_manifest", "path": "evaluation-manifest-v0.json", "sha256": "78b19e8f80874c7c6f455b8f486a0fbfec0b347d9dfe72e2a6cdec533e4dfa0c" }
+  ]
+}
