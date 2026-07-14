@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Iterable
+from types import MappingProxyType
+from typing import Any, Iterable, Mapping
 
 from dynamics.labs.interp_dialogue_scenario_contract import (
     load_and_validate_family,
@@ -10,7 +12,11 @@ from dynamics.labs.interp_dialogue_scenario_contract import (
 from dynamics.labs.interp_dialogue_trace_oracle_contract import (
     load_and_validate_trace_oracle,
 )
-from dynamics.labs.interp_m1_common import file_sha256, validate_json_schema
+from dynamics.labs.interp_m1_common import (
+    digest,
+    file_sha256,
+    validate_json_schema,
+)
 
 
 _ROOT = Path(__file__).resolve().parents[2]
@@ -169,6 +175,57 @@ class ElicitationInstrumentContractError(ValueError):
 
 def _fail(message: str) -> None:
     raise ElicitationInstrumentContractError(message)
+
+
+@dataclass(frozen=True, slots=True)
+class CompiledInstrumentContext:
+    """Process-local compiled view of one verified frozen instrument graph.
+
+    The context is an execution optimization and carries no research or claim
+    authority. Parsed source objects stay private; callers receive only
+    read-only indexes and use the rendering helpers below.
+    """
+
+    context_id: str
+    compiler_semantics_version: str
+    canonicalization_profile_id: str
+    instrument_sha256: str
+    source_bindings: tuple[tuple[str, str, str], ...]
+    _instrument: dict[str, Any]
+    _families: Mapping[str, dict[str, Any]]
+    _oracle: dict[str, Any]
+    _presentations: Mapping[str, dict[str, Any]]
+    _future_options: Mapping[str, dict[str, Any]]
+    _prompts: Mapping[str, dict[str, Any]]
+    _comparisons: Mapping[str, dict[str, Any]]
+
+    @property
+    def instrument(self) -> Mapping[str, Any]:
+        return MappingProxyType(self._instrument)
+
+    @property
+    def families(self) -> Mapping[str, dict[str, Any]]:
+        return self._families
+
+    @property
+    def oracle(self) -> Mapping[str, Any]:
+        return MappingProxyType(self._oracle)
+
+    @property
+    def presentations(self) -> Mapping[str, dict[str, Any]]:
+        return self._presentations
+
+    @property
+    def future_options(self) -> Mapping[str, dict[str, Any]]:
+        return self._future_options
+
+    @property
+    def prompts(self) -> Mapping[str, dict[str, Any]]:
+        return self._prompts
+
+    @property
+    def comparisons(self) -> Mapping[str, dict[str, Any]]:
+        return self._comparisons
 
 
 def load_instrument(
@@ -558,6 +615,14 @@ def validate_elicitation_instrument(
 ) -> None:
     _validate_schema(instrument, schema_path)
     families, oracle = _load_bound_sources(instrument, instrument_path)
+    _validate_instrument_with_bound_sources(instrument, families, oracle)
+
+
+def _validate_instrument_with_bound_sources(
+    instrument: dict[str, Any],
+    families: dict[str, dict[str, Any]],
+    oracle: dict[str, Any],
+) -> None:
     _validate_prompts_and_schedule(instrument)
     _validate_presentations(instrument, families)
     _validate_rendering_policy(instrument, families)
@@ -579,18 +644,98 @@ def load_and_validate_elicitation_instrument(
     return instrument
 
 
+def compile_instrument_context(
+    path: str | Path = _DEFAULT_INSTRUMENT_PATH,
+    *,
+    schema_path: str | Path | None = None,
+) -> CompiledInstrumentContext:
+    """Read and verify the frozen source graph once, then build runtime indexes."""
+
+    resolved_path = Path(path)
+    if file_sha256(resolved_path) != FROZEN_INSTRUMENT_SHA256:
+        _fail("instrument is not the frozen P0-v0 raw-byte artifact")
+    instrument = load_instrument(resolved_path)
+    _validate_schema(instrument, schema_path)
+    families, oracle = _load_bound_sources(instrument, resolved_path)
+    _validate_instrument_with_bound_sources(instrument, families, oracle)
+
+    source_bindings = tuple(
+        sorted(
+            (
+                item["role"],
+                item["source_id"],
+                item["content_sha256"],
+            )
+            for item in instrument["bound_source_artifacts"]
+        )
+    )
+    compiler_semantics_version = "INTERP-DIALOGUE-CONTEXT-1.0.0"
+    canonicalization_profile_id = "HM-CANONICAL-JSON-PY-V1"
+    context_id = digest(
+        {
+            "domain": "COMPILED_INTERP_DIALOGUE_INSTRUMENT_CONTEXT",
+            "compiler_semantics_version": compiler_semantics_version,
+            "canonicalization_profile_id": canonicalization_profile_id,
+            "instrument_sha256": FROZEN_INSTRUMENT_SHA256,
+            "instrument_schema_sha256": FROZEN_INSTRUMENT_SCHEMA_SHA256,
+            "source_bindings": [list(item) for item in source_bindings],
+        }
+    )
+    return CompiledInstrumentContext(
+        context_id=context_id,
+        compiler_semantics_version=compiler_semantics_version,
+        canonicalization_profile_id=canonicalization_profile_id,
+        instrument_sha256=FROZEN_INSTRUMENT_SHA256,
+        source_bindings=source_bindings,
+        _instrument=instrument,
+        _families=MappingProxyType(dict(families)),
+        _oracle=oracle,
+        _presentations=MappingProxyType(
+            _unique_index(instrument["presentations"], "presentation_id", "presentation")
+        ),
+        _future_options=MappingProxyType(
+            _unique_index(
+                instrument["future_option_catalog"],
+                "future_option_id",
+                "future option",
+            )
+        ),
+        _prompts=MappingProxyType(
+            _unique_index(instrument["prompt_catalog"], "prompt_id", "prompt")
+        ),
+        _comparisons=MappingProxyType(
+            _unique_index(
+                instrument["matched_future_comparisons"],
+                "comparison_id",
+                "matched comparison",
+            )
+        ),
+    )
+
+
 def render_initial_presentation(
-    instrument: dict[str, Any],
+    instrument: dict[str, Any] | CompiledInstrumentContext,
     presentation_id: str,
     *,
     instrument_path: str | Path = _DEFAULT_INSTRUMENT_PATH,
     families: dict[str, dict[str, Any]] | None = None,
 ) -> str:
-    if families is None:
+    context = (
+        instrument if isinstance(instrument, CompiledInstrumentContext) else None
+    )
+    raw_instrument = context._instrument if context is not None else instrument
+    if context is not None:
+        families = dict(context._families)
+        presentations = context._presentations
+    elif families is None:
         families, _ = _load_bound_sources(instrument, instrument_path)
-    presentations = {
-        item["presentation_id"]: item for item in instrument["presentations"]
-    }
+        presentations = {
+            item["presentation_id"]: item for item in instrument["presentations"]
+        }
+    else:
+        presentations = {
+            item["presentation_id"]: item for item in instrument["presentations"]
+        }
     if presentation_id not in presentations:
         _fail(f"unknown presentation: {presentation_id}")
     presentation = presentations[presentation_id]
@@ -603,9 +748,9 @@ def render_initial_presentation(
         descriptors.append(levels[level_id]["descriptor"])
     bases = {
         item["family_id"]: item["participant_text"]
-        for item in instrument["rendering_policy"]["base_surface_by_family"]
+        for item in raw_instrument["rendering_policy"]["base_surface_by_family"]
     }
-    policy = instrument["rendering_policy"]
+    policy = raw_instrument["rendering_policy"]
     factor_text = policy["factor_joiner"].join(
         policy["factor_line_prefix"] + descriptor for descriptor in descriptors
     )
@@ -613,16 +758,20 @@ def render_initial_presentation(
 
 
 def render_future_option(
-    instrument: dict[str, Any],
+    instrument: dict[str, Any] | CompiledInstrumentContext,
     future_option_id: str,
     *,
     instrument_path: str | Path = _DEFAULT_INSTRUMENT_PATH,
 ) -> str:
-    _, oracle = _load_bound_sources(instrument, instrument_path)
-    options = {
-        item["future_option_id"]: item
-        for item in instrument["future_option_catalog"]
-    }
+    if isinstance(instrument, CompiledInstrumentContext):
+        oracle = instrument._oracle
+        options = instrument._future_options
+    else:
+        _, oracle = _load_bound_sources(instrument, instrument_path)
+        options = {
+            item["future_option_id"]: item
+            for item in instrument["future_option_catalog"]
+        }
     if future_option_id not in options:
         _fail(f"unknown future option: {future_option_id}")
     option = options[future_option_id]
@@ -636,8 +785,14 @@ def render_future_option(
     ]
 
 
-def prompt_text(instrument: dict[str, Any], prompt_id: str) -> str:
-    prompts = {item["prompt_id"]: item for item in instrument["prompt_catalog"]}
+def prompt_text(
+    instrument: dict[str, Any] | CompiledInstrumentContext, prompt_id: str
+) -> str:
+    prompts = (
+        instrument._prompts
+        if isinstance(instrument, CompiledInstrumentContext)
+        else {item["prompt_id"]: item for item in instrument["prompt_catalog"]}
+    )
     if prompt_id not in prompts:
         _fail(f"unknown prompt: {prompt_id}")
     return prompts[prompt_id]["participant_text"]

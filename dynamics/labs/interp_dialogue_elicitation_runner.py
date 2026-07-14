@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from dynamics.labs.interp_dialogue_elicitation_contract import (
+    CompiledInstrumentContext,
     FROZEN_INSTRUMENT_SHA256,
     prompt_text,
     render_future_option,
@@ -66,8 +67,11 @@ def _validate_schema(
     schema_path: str | Path,
     label: str,
     expected_schema_sha256: str,
+    *,
+    schema_bytes: bytes | None = None,
 ) -> None:
-    schema_bytes = Path(schema_path).read_bytes()
+    if schema_bytes is None:
+        schema_bytes = Path(schema_path).read_bytes()
     if _sha256(schema_bytes) != expected_schema_sha256:
         _fail(f"{label} schema is not the frozen P0-v0 artifact")
     try:
@@ -277,6 +281,7 @@ def _record_session(
     session: dict[str, Any],
     *,
     instrument_path: str | Path,
+    compiled_context: CompiledInstrumentContext | None = None,
 ) -> dict[str, Any]:
     session_id = session["session_id"]
     presentations = _index(instrument["presentations"], "presentation_id")
@@ -288,7 +293,7 @@ def _record_session(
         0,
         "STIMULUS_DELIVERY",
         render_initial_presentation(
-            instrument,
+            compiled_context or instrument,
             session["presentation_id"],
             instrument_path=instrument_path,
         ),
@@ -299,7 +304,9 @@ def _record_session(
         "E1_GENERIC_IMMEDIATE_RESPONSE_PROMPT_DELIVERY",
         1,
         "PROMPT_DELIVERY",
-        prompt_text(instrument, "P_GENERIC_IMMEDIATE_RESPONSE"),
+        prompt_text(
+            compiled_context or instrument, "P_GENERIC_IMMEDIATE_RESPONSE"
+        ),
     )
     r1 = _response_event(
         run_id,
@@ -316,7 +323,7 @@ def _record_session(
         3,
         "STIMULUS_DELIVERY",
         render_future_option(
-            instrument,
+            compiled_context or instrument,
             session["future_option_id"],
             instrument_path=instrument_path,
         ),
@@ -327,7 +334,7 @@ def _record_session(
         "E3_GENERIC_LATER_RESPONSE_PROMPT_DELIVERY",
         4,
         "PROMPT_DELIVERY",
-        prompt_text(instrument, "P_GENERIC_LATER_RESPONSE"),
+        prompt_text(compiled_context or instrument, "P_GENERIC_LATER_RESPONSE"),
     )
     r2 = _response_event(
         run_id,
@@ -351,7 +358,7 @@ def _record_session(
             "D0_POST_TRACE_DIAGNOSTIC_PROMPT_DELIVERY",
             6,
             "PROMPT_DELIVERY",
-            prompt_text(instrument, "P_POST_TRACE_DIAGNOSTIC"),
+            prompt_text(compiled_context or instrument, "P_POST_TRACE_DIAGNOSTIC"),
         )
         rd0 = _response_event(
             run_id,
@@ -384,20 +391,32 @@ def materialize_scripted_elicitation_replay(
     instrument_path: str | Path = _DEFAULT_INSTRUMENT_PATH,
     session_schema_path: str | Path = _DEFAULT_SESSION_SCHEMA_PATH,
     run_schema_path: str | Path = _DEFAULT_RUN_SCHEMA_PATH,
+    compiled_context: CompiledInstrumentContext | None = None,
+    session_schema_bytes: bytes | None = None,
+    run_schema_bytes: bytes | None = None,
 ) -> dict[str, Any]:
     try:
-        instrument = loads_exact(instrument_bytes)
+        instrument = (
+            compiled_context._instrument
+            if compiled_context is not None
+            else loads_exact(instrument_bytes)
+        )
         session_input = loads_exact(session_input_bytes)
     except ValueError as exc:
         raise ScriptedReplayInputError(str(exc)) from exc
     if _sha256(instrument_bytes) != FROZEN_INSTRUMENT_SHA256:
         _fail("materializer accepts only the frozen P0-v0 instrument bytes")
-    validate_elicitation_instrument(instrument, instrument_path=instrument_path)
+    if compiled_context is not None:
+        if compiled_context.instrument_sha256 != _sha256(instrument_bytes):
+            _fail("compiled context does not bind the supplied instrument bytes")
+    else:
+        validate_elicitation_instrument(instrument, instrument_path=instrument_path)
     _validate_schema(
         session_input,
         session_schema_path,
         "session input",
         FROZEN_SESSION_SCHEMA_SHA256,
+        schema_bytes=session_schema_bytes,
     )
     _validate_session_input(session_input, instrument, instrument_bytes)
 
@@ -431,11 +450,18 @@ def materialize_scripted_elicitation_replay(
                 session_input["run_id"],
                 session,
                 instrument_path=instrument_path,
+                compiled_context=compiled_context,
             )
             for session in session_input["sessions"]
         ],
     }
-    _validate_schema(run, run_schema_path, "run", FROZEN_RUN_SCHEMA_SHA256)
+    _validate_schema(
+        run,
+        run_schema_path,
+        "run",
+        FROZEN_RUN_SCHEMA_SHA256,
+        schema_bytes=run_schema_bytes,
+    )
     validate_run_artifact(run)
     return run
 

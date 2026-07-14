@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Any
 
 from dynamics.labs.interp_dialogue_elicitation_contract import (
+    CompiledInstrumentContext,
     FROZEN_INSTRUMENT_SHA256,
     prompt_text,
     render_future_option,
@@ -115,9 +116,13 @@ def _sha256(source: bytes) -> str:
 
 
 def _frozen_schema(
-    path: str | Path, expected_sha256: str, label: str
+    path: str | Path,
+    expected_sha256: str,
+    label: str,
+    *,
+    source_bytes: bytes | None = None,
 ) -> dict[str, Any]:
-    source = Path(path).read_bytes()
+    source = Path(path).read_bytes() if source_bytes is None else source_bytes
     if _sha256(source) != expected_sha256:
         _fail(f"{label} schema is not the frozen P0-v0 artifact")
     try:
@@ -143,7 +148,10 @@ def _candidate(
 
 
 def _participant_texts(
-    instrument: dict[str, Any], instrument_path: str | Path
+    instrument: dict[str, Any],
+    instrument_path: str | Path,
+    *,
+    compiled_context: CompiledInstrumentContext | None = None,
 ) -> list[tuple[str, str]]:
     result: list[tuple[str, str]] = []
     for presentation in instrument["presentations"]:
@@ -151,7 +159,7 @@ def _participant_texts(
             (
                 f"/instrument/presentations/{presentation['presentation_id']}",
                 render_initial_presentation(
-                    instrument,
+                    compiled_context or instrument,
                     presentation["presentation_id"],
                     instrument_path=instrument_path,
                 ),
@@ -162,7 +170,7 @@ def _participant_texts(
             (
                 f"/instrument/future_option_catalog/{option['future_option_id']}",
                 render_future_option(
-                    instrument,
+                    compiled_context or instrument,
                     option["future_option_id"],
                     instrument_path=instrument_path,
                 ),
@@ -172,21 +180,28 @@ def _participant_texts(
         result.append(
             (
                 f"/instrument/prompt_catalog/{prompt['prompt_id']}",
-                prompt_text(instrument, prompt["prompt_id"]),
+                prompt_text(compiled_context or instrument, prompt["prompt_id"]),
             )
         )
     return result
 
 
 def _candidate_anchors(
-    instrument: dict[str, Any], instrument_path: str | Path
+    instrument: dict[str, Any],
+    instrument_path: str | Path,
+    *,
+    compiled_context: CompiledInstrumentContext | None = None,
 ) -> set[str]:
     root = Path(instrument_path).resolve().parent
     anchors: set[str] = set()
     for source in instrument["bound_source_artifacts"]:
         if source["role"] != "SCENARIO_FAMILY":
             continue
-        family = load_family((root / source["path"]).resolve())
+        family = (
+            compiled_context._families[source["source_id"]]
+            if compiled_context is not None
+            else load_family((root / source["path"]).resolve())
+        )
         anchors.add(
             family["same_immediate_projection_claim"]["candidate_projection"][
                 "illustration"
@@ -264,25 +279,27 @@ def _expected_delivery_text(
     session: dict[str, Any],
     step_id: str,
     instrument_path: str | Path,
+    compiled_context: CompiledInstrumentContext | None = None,
 ) -> str | None:
+    source = compiled_context or instrument
     if step_id == "E0_INITIAL_VIGNETTE_DELIVERY":
         return render_initial_presentation(
-            instrument,
+            source,
             session["presentation_id"],
             instrument_path=instrument_path,
         )
     if step_id == "E1_GENERIC_IMMEDIATE_RESPONSE_PROMPT_DELIVERY":
-        return prompt_text(instrument, "P_GENERIC_IMMEDIATE_RESPONSE")
+        return prompt_text(source, "P_GENERIC_IMMEDIATE_RESPONSE")
     if step_id == "E2_MATCHED_FUTURE_OPTION_DELIVERY":
         return render_future_option(
-            instrument,
+            source,
             session["future_option_id"],
             instrument_path=instrument_path,
         )
     if step_id == "E3_GENERIC_LATER_RESPONSE_PROMPT_DELIVERY":
-        return prompt_text(instrument, "P_GENERIC_LATER_RESPONSE")
+        return prompt_text(source, "P_GENERIC_LATER_RESPONSE")
     if step_id == "D0_POST_TRACE_DIAGNOSTIC_PROMPT_DELIVERY":
-        return prompt_text(instrument, "P_POST_TRACE_DIAGNOSTIC")
+        return prompt_text(source, "P_POST_TRACE_DIAGNOSTIC")
     return None
 
 
@@ -426,15 +443,26 @@ def scan_mechanical_defects(
     instrument_path: str | Path = _DEFAULT_INSTRUMENT_PATH,
     run_schema_path: str | Path = _DEFAULT_RUN_SCHEMA_PATH,
     assessment_schema_path: str | Path = _DEFAULT_ASSESSMENT_SCHEMA_PATH,
+    compiled_context: CompiledInstrumentContext | None = None,
+    run_schema_bytes: bytes | None = None,
+    assessment_schema_bytes: bytes | None = None,
 ) -> dict[str, Any]:
     try:
-        instrument = loads_exact(instrument_bytes)
+        instrument = (
+            compiled_context._instrument
+            if compiled_context is not None
+            else loads_exact(instrument_bytes)
+        )
         run = loads_exact(run_bytes)
     except ValueError as exc:
         raise MechanicalScanInputError(str(exc)) from exc
     if _sha256(instrument_bytes) != FROZEN_INSTRUMENT_SHA256:
         _fail("scanner accepts only the frozen P0-v0 instrument bytes")
-    validate_elicitation_instrument(instrument, instrument_path=instrument_path)
+    if compiled_context is not None:
+        if compiled_context.instrument_sha256 != _sha256(instrument_bytes):
+            _fail("compiled context does not bind the supplied instrument bytes")
+    else:
+        validate_elicitation_instrument(instrument, instrument_path=instrument_path)
     if run.get("instrument_binding", {}).get("content_sha256") != _sha256(
         instrument_bytes
     ):
@@ -443,7 +471,10 @@ def scan_mechanical_defects(
         validate_json_schema(
             run,
             _frozen_schema(
-                run_schema_path, FROZEN_RUN_SCHEMA_SHA256, "run"
+                run_schema_path,
+                FROZEN_RUN_SCHEMA_SHA256,
+                "run",
+                source_bytes=run_schema_bytes,
             ),
         )
     except ValueError as exc:
@@ -452,8 +483,12 @@ def scan_mechanical_defects(
         ) from exc
 
     candidates: list[dict[str, Any]] = []
-    participant_texts = _participant_texts(instrument, instrument_path)
-    anchors = _candidate_anchors(instrument, instrument_path)
+    participant_texts = _participant_texts(
+        instrument, instrument_path, compiled_context=compiled_context
+    )
+    anchors = _candidate_anchors(
+        instrument, instrument_path, compiled_context=compiled_context
+    )
     for pointer, text in participant_texts:
         folded = text.casefold()
         for anchor in sorted(anchors):
@@ -669,6 +704,7 @@ def scan_mechanical_defects(
                 session,
                 event["elicitation_step_id"],
                 instrument_path,
+                compiled_context,
             )
             if expected_text is not None and raw != expected_text.encode("utf-8"):
                 candidates.append(
@@ -771,6 +807,7 @@ def scan_mechanical_defects(
                 assessment_schema_path,
                 FROZEN_ASSESSMENT_SCHEMA_SHA256,
                 "development assessment",
+                source_bytes=assessment_schema_bytes,
             ),
         )
     except ValueError as exc:
