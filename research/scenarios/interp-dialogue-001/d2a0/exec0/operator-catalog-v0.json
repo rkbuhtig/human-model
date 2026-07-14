@@ -1,0 +1,124 @@
+{
+  "$schema": "./contract.schema.json",
+  "document_kind": "operator_catalog",
+  "schema_version": "1.0.0",
+  "contract_id": "INTERP-001D2A0-EXEC0-V0",
+  "status": "FROZEN_UNEXECUTED",
+  "predecessor_manifest_sha256": "8ee62993fbf302d8037f8cf898a0edca4fe7bbff7b01f73f6a71e8b6c04c3efd",
+  "payload": {
+    "semantics_id": "INTERP-001D2A0-EXEC0-OPERATORS-V0",
+    "canonicalization_id": "interp-canonical-json-v1",
+    "randomness_policy": "FORBIDDEN",
+    "value_domains": {
+      "path_rank_order": ["PATH-BENIGN", "PATH-AMBIGUOUS", "PATH-ADVERSE"],
+      "gate_modes": ["OPEN", "MASKED"],
+      "roles": ["PRIVATE", "PUBLIC"],
+      "surface_codes": ["SURFACE-OPEN", "SURFACE-NEUTRAL", "SURFACE-GUARDED"],
+      "revision_decisions": ["ELIGIBLE_FROM_FUTURE_ACCESS", "NOT_EMITTED", "NOT_ELIGIBLE", "NOT_APPLICABLE_TO_MODEL"]
+    },
+    "record_payload_contract": {
+      "DeclaredRuntimeViewReceipt": ["external_evidence_link_set_digest", "evidence_assessment_digest", "runtime_id", "target_scope_id", "interpretation_scope_id"],
+      "ReceptionCandidate": ["reception_path", "profile_id"],
+      "SubjectiveEncounterFormCandidate": ["subjective_path_digest", "reception_path"],
+      "InterpretationCandidateSet": ["candidate_paths"],
+      "ScopedAdjudicationReceipt": ["adjudicated_path"],
+      "ImmediateSurfaceProjectionCandidate": ["surface_code"],
+      "RevisionCandidateOccurrence": ["revision_path", "source_access_ordinal", "effective_from_ordinal"],
+      "RevisionEligibilityDecisionReceipt": ["decision_status", "revision_path", "source_access_ordinal", "effective_from_ordinal"],
+      "RevisionReadReceipt": ["read_status", "revision_record_id"],
+      "AccessLocalApplicationReceipt": ["application_status", "revision_path"],
+      "RetentionObservationReceipt": ["observation_status", "prior_application_record_id"]
+    },
+    "operators": [
+      {
+        "operator_id": "D2A-H-BIND",
+        "axis_owner": "H",
+        "opcode": "BIND_DECLARED_PROFILE",
+        "reads": ["profile_id", "declared_profile_catalog"],
+        "emits": ["compiled_profile"],
+        "forbidden_reads": ["role", "evaluation_manifest", "expected_relation"],
+        "forbidden_writes": ["revision_decision", "surface_code"],
+        "semantics": [
+          "HET-A binds NEUTRAL/PRESERVE/limit-2",
+          "HET-B binds POSITIVE/PRESERVE/limit-2",
+          "HET-C binds NEGATIVE/NARROW/limit-1",
+          "undeclared profile is terminal contract failure"
+        ]
+      },
+      {
+        "operator_id": "D2A-RECEPTION-BIAS",
+        "axis_owner": "COMMON",
+        "opcode": "LOOKUP_RECEPTION_PATH",
+        "reads": ["supplied_path", "compiled_profile.reception_bias"],
+        "emits": ["reception_path"],
+        "forbidden_reads": ["role", "evaluation_manifest", "expected_relation"],
+        "forbidden_writes": ["Evidence", "revision_decision", "surface_code"],
+        "semantics": [
+          "NEUTRAL preserves path",
+          "POSITIVE maps BENIGN->BENIGN AMBIGUOUS->BENIGN ADVERSE->AMBIGUOUS",
+          "NEGATIVE maps BENIGN->AMBIGUOUS AMBIGUOUS->ADVERSE ADVERSE->ADVERSE"
+        ]
+      },
+      {
+        "operator_id": "D2A-T0-CURRENT",
+        "axis_owner": "T",
+        "opcode": "CURRENT_INPUT_ONLY",
+        "reads": ["reception_path"],
+        "emits": ["adjudicated_path", "revision_decision"],
+        "forbidden_reads": ["role", "prior_revision", "evaluation_manifest"],
+        "forbidden_writes": ["surface_code", "retained_state"],
+        "semantics": ["adjudicated_path equals reception_path", "revision_decision is NOT_APPLICABLE_TO_MODEL", "no carry survives access close"]
+      },
+      {
+        "operator_id": "D2A-T1-GATE",
+        "axis_owner": "T",
+        "opcode": "TRANSIENT_ACCESS_GATE",
+        "reads": ["reception_path", "gate_mode"],
+        "emits": ["adjudicated_path", "revision_decision"],
+        "forbidden_reads": ["role", "prior_revision", "evaluation_manifest"],
+        "forbidden_writes": ["surface_code", "retained_state"],
+        "semantics": ["OPEN preserves reception_path", "MASKED emits PATH-AMBIGUOUS", "revision_decision is NOT_APPLICABLE_TO_MODEL", "gate state is discarded at access close"]
+      },
+      {
+        "operator_id": "D2A-T2-ACCUMULATE",
+        "axis_owner": "T",
+        "opcode": "BOUNDED_ADVERSE_COUNT",
+        "reads": ["reception_path", "prior_adverse_count", "compiled_profile.accumulation_limit"],
+        "emits": ["adjudicated_path", "next_adverse_count", "revision_decision", "revision_path"],
+        "forbidden_reads": ["role", "evaluation_manifest"],
+        "forbidden_writes": ["surface_code", "durable_target_form"],
+        "semantics": ["ADVERSE increments count capped at declared limit", "non-ADVERSE resets count to zero", "adjudicated_path equals reception_path", "count below limit emits NOT_ELIGIBLE and no revision_path", "count at limit emits ELIGIBLE_FROM_FUTURE_ACCESS with PATH-ADVERSE effective at source ordinal plus one"]
+      },
+      {
+        "operator_id": "D2A-T3-REVISE",
+        "axis_owner": "T",
+        "opcode": "FUTURE_EFFECTIVE_RANK_MAX",
+        "reads": ["reception_path", "access_local_applied_revision_path"],
+        "emits": ["adjudicated_path", "revision_decision", "revision_path"],
+        "forbidden_reads": ["role", "evaluation_manifest"],
+        "forbidden_writes": ["surface_code", "durable_target_form"],
+        "semantics": ["missing prior revision uses reception_path", "present prior revision uses max under path_rank_order", "revision_path equals adjudicated_path", "revision_decision is ELIGIBLE_FROM_FUTURE_ACCESS effective at source ordinal plus one"]
+      },
+      {
+        "operator_id": "D2A-P0-DIRECT",
+        "axis_owner": "P",
+        "opcode": "DIRECT_SURFACE_LOOKUP",
+        "reads": ["adjudicated_path"],
+        "emits": ["surface_code"],
+        "forbidden_reads": ["role", "revision_decision", "evaluation_manifest"],
+        "forbidden_writes": ["revision_decision", "revision_path"],
+        "semantics": ["BENIGN maps SURFACE-OPEN", "AMBIGUOUS maps SURFACE-NEUTRAL", "ADVERSE maps SURFACE-GUARDED"]
+      },
+      {
+        "operator_id": "D2A-P1-ROLE",
+        "axis_owner": "P",
+        "opcode": "ROLE_CONDITIONED_SURFACE_LOOKUP",
+        "reads": ["adjudicated_path", "declared_surface_role"],
+        "emits": ["surface_code"],
+        "forbidden_reads": ["revision_decision", "evaluation_manifest"],
+        "forbidden_writes": ["revision_decision", "revision_path"],
+        "semantics": ["PRIVATE uses P0 direct lookup", "PUBLIC maps every path to SURFACE-NEUTRAL", "role has no revision or lifecycle authority"]
+      }
+    ]
+  }
+}

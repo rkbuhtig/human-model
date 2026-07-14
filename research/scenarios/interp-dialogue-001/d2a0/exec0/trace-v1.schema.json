@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/human-model/interp-001d2a0-exec0/trace-v1.schema.json",
+  "title": "INTERP-001D2a1 execution-unit terminal trace",
+  "oneOf": [
+    { "$ref": "#/$defs/completedTrace" },
+    { "$ref": "#/$defs/rejectedTrace" }
+  ],
+  "$defs": {
+    "token": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$" },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "tokenList": { "type": "array", "items": { "$ref": "#/$defs/token" }, "uniqueItems": true },
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["record_id", "type_id", "access_ordinal", "source_record_ids", "payload_digest", "payload"],
+      "properties": {
+        "record_id": { "$ref": "#/$defs/token" },
+        "type_id": {
+          "enum": [
+            "DeclaredRuntimeViewReceipt", "ReceptionCandidate",
+            "SubjectiveEncounterFormCandidate", "InterpretationCandidateSet",
+            "ScopedAdjudicationReceipt", "ImmediateSurfaceProjectionCandidate",
+            "RevisionCandidateOccurrence", "RevisionEligibilityDecisionReceipt",
+            "RevisionReadReceipt", "AccessLocalApplicationReceipt",
+            "RetentionObservationReceipt"
+          ]
+        },
+        "access_ordinal": { "type": "integer", "minimum": 1 },
+        "source_record_ids": { "$ref": "#/$defs/tokenList" },
+        "payload_digest": { "$ref": "#/$defs/sha256" },
+        "payload": { "type": "object" }
+      }
+    },
+    "rejectionReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rejection_code", "rejected_stage", "authority_rule_id", "source_record_ids", "offending_input_refs"],
+      "properties": {
+        "rejection_code": {
+          "enum": [
+            "SAME_ACCESS_REVISION_FEEDBACK", "REVISION_NOT_YET_EFFECTIVE",
+            "CROSS_RUNTIME_REVISION_READ", "CROSS_TARGET_SCOPE_REVISION_READ",
+            "CROSS_INTERPRETATION_SCOPE_REVISION_READ",
+            "UNDECLARED_RUNTIME_VIEW_READ", "UNREGISTERED_FREE_CANDIDATE",
+            "UNBOUNDED_OUT_OF_MODEL_ESCAPE"
+          ]
+        },
+        "rejected_stage": { "$ref": "#/$defs/token" },
+        "authority_rule_id": { "$ref": "#/$defs/token" },
+        "source_record_ids": { "$ref": "#/$defs/tokenList" },
+        "offending_input_refs": { "$ref": "#/$defs/tokenList" }
+      }
+    },
+    "completedTrace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["trace_id", "execution_unit_id", "contract_id", "status", "records", "content_sha256"],
+      "properties": {
+        "trace_id": { "$ref": "#/$defs/token" },
+        "execution_unit_id": { "$ref": "#/$defs/token" },
+        "contract_id": { "const": "INTERP-001D2A0-EXEC0-V0" },
+        "status": { "const": "COMPLETED" },
+        "records": { "type": "array", "items": { "$ref": "#/$defs/record" }, "minItems": 7, "uniqueItems": true },
+        "content_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "rejectedTrace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["trace_id", "execution_unit_id", "contract_id", "status", "completed_prefix_records", "rejection_receipt", "content_sha256"],
+      "properties": {
+        "trace_id": { "$ref": "#/$defs/token" },
+        "execution_unit_id": { "$ref": "#/$defs/token" },
+        "contract_id": { "const": "INTERP-001D2A0-EXEC0-V0" },
+        "status": { "const": "REJECTED" },
+        "completed_prefix_records": { "type": "array", "items": { "$ref": "#/$defs/record" }, "uniqueItems": true },
+        "rejection_receipt": { "$ref": "#/$defs/rejectionReceipt" },
+        "content_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    }
+  }
+}
