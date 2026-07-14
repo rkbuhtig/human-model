@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rkbuhtig/human-model/research/scenarios/interp-dialogue-001/elicitation/p1/runs/artifact-manifest.schema.json",
+  "title": "INTERP-DIALOGUE-001P1-v0 generated artifact digest manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "artifact_type",
+    "manifest_id",
+    "authority",
+    "coverage_manifest_sha256",
+    "response_corpus_sha256",
+    "artifacts"
+  ],
+  "properties": {
+    "$schema": {"const": "./artifact-manifest.schema.json"},
+    "schema_version": {"const": "1.0.0"},
+    "artifact_type": {"const": "P1_GENERATED_ARTIFACT_SHA256_MANIFEST"},
+    "manifest_id": {"$ref": "#/$defs/token"},
+    "authority": {
+      "const": "CONTENT_DIGEST_ACCOUNTING_ONLY_NOT_ACQUISITION_OR_CLAIM_SUPPORT"
+    },
+    "coverage_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "response_corpus_sha256": {"$ref": "#/$defs/sha256"},
+    "artifacts": {
+      "type": "array",
+      "minItems": 96,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/artifact"}
+    }
+  },
+  "$defs": {
+    "token": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "run_id", "sha256"],
+      "properties": {
+        "path": {"type": "string", "pattern": "^research/scenarios/.+\\.json$"},
+        "run_id": {"$ref": "#/$defs/token"},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  }
+}

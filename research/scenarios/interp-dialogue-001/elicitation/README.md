@@ -77,23 +77,30 @@ records. P1 cannot perform actual acquisition, adopt a proposal, or execute a
 revised instrument. A later P0 version must accept, reject, or defer each
 proposal and freeze the next instrument artifact.
 
-## Next registered development step
+## Executed development step
 
-[`INTERP-DIALOGUE-001P1-v0`](p1-development-pilot-preregistration.md) is
-`PLANNED / UNEXECUTED — SCRIPTED DEVELOPMENT PILOT ONLY`. It freezes the minimum
+[`INTERP-DIALOGUE-001P1-v0`](p1-development-pilot-v0-report.md) is
+`EXECUTED / EVALUATED — SCRIPTED DEVELOPMENT PILOT ONLY`. Its
+[`preregistration`](p1-development-pilot-preregistration.md) froze the minimum
 30-session coverage, adversarial response classes, evaluator inspections,
 analyst adjudication states, proposal-only revision authority and merge
-conditions before any pilot output exists.
+conditions before any pilot output existed.
+
+The execution materialized 30 sessions as 24 run artifacts and checked in 96
+generated artifacts plus their manifest. The mechanical scanner emitted zero
+candidates; analyst adjudication recorded 9 confirmed, 4 deferred and 1
+rejected defects. All 8 revision proposals remain
+`PROPOSED_NOT_ADOPTED / UNEXECUTED`.
 
 ```text
-P1 preregistration
-!= P1 execution
+P1 scripted execution
 != actual acquisition contract
 != prompt-reactivity identification
 != persona or latent-state study
 ```
 
-P1 execution belongs in a separate PR. Actual delivery/response occurrences,
+The next registered authority step is a separate P0-v1 decision/freeze that
+accepts, rejects or defers each proposal. Actual delivery/response occurrences,
 source identity, clocks, consent/privacy/withdrawal and acquisition lineage
 remain an `ACQ0` gate. Interpreting prior-response-exposed later surfaces as
 natural persistence also remains blocked on a separate prompt-reactivity study.

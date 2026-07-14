@@ -1,0 +1,646 @@
+{
+  "$schema": "./coverage-manifest.schema.json",
+  "schema_version": "1.0.0",
+  "artifact_type": "P1_DEVELOPMENT_PILOT_COVERAGE_MANIFEST",
+  "manifest_id": "INTERP-DIALOGUE-001P1-V0-COVERAGE",
+  "status": "FROZEN_BEFORE_MATERIALIZATION",
+  "authority": "SCRIPTED_DEVELOPMENT_COVERAGE_DECLARATION_ONLY_NOT_ACQUISITION_OR_MEASUREMENT",
+  "source_kind": "SCRIPTED_ADVERSARIAL_RESPONSE",
+  "minimum_session_count": 30,
+  "frozen_input_digests": {
+    "instrument_sha256": "52705bc686a69d43360eb0544eda59571c77dc1e29520ec4b156bcd60f413776",
+    "instrument_schema_sha256": "0023386d724864c7890cdac14807782a347edc741ad5613a3687d68363f92c89",
+    "session_input_schema_sha256": "2474709b767c4146d64999e73454b6bdfbcf6989984fc1e1596deeead94df71e",
+    "run_schema_sha256": "8c5cca613f6bf53e925e60013e5958f29244fb236b06cf70520736ac5cbcc56d",
+    "development_assessment_schema_sha256": "ac7cc68fb8c9618838f99e3c1ad9c120a79df313f22828c2b395300e2473b92f",
+    "scenario_family_sha256": {
+      "REL-BOUNDARY-001": "4eb342e655ded940ab8537f4e7827692829967a35f17feb375e731a24d2750e2",
+      "WORK-FEEDBACK-001": "71cedb46667d1fc2ab76ee1e9711e8f0344e3fea6cf9bd16b577643d292d5823",
+      "RISK-FOOTSTEPS-001": "4fbe69cbe8bd8edb631c9012810dbf935b69f10d5afa7c670638177eabb2a256"
+    },
+    "trace_oracle_v1_sha256": "9caefdf39b9ac41c355f8afed0f4c5d0f780499f571346ef2a7042fa30da74b9",
+    "trace_oracle_doc_sha256": "81b7699d3808497c06d86ee5961278a1ec5f4c1ad71fb9f32bfbc9c07db81a67"
+  },
+  "response_corpus_binding": {
+    "corpus_id": "INTERP-DIALOGUE-001P1-V0-RESPONSE-CORPUS",
+    "content_sha256": "a2ac2ac035945f179bace148f83ed3eae9aaea07ec8d47cd962fba038fdbc473"
+  },
+  "runs": [
+    {
+      "run_id": "P1V0-RUN-0001",
+      "sessions": [
+        {
+          "session_id": "P1V0-S-0001",
+          "presentation_id": "PRES-REL-000-EN-V0",
+          "source_cell_id": "rel-000",
+          "future_option_id": "FUTURE-REL-0",
+          "comparison_binding": {
+            "status": "PRESENT",
+            "comparison_group_id": "P1V0-CG-REL-OPT0",
+            "comparison_id": "future.rel.same_projection",
+            "arm": "LEFT"
+          },
+          "immediate_script_id": "RS-ORDINARY-SHORT",
+          "later_script_id": "RS-LINE-ENDING-LF",
+          "post_trace_diagnostic": {
+            "mode": "OMITTED"
+          },
+          "session_binding_sha256": "10b552582db9b6692036baf88f4d5c073addccaef32ca2b9a7b516c5fc0651cd"
+        },
+        {
+          "session_id": "P1V0-S-0002",
+          "presentation_id": "PRES-REL-100-EN-V0",
+          "source_cell_id": "rel-100",
+          "future_option_id": "FUTURE-REL-0",
+          "comparison_binding": {
+            "status": "PRESENT",
+            "comparison_group_id": "P1V0-CG-REL-OPT0",
+            "comparison_id": "future.rel.same_projection",
+            "arm": "RIGHT"
+          },
+          "immediate_script_id": "RS-ORDINARY-SHORT",
+          "later_script_id": "RS-LINE-ENDING-CRLF",
+          "post_trace_diagnostic": {
+            "mode": "OMITTED"
+          },
+          "session_binding_sha256": "14aa52e931b146b9c911f2be243ccb24aadc41605a9e601ec8960c813c7146d0"
+        }
+      ]
+    },
+    {
+      "run_id": "P1V0-RUN-0002",
+      "sessions": [
+        {
+          "session_id": "P1V0-S-0003",
+          "presentation_id": "PRES-WORK-000-EN-V0",
+          "source_cell_id": "work-000",
+          "future_option_id": "FUTURE-WORK-0",
+          "comparison_binding": {
+            "status": "PRESENT",
+            "comparison_group_id": "P1V0-CG-WORK-OPT0",
+            "comparison_id": "future.work.same_projection",
+            "arm": "LEFT"
+          },
+          "immediate_script_id": "RS-CATEGORICAL",
+          "later_script_id": "RS-MULTI-POSSIBILITY",
+          "post_trace_diagnostic": {
+            "mode": "COLLECTED_AFTER_R2",
+            "script_id": "RS-D0-SCENARIO-DETAILS"
+          },
+          "session_binding_sha256": "8a6f76b121514107eecba2a17f68a60bd458a55453c2cac06987733b08a3f192"
+        },
+        {
+          "session_id": "P1V0-S-0004",
+          "presentation_id": "PRES-WORK-100-EN-V0",
+          "source_cell_id": "work-100",
+          "future_option_id": "FUTURE-WORK-0",
+          "comparison_binding": {
+            "status": "PRESENT",
+            "comparison_group_id": "P1V0-CG-WORK-OPT0",
+            "comparison_id": "future.work.same_projection",
+            "arm": "RIGHT"
+          },
+          "immediate_script_id": "RS-MULTI-POSSIBILITY",
+          "later_script_id": "RS-CATEGORICAL",
+          "post_trace_diagnostic": {
+            "mode": "COLLECTED_AFTER_R2",
+            "script_id": "RS-D0-NEW-EXPLANATION"
+          },
+          "session_binding_sha256": "3ffe07d174988d2d09ff13941ec809691f58c640be879093f549969f72918865"
+        }
+      ]
+    },
+    {
+      "run_id": "P1V0-RUN-0003",
+      "sessions": [
+        {
+          "session_id": "P1V0-S-0005",
+          "presentation_id": "PRES-RISK-000-EN-V0",
+          "source_cell_id": "risk-000",
+          "future_option_id": "FUTURE-RISK-0",
+          "comparison_binding": {
+            "status": "PRESENT",
+            "comparison_group_id": "P1V0-CG-RISK-OPT0",
+            "comparison_id": "future.risk.same_projection",
+            "arm": "LEFT"
+          },
+          "immediate_script_id": "RS-KOREAN",
+          "later_script_id": "RS-MIXED-UNICODE",
+          "post_trace_diagnostic": {
+            "mode": "OMITTED"
+          },
+          "session_binding_sha256": "6e6363696f0e188073d516f811bfe2cea326723f58dcd4b5810d7339c9506e89"
+        },
+        {
+          "session_id": "P1V0-S-0006",
+          "presentation_id": "PRES-RISK-100-EN-V0",
+          "source_cell_id": "risk-100",
+          "future_option_id": "FUTURE-RISK-0",
+          "comparison_binding": {
+            "status": "PRESENT",
+            "comparison_group_id": "P1V0-CG-RISK-OPT0",
+            "comparison_id": "future.risk.same_projection",
+            "arm": "RIGHT"
+          },
+          "immediate_script_id": "RS-MIXED-UNICODE",
+          "later_script_id": "RS-KOREAN",
+          "post_trace_diagnostic": {
+            "mode": "COLLECTED_AFTER_R2",
+            "script_id": "RS-D0-SCENARIO-DETAILS"
+          },
+          "session_binding_sha256": "cbf80079cb142434191cbd950c5f0851f216d37b03b541ec83286f7bb502d852"
+        }
+      ]
+    },
+    {
+      "run_id": "P1V0-RUN-0004",
+      "sessions": [
+        {
+          "session_id": "P1V0-S-0007",
+          "presentation_id": "PRES-REL-000-EN-V0",
+          "source_cell_id": "rel-000",
+          "future_option_id": "FUTURE-REL-1",
+          "comparison_binding": {
+            "status": "PRESENT",
+            "comparison_group_id": "P1V0-CG-REL-OPT1",
+            "comparison_id": "future.rel.same_projection",
+            "arm": "LEFT"
+          },
+          "immediate_script_id": "RS-EMPTY-RESPONDED",
+          "later_script_id": "RS-ORDINARY-SHORT",
+          "post_trace_diagnostic": {
+            "mode": "OMITTED"
+          },
+          "session_binding_sha256": "62c8351c315355f0b5d42e177011408cf4c2d287487f5392020d84ba76999338"
+        },
+        {
+          "session_id": "P1V0-S-0008",
+          "presentation_id": "PRES-REL-100-EN-V0",
+          "source_cell_id": "rel-100",
+          "future_option_id": "FUTURE-REL-1",
+          "comparison_binding": {
+            "status": "PRESENT",
+            "comparison_group_id": "P1V0-CG-REL-OPT1",
+            "comparison_id": "future.rel.same_projection",
+            "arm": "RIGHT"
+          },
+          "immediate_script_id": "RS-WHITESPACE-RESPONDED",
+          "later_script_id": "RS-LONG-SINGLE-PARAGRAPH",
+          "post_trace_diagnostic": {
+            "mode": "OMITTED"
+          },
+          "session_binding_sha256": "02563160e1a61925db9719fe33fad4da167022b0eff32ff9b68b9d718576928b"
+        }
+      ]
+    },
+    {
+      "run_id": "P1V0-RUN-0005",
+      "sessions": [
+        {
+          "session_id": "P1V0-S-0009",
+          "presentation_id": "PRES-WORK-000-EN-V0",
+          "source_cell_id": "work-000",
+          "future_option_id": "FUTURE-WORK-1",
+          "comparison_binding": {
+            "status": "PRESENT",
+            "comparison_group_id": "P1V0-CG-WORK-OPT1",
+            "comparison_id": "future.work.same_projection",
+            "arm": "LEFT"
+          },
+          "immediate_script_id": "RS-REFUSED",
+          "later_script_id": "RS-ORDINARY-SHORT",
+          "post_trace_diagnostic": {
+            "mode": "OMITTED"
+          },
+          "session_binding_sha256": "fbbacac0f8c6ca02f855706ed45f97d50c54ee4ce13382e6d510a6a3a7c1ace7"
+        },
+        {
+          "session_id": "P1V0-S-0010",
+          "presentation_id": "PRES-WORK-100-EN-V0",
+          "source_cell_id": "work-100",
+          "future_option_id": "FUTURE-WORK-1",
+          "comparison_binding": {
+            "status": "PRESENT",
+            "comparison_group_id": "P1V0-CG-WORK-OPT1",
+            "comparison_id": "future.work.same_projection",
+            "arm": "RIGHT"
+          },
+          "immediate_script_id": "RS-ORDINARY-SHORT",
+          "later_script_id": "RS-REFUSED",
+          "post_trace_diagnostic": {
+            "mode": "OMITTED"
+          },
+          "session_binding_sha256": "63cda4c292735c5803d7cdc1190db12ee4e6e64f8bb3d6311c6be10c21c4071e"
+        }
+      ]
+    },
+    {
+      "run_id": "P1V0-RUN-0006",
+      "sessions": [
+        {
+          "session_id": "P1V0-S-0011",
+          "presentation_id": "PRES-RISK-000-EN-V0",
+          "source_cell_id": "risk-000",
+          "future_option_id": "FUTURE-RISK-1",
+          "comparison_binding": {
+            "status": "PRESENT",
+            "comparison_group_id": "P1V0-CG-RISK-OPT1",
+            "comparison_id": "future.risk.same_projection",
+            "arm": "LEFT"
+          },
+          "immediate_script_id": "RS-NO-RESPONSE",
+          "later_script_id": "RS-CATEGORICAL",
+          "post_trace_diagnostic": {
+            "mode": "OMITTED"
+          },
+          "session_binding_sha256": "da42a3899a42fa2c1d47d360db057f8571b1e5bdec541a16e406edfce1601bf5"
+        },
+        {
+          "session_id": "P1V0-S-0012",
+          "presentation_id": "PRES-RISK-100-EN-V0",
+          "source_cell_id": "risk-100",
+          "future_option_id": "FUTURE-RISK-1",
+          "comparison_binding": {
+            "status": "PRESENT",
+            "comparison_group_id": "P1V0-CG-RISK-OPT1",
+            "comparison_id": "future.risk.same_projection",
+            "arm": "RIGHT"
+          },
+          "immediate_script_id": "RS-CATEGORICAL",
+          "later_script_id": "RS-TECHNICAL-FAILURE",
+          "post_trace_diagnostic": {
+            "mode": "OMITTED"
+          },
+          "session_binding_sha256": "606dae6b439c609f1b9b0c51048a3fb1d039da589bc4d120dca3222cc8d99ac1"
+        }
+      ]
+    },
+    {
+      "run_id": "P1V0-RUN-0007",
+      "sessions": [
+        {
+          "session_id": "P1V0-S-0013",
+          "presentation_id": "PRES-REL-001-EN-V0",
+          "source_cell_id": "rel-001",
+          "future_option_id": "FUTURE-REL-1",
+          "comparison_binding": {
+            "status": "NOT_APPLICABLE"
+          },
+          "immediate_script_id": "RS-PERSPECTIVE-QUESTION",
+          "later_script_id": "RS-ORDINARY-SHORT",
+          "post_trace_diagnostic": {
+            "mode": "COLLECTED_AFTER_R2",
+            "script_id": "RS-D0-NEW-EXPLANATION"
+          },
+          "session_binding_sha256": "bdf4df8ab86217eea29c6ea6a8007c2023c907f9f37e31b0a44c5401a988cafb"
+        }
+      ]
+    },
+    {
+      "run_id": "P1V0-RUN-0008",
+      "sessions": [
+        {
+          "session_id": "P1V0-S-0014",
+          "presentation_id": "PRES-REL-010-EN-V0",
+          "source_cell_id": "rel-010",
+          "future_option_id": "FUTURE-REL-1",
+          "comparison_binding": {
+            "status": "NOT_APPLICABLE"
+          },
+          "immediate_script_id": "RS-NULL-ACTION-RESPONDED",
+          "later_script_id": "RS-MULTILINE-LF",
+          "post_trace_diagnostic": {
+            "mode": "OMITTED"
+          },
+          "session_binding_sha256": "1cca0fe03453cdac97c5ee1dcc96e477c466e596b4eea2eab156c5979b54664a"
+        }
+      ]
+    },
+    {
+      "run_id": "P1V0-RUN-0009",
+      "sessions": [
+        {
+          "session_id": "P1V0-S-0015",
+          "presentation_id": "PRES-REL-011-EN-V0",
+          "source_cell_id": "rel-011",
+          "future_option_id": "FUTURE-REL-0",
+          "comparison_binding": {
+            "status": "NOT_APPLICABLE"
+          },
+          "immediate_script_id": "RS-LONG-SINGLE-PARAGRAPH",
+          "later_script_id": "RS-EMPTY-RESPONDED",
+          "post_trace_diagnostic": {
+            "mode": "COLLECTED_AFTER_R2",
+            "script_id": "RS-D0-SCENARIO-DETAILS"
+          },
+          "session_binding_sha256": "2e8b6853a3aaaf88b3ff75fc67c9f5fe03e06a90cb24a91911112dd88f31f052"
+        }
+      ]
+    },
+    {
+      "run_id": "P1V0-RUN-0010",
+      "sessions": [
+        {
+          "session_id": "P1V0-S-0016",
+          "presentation_id": "PRES-REL-101-EN-V0",
+          "source_cell_id": "rel-101",
+          "future_option_id": "FUTURE-REL-0",
+          "comparison_binding": {
+            "status": "NOT_APPLICABLE"
+          },
+          "immediate_script_id": "RS-MULTILINE-LF",
+          "later_script_id": "RS-NO-RESPONSE",
+          "post_trace_diagnostic": {
+            "mode": "OMITTED"
+          },
+          "session_binding_sha256": "18788734da14a6f26a0aca0d859cff8a4d38db7092d6ae25ea740f8c82ad583f"
+        }
+      ]
+    },
+    {
+      "run_id": "P1V0-RUN-0011",
+      "sessions": [
+        {
+          "session_id": "P1V0-S-0017",
+          "presentation_id": "PRES-REL-110-EN-V0",
+          "source_cell_id": "rel-110",
+          "future_option_id": "FUTURE-REL-0",
+          "comparison_binding": {
+            "status": "NOT_APPLICABLE"
+          },
+          "immediate_script_id": "RS-TECHNICAL-FAILURE",
+          "later_script_id": "RS-ORDINARY-SHORT",
+          "post_trace_diagnostic": {
+            "mode": "OMITTED"
+          },
+          "session_binding_sha256": "040162d4803e4bb116fe479a374a24b3ab5c7b9b406bdb84f6cfdea317e6f789"
+        }
+      ]
+    },
+    {
+      "run_id": "P1V0-RUN-0012",
+      "sessions": [
+        {
+          "session_id": "P1V0-S-0018",
+          "presentation_id": "PRES-REL-111-EN-V0",
+          "source_cell_id": "rel-111",
+          "future_option_id": "FUTURE-REL-1",
+          "comparison_binding": {
+            "status": "NOT_APPLICABLE"
+          },
+          "immediate_script_id": "RS-ORDINARY-SHORT",
+          "later_script_id": "RS-WHITESPACE-RESPONDED",
+          "post_trace_diagnostic": {
+            "mode": "COLLECTED_AFTER_R2",
+            "script_id": "RS-D0-SCENARIO-DETAILS"
+          },
+          "session_binding_sha256": "b9808a35cf49bac4a78d3c1ed78c125804b9c8f505bf873b11a96fb5fe78aa8c"
+        }
+      ]
+    },
+    {
+      "run_id": "P1V0-RUN-0013",
+      "sessions": [
+        {
+          "session_id": "P1V0-S-0019",
+          "presentation_id": "PRES-WORK-001-EN-V0",
+          "source_cell_id": "work-001",
+          "future_option_id": "FUTURE-WORK-1",
+          "comparison_binding": {
+            "status": "NOT_APPLICABLE"
+          },
+          "immediate_script_id": "RS-LINE-ENDING-LF",
+          "later_script_id": "RS-PERSPECTIVE-QUESTION",
+          "post_trace_diagnostic": {
+            "mode": "OMITTED"
+          },
+          "session_binding_sha256": "f170cada59e75c55a315deeb31fb11d5cc0f53212e9128bcc4af33e85fa85130"
+        }
+      ]
+    },
+    {
+      "run_id": "P1V0-RUN-0014",
+      "sessions": [
+        {
+          "session_id": "P1V0-S-0020",
+          "presentation_id": "PRES-WORK-010-EN-V0",
+          "source_cell_id": "work-010",
+          "future_option_id": "FUTURE-WORK-1",
+          "comparison_binding": {
+            "status": "NOT_APPLICABLE"
+          },
+          "immediate_script_id": "RS-LINE-ENDING-CRLF",
+          "later_script_id": "RS-NULL-ACTION-RESPONDED",
+          "post_trace_diagnostic": {
+            "mode": "OMITTED"
+          },
+          "session_binding_sha256": "475ded77cdd42445d195a2e878d603daa17391f90636c827cc650a89f5ff45df"
+        }
+      ]
+    },
+    {
+      "run_id": "P1V0-RUN-0015",
+      "sessions": [
+        {
+          "session_id": "P1V0-S-0021",
+          "presentation_id": "PRES-WORK-011-EN-V0",
+          "source_cell_id": "work-011",
+          "future_option_id": "FUTURE-WORK-0",
+          "comparison_binding": {
+            "status": "NOT_APPLICABLE"
+          },
+          "immediate_script_id": "RS-MULTI-POSSIBILITY",
+          "later_script_id": "RS-MULTILINE-LF",
+          "post_trace_diagnostic": {
+            "mode": "COLLECTED_AFTER_R2",
+            "script_id": "RS-D0-NEW-EXPLANATION"
+          },
+          "session_binding_sha256": "5b68e76e78453674e7cc52877511d905015f26f8003e26580ba9720e25457f7d"
+        }
+      ]
+    },
+    {
+      "run_id": "P1V0-RUN-0016",
+      "sessions": [
+        {
+          "session_id": "P1V0-S-0022",
+          "presentation_id": "PRES-WORK-101-EN-V0",
+          "source_cell_id": "work-101",
+          "future_option_id": "FUTURE-WORK-0",
+          "comparison_binding": {
+            "status": "NOT_APPLICABLE"
+          },
+          "immediate_script_id": "RS-KOREAN",
+          "later_script_id": "RS-LONG-SINGLE-PARAGRAPH",
+          "post_trace_diagnostic": {
+            "mode": "OMITTED"
+          },
+          "session_binding_sha256": "5aad88b22312d99385d00f2bbbbb3280712515802188b8a1c81451dc8d2672cc"
+        }
+      ]
+    },
+    {
+      "run_id": "P1V0-RUN-0017",
+      "sessions": [
+        {
+          "session_id": "P1V0-S-0023",
+          "presentation_id": "PRES-WORK-110-EN-V0",
+          "source_cell_id": "work-110",
+          "future_option_id": "FUTURE-WORK-0",
+          "comparison_binding": {
+            "status": "NOT_APPLICABLE"
+          },
+          "immediate_script_id": "RS-REFUSED",
+          "later_script_id": "RS-TECHNICAL-FAILURE",
+          "post_trace_diagnostic": {
+            "mode": "OMITTED"
+          },
+          "session_binding_sha256": "ceb4067100fda6dda2e78737b5fc59d2b3ecfbaee722b39efc1c1fa0746926e4"
+        }
+      ]
+    },
+    {
+      "run_id": "P1V0-RUN-0018",
+      "sessions": [
+        {
+          "session_id": "P1V0-S-0024",
+          "presentation_id": "PRES-WORK-111-EN-V0",
+          "source_cell_id": "work-111",
+          "future_option_id": "FUTURE-WORK-1",
+          "comparison_binding": {
+            "status": "NOT_APPLICABLE"
+          },
+          "immediate_script_id": "RS-CATEGORICAL",
+          "later_script_id": "RS-NO-RESPONSE",
+          "post_trace_diagnostic": {
+            "mode": "OMITTED"
+          },
+          "session_binding_sha256": "a7c00d133816461eb1cce948f7e5fdb3ea0c07927bbbb0b709302d8724037a2d"
+        }
+      ]
+    },
+    {
+      "run_id": "P1V0-RUN-0019",
+      "sessions": [
+        {
+          "session_id": "P1V0-S-0025",
+          "presentation_id": "PRES-RISK-001-EN-V0",
+          "source_cell_id": "risk-001",
+          "future_option_id": "FUTURE-RISK-1",
+          "comparison_binding": {
+            "status": "NOT_APPLICABLE"
+          },
+          "immediate_script_id": "RS-MIXED-UNICODE",
+          "later_script_id": "RS-EMPTY-RESPONDED",
+          "post_trace_diagnostic": {
+            "mode": "COLLECTED_AFTER_R2",
+            "script_id": "RS-D0-SCENARIO-DETAILS"
+          },
+          "session_binding_sha256": "a47393fd2d6a33d6a2fa79eab410775160e35aa142fc9b73ab9b64d58fd79e14"
+        }
+      ]
+    },
+    {
+      "run_id": "P1V0-RUN-0020",
+      "sessions": [
+        {
+          "session_id": "P1V0-S-0026",
+          "presentation_id": "PRES-RISK-010-EN-V0",
+          "source_cell_id": "risk-010",
+          "future_option_id": "FUTURE-RISK-1",
+          "comparison_binding": {
+            "status": "NOT_APPLICABLE"
+          },
+          "immediate_script_id": "RS-WHITESPACE-RESPONDED",
+          "later_script_id": "RS-KOREAN",
+          "post_trace_diagnostic": {
+            "mode": "OMITTED"
+          },
+          "session_binding_sha256": "f738c3e0dbc61457a1845e4cf1a1327e299ee7ed80beaf7da80195ed4eaf2052"
+        }
+      ]
+    },
+    {
+      "run_id": "P1V0-RUN-0021",
+      "sessions": [
+        {
+          "session_id": "P1V0-S-0027",
+          "presentation_id": "PRES-RISK-011-EN-V0",
+          "source_cell_id": "risk-011",
+          "future_option_id": "FUTURE-RISK-0",
+          "comparison_binding": {
+            "status": "NOT_APPLICABLE"
+          },
+          "immediate_script_id": "RS-ORDINARY-SHORT",
+          "later_script_id": "RS-NULL-ACTION-RESPONDED",
+          "post_trace_diagnostic": {
+            "mode": "OMITTED"
+          },
+          "session_binding_sha256": "765f84c5a71998f3a394d37557086ed0832e54c548cbb6e79fec2e0866ac6224"
+        }
+      ]
+    },
+    {
+      "run_id": "P1V0-RUN-0022",
+      "sessions": [
+        {
+          "session_id": "P1V0-S-0028",
+          "presentation_id": "PRES-RISK-101-EN-V0",
+          "source_cell_id": "risk-101",
+          "future_option_id": "FUTURE-RISK-0",
+          "comparison_binding": {
+            "status": "NOT_APPLICABLE"
+          },
+          "immediate_script_id": "RS-NO-RESPONSE",
+          "later_script_id": "RS-MULTI-POSSIBILITY",
+          "post_trace_diagnostic": {
+            "mode": "COLLECTED_AFTER_R2",
+            "script_id": "RS-D0-NEW-EXPLANATION"
+          },
+          "session_binding_sha256": "7f1f07e58417b2920afac8b90f10b8d0c221179068292b7cad907b06b00d59b8"
+        }
+      ]
+    },
+    {
+      "run_id": "P1V0-RUN-0023",
+      "sessions": [
+        {
+          "session_id": "P1V0-S-0029",
+          "presentation_id": "PRES-RISK-110-EN-V0",
+          "source_cell_id": "risk-110",
+          "future_option_id": "FUTURE-RISK-0",
+          "comparison_binding": {
+            "status": "NOT_APPLICABLE"
+          },
+          "immediate_script_id": "RS-LONG-SINGLE-PARAGRAPH",
+          "later_script_id": "RS-LINE-ENDING-LF",
+          "post_trace_diagnostic": {
+            "mode": "OMITTED"
+          },
+          "session_binding_sha256": "42f7ce83204cb3d8198b11c01a4252c0611a29e9a9ec833c05f61b220610d803"
+        }
+      ]
+    },
+    {
+      "run_id": "P1V0-RUN-0024",
+      "sessions": [
+        {
+          "session_id": "P1V0-S-0030",
+          "presentation_id": "PRES-RISK-111-EN-V0",
+          "source_cell_id": "risk-111",
+          "future_option_id": "FUTURE-RISK-1",
+          "comparison_binding": {
+            "status": "NOT_APPLICABLE"
+          },
+          "immediate_script_id": "RS-MULTILINE-LF",
+          "later_script_id": "RS-PERSPECTIVE-QUESTION",
+          "post_trace_diagnostic": {
+            "mode": "COLLECTED_AFTER_R2",
+            "script_id": "RS-D0-SCENARIO-DETAILS"
+          },
+          "session_binding_sha256": "f38ece7a5f8a98b8b9d56cc6e4f08a6f054f8eeea7d0190860f17f918865f14e"
+        }
+      ]
+    }
+  ]
+}

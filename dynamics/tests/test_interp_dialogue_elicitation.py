@@ -275,6 +275,36 @@ class InterpDialogueElicitationContractTests(unittest.TestCase):
                 )
             )
 
+    def test_compiled_context_reuses_verified_sources_without_file_reads(self) -> None:
+        context = contract.compile_instrument_context(INSTRUMENT_PATH)
+        self.assertEqual(context.instrument_sha256, _sha256(self.instrument_bytes))
+        self.assertEqual(len(context.presentations), 24)
+        self.assertEqual(len(context.future_options), 6)
+
+        presentation_id = self.instrument["presentations"][0]["presentation_id"]
+        future_option_id = self.instrument["future_option_catalog"][0][
+            "future_option_id"
+        ]
+        expected_presentation = contract.render_initial_presentation(
+            self.instrument, presentation_id, instrument_path=INSTRUMENT_PATH
+        )
+        expected_future = contract.render_future_option(
+            self.instrument, future_option_id, instrument_path=INSTRUMENT_PATH
+        )
+
+        with patch.object(Path, "read_bytes", side_effect=AssertionError("hidden read")):
+            self.assertEqual(
+                contract.render_initial_presentation(context, presentation_id),
+                expected_presentation,
+            )
+            self.assertEqual(
+                contract.render_future_option(context, future_option_id),
+                expected_future,
+            )
+            self.assertTrue(
+                contract.prompt_text(context, "P_GENERIC_IMMEDIATE_RESPONSE")
+            )
+
     def test_instrument_authority_mapping_and_processing_roles_are_closed(self) -> None:
         self.assertEqual(
             self.instrument["status"],

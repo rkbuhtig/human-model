@@ -246,7 +246,7 @@ access와 interpretive integration 경계를 먼저 분리한다. 그 전에는
 
 ## 3C. `INTERP-001` — Subjective Encounter and Interpretive Reorganization
 
-**상태: `INTERP-001A BOUNDARY DOCUMENTED; INTERP-001A2 M1 CONTRACT FROZEN; INTERP-001B DETACHED CONFORMANCE IMPLEMENTED; INTERP-001D1 EXECUTED / EVALUATED SYNTHETIC CONFORMANCE; INTERP-DIALOGUE-001A SCENARIOS DOCUMENTED / UNEXECUTED; INTERP-DIALOGUE-001B TRACE ORACLE FROZEN / UNEXECUTED; INTERP-DIALOGUE-001P0-V0 ELICITATION CONTRACT FROZEN / UNEXECUTED; BROADER DYNAMICS OPEN` — RFC 0004**
+**상태: `INTERP-001A BOUNDARY DOCUMENTED; INTERP-001A2 M1 CONTRACT FROZEN; INTERP-001B DETACHED CONFORMANCE IMPLEMENTED; INTERP-001D1 EXECUTED / EVALUATED SYNTHETIC CONFORMANCE; INTERP-DIALOGUE-001A SCENARIOS DOCUMENTED / UNEXECUTED; INTERP-DIALOGUE-001B TRACE ORACLE FROZEN / UNEXECUTED; INTERP-DIALOGUE-001P0-V0 ELICITATION CONTRACT FROZEN / UNEXECUTED; INTERP-DIALOGUE-001P1-V0 EXECUTED / EVALUATED SCRIPTED DEVELOPMENT PILOT; BROADER DYNAMICS OPEN` — RFC 0004**
 
 ```text
 ExternalOccurrence / CurrentAccessOccurrence
@@ -394,9 +394,10 @@ adjudicator와 action gate도 `001A` 자연 factor의 결과로 선택하지 않
 3. `INTERP-DIALOGUE-001P0-v0` (`FROZEN / UNEXECUTED`): 24개 presentation,
    prompt/response schedule, scripted replay provenance, runner/scanner/analyst 경계와 P1
    proposal-only 권한 동결
-4. `INTERP-DIALOGUE-001P1-v0`: exact v0의 immutable scripted adversarial replay,
-   evaluator-side walkthrough/inspection, defect receipt와 revision proposal만 발행; actual
-   acquisition과 수정 instrument 채택·실행 금지
+4. `INTERP-DIALOGUE-001P1-v0` (`EXECUTED / EVALUATED`): exact v0의 30-session immutable
+   scripted adversarial replay를 24 run으로 실행하고 evaluator-side walkthrough/inspection,
+   9 confirmed/4 deferred/1 rejected defect receipt와 8개 미채택·미실행 revision proposal을
+   발행; actual acquisition과 수정 instrument 채택·실행 없음
 5. 필요 시 `INTERP-DIALOGUE-001P0-v1`: proposal을 `ACCEPTED / REJECTED / DEFERRED`로
    별도 판정하고 채택된 변경만 새 immutable instrument로 동결
 6. source-specific acquisition, human confirmatory, cross-model latent와 `INTERP-001D2a`
@@ -462,6 +463,35 @@ mapping과 missingness를 별도 pre-run freeze한 뒤에만 연다.
 
 P0의 schema·validator 통과는 human/LLM/D2a trace, placement winner, D2a k→k+1 recursion,
 durable TargetForm, Episode/Narrative writer 또는 claim support가 아니다.
+
+### 3C-P1. `INTERP-DIALOGUE-001P1-v0` — Scripted development pilot
+
+**상태: `EXECUTED / EVALUATED — SCRIPTED DEVELOPMENT PILOT ONLY`**
+
+[`P1 preregistration`](scenarios/interp-dialogue-001/elicitation/p1-development-pilot-preregistration.md)에
+고정된 exact P0-v0와 30-session coverage를
+[`execution report`](scenarios/interp-dialogue-001/elicitation/p1-development-pilot-v0-report.md)에
+따라 실행했다. 30개 session은 24개 run artifact로 materialize됐고, session input·run·mechanical
+candidate set·mapping candidate set 총 96개 생성 artifact와 content manifest가 deterministic
+rebuild로 검증됐다.
+
+mechanical scanner는 candidate 0개를 냈지만 이는 PASS가 아니다. evaluator-side walkthrough와
+language inspection candidate를 analyst가 판정해 9개를 `CONFIRMED`, 4개를 `DEFERRED`, 1개를
+`REJECTED`로 남겼다. 8개 revision proposal은 모두
+`PROPOSED_NOT_ADOPTED / UNEXECUTED`이며 P1은 instrument byte, claim registry 또는 runtime을
+수정하지 않았다.
+
+```text
+scripted replay determinism
+!= actual delivery/response occurrence
+!= frozen response-to-observation mapping
+!= human, persona, latent or mechanism evidence
+!= registry claim support
+```
+
+다음 권한 단계는 각 proposal을 `ACCEPTED / REJECTED / DEFERRED`로 판정하는 별도 P0-v1
+decision/freeze다. 채택된 revision도 새 version으로 동결하고 P1-v1에서 다시 실행하기 전에는
+defect가 수정됐다고 선언할 수 없다.
 
 ## 4. Dynamics v0.3 — 첫 descriptive transgression
 
