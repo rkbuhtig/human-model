@@ -27,6 +27,7 @@ Assessment ≠ Adoption ≠ Implementation ≠ Run ≠ Human-Empirical Evidence
 - [P0 provenance/persona-scope 채택 기록](research/adoption-records/2026-07-14-interp-dialogue-p0-provenance-persona-scope.md)
 - [P1 development-pilot 사전등록](research/scenarios/interp-dialogue-001/elicitation/p1-development-pilot-preregistration.md)
 - [P1 development-pilot 실행 보고서](research/scenarios/interp-dialogue-001/elicitation/p1-development-pilot-v0-report.md)
+- [P0-v1 revision decision/freeze 보고서](research/scenarios/interp-dialogue-001/elicitation/p0-v1/p0-v1-decision-report.md)
 
 ## Volume I
 
@@ -184,6 +185,10 @@ surface와 latent transition, role과 persona, scripted response와 actual occur
 사전등록된 30-session coverage를 24개 run artifact로 실행해 96개 생성 artifact와 manifest를
 byte-deterministic하게 고정했다. mechanical candidate는 0개였고, evaluator-side candidate를
 adjudicate해 9개 defect를 `CONFIRMED`, 4개를 `DEFERRED`, 1개를 `REJECTED`로 기록했으며 8개
-revision proposal은 모두 `PROPOSED_NOT_ADOPTED / UNEXECUTED`다. 이 실행은 actual acquisition,
-prompt-reactivity identification, persona 연구 또는 registry claim support가 아니다. 다음 권한
-단계는 별도 P0-v1 revision decision/freeze다.
+revision proposal은 모두 `PROPOSED_NOT_ADOPTED / UNEXECUTED`로 발행됐다. 후속
+[`P0-v1 decision/freeze`](research/scenarios/interp-dialogue-001/elicitation/p0-v1/p0-v1-decision-report.md)는
+이를 18개 exact candidate와 별도 decision receipt로 원자화하고, 001A/001B 의미 artifact를
+수정하지 않은 채 closed-world participant surface 34개 component와 최종 delivery 37개를 새로
+동결했다. 9개 confirmed defect는 여전히 P1-v1 repilot 대기이고 4개 deferred defect는 open이다.
+이 freeze는 actual acquisition, prompt-reactivity identification, persona 연구 또는 registry claim
+support가 아니다. 다음 권한 단계는 merged v1 digest에 결박된 별도 P1-v1 사전등록이다.

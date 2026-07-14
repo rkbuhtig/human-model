@@ -149,9 +149,10 @@ replay response source가 아니다.
 
 P0의 상태는 `FROZEN / UNEXECUTED — DEVELOPMENT ELICITATION ONLY`다. P1은 exact v0에
 결박된 immutable scripted replay를 실행해 analyst defect receipt와 revision proposal을
-발행했다. proposal은 `PROPOSED_NOT_ADOPTED / UNEXECUTED`이며, P1은 revised instrument를
-채택하거나 실행하지 않았다. 다음 P0 version만 proposal을 판정하고 새 instrument를 동결할
-수 있다. 실제 human, LLM 또는 다른 source acquisition은 각 source의 delivery, consent,
+발행했다. proposal은 P1 안에서는 `PROPOSED_NOT_ADOPTED / UNEXECUTED`이며, P1은 revised
+instrument를 채택하거나 실행하지 않았다. 별도 P0-v1은 exact candidate/decision receipt와
+participant surface, rendered catalog, mapping lineage를 새 instrument로 동결했지만 실행하지
+않았다. 실제 human, LLM 또는 다른 source acquisition은 각 source의 delivery, consent,
 identity, mapping과 missingness를 별도 pre-run freeze한 뒤에만 가능하다. 이 follow-up도
 human/LLM/D2a data, internal mechanism observation, claim support, durable TargetForm,
 Episode 또는 Narrative writer를 만들지 않는다.
