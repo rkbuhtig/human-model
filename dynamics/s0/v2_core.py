@@ -65,23 +65,90 @@ EVENT_KINDS = (
     "NO_NEW_INFORMATION",
 )
 
+# Allowed receipt jurisdiction. A registered report may report most relational events,
+# but settlement events have exact actor/target rules. Certified world occurrences are
+# intentionally narrower than reports.
 EVENT_COMPATIBILITY: dict[str, dict[str, tuple[str, ...]]] = {
-    "CURRENT_COMMITMENT_MISSED": {"scopes": ("REGISTERED_REPORT", "CERTIFIED_WORLD_OCCURRENCE"), "actors": ("counterpart",), "targets": ("focal",)},
-    "COUNTERPART_ACKNOWLEDGES_IMPACT": {"scopes": ("REGISTERED_REPORT", "CERTIFIED_WORLD_OCCURRENCE"), "actors": ("counterpart",), "targets": ("focal",)},
-    "COUNTERPART_ACCEPTS_RESPONSIBILITY": {"scopes": ("REGISTERED_REPORT", "CERTIFIED_WORLD_OCCURRENCE"), "actors": ("counterpart",), "targets": ("focal",)},
-    "COUNTERPART_OFFERS_COSTLY_REPAIR": {"scopes": ("REGISTERED_REPORT", "CERTIFIED_WORLD_OCCURRENCE"), "actors": ("counterpart",), "targets": ("focal",)},
-    "COUNTERPART_MINIMIZES_IMPACT": {"scopes": ("REGISTERED_REPORT", "CERTIFIED_WORLD_OCCURRENCE"), "actors": ("counterpart",), "targets": ("focal",)},
-    "COUNTERPART_SHIFTS_RESPONSIBILITY": {"scopes": ("REGISTERED_REPORT", "CERTIFIED_WORLD_OCCURRENCE"), "actors": ("counterpart",), "targets": ("focal",)},
-    "SIMILAR_VIOLATION_REPEATED": {"scopes": ("REGISTERED_REPORT", "CERTIFIED_WORLD_OCCURRENCE"), "actors": ("counterpart",), "targets": ("focal",)},
-    "AUDIENCE_CONSTRAINT_PRESENT": {"scopes": ("REGISTERED_REPORT", "CERTIFIED_WORLD_OCCURRENCE"), "actors": ("environment",), "targets": ("interaction",)},
-    "ROLE_CONSTRAINT_PRESENT": {"scopes": ("REGISTERED_REPORT", "CERTIFIED_WORLD_OCCURRENCE"), "actors": ("environment",), "targets": ("interaction",)},
-    "SELF_ACTION_CAUSALLY_ATTRIBUTED": {"scopes": ("INTERNAL_OCCURRENCE_REPORT",), "actors": ("focal",), "targets": ("focal",)},
-    "SELF_CONTROL_ATTRIBUTED": {"scopes": ("INTERNAL_OCCURRENCE_REPORT",), "actors": ("focal",), "targets": ("focal",)},
-    "SELF_OWNERSHIP_EXPRESSED": {"scopes": ("INTERNAL_OCCURRENCE_REPORT", "REGISTERED_REPORT"), "actors": ("focal",), "targets": ("focal",)},
-    "SELF_RESPONSIBILITY_ACCEPTED": {"scopes": ("INTERNAL_OCCURRENCE_REPORT", "REGISTERED_REPORT"), "actors": ("focal",), "targets": ("focal",)},
-    "SELF_ENDORSEMENT_EXPRESSED": {"scopes": ("INTERNAL_OCCURRENCE_REPORT", "REGISTERED_REPORT"), "actors": ("focal",), "targets": ("focal",)},
-    "SELF_REPUDIATION_EXPRESSED": {"scopes": ("INTERNAL_OCCURRENCE_REPORT", "REGISTERED_REPORT"), "actors": ("focal",), "targets": ("focal",)},
-    "NO_NEW_INFORMATION": {"scopes": ("REGISTERED_REPORT",), "actors": ("environment",), "targets": ("interaction",)},
+    "CURRENT_COMMITMENT_MISSED": {
+        "scopes": ("REGISTERED_REPORT", "CERTIFIED_WORLD_OCCURRENCE"),
+        "actors": ("counterpart",),
+        "targets": ("focal",),
+    },
+    "COUNTERPART_ACKNOWLEDGES_IMPACT": {
+        "scopes": ("REGISTERED_REPORT", "CERTIFIED_WORLD_OCCURRENCE"),
+        "actors": ("counterpart",),
+        "targets": ("focal",),
+    },
+    "COUNTERPART_ACCEPTS_RESPONSIBILITY": {
+        "scopes": ("REGISTERED_REPORT", "CERTIFIED_WORLD_OCCURRENCE"),
+        "actors": ("counterpart",),
+        "targets": ("focal",),
+    },
+    "COUNTERPART_OFFERS_COSTLY_REPAIR": {
+        "scopes": ("REGISTERED_REPORT", "CERTIFIED_WORLD_OCCURRENCE"),
+        "actors": ("counterpart",),
+        "targets": ("focal",),
+    },
+    "COUNTERPART_MINIMIZES_IMPACT": {
+        "scopes": ("REGISTERED_REPORT", "CERTIFIED_WORLD_OCCURRENCE"),
+        "actors": ("counterpart",),
+        "targets": ("focal",),
+    },
+    "COUNTERPART_SHIFTS_RESPONSIBILITY": {
+        "scopes": ("REGISTERED_REPORT", "CERTIFIED_WORLD_OCCURRENCE"),
+        "actors": ("counterpart",),
+        "targets": ("focal",),
+    },
+    "SIMILAR_VIOLATION_REPEATED": {
+        "scopes": ("REGISTERED_REPORT", "CERTIFIED_WORLD_OCCURRENCE"),
+        "actors": ("counterpart",),
+        "targets": ("focal",),
+    },
+    "AUDIENCE_CONSTRAINT_PRESENT": {
+        "scopes": ("REGISTERED_REPORT", "CERTIFIED_WORLD_OCCURRENCE"),
+        "actors": ("environment",),
+        "targets": ("interaction",),
+    },
+    "ROLE_CONSTRAINT_PRESENT": {
+        "scopes": ("REGISTERED_REPORT", "CERTIFIED_WORLD_OCCURRENCE"),
+        "actors": ("environment",),
+        "targets": ("interaction",),
+    },
+    "SELF_ACTION_CAUSALLY_ATTRIBUTED": {
+        "scopes": ("INTERNAL_OCCURRENCE_REPORT",),
+        "actors": ("focal",),
+        "targets": ("focal",),
+    },
+    "SELF_CONTROL_ATTRIBUTED": {
+        "scopes": ("INTERNAL_OCCURRENCE_REPORT",),
+        "actors": ("focal",),
+        "targets": ("focal",),
+    },
+    "SELF_OWNERSHIP_EXPRESSED": {
+        "scopes": ("INTERNAL_OCCURRENCE_REPORT", "REGISTERED_REPORT"),
+        "actors": ("focal",),
+        "targets": ("focal",),
+    },
+    "SELF_RESPONSIBILITY_ACCEPTED": {
+        "scopes": ("INTERNAL_OCCURRENCE_REPORT", "REGISTERED_REPORT"),
+        "actors": ("focal",),
+        "targets": ("focal",),
+    },
+    "SELF_ENDORSEMENT_EXPRESSED": {
+        "scopes": ("INTERNAL_OCCURRENCE_REPORT", "REGISTERED_REPORT"),
+        "actors": ("focal",),
+        "targets": ("focal",),
+    },
+    "SELF_REPUDIATION_EXPRESSED": {
+        "scopes": ("INTERNAL_OCCURRENCE_REPORT", "REGISTERED_REPORT"),
+        "actors": ("focal",),
+        "targets": ("focal",),
+    },
+    "NO_NEW_INFORMATION": {
+        "scopes": ("REGISTERED_REPORT",),
+        "actors": ("environment",),
+        "targets": ("interaction",),
+    },
 }
 
 FORBIDDEN_INPUT_KEYS = frozenset({
@@ -165,7 +232,9 @@ class TypedReceipt:
             raise S0V2Error("unknown actor or target")
         rule = EVENT_COMPATIBILITY[self.event_kind]
         if self.scope not in rule["scopes"] or self.actor not in rule["actors"] or self.target not in rule["targets"]:
-            raise S0V2Error(f"incompatible receipt event={self.event_kind} scope={self.scope} actor={self.actor} target={self.target}")
+            raise S0V2Error(
+                f"incompatible receipt event={self.event_kind} scope={self.scope} actor={self.actor} target={self.target}"
+            )
 
     @classmethod
     def from_dict(cls, value: Mapping[str, Any]) -> "TypedReceipt":
@@ -313,6 +382,7 @@ class AuthorityProbeState:
 class HStateEnvelope:
     schema_version: str
     state_version: str
+    source_instance_id: str
     trajectory_id: str
     last_step_ordinal: int
     receipt_chain_sha256: str
@@ -320,11 +390,12 @@ class HStateEnvelope:
     state_digest: str
 
     @classmethod
-    def build(cls, *, state_version: str, trajectory_id: str, last_step_ordinal: int,
+    def build(cls, *, state_version: str, source_instance_id: str, trajectory_id: str, last_step_ordinal: int,
               receipt_chain_sha256: str, predictive_state: PredictiveHState) -> "HStateEnvelope":
         payload = {
             "schema_version": STATE_SCHEMA_VERSION,
             "state_version": state_version,
+            "source_instance_id": source_instance_id,
             "trajectory_id": trajectory_id,
             "last_step_ordinal": last_step_ordinal,
             "receipt_chain_sha256": receipt_chain_sha256,
@@ -333,6 +404,7 @@ class HStateEnvelope:
         return cls(
             schema_version=STATE_SCHEMA_VERSION,
             state_version=state_version,
+            source_instance_id=source_instance_id,
             trajectory_id=trajectory_id,
             last_step_ordinal=last_step_ordinal,
             receipt_chain_sha256=receipt_chain_sha256,
@@ -343,6 +415,7 @@ class HStateEnvelope:
     def verify(self) -> None:
         rebuilt = HStateEnvelope.build(
             state_version=self.state_version,
+            source_instance_id=self.source_instance_id,
             trajectory_id=self.trajectory_id,
             last_step_ordinal=self.last_step_ordinal,
             receipt_chain_sha256=self.receipt_chain_sha256,
@@ -355,6 +428,7 @@ class HStateEnvelope:
         return {
             "schema_version": self.schema_version,
             "state_version": self.state_version,
+            "source_instance_id": self.source_instance_id,
             "trajectory_id": self.trajectory_id,
             "last_step_ordinal": self.last_step_ordinal,
             "receipt_chain_sha256": self.receipt_chain_sha256,
@@ -364,7 +438,7 @@ class HStateEnvelope:
 
     @classmethod
     def from_dict(cls, value: Mapping[str, Any]) -> "HStateEnvelope":
-        require_exact_keys(value, ("schema_version", "state_version", "trajectory_id", "last_step_ordinal", "receipt_chain_sha256", "predictive_state", "state_digest"), "h_state")
+        require_exact_keys(value, ("schema_version", "state_version", "source_instance_id", "trajectory_id", "last_step_ordinal", "receipt_chain_sha256", "predictive_state", "state_digest"), "h_state")
         if value["schema_version"] != STATE_SCHEMA_VERSION:
             raise S0V2Error("unsupported H state schema")
         predictive = value["predictive_state"]
@@ -372,7 +446,7 @@ class HStateEnvelope:
         require_exact_keys(predictive, expected_fields, "predictive_state")
         obj = cls(
             schema_version=str(value["schema_version"]), state_version=str(value["state_version"]),
-            trajectory_id=str(value["trajectory_id"]), last_step_ordinal=int(value["last_step_ordinal"]),
+            source_instance_id=str(value["source_instance_id"]), trajectory_id=str(value["trajectory_id"]), last_step_ordinal=int(value["last_step_ordinal"]),
             receipt_chain_sha256=str(value["receipt_chain_sha256"]),
             predictive_state=PredictiveHState(**{field: int(predictive[field]) for field in expected_fields}),
             state_digest=str(value["state_digest"]),
