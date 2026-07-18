@@ -5,7 +5,7 @@
 이 저장소는 완성된 단일 이론을 선언하지 않는다. 역사 복원, 현재 합성, 구현된 계약, 실행 결과와 인간 경험적 근거를 서로 다른 권위로 관리한다.
 
 ```text
-Assessment ≠ Adoption ≠ Implementation ≠ Run ≠ Human-Empirical Evidence
+Assessment ≠ Adoption ≠ Implementation ≠ Run ≠ Evaluation ≠ Human-Empirical Evidence
 ```
 
 ## Current research direction
@@ -30,7 +30,7 @@ history and current occurrence
 - [Volume 0 minimal lineage audit](research/volume-0/README.md)
 - [Multi-Clock Distributional Human Dynamics](research/syntheses/2026-07-18-multi-clock-distributional-human-dynamics.md)
 - [Distributional-adequacy mainline 채택 기록](research/adoption-records/2026-07-18-distributional-adequacy-mainline.md)
-- [HUMAN-DYN-ADEQ-S0 초안](research/benchmarks/human-dyn-adequacy-s0.md)
+- [HUMAN-DYN-ADEQ-S0 preregistration](research/benchmarks/human-dyn-adequacy-s0.md)
 - [Research Architecture](research/architecture.md)
 - [Research Roadmap](research/roadmap.md)
 - [Claim registry](research/claims/README.md)
@@ -43,14 +43,14 @@ Local causal influence
 ≠ cross-domain certification authority
 ```
 
-느낌, 기억, Narrative와 자기해석은 이후의 접근과 행동을 바꿀 수 있다. 그 영향만으로 과거 occurrence, 외부 사실, 타인의 동의나 공적 권한을 다시 쓸 수는 없다.
+느낌, 기억, Narrative와 자기해석은 이후의 접근과 행동을 바꿀 수 있다. 그 영향만으로 과거 occurrence receipt, 외부 사실, 타인의 동의나 공적 권한을 다시 쓸 수는 없다.
 
 현재 합성은 다음 정산도 분리한다.
 
 ```text
-occurrence
+registered occurrence receipt
 ≠ action realization
-≠ authorship endorsement
+≠ authorship settlement
 ≠ narrative adoption
 ≠ interpersonal or normative settlement
 ```
@@ -65,6 +65,7 @@ occurrence
 | `INTERP-001D2a0-EXEC0` | frozen/unexecuted reference harness |
 | PR #21 `MAT0` | closed as superseded; branch preserved as a non-mainline representation-specific reference proposal |
 | Volume 0 minimal audit | source-bound first slice; broader reconstruction remains open |
+| `HUMAN-DYN-ADEQ-S0` | structural/predictive protocol preregistered; models and run unimplemented |
 | P0-v1 elicitation instrument | frozen/unexecuted development infrastructure |
 | human predictive adequacy | open |
 
@@ -73,14 +74,25 @@ Reference harnesses preserve useful authority, ordering and isolation tests. The
 The immediate order is:
 
 ```text
-current synthesis documentation
-→ Volume 0 minimal lineage audit
-→ HUMAN-DYN-ADEQ-S0 exact preregistration
-→ S0 execution
+S0 public preregistration
+→ B0/B1/B2/H implementation and model freeze
+→ evaluator-side hidden source-instance freeze
+→ S0 execution and evaluation
 → representation retention, revision or retirement
 ```
 
-Another materialization-only contract does not substitute for the S0 execution.
+Another materialization-only contract or additional Volume 0 chapter does not substitute for S0 execution.
+
+## S0 authority boundary
+
+S0 has two lanes.
+
+```text
+S0-A structural distributional adequacy
+S0-B non-human source-conditional predictive adequacy
+```
+
+S0-A does not establish predictive fit. S0-B uses an evaluator-held synthetic hidden process and does not provide human-empirical support.
 
 ## Volume 0
 
@@ -140,4 +152,4 @@ OPEN_HYPOTHESIS
 METAPHOR
 ```
 
-구조 테스트 통과, 결정적 재생성과 그럴듯한 출력은 인간에 대한 경험적 증거가 아니다. 현재 모델은 경험적으로 보정된 인간 예측기가 아니며, 실제 human/model acquisition과 분포적 예측 비교는 아직 열려 있다.
+구조 테스트 통과, synthetic source 예측, 결정적 재생성과 그럴듯한 출력은 인간에 대한 경험적 증거가 아니다. 현재 모델은 경험적으로 보정된 인간 예측기가 아니며, 실제 human/model acquisition과 분포적 예측 비교는 아직 열려 있다.
