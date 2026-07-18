@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.1.0",
+  "schema_version": "0.1.1",
   "id": "VOLUME-0-SOURCE-MANIFEST-MINIMAL",
   "status": "SOURCE_CRITICAL_MINIMAL_AUDIT",
   "created_on": "2026-07-18",
@@ -65,10 +65,10 @@
       "id": "V0-SRC-005",
       "path": "3 axis/1223 leak 1",
       "date": "2025-12-23",
-      "ranges": ["1-8", "23-34", "38-50", "54-60"],
-      "role": ["STATE_SURFACE_NONIDENTITY", "FACE_LEAK", "COMMENT_PROTECTION", "DISTRIBUTIONAL_SHAPING"],
+      "ranges": ["1-8", "18-18", "23-34", "38-50", "54-60"],
+      "role": ["PERSONA_ORDER_RETENTION", "STATE_SURFACE_NONIDENTITY", "FACE_LEAK", "COMMENT_PROTECTION", "DISTRIBUTIONAL_SHAPING"],
       "status": "DIRECT_ENGINE_SOURCE",
-      "summary": "The patch combines FACE/LEAK dynamics with PLAN-only rendering, single-writer state updates, distribution-sensitive NUCHI, and protected philosophical/safety comments.",
+      "summary": "The source retains the six-persona order and combines FACE/LEAK dynamics with PLAN-only rendering, single-writer state updates, distribution-sensitive NUCHI, and protected philosophical/safety comments.",
       "sha256": "9477a53f3d2a82320b6e0f7118a2160e5c0b6764379a7a472bdabcf26019345e",
       "line_count": 636
     },
@@ -143,9 +143,9 @@
       "path": "NEWMODEL/1231 newmo 2",
       "date": "2025-12-31",
       "ranges": ["1-21", "59-80"],
-      "role": ["RESOURCE_MASS_GATE", "PERSONA_AS_SLOW_PARAMETERIZATION", "SCENE_CARRIER"],
+      "role": ["RESOURCE_MASS_GATE", "PERSONA_CORE_METADATA", "PERSONA_RUNTIME_PARAMETER_FIELDS", "SCENE_CARRIER"],
       "status": "DIRECT_ENGINE_SOURCE",
-      "summary": "A single-person runtime combines resource-mass limits, persona-core metadata/signature, and a shared Scene carrier while retaining the removal of persona-indexed runtime structures.",
+      "summary": "A single-person runtime combines resource-mass limits, persona-core metadata and runtime parameter fields with a shared Scene carrier while retaining the removal of persona-indexed runtime structures.",
       "sha256": "14543fd41d0fff76678188a510eb2a99e79404c2a8875589fd2e588e3bfa46de",
       "line_count": 1201
     }
