@@ -17,11 +17,9 @@ class V2ArtifactTests(unittest.TestCase):
         self.assertEqual(cards["freeze_id"], "HUMAN-DYN-ADEQ-S0-MODEL-FREEZE-INITIAL-002")
         self.assertFalse(cards["source_eligibility"]["INITIAL-001"])
         self.assertTrue(cards["source_eligibility"]["INITIAL-002"])
-        self.assertEqual(
-            {item["model_id"]: item["model_version"] for item in cards["models"]},
-            {key: value["model_version"] for key, value in parameters["models"].items()},
-        )
+        self.assertEqual({item["model_id"]: item["model_version"] for item in cards["models"]}, {key: value["model_version"] for key, value in parameters["models"].items()})
         self.assertEqual(kernel["state_version"], "s0-h-incremental-2")
+        self.assertEqual(kernel["online_state_contract"]["source_instance"], "EXACT_MATCH")
         self.assertEqual(compatibility["validation_stage"], "PARSE_BEFORE_TRANSITION")
 
     def test_no_source_materialization_artifact(self):
