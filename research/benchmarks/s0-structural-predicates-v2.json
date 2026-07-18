@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "HUMAN-DYN-ADEQ-S0-STRUCTURAL-PREDICATES-V2",
+  "prediction_probability_scale": 1000000,
+  "structural_point_required_fields": [
+    "case_id",
+    "match_id",
+    "history_condition",
+    "continuation_condition",
+    "context_variant",
+    "immediate_action_distribution",
+    "long_horizon_region_distribution"
+  ],
+  "predicates": [
+    {
+      "predicate_id": "A-C1-HISTORY-SENSITIVITY-V2",
+      "matched_dimension": "history_condition",
+      "left": "H-STABLE",
+      "right": "H-BREACH",
+      "formula": "threat_mass(right) - threat_mass(left) >= 0",
+      "threat_categories": ["ASSERT_BOUNDARY", "TEMPORARY_WITHDRAWAL", "PUNITIVE_ATTACK", "RELATION_EXIT"],
+      "exceptions": []
+    },
+    {
+      "predicate_id": "A-C2-REPAIR-DISCRIMINATION-V2",
+      "matched_dimension": "continuation_condition",
+      "left": "F-REPAIR",
+      "right": "F-DEFLECT",
+      "formula": "healthy_region_mass(left) - healthy_region_mass(right) > 0",
+      "healthy_regions": ["PARTIAL_REPAIR", "GUARDED_CONTINUATION"]
+    },
+    {
+      "predicate_id": "A-C3-REPETITION-SENSITIVITY-V2",
+      "matched_dimension": "context_variant",
+      "left": "MATCHED_NO_REPEAT",
+      "right": "MATCHED_REPEAT",
+      "formula": "P(PARTIAL_REPAIR|left) - P(PARTIAL_REPAIR|right) >= 0"
+    },
+    {
+      "predicate_id": "A-C4-PROJECTION-SELECTIVITY-V2",
+      "matched_dimension": "context_variant",
+      "left": "PRIVATE_MATCH",
+      "right": "PUBLIC_MATCH",
+      "formula": "P(SUPPRESS_FOR_ROLE|right) - P(SUPPRESS_FOR_ROLE|left) >= 0"
+    },
+    {
+      "predicate_id": "A-C5-LOCAL-VARIATION-V2",
+      "formula": "not universal_mode_collapse and maximum_pairwise_total_variation >= 0.05",
+      "universal_single_category_max_probability": 0.98,
+      "minimum_intervention_total_variation": 0.05
+    }
+  ],
+  "non_predicates": [
+    {
+      "former_id": "A-C6-NO-AUTOMATIC-HEALTHY-CONVERGENCE",
+      "status": "INTERPRETIVE_NON_REQUIREMENT_NOT_PASS_FAIL"
+    },
+    {
+      "former_id": "A-C7-AUTHORITY-INTEGRITY",
+      "status": "MOVED_TO_IMPLEMENTATION_INTEGRITY_TESTS",
+      "required_tests": [
+        "INPUT_RECEIPT_BYTES_IMMUTABLE",
+        "RECEIPT_SCOPE_NOT_PROMOTED",
+        "ACTION_OCCURRENCE_NOT_AUTO_ENDORSEMENT_OR_RESPONSIBILITY",
+        "NORMATIVE_AUTHORITY_STATE_NOT_UPDATED_WITHOUT_TYPED_COMPATIBLE_RECEIPT"
+      ]
+    }
+  ],
+  "implementation_module": "dynamics.s0.structural"
+}
