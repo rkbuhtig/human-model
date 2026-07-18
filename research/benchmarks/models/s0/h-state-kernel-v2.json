@@ -1,15 +1,49 @@
 {
-  "authority_probe_excluded_from": ["PREDICTIVE_FEATURES", "LEADERBOARD", "COMPRESSION_BYTES"],
-  "authority_probe_fields": ["consent", "fault", "obligation", "permission", "authority"],
+  "authority_probe_excluded_from": [
+    "PREDICTIVE_FEATURES",
+    "LEADERBOARD",
+    "COMPRESSION_BYTES"
+  ],
+  "authority_probe_fields": [
+    "consent",
+    "fault",
+    "obligation",
+    "permission",
+    "authority"
+  ],
   "clock_rules": {
-    "episode": {"decay_each_step": "SLOW", "fields": ["unresolved_breach", "repair_progress"]},
-    "fast": {"decay_each_step": true, "fields": ["threat", "approach", "control_capacity"]},
+    "episode": {
+      "decay_each_step": "SLOW",
+      "fields": [
+        "unresolved_breach",
+        "repair_progress"
+      ]
+    },
+    "fast": {
+      "decay_each_step": true,
+      "fields": [
+        "threat",
+        "approach",
+        "control_capacity"
+      ]
+    },
     "settlement": {
-      "fields": ["causal_attribution", "control_attribution", "reflective_ownership", "endorsement", "responsibility_acceptance"],
+      "fields": [
+        "causal_attribution",
+        "control_attribution",
+        "reflective_ownership",
+        "endorsement",
+        "responsibility_acceptance"
+      ],
       "updates": "COMPATIBLE_TYPED_RECEIPTS_ONLY"
     },
     "slow": {
-      "fields": ["trust_expectation", "continuation_commitment", "counterpart_reliability", "expected_repair"],
+      "fields": [
+        "trust_expectation",
+        "continuation_commitment",
+        "counterpart_reliability",
+        "expected_repair"
+      ],
       "updates": "CONSOLIDATION_EVENTS_ONLY"
     }
   },
@@ -18,12 +52,24 @@
     "ordinal": "EXACT_NEXT",
     "raw_history_reread": false,
     "receipt_chain": "SHA256_CHAIN",
+    "source_instance": "EXACT_MATCH",
     "state_digest": "REQUIRED"
   },
   "predictive_fields": [
-    "threat", "approach", "control_capacity", "unresolved_breach", "repair_progress",
-    "trust_expectation", "continuation_commitment", "counterpart_reliability", "expected_repair",
-    "causal_attribution", "control_attribution", "reflective_ownership", "endorsement", "responsibility_acceptance"
+    "threat",
+    "approach",
+    "control_capacity",
+    "unresolved_breach",
+    "repair_progress",
+    "trust_expectation",
+    "continuation_commitment",
+    "counterpart_reliability",
+    "expected_repair",
+    "causal_attribution",
+    "control_attribution",
+    "reflective_ownership",
+    "endorsement",
+    "responsibility_acceptance"
   ],
   "schema_version": "s0-h-state-kernel-v2/1.0.0",
   "state_version": "s0-h-incremental-2"
