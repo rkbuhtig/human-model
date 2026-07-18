@@ -1,0 +1,53 @@
+{
+  "benchmark_id": "HUMAN-DYN-ADEQ-S0",
+  "claim_scope": "REPRESENTATION_AND_UPDATE_PIPELINE_COMPARISON_NOT_PURE_REPRESENTATION_ISOLATION",
+  "explicit_absences": [
+    "SOURCE_SEED",
+    "SOURCE_INSTANCE",
+    "DEVELOPMENT_CORPUS",
+    "EVALUATION_CORPUS",
+    "STABILITY_CORPUS",
+    "FITTED_PARAMETERS",
+    "SCORE"
+  ],
+  "freeze_id": "HUMAN-DYN-ADEQ-S0-MODEL-FREEZE-INITIAL-002",
+  "models": [
+    {
+      "execution_modes": ["FULL_PREFIX"],
+      "feature_residence": "CURRENT_EVENT_AND_CONTEXT_ONLY",
+      "model_id": "B0",
+      "model_version": "s0-initial-2",
+      "persistent_state": "NONE"
+    },
+    {
+      "execution_modes": ["FULL_PREFIX"],
+      "feature_residence": "TWO_SCALAR_ACCUMULATOR",
+      "model_id": "B1",
+      "model_version": "s0-initial-2",
+      "persistent_state": "TRUST_VALENCE_ONLY"
+    },
+    {
+      "execution_modes": ["FULL_PREFIX"],
+      "feature_residence": "ORDER_AND_COUNT_PRESERVING_DIRECT_HISTORY",
+      "model_id": "B2",
+      "model_version": "s0-initial-2",
+      "persistent_state": "RAW_OBSERVABLE_HISTORY"
+    },
+    {
+      "diagnostics": "AUTHORITY_PROBE_AND_STATE_DELTA_EXCLUDED_FROM_LEADERBOARD",
+      "execution_modes": ["FULL_PREFIX", "STATE_ONLY_INCREMENTAL"],
+      "feature_residence": "INCREMENTAL_TYPED_PREDICTIVE_STATE",
+      "model_id": "H",
+      "model_version": "s0-initial-2",
+      "persistent_state": "PREDICTIVE_H_STATE"
+    }
+  ],
+  "schema_version": "s0-model-cards-v2/1.0.0",
+  "shared_predictive_learner": "COUNTED_MULTINOMIAL_NAIVE_BAYES_NO_MODEL_SPECIFIC_BASE_LOGITS",
+  "source_eligibility": {
+    "INITIAL-001": false,
+    "INITIAL-002": true,
+    "beacon_resolution_requires_merge": true
+  },
+  "status": "INITIAL_MODEL_IMPLEMENTATION_V2_FROZEN_UNEXECUTED_SOURCE_SEED_UNRESOLVED"
+}
