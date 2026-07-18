@@ -1,43 +1,126 @@
 # Human Model Research Program
 
-## 정체성
+## Current identity
 
-Human Model은 불완전한 관측과 여러 시간척도 아래에서 인간의 경로 의존적
-변화를 연구한다. 한 상태의 국소적 인과 영향이 다른 관할의 사실·의도·수행·
-세계 사건을 성립시킬 권한으로 자동 승격되지 않도록 구분하고, 실제 인간에서
-그 경계가 어떻게 무너지는지도 모델링하려는 typed hybrid dynamics 연구
-프로그램이다.
+Human Model studies people as stochastic, path-dependent systems whose possible interpretations and actions are organized over time by multiple state timescales, settlement processes, resource constraints, self-feedback and recursively represented other agents.
+
+```text
+observable history and current occurrence
++ fast state
++ episode residue
++ narrative/self topology
++ capacity
++ self/other models
++ settlement history
+→ constrained interpretation and action distributions
+→ realized action and world/social response
+→ self-feedback and delayed settlement
+→ updated state and transition tendencies
+```
+
+The project does not treat one exact thought, action or trace as the default human answer. The primary adequacy target is the distribution of possible episode trajectories and the slower structure that organizes their recurrence, divergence, recovery and long-run change.
+
+## Strongest authority boundary
 
 ```text
 Local causal influence
 ≠ cross-domain certification authority
 ```
 
-이 원리는 상태 간 영향을 금지하지 않는다. 느낌은 믿음을, 기억은 접근성을,
-몸은 수행 가능성을 바꿀 수 있다. 그 영향만으로 타 관할을 인증하지 못한다는
-뜻이다.
+This rule does not prohibit causal influence between human states. Affect may change attention and belief, memory may change accessibility, and Narrative may bias future sampling. Those effects do not by themselves certify an external fact, rewrite a past occurrence, create another person's consent or issue normative authority.
 
-## 현재 상태
+The current synthesis extends this boundary across several settlement jurisdictions:
 
-현재 Dynamics는 v0.1.1의 구조적 구분과 동역학적 반례에 v0.2 temporal provenance
-slice, read-only mental-transition measurement, `MORPH-001A` reducer-proposal
-instrumentation과 opt-in `MORPH-001B` proposal/declared-band proxy comparison을 추가한 최소 모델이다.
-`Q-v1`은 processed occurrence마다 literal persistent field delta를 측정해 immutable
-receipt와 count/density report를 파생한다. proposal ledger는 각 occurrence의 flat
-ordered pre-clamp proposal/commit tuple을 별도 receipt로 보존한다. 어느 쪽도 인간의
-정신 시간·DeformationDemand·MorphicLoad를 식별하지 않았다. `MORPH-001B`의 band도
-인간 능력의 측정값이 아니라 명시적으로 선택한 synthetic simulation parameter다.
-인간에 대한 경험적 예측 정확도도 아직 검증되지 않았다.
+```text
+occurrence
+≠ action realization
+≠ authorship endorsement
+≠ narrative adoption
+≠ interpersonal or normative settlement
+```
 
-| 근거 층 | 지위 |
+A past occurrence may remain immutable while its present meaning, ownership or narrative placement is reconsidered through later access. No-backflow and retrospective re-adjudication are therefore complementary.
+
+## Current synthesis
+
+The current program direction is documented in:
+
+- [Multi-Clock Distributional Human Dynamics](syntheses/2026-07-18-multi-clock-distributional-human-dynamics.md)
+- [Distributional-adequacy mainline adoption record](adoption-records/2026-07-18-distributional-adequacy-mainline.md)
+- [HUMAN-DYN-ADEQ-S0 draft](benchmarks/human-dyn-adequacy-s0.md)
+
+The synthesis separates five functional regions without freezing them as one canonical runtime object model:
+
+```text
+Internal State
+Settlement Ledgers
+Context
+Transition Kernel
+Readouts
+```
+
+`Episode`, `Narrative`, `attractor`, `basin`, `grammar` and `field` are not automatically promoted to runtime types. Episode may denote one realized trajectory and its medium-timescale residue; Narrative is currently a hypothesis about the slow organization of possible episode trajectories. Exact node, edge and writer representations remain open.
+
+## Repository status
+
+The repository contains several evidence and implementation layers that must not be collapsed.
+
+| Layer | Current status |
 |---|---|
-| Historical / engineering | `PARTIAL` |
-| Executable / structural | `PARTIAL` |
-| Human-empirical | `OPEN` |
+| December–January lineage | partial historical recovery; Volume 0 not yet written |
+| Dynamics v0.1–v0.2 | executable historical baseline and partial typed dynamics |
+| `INTERP-001D1` | executed/evaluated detached synthetic conformance |
+| `INTERP-001D2a0` | frozen/unexecuted reference harness |
+| `INTERP-001D2a0-EXEC0` | frozen/unexecuted reference harness |
+| draft `INTERP-001D2a0-MAT0` PR #21 | non-mainline hold under the current program order |
+| revised P0-v1 elicitation instrument | frozen/unexecuted development infrastructure |
+| human-empirical predictive adequacy | open |
 
-구조 테스트 통과나 그럴듯한 출력은 인간에 대한 경험적 증거가 아니다.
+A reference harness may be reused to test ordering, authority, isolation or deterministic replay. Its exact record layout, stage rank, source bundle or byte serialization is not thereby the unique ontology of the Human Model.
 
-## 문서 권위
+## Current mainline
+
+The immediate program order is:
+
+```text
+1. document the current synthesis
+2. reconstruct Volume 0 with explicit lineage labels
+3. preregister HUMAN-DYN-ADEQ-S0
+4. execute S0 before adding another contract layer
+5. retain, revise or retire the proposed representation from the result
+6. complete revised-instrument repilot before actual acquisition through that surface
+7. move to human/model acquisition only under separate source-specific protocols
+```
+
+`HUMAN-DYN-ADEQ-S0` compares:
+
+```text
+B0  current-event-only model
+B1  simple trust/valence accumulator
+B2  direct full-history-to-output model
+H   explicit state-and-settlement model
+```
+
+The H model must earn its intermediate representation through held-out prediction, compression, intervention selectivity, long-horizon stability, data efficiency or successful state-level probes. A vocabulary that merely sounds explanatory is insufficient.
+
+## Research layers
+
+The original three-layer separation remains valid:
+
+```text
+Contract Layer
+Descriptive Dynamics
+Experimental Protocol
+```
+
+The current architecture document records the implemented and historical boundaries:
+
+- [Research Architecture](architecture.md)
+- [Research Roadmap](roadmap.md)
+
+The distributional synthesis does not erase those documents. It changes the immediate research question from exact structural closure to explanatory adequacy.
+
+## Evidence authority
 
 ```text
 assessment
@@ -47,117 +130,60 @@ assessment
 → empirical evaluation
 ```
 
-각 화살표는 자동 승격이 아니라 별도 판정 문턱이다.
+Each arrow is a separate decision threshold, not an automatic promotion.
 
-- [`assessments/`](../assessments/): 외부 비동료평가·비정본 자료
-- [`adoption-records/`](adoption-records/): `Adopt / Revise / Hold` 판정
-- [`architecture.md`](architecture.md): 연구층과 의존 경계
-- [`roadmap.md`](roadmap.md): 단계별 범위와 종료 조건
-- [`rfcs/`](rfcs/): 구현 전 제안
-- [`claims/`](claims/): claim의 종류·범위·근거·실패 조건
-- [`defects/`](defects/): 당시 기록과 현재 해석을 분리한 결함 corpus
-- [`benchmarks/`](benchmarks/): 계약 mutation, 구조 ablation, 시간 비교 계획
-- [`scenarios/`](scenarios/): 현실 영역의 저자 생성 가상 scenario와 기능 관할 contrast 계약
-
-## 목표 아키텍처
+The following evidence lanes must remain distinct:
 
 ```text
-Contract Layer
-├─ Certification Contract
-├─ Provenance / Integrity Contract
-├─ Transition Lineage Contract
-└─ Accounting Contract
-
-Descriptive Dynamics
-Experimental Protocol
+historical engineering recurrence
+structural executable conformance
+conceptual literature adjacency
+imported empirical constraint
+open-dataset reanalysis
+new acquisition
 ```
 
-v0.1 baseline은 [원격 source revision과 semantic golden](../dynamics/reports/baseline-v0.1.md)으로 동결했다. v0.1.1 package 경계는 구현되었고, 기존 queue→Access
-결합은 명명된 legacy bridge로 남아 있다. v0.2 temporal provenance와 read-only
-mental-transition type/measurement surface는 구현되었다. 그 위에
-[`MORPH-001A`](benchmarks/morph-001-demand-commit.md)가 pre-constraint reducer
-proposal과 committed target을 분리하는 instrumentation을 구현했다. 이 proposal은
-independently identified `DeformationDemand`가 아니다. 이어
-[`MORPH-001B`](benchmarks/morph-001b-proposal-envelope-comparison.md)는 proposal을
-실험자가 선언한 asymmetric reducer-write band와 비교하는 read-only surface를
-구현했다. 이는 measured human `AccommodationEnvelope`나 `MorphicLoad`가 아니다.
-`MORPH-001C` outcome/load comparison은 해석·회복 outcome을 성급히 선형화하지 않도록
-`DEFERRED`한다. 먼저 [`INTERP-001`](benchmarks/interp-001-subjective-encounter-binding.md)이
-subjective encounter, current access, Episode candidate, interpretive adjudication과
-object-scoped target-form readout의 타입·시간·권한 경계를 문서화한다.
-`INTERP-001A2`는 reception→access와 reception→candidate-coherence를 다루는 첫 M1
-execution/evaluation contract를 동결했고, [`INTERP-001B`](benchmarks/interp-001b-m1-conformance.md)가
-manifest에 고정된 assembly/adjudication phase까지 포함해 detached conformance를
-실행했다. [`INTERP-001D1`](benchmarks/interp-001d1-target-form-ghost-ablation.md)은
-outcome-blind `TF0–TF2` source compiler, supplied TargetForm/Reception formation
-intervention과 exact-access Ghost path를 서로 다른 세 block으로 분리한 88-cell
-execution/evaluation contract로 동결했고,
-[`D1 conformance run`](benchmarks/interp-001d1-v1-conformance.md)이 88/88 signature와
-91/91 non-retirement assertion을 통과했다. 상태는
-`EXECUTED / EVALUATED SYNTHETIC CONFORMANCE`다. source compiler 성공, supplied-input
-sensitivity와 Ghost-path distinction은 서로 다른 격리 판정이며 block 사이에 output을
-전달하는 end-to-end pipeline이 아니다. development/sealed도 evaluator-only synthetic
-분리이지 예측 partition이 아니다. durable TargetForm writer, later-access feedback, 전체
-EF manifest와 Dynamics runtime behavior는 여전히 `OPEN`이다. residual·load와
-INTERP/MORPH 접합은 detached lab 판별 뒤에 남아 있다.
-`FlowUpdate/EventJump`·no-event flow·burst/spaced와
-`HM-DYN-001` predictive comparison은 독립적인 planned temporal-comparison 축이며
-`MORPH-001`의 선행 blocker가 아니다. `affect → SubjectiveBelief`는 독립 v0.3 축이고,
-`WarrantState`, 독립 주관 시계, 퀄리아–부하 대응식, 다른 기억 오귀속은 `HOLD`다.
+The persona-engine lineage is a hypothesis generator and historical ablation source. It is not human ground truth for the theory it helped produce.
 
-D1과 recursive D2 사이에는
-[`INTERP-DIALOGUE-001A`](adoption-records/2026-07-13-functional-jurisdiction-scenarios.md)
-기능 관할 gate를 둔다. 관찰·보고된 현상군을 기능 residence의 정답으로 취급하지 않고,
-관계·업무·위험이라는 현실 영역의 저자 생성 가상 scenario에서 한 declared factor만
-바꾸는 contrast를 등록한다. factor별 contract는 조작 source lane, public-record effect,
-고정 factor, `registered_candidate_probe_domains`, must-remain-equal 항목과 열린
-discriminator를 구분한다. 후보 domain은 비배타적 관측 목록이므로 목록 밖 효과는 fixture
-위반이 아니라 현재 기능 분해의 scope failure 또는 열린 결과다.
+## Document map
 
-[`INTERP-DIALOGUE-001B`](adoption-records/2026-07-13-functional-jurisdiction-trace-oracle.md)는
-23개 exact trace field, prefix/initial/one-future ordinal horizon, 9개 factor별 38개 competing placement hypothesis,
-동일 future option 비교, REL initial×later mood 2×2와 명시적 out-of-model lane을 결과 전에
-동결했다. 이 oracle은 mental ground truth가 아니라 hypothesis-conditional conformance
-contract다. natural contrast는 association signature만 주며 direct edge는 D2a-only
-node clamp로 남는다. observed equality는 alias가 아니고, durable state와 slow cache는
-현재 one-future-access horizon에서 `NOT_IDENTIFIABLE_UNDER_HORIZON`이다. 단순 challenger는 표현력 순위표가
-아니라 alias·degeneracy control이다.
+- [`assessments/`](../assessments/): external non-peer and non-canonical assessments
+- [`adoption-records/`](adoption-records/): adopted, revised or held program decisions
+- [`architecture.md`](architecture.md): research layers, dependencies and implemented boundaries
+- [`roadmap.md`](roadmap.md): historical implementation status and program sequence
+- [`syntheses/`](syntheses/): current integrations that must not be projected backward as recovered canon
+- [`rfcs/`](rfcs/): implementation proposals and representation candidates
+- [`claims/`](claims/): typed claims, scope, exclusions, support and failure conditions
+- [`defects/`](defects/): contemporaneous failures and retrospective competing repairs
+- [`benchmarks/`](benchmarks/): structural, temporal and adequacy comparisons
+- [`scenarios/`](scenarios/): frozen scenario, elicitation and detached-lab artifacts
 
-후속 [`INTERP-DIALOGUE-001P0-v0`](scenarios/interp-dialogue-001/elicitation/README.md)는
-[`development elicitation adoption`](adoption-records/2026-07-13-development-elicitation-instrument.md)에
-따라 24개 presentation, generic immediate/later prompt, matched future option과 scripted
-replay provenance를 동결했다. observation coordinate와 prompt/response schedule을 분리하며,
-current runner는 `SCRIPTED_ADVERSARIAL_RESPONSE`만 replay record로 materialize한다. 그
-record는 실제 delivery/response occurrence가 아니며 mapping·`OUT_OF_MODEL`·defect·placement를
-발행하지 않는다. author walkthrough와 language inspection은 evaluator-side source다. P0의
-상태는 `FROZEN / UNEXECUTED — DEVELOPMENT ELICITATION ONLY`다. 사전등록된
-[`P1-v0`](scenarios/interp-dialogue-001/elicitation/p1-development-pilot-v0-report.md)은 exact P0-v0를
-30 session/24 run으로 replay하고 96개 생성 artifact와 manifest, 9 confirmed/4 deferred/1 rejected
-defect receipt, 8개의 미채택·미실행 revision proposal을 발행해 `EXECUTED / EVALUATED`가 됐다.
-후속 [`P0-v1 decision/freeze`](scenarios/interp-dialogue-001/elicitation/p0-v1/p0-v1-decision-report.md)는
-18개 exact candidate/decision lineage, closed-world participant surface와 37개 exact rendered
-delivery, mapping-attempt lineage를 `FROZEN / UNEXECUTED`로 동결했다. 001A/001B 의미 source와
-P0-v0/P1-v0 bytes는 바꾸지 않았다. 이후 immediate mainline은
-[`INTERP-001D2a0`](scenarios/interp-dialogue-001/d2a0/README.md) 계약 동결 → detached D2a1 →
-`OBS-MAP-000`이다. D2a1 전에
-[`INTERP-001D2a0-EXEC0`](scenarios/interp-dialogue-001/d2a0/exec0/README.md)가 predecessor
-byte를 보존한 채 exact operator, lifecycle, explicit execution unit과 typed evaluator selector를
-`FROZEN / UNEXECUTED`로 닫는다. 이 bundle에는 runner, evaluator implementation 또는 결과가 없다.
-P1-v1은 merged v1 digest에 결박된 repilot 의무를 유지하지만 non-mainline
-hold이며, observation mapping 뒤에 재개 여부를 판정한다. P0-v1은 confirmed defect를 해결됐다고 선언하지 않으며 현재 artifact는 actual
-participant/model occurrence, human support, LLM latent 측정, D2a runtime, durable TargetForm
-또는 Narrative writer를 구현하지 않는다.
+## Lineage labels
+
+Volume 0 and future synthesis work must distinguish:
 
 ```text
-implemented Q-v1 receipt/count/density types
-≠ transition density predicts human trajectories
-≠ mental time unit identified
-≠ MorphicLoad or qualia measured
-
-ReducerProposal ≠ DeformationDemand ≠ AccommodationEnvelope ≠ MorphicLoad
-
-declared simulation envelope comparison ≠ measured human capacity or load
+RECOVERED
+STRUCTURAL_PRECURSOR
+CURRENT_SYNTHESIS
+OPEN_HYPOTHESIS
+METAPHOR
 ```
 
-상세 범위는 [roadmap](roadmap.md), 기존 세 RFC와
-[RFC 0004](rfcs/0004-subjective-encounter-interpretive-reorganization.md)를 따른다.
+A current synthesis is not silently written back into the historical corpus.
+
+## Explicit non-claims
+
+The current program has not established:
+
+```text
+a canonical HumanState ontology
+a validated human Episode or Narrative attractor
+a clinical taxonomy
+a causal-state or epsilon-machine identity
+predictive superiority over direct history conditioning
+a calibrated human capacity or resource metric
+human, participant or LLM empirical support for the current synthesis
+```
+
+Structural tests and plausible output are not evidence of human predictive accuracy. The next meaningful promotion requires an executed distributional comparison.
