@@ -41,12 +41,13 @@ occurrence
 
 A past occurrence may remain immutable while its present meaning, ownership or narrative placement is reconsidered through later access. No-backflow and retrospective re-adjudication are therefore complementary.
 
-## Current synthesis
+## Current synthesis and lineage audit
 
 The current program direction is documented in:
 
 - [Multi-Clock Distributional Human Dynamics](syntheses/2026-07-18-multi-clock-distributional-human-dynamics.md)
 - [Distributional-adequacy mainline adoption record](adoption-records/2026-07-18-distributional-adequacy-mainline.md)
+- [Volume 0 minimal lineage audit](volume-0/README.md)
 - [HUMAN-DYN-ADEQ-S0 draft](benchmarks/human-dyn-adequacy-s0.md)
 
 The synthesis separates five functional regions without freezing them as one canonical runtime object model:
@@ -61,18 +62,29 @@ Readouts
 
 `Episode`, `Narrative`, `attractor`, `basin`, `grammar` and `field` are not automatically promoted to runtime types. Episode may denote one realized trajectory and its medium-timescale residue; Narrative is currently a hypothesis about the slow organization of possible episode trajectories. Exact node, edge and writer representations remain open.
 
+The first Volume 0 slice registers twelve December persona-engine sources and three January/current bridge sources. It recovers one lineage in detail:
+
+```text
+proposal / output / derived framing
+≠ evidence
+≠ commitment
+≠ state write
+```
+
+This is a historical-engine recurrence, not human-empirical support.
+
 ## Repository status
 
 The repository contains several evidence and implementation layers that must not be collapsed.
 
 | Layer | Current status |
 |---|---|
-| December–January lineage | partial historical recovery; Volume 0 not yet written |
+| December–January lineage | minimal source-bound Volume 0 slice added; broader reconstruction open |
 | Dynamics v0.1–v0.2 | executable historical baseline and partial typed dynamics |
 | `INTERP-001D1` | executed/evaluated detached synthetic conformance |
 | `INTERP-001D2a0` | frozen/unexecuted reference harness |
 | `INTERP-001D2a0-EXEC0` | frozen/unexecuted reference harness |
-| draft `INTERP-001D2a0-MAT0` PR #21 | non-mainline hold under the current program order |
+| PR #21 `INTERP-001D2a0-MAT0` | closed as superseded; branch preserved as a non-mainline representation-specific proposal |
 | revised P0-v1 elicitation instrument | frozen/unexecuted development infrastructure |
 | human-empirical predictive adequacy | open |
 
@@ -83,12 +95,12 @@ A reference harness may be reused to test ordering, authority, isolation or dete
 The immediate program order is:
 
 ```text
-1. document the current synthesis
-2. reconstruct Volume 0 with explicit lineage labels
-3. preregister HUMAN-DYN-ADEQ-S0
+1. document the current synthesis                         DONE
+2. complete the minimal Volume 0 lineage audit           CURRENT SLICE
+3. preregister HUMAN-DYN-ADEQ-S0 exactly
 4. execute S0 before adding another contract layer
-5. retain, revise or retire the proposed representation from the result
-6. complete revised-instrument repilot before actual acquisition through that surface
+5. retain, revise or retire the proposed representation
+6. complete revised-instrument repilot before acquisition through that surface
 7. move to human/model acquisition only under separate source-specific protocols
 ```
 
@@ -102,6 +114,8 @@ H   explicit state-and-settlement model
 ```
 
 The H model must earn its intermediate representation through held-out prediction, compression, intervention selectivity, long-horizon stability, data efficiency or successful state-level probes. A vocabulary that merely sounds explanatory is insufficient.
+
+Additional Volume 0 chapters are not automatic blockers for S0. They should be opened only when the exact preregistration requires a historical distinction that the current manifest and matrix do not resolve.
 
 ## Research layers
 
@@ -152,6 +166,7 @@ The persona-engine lineage is a hypothesis generator and historical ablation sou
 - [`architecture.md`](architecture.md): research layers, dependencies and implemented boundaries
 - [`roadmap.md`](roadmap.md): historical implementation status and program sequence
 - [`syntheses/`](syntheses/): current integrations that must not be projected backward as recovered canon
+- [`volume-0/`](volume-0/): source-bound December persona-engine prehistory and invariant lineage
 - [`rfcs/`](rfcs/): implementation proposals and representation candidates
 - [`claims/`](claims/): typed claims, scope, exclusions, support and failure conditions
 - [`defects/`](defects/): contemporaneous failures and retrospective competing repairs
@@ -186,4 +201,4 @@ a calibrated human capacity or resource metric
 human, participant or LLM empirical support for the current synthesis
 ```
 
-Structural tests and plausible output are not evidence of human predictive accuracy. The next meaningful promotion requires an executed distributional comparison.
+Structural tests, source recurrence and plausible output are not evidence of human predictive accuracy. The next meaningful promotion requires an executed distributional comparison.
