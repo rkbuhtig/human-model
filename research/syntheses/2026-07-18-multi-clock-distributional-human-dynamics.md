@@ -8,22 +8,20 @@
 | Human-empirical status | `OPEN` |
 | Canonical ontology status | `NOT FROZEN` |
 
-This document states the current research synthesis after comparing the December persona-engine lineage, the January chapters and the July typed-contract program. It is not a claim that the recovered engine already modeled humans correctly.
+This document integrates the December persona-engine lineage, the January chapters and the July typed-contract program. It does not claim that the recovered engine already modeled humans correctly.
 
 ## 1. Central object of study
 
-The model target is not one exact next thought, one exact action or one exact trace.
+The target is not one exact thought, action or trace.
 
 ```text
 same person and macro-history
-+ similar current event
++ similar current occurrence
 + varying micro-context, attention and capacity
-→ multiple plausible local interpretations and actions
+→ multiple plausible interpretations and actions
 ```
 
-Those local variations are not unrestricted. Over time, self-feedback, social response, memory access, resource limits and repeated settlement organize them into a smaller set of recurring trajectory structures.
-
-The target is therefore:
+Local variation is constrained. Self-feedback, social response, memory access, resource limits and delayed settlement organize possible paths over time.
 
 ```text
 local possibility distribution
@@ -32,18 +30,17 @@ local possibility distribution
 + long-run episode/narrative organization
 ```
 
-A model is adequate only if its state representation improves prediction or compression of held-out trajectory distributions over simpler alternatives.
+A state representation earns retention only if it improves held-out source prediction, compression, intervention selectivity or generalization over simpler alternatives.
 
-## 2. Five architectural regions
+## 2. Five functional regions
 
-The current synthesis separates five regions. They are functional roles, not yet canonical classes or files.
+These are functional regions, not canonical classes or files.
 
-### 2.1 Internal state
+### 2.1 Internal State
 
 ```text
 FastState
-- current affect
-- attention and salience
+- current affect, attention and salience
 - present interpretation
 - impulse and action readiness
 
@@ -52,74 +49,109 @@ EpisodeResidue
 - recent path-dependent accessibility
 - local hysteresis and after-effects
 
-NarrativeState
-- slow self/relationship topology
-- recurrent expectations and return paths
-- long-run constraints on what becomes plausible next
+Narrative/Self State
+- slow recurrent expectations and return paths
+- long-run self/relationship organization
 
 CapacityState
 - fatigue and control capacity
-- attentional, temporal and social-risk budget
+- attentional, temporal and social-risk limits
 
 SelfOtherModels
 - current self-model
 - compressed model of other agents
-- approximation of how another agent models the self
+- bounded approximation of reciprocal modeling
 ```
 
-These components need not update at the same rate. A surface action may change immediately while Episode residue, Narrative topology and transition parameters remain nearly fixed.
+These components need not update at the same rate.
 
-### 2.2 Settlement ledgers
+### 2.2 Settlement Receipts
 
-A human event can be final in one sense and unsettled in another.
+A human event can be final in one jurisdiction and unsettled in another. `Ledger` denotes an append-only collection of typed receipts, not a universal truth store.
+
+#### OccurrenceReceiptLedger
 
 ```text
-OccurrenceLedger
-- what occurred
-
-ActionLedger
-- what action was realized
-
-AuthorshipLedger
-- what the subject currently endorses, owns or accepts responsibility for
-
-NarrativeAdoptionLedger
-- what has been incorporated into a durable self/relationship account
-
-NormativeSettlementLedger
-- what is interpersonally or institutionally recognized as obligation, consent, fault or authority
+OccurrenceReceipt
+- source identity and provenance
+- declared scope
+- occurred/reported/registered time
+- submitted or observed occurrence content
+- grounds lane
 ```
 
-These ledgers must not be collapsed.
+Minimum scopes:
 
 ```text
-an action occurred
-≠ it was fully intended
-≠ it is currently endorsed
-≠ it defines the person
-≠ another person consented
-≠ it is normatively justified
+REGISTERED_REPORT
+- a source reported the content
+
+INTERNAL_OCCURRENCE_REPORT
+- the subject reported a feeling, thought or perception occurrence
+
+CERTIFIED_WORLD_OCCURRENCE
+- a separate evidence/grounds protocol established an external occurrence
 ```
+
+```text
+receipt registration
+≠ certification of every world claim in the payload
+```
+
+The immutable object is the registered receipt and its provenance. Later interpretation must not silently alter that receipt. This does not make all receipt content externally true.
+
+#### ActionReceiptLedger
+
+Records realized action occurrence. It does not by itself certify intent, control, quality, endorsement or outcome.
+
+#### AuthorshipSettlementLedger
+
+Authorship is multi-dimensional.
+
+```text
+causal_attribution
+control_attribution
+reflective_ownership
+endorsement
+responsibility_acceptance
+```
+
+These relations may diverge. A person may repudiate an action while accepting responsibility for repair.
+
+#### NarrativeAdoptionLedger
+
+Records current durable incorporation into a self/relationship account. Later re-adjudication may change placement without rewriting the occurrence receipt.
+
+#### NormativeSettlementLedger
+
+Normative settlement is not one scalar. It preserves independent typed relations:
+
+```text
+consent
+fault
+obligation
+permission
+authority
+recognized remedy
+```
+
+Self-authorship or Narrative cannot issue another person's consent or authority.
 
 ### 2.3 Context
-
-Context is not part of the person merely because it shapes the person.
 
 ```text
 external occurrence
 physical environment
 role and audience
 relationship configuration
-other-agent response
+actual other-agent response
 available information
 current bodily conditions
 ```
 
-The model must distinguish internal capacity from external constraint and internal other-models from the actual other agent.
+Context is not part of the person merely because it shapes the person. Internal other-models remain distinct from the actual other agent.
 
-### 2.4 Transition kernel
-
-The transition kernel denotes the current rules and tendencies by which state, context and ledgers generate future distributions.
+### 2.4 Transition Kernel
 
 ```text
 candidate generation
@@ -132,11 +164,9 @@ retrospective authorship adjudication
 slow adaptation of future transition tendencies
 ```
 
-Narrative may partly reside in slow state and partly parameterize this kernel. That placement remains an open representation question.
+Narrative may partly reside in slow state and partly parameterize this kernel. That placement remains open.
 
 ### 2.5 Readouts
-
-The following are readouts, not automatically persistent state objects:
 
 ```text
 interpretation distribution
@@ -145,47 +175,51 @@ surface-expression distribution
 future trajectory distribution
 ```
 
-A candidate distribution should be derived from state, ledgers, context and transition rules. It should not be equated with HumanState without a separate residence argument.
+Readouts are not automatically persistent state, evidence or settlement receipts.
 
 ## 3. Multi-clock settlement
 
 Human dynamics does not use one universal commit boundary.
 
 ```text
-occurrence can settle immediately
-behavior can be realized before reflective endorsement
-authorship can be reconsidered later
-narrative adoption can require repeated episodes
-normative settlement can depend on other agents and institutions
+an occurrence receipt may become immutable immediately
+an action may be realized before reflective endorsement
+authorship may be reconsidered later
+Narrative adoption may require repeated episodes
+normative settlement may depend on other agents or institutions
 ```
-
-The clocks interact but remain distinct.
 
 ### 3.1 Occurrence immutability
 
-Once an occurrence is accepted into its declared ledger, later interpretation must not rewrite whether that occurrence happened.
+After registration, a receipt's bytes, source, scope and provenance are immutable. The receipt may represent a report rather than a certified world fact.
+
+```text
+registered report remains fixed
+≠ reported proposition is externally certified
+```
 
 ### 3.2 Retrospective authorship adjudication
 
-Later access may change the subject's current relation to a past event.
+Later access may change the subject's current relation to a past occurrence or action.
 
 ```text
-what happened then                         fixed within the occurrence ledger
-what I now think it meant                  revisable
-whether I endorse or repudiate my action   revisable
-how it belongs in my self-narrative         revisable
-what rights another person has              not issued by self-narrative alone
+what was registered then                     fixed receipt
+what I now think it meant                    revisable
+whether I causally produced it               evidence-sensitive
+whether I could control it                    revisable assessment
+whether I endorse it                         revisable
+whether I accept repair responsibility       revisable
+how it belongs in my self-narrative          revisable
+what rights another person has               separate settlement
 ```
 
-No-backflow and retrospective re-adjudication are therefore complementary rather than contradictory.
+No-backflow and retrospective re-adjudication are complementary.
 
 ### 3.3 Partial finality
 
-A record can be final for one jurisdiction and open for another. The architecture must represent partial finality rather than one `COMMITTED / NOT_COMMITTED` bit.
+A record can be final for one jurisdiction and open for another. The architecture must not collapse this into one `COMMITTED / NOT_COMMITTED` bit.
 
 ## 4. Authority topology
-
-The strongest recurrent invariant in the lineage is not a particular module name but a restriction on what each layer may establish.
 
 ```text
 local causal influence
@@ -195,37 +229,35 @@ local causal influence
 Examples:
 
 ```text
-affect may bias attention and belief
-but does not by itself certify an external fact
+affect may bias attention
+but does not certify an external fact
 
 Narrative may bias future sampling
-but does not rewrite a past occurrence
+but does not rewrite a registered occurrence receipt
 
-self-authorship may alter future action
+reflective ownership may alter future conduct
 but does not issue another person's consent
 
 a generated candidate may influence selection
-but is not the selection receipt
+but is not the action or settlement receipt
 ```
 
-The current candidate for formalization is a typed authority relation:
+Candidate formalization:
 
 ```text
 Authority = actor × operation × target × scope × grounds × effective clock
 ```
 
-This is a current synthesis and potential original contribution. The claim that no adjacent cognitive architecture contains a comparable structure remains unestablished until a dedicated literature audit.
+This is a current synthesis and possible contribution. Literature uniqueness remains unestablished.
 
 ## 5. Episode and Narrative
 
 ### 5.1 Episode
 
-An Episode is not one universal stored object in the current synthesis.
-
-At the empirical surface, an episode is one realized sample trajectory:
+At the empirical surface, an episode is one realized trajectory:
 
 ```text
-state and history
+history and state
 → encounter
 → interpretation
 → action
@@ -234,15 +266,11 @@ state and history
 → subsequent state
 ```
 
-At the state level, `EpisodeResidue` denotes the medium-timescale effects left by such trajectories.
-
-The object-assembly representation in RFC 0004 remains one candidate representation, not the unique ontology.
+At the state level, `EpisodeResidue` denotes medium-timescale effects left by trajectories. RFC 0004's object-assembly representation remains one candidate, not the unique ontology.
 
 ### 5.2 Narrative
 
-Narrative is not one exact sequence and not necessarily one stable attractor point.
-
-It is the slow organization of possible episode trajectories:
+Narrative is not one exact sequence or necessarily one stable attractor point. It is a hypothesis about slow organization of possible episode trajectories:
 
 ```text
 recurring regions
@@ -250,16 +278,14 @@ transition probabilities
 return paths
 persistent avoidance or approach loops
 ignition and recovery thresholds
-possible long-run drift or topology change
+long-run drift or topology change
 ```
 
-`attractor`, `basin`, `grammar` and `field` remain metaphors until node equivalence, transition extraction and generative rules are operationally defined.
+`attractor`, `basin`, `grammar` and `field` remain metaphors until extraction and generative rules are operationally defined.
 
 ## 6. Scarcity and costly selection
 
-Choice is meaningful only under limited capacity and opportunity cost.
-
-The model should not assume one conserved scalar resource. Human constraints may include partially non-convertible resources:
+Choice occurs under partially non-convertible constraints:
 
 ```text
 time
@@ -272,13 +298,11 @@ risk capacity
 future optionality
 ```
 
-Resource changes can alter candidate width, gate passage, switching cost and hysteresis. They must not be silently relabeled as Narrative or identity change.
+Resource changes may alter candidate width, gate passage, switching cost and hysteresis. They must not be silently relabeled as Narrative or identity change.
 
 ## 7. Recursive social dynamics
 
 A person is not a closed single-agent system.
-
-The constraint layer may contain compressed models of other agents and of reciprocal modeling:
 
 ```text
 A's model of B
@@ -286,56 +310,48 @@ A's model of B's model of A
 B's model of A
 ```
 
-The actual other agent remains outside those internal models. Coupled social rollout is therefore a central future test, but it should follow identifiable single-agent and fixed-other-policy slices so that failure sources remain separable.
+The actual other agent remains outside those internal models. Coupled rollout is central but follows identifiable single-agent and fixed-other-policy slices.
 
 ## 8. Competing representations
 
-The current synthesis does not freeze one representation.
-
 ```text
-R0 — object-assembly representation
-EpisodeMaterialReference → Assembly → Adjudication → Integration
-
-R1 — multi-timescale state representation
-FastState → EpisodeResidue → NarrativeState
-
-R2 — predictive-state representation
-histories are equivalent when held-out future distributions are equivalent
-
-R3 — hybrid representation
-source-bound ledgers + multi-timescale state + predictive narrative topology
+R0 — object assembly
+R1 — multi-timescale state
+R2 — predictive-state compression
+R3 — hybrid receipts + state + predictive topology
 ```
 
 The preferred representation must earn its place through held-out prediction, compression, intervention selectivity and complexity-adjusted comparison.
 
 ## 9. Evaluation implications
 
-The main evaluation target is a trajectory distribution, not an exact full trace.
-
-A valid adequacy slice should distinguish:
+Evaluation is split.
 
 ```text
-mode collapse
-- one response is produced regardless of micro-context
+S0-A structural distributional adequacy
+- directional intervention constraints
+- mode collapse and unstructured randomness
+- authority and information-boundary failures
 
-unstructured randomness
-- many responses occur without state-dependent constraint
-
-healthy or pathological recurrence
-- local variation is organized by stable but revisable long-run structure
-
-rigidity
-- structural events cannot change the topology
-
-over-reset
-- any small event erases slow state
+S0-B source-conditional predictive adequacy
+- evaluator-held hidden continuation source
+- proper scoring
+- identical observable information for B0/B1/B2/H
 ```
 
-It should also compare an explicit HumanState/Narrative model against a direct full-history-to-output model. If the intermediate representation does not improve prediction, compression, intervention behavior or generalization, it may be explanatory decoration rather than a useful state.
+H-only reference-state probes are diagnostic and do not enter the B2/H leaderboard.
+
+A model may fail through:
+
+- mode collapse
+- state-insensitive randomness
+- rigidity
+- over-reset
+- target leakage
+- receipt/world-truth collapse
+- authorship dimension collapse
 
 ## 10. Evidence status
-
-The following evidence lanes remain separate:
 
 ```text
 historical engineering recurrence
@@ -346,13 +362,13 @@ open-dataset reanalysis
 new acquisition
 ```
 
-The persona-engine lineage can generate hypotheses and historical ablations. It cannot serve as human ground truth for the theory it helped produce.
+The persona-engine lineage is a hypothesis generator and historical ablation source, not human ground truth.
 
-## 11. Relation to current repository artifacts
+## 11. Relation to current artifacts
 
 ```text
 Dynamics v0.1–v0.2
-- executable historical baseline and typed boundary implementation
+- historical executable baseline and typed boundaries
 
 INTERP-001D1
 - detached structural conformance result
@@ -360,34 +376,23 @@ INTERP-001D1
 INTERP-001D2a0 / EXEC0
 - reference harnesses for ordering, authority and isolation
 
-INTERP-001D2a0-MAT0 draft
-- representation-specific closure on non-mainline hold
+PR #21 MAT0
+- closed unmerged representation-specific proposal
 
 RFC 0004
 - object-assembly precursor and competing representation
 ```
 
-None of these artifacts alone establishes distributional or human adequacy.
+None alone establishes distributional or human adequacy.
 
-## 12. Lineage labels
+## 12. Explicit non-claims
 
-Volume 0 and future theory documents must use the following labels explicitly:
-
-```text
-RECOVERED
-- directly attested in the historical corpus
-
-STRUCTURAL_PRECURSOR
-- historical structure that supports but does not entail the current synthesis
-
-CURRENT_SYNTHESIS
-- present integration not projected backward as original canon
-
-OPEN_HYPOTHESIS
-- discriminable proposal awaiting execution or evidence
-
-METAPHOR
-- useful language without an operational mapping
-```
-
-This document is primarily `CURRENT_SYNTHESIS`, with individual boundaries inherited from recovered and implemented authority structures.
+- canonical HumanState ontology
+- universal truth-valued OccurrenceLedger
+- one scalar Authorship or Normative settlement
+- validated human Narrative attractor
+- clinical taxonomy
+- causal-state or epsilon-machine identity
+- predictive superiority over B2
+- calibrated human capacity metric
+- human empirical support
