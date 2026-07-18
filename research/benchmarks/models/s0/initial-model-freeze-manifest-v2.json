@@ -8,16 +8,16 @@
     "source_resolution_eligible": false
   },
   "bound_git_blobs": {
-    "dynamics/s0/v2_core.py": "d77bc6282d679dd7d7dbad44b47eac11c34c0e13",
-    "dynamics/s0/v2_models.py": "4e81c5d64b94b5f023ff07e3564d06b9bcc094a7",
+    "dynamics/s0/v2_core.py": "87a97dc80ac2654bb86cf3fececba046fde1b16f",
+    "dynamics/s0/v2_models.py": "c5f152bc2c7844f18c091d5f6bd4bd9a8142932e",
     "dynamics/s0/v2_runner.py": "4e7b4a03eb85fece86f6287efec209880b334403",
-    "dynamics/s0/v2_scoring.py": "b41f2018e72231d5cd66ce876f76a8c60fe62027",
-    "dynamics/tests/test_s0_v2_models.py": "af564651cc4a4d77cc1aeff0e49e070951977f4c",
-    "dynamics/tests/test_s0_v2_scoring.py": "a246a7582c55115737c039a7daaa6afce3f92d7c",
-    "dynamics/tests/test_s0_v2_artifacts.py": "65e23b954086ec2c1e3c93e39648f23ed660e6b5",
+    "dynamics/s0/v2_scoring.py": "b1001e2a4e80aea7c47dfbe20720c2ae83448549",
+    "dynamics/tests/test_s0_v2_models.py": "e2b77f639e74bb857313ae3a6df1427cd2b3f0ee",
+    "dynamics/tests/test_s0_v2_scoring.py": "8ea0703f8812415d6a5c569f7784457fe6ac03de",
+    "dynamics/tests/test_s0_v2_artifacts.py": "739d89455e66e56a86893ffdee033a6427999059",
     "research/benchmarks/models/s0/model-cards-v2.json": "75eaac17a17345ef23cb891d0b42f268f8ad2a1f",
     "research/benchmarks/models/s0/initial-parameters-v2.json": "966959ec893eef4f41ea0038f1fd01eeef14e576",
-    "research/benchmarks/models/s0/h-state-kernel-v2.json": "80eb412e95da04e0d05a2d00983fc8fa9345c678",
+    "research/benchmarks/models/s0/h-state-kernel-v2.json": "bd02902f2a30d33fd2e841f3eefb9881a145d22a",
     "research/benchmarks/models/s0/receipt-compatibility-v2.json": "fb28f9ff378f1b15ee43d953aff86d385b2a4f03",
     "research/benchmarks/models/s0/implementation-freeze-v2.md": "aee5c9ed9a03b2d8d4b66c270f60641b41bf32ec",
     "research/adoption-records/2026-07-18-s0-initial-model-freeze-v2.md": "e8b82c5ed5d2d43e0166d77b5595f8db16877913"
@@ -32,7 +32,7 @@
     "scores": 0
   },
   "validation": {
-    "focused_tests": 21,
+    "focused_tests": 24,
     "compileall": "PASSED",
     "full_historical_dynamics_suite": "NOT_CLAIMED_FROM_ISOLATED_MIRROR"
   },
