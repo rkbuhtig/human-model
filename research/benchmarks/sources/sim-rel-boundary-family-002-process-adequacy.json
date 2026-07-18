@@ -1,0 +1,27 @@
+{
+  "schema_version": "s0-process-adequacy-contract/1.0.0",
+  "authority": "MODEL_INDEPENDENT_SOURCE_ACCEPTANCE_ONLY",
+  "predictive_memory_measure": "EXPECTED_KL_FULL_PUBLIC_HISTORY_VS_CURRENT_ONLY_SOURCE_ORACLE",
+  "current_only_surface": "LAST_PUBLIC_EVENT_PLUS_CURRENT_VISIBLE_CONTEXT",
+  "prehistory_condition": "VISIBLE_AND_CONTROLLED",
+  "episode_internal_history": "EXCLUDED_FROM_CURRENT_ONLY_COMPARATOR",
+  "hidden_continuation_branch": "MARGINALIZED_UNTIL_PUBLIC_CUE",
+  "source_instance_id": "EXCLUDED",
+  "thresholds": {
+    "minimum_p2_immediate_predictive_memory_gain_nats": 0.0015,
+    "minimum_p3_immediate_predictive_memory_gain_nats": 0.0015,
+    "minimum_p3_terminal_predictive_memory_gain_nats": 0.000075,
+    "minimum_transition_dobrushin": 0.25,
+    "maximum_transition_dobrushin": 0.85
+  },
+  "dobrushin_definition": "delta(T)=max_i_j_TV(T_i,T_j)",
+  "forbidden_inputs": [
+    "B0_OUTPUT",
+    "B1_OUTPUT",
+    "B2_OUTPUT",
+    "H_OUTPUT",
+    "MODEL_SCORE",
+    "PREFERRED_WINNER",
+    "HUMAN_PLAUSIBILITY"
+  ]
+}

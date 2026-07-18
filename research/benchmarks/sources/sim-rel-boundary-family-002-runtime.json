@@ -1,0 +1,41 @@
+{
+  "schema_version": "s0-source-runtime-contract/1.0.0",
+  "runtime_id": "HUMAN-DYN-ADEQ-S0-SOURCE-RUNTIME-001",
+  "runtime_version": "sim-rel-boundary-source-runtime/1.0.0",
+  "family_id": "SIM-REL-BOUNDARY-FAMILY-002",
+  "canonical_tick_semantics": "ONE_ORDINAL_EQUALS_ONE_SOURCE_PROCESS_TICK_NOT_HUMAN_DURATION",
+  "prediction_points": [
+    {"id": "P1", "step_ordinal": 1},
+    {"id": "P2", "step_ordinal": 4},
+    {"id": "P3", "step_ordinal": 7}
+  ],
+  "event_schedule": [
+    "1 CURRENT_COMMITMENT_MISSED THEN P1",
+    "2 REALIZED_P1_ACTION_PUBLIC",
+    "3 ACTION_CONDITIONED_FEEDBACK_PUBLIC THEN BRANCH_TRANSITION",
+    "4 FIRST_BRANCH_CUE_PUBLIC THEN P2",
+    "5 REALIZED_P2_ACTION_PUBLIC",
+    "6 ACTION_CONDITIONED_FEEDBACK_PUBLIC THEN BRANCH_TRANSITION",
+    "7 SECOND_BRANCH_CUE_PUBLIC THEN P3",
+    "P3_ACTION_TARGET_HIDDEN THEN_FINAL_BRANCH_TRANSITION_THEN_TERMINAL_EMISSION"
+  ],
+  "branch_visibility": {
+    "metadata": "EVALUATOR_ONLY",
+    "P1_prefix": "BYTE_IDENTICAL_ACROSS_FOUR_BRANCHES_WITHIN_MATCHED_HISTORY_AND_SAMPLE",
+    "P2_and_P3": "BRANCH_LEARNED_ONLY_FROM_PUBLIC_CUE_EVENTS"
+  },
+  "prebranch_sampling": "INITIAL_LATENT_P1_ACTION_AND_P1_FEEDBACK_SHARE_BRANCH_FREE_MATCHED_SEED",
+  "transition_order": "PUBLIC_ACTION_AND_FEEDBACK_PRECEDE_BRANCH_CONDITIONED_LATENT_TRANSITION",
+  "P3_hidden_feedback_sampling": "ABSENT",
+  "terminal_target": "ONE_REALIZED_REGION_SHARED_AS_TARGET_AT_P1_P2_P3",
+  "split_trajectories_per_instance": {
+    "development": 16,
+    "evaluation": 64,
+    "stability": 64
+  },
+  "condition_balance": "EQUAL_OVER_2_HISTORY_BY_4_HIDDEN_CONTINUATION_CELLS",
+  "post_seed_selection": "FORBIDDEN",
+  "beacon_status": "UNRESOLVED",
+  "materialized_source_instances": 0,
+  "materialized_trajectories": 0
+}

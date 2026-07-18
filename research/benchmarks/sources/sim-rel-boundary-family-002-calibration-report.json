@@ -1,0 +1,49 @@
+{
+  "acceptance_rate": 1.0,
+  "accepted": 16,
+  "calibration_seed_derivation": "SHA256(S0-FAMILY-002-CALIBRATION-NNNN)",
+  "candidate_attempts": {
+    "maximum": 2,
+    "mean": 0.375,
+    "median": 0.0,
+    "minimum": 0
+  },
+  "future_beacon_seed_used": false,
+  "metric_summary": {
+    "maximum_transition_dobrushin": {
+      "maximum": 0.681456,
+      "median": 0.5569945000000001,
+      "minimum": 0.477195
+    },
+    "minimum_transition_dobrushin": {
+      "maximum": 0.521646,
+      "median": 0.4330345,
+      "minimum": 0.372522
+    },
+    "p2_immediate_predictive_memory_gain_nats": {
+      "maximum": 0.0037441393357660474,
+      "median": 0.0021529606081007037,
+      "minimum": 0.0015132323634322081
+    },
+    "p2_terminal_predictive_memory_gain_nats": {
+      "maximum": 6.232565990750514e-05,
+      "median": 2.8885364852187683e-05,
+      "minimum": 1.2946700865795541e-05
+    },
+    "p3_immediate_predictive_memory_gain_nats": {
+      "maximum": 0.003945035309249975,
+      "median": 0.002652348588442556,
+      "minimum": 0.0017600000639426481
+    },
+    "p3_terminal_predictive_memory_gain_nats": {
+      "maximum": 0.0006328802437294441,
+      "median": 0.0002520889999581021,
+      "minimum": 0.00013458906096681247
+    }
+  },
+  "model_outputs_or_scores_read": false,
+  "panel_size": 16,
+  "purpose": "GENERATOR_FEASIBILITY_ONLY_NOT_BENCHMARK_SOURCE_OR_CORPUS",
+  "schema_version": "s0-family-002-calibration-report/1.0.0",
+  "source_parameters_retained": false
+}

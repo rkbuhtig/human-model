@@ -1,0 +1,61 @@
+{
+  "schema_version": "s0-source-family-hyperprior/2.0.0",
+  "family_id": "SIM-REL-BOUNDARY-FAMILY-002",
+  "generator_version": "sim-rel-boundary-family-generator/2.0.0",
+  "instance_count": 16,
+  "instance_relation": "INDEPENDENT_DRAWS_FROM_COMMON_PUBLIC_HYPERPRIOR",
+  "latent_state_count": 6,
+  "probability_scale": 1000000,
+  "sampling": {
+    "positive_weight_minimum": 10,
+    "positive_weight_maximum": 100,
+    "transition_diagonal_weight_boost": 100,
+    "emission_anchor_weight_boost": 120,
+    "feedback_anchor_weight_boost": 100
+  },
+  "intrinsic_acceptance": {
+    "minimum_category_probability": 0.005,
+    "maximum_category_probability": 0.75,
+    "minimum_history_initial_total_variation": 0.06,
+    "minimum_any_condition_matrix_mean_row_total_variation": 0.04,
+    "minimum_immediate_emission_state_total_variation": 0.025,
+    "minimum_feedback_emission_state_total_variation": 0.02,
+    "minimum_action_feedback_mean_row_total_variation": 0.03,
+    "minimum_horizon_emission_state_total_variation": 0.025,
+    "maximum_candidate_attempts": 512
+  },
+  "process_adequacy": {
+    "current_only_surface": "LAST_PUBLIC_EVENT_PLUS_CURRENT_VISIBLE_CONTEXT",
+    "hidden_branch_marginalized_until_public_cue": true,
+    "source_instance_id_excluded": true,
+    "minimum_p2_immediate_predictive_memory_gain_nats": 0.0015,
+    "minimum_p3_immediate_predictive_memory_gain_nats": 0.0015,
+    "minimum_p3_terminal_predictive_memory_gain_nats": 0.000075,
+    "minimum_transition_dobrushin": 0.25,
+    "maximum_transition_dobrushin": 0.85
+  },
+  "allowed_acceptance_inputs": [
+    "distribution_normalization",
+    "category_probability_bounds",
+    "history_initial_distribution_separation",
+    "continuation_transition_separation",
+    "latent_emission_separation",
+    "action_conditioned_feedback_separation",
+    "exact_source_filtering_predictive_memory",
+    "transition_dobrushin_bounds",
+    "finite_candidate_attempt_count"
+  ],
+  "forbidden_acceptance_inputs": [
+    "model_id",
+    "model_output",
+    "model_score",
+    "B2_MINUS_H_NLL",
+    "leaderboard_result",
+    "preferred_winner",
+    "representation_name",
+    "human_plausibility_judgment"
+  ],
+  "instance_inclusion_rule": "ALL_16_GENERATED_INSTANCES_INCLUDED",
+  "post_generation_instance_selection": "FORBIDDEN",
+  "human_empirical_support": "NONE"
+}
