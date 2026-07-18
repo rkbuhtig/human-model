@@ -34,7 +34,7 @@ def join_predictions_targets(predictions: Sequence[Mapping[str, Any]], targets: 
 
 
 def probability(distribution: Mapping[str, int], label: str, categories: tuple[str, ...]) -> float:
-    if set(distribution) != set(categories) or sum(distribution.values()) != PROBABILITY_SCALE:
+    if set(distribution) != set(categories) or any(not isinstance(value, int) or value < 0 for value in distribution.values()) or sum(distribution.values()) != PROBABILITY_SCALE:
         raise S0V2Error("invalid distribution")
     if label not in categories:
         raise S0V2Error("label outside vocabulary")
@@ -67,6 +67,70 @@ def aggregate_trajectory_losses(losses: Sequence[Mapping[str, Any]]) -> list[dic
             "prediction_points": len(rows),
         })
     return result
+
+
+def score_documents(predictions: Sequence[Mapping[str, Any]], targets: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    joined = join_predictions_targets(predictions, targets)
+    trajectories = aggregate_trajectory_losses(point_losses(predictions, targets))
+    immediate_rows = [(prediction["immediate_action_distribution"], target["immediate_action"]) for prediction, target in joined]
+    horizon_rows = [(prediction["long_horizon_region_distribution"], target["long_horizon_region"]) for prediction, target in joined]
+    per_instance: dict[str, dict[str, float]] = {}
+    by_instance: dict[str, list[Mapping[str, Any]]] = defaultdict(list)
+    for row in trajectories:
+        by_instance[row["source_instance_id"]].append(row)
+    for instance, rows in sorted(by_instance.items()):
+        per_instance[instance] = {
+            "trajectory_count": len(rows),
+            "immediate_nll": sum(row["immediate_nll"] for row in rows) / len(rows),
+            "long_horizon_nll": sum(row["long_horizon_nll"] for row in rows) / len(rows),
+        }
+    return {
+        "trajectory_losses": trajectories,
+        "per_instance": per_instance,
+        "pooled": {
+            "trajectory_count": len(trajectories),
+            "immediate_nll": sum(row["immediate_nll"] for row in trajectories) / len(trajectories),
+            "long_horizon_nll": sum(row["long_horizon_nll"] for row in trajectories) / len(trajectories),
+            "immediate_brier": sum(multiclass_brier(distribution, label, IMMEDIATE_ACTIONS) for distribution, label in immediate_rows) / len(immediate_rows),
+            "long_horizon_brier": sum(multiclass_brier(distribution, label, LONG_HORIZON_REGIONS) for distribution, label in horizon_rows) / len(horizon_rows),
+            "immediate_ece_10": expected_calibration_error(immediate_rows, IMMEDIATE_ACTIONS, 10),
+            "long_horizon_ece_10": expected_calibration_error(horizon_rows, LONG_HORIZON_REGIONS, 10),
+            "branch_occupancy_absolute_error": branch_occupancy_absolute_error(horizon_rows),
+        },
+    }
+
+
+def hierarchical_paired_bootstrap(left: Sequence[Mapping[str, Any]], right: Sequence[Mapping[str, Any]], metric: str, *, seed: int, resamples: int = 2000) -> dict[str, float]:
+    left_map = {(row["source_instance_id"], row["trajectory_id"]): row for row in left}
+    right_map = {(row["source_instance_id"], row["trajectory_id"]): row for row in right}
+    if len(left_map) != len(left) or len(right_map) != len(right):
+        raise S0V2Error("duplicate paired trajectory key")
+    if set(left_map) != set(right_map) or not left_map:
+        raise S0V2Error("paired trajectory key mismatch")
+    instances: dict[str, list[str]] = defaultdict(list)
+    for instance_id, trajectory_id in left_map:
+        instances[instance_id].append(trajectory_id)
+    instance_ids = sorted(instances)
+    rng = random.Random(seed)
+    sampled_means = []
+    for _ in range(resamples):
+        sampled_diffs = []
+        for _instance_draw in range(len(instance_ids)):
+            instance_id = instance_ids[rng.randrange(len(instance_ids))]
+            trajectory_ids = sorted(instances[instance_id])
+            for _trajectory_draw in range(len(trajectory_ids)):
+                trajectory_id = trajectory_ids[rng.randrange(len(trajectory_ids))]
+                key = (instance_id, trajectory_id)
+                sampled_diffs.append(left_map[key][metric] - right_map[key][metric])
+        sampled_means.append(sum(sampled_diffs) / len(sampled_diffs))
+    sampled_means.sort()
+    observed = sum(left_map[key][metric] - right_map[key][metric] for key in left_map) / len(left_map)
+    return {
+        "mean": observed,
+        "lower_95": sampled_means[max(0, int(0.025 * resamples) - 1)],
+        "upper_95": sampled_means[min(resamples - 1, int(0.975 * resamples))],
+        "resamples": resamples,
+    }
 
 
 def multiclass_brier(distribution: Mapping[str, int], label: str, categories: tuple[str, ...]) -> float:
@@ -105,65 +169,3 @@ def branch_occupancy_absolute_error(rows: Sequence[tuple[Mapping[str, int], str]
         observed[label] += 1
     count = len(rows)
     return sum(abs(predicted[category] / count - observed[category] / count) for category in LONG_HORIZON_REGIONS) / 2
-
-
-def score_documents(predictions: Sequence[Mapping[str, Any]], targets: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
-    joined = join_predictions_targets(predictions, targets)
-    trajectories = aggregate_trajectory_losses(point_losses(predictions, targets))
-    immediate_rows = [(prediction["immediate_action_distribution"], target["immediate_action"]) for prediction, target in joined]
-    horizon_rows = [(prediction["long_horizon_region_distribution"], target["long_horizon_region"]) for prediction, target in joined]
-    per_instance: dict[str, dict[str, float]] = {}
-    by_instance: dict[str, list[Mapping[str, Any]]] = defaultdict(list)
-    for row in trajectories:
-        by_instance[row["source_instance_id"]].append(row)
-    for instance, rows in sorted(by_instance.items()):
-        per_instance[instance] = {
-            "trajectory_count": len(rows),
-            "immediate_nll": sum(row["immediate_nll"] for row in rows) / len(rows),
-            "long_horizon_nll": sum(row["long_horizon_nll"] for row in rows) / len(rows),
-        }
-    return {
-        "trajectory_losses": trajectories,
-        "per_instance": per_instance,
-        "pooled": {
-            "trajectory_count": len(trajectories),
-            "immediate_nll": sum(row["immediate_nll"] for row in trajectories) / len(trajectories),
-            "long_horizon_nll": sum(row["long_horizon_nll"] for row in trajectories) / len(trajectories),
-            "immediate_brier": sum(multiclass_brier(distribution, label, IMMEDIATE_ACTIONS) for distribution, label in immediate_rows) / len(immediate_rows),
-            "long_horizon_brier": sum(multiclass_brier(distribution, label, LONG_HORIZON_REGIONS) for distribution, label in horizon_rows) / len(horizon_rows),
-            "immediate_ece_10": expected_calibration_error(immediate_rows, IMMEDIATE_ACTIONS, 10),
-            "long_horizon_ece_10": expected_calibration_error(horizon_rows, LONG_HORIZON_REGIONS, 10),
-            "branch_occupancy_absolute_error": branch_occupancy_absolute_error(horizon_rows),
-        },
-    }
-
-
-def hierarchical_paired_bootstrap(left: Sequence[Mapping[str, Any]], right: Sequence[Mapping[str, Any]], metric: str, *, seed: int, resamples: int = 2000) -> dict[str, float]:
-    left_map = {(row["source_instance_id"], row["trajectory_id"]): row for row in left}
-    right_map = {(row["source_instance_id"], row["trajectory_id"]): row for row in right}
-    if set(left_map) != set(right_map) or not left_map:
-        raise S0V2Error("paired trajectory key mismatch")
-    instances: dict[str, list[str]] = defaultdict(list)
-    for instance_id, trajectory_id in left_map:
-        instances[instance_id].append(trajectory_id)
-    instance_ids = sorted(instances)
-    rng = random.Random(seed)
-    sampled_means = []
-    for _ in range(resamples):
-        sampled_diffs = []
-        for _instance_draw in range(len(instance_ids)):
-            instance_id = instance_ids[rng.randrange(len(instance_ids))]
-            trajectory_ids = sorted(instances[instance_id])
-            for _trajectory_draw in range(len(trajectory_ids)):
-                trajectory_id = trajectory_ids[rng.randrange(len(trajectory_ids))]
-                key = (instance_id, trajectory_id)
-                sampled_diffs.append(left_map[key][metric] - right_map[key][metric])
-        sampled_means.append(sum(sampled_diffs) / len(sampled_diffs))
-    sampled_means.sort()
-    observed = sum(left_map[key][metric] - right_map[key][metric] for key in left_map) / len(left_map)
-    return {
-        "mean": observed,
-        "lower_95": sampled_means[max(0, int(0.025 * resamples) - 1)],
-        "upper_95": sampled_means[min(resamples - 1, int(0.975 * resamples))],
-        "resamples": resamples,
-    }
