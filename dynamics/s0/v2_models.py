@@ -6,6 +6,7 @@ import math
 from typing import Any, Mapping, Sequence
 
 from .v2_core import (
+    CONTINUATION_CONDITIONS,
     HStateEnvelope,
     IMMEDIATE_ACTIONS,
     LONG_HORIZON_REGIONS,
@@ -27,6 +28,7 @@ CHANNELS = {
     "immediate_action": IMMEDIATE_ACTIONS,
     "long_horizon_region": LONG_HORIZON_REGIONS,
 }
+
 FeatureVector = dict[str, int]
 
 
@@ -62,11 +64,14 @@ _EVENT_SCALAR_EFFECTS = {
 def b1_accumulators(prefix: ObservablePrefixV2) -> tuple[int, int]:
     trust = 700 if prefix.context.history_condition == "H-STABLE" else 250
     valence = 200 if prefix.context.history_condition == "H-STABLE" else -250
+    # Sum first and clamp once so the intended two-scalar baseline is order-insensitive.
+    trust_delta = 0
+    valence_delta = 0
     for receipt in prefix.receipts:
         d_trust, d_valence = _EVENT_SCALAR_EFFECTS.get(receipt.event_kind, (0, 0))
-        trust = clamp(trust + d_trust)
-        valence = clamp(valence + d_valence)
-    return trust, valence
+        trust_delta += d_trust
+        valence_delta += d_valence
+    return clamp(trust + trust_delta), clamp(valence + valence_delta)
 
 
 def b1_features(prefix: ObservablePrefixV2) -> FeatureVector:
@@ -91,7 +96,8 @@ def b2_features(prefix: ObservablePrefixV2) -> FeatureVector:
     for index, receipt in enumerate(receipts, start=1):
         _add(features, f"event={receipt.event_kind}")
         _add(features, f"event@{index}={receipt.event_kind}")
-        distance_bucket = min(len(receipts) - index, 4)
+        distance = len(receipts) - index
+        distance_bucket = min(distance, 4)
         _add(features, f"event_from_end@{distance_bucket}={receipt.event_kind}")
         _add(features, f"scope_event={receipt.scope}:{receipt.event_kind}")
         _add(features, f"actor_target={receipt.actor}>{receipt.target}")
@@ -130,9 +136,10 @@ def initial_predictive_state(context: PublicContext) -> PredictiveHState:
     )
 
 
-def initialize_h(context: PublicContext, trajectory_id: str) -> HStateEnvelope:
+def initialize_h(context: PublicContext, source_instance_id: str, trajectory_id: str) -> HStateEnvelope:
     return HStateEnvelope.build(
         state_version=STATE_VERSION,
+        source_instance_id=source_instance_id,
         trajectory_id=trajectory_id,
         last_step_ordinal=0,
         receipt_chain_sha256="0" * 64,
@@ -155,6 +162,7 @@ def _decay_fast(state: PredictiveHState, gap: int) -> PredictiveHState:
 
 
 def _receipt_weight(receipt: TypedReceipt) -> tuple[int, int]:
+    # A report can affect interpretation, but certification gives stronger world-event weight.
     if receipt.scope == "CERTIFIED_WORLD_OCCURRENCE":
         return (100, 100)
     if receipt.scope == "REGISTERED_REPORT":
@@ -203,6 +211,7 @@ def apply_receipt(state: PredictiveHState, receipt: TypedReceipt) -> PredictiveH
         raise S0V2Error(f"unhandled H event {event}")
 
     interim = replace(state, **changes)
+    # Slow-state consolidation: only threshold-crossing repair/repeat evidence changes it.
     if event == "COUNTERPART_OFFERS_COSTLY_REPAIR" and interim.repair_progress >= 350:
         interim = replace(
             interim,
@@ -222,6 +231,8 @@ def apply_receipt(state: PredictiveHState, receipt: TypedReceipt) -> PredictiveH
 
 def step_h(previous: HStateEnvelope, delta: PublicDeltaV2) -> HStateEnvelope:
     previous.verify()
+    if delta.key.source_instance_id != previous.source_instance_id:
+        raise S0V2Error("cannot apply delta from another source instance")
     if delta.key.trajectory_id != previous.trajectory_id:
         raise S0V2Error("cannot apply delta from another trajectory")
     if delta.key.step_ordinal != previous.last_step_ordinal + 1:
@@ -230,6 +241,7 @@ def step_h(previous: HStateEnvelope, delta: PublicDeltaV2) -> HStateEnvelope:
     state = apply_receipt(state, delta.receipt)
     return HStateEnvelope.build(
         state_version=previous.state_version,
+        source_instance_id=previous.source_instance_id,
         trajectory_id=previous.trajectory_id,
         last_step_ordinal=delta.key.step_ordinal,
         receipt_chain_sha256=update_chain(previous.receipt_chain_sha256, delta.receipt),
@@ -238,17 +250,23 @@ def step_h(previous: HStateEnvelope, delta: PublicDeltaV2) -> HStateEnvelope:
 
 
 def h_full_state(prefix: ObservablePrefixV2) -> HStateEnvelope:
-    state = initialize_h(prefix.context, prefix.key.trajectory_id)
+    state = initialize_h(prefix.context, prefix.key.source_instance_id, prefix.key.trajectory_id)
     for receipt in prefix.receipts:
         key = type(prefix.key)(prefix.key.source_instance_id, prefix.key.trajectory_id, receipt.ordinal, f"state:{receipt.ordinal}")
-        state = step_h(state, PublicDeltaV2(prefix.schema_version, key, prefix.context, receipt))
+        state = step_h(state, PublicDeltaV2(
+            schema_version=prefix.schema_version,
+            key=key,
+            context=prefix.context,
+            receipt=receipt,
+        ))
     return state
 
 
 def h_features_from_state(state: HStateEnvelope, context: PublicContext) -> FeatureVector:
     state.verify()
+    values = state.predictive_state.to_dict()
     features: Counter[str] = Counter()
-    for name, value in state.predictive_state.to_dict().items():
+    for name, value in values.items():
         _add(features, f"state:{name}:bin={math.floor(value / 200)}")
     _add(features, f"continuation={context.continuation_condition}")
     _add(features, f"role={context.role_context}")
@@ -260,7 +278,12 @@ def h_full_features(prefix: ObservablePrefixV2) -> FeatureVector:
     return h_features_from_state(h_full_state(prefix), prefix.context)
 
 
-FEATURE_EXTRACTORS = {"B0": b0_features, "B1": b1_features, "B2": b2_features, "H": h_full_features}
+FEATURE_EXTRACTORS = {
+    "B0": b0_features,
+    "B1": b1_features,
+    "B2": b2_features,
+    "H": h_full_features,
+}
 
 
 def empty_parameters() -> dict[str, Any]:
@@ -287,11 +310,6 @@ def empty_parameters() -> dict[str, Any]:
     }
 
 
-def json_clone(value: Mapping[str, Any]) -> dict[str, Any]:
-    import json
-    return json.loads(json.dumps(value))
-
-
 def fit_parameters(model_id: str, examples: Sequence[tuple[ObservablePrefixV2, str, str]], parameter_document: Mapping[str, Any]) -> dict[str, Any]:
     if model_id not in MODEL_IDS:
         raise S0V2Error("unknown model")
@@ -312,6 +330,11 @@ def fit_parameters(model_id: str, examples: Sequence[tuple[ObservablePrefixV2, s
             learned["vocabulary"] = sorted(set(learned["vocabulary"]) | set(features))
     result["models"][model_id]["model_version"] = "s0-initial-2-fitted-development"
     return result
+
+
+def json_clone(value: Mapping[str, Any]) -> dict[str, Any]:
+    import json
+    return json.loads(json.dumps(value))
 
 
 def _channel_logits(model_id: str, features: FeatureVector, channel: str, parameters: Mapping[str, Any]) -> dict[str, float]:
