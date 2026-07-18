@@ -10,7 +10,7 @@
     {"path": "dynamics/s0/scoring.py", "git_blob_sha": "3c5a13118beaea85697bb47bfb9c7df34dc66b83"},
     {"path": "dynamics/s0/run_cli.py", "git_blob_sha": "46995191a82adbc9949f1d75eac32878041e75c7"},
     {"path": "dynamics/s0/score_cli.py", "git_blob_sha": "e07061de4888433313ed9e37873b2f246f8bc9c9"},
-    {"path": "dynamics/tests/test_s0_models.py", "git_blob_sha": "e759921f61e0b92cfe107f7eb86c129ae5de6dff"},
+    {"path": "dynamics/tests/test_s0_models.py", "git_blob_sha": "24000c8b6c621a3a961565ac9226820b0aa4be12"},
     {"path": "dynamics/tests/test_s0_scoring.py", "git_blob_sha": "d9b73e0228057a66f454bf91a5ec64d69f78b917"},
     {"path": "research/benchmarks/models/s0/model-cards.json", "git_blob_sha": "856bd8c11f4062b0d96bd66b1901889c67c248ae"},
     {"path": "research/benchmarks/models/s0/initial-parameters.json", "git_blob_sha": "3b800fd3576ba599e032530a94ead074cb50c935"},
