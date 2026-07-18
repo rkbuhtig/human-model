@@ -12,6 +12,8 @@
 Assessment ≠ Adoption ≠ Implementation ≠ Run ≠ Evaluation ≠ Human-Empirical Evidence
 ```
 
+상세한 pre-S0 구현 연대기는 [Historical Roadmap Snapshot — through PR #23](history/roadmap-through-pr23.md)에 보존한다.
+
 ## 0. Current program order
 
 2026-07-18 distributional-adequacy adoption이 아래 순서를 현재 mainline으로 채택했다.
