@@ -1,0 +1,35 @@
+{
+  "benchmark_id": "HUMAN-DYN-ADEQ-S0",
+  "content_addressing": "GIT_BLOB_SHA1_FROM_REMOTE_BRANCH_CONTENT",
+  "files": [
+    {"path": "dynamics/s0/__init__.py", "git_blob_sha": "f416c8c324d28a4655b2d619e4028ab521c23310"},
+    {"path": "dynamics/s0/README.md", "git_blob_sha": "f7fd48b23d11ee555d01e8c85a47577d84ef32dc"},
+    {"path": "dynamics/s0/core.py", "git_blob_sha": "b86edc6b31e65a1b69722060db4076e08405d95f"},
+    {"path": "dynamics/s0/models.py", "git_blob_sha": "01d0e445cef04ad227fd796a69d80b01bf935ddf"},
+    {"path": "dynamics/s0/runner.py", "git_blob_sha": "5f3ef262164d44b90516ad3db92362e6ff49a4e4"},
+    {"path": "dynamics/s0/scoring.py", "git_blob_sha": "3c5a13118beaea85697bb47bfb9c7df34dc66b83"},
+    {"path": "dynamics/s0/run_cli.py", "git_blob_sha": "46995191a82adbc9949f1d75eac32878041e75c7"},
+    {"path": "dynamics/s0/score_cli.py", "git_blob_sha": "e07061de4888433313ed9e37873b2f246f8bc9c9"},
+    {"path": "dynamics/tests/test_s0_models.py", "git_blob_sha": "24000c8b6c621a3a961565ac9226820b0aa4be12"},
+    {"path": "dynamics/tests/test_s0_scoring.py", "git_blob_sha": "d9b73e0228057a66f454bf91a5ec64d69f78b917"},
+    {"path": "research/benchmarks/models/s0/model-cards.json", "git_blob_sha": "856bd8c11f4062b0d96bd66b1901889c67c248ae"},
+    {"path": "research/benchmarks/models/s0/initial-parameters.json", "git_blob_sha": "3b800fd3576ba599e032530a94ead074cb50c935"},
+    {"path": "research/benchmarks/models/s0/implementation-freeze.md", "git_blob_sha": "6721f60f48fa7d87cbb6deb80eedf39871c335a3"},
+    {"path": "research/benchmarks/sources/s0-observable-interface.json", "git_blob_sha": "e36156d0baf8b1e6864397a6a34ce0f4c85730ad"}
+  ],
+  "forbidden_absent_artifacts": [
+    "SIM_REL_BOUNDARY_001_HIDDEN_INSTANCE",
+    "DEVELOPMENT_CORPUS",
+    "EVALUATION_CORPUS",
+    "STABILITY_CORPUS",
+    "S0_RESULT",
+    "TARGET_REVEAL"
+  ],
+  "freeze_id": "HUMAN-DYN-ADEQ-S0-MODEL-FREEZE-INITIAL-001",
+  "governing_main_commit": "be7f862847a03eb3d1653396d577143d55666ca7",
+  "governing_preregistration": "research/benchmarks/human-dyn-adequacy-s0-preregistration.json",
+  "models": ["B0", "B1", "B2", "H"],
+  "next_gate": "EVALUATOR_SOURCE_INSTANCE_FREEZE_AND_DEVELOPMENT_CORPUS",
+  "schema_version": "s0-model-freeze-manifest/1.0.0",
+  "status": "IMPLEMENTED_FROZEN_UNEXECUTED_ON_S0_SOURCE"
+}
