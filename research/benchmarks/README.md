@@ -29,6 +29,13 @@ Contract mutant는 인간 모델 후보가 아니다. 반대로 descriptive mode
   `MORPH-001A`의 ordered proposal을 실험자가 선언한 asymmetric simulation band와
   componentwise로 비교한다. 출력은 read-only proxy profile이며 인간의 수용 능력,
   `ExcessDemand`, residual, load, 퀄리아 또는 정신 시간 측정값이 아니다.
+- [`HUMAN-DYN-ADEQ-S0`](human-dyn-adequacy-s0.md):
+  구조적 분포 능력과 비인간 hidden source 예측을 분리한다. 후속
+  [`AMEND-001`](human-dyn-adequacy-s0-amendment-001.md)은 단일 수동 source 대신
+  public generator/hyperprior와 미래 beacon으로 결정되는 16개 source instance family를
+  채택하고, predictive leaderboard·state sufficiency·online compression의 판정 권한을
+  분리한다. `INITIAL-001` 모델 freeze는 source 생성 권한이 없으며 `INITIAL-002`가
+  merge되기 전에는 beacon·instance·corpus를 만들 수 없다.
 
 - [`INTERP-001` subjective encounter / delayed assembly / adjudication](interp-001-subjective-encounter-binding.md):
   외부 occurrence·Evidence, current access, experimenter-defined subjective encounter
