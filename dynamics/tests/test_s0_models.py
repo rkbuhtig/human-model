@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 from copy import deepcopy
+import json
+from pathlib import Path
 import unittest
 
 from dynamics.s0.core import (
@@ -17,7 +19,6 @@ from dynamics.s0.models import (
     b0_features,
     b1_features,
     b2_features,
-    empty_parameter_document,
     fit_parameters,
     h_features,
     h_state,
@@ -58,33 +59,25 @@ def prefix(
     }
 
 
-MODEL_CARDS = {
-    "schema_version": "s0-model-cards/1.0.0",
-    "models": [
-        {
-            "model_id": model_id,
-            "model_version": "s0-initial-1",
-            "allowed_input_fields": [
-                "schema_version", "trajectory_id", "history_condition",
-                "continuation_condition", "receipts", "public_actions",
-                "counterpart_feedback", "role_context", "audience_context",
-                "step_ordinal",
-            ],
-        }
-        for model_id in ("B0", "B1", "B2", "H")
-    ],
-}
+ROOT = Path(__file__).resolve().parents[2]
+MODEL_CARDS_PATH = ROOT / "research" / "benchmarks" / "models" / "s0" / "model-cards.json"
+PARAMETERS_PATH = ROOT / "research" / "benchmarks" / "models" / "s0" / "initial-parameters.json"
 
 
 class S0ModelTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.model_cards = json.loads(MODEL_CARDS_PATH.read_text(encoding="utf-8"))
+        cls.initial_parameters = json.loads(PARAMETERS_PATH.read_text(encoding="utf-8"))
+
     def setUp(self) -> None:
-        self.parameters = empty_parameter_document()
+        self.parameters = deepcopy(self.initial_parameters)
 
     def test_all_models_emit_complete_normalized_distributions(self) -> None:
         document = prefix(["CURRENT_COMMITMENT_MISSED"])
         for model_id in ("B0", "B1", "B2", "H"):
             with self.subTest(model_id=model_id):
-                result = run_model(model_id, document, self.parameters, MODEL_CARDS, seed=11)
+                result = run_model(model_id, document, self.parameters, self.model_cards, seed=11)
                 self.assertEqual(set(result["immediate_action_distribution"]), set(IMMEDIATE_ACTIONS))
                 self.assertEqual(set(result["long_horizon_region_distribution"]), set(LONG_HORIZON_REGIONS))
                 self.assertEqual(sum(result["immediate_action_distribution"].values()), PROBABILITY_SCALE)
@@ -96,8 +89,8 @@ class S0ModelTests(unittest.TestCase):
         stable = prefix(["CURRENT_COMMITMENT_MISSED"], history="H-STABLE")
         breach = prefix(["CURRENT_COMMITMENT_MISSED"], history="H-BREACH")
         self.assertEqual(
-            run_model("B0", stable, self.parameters, MODEL_CARDS)["immediate_action_distribution"],
-            run_model("B0", breach, self.parameters, MODEL_CARDS)["immediate_action_distribution"],
+            run_model("B0", stable, self.parameters, self.model_cards)["immediate_action_distribution"],
+            run_model("B0", breach, self.parameters, self.model_cards)["immediate_action_distribution"],
         )
 
     def test_b1_ignores_event_order_when_accumulators_match(self) -> None:
@@ -149,21 +142,21 @@ class S0ModelTests(unittest.TestCase):
             document = prefix(["CURRENT_COMMITMENT_MISSED"])
             document[key] = "forbidden"
             with self.subTest(key=key), self.assertRaises(S0ValidationError):
-                run_model("H", document, self.parameters, MODEL_CARDS)
+                run_model("H", document, self.parameters, self.model_cards)
 
     def test_b2_and_h_receive_identical_prefix_digest_and_visible_fields(self) -> None:
         document = prefix(["CURRENT_COMMITMENT_MISSED", "COUNTERPART_MINIMIZES_IMPACT"])
-        b2 = run_model("B2", document, self.parameters, MODEL_CARDS)
-        h = run_model("H", document, self.parameters, MODEL_CARDS)
+        b2 = run_model("B2", document, self.parameters, self.model_cards)
+        h = run_model("H", document, self.parameters, self.model_cards)
         self.assertEqual(b2["runtime_receipt"]["prefix_sha256"], h["runtime_receipt"]["prefix_sha256"])
         self.assertEqual(b2["runtime_receipt"]["visible_field_names"], h["runtime_receipt"]["visible_field_names"])
 
     def test_h_diagnostics_are_explicitly_non_leaderboard_and_h_only(self) -> None:
         document = prefix(["CURRENT_COMMITMENT_MISSED"])
-        h = run_model("H", document, self.parameters, MODEL_CARDS, include_h_diagnostics=True)
+        h = run_model("H", document, self.parameters, self.model_cards, include_h_diagnostics=True)
         self.assertEqual(h["diagnostic_authority"], "H_ONLY_NOT_LEADERBOARD_EVIDENCE")
         with self.assertRaises(S0ValidationError):
-            run_model("B2", document, self.parameters, MODEL_CARDS, include_h_diagnostics=True)
+            run_model("B2", document, self.parameters, self.model_cards, include_h_diagnostics=True)
 
     def test_free_text_and_unregistered_feedback_cannot_smuggle_targets(self) -> None:
         document = prefix(["CURRENT_COMMITMENT_MISSED"])
@@ -177,7 +170,6 @@ class S0ModelTests(unittest.TestCase):
 
     def test_runner_module_has_no_scoring_import(self) -> None:
         import ast
-        from pathlib import Path
         path = Path(__file__).resolve().parents[1] / "s0" / "runner.py"
         tree = ast.parse(path.read_text(encoding="utf-8"))
         imports = []
@@ -200,8 +192,8 @@ class S0ModelTests(unittest.TestCase):
 
     def test_same_input_model_version_and_seed_is_byte_reproducible(self) -> None:
         document = prefix(["CURRENT_COMMITMENT_MISSED", "COUNTERPART_SHIFTS_RESPONSIBILITY"])
-        first = run_model("H", document, self.parameters, MODEL_CARDS, seed=20260718)
-        second = run_model("H", deepcopy(document), deepcopy(self.parameters), deepcopy(MODEL_CARDS), seed=20260718)
+        first = run_model("H", document, self.parameters, self.model_cards, seed=20260718)
+        second = run_model("H", deepcopy(document), deepcopy(self.parameters), deepcopy(self.model_cards), seed=20260718)
         self.assertEqual(canonical_bytes(first), canonical_bytes(second))
 
 
