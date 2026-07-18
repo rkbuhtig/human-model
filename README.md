@@ -27,6 +27,7 @@ history and current occurrence
 한 시점의 그럴듯한 내부 상태나 정확한 JSON trace가 아니라, 가능한 episode 경로의 분포와 그 분포를 장기적으로 조직하는 구조가 주된 adequacy 대상이다.
 
 - [연구의 현재 정체성과 주장 범위](research/README.md)
+- [Volume 0 minimal lineage audit](research/volume-0/README.md)
 - [Multi-Clock Distributional Human Dynamics](research/syntheses/2026-07-18-multi-clock-distributional-human-dynamics.md)
 - [Distributional-adequacy mainline 채택 기록](research/adoption-records/2026-07-18-distributional-adequacy-mainline.md)
 - [HUMAN-DYN-ADEQ-S0 초안](research/benchmarks/human-dyn-adequacy-s0.md)
@@ -62,7 +63,8 @@ occurrence
 | `INTERP-001D1` | executed/evaluated detached synthetic conformance |
 | `INTERP-001D2a0` | frozen/unexecuted reference harness |
 | `INTERP-001D2a0-EXEC0` | frozen/unexecuted reference harness |
-| draft PR #21 `MAT0` | non-mainline hold under the current program order |
+| PR #21 `MAT0` | closed as superseded; branch preserved as a non-mainline representation-specific reference proposal |
+| Volume 0 minimal audit | source-bound first slice; broader reconstruction remains open |
 | P0-v1 elicitation instrument | frozen/unexecuted development infrastructure |
 | human predictive adequacy | open |
 
@@ -72,17 +74,35 @@ The immediate order is:
 
 ```text
 current synthesis documentation
-→ Volume 0 lineage reconstruction
-→ HUMAN-DYN-ADEQ-S0 preregistration
+→ Volume 0 minimal lineage audit
+→ HUMAN-DYN-ADEQ-S0 exact preregistration
 → S0 execution
 → representation retention, revision or retirement
 ```
 
 Another materialization-only contract does not substitute for the S0 execution.
 
+## Volume 0
+
+The first Volume 0 slice binds the user-provided December persona-engine archive by archive/member SHA-256 and recovers one lineage in detail:
+
+```text
+proposal / output / derived framing
+≠ evidence
+≠ commitment
+≠ state writer
+```
+
+- [Volume 0 index](research/volume-0/README.md)
+- [Minimal source manifest](research/volume-0/source-manifest.json)
+- [Invariant lineage matrix](research/volume-0/invariant-lineage-matrix.md)
+- [Chapter 00-A — 출력은 아직 상태변경이 아니다](research/volume-0/chapter-00-a-output-is-not-state-change.md)
+
+This is a partial source audit, not a complete December canon and not human-empirical support.
+
 ## Volume I
 
-현재 공개 Chapter 01–11은 2026년 1월 이론 계보의 첫 정리 경계다. 앞으로 작성할 Volume 0은 2025년 12월 persona-engine corpus를 복원하고 Chapter 01을 절대적 기원 대신 0101 재컴파일 경계로 재배치한다.
+현재 공개 Chapter 01–11은 2026년 1월 이론 계보의 첫 정리 경계다. Volume 0은 2025년 12월 persona-engine corpus를 복원하고 Chapter 01을 절대적 기원 대신 0101 재컴파일 경계로 재배치한다.
 
 | 장 | 제목 | 문서 |
 |---:|---|---|
