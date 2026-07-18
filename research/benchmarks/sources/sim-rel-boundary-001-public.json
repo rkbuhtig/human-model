@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0.0",
+  "source_id": "SIM-REL-BOUNDARY-001",
+  "source_class": "NON_HUMAN_SYNTHETIC_HIDDEN_PROCESS",
+  "human_empirical_support": "NONE",
+  "episode_family": "RELATIONSHIP_BOUNDARY_SINGLE_FAMILY",
+  "latent_state_contract": {
+    "count": 6,
+    "public_names": [
+      "q0",
+      "q1",
+      "q2",
+      "q3",
+      "q4",
+      "q5"
+    ],
+    "semantic_names_visible_to_models": false,
+    "must_not_use_h_model_field_names": true
+  },
+  "conditions": {
+    "history": [
+      "H-STABLE",
+      "H-BREACH"
+    ],
+    "continuation": [
+      "F-REPAIR",
+      "F-DEFLECT",
+      "F-REPEAT",
+      "F-PUBLIC"
+    ]
+  },
+  "observable_vocabularies": {
+    "immediate_action": [
+      "SEEK_CLARIFICATION",
+      "EXPRESS_HURT",
+      "ASSERT_BOUNDARY",
+      "TEMPORARY_WITHDRAWAL",
+      "PUNITIVE_ATTACK",
+      "SUPPRESS_FOR_ROLE",
+      "REPAIR_ATTEMPT",
+      "RELATION_EXIT"
+    ],
+    "long_horizon_region": [
+      "PARTIAL_REPAIR",
+      "GUARDED_CONTINUATION",
+      "CONFLICT_LOOP",
+      "RELATION_EXIT",
+      "UNRESOLVED_DRIFT"
+    ]
+  },
+  "public_process_constraints": [
+    "history condition changes the initial latent distribution",
+    "continuation condition changes the transition kernel",
+    "the process is path dependent and not recoverable from the current occurrence alone",
+    "observable action events may affect later source transitions only through the registered interface",
+    "the source never reads model-internal state or evaluator scores"
+  ],
+  "hidden_evaluator_fields": [
+    "initial_state_probabilities",
+    "conditioned_transition_matrices",
+    "emission_parameters",
+    "source_seed_panels",
+    "bootstrap_seed"
+  ],
+  "split_sizes": {
+    "development": 256,
+    "evaluation": 1024,
+    "stability": 1024
+  },
+  "balance_rule": "equal counts across the 2 history by 4 continuation condition grid within each split",
+  "visibility": {
+    "development": "public after model-freeze commit and source-instance freeze",
+    "evaluation": "evaluator-only until final-model freeze",
+    "stability": "evaluator-only and used once after primary evaluation"
+  },
+  "authority_note": "Performance on this source is source-conditional synthetic adequacy and is not human-empirical support."
+}
