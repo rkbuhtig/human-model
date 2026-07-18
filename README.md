@@ -1,155 +1,522 @@
 # Human Model
 
-인간이 경험하고, 사실을 받아들이고, 기억하고, 판단하고, 행동하며, 그 결과를 다시 자기 변화로 받아들이는 과정을 모델링하려는 연구 기록이다.
+이 저장소는 인간을 하나의 고정된 성격표나 결정적인 상태–출력 함수로 환원하지 않고, **생각·감정·해석·행동·후회·복귀·관계 변화가 시간 속에서 어떻게 이어지는지** 탐구하기 위한 연구 작업장이다.
 
-이 저장소는 완성된 단일 이론을 선언하지 않는다. 역사 복원, 현재 합성, 구현된 계약, 실행 결과와 인간 경험적 근거를 서로 다른 권위로 관리한다.
+현재 목표는 완성된 인간 이론을 선언하는 것이 아니다. 먼저 자유롭게 이론을 만들고 버리며, 그중 실제로 굴려볼 가치가 생긴 구조를 **하나의 프롬프트 모델**로 내려 LLM에게 직접 수행시킨다. 연구자는 그 모델을 사전에 준비된 시나리오가 아니라 즉흥적인 상호작용으로 흔들고, 인간답지 않은 지점과 구조적 약점을 발견한다. 발견된 문제는 다시 연구로 돌아가며, 충분히 살아남은 구조가 생겼을 때에만 그 구조를 위한 더 단단한 이론적 집을 짓는다.
 
-```text
-Assessment ≠ Adoption ≠ Implementation ≠ Run ≠ Evaluation ≠ Human-Empirical Evidence
-```
-
-## Current research direction
-
-현재 연구는 사람을 하나의 결정적 상태-출력 함수보다 다음과 같은 경로분포 시스템으로 본다.
+이 저장소의 기본 순환은 다음과 같다.
 
 ```text
-history and current occurrence
-+ multiple-timescale state
-+ settlement history
-+ capacity and context
-+ self/other models
-→ constrained interpretation and action distributions
-→ realized episode trajectory
-→ self/social feedback
-→ slow narrative and transition change
+이론 연구
+→ 시험할 만한 구조를 프롬프트로 구성
+→ 프롬프트 하나를 하나의 모델로 등록
+→ 연구자가 즉흥적으로 LLM을 테스트
+→ 그 모델 아래에 평가 기록 축적
+→ 약점·모순·새 통찰을 연구로 환류
+→ 새 프롬프트가 필요하면 별개의 새 모델 생성
 ```
 
-한 시점의 그럴듯한 내부 상태나 정확한 JSON trace가 아니라, 가능한 episode 경로의 분포와 그 분포를 장기적으로 조직하는 구조가 주된 adequacy 대상이다.
+이 순환에서 문서는 이론을 보호하기 위한 장식이 아니며, 프롬프트는 이론을 설명하는 예시가 아니다.
 
-- [연구의 현재 정체성과 주장 범위](research/README.md)
-- [Volume 0 minimal lineage audit](research/volume-0/README.md)
-- [Multi-Clock Distributional Human Dynamics](research/syntheses/2026-07-18-multi-clock-distributional-human-dynamics.md)
-- [Distributional-adequacy mainline 채택 기록](research/adoption-records/2026-07-18-distributional-adequacy-mainline.md)
-- [HUMAN-DYN-ADEQ-S0 preregistration](research/benchmarks/human-dyn-adequacy-s0.md)
-- [Research Architecture](research/architecture.md)
-- [Research Roadmap](research/roadmap.md)
-- [Claim registry](research/claims/README.md)
-- [Defect–Principle Abduction Corpus](research/defects/README.md)
+- `research/`는 틀릴 자유가 있는 연구 공간이다.
+- `models/<model-name>/prompt.md`는 실제로 실행되는 모델 그 자체다.
+- `models/<model-name>/evaluations/`는 그 프롬프트를 직접 굴리며 얻은 평가 기록이다.
 
-## Strongest invariant
+---
+
+## 1. 이 저장소가 다루는 질문
+
+이 연구는 대략 다음과 같은 질문에서 출발한다.
+
+- 사람의 순간적인 생각과 행동이 매번 하나로 결정되지 않는다면, 그 변동은 완전한 무작위와 무엇이 다른가?
+- 상황·피로·관계·충동에 따라 국소 반응은 달라져도, 시간이 지나며 다시 나타나는 그 사람다운 구조는 무엇인가?
+- 하나의 사건은 어떻게 현재 반응을 만들고, 이후 후회·자기평가·타인의 반응을 거쳐 다음 선택의 가능성을 바꾸는가?
+- 한 번의 실제 경로인 Episode와, 여러 가능한 Episode를 장기적으로 조직하는 Narrative는 어떤 관계인가?
+- 기억과 서사는 미래의 주의와 행동을 바꿀 수 있으면서도, 왜 과거 발생 사실이나 타인의 권리를 마음대로 다시 쓸 수 없는가?
+- 행동이 이미 일어난 뒤에도 그 의미·책임·자기 소유 관계가 다시 판정될 수 있다면, 무엇은 바뀌고 무엇은 바뀌지 않는가?
+- 인간다운 선택은 시간·주의·피로·인지 통제·관계 위험 같은 희소한 자원과 어떤 관계를 갖는가?
+- 다른 사람을 추정하고, 그 사람이 나를 어떻게 볼지 다시 추정하는 재귀적 타자 모델은 실제 반응을 어떻게 형성하는가?
+- 이런 구조를 프롬프트에 넣었을 때 LLM의 장기 수행은 실제로 어떻게 달라지는가?
+
+이 질문들은 아직 확정된 답이 아니다. 현재 연구에서 반복적으로 나타난 문제와 통찰을 추적하기 위한 중심축이다.
+
+---
+
+## 2. 현재 연구의 핵심 관점
+
+현재 탐구는 인간을 단일한 정확 경로보다 **가능한 경로들의 분포**로 바라보는 방향에 가깝다.
 
 ```text
-Local causal influence
-≠ cross-domain certification authority
+과거 경험과 현재 사건
++ 순간의 환경과 제약
++ 현재의 욕구·감정·주의
++ 관계와 타자에 대한 추정
++ 행동 뒤의 결과와 자기 피드백
+→ 가능한 해석과 행동의 분포
+→ 그중 실제로 걸은 한 Episode 경로
+→ 이후의 복귀·고착·전환
+→ 장기적인 Narrative 구조 변화
 ```
 
-느낌, 기억, Narrative와 자기해석은 이후의 접근과 행동을 바꿀 수 있다. 그 영향만으로 과거 occurrence receipt, 외부 사실, 타인의 동의나 공적 권한을 다시 쓸 수는 없다.
+여기서 순간적인 변덕과 확률성은 인간의 연속성이 없다는 뜻이 아니다. 같은 사람도 피로, 공개성, 관계 압력, 우발적 자극에 따라 다르게 행동할 수 있다. 중요한 것은 매번 같은 행동을 출력하는지가 아니라, 여러 번의 상호작용과 자기 피드백을 거치면서 어떤 경로가 반복되고, 어디로 복귀하며, 무엇이 누적되고, 어떤 사건이 구조를 바꾸는가이다.
 
-현재 합성은 다음 정산도 분리한다.
+현재까지 대화와 기존 연구에서 특히 중요하게 떠오른 통찰은 다음과 같다.
+
+### 2.1 경로분포
+
+한 시점의 정답 반응보다, 같은 조건에서 가능한 여러 반응과 그 이후 경로들의 분포가 중요하다.
+
+### 2.2 Episode와 Narrative
+
+- **Episode**는 실제로 걸은 한 구간의 경로이자, 그 경로가 이후에 남긴 잔여일 수 있다.
+- **Narrative**는 여러 Episode를 단순 요약한 문장이 아니라, 이후 어떤 경로가 더 쉽게 열리고 어디로 복귀하는지를 장기적으로 조직하는 구조일 수 있다.
+
+이 정의 역시 아직 연구 중이며, 상태·전이 경사·경로 그래프·자기해석 가운데 무엇이 핵심인지 프롬프트 수행을 통해 계속 확인한다.
+
+### 2.3 자기 피드백과 복귀
+
+후회, 만족, 수치, 합리화, 책임 수용, 회피는 단순한 감정 묘사가 아니다. 실제로 의미가 있다면 이후 선택의 분포나 자기해석의 방향을 바꾸어야 한다.
+
+### 2.4 발생과 재해석의 분리
+
+과거에 어떤 일이 발생했다는 사실과, 현재의 내가 그 사건을 어떤 의미로 받아들이고 어느 정도 자기 행동으로 인수하는지는 같지 않다.
 
 ```text
-registered occurrence receipt
-≠ action realization
-≠ authorship settlement
-≠ narrative adoption
-≠ interpersonal or normative settlement
+과거 발생 사실의 수정
+≠
+현재 의미·책임·저자성 관계의 재판정
 ```
 
-## Program status
+### 2.5 영향과 권한의 분리
 
-| Artifact or lane | Status |
-|---|---|
-| Dynamics v0.1–v0.2 | executable historical baseline and partial typed dynamics |
-| `INTERP-001D1` | executed/evaluated detached synthetic conformance |
-| `INTERP-001D2a0` | frozen/unexecuted reference harness |
-| `INTERP-001D2a0-EXEC0` | frozen/unexecuted reference harness |
-| PR #21 `MAT0` | closed as superseded; branch preserved as a non-mainline representation-specific reference proposal |
-| Volume 0 minimal audit | source-bound first slice; broader reconstruction remains open |
-| `HUMAN-DYN-ADEQ-S0` | structural/predictive protocol preregistered; models and run unimplemented |
-| P0-v1 elicitation instrument | frozen/unexecuted development infrastructure |
-| human predictive adequacy | open |
-
-Reference harnesses preserve useful authority, ordering and isolation tests. Their exact record layout or byte serialization is not the unique ontology of the Human Model.
-
-The immediate order is:
+느낌, 기억, 서사, 자기해석은 이후의 주의와 행동에 강한 영향을 줄 수 있다. 그러나 그 영향만으로 외부 사실, 과거 발생, 타인의 동의, 공적 책임을 자동으로 인증할 수는 없다.
 
 ```text
-S0 public preregistration
-→ B0/B1/B2/H implementation and model freeze
-→ evaluator-side hidden source-instance freeze
-→ S0 execution and evaluation
-→ representation retention, revision or retirement
+인과적으로 영향을 줌
+≠
+다른 영역을 사실로 인증하거나 덮어쓸 권한이 있음
 ```
 
-Another materialization-only contract or additional Volume 0 chapter does not substitute for S0 execution.
+### 2.6 희소성 아래의 선택
 
-## S0 authority boundary
+시간과 자원이 무한하면 모든 후보를 계속 유지하고 모든 선택을 다시 검토할 수 있다. 실제 인간다운 선택은 제한된 시간·주의·에너지·통제력·관계적 위험 아래에서 일부 가능성을 포기하거나 묶는 과정일 수 있다.
 
-S0 has two lanes.
+### 2.7 재귀적 타자 모델
+
+사람은 상대의 실제 상태를 직접 읽지 못한다. 상대를 추정하고, 상대가 자신을 어떻게 볼지 다시 추정하며, 그 압축된 타자 모델이 현재 행동을 제약한다.
+
+이 일곱 항목은 정식 모듈 목록이나 확정된 존재론이 아니다. 현재 연구에서 반복적으로 살아남고 있는 통찰의 묶음이며, 실제 프롬프트 모델과 즉흥 평가를 통해 계속 수정·분리·폐기된다.
+
+---
+
+## 3. 저장소 구조
+
+현재 저장소의 중심 구조는 단순하다.
 
 ```text
-S0-A structural distributional adequacy
-S0-B non-human source-conditional predictive adequacy
+human-model/
+├─ README.md
+├─ research/
+│  ├─ README.md
+│  └─ discarded/
+│     └─ README.md
+│
+├─ models/
+│  └─ README.md
+│
+├─ chapters/
+├─ notes/
+└─ checkpoints/
 ```
 
-S0-A does not establish predictive fit. S0-B uses an evaluator-held synthetic hidden process and does not provide human-empirical support.
+`chapters/`, `notes/`, `checkpoints/`는 기존 연구에서 만들어진 활용 가능한 자료다. 이 문서들을 작성 시점이 오래되었다는 이유만으로 폐기하거나 별도의 역사 창고로 밀어 넣지 않는다. 각 문서는 현재 연구에 제공하는 문제, 구조, 반례, 뉘앙스를 다시 읽고 활용한다.
 
-## Volume 0
+현재 단계에서는 이 문서들을 일괄 이동하거나 임의로 정본·구식 자료로 분류하지 않는다. 내용 단위로 다시 사용할 자리가 분명해질 때 연결하거나 재배치한다.
 
-The first Volume 0 slice binds the user-provided December persona-engine archive by archive/member SHA-256 and recovers one lineage in detail:
+---
+
+## 4. `research/`: 버릴 수 있는 이론 연구 공간
+
+`research/`는 완성된 이론의 집이 아니다. 이곳의 모든 문서는 수정·충돌·분해·폐기될 수 있다.
+
+여기에는 다음과 같은 작업이 들어갈 수 있다.
+
+- 기존 챕터와 페르소나 프롬프트 연구에서 반복되는 구조 추출
+- 새 개념에 대한 자유로운 탐색
+- 서로 다른 해석의 비교
+- 여러 문서와 대화를 묶은 임시 종합
+- 프롬프트로 시험해볼 구조의 초안
+- 평가에서 발견된 문제에 대한 원인 가설
+- 틀린 설명과 실패한 구조의 보존
+- 아직 이름 붙일 수 없는 직관과 질문
+
+연구 문서는 그 자체로 모델이 아니다. 문장이 아름답거나 설명력이 있어 보인다는 이유만으로 현재 인간 이론으로 승격되지 않는다.
+
+연구에서 실제로 굴려볼 만한 구조가 생기면, 그때 별개의 모델 디렉터리를 만들고 하나의 완결된 프롬프트로 내린다.
 
 ```text
-proposal / output / derived framing
-≠ evidence
-≠ commitment
-≠ state writer
+research의 후보
+→ 프롬프트로 실제 수행 가능하게 구성
+→ models/<새-model>/prompt.md
 ```
 
-- [Volume 0 index](research/volume-0/README.md)
-- [Minimal source manifest](research/volume-0/source-manifest.json)
-- [Invariant lineage matrix](research/volume-0/invariant-lineage-matrix.md)
-- [Chapter 00-A — 출력은 아직 상태변경이 아니다](research/volume-0/chapter-00-a-output-is-not-state-change.md)
+평가 결과가 좋지 않더라도 기존 연구를 억지로 보존할 필요는 없다. 모델 수행에서 반복적으로 쓸모가 없거나 잘못된 방향으로 드러난 연구는 `research/discarded/`에 남긴다. 폐기는 삭제와 다르다. 실패한 생각도 이후 다른 문제에서 일부가 다시 살아날 수 있다.
 
-This is a partial source audit, not a complete December canon and not human-empirical support.
+자세한 규칙은 [`research/README.md`](research/README.md)에 적는다.
 
-## Volume I
+---
 
-현재 공개 Chapter 01–11은 2026년 1월 이론 계보의 첫 정리 경계다. Volume 0은 2025년 12월 persona-engine corpus를 복원하고 Chapter 01을 절대적 기원 대신 0101 재컴파일 경계로 재배치한다.
+## 5. `models/`: 프롬프트 모델과 그 평가 기록
 
-| 장 | 제목 | 문서 |
-|---:|---|---|
-| 01 | 틀릴 자유와 사실의 문턱 | [읽기](chapters/chapter-01-ionstar-origin-0101-0103.md) |
-| 02 | 사건은 아직 현실이 아니다 | [읽기](chapters/chapter-02-event-irreversibility-0104-0111.md) |
-| 03 | 읽히지만 쓰지 못하는 것들 | [읽기](chapters/chapter-03-readout-authority-0111-0115.md) |
-| 04 | 다음 박자에만 닿는 것들 | [읽기](chapters/chapter-04-next-tick-influence-0115-0117.md) |
-| 05 | 문서는 아직 런타임이 아니다 | [읽기](chapters/chapter-05-document-runtime-factory-0117.md) |
-| 06 | 증언과 빚의 탄생 | [읽기](chapters/chapter-06-witness-grounds-billing-0118.md) |
-| 07 | 안개 속의 편성자 | [읽기](chapters/chapter-07-fog-reporter-compressed-self-0119.md) |
-| 08 | 저장된 과거는 아직 ‘나’가 아니다 | [읽기](chapters/chapter-08-access-rehydration-continuity-0120.md) |
-| 09 | 나를 계속 켜 두는 비용 | [읽기](chapters/chapter-09-runtime-self-continuity-tax-0121.md) |
-| 10 | 잠을 필연으로 만들려 한 이론 | [읽기](chapters/chapter-10-maintenance-sleep-overreach-0121-0122.md) |
-| 11 | 권위 없이 나를 바꾸는 것 | [읽기](chapters/chapter-11-authorityless-influence-qualia-routing-0122.md) |
+이 저장소에서 모델의 정의는 명확하다.
 
-### Interchapter notes
+> **프롬프트 하나가 모델 하나다.**
 
-- [자기 경계와 가역적 자아](notes/interchapter-note-03a-self-boundary-ghost-editor-episode.md)
-- [흐름을 견디는 경계](notes/interchapter-note-04a-flow-boundary-decision-checkpoint.md)
-- [퀄리아는 변형 가능한 생존 매질이다](notes/interchapter-note-08a-qualia-morphic-medium.md)
+모델은 공용 런타임, 코드 모듈, 설정 파일 조합, 버전 계보로 정의하지 않는다. LLM에 실제로 넣어 수행시키는 하나의 프롬프트가 그 모델의 전체 실행 뼈대다.
 
-### Checkpoints
-
-- [최신 TAD로 다시 본 Chapter 01–05](checkpoints/checkpoint-05a-current-tad-analysis.md)
-
-## Reading and evidence labels
-
-역사 문서와 현재 합성을 구분하기 위해 다음 라벨을 사용한다.
+모델 디렉터리는 다음 구조를 가진다.
 
 ```text
-RECOVERED
-STRUCTURAL_PRECURSOR
-CURRENT_SYNTHESIS
-OPEN_HYPOTHESIS
-METAPHOR
+models/
+└─ <model-name>/
+   ├─ prompt.md
+   └─ evaluations/
+      ├─ <evaluation-record-1>/
+      ├─ <evaluation-record-2>/
+      └─ ...
 ```
 
-구조 테스트 통과, synthetic source 예측, 결정적 재생성과 그럴듯한 출력은 인간에 대한 경험적 증거가 아니다. 현재 모델은 경험적으로 보정된 인간 예측기가 아니며, 실제 human/model acquisition과 분포적 예측 비교는 아직 열려 있다.
+### 5.1 `prompt.md`
+
+`prompt.md`는 설명서나 요약본이 아니라 모델 그 자체다.
+
+- 해당 프롬프트만으로 LLM이 최소한의 인간적 수행을 시작할 수 있어야 한다.
+- 연구 문서의 모든 개념을 억지로 넣을 필요는 없다.
+- 실제로 작동하게 만들 수 있는 구조만 포함한다.
+- 프롬프트 내부 구조는 연구자가 필요하다고 판단한 방식으로 작성한다.
+- 저장소가 미리 `state module`, `candidate generator`, `settlement engine` 같은 공용 부품을 강제하지 않는다.
+
+### 5.2 프롬프트 변경과 모델 정체성
+
+프롬프트가 실질적으로 달라지면 같은 모델의 새 버전으로 취급하지 않는다.
+
+```text
+기존 모델 프롬프트를 수정하여 덮어씀
+×
+v1 / v2 / latest 같은 버전 폴더를 만듦
+×
+
+달라진 프롬프트를 별개의 새 모델로 등록
+○
+```
+
+이 원칙은 평가 기록의 대상을 흐리지 않기 위한 것이다. 하나의 평가가 어떤 정확한 프롬프트에서 나왔는지 항상 분명해야 한다.
+
+모델 사이에 계보적 관계가 있다면 평가나 연구 문서에서 서술할 수 있다. 그러나 파일 구조가 모델을 하나의 계속 변하는 버전열로 취급하지는 않는다.
+
+### 5.3 `evaluations/`
+
+`evaluations/`에는 그 모델을 직접 사용해 얻은 평가 기록만 들어간다.
+
+평가 기록은 고정된 시나리오 파일을 실행한 결과가 아니다. 연구자가 모델과 직접 대화하며 즉흥적으로 상황을 만들고, 반응을 따라가고, 예상하지 못한 약점이 보이면 그 자리에서 방향을 바꾸어 더 깊이 찌른 기록이다.
+
+평가는 다음과 같은 질문을 자유롭게 추적할 수 있다.
+
+- 행동 뒤 후회를 말하지만 이후 선택은 실제로 달라지는가?
+- 상대의 반응을 읽는 척하면서 미리 정해진 서사로만 가는가?
+- 순간적인 감정 변화가 이전 사건의 흔적을 지워버리는가?
+- 모든 갈등이 자동으로 건강하게 복구되는가?
+- 반대로 한 번의 사건이 정체성을 지나치게 영구 고정하는가?
+- 인물이 자기 행동을 살아내는 대신 해설자처럼 분석하는가?
+- 다양한 국소 반응이 장기적으로 아무 구조도 만들지 못하는가?
+- 표면 표현만 달라지고 내부 선택 경향은 매번 동일한가?
+- 자신이 느낀 것을 외부 사실이나 상대의 의도로 자동 승격하는가?
+- 지나간 행동을 재해석하는 과정이 책임 삭제나 무한 합리화로 흐르는가?
+
+평가가 시작될 때 이 질문들을 미리 정할 필요는 없다. 실제 대화에서 발견된 문제를 따라가며 평가 방향을 바꿀 수 있다.
+
+평가 기록의 형식은 강제하지 않는다. 필요에 따라 다음을 남길 수 있다.
+
+- 전체 대화 transcript
+- 사용한 모델명
+- 평가 중 즉흥적으로 바꾼 압력과 질문
+- 이상하다고 느낀 구체적 순간
+- 반복해서 나타난 패턴
+- 모델의 강점
+- 모델의 약점
+- 예상하지 못한 통찰
+- 연구로 되돌릴 질문
+- 새 모델에서 시험할 수정 방향
+
+중요한 것은 형식의 완결성이 아니라 **평가가 반드시 해당 프롬프트 모델 아래에 귀속되는 것**이다.
+
+자세한 규칙은 [`models/README.md`](models/README.md)에 적는다.
+
+---
+
+## 6. 즉흥 평가 원칙
+
+이 저장소는 현 단계에서 고정 시나리오를 두지 않는다.
+
+```text
+사전 제작 시나리오
+고정 episode family
+정답 반응
+정답 내부 상태
+미리 닫힌 평가 rubric
+공용 benchmark
+```
+
+를 중심 구조로 사용하지 않는다.
+
+연구자는 모델과 직접 상호작용하며 약점을 찾는다.
+
+```text
+모델을 실행
+→ 즉흥적으로 상황을 던짐
+→ 반응을 따라 다음 압력을 선택
+→ 이상한 지점이 나타나면 원래 계획을 버리고 그 문제를 추적
+→ 충분히 드러난 뒤 평가 기록 작성
+```
+
+이 방식의 목적은 평가를 느슨하게 만드는 것이 아니다. 아직 무엇을 측정해야 하는지조차 연구 중인 단계에서, 미리 만든 테스트가 이론의 시야를 고정하는 것을 피하기 위함이다.
+
+나중에 여러 모델과 평가에서 같은 실패가 반복되고, 비교 가능한 질문이 분명해진다면 그때 더 정형화된 시험법을 만들 수 있다. 현재 구조가 그 미래의 형식을 미리 결정하지는 않는다.
+
+---
+
+## 7. 연구–모델–평가의 환류
+
+평가에서 나온 문제는 모델 디렉터리 안에만 묻히지 않는다. 다시 연구로 돌아간다.
+
+```text
+연구 아이디어
+→ 프롬프트 모델
+→ 즉흥 평가
+→ 관찰된 실패
+→ 원인 가설
+→ 연구 수정 또는 폐기
+→ 다른 프롬프트 모델
+```
+
+여기서 구분해야 할 것이 있다.
+
+### 7.1 모델이 실패했다고 이론이 곧바로 틀린 것은 아니다
+
+가능한 원인은 여러 가지다.
+
+- 연구 아이디어 자체가 틀렸을 수 있다.
+- 아이디어를 프롬프트로 내리는 방식이 잘못되었을 수 있다.
+- LLM이 해당 지시를 안정적으로 수행하지 못했을 수 있다.
+- 평가 중 실제로 찌른 지점과 기록한 해석이 어긋났을 수 있다.
+- 독립 구조라고 생각한 개념이 다른 구조에 포함되어 있었을 수 있다.
+
+따라서 평가 기록은 관찰과 해석을 가능한 한 구분한다.
+
+### 7.2 평가가 좋았다고 인간 이론이 증명된 것은 아니다
+
+프롬프트 모델이 인간답게 느껴지거나 장기 일관성을 보였다고 해서 실제 인간 구조가 입증되는 것은 아니다.
+
+현재 평가는 우선 다음을 확인한다.
+
+- 프롬프트에 넣은 구조가 실제 수행 차이를 만드는가?
+- 그 구조가 여러 즉흥 상황에서 계속 기능하는가?
+- 특정 구조를 넣었을 때 생기는 장점과 부작용은 무엇인가?
+- 기존보다 더 깊은 약점을 발견할 수 있는가?
+- 연구 언어가 실제 실행 가능한 형태로 내려오는가?
+
+실제 인간에 대한 경험적 주장이나 외부 검증은 이후 별도의 필요가 생길 때 다룬다.
+
+---
+
+## 8. 기존 연구 자료의 사용 원칙
+
+현재 저장소의 `chapters/`, `notes/`, `checkpoints/`와 페르소나 엔진 계보에서 얻은 자료는 단순한 과거 기록이 아니다.
+
+이 자료들은 다음 용도로 계속 사용한다.
+
+- 어떤 문제가 실제 수행에서 반복적으로 발생했는지 확인
+- 현재 통찰의 계보와 최초 문제 압력을 복원
+- 지금의 매끈한 정의가 잃어버린 뉘앙스 발견
+- 같은 구조가 다른 이름으로 반복되었는지 비교
+- 과거에 과잉 통합되거나 잘못 분리된 개념 확인
+- 프롬프트 모델에 내려볼 기능 후보 발굴
+- 새 평가에서 찌를 약점과 반례 찾기
+- 현재 연구가 같은 오류를 반복하는지 감시
+
+자료의 나이가 권위를 결정하지 않는다. 최신 문서도 틀릴 수 있고, 오래된 패치에서 중요한 구조가 다시 발견될 수 있다.
+
+반대로, 과거에 반복되었다는 이유만으로 현재 이론으로 자동 채택하지도 않는다. 반복은 시험할 이유이지 진실의 인증이 아니다.
+
+---
+
+## 9. 이 저장소에서 두지 않는 것
+
+현재 단계에서 다음 구조를 만들지 않는다.
+
+### 9.1 프롬프트 버전 폴더
+
+```text
+runtime/current.md
+runtime/versions/
+model-v1/
+model-v2/
+latest-prompt.md
+```
+
+프롬프트가 달라지면 새 모델이다.
+
+### 9.2 공용 런타임 모듈
+
+```text
+state/
+transitions/
+settlement/
+candidate-generator/
+narrative-kernel/
+```
+
+같은 구조를 저장소 차원에서 미리 강제하지 않는다. 실제 프롬프트 모델을 만들며 반복적으로 필요한 구조가 드러나기 전에 공용 부품을 창조하지 않는다.
+
+### 9.3 고정 시나리오 저장소
+
+```text
+scenarios/
+episode-families/
+fixtures/
+golden-traces/
+```
+
+를 중심 테스트 방식으로 두지 않는다. 평가자는 즉흥적으로 모델을 테스트하고 약점을 추적한다.
+
+### 9.4 완성된 정본 이론 폴더
+
+현재는 연구 재료에서 충분히 반복되고, 여러 프롬프트 모델에서 실제 기능하며, 다른 설명보다 유용하다고 판정된 구조가 아직 하나의 정본 체계로 닫히지 않았다.
+
+따라서 이론의 집을 미리 짓고 연구 내용을 그 방에 맞춰 넣지 않는다.
+
+```text
+연구 재료에서 구조 발견
+→ 프롬프트 모델에서 실제로 시험
+→ 여러 평가에서 생존
+→ 독립적으로 정리할 가치가 생김
+→ 그때 필요한 집을 설계
+```
+
+---
+
+## 10. 모델을 만드는 실제 흐름
+
+새 모델은 다음과 같은 흐름에서 생긴다.
+
+### 10.1 연구에서 시험할 구조를 고른다
+
+예를 들어 다음 가설이 떠올랐다고 하자.
+
+```text
+후회가 인간다운 의미를 가지려면
+현재 감정 문장에 나타나는 것만으로는 부족하고,
+이후 선택 가능성의 분포를 바꾸어야 한다.
+```
+
+### 10.2 그 구조를 수행 가능한 프롬프트로 만든다
+
+연구 문장을 그대로 복사하는 것이 아니다. LLM이 실제 역할 수행 중 행동 뒤의 자기 피드백을 다음 반응에 반영하도록 하나의 프롬프트를 작성한다.
+
+### 10.3 새 모델 디렉터리를 만든다
+
+```text
+models/regret-changes-future-choice/
+├─ prompt.md
+└─ evaluations/
+```
+
+이 이름은 예시일 뿐이며 고정 명명 규칙은 아니다.
+
+### 10.4 즉흥적으로 모델을 흔든다
+
+처음에는 작은 상황으로 시작할 수 있지만, 대화 도중 예상하지 못한 문제가 나오면 즉시 그 문제를 따라간다.
+
+### 10.5 평가를 모델 아래에 남긴다
+
+```text
+models/regret-changes-future-choice/evaluations/<record-name>/
+```
+
+평가 기록은 성공 보고서가 아니라 모델이 실제로 어디서 버티고 어디서 무너졌는지 남기는 자료다.
+
+### 10.6 결과를 연구로 돌려보낸다
+
+- 가설이 약하면 수정하거나 버린다.
+- 프롬프트 구현이 약하면 다른 프롬프트를 별개의 모델로 만든다.
+- 새로운 현상이 발견되면 연구 질문을 추가한다.
+- 같은 구조가 여러 모델에서 반복적으로 살아남으면 더 높은 정리의 후보가 된다.
+
+---
+
+## 11. 평가 기록을 읽는 방법
+
+평가 기록은 정량 점수표나 객관적 인간 데이터가 아니다. 현재 단계에서는 연구자가 모델을 직접 흔들며 수행의 질과 구조적 결함을 발견한 탐색 기록이다.
+
+따라서 평가를 읽을 때 다음을 구분한다.
+
+```text
+실제로 나온 응답
+≠
+평가자가 느낀 문제
+≠
+그 문제의 원인 가설
+≠
+인간 일반에 대한 결론
+```
+
+좋은 평가 기록은 반드시 모든 것을 확정할 필요가 없다. 오히려 다음과 같이 불확실성을 남길 수 있다.
+
+- 이 반응은 프롬프트의 결함인지 기반 LLM의 한계인지 아직 모른다.
+- 장기 복귀가 보였지만, 단순한 문맥 반복과 Narrative 구조를 구분하지 못했다.
+- 표현은 다양했으나 실제 선택 경향은 같은지 추가로 찔러봐야 한다.
+- 후회가 이후 행동을 바꾼 것처럼 보였지만, 상대 반응에 대한 일반적인 순응일 가능성이 있다.
+- 현재 모델이 지나치게 건강한 회복을 강제하는지 더 거친 즉흥 압력이 필요하다.
+
+이런 미결 상태도 중요한 연구 결과다.
+
+---
+
+## 12. 현재 상태
+
+이 저장소는 현재 다음 단계에 있다.
+
+```text
+완성된 인간 이론
+아님
+
+검증된 인간 예측기
+아님
+
+고정 benchmark 프로젝트
+아님
+
+프롬프트 기반 인간 동역학 연구 작업장
+맞음
+```
+
+현재의 우선순위는 다음과 같다.
+
+1. 기존 연구 자료와 대화에서 얻은 통찰을 계속 읽고 연구한다.
+2. 시험할 가치가 생긴 구조만 하나의 프롬프트 모델로 만든다.
+3. 모델을 즉흥적으로 오래 굴리며 약점을 찾는다.
+4. 평가를 반드시 해당 모델 아래에 남긴다.
+5. 평가에서 나온 문제를 다시 연구로 되돌린다.
+6. 충분히 반복해서 살아남은 구조가 생길 때에만 더 단단한 이론 구조를 만든다.
+
+---
+
+## 13. 읽기 시작하기
+
+- 연구 공간의 성격과 사용법: [`research/README.md`](research/README.md)
+- 프롬프트 모델과 평가 기록 규칙: [`models/README.md`](models/README.md)
+- 기존 장기 연구 챕터: [`chapters/`](chapters/)
+- 교차 개념 노트: [`notes/`](notes/)
+- 특정 시점의 종합·대조 기록: [`checkpoints/`](checkpoints/)
+
+이 저장소는 정답을 보존하기보다, **어떤 인간 모델이 실제 수행에서 살아남는지 발견하기 위한 반복 과정**을 보존한다.
