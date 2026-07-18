@@ -1,0 +1,43 @@
+{
+  "schema_version": "s0-source-family-hyperprior/1.0.0",
+  "family_id": "SIM-REL-BOUNDARY-FAMILY-001",
+  "generator_version": "sim-rel-boundary-family-generator/1.0.0",
+  "instance_count": 16,
+  "latent_state_count": 6,
+  "probability_scale": 1000000,
+  "sampling": {
+    "positive_weight_minimum": 10,
+    "positive_weight_maximum": 100,
+    "transition_diagonal_weight_boost": 30
+  },
+  "intrinsic_acceptance": {
+    "minimum_category_probability": 0.01,
+    "maximum_category_probability": 0.7,
+    "minimum_history_initial_total_variation": 0.06,
+    "minimum_condition_matrix_mean_row_total_variation": 0.04,
+    "minimum_immediate_emission_state_total_variation": 0.03,
+    "minimum_horizon_emission_state_total_variation": 0.03,
+    "maximum_candidate_attempts": 4096
+  },
+  "allowed_acceptance_inputs": [
+    "distribution_normalization",
+    "category_probability_bounds",
+    "history_initial_distribution_separation",
+    "continuation_transition_matrix_separation",
+    "latent_state_emission_separation",
+    "finite_candidate_attempt_count"
+  ],
+  "forbidden_acceptance_inputs": [
+    "model_id",
+    "model_output",
+    "model_score",
+    "B2_MINUS_H_NLL",
+    "leaderboard_result",
+    "preferred_winner",
+    "representation_name",
+    "human_plausibility_judgment"
+  ],
+  "instance_inclusion_rule": "ALL_GENERATED_INSTANCES_INCLUDED",
+  "post_generation_instance_selection": "FORBIDDEN",
+  "human_empirical_support": "NONE"
+}
