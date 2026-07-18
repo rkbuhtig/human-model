@@ -1,0 +1,61 @@
+{
+  "actor_aliases": ["focal", "counterpart"],
+  "audience_contexts": ["NO_AUDIENCE", "AUDIENCE_PRESENT"],
+  "authority_note": "Receipt scope is preserved; registration does not automatically certify a world claim.",
+  "benchmark_id": "HUMAN-DYN-ADEQ-S0",
+  "conditions": {
+    "continuation": ["F-REPAIR", "F-DEFLECT", "F-REPEAT", "F-PUBLIC"],
+    "history": ["H-STABLE", "H-BREACH"]
+  },
+  "counterpart_feedback_codes": [
+    "ACKNOWLEDGED_IMPACT", "ACCEPTED_RESPONSIBILITY", "OFFERED_COSTLY_REPAIR",
+    "MINIMIZED_IMPACT", "SHIFTED_RESPONSIBILITY", "NO_RESPONSE"
+  ],
+  "directional_readout": {
+    "fields": ["trust", "relationship_continuation_motive", "threat_interpretation", "action_control_capacity"],
+    "values": ["increase", "stable", "decrease"]
+  },
+  "hidden_fields_forbidden": [
+    "latent_state", "hidden_state", "target_probabilities", "evaluation_label",
+    "reference_state", "source_seed", "emission_parameters", "transition_matrix",
+    "bootstrap_seed"
+  ],
+  "immediate_action_vocabulary": [
+    "SEEK_CLARIFICATION", "EXPRESS_HURT", "ASSERT_BOUNDARY", "TEMPORARY_WITHDRAWAL",
+    "PUNITIVE_ATTACK", "SUPPRESS_FOR_ROLE", "REPAIR_ATTEMPT", "RELATION_EXIT"
+  ],
+  "information_rule": "B2_AND_H_RECEIVE_BYTE_IDENTICAL_PUBLIC_PREFIX",
+  "long_horizon_region_vocabulary": [
+    "PARTIAL_REPAIR", "GUARDED_CONTINUATION", "CONFLICT_LOOP", "RELATION_EXIT", "UNRESOLVED_DRIFT"
+  ],
+  "observable_event_kinds": [
+    "CURRENT_COMMITMENT_MISSED",
+    "COUNTERPART_ACKNOWLEDGES_IMPACT",
+    "COUNTERPART_ACCEPTS_RESPONSIBILITY",
+    "COUNTERPART_OFFERS_COSTLY_REPAIR",
+    "COUNTERPART_MINIMIZES_IMPACT",
+    "COUNTERPART_SHIFTS_RESPONSIBILITY",
+    "SIMILAR_VIOLATION_REPEATED",
+    "AUDIENCE_CONSTRAINT_PRESENT",
+    "ROLE_CONSTRAINT_PRESENT",
+    "SELF_ACTION_CAUSALLY_ATTRIBUTED",
+    "SELF_CONTROL_ATTRIBUTED",
+    "SELF_OWNERSHIP_EXPRESSED",
+    "SELF_RESPONSIBILITY_ACCEPTED",
+    "SELF_ENDORSEMENT_EXPRESSED",
+    "SELF_REPUDIATION_EXPRESSED",
+    "NO_NEW_INFORMATION"
+  ],
+  "prefix_schema_version": "human-dyn-adeq-s0/1.0.0",
+  "probability_encoding": {"kind": "INTEGER_MILLIONTHS", "scale": 1000000, "sum_must_equal_scale": true},
+  "receipt_public_value_rule": "MUST_EQUAL_EVENT_KIND",
+  "receipt_scopes": ["REGISTERED_REPORT", "INTERNAL_OCCURRENCE_REPORT", "CERTIFIED_WORLD_OCCURRENCE"],
+  "role_contexts": ["PRIVATE_RELATION", "PUBLIC_ROLE"],
+  "schema_version": "s0-observable-interface/1.0.0",
+  "status": "FROZEN_PUBLIC_MODEL_INPUT",
+  "top_level_fields": [
+    "schema_version", "trajectory_id", "history_condition", "continuation_condition",
+    "receipts", "public_actions", "counterpart_feedback", "role_context",
+    "audience_context", "step_ordinal"
+  ]
+}
