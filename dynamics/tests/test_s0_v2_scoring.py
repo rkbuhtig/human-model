@@ -56,7 +56,8 @@ class V2ScoringTests(unittest.TestCase):
         self.assertEqual(scored["trajectory_losses"][0]["prediction_points"], 2)
 
     def test_hierarchical_bootstrap_is_deterministic(self):
-        left, right = [], []
+        left = []
+        right = []
         for instance in ("I0", "I1"):
             for index in range(3):
                 left.append({"source_instance_id": instance, "trajectory_id": f"T{index}", "immediate_nll": 1.0 + index, "long_horizon_nll": 2.0})
@@ -65,6 +66,13 @@ class V2ScoringTests(unittest.TestCase):
         b = hierarchical_paired_bootstrap(left, right, "immediate_nll", seed=7, resamples=200)
         self.assertEqual(a, b)
         self.assertAlmostEqual(a["mean"], 0.5)
+
+
+class V2ProperScoringTests(unittest.TestCase):
+    def test_duplicate_trajectory_bootstrap_input_fails(self):
+        row = {"source_instance_id": "I0", "trajectory_id": "T0", "immediate_nll": 1.0, "long_horizon_nll": 1.0}
+        with self.assertRaises(S0V2Error):
+            hierarchical_paired_bootstrap([row, dict(row)], [row, dict(row)], "immediate_nll", seed=1, resamples=10)
 
     def test_pooled_proper_metrics_present_and_bounded(self):
         predictions = [prediction("I0", "T0", 1), prediction("I1", "T1", 1)]
