@@ -1,0 +1,24 @@
+{
+  "schema_version": "s0-source-family-public/2.0.0",
+  "family_id": "SIM-REL-BOUNDARY-FAMILY-002",
+  "supersedes": "SIM-REL-BOUNDARY-FAMILY-001_BEFORE_SEED_RESOLUTION",
+  "source_class": "NON_HUMAN_CO_DESIGNED_PROCESS_CONDITIONAL_FAMILY",
+  "instance_count": 16,
+  "instance_sampling": "INDEPENDENT_DRAWS_FROM_ONE_PUBLIC_HYPERPRIOR",
+  "latent_states": ["q0", "q1", "q2", "q3", "q4", "q5"],
+  "latent_semantics": "OPAQUE_AND_INSTANCE_LOCAL",
+  "model_visible_source_instance_identity": false,
+  "model_visible_continuation_branch": false,
+  "parameter_components": [
+    "HISTORY_CONDITIONED_INITIAL_DISTRIBUTIONS",
+    "CONTINUATION_CONDITIONED_TRANSITIONS",
+    "IMMEDIATE_ACTION_EMISSIONS",
+    "ACTION_CONDITIONED_FEEDBACK_EMISSIONS",
+    "TERMINAL_LONG_HORIZON_EMISSIONS"
+  ],
+  "runtime_id": "HUMAN-DYN-ADEQ-S0-SOURCE-RUNTIME-001",
+  "runtime_summary": "THREE_PREDICTION_POINTS_WITH_OBSERVABLE_ACTION_CONDITIONED_FEEDBACK",
+  "interaction_scope": "OBSERVABLE_ACTION_CONDITIONED_FEEDBACK_SEQUENCE_NOT_FULL_WORLD_CLOSED_LOOP",
+  "claim_authority": "NON_HUMAN_CO_DESIGNED_PROCESS_CONDITIONAL_ADEQUACY_ONLY",
+  "human_empirical_support": "NONE"
+}
