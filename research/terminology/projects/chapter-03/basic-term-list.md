@@ -24,28 +24,28 @@
 | `O` | SSOT의 투영 관측량 | X-CH03-011 | 미할당 | current readout과 persistent state 경계 |
 | `M` | SSOT의 근사 메모리 | X-CH03-011 | 미할당 | stored trace·autobiographical memory 경계 |
 | `e` | SSOT의 에너지 원장 | X-CH03-039 | 미할당 | evidence·관계 통화와 경계 |
-| `Z` | 과거·미래 초안·현재 증거로 구성한 현재상 | X-CH03-012 | 미할당 | phenomenal scene·persistent interpretation 경계 |
-| `Φ` | Qualia Surface | X-CH03-013 | 미할당 | first-person report·routing 영향과 경계 |
+| `Z` | 과거·미래 초안·현재 증거로 구성한 현재상 | X-CH03-012 | 미할당 | C0005 체험 표면과 장면 구성 구조 분리 |
+| `Φ` | Qualia Surface | X-CH03-013 | C0005 | 외부 원인·공적 정당화와 경계 |
 | `𝒢⁺` | 아직 사실이 아닌 미래 초안 | X-CH03-014 | 미할당 | prospective simulation·adoption 경계 |
 | `Γ` | 관계적 거리·자기 편집 마찰장 | X-CH03-015 | 미할당 | 사랑·상호성·비용과 경계 |
 | `Γ_void` | 거리장 바닥·Void 배경 | X-CH03-015 | 미할당 | `VOID` 동음 재발명 여부 |
-| `StoryField` | 다음 후보 공간의 서사적 제안·재정렬 | X-CH03-016 | 미할당 | proposal·selector·belief 경계 |
+| `StoryField` | 다음 후보 공간의 서사적 제안·재정렬 | X-CH03-016 | 미할당 | C0006 영향과 generator 권한 분리 |
 | Story | add-only 후보 제안 | X-CH03-021 | 미할당 | generator·candidate set 경계 |
 | `Cand_story` | Story가 추가한 후보 | X-CH03-021 | 미할당 | base candidate와 동일 평가 여부 |
 | `ExpandFn` | 후보 확장 연산 | X-CH03-021 | 미할당 | proposal generator와 result 경계 |
 | `UnionSet` | base·story 후보의 합류 | X-CH03-021 | 미할당 | 후보 집합과 selector 경계 |
-| `MeaningFlux` | 의미 정렬·역행 밀도 readout | X-CH03-017 | 미할당 | durable meaning·labor와 경계 |
+| `MeaningFlux` | 의미 정렬·역행 밀도 readout | X-CH03-017 | 미할당 | C0005 체험 표면·지속 상태·실행 receipt와 경계 |
 | `Why-token` | 답 없는 이상·막힘의 탐색 주소 | X-CH03-018 | 미할당 | evidence·question·trigger 경계 |
 | `MetaFire` | 이상·메타 탐색 점화 | X-CH03-018 | 미할당 | EventFire·adjudication과 경계 |
 | `AttachTag` | 내부 계산 참여 자격 | X-CH03-020 | 미할당 | access·eligibility·adoption 경계 |
 | selector | 공통 후보 선택 규칙 | X-CH03-022 | 미할당 | evaluation·selection·execution 경계 |
 | `Select` | 후보 선택 sink | X-CH03-022 | 미할당 | proposal authority와 경계 |
 | `ΔF` | 후보 평가에 쓰인 차이·비용 기준 | X-CH03-022 | 미할당 | feasible·selector·world outcome 경계 |
-| proposal influence | 탐색·후보에 미치는 readout 영향 | X-CH03-023 | 미할당 | warrant·selection authority와 경계 |
-| next-tick | readout 영향의 지연 적용 시점 | X-CH03-024 | 미할당 | 단순 delay·authorized transition 경계 |
+| proposal influence | 탐색·후보에 미치는 readout 영향 | X-CH03-023 | C0006 | selection authority·warrant와 경계 |
+| next-tick | readout 영향의 지연 적용 시점 | X-CH03-024 | C0006 | 영향 concept와 transition rule 분리 |
 | Reader | 관객·독자 압력 | X-CH03-025 | 미할당 | social influence·evidence 경계 |
 | Perspective Spine | 관점·독자 압력의 편집 구조 | X-CH03-025 | 미할당 | readout·adoption·memory edit 경계 |
-| proposal authority | 후보 제안 권한 | X-CH03-026 | 미할당 | causal influence·selection authority 경계 |
+| proposal authority | 후보 제안 권한 | X-CH03-026 | 미할당 | C0006 causal influence·selection authority 경계 |
 | selection authority | 최종 후보 선택 권한 | X-CH03-026 | 미할당 | application authority와 경계 |
 | commit lane | 적용 sink로 향하는 권한 lane | X-CH03-026 | 미할당 | AuthorityLane·ULGATE와 경계 |
 | `Π_perc` | 렌즈 의존 의미·정렬·점화 투영 | X-CH03-027 | 미할당 | phenomenal readout·interpretation 경계 |
@@ -54,37 +54,37 @@
 | Transduction | 외부 입력의 내부 변환·비교 | X-CH03-029 | 미할당 | source authenticity·external fit 경계 |
 | RoughFit | 내부/외부 적합성 후보 검사 | X-CH03-029 | 미할당 | coherence·evidence와 경계 |
 | Consistency | 내부 일관성 검사 | X-CH03-029 | 미할당 | truth·source reliability와 경계 |
-| Qualia report | 현재 체험 범위의 1인칭 보고 | X-CH03-030 | 미할당 | 외부 원인·공적 정당화와 경계 |
+| Qualia report | 현재 체험 범위의 1인칭 보고 | X-CH03-030 | C0005 | 외부 원인·공적 정당화와 경계 |
 | `LabelSet` | 값의 출처·권한 라벨 집합 | X-CH03-031 | 미할당 | epistemic source·policy label 경계 |
 | `AttrSet` | ValueId의 보수적 속성 집합 | X-CH03-031 | 미할당 | runtime provenance·authority 경계 |
 | `ValueId` | 라벨과 provenance를 가진 값 identity | X-CH03-031 | 미할당 | claim·record identity와 경계 |
 | `Source` | 값의 입력 provenance | X-CH03-031 | 미할당 | SourceEvent·epistemic source 경계 |
 | `Lane` | 정보흐름 허용 위치 | X-CH03-032 | 미할당 | normative authority와 경계 |
 | `AuthorityLane` | 권한 sink로 이어지는 lane | X-CH03-032 | 미할당 | human decision right와 경계 |
-| `READOUT_ONLY` | authority sink 진입 금지 속성 | X-CH03-032 | 미할당 | 제한된 first-person authority와 경계 |
+| `READOUT_ONLY` | authority sink 진입 금지 속성 | X-CH03-032 | 미할당 | C0005·C0006 역할과 current schema 분리 |
 | `SourceEvent` | source 접근·입력 provenance 사건 | X-CH03-033 | 미할당 | observation·evidence와 경계 |
 | `ImpactDeps` | 영향 의존성 집합 | X-CH03-034 | 미할당 | causal graph·claim evidence 경계 |
 | `DepsClosure` | transitive dependency closure | X-CH03-034 | 미할당 | control dependence·provenance 경계 |
 | `TraceRoot` | 실행 trace의 결박 root | X-CH03-034 | 미할당 | truth evidence·application receipt 경계 |
-| Trace | 실행 의존성 기록 | X-CH03-034 | 미할당 | epistemic evidence와 경계 |
-| `WorkEvent` | 수행 노동의 검증 가능한 기록 | X-CH03-035 | 미할당 | effort·evidence production 경계 |
-| Billing | 노동·비용 회계 | X-CH03-035 | 미할당 | resource spend·normative cost 경계 |
+| Trace | 실행 의존성 기록 | X-CH03-034 | 미할당 | C0009 회계 기록·epistemic evidence 경계 |
+| `WorkEvent` | 수행 노동의 검증 가능한 기록 | X-CH03-035 | C0009 | C0007 실제 노동·C0008 지출과 분리 |
+| Billing | 노동·비용 회계 | X-CH03-035 | C0009 | resource spend·normative cost 경계 |
 | `Trace/Facts` | procedure·실행 완전성 근거 | X-CH03-036 | 미할당 | external claim truth와 경계 |
 | Evidence(Trace/Facts) | trace를 evidence라 부른 혼선 | X-CH03-036 | 미할당 | epistemic evidence와 명칭 분리 |
 | `LAB` | 자유로운 실험·생성 공간 | X-CH03-037 | 미할당 | theorem candidate·CORE 승격 경계 |
 | `RATIONALE` | 채택 근거·설명 층 | X-CH03-037 | 미할당 | evidence·governance approval 경계 |
 | `CORE` | 보수적으로 채택된 정본 역할 | X-CH03-037 | 미할당 | current canon·human belief 경계 |
 | `Budget` | persistent state가 아닌 파생 slack | X-CH03-038 | 미할당 | writable stock·capacity 경계 |
-| Vitality stock | 반복 가능한 자원 stock | X-CH03-039 | 미할당 | body resource·model scalar 경계 |
+| Vitality stock | 반복 가능한 자원 stock | X-CH03-039 | 미할당 | C0008 actual expenditure와 구분 |
 | capacity | 사용할 수 있는 자원 범위 | X-CH03-039 | 미할당 | Budget·envelope·actual use 경계 |
 | `h` | BIO tick LPF·limiter | X-CH03-040 | 미할당 | updated state·clock 충돌 |
 | `q_conf` | 갈등·상쇄 단일량 | X-CH03-040 | 미할당 | lock stock·rate와 분리 |
 | `q_lock` | 잠금 stock | X-CH03-040 | 미할당 | conflict·inhibition 경계 |
 | `q_rate` | 잠금·갈등 변화 rate | X-CH03-040 | 미할당 | stock과 분리 |
-| `F_out` | 최대 지출·출력 envelope | X-CH03-041 | 미할당 | actual discharge와 분리 |
+| `F_out` | 최대 지출·출력 envelope | X-CH03-041 | 미할당 | C0008 actual expenditure와 분리 |
 | flux | 단위 시간 가용 흐름 | X-CH03-041 | 미할당 | stock·actual use 경계 |
-| `F_use` | 실제 사용량 | X-CH03-042 | 미할당 | envelope·performance 경계 |
-| `Spend` | 실제 자원 지출 | X-CH03-042 | 미할당 | WorkEvent·billing 경계 |
+| `F_use` | 실제 사용량 | X-CH03-042 | C0008 | C0007 수행 노동·C0009 기록과 분리 |
+| `Spend` | 실제 자원 지출 | X-CH03-042 | C0008 | WorkEvent·Billing과 경계 |
 | `P` | 단일 렌즈 | X-CH03-043 | 미할당 | compressor·policy와 경계 |
 | `P` | 용량 제한 압축기 | X-CH03-043 | 미할당 | attention·distortion 합성 경계 |
 | `(A,W)` | attention·distortion 합성 관점 | X-CH03-043 | 미할당 | accounting·window 동음 충돌 |
@@ -116,4 +116,4 @@
 - 같은 철자가 여러 행에 나타나는 것은 과적재를 보존하기 위한 것이다.
 - 여러 명칭이 같은 추출 항목을 가리켜도 concept 동일성을 승인한 것이 아니다.
 - Chapter 04 이후의 용어를 이 표에 소급해 넣지 않는다.
-- concept 단계가 열리기 전에는 C-ID를 배정하지 않는다.
+- C-ID는 해당 역사적 역할만 연결하며 같은 철자의 다른 역할을 승인하지 않는다.
