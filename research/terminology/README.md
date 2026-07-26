@@ -8,13 +8,13 @@
 범위와 출처 선정
 → 개념 후보와 관계 추출
 → 기초 용어 색인 작성
-→ 단일 개념 분석
-→ 차별 특성 확인
-→ 정의 작성
+→ cluster 단위 개념 분석
+→ 특성·차별 특성 확인
+→ 정의 초안
 → 명칭 선정
 → 다른 입력 배치와 조화
+→ 범위가 명시된 glossary
 → 현재 문서 개명
-→ glossary 발행
 ```
 
 ## 1. 작업 구조 지도
@@ -26,142 +26,103 @@
 ```text
 research/
 ├─ terminology/
-│  ├─ README.md                                      [현재]
+│  ├─ README.md
 │  │
-│  ├─ projects/                                      [입력 배치 소유]
-│  │  ├─ chapter-02/                                 [현재]
-│  │  │  ├─ scope.md                                 조사 범위·출처 권한
-│  │  │  ├─ extraction-map.md                        후보 내용의 단일 권위
-│  │  │  ├─ basic-term-list.md                       명칭 → 추출 ID 색인
-│  │  │  └─ touched-concepts.md                      C-ID 생성·갱신 뒤 생성
-│  │  │
-│  │  ├─ current-research/                           [현재]
+│  ├─ projects/                                      입력 배치 소유
+│  │  ├─ chapter-02/
 │  │  │  ├─ scope.md
-│  │  │  ├─ extraction-map.md
-│  │  │  ├─ basic-term-list.md
-│  │  │  └─ touched-concepts.md                      C-ID 생성·갱신 뒤 생성
-│  │  │
+│  │  │  ├─ extraction-map.md                        후보 내용의 단일 권위
+│  │  │  ├─ basic-term-list.md                       명칭 → 추출 ID → C-ID 색인
+│  │  │  └─ touched-concepts.md                      이번 배치가 건드린 C-ID
+│  │  ├─ current-research/
+│  │  │  └─ 같은 네 문서
+│  │  ├─ chapter-03/
+│  │  │  └─ 같은 네 문서
 │  │  └─ <future-input-batch>/                       새 자료 배치를 열 때 생성
 │  │
-│  └─ termbase/                                      첫 C-ID가 필요할 때 생성
+│  └─ termbase/                                      입력 배치를 넘어 살아남는 결과
 │     ├─ concepts/
-│     │  └─ C0001.md                                 개념당 하나의 안정 파일
+│     │  ├─ C0001.md                                 행동 경로 선택 cluster 결과
+│     │  ├─ C0002.md                                 외부 발생 cluster 결과
+│     │  ├─ C0003.md                                 세계 결과 cluster 결과
+│     │  └─ C0004.md                                 발생 기록 cluster 결과
 │     ├─ harmonization/
-│     │  └─ H0001.md                                 실제 충돌·통합·분할 때 생성
-│     └─ glossary.md                                 승인 용어가 생길 때 발행
+│     │  └─ H0001.md                                 실제 통합·분할·경계 수정 때 생성
+│     └─ glossary.md                                 승인 명칭이 생길 때 발행
 │
 └─ diary/
    └─ YYYY-MM-DD/
       └─ 부제.md                                     비권위 연구 메모
 ```
 
-`projects/` 아래의 파일은 입력 자료와 추출 결과를 소유한다. `termbase/` 아래의 파일은 입력 배치를 넘어 살아남는 현재 개념, 조화 결과, 사전을 소유한다. `diary/`는 어느 쪽의 근거 또는 승인 경로에도 자동으로 들어가지 않는다.
+`projects/`는 무엇을 읽고 무엇을 발견했는지를 소유한다. `termbase/`는 여러 입력을 지나도 같은 것으로 남은 concept와 조화 결과를 소유한다. `diary/`는 어느 쪽의 승인 근거로도 자동 승격되지 않는다.
 
 ### 1.2 자료 흐름
 
 ```text
-Chapter / README / RFC / notes / checkpoints / models
-                         │
-                         ▼
-projects/<batch>/scope.md
-= 무엇을 읽고, 각 출처로 무엇을 주장할 수 있는가
-                         │
-                         ▼
-projects/<batch>/extraction-map.md
-= 자료에서 나온 중립 후보와 관계의 단일 권위
-                         │
-                         ├───────────────┐
-                         ▼               ▼
-projects/<batch>/basic-term-list.md   다른 입력 배치의 extraction-map.md
-= 역사 명칭 색인                   = 같은 후보의 추가 근거·경계
-                         │               │
-                         └───────┬───────┘
-                                 ▼
-                    기존 C-ID와 동일한지 판정
-                      ├─ 동일함 → 기존 C-ID 갱신
-                      └─ 새 개념 → 새 C-ID 생성
-                                 │
-                                 ▼
-termbase/concepts/Cxxxx.md
-= 차별 특성·근거·정의·권장 명칭의 단일 권위
-                                 │
-                    ┌────────────┴────────────┐
-                    ▼                         ▼
-projects/<batch>/touched-concepts.md   concept 간 충돌 발생
-= 이 배치가 건드린 C-ID 색인              │
-                                              ▼
-                            termbase/harmonization/Hxxxx.md
-                            = 통합·분할·경계 수정 기록
-                                              │
-                                              ▼
-                                termbase/concepts/ 갱신
-                                              │
-                                              ▼
-                                termbase/glossary.md
-                                              │
-                                              ▼
-                              현재 이론의 use만 개명
-```
-
-### 1.3 참조 방향과 금지된 역류
-
-```text
-scope
-→ extraction-map
-→ basic-term-list
-→ concept
-→ harmonization
+source corpus
+→ projects/<batch>/scope.md
+→ projects/<batch>/extraction-map.md
+→ projects/<batch>/basic-term-list.md
+→ 형제 후보 cluster를 동시에 비교
+→ 기존 C-ID 갱신 또는 새 C-ID 생성
+→ termbase/concepts/Cxxxx.md
+→ projects/<batch>/touched-concepts.md
+→ 충돌 시 harmonization
 → glossary
 → current-use rename
 ```
 
-허용되는 역참조는 색인과 provenance뿐이다.
+### 1.3 참조 방향과 금지된 역류
 
-- `basic-term-list.md`는 후보 설명을 복사하지 않고 `extraction-map`의 추출 ID를 가리킨다.
-- `touched-concepts.md`는 정의를 복사하지 않고 C-ID만 가리킨다.
-- concept 파일은 자신을 연 입력 배치의 근거를 가리킬 수 있다.
-- glossary는 concept의 정의를 사용자용으로 발행하지만 프로젝트별 분석을 다시 소유하지 않는다.
+- `basic-term-list.md`는 후보 설명을 복제하지 않고 추출 ID와 C-ID를 가리킨다.
+- `touched-concepts.md`는 정의를 복제하지 않고 C-ID와 사용한 추출 항목만 가리킨다.
+- concept 파일은 자신을 연 입력 배치와 코퍼스 위치를 가리킨다.
+- glossary는 concept 결과를 사용자용으로 발행하지만 과거 Chapter의 의미를 다시 결정하지 않는다.
 
 다음 역류는 금지한다.
 
-- glossary의 문구를 근거로 과거 Chapter의 의미를 다시 판정하지 않는다.
-- 한 프로젝트의 추출 지도를 termbase의 정본 개념체계로 취급하지 않는다.
 - 현재 RFC의 아키텍처 구분을 인간 현상 근거로 되돌려 쓰지 않는다.
-- diary의 직감을 concept 정의나 KEEP 판정의 직접 근거로 사용하지 않는다.
+- 한 프로젝트의 extraction map을 termbase의 정본 개념체계로 취급하지 않는다.
+- diary의 직감을 차별 특성이나 `KEEP` 판정의 직접 근거로 사용하지 않는다.
+- 구성 사례를 인간 현상 근거로 사용하지 않는다.
 
 ## 2. 입력 배치와 termbase의 소유권
 
 ### `projects/<batch>/`
 
-입력 배치는 이번 조사에서 무엇을 읽었고 무엇을 발견했는지를 기록한다.
+입력 배치는 다음만 소유한다.
 
 - 조사 범위와 출처별 주장 권한
-- 자료에서 추출한 중립 개념 후보와 관계
-- 역사적 명칭에서 추출 후보로 들어가는 색인
+- 자료에서 추출한 중립 후보와 관계
+- 역사적·현재 명칭에서 추출 후보로 들어가는 색인
 - 이후 개설하거나 갱신한 concept ID 목록
 
 입력 배치는 개념 정의, 권장 명칭, glossary를 소유하지 않는다.
 
 ### `termbase/concepts/`
 
-입력 배치를 넘어 살아남는 단일 개념을 소유한다.
+입력 배치를 넘어 살아남는 단일 concept를 소유한다.
 
 - 안정적인 concept ID
-- 차별 특성
-- 지원 근거
-- 인접 개념
-- 정의
+- 작업 설명
+- 특성 목록과 특성별 provenance
+- 본질·부수·차별·제외 판정
+- 코퍼스 확인 대비 사례
+- 상위 개념과 형제 관계
+- 정의 초안
+- 현재 판정
 - 권장·허용·역사적 명칭
 
-같은 개념이 여러 Chapter나 현재 연구에서 다시 발견되어도 concept 파일은 하나만 유지한다.
+같은 concept가 여러 Chapter나 현재 연구에서 다시 발견되어도 파일은 하나만 유지한다.
 
 ### `termbase/harmonization/`
 
-서로 다른 concept가 충돌할 때의 통합, 분할, 경계 수정, 엔진 전용 판정을 기록한다.
+서로 다른 concept가 충돌할 때의 통합, 분할, 경계 수정, ENGINE-ONLY 처분을 기록한다. 실제 충돌이 생기기 전에는 만들지 않는다.
 
 ### `termbase/glossary.md`
 
-분석과 조화가 끝난 현재 개념만 사용자용 사전으로 발행한다. 프로젝트별 glossary는 만들지 않는다.
+분석과 조화가 끝난 현재 concept만 발행한다. 프로젝트별 glossary는 만들지 않는다.
 
 ## 3. 입력 배치 문서의 권한
 
@@ -178,35 +139,55 @@ scope
 자료에서 추출한 후보 책임과 관계의 단일 권위다.
 
 - 후보는 잠정 명칭이 아니라 중립 서술로 적는다.
-- 후보마다 배치 내부의 안정 참조 ID를 붙인다.
+- 후보마다 배치 내부의 안정 추출 ID를 붙인다.
 - 역사적 명칭은 후보에 연결한다.
 - 이 지도는 현재 인간 ontology나 termbase의 정본 개념체계가 아니다.
 
 ### `basic-term-list.md`
 
-역사적 명칭에서 `extraction-map` 항목으로 들어가는 색인이다.
+명칭에서 extraction map과 concept로 들어가는 색인이다.
 
 - 후보 설명을 복제하지 않는다.
-- 명칭, 관찰된 역할, 추출 항목 ID, concept ID, 다음 확인만 기록한다.
-- 후보 내용이 바뀌면 `extraction-map`만 수정한다.
+- 명칭, 관찰된 역할, 추출 ID, C-ID, 다음 확인만 기록한다.
+- C-ID 연결은 해당 역할만 연결하며 같은 철자의 모든 용법을 승인하지 않는다.
 
 ### `touched-concepts.md`
 
-배치가 새로 개설하거나 갱신한 concept ID만 기록한다. 정의나 명칭을 복사하지 않는다.
+배치가 새로 개설하거나 갱신한 C-ID와, ID를 열지 않은 인접 후보의 목적지를 기록한다. 정의나 명칭을 복제하지 않는다.
 
-## 4. 개념 분석 규칙
+## 4. 개념 분석
 
-1. **개념은 명칭보다 먼저다.** 정의와 경계가 안정되기 전에 권장 이름을 확정하지 않는다.
-2. **한 concept 파일에는 한 개념만 둔다.** 다의어 중심 파일을 만들지 않는다.
-3. **concept ID는 명칭과 독립적이다.** `C0001`처럼 주제와 이름을 인코딩하지 않은 ID를 사용한다.
-4. **Chapter의 mention과 현재 use를 구분한다.** “당시 `Commit`이라 불렀다”는 역사적 언급은 개명하지 않는다.
-5. **엔진 분리가 인간 ontology를 허가하지 않는다.** 저장, 직렬화, 호출, writer, lock에서만 필요한 구분은 인간 현상 근거 없이 승격하지 않는다.
-6. **근거 부족과 ENGINE-ONLY를 구분한다.** 현재 자료에서 확인되지 않았다는 이유만으로 엔진 전용이라 판정하지 않는다.
-7. **현재 사용 근거와 인간 현상 근거를 구분한다.** README, RFC, schema, model 문서는 현재 연구가 어떤 구분을 사용하거나 필요로 하는지는 보여줄 수 있지만, 그 구분이 엔진과 무관한 인간 현상의 독립 개념이라는 근거가 되지는 않는다. 엔진과 무관한 인간 현상 근거가 없는 후보는 인간 연구 concept로 `KEEP` 판정하지 않고 보류한다.
-8. **후보를 조용히 누락하지 않는다.** 다른 조사로 넘길 경우 목적지와 이유를 기록한다.
-9. **모든 용례를 영구 목록으로 만들지 않는다.** Chapter synthesis와 핵심 표가 이미 드러낸 의미 분기를 중심으로 대표 근거만 연결한다.
+개념 분석은 후보 설명을 구성하는 특성을 밝히고, 그중 형제 후보와 갈라내는 차별 특성을 확정하는 작업이다.
 
-concept 분석에서는 근거를 다음 세 층으로 분리한다.
+### 4.1 cluster 단위 분석
+
+후보 하나만 고립해서 정의하지 않는다. 상위 개념과 형제 후보에 따라 차별 특성이 달라지므로 함께 비교한다.
+
+첫 cluster는 다음 경계를 동시에 다룬다.
+
+```text
+행동 선택
+≠ 외부 표현·수행
+≠ 실제 발생
+≠ 세계 결과
+≠ 발생 기록
+```
+
+현재 C-ID를 열지 않은 외부 표현, Intent, Attempt, Performance도 대비 후보로 남긴다.
+
+### 4.2 특성 판정
+
+각 특성은 다음 중 하나로 판정한다.
+
+- **본질:** 없으면 해당 concept가 아닌 특성
+- **차별:** 본질 특성 중 형제 concept와 갈라내는 특성
+- **부수:** 일부 사례에서 따라오지만 concept를 구성하지 않는 특성
+- **제외:** 다른 후보의 특성이거나 근거 권한이 맞지 않아 정의에서 제거한 특성
+- **엔진 의존 후보:** 구현·protocol에서만 확인되어 인간 concept 특성으로 아직 사용할 수 없는 특성
+
+근거 권한과 엔진 의존성은 특성 단위로 판정한다. 최종 `ENGINE-ONLY` 처분은 모든 본질적 차별 특성이 구현 구조에서만 성립하는 concept에 대해 concept 단위로 내린다.
+
+### 4.3 근거 층
 
 ```text
 계보 근거
@@ -216,16 +197,51 @@ concept 분석에서는 근거를 다음 세 층으로 분리한다.
 = 현재 연구가 어떤 구분을 사용하거나 필요로 하는가
 
 인간 현상 근거
-= 그 구분이 엔진과 무관한 인간 장면과 설명에서도 필요한가
+= 엔진과 무관한 인간 장면에서 그 구분이 실제로 필요한가
 ```
 
-`현재 사용됨`은 용어 정리의 필요를 보여주지만, 인간 내부의 독립 구조를 승인하지 않는다.
+인간 현상 근거 안에서도 권한을 구분한다.
+
+- **코퍼스 확인 사례:** 분석 이전부터 Chapter·notes·평가 기록에 존재한 인간 장면. 현재 연구 어휘의 구분 필요성을 지지하지만 인간 일반의 경험적 검증은 아니다.
+- **독립 관측 사례:** 해당 구분을 설명하려고 구성하지 않은 관찰·평가·자료에서 확인된 장면. 별도 출처가 실제로 있을 때만 표시한다.
+- **구성 사례:** 분석자가 정의의 과대·과소를 확인하려고 만든 예. 정의 교정에는 쓸 수 있지만 `KEEP`, `MERGE`, `ENGINE-ONLY`의 근거로 기록하지 않는다.
+
+### 4.4 대비 사례 규칙
+
+차별 특성에는 형제 후보와 실제로 갈라지는 코퍼스 확인 사례 또는 독립 관측 사례를 연결한다.
+
+- 사례가 없으면 그 특성으로 `KEEP`을 주지 않고 보류한다.
+- `분리 사례를 찾지 못함`을 `분리 사례가 없음`으로 바꾸지 않는다.
+- `MERGE`는 scoped corpus에서 실제로 대비를 찾고도 독립 차별 특성을 확인하지 못했을 때만 사용한다.
+- 별도 `scenarios/`, PASS/FAIL suite, coverage checker를 만들지 않는다.
+
+### 4.5 판정 의미
+
+- `KEEP`: 현재 인간 연구의 어휘에서 독립적으로 유지할 가치가 있음. 인간 내부 모듈의 경험적 실재를 승인하지 않음.
+- `ENGINE-ONLY`: 본질적 차별 특성이 구현·protocol 구조에서만 성립함.
+- `HISTORICAL-ONLY`: 과거 계보를 설명하지만 현재 연구 어휘에는 독립 concept로 불필요함.
+- `MERGE`: 조사 범위에서 별도 차별 특성을 확인하지 못해 다른 concept와 같은 경계로 처리함.
+- `보류`: 근거·사례·관계가 부족해 판정할 수 없음.
+
+### 4.6 공통 규칙
+
+1. 개념은 명칭보다 먼저다.
+2. 한 concept 파일에는 한 개념만 둔다.
+3. C-ID는 이름과 주제를 인코딩하지 않는다.
+4. Chapter의 historical mention과 현재 use를 구분한다.
+5. 엔진 분리가 인간 ontology를 허가하지 않는다.
+6. 근거 부족과 ENGINE-ONLY를 구분한다.
+7. 현재 사용 근거만으로 인간 concept를 `KEEP`하지 않는다.
+8. 다른 조사로 넘긴 후보의 목적지와 이유를 남긴다.
+9. 모든 용례를 영구 목록으로 만들지 않고 대표 근거를 연결한다.
+10. 정의는 상위 개념과 차별 특성으로 작성하고 순환 정의를 피한다.
+11. 권장 명칭은 특성과 정의가 안정된 뒤 정한다.
 
 ## 5. 조화 규칙
 
 ### 통합
 
-둘 이상의 concept가 같은 차별 특성·정의·예측을 가진다고 확인되면 대표 ID 하나를 유지한다. 다른 ID는 대표 ID와 조화 기록을 가리키는 안내만 남긴다.
+둘 이상의 concept가 같은 차별 특성·정의·적용 범위를 가진다고 확인되면 대표 ID 하나를 유지한다. 다른 ID는 대표 ID와 조화 기록을 가리키는 안내만 남긴다.
 
 ### 분할
 
@@ -239,36 +255,32 @@ C0002
 ```
 
 - 원본 ID는 분할 안내만 보존한다.
-- 새 개념마다 새 ID를 발급한다.
-- 각 프로젝트의 `basic-term-list.md`와 `touched-concepts.md` 참조를 실제 의미에 맞게 갱신한다.
-- 원본이 두 의미를 함께 가리켰다면 두 새 ID와 조화 기록을 함께 연결한다.
+- 새 concept마다 새 ID를 발급한다.
+- 각 프로젝트의 basic term list와 touched concepts 참조를 실제 의미에 맞게 갱신한다.
 - glossary에는 새 ID만 반영한다.
 
 ## 6. 개명과 glossary 발행 조건
 
-저장소 전면 개명은 다음 순서 뒤에만 수행한다.
-
 ```text
-Chapter 입력 배치
-+ 현재 연구 입력 배치
-+ 관련 후속 Chapter 입력 배치
-→ concept 분석
-→ 조화
+관련 입력 배치
+→ cluster concept 분석
+→ 필요한 조화
 → 범위가 명시된 glossary
-→ 현재 이론의 use 개명
+→ 현재 이론의 use만 개명
 ```
 
-첫 glossary는 자신이 반영한 입력 배치를 상단에 명시한다. 아직 조사하지 않은 Chapter나 모델 계보의 용어를 승인하거나 폐기한 것으로 간주하지 않는다.
+첫 glossary는 반영한 입력 배치를 상단에 명시한다. 아직 조사하지 않은 Chapter나 모델 계보의 용어를 승인하거나 폐기한 것으로 간주하지 않는다.
 
 기존 `models/<model>/prompt.md`와 평가는 정확한 모델 artifact이므로 잔여 검색에는 포함하되 조용히 개명하지 않는다. 새 용어를 반영하려면 기존 모델을 보존하고 새 프롬프트 모델을 만든다.
 
-## 7. 지금 하지 않는 것
+## 7. 현재 단계에서 하지 않는 것
 
-- concept ID 생성
-- 최종 정의와 권장 명칭 확정
-- 프로젝트별 glossary
+- 새 Chapter 입력 배치를 연속으로 추가해 concept 분석을 미루는 일
+- 첫 cluster 밖의 C-ID 대량 발급
+- 권장 명칭과 glossary 확정
+- 현재 문서 전면 rename
+- 별도 시나리오 디렉터리·하네스·PASS/FAIL suite
 - 자동 checker, schema, status registry
-- 엔진 용어의 인간 구조 자동 승격
-- 현재 문서의 전면 rename
+- 엔진 타입을 인간 구조로 자동 승격
 
-첫 단계는 Chapter 02의 역사적 혼합과 현재 연구의 실제 구분 요구를 두 입력 배치로 나란히 추출하는 것이다.
+현재 단계는 Chapter 02, current-research, Chapter 03이 함께 지목한 첫 occurrence cluster의 특성·대비 사례·정의 초안을 검토하는 것이다.
