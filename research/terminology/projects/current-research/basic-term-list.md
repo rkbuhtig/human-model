@@ -12,7 +12,8 @@
 | `event` | RFC 0002의 FlowUpdate/EventJump | X-CURR-021 | 미할당 | 상태 전이 연산과 occurrence 구분 |
 | `event count` | burst/spaced 비교의 사건 수 | X-CURR-021 | 미할당 | occurrence count와 mental transition 구분 |
 | `event property` | RFC 0004의 보편 점화 속성 금지 | X-CURR-021 | 미할당 | 단일 Event scalar 폐기 근거 |
-| `occurrence` | 원천 발생과 동일성 | X-CURR-005 | 미할당 | Chapter Event 실제 발생과 대조 |
+| `selection` / `선택` | 여러 행동 후보 중 이후 수행 경로를 고름 | X-CURR-001 | C0001 | Intent·Attempt와 추가 대조 |
+| `occurrence` | 원천 발생과 동일성 | X-CURR-005 | C0002 | ID·timestamp는 concept 정의 특성에서 제외 |
 | `delivery` | occurrence 전달 동일성 | X-CURR-006 | 미할당 | transport redelivery와 재노출 구분 |
 | `CurrentReexposure` | 현재의 별도 재노출 occurrence | X-CURR-006 | 미할당 | memory access와 경계 |
 | `CurrentAccessOccurrence` | 회상·연상·현재 encounter 접근 | X-CURR-006 | 미할당 | protocol reexposure와 동일 타입 아님 |
@@ -22,12 +23,12 @@
 | `JOT.court` | 판정 계열의 역사적 명칭 | X-CURR-013 | 미할당 | BindingAdjudicationReceipt와 직접 동일시 금지 |
 | `JOT store` | 미확정 재료 저장의 역사적 명칭 | X-CURR-010 | 미할당 | EpisodeMaterialReference·persistent store와 경계 |
 | `Quench` | 현행 research 직접 use 미확인 | X-CURR-023 | 미할당 | Chapter 02·03·후속 자료에서만 조사 |
-| `Candidate` | 행동·해석·조립 전 후보 | X-CURR-001 / X-CURR-011 / X-CURR-012 | 미할당 | 서로 다른 후보 종류를 한 concept로 묶지 않음 |
+| `Candidate` | 행동·해석·조립 전 후보 | X-CURR-001 / X-CURR-011 / X-CURR-012 | 미할당 | 후보 자체는 선택 C0001이 아님 |
 | `Intent` | 수행 이전 의도 | X-CURR-002 | 미할당 | 선택·시도·수행과 경계 |
 | `Attempt` | 수행 시도 | X-CURR-002 | 미할당 | intent/performance 사이 별도 개념 필요성 |
-| `Performance` | 행동 수행 과정 | X-CURR-002 / X-CURR-003 | 미할당 | ActionOccurrence와 경계 |
-| `ActionOccurrence` | 행동이 실제로 발생한 사실 | X-CURR-003 | 미할당 | Chapter Commit/Event 실제 발생과 대조 |
-| `WorldOutcome` | 행동 뒤 세계 결과 | X-CURR-004 | 미할당 | occurrence와 자기 피드백 구분 |
+| `Performance` | 행동 수행 과정 | X-CURR-002 / X-CURR-003 | 미할당 | ActionOccurrence와 경계; 인간 대비 근거 부족 |
+| `ActionOccurrence` | 행동이 실제로 발생한 사실 | X-CURR-003 | C0002 | 외부 표현·수행 과정과 추가 대조 |
+| `WorldOutcome` | 행동 뒤 세계 결과 | X-CURR-004 | C0003 | 관계 상태 변화·자기 피드백과 구분 |
 | `SubjectiveEncounterFormProxy` | 현재 접근의 descriptive encounter proxy | X-CURR-009 | 미할당 | actual qualia·evidence와 구분 |
 | `EpisodeMaterialReference` | 조립 독립 material handle | X-CURR-010 | 미할당 | 기억 저장소나 Episode 자체가 아님 |
 | `EpisodeAssemblyCandidate` | 아직 통합되지 않은 조립 후보 | X-CURR-011 | 미할당 | CandidatePack·Episode integration과 대조 |
@@ -36,10 +37,10 @@
 | `EpisodeIntegrationReceipt` | detached-lab 통합 결과 기록 | X-CURR-014 | 미할당 | durable writer·canonical Episode 아님 |
 | `SubjectiveBelief` | 현재 믿음 | X-CURR-015 | 미할당 | EvidenceAssessment와 구분 |
 | `EvidenceAssessment` | 증거에 대한 평가 | X-CURR-015 | 미할당 | world truth·belief·warrant와 구분 |
-| `receipt` / `record` | provenance와 판정 보존 | X-CURR-016 | 미할당 | persistent state와 write authority 구분 |
+| `receipt` / `record` | provenance와 판정 보존 | X-CURR-016 | 미할당 | C0004보다 넓으므로 자동 통합하지 않음 |
 | `readout` | 현재 표면·관측 출력 | X-CURR-017 | 미할당 | writable state와 경계 |
 | `Narrative write` | 느린 상태에 대한 write 후보 | X-CURR-014 / X-CURR-017 | 미할당 | 현재 readout과 자동 연결 금지 |
-| `후회` / `책임 수용` / `수리` | 행동 결과 이후 자기평가와 후속 변화 | X-CURR-018 | 미할당 | 지지·책임·사과·수리·채택 분리 |
+| `후회` / `책임 수용` / `수리` | 행동 결과 이후 자기평가와 후속 변화 | X-CURR-018 | 미할당 | C0003의 결과와 별도 후속 cluster |
 | `Episode 잔여` / `Narrative 변화` | 여러 사건 뒤 지속 경로 변화 | X-CURR-019 | 미할당 | stored trace·trajectory·Narrative 구분 |
 
 ## 사용 규칙
@@ -47,5 +48,6 @@
 - 후보 설명은 `extraction-map.md`만 수정한다.
 - 한 명칭이 여러 후보 종류에 쓰이면 여러 추출 ID를 연결한다.
 - 현재 사용이 없다는 사실은 ENGINE-ONLY 판정이 아니다.
-- concept 단계가 시작되면 같은 개념으로 확인된 여러 행만 하나의 C-ID에 연결한다.
+- 같은 개념으로 확인된 역할만 하나의 C-ID에 연결한다.
 - 구현 타입명과 인간 연구 용어가 같은 철자를 사용해도 자동 통합하지 않는다.
+- current-research의 C-ID 연결은 현재 사용 근거이며 인간 현상 근거를 추가하지 않는다.
