@@ -17,7 +17,119 @@
 → glossary 발행
 ```
 
-## 1. 입력 배치와 termbase의 소유권
+## 1. 작업 구조 지도
+
+이 지도는 현재 파일의 소유권과 참조 방향을 보여주는 라우팅 가이드다. 새 ontology, 상태 기계, 권위 계약을 만들지 않는다. 아직 존재하지 않는 경로는 해당 산출물이 실제로 처음 필요해질 때만 생성한다.
+
+### 1.1 디렉터리와 생성 조건
+
+```text
+research/
+├─ terminology/
+│  ├─ README.md                                      [현재]
+│  │
+│  ├─ projects/                                      [입력 배치 소유]
+│  │  ├─ chapter-02/                                 [현재]
+│  │  │  ├─ scope.md                                 조사 범위·출처 권한
+│  │  │  ├─ extraction-map.md                        후보 내용의 단일 권위
+│  │  │  ├─ basic-term-list.md                       명칭 → 추출 ID 색인
+│  │  │  └─ touched-concepts.md                      C-ID 생성·갱신 뒤 생성
+│  │  │
+│  │  ├─ current-research/                           [현재]
+│  │  │  ├─ scope.md
+│  │  │  ├─ extraction-map.md
+│  │  │  ├─ basic-term-list.md
+│  │  │  └─ touched-concepts.md                      C-ID 생성·갱신 뒤 생성
+│  │  │
+│  │  └─ <future-input-batch>/                       새 자료 배치를 열 때 생성
+│  │
+│  └─ termbase/                                      첫 C-ID가 필요할 때 생성
+│     ├─ concepts/
+│     │  └─ C0001.md                                 개념당 하나의 안정 파일
+│     ├─ harmonization/
+│     │  └─ H0001.md                                 실제 충돌·통합·분할 때 생성
+│     └─ glossary.md                                 승인 용어가 생길 때 발행
+│
+└─ diary/
+   └─ YYYY-MM-DD/
+      └─ 부제.md                                     비권위 연구 메모
+```
+
+`projects/` 아래의 파일은 입력 자료와 추출 결과를 소유한다. `termbase/` 아래의 파일은 입력 배치를 넘어 살아남는 현재 개념, 조화 결과, 사전을 소유한다. `diary/`는 어느 쪽의 근거 또는 승인 경로에도 자동으로 들어가지 않는다.
+
+### 1.2 자료 흐름
+
+```text
+Chapter / README / RFC / notes / checkpoints / models
+                         │
+                         ▼
+projects/<batch>/scope.md
+= 무엇을 읽고, 각 출처로 무엇을 주장할 수 있는가
+                         │
+                         ▼
+projects/<batch>/extraction-map.md
+= 자료에서 나온 중립 후보와 관계의 단일 권위
+                         │
+                         ├───────────────┐
+                         ▼               ▼
+projects/<batch>/basic-term-list.md   다른 입력 배치의 extraction-map.md
+= 역사 명칭 색인                   = 같은 후보의 추가 근거·경계
+                         │               │
+                         └───────┬───────┘
+                                 ▼
+                    기존 C-ID와 동일한지 판정
+                      ├─ 동일함 → 기존 C-ID 갱신
+                      └─ 새 개념 → 새 C-ID 생성
+                                 │
+                                 ▼
+termbase/concepts/Cxxxx.md
+= 차별 특성·근거·정의·권장 명칭의 단일 권위
+                                 │
+                    ┌────────────┴────────────┐
+                    ▼                         ▼
+projects/<batch>/touched-concepts.md   concept 간 충돌 발생
+= 이 배치가 건드린 C-ID 색인              │
+                                              ▼
+                            termbase/harmonization/Hxxxx.md
+                            = 통합·분할·경계 수정 기록
+                                              │
+                                              ▼
+                                termbase/concepts/ 갱신
+                                              │
+                                              ▼
+                                termbase/glossary.md
+                                              │
+                                              ▼
+                              현재 이론의 use만 개명
+```
+
+### 1.3 참조 방향과 금지된 역류
+
+```text
+scope
+→ extraction-map
+→ basic-term-list
+→ concept
+→ harmonization
+→ glossary
+→ current-use rename
+```
+
+허용되는 역참조는 색인과 provenance뿐이다.
+
+- `basic-term-list.md`는 후보 설명을 복사하지 않고 `extraction-map`의 추출 ID를 가리킨다.
+- `touched-concepts.md`는 정의를 복사하지 않고 C-ID만 가리킨다.
+- concept 파일은 자신을 연 입력 배치의 근거를 가리킬 수 있다.
+- glossary는 concept의 정의를 사용자용으로 발행하지만 프로젝트별 분석을 다시 소유하지 않는다.
+
+다음 역류는 금지한다.
+
+- glossary의 문구를 근거로 과거 Chapter의 의미를 다시 판정하지 않는다.
+- 한 프로젝트의 추출 지도를 termbase의 정본 개념체계로 취급하지 않는다.
+- 현재 RFC의 아키텍처 구분을 인간 현상 근거로 되돌려 쓰지 않는다.
+- diary의 직감을 concept 정의나 KEEP 판정의 직접 근거로 사용하지 않는다.
+
+## 2. 입력 배치와 termbase의 소유권
 
 ### `projects/<batch>/`
 
@@ -51,7 +163,7 @@
 
 분석과 조화가 끝난 현재 개념만 사용자용 사전으로 발행한다. 프로젝트별 glossary는 만들지 않는다.
 
-## 2. 입력 배치 문서의 권한
+## 3. 입력 배치 문서의 권한
 
 ### `scope.md`
 
@@ -82,7 +194,7 @@
 
 배치가 새로 개설하거나 갱신한 concept ID만 기록한다. 정의나 명칭을 복사하지 않는다.
 
-## 3. 개념 분석 규칙
+## 4. 개념 분석 규칙
 
 1. **개념은 명칭보다 먼저다.** 정의와 경계가 안정되기 전에 권장 이름을 확정하지 않는다.
 2. **한 concept 파일에는 한 개념만 둔다.** 다의어 중심 파일을 만들지 않는다.
@@ -109,7 +221,7 @@ concept 분석에서는 근거를 다음 세 층으로 분리한다.
 
 `현재 사용됨`은 용어 정리의 필요를 보여주지만, 인간 내부의 독립 구조를 승인하지 않는다.
 
-## 4. 조화 규칙
+## 5. 조화 규칙
 
 ### 통합
 
@@ -132,7 +244,7 @@ C0002
 - 원본이 두 의미를 함께 가리켰다면 두 새 ID와 조화 기록을 함께 연결한다.
 - glossary에는 새 ID만 반영한다.
 
-## 5. 개명과 glossary 발행 조건
+## 6. 개명과 glossary 발행 조건
 
 저장소 전면 개명은 다음 순서 뒤에만 수행한다.
 
@@ -150,7 +262,7 @@ Chapter 입력 배치
 
 기존 `models/<model>/prompt.md`와 평가는 정확한 모델 artifact이므로 잔여 검색에는 포함하되 조용히 개명하지 않는다. 새 용어를 반영하려면 기존 모델을 보존하고 새 프롬프트 모델을 만든다.
 
-## 6. 지금 하지 않는 것
+## 7. 지금 하지 않는 것
 
 - concept ID 생성
 - 최종 정의와 권장 명칭 확정
