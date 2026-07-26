@@ -37,8 +37,8 @@
 | `Φ` | routing field | X-CH02-022 | 미할당 | readout과 causal routing 구분 |
 | `Φ` | 의미 확정 표면 | X-CH02-019 | 미할당 | 현재 해석과 durable state 구분 |
 | `EOE` / `e` | 관계적 기대·베팅·미청산·수리 | X-CH02-020 | 미할당 | 관계 상태의 내부 분해 |
-| `EOE` / `e` | 보편 보존 통화 | X-CH02-024 | 미할당 | 관계 상태와 별도 개념인지 |
-| `EOE` / `e` | 문턱을 넘은 사건 | X-CH02-024 | 미할당 | Event/occurrence와 중복 여부 |
+| `EOE` / `e` | 보편 보존 통화 | X-CH02-024 | 미할당 | 인간 현상 설명인지 엔진 회계 은유인지 |
+| `EOE` / `e` | 문턱을 넘은 사건 | X-CH02-026 | 미할당 | Event/occurrence·경로 변화와 경계 |
 | `Ledger` | 발생 기록 | X-CH02-007 | 미할당 | 사실 기록과 관계 회계 구분 |
 | `Ledger` | ownership·settlement 회계 | X-CH02-023 | 미할당 | responsibility/settlement 자료 대조 |
 | `Ledger` | 자기 역사 원장 | X-CH02-018 | 미할당 | Λ·SSOT와 경계 |
