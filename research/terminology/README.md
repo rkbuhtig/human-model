@@ -38,14 +38,21 @@ research/
 │  │  │  └─ 같은 네 문서
 │  │  ├─ chapter-03/
 │  │  │  └─ 같은 네 문서
+│  │  ├─ chapter-04/
+│  │  │  └─ 같은 네 문서
 │  │  └─ <future-input-batch>/                       새 자료 배치를 열 때 생성
 │  │
 │  └─ termbase/                                      입력 배치를 넘어 살아남는 결과
 │     ├─ concepts/
-│     │  ├─ C0001.md                                 행동 경로 선택 cluster 결과
-│     │  ├─ C0002.md                                 외부 발생 cluster 결과
-│     │  ├─ C0003.md                                 세계 결과 cluster 결과
-│     │  └─ C0004.md                                 발생 기록 cluster 결과
+│     │  ├─ C0001.md                                 행동 경로 선택
+│     │  ├─ C0002.md                                 외부 발생
+│     │  ├─ C0003.md                                 세계 결과 상태
+│     │  ├─ C0004.md                                 occurrence record
+│     │  ├─ C0005.md                                 현재 체험 표면
+│     │  ├─ C0006.md                                 비권위적 미래 편성 영향
+│     │  ├─ C0007.md                                 실제 탐색·비교 노동
+│     │  ├─ C0008.md                                 실제 자원 지출
+│     │  └─ C0009.md                                 수행·지출 회계 기록
 │     ├─ harmonization/
 │     │  └─ H0001.md                                 실제 통합·분할·경계 수정 때 생성
 │     └─ glossary.md                                 승인 명칭이 생길 때 발행
@@ -110,6 +117,8 @@ source corpus
 - 본질·부수·차별·제외 판정
 - 코퍼스 확인 대비 사례
 - 상위 개념과 형제 관계
+- 이 구분이 보존하는 설명적 차이
+- 실제로 확인된 경우의 경계 재압축 이력
 - 정의 초안
 - 현재 판정
 - 권장·허용·역사적 명칭
@@ -119,6 +128,8 @@ source corpus
 ### `termbase/harmonization/`
 
 서로 다른 concept가 충돌할 때의 통합, 분할, 경계 수정, ENGINE-ONLY 처분을 기록한다. 실제 충돌이 생기기 전에는 만들지 않는다.
+
+역사 문서가 한 번 분리한 경계를 후속 통합본에서 다시 섞은 사실은 harmonization이 아니다. 해당 concept 파일의 `경계 재압축 이력`에 위치·방식·손실을 기록한다.
 
 ### `termbase/glossary.md`
 
@@ -163,7 +174,7 @@ source corpus
 
 후보 하나만 고립해서 정의하지 않는다. 상위 개념과 형제 후보에 따라 차별 특성이 달라지므로 함께 비교한다.
 
-첫 cluster는 다음 경계를 동시에 다룬다.
+첫 cluster는 다음 경계를 동시에 다뤘다.
 
 ```text
 행동 선택
@@ -174,6 +185,21 @@ source corpus
 ```
 
 현재 C-ID를 열지 않은 외부 표현, Intent, Attempt, Performance도 대비 후보로 남긴다.
+
+두 번째 cluster는 다음 경계를 동시에 다룬다.
+
+```text
+현재 체험 표면
+≠ 현재 장면 구성·Priority·Alignment 같은 다른 readout
+≠ 미래 탐색에 대한 비권위적 영향
+≠ 운영 노브와 budget
+≠ 실제 수행 노동
+≠ 실제 자원 지출
+≠ 수행·지출 회계 기록
+≠ 이후 지속 상태 갱신
+```
+
+`readout / policy / accounting`을 정답 상자로 먼저 두지 않는다. 같은 역사적 residence에 놓였다는 사실은 concept 동일성 근거가 아니다.
 
 ### 4.2 특성 판정
 
@@ -223,7 +249,50 @@ source corpus
 - `MERGE`: 조사 범위에서 별도 차별 특성을 확인하지 못해 다른 concept와 같은 경계로 처리함.
 - `보류`: 근거·사례·관계가 부족해 판정할 수 없음.
 
-### 4.6 공통 규칙
+### 4.6 이 구분이 보존하는 것
+
+`KEEP` concept는 다른 concept와 압축했을 때 사라지는 구체적인 인간 장면이나 판정 차이를 적는다.
+
+```text
+합쳐지는 경계
+→ 사라지는 장면·판정
+→ 그 손실을 보여주는 코퍼스 위치
+```
+
+추상적으로 “중요하다”고 쓰지 않는다. 구성 사례로 중요성을 장식하지 않고, 이미 확인한 대비 사례가 어떤 설명을 보존하는지 적는다.
+
+### 4.7 경계 재압축 이력
+
+한 번 분리한 경계가 후속 문서에서 실제로 다시 합쳐졌을 때만 기록한다.
+
+```text
+무너진 경계
+→ 재압축 위치
+→ 다시 합쳐진 방식
+→ 발생한 설명·권한·시간·provenance 손실
+```
+
+- 실제 문서 위치가 없는 위험을 지어내지 않는다.
+- 모든 concept 파일에 같은 수의 이력을 채우지 않는다.
+- 빈 섹션이나 `없음`을 의례적으로 추가하지 않는다.
+- 이것은 현재 concept끼리의 조화가 아니라 시간축 위의 자기붕괴 기록이다.
+
+### 4.8 기능·전이 감사 질문
+
+Chapter 04의 X/R/U/A를 현재 schema로 사용하지 않는다. 그 실패가 드러낸 다음 질문만 cluster 분석 중 사용한다.
+
+```text
+지속성: 순간적인가, 이후에도 남는가?
+파생 방식: 직접 저장됐는가, 다른 값에서 계산됐는가?
+영향: 무엇을 실제로 바꿀 수 있는가?
+시점: 같은 tick인가, 이후 tick인가?
+writer 권한: 어떤 상태를 직접 갱신할 수 있는가?
+귀속: 변화·비용·결과는 어떤 기록으로 남는가?
+```
+
+이 질문은 concept 파일의 필수 슬롯이나 residence 분류가 아니다. 답이 특성·관계·제외 판정·정의를 실제로 바꿀 때만 산출물에 남긴다.
+
+### 4.9 공통 규칙
 
 1. 개념은 명칭보다 먼저다.
 2. 한 concept 파일에는 한 개념만 둔다.
@@ -275,12 +344,14 @@ C0002
 
 ## 7. 현재 단계에서 하지 않는 것
 
-- 새 Chapter 입력 배치를 연속으로 추가해 concept 분석을 미루는 일
-- 첫 cluster 밖의 C-ID 대량 발급
+- Chapter 05 입력 배치
+- readout/policy/accounting 3분법 선확정
+- X/R/U/A 또는 S/R/U/A 기반 concept schema
 - 권장 명칭과 glossary 확정
 - 현재 문서 전면 rename
 - 별도 시나리오 디렉터리·하네스·PASS/FAIL suite
 - 자동 checker, schema, status registry
 - 엔진 타입을 인간 구조로 자동 승격
+- 근거가 부족한 후보의 대량 C-ID 발급
 
-현재 단계는 Chapter 02, current-research, Chapter 03이 함께 지목한 첫 occurrence cluster의 특성·대비 사례·정의 초안을 검토하는 것이다.
+현재 단계는 Chapter 03·04와 current-research가 함께 드러낸 두 번째 cluster에서 현재 체험 표면, 비권위적 미래 영향, 실제 수행 노동, 실제 자원 지출, 수행·지출 회계 기록의 경계를 검토하는 것이다. `Z`, Priority, Alignment, MeaningFlux, policy knob, CovState, delayed persistent update는 자동 통합하지 않고 후속 후보로 남긴다.

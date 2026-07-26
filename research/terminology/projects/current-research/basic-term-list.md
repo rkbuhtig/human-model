@@ -29,7 +29,7 @@
 | `Performance` | 행동 수행 과정 | X-CURR-002 / X-CURR-003 | 미할당 | ActionOccurrence와 경계; 인간 대비 근거 부족 |
 | `ActionOccurrence` | 행동이 실제로 발생한 사실 | X-CURR-003 | C0002 | 외부 표현·수행 과정과 추가 대조 |
 | `WorldOutcome` | 행동 뒤 세계 결과 | X-CURR-004 | C0003 | 관계 상태 변화·자기 피드백과 구분 |
-| `SubjectiveEncounterFormProxy` | 현재 접근의 descriptive encounter proxy | X-CURR-009 | 미할당 | actual qualia·evidence와 구분 |
+| `SubjectiveEncounterFormProxy` | 현재 접근의 descriptive encounter proxy | X-CURR-009 | C0005 | actual qualia·외부 원인·evidence와 구분 |
 | `EpisodeMaterialReference` | 조립 독립 material handle | X-CURR-010 | 미할당 | 기억 저장소나 Episode 자체가 아님 |
 | `EpisodeAssemblyCandidate` | 아직 통합되지 않은 조립 후보 | X-CURR-011 | 미할당 | CandidatePack·Episode integration과 대조 |
 | `InterpretiveBindingCandidate` | 일시적 해석 후보 | X-CURR-012 | 미할당 | Narrative write 권한 없음 |
@@ -37,8 +37,8 @@
 | `EpisodeIntegrationReceipt` | detached-lab 통합 결과 기록 | X-CURR-014 | 미할당 | durable writer·canonical Episode 아님 |
 | `SubjectiveBelief` | 현재 믿음 | X-CURR-015 | 미할당 | EvidenceAssessment와 구분 |
 | `EvidenceAssessment` | 증거에 대한 평가 | X-CURR-015 | 미할당 | world truth·belief·warrant와 구분 |
-| `receipt` / `record` | provenance와 판정 보존 | X-CURR-016 | 미할당 | C0004보다 넓으므로 자동 통합하지 않음 |
-| `readout` | 현재 표면·관측 출력 | X-CURR-017 | 미할당 | writable state와 경계 |
+| `receipt` / `record` | provenance와 판정 보존 | X-CURR-016 | 미할당 | C0004 occurrence record·C0009 work accounting record보다 넓음 |
+| `readout` | 현재 표면·관측 출력 | X-CURR-017 | 미할당 | C0005 surface·C0006 influence·writable state를 자동 통합하지 않음 |
 | `Narrative write` | 느린 상태에 대한 write 후보 | X-CURR-014 / X-CURR-017 | 미할당 | 현재 readout과 자동 연결 금지 |
 | `후회` / `책임 수용` / `수리` | 행동 결과 이후 자기평가와 후속 변화 | X-CURR-018 | 미할당 | C0003의 결과와 별도 후속 cluster |
 | `Episode 잔여` / `Narrative 변화` | 여러 사건 뒤 지속 경로 변화 | X-CURR-019 | 미할당 | stored trace·trajectory·Narrative 구분 |
