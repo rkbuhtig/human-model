@@ -4,25 +4,25 @@
 
 | 역사적 명칭 | 관찰된 역할 | 추출 항목 | concept ID | 다음 확인 |
 |---|---|---|---|---|
-| `Commit` | 행동 선택 | X-CH02-001 | 미할당 | current-research의 Candidate/Intent/Attempt/Performance 대조 |
-| `Commit` | 외부 표현 | X-CH02-002 | 미할당 | 표현과 수행·발생의 경계 |
-| `Commit` | 실제 발생 | X-CH02-003 | 미할당 | current-research의 ActionOccurrence 대조 |
-| `Commit` | 원장 기록 | X-CH02-007 | 미할당 | 발생 사실과 기록·상태 편입의 경계 |
+| `Commit` | 행동 선택 | X-CH02-001 | C0001 | Intent·Attempt·Performance와 추가 대조 |
+| `Commit` | 외부 표현 | X-CH02-002 | 미할당 | 발생의 하위 개념인지 수행 과정인지 보류 |
+| `Commit` | 실제 발생 | X-CH02-003 | C0002 | 수행 과정·신체 내부 변화와 경계 |
+| `Commit` | 원장 기록 | X-CH02-007 | C0004 | 사건 기록과 판정 기록의 경계 |
 | `Commit` | 비가역 잠금 | X-CH02-008 | 미할당 | 엔진 state lock인지 인간 개념인지 |
 | `Commit` | 신체 흔적 | X-CH02-016 | 미할당 | Chapter 08·qualia/morphic 자료 |
 | `Commit` | 기억 고착 | X-CH02-017 | 미할당 | Chapter 08 |
 | `Commit` | 자기 역사 편입 | X-CH02-018 | 미할당 | Chapter 08·09 및 current-research |
 | `Commit` | 의미 확정 | X-CH02-019 | 미할당 | 해석 형성과 비가역 적용의 경계 |
 | `Commit` | 관계적 결속·투자 | X-CH02-020 | 미할당 | EOE/Ledger 관계 후보와 대조 |
-| `Event` | 외부 발생 | X-CH02-003 | 미할당 | occurrence와 world outcome의 경계 |
-| `Event` | 새 위치·경로를 엶 | X-CH02-004 | 미할당 | 발생 결과와 별도 개념인지 |
+| `Event` | 외부 발생 | X-CH02-003 | C0002 | occurrence와 신체 내부 사건의 경계 |
+| `Event` | 새 위치·경로를 엶 | X-CH02-004 | C0003 | 결과와 관계 상태 변화의 범위 |
 | `Event` | 단계·위상 | X-CH02-005 | 미할당 | 엔진 phase인지 인간 변화 단계인지 |
 | `Event` | 검사점·시점 | X-CH02-006 | 미할당 | timepoint와 occurrence의 경계 |
-| `Event` | 기록 경계 | X-CH02-007 | 미할당 | EventRecord 계열과 대조 |
+| `Event` | 기록 경계 | X-CH02-007 | C0004 | 기록과 비가역 적용의 경계 |
 | `Event` | Quench 포함 복합 경계 | X-CH02-010 | 미할당 | 역사적 과잉 통합 여부 |
 | `JOT` | 판정 cycle | X-CH02-012 | 미할당 | RFC 0004의 JOT.court 언급 대조 |
 | `JOT` | 미확정 재료 store | X-CH02-013 | 미할당 | SSOT·Episode material과 경계 |
-| `JOT` | 발생 기록 | X-CH02-007 | 미할당 | record와 store의 경계 |
+| `JOT` | 발생 기록 | X-CH02-007 | C0004 | record와 store의 경계 |
 | `Quench` | 비가역 잠금 | X-CH02-008 | 미할당 | 현재 연구 직접 사용 없음 확인 |
 | `Quench` | Event 뒤 후처리 | X-CH02-009 | 미할당 | 엔진 전용 가능성 |
 | `Quench` | Event 내부 고정 단계 | X-CH02-010 | 미할당 | 0109/0110 충돌 조화 |
@@ -38,8 +38,8 @@
 | `Φ` | 의미 확정 표면 | X-CH02-019 | 미할당 | 현재 해석과 durable state 구분 |
 | `EOE` / `e` | 관계적 기대·베팅·미청산·수리 | X-CH02-020 | 미할당 | 관계 상태의 내부 분해 |
 | `EOE` / `e` | 보편 보존 통화 | X-CH02-024 | 미할당 | 인간 현상 설명인지 엔진 회계 은유인지 |
-| `EOE` / `e` | 문턱을 넘은 사건 | X-CH02-026 | 미할당 | Event/occurrence·경로 변화와 경계 |
-| `Ledger` | 발생 기록 | X-CH02-007 | 미할당 | 사실 기록과 관계 회계 구분 |
+| `EOE` / `e` | 문턱을 넘은 사건 | X-CH02-026 | 미할당 | 외부 occurrence와 내부 임계 판정의 경계 |
+| `Ledger` | 발생 기록 | X-CH02-007 | C0004 | 사실 기록과 관계 회계 구분 |
 | `Ledger` | ownership·settlement 회계 | X-CH02-023 | 미할당 | responsibility/settlement 자료 대조 |
 | `Ledger` | 자기 역사 원장 | X-CH02-018 | 미할당 | Λ·SSOT와 경계 |
 | `SSOT` | 개인 기억·정체성 상태 | X-CH02-015 | 미할당 | Chapter 08·09 |
@@ -55,5 +55,6 @@
 
 - 후보 설명을 바꾸려면 `extraction-map.md`만 수정한다.
 - 이 표는 해당 명칭이 어느 추출 항목을 가리켰는지만 연결한다.
-- concept 단계가 열리면 같은 개념을 가리키는 여러 행이 하나의 C-ID에 연결될 수 있다.
+- 같은 개념을 가리키는 여러 역사 명칭은 하나의 C-ID에 연결할 수 있다.
+- C-ID 연결은 역사 명칭 전체를 승인하지 않고 해당 추출 역할만 연결한다.
 - 하나의 추출 항목이 분할되면 실제 의미에 따라 새 C-ID들과 harmonization 기록을 연결한다.
