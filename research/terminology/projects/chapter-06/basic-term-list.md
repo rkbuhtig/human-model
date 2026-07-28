@@ -5,7 +5,7 @@
 | 역사적 명칭 | 관찰된 역할 | 추출 항목 | concept ID | 다음 확인 |
 |---|---|---|---|---|
 | Pressure | 예상 수리 요구와 현재 여유의 충돌 | X-CH06-001 | 미할당 | burden readout·repair demand와 구분 |
-| Repair | 이미 생긴 불일치를 복구하는 실제 작동 | X-CH06-001 / X-CH06-019 | 미할당 | work·resource spend·settlement와 구분 |
+| Repair | 이미 생긴 불일치를 복구하는 실제 작동 | X-CH06-001 / X-CH06-019 | 보류 | C0007 후보군에서 generic·partitive 관계 확인 |
 | Relief | 현재 느끼고 대응하는 부담 감소 | X-CH06-001 / X-CH06-008 | 미할당 | actual repair와 구분 |
 | RiskCarry | 현재 전망 완화의 차액을 동일 tick에 계상 | X-CH06-002 | 미할당 | persistent σ와 자동 동일시 금지 |
 | Witness / Control / Storage / Bill | 판정·조절·지속·청구의 네 층 | X-CH06-003 | 미할당 | 전역 schema로 승격 금지 |
@@ -81,8 +81,8 @@
 | ActionOut | 선택 뒤 산출되는 행동 출력 | X-CH06-034 / X-CH06-036 | ENGINE-ONLY | actual occurrence·world outcome을 보증하지 않음 |
 | BodyAuthorization | 몸의 허가·veto 단계 요구 | X-CH06-035 / X-CH06-036 | 보류 | 독립 긍정 근거·형제 대비 필요 |
 | dm_phys / Damage | 미충족 repair demand에 가까운 scalar | X-CH06-035 | 보류 | body·repair demand cluster에서 재명명 판단 |
-| PerformedAction | 실제 수행된 행동 단계 요구 | X-CH06-034 / X-CH06-036 | C0002 | 외부 action occurrence 역할만 병합 |
-| ExternalOutcome | 행동 뒤 세계 결과 | X-CH06-036 | C0003 | observed outcome·outcome receipt와 구분 |
+| PerformedAction | 실제 수행된 행동 단계 요구 | X-CH06-034 / X-CH06-036 | 보류 | C0002 NARROWER 후보; 행위자성·완료 문턱 대비 필요 |
+| ExternalOutcome | 행동 뒤 세계 결과 | X-CH06-036 | 보류 | C0003 RELATED/NARROWER 후보; realized·relational·settlement 분리 필요 |
 
 ## Chapter 05 연결 요약
 
@@ -102,5 +102,5 @@
 - 같은 철자가 여러 행이나 여러 추출 ID에 나타나는 것은 역할 이동·과적재를 보존하기 위한 것이다.
 - `Witness`, `Receipt`, `Bill`, `Grounds`, `Influence`, `Authority`는 현재 권장 명칭이나 정본 concept로 승인된 것이 아니다.
 - `C0006` 연결은 Influence 역할의 부분 대조일 뿐 CON06의 전체 runtime relation을 기존 concept와 동일시하지 않는다.
-- Chapter 07 이후의 Fog·Reporter·Two-Cut 용어를 이 표에 소급해 넣지 않는다.
-- concept 분석이 끝난 역할만 C-ID 또는 `ENGINE-ONLY`·`HISTORICAL-ONLY`·`보류` 판정을 연결한다. 한 역사 명칭의 다른 역할까지 함께 승인하지 않는다.
+- C-ID 연결과 synonymy는 다르다. generic·partitive·associative 관계 후보는 `보류`와 다음 확인을 기록한다.
+- Chapter 07 이후의 용어를 이 표에 소급해 넣지 않는다.

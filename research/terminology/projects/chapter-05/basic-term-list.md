@@ -88,14 +88,13 @@
 | evidence gap | 입력과 판정 근거 사이 type 부재 | X-CH05-030 / X-CH05-031 | 미할당 | Chapter 06으로 소급 금지 |
 | evidence port | policy-independent attestable grounds 입력 경로 | X-CH05-031 | 미할당 | Chapter 05에는 부재한 요구 |
 | grounds starvation | 강한 closure가 정당한 외부 근거도 막는 위험 | X-CH05-031 | 미할당 | over-closure와 구분 |
-| OVER-CLOSURE | 누수 차단이 evidence candidate까지 막는 상태 | X-CH05-031 | 미할당 | 단순 deny 성공과 구분 |
-| `F` | 모든 상태 갱신과 output의 single transition | X-CH05-032 | 미할당 | 내부 stage type 완성으로 해석 금지 |
-| single transition | 외부 write boundary를 하나로 모음 | X-CH05-032 | 미할당 | human ontology와 구분 |
+| OVER-CLOSURE | 합법적 입력·영향까지 함께 차단한 폐쇄 실패 | X-CH05-028 / X-CH05-031 | 미할당 | security rule과 failure mode 구분 |
+| STG | 통합 실행 알고리즘 초안 | X-CH05-023 / X-CH05-028~036 | 미할당 | Core 직접 후속·승계로 단정 금지 |
 | CommitFn | STG state update 함수 | X-CH05-032 / X-CH05-024 | 미할당 | Record·policy-next read-cap 확인 |
-| Decision_t | STG가 commit하는 결정 | X-CH05-033 | C0001 | StrategyAdoption·ActionOut·occurrence와 구분 |
+| Decision_t | STG가 commit하는 결정 | X-CH05-033 | C0001 역할 연결 | C0001 synonymy가 아니라 해당 선택 역할만 연결 |
 | ActionOut_t | 외부로 내보내는 action output | X-CH05-033 | ENGINE-ONLY | C0002 실제 occurrence를 보증하지 않음 |
 | Gate_Action | ActionOut 계산의 실행 gate | X-CH05-033 | ENGINE-ONLY | body authorization·actual occurrence와 구분 |
-| action receipt | 실제 행동 occurrence 결박 기록 | X-CH05-033 | C0004 | configuration Receipt·work/spend record와 구분 |
+| action receipt | 실제 행동 occurrence 결박 기록 | X-CH05-033 | 보류 | C0004 NARROWER 후보; configuration Receipt·work/spend record와 구분 |
 | outcome receipt | world response 결박 기록 | X-CH05-033 | 보류 | C0003·observation artifact·evidence와 후속 분석 |
 | SEALED | 원문이 열거한 특정 우회 경로 봉인 | X-CH05-034 | 미할당 | 전체 이론·구현 완성으로 확장 금지 |
 | Gate checklist | spec 수준 검사 항목 | X-CH05-034 | 미할당 | 실행 결과·test evidence와 구분 |
@@ -114,4 +113,4 @@
 - Core와 STG에 같은 기능명이 나타나도 직접 승계·동일 schema를 보증하지 않는다.
 - registry·socket·key·PackRef는 현재 인간 ontology의 concept 이름으로 자동 승격하지 않는다.
 - `registered`, `linked`, `executable`, `writable`, `warranted`를 같은 상태로 합치지 않는다.
-- concept 분석이 끝난 역할만 C-ID 또는 `ENGINE-ONLY`·`HISTORICAL-ONLY`·`보류` 판정을 연결한다. 같은 추출 항목 안의 다른 역할까지 승인하지 않는다.
+- C-ID 연결과 synonymy는 다르다. generic·partitive·associative 관계 후보는 `보류`와 다음 확인을 기록한다.
