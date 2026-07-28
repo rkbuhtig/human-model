@@ -25,18 +25,18 @@
 | ForecastBase | policy 표현 전 전망 기준 | X-CH06-009 | 미할당 | world truth와 구분 |
 | ForecastCosmetic | 표현·주의를 거친 현재 전망 | X-CH06-009 | 미할당 | current regulation과 구분 |
 | cosmetic delta | base와 cosmetic forecast 차액 | X-CH06-009 / X-CH06-012 | 미할당 | burden transfer evidence 여부 확인 |
-| pledge | 미래 이월 자기서약 또는 controller strategy 명세 | X-CH06-010 / X-CH06-012 | 미할당 | intention·configuration receipt 분리 |
+| pledge | 미래 이월 자기서약 또는 controller strategy 명세 | X-CH06-010 / X-CH06-012 | HISTORICAL-ONLY | 인간 약속·의도 concept로 자동 승격 금지 |
 | obs_gain | 즉시 완화와 초기 σ 법칙에 관여한 knob | X-CH06-011 | 미할당 | Bill rule 조작 누수 확인 |
 | policy-free Bill | 현재 policy가 청구 법칙을 바꾸지 못함 | X-CH06-011 | 미할당 | obligation law·runtime coefficient 구분 |
-| Receipt | strategy knob configuration 자동 기록 | X-CH06-012 / X-CH06-013 / X-CH06-034 | 미할당 | performed action receipt와 구분 |
-| `Receipt(=pledge payload)` | pledge의 실행판 별칭 | X-CH06-012 | 미할당 | 선언적 pledge와 역할 이동 확인 |
-| PledgeFn | 허용 knob에서 Receipt를 자동 산출 | X-CH06-012 | 미할당 | controller 자유 신고와 구분 |
-| AttachMeta | pledge/Receipt를 단일 원천으로 mint | X-CH06-012 | 미할당 | action outcome 전 발행 문제 |
-| Receipt-only | Receipt payload의 Store 전용 사용 | X-CH06-013 | 미할당 | evidence·Bill direct read 금지 |
-| PayloadFirewall | core별 payload read-cap 제한 | X-CH06-013 / X-CH06-025 | 미할당 | record existence와 authority 구분 |
-| `pledge_t` | STG1의 stored pledge 표기 | X-CH06-014 | 미할당 | production tick 규약 확인 |
-| `pledge_{t-1}` | STG2의 이전 tick stored pledge 표기 | X-CH06-014 | 미할당 | double-delay 가능성 확인 |
-| `pledge_next` | 현재 knob에서 mint된 다음 payload | X-CH06-014 / X-CH06-034 | 미할당 | ActionOut보다 먼저 생성됨 |
+| Receipt | strategy knob configuration 자동 기록 | X-CH06-012 / X-CH06-013 / X-CH06-034 | ENGINE-ONLY | performed action receipt와 구분 |
+| `Receipt(=pledge payload)` | pledge의 실행판 별칭 | X-CH06-012 | ENGINE-ONLY | 실제 수행·결과를 보증하지 않음 |
+| PledgeFn | 허용 knob에서 Receipt를 자동 산출 | X-CH06-012 | ENGINE-ONLY | controller configuration operation |
+| AttachMeta | pledge/Receipt를 단일 원천으로 mint | X-CH06-012 | ENGINE-ONLY | action outcome 전 발행 문제 |
+| Receipt-only | Receipt payload의 Store 전용 사용 | X-CH06-013 | ENGINE-ONLY | evidence·Bill direct read 금지 |
+| PayloadFirewall | core별 payload read-cap 제한 | X-CH06-013 / X-CH06-025 | ENGINE-ONLY | record existence와 authority 구분 |
+| `pledge_t` | STG1의 stored pledge 표기 | X-CH06-014 | ENGINE-ONLY | production tick 규약 확인 |
+| `pledge_{t-1}` | STG2의 이전 tick stored pledge 표기 | X-CH06-014 | ENGINE-ONLY | double-delay 가능성 확인 |
+| `pledge_next` | 현재 knob에서 mint된 다음 payload | X-CH06-014 / X-CH06-034 | ENGINE-ONLY | ActionOut보다 먼저 생성됨 |
 | `σ` | 미해결 응력·수리 요구의 지속 vector | X-CH06-015 / X-CH06-017 | 미할당 | obligation·backlog와 구분 |
 | `σ_age` | 미해결 상태의 경로 의존 경과 요약 | X-CH06-016 | 미할당 | 단순 이자·elapsed time과 구분 |
 | Store / StoreFn | Receipt를 σ 상태에 적재 | X-CH06-017 | 미할당 | record store·obligation creation 경계 |
@@ -78,11 +78,11 @@
 | Imprint(C/R/S) | 연결이 남기는 여러 흔적 | X-CH06-041 | 미할당 | residue·cost·debt 자동 통합 금지 |
 | flux × resistance | 연결 비용·담보 하한 가설 | X-CH06-041 | 미할당 | SIDE BRANCH / HOLD |
 | Obligation | actor·bearer·beneficiary·scope를 가진 후속 relation 요구 | X-CH06-020 / X-CH06-042 | 미할당 | 0118 원문 완성 타입 아님 |
-| ActionOut | 선택 뒤 산출되는 행동 출력 | X-CH06-034 / X-CH06-036 | 미할당 | actual occurrence·world outcome과 구분 |
-| BodyAuthorization | 몸의 허가·veto 단계 요구 | X-CH06-035 / X-CH06-036 | 미할당 | Chapter 06 원문 부재 |
-| dm_phys / Damage | 미충족 repair demand에 가까운 scalar | X-CH06-035 | 미할당 | `UnmetRepairDemand` 재명명 후보 |
-| PerformedAction | 실제 수행된 행동 단계 요구 | X-CH06-034 / X-CH06-036 | 미할당 | ActionOut·Receipt와 구분 |
-| ExternalOutcome | 행동 뒤 세계 결과 | X-CH06-036 | C0003 부분 대조 | observed outcome과 구분 |
+| ActionOut | 선택 뒤 산출되는 행동 출력 | X-CH06-034 / X-CH06-036 | ENGINE-ONLY | actual occurrence·world outcome을 보증하지 않음 |
+| BodyAuthorization | 몸의 허가·veto 단계 요구 | X-CH06-035 / X-CH06-036 | 보류 | 독립 긍정 근거·형제 대비 필요 |
+| dm_phys / Damage | 미충족 repair demand에 가까운 scalar | X-CH06-035 | 보류 | body·repair demand cluster에서 재명명 판단 |
+| PerformedAction | 실제 수행된 행동 단계 요구 | X-CH06-034 / X-CH06-036 | C0002 | 외부 action occurrence 역할만 병합 |
+| ExternalOutcome | 행동 뒤 세계 결과 | X-CH06-036 | C0003 | observed outcome·outcome receipt와 구분 |
 
 ## Chapter 05 연결 요약
 
@@ -93,7 +93,7 @@
 | X-CH05-030 input admission ≠ evidence | X-CH06-005 Witness 교정, X-CH06-027 positive issuance gap |
 | X-CH05-031 evidence port 부재 | X-CH06-021~028 admissibility contract와 남은 공백 |
 | X-CH05-024/026 Decision·Record | X-CH06-012~014 configuration Receipt와 firewall |
-| X-CH05-035 ActionOut·outcome 공백 | X-CH06-034~036 action execution chain 결손 |
+| X-CH05-033 Decision·ActionOut·outcome 공백 | X-CH06-034~036 action execution chain 결손 |
 
 ## 사용 규칙
 
@@ -103,4 +103,4 @@
 - `Witness`, `Receipt`, `Bill`, `Grounds`, `Influence`, `Authority`는 현재 권장 명칭이나 정본 concept로 승인된 것이 아니다.
 - `C0006` 연결은 Influence 역할의 부분 대조일 뿐 CON06의 전체 runtime relation을 기존 concept와 동일시하지 않는다.
 - Chapter 07 이후의 Fog·Reporter·Two-Cut 용어를 이 표에 소급해 넣지 않는다.
-- concept 단계가 열리기 전에는 C-ID를 배정하지 않는다.
+- concept 분석이 끝난 역할만 C-ID 또는 `ENGINE-ONLY`·`HISTORICAL-ONLY`·`보류` 판정을 연결한다. 한 역사 명칭의 다른 역할까지 함께 승인하지 않는다.
