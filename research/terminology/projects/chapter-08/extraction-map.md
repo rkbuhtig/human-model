@@ -44,7 +44,7 @@
 - epoch / 출처: PATCH20-D→E
 - Chapter 근거: OpenEase/AfterCost와 readdressing이 최초 Propulsion/Contraction 식을 좁힘
 - 선행 대조: X-CH07-057~059
-- 함께 구분할 후보: X-CH08-073~082
+- 함께 구분할 후보: X-CH08-072~080
 - 다음 확인: 명시적 refinement 범위와 남은 수식의 승계
 - 주의: E가 PATCH20 전체를 대체했다고 읽지 않는다.
 
@@ -54,7 +54,7 @@
 - epoch / 출처: PATCH20-F
 - Chapter 근거: ClaimSig·WSET·Graph·Access·Backaction은 재수록되지만 F_t·Persona·Rehydration 명칭은 빠짐
 - 선행 대조: X-CH07-005, X-CH07-057~059
-- 함께 구분할 후보: X-CH08-031, X-CH08-057, X-CH08-084
+- 함께 구분할 후보: X-CH08-031, X-CH08-053, X-CH08-084
 - 다음 확인: 기능 흔적, 명칭 탈락, 실제 폐기의 구분
 - 주의: 미재수록을 자동 폐기나 안정 승계로 판정하지 않는다.
 
@@ -136,7 +136,7 @@
 - epoch / 출처: PATCH20-A
 - Chapter 근거: incomplete signature를 false가 아니라 SSOT 도달 자격 미정의로 둠
 - 선행 대조: X-CH06-023 unregistered/undefined
-- 함께 구분할 후보: X-CH08-012, X-CH08-069~071
+- 함께 구분할 후보: X-CH08-012, X-CH08-062~065
 - 다음 확인: false, unknown, inadmissible, incomplete
 - 주의: schema 미정의를 반증으로 cast하지 않는다.
 
@@ -146,7 +146,7 @@
 - epoch / 출처: MAIN20, PATCH20-A
 - Chapter 근거: origin tracking을 attribution verdict와 분리
 - 선행 대조: X-CH04-005, X-CH06-042, X-CH07-022
-- 함께 구분할 후보: X-CH08-011~013, X-CH08-081
+- 함께 구분할 후보: X-CH08-011~013, X-CH08-076, X-CH08-085
 - 다음 확인: causal source, evidence source, responsible actor, obligation bearer
 - 주의: `unknown`을 무책임·무원인으로 해석하지 않는다.
 
@@ -228,7 +228,7 @@
 - epoch / 출처: PATCH20-A
 - Chapter 근거: view-origin action이 사후 흔적·관측 변화·유보 기록을 남겨야 한다는 주장
 - 선행 대조: X-CH06-040~042, X-CH07-061~063
-- 함께 구분할 후보: X-CH08-050~052
+- 함께 구분할 후보: X-CH08-047~048, X-CH08-060
 - 다음 확인: occurrence trace, learning trace, audit duty, normative obligation
 - 주의: 모든 행동에 debt·명시 기록 의무가 생긴다고 자동 일반화하지 않는다.
 
@@ -267,7 +267,7 @@
 - 연결된 역사적 명칭: meaning as access geometry
 - epoch / 출처: PATCH20-F 연구 후기 해석
 - Chapter 근거: 어떤 단서가 어떤 기억 주변을 쉽게 여는지의 변화량으로 읽을 수 있다는 제안
-- 선행 대조: X-CH08-073~078
+- 선행 대조: X-CH08-072~078
 - 함께 구분할 후보: X-CH08-023~025, X-CH08-027
 - 다음 확인: access weight change, causal significance, adopted meaning
 - 주의: 가능 해석을 0120의 최종 직접 정의로 승격하지 않는다.
@@ -370,7 +370,7 @@
 - epoch / 출처: Chapter 08 형식 감사
 - Chapter 근거: graph persistence만으로 event truth·evidence·identity가 생기지 않음
 - 선행 대조: C0004, C0009, X-CH07-068
-- 함께 구분할 후보: X-CH08-034~035, X-CH08-064~066
+- 함께 구분할 후보: X-CH08-034~035, X-CH08-057~058, X-CH08-086~088
 - 다음 확인: ArchiveTrace, occurrence record, evidence artifact, narrative adoption
 - 주의: Memory Graph를 C0004/C0009에 자동 흡수하지 않는다.
 
@@ -422,7 +422,7 @@
 - epoch / 출처: PATCH20-F
 - Chapter 근거: vivid scaffold와 Π_wit strength 사이 단조 관계 부정
 - 선행 대조: X-CH06-007, X-CH07-045~047
-- 함께 구분할 후보: X-CH08-058~061
+- 함께 구분할 후보: X-CH08-055~059
 - 다음 확인: addressability, vividness, evidentiality
 - 주의: vivid address를 strong evidence로 cast하지 않는다.
 
@@ -554,7 +554,7 @@
 - epoch / 출처: Chapter 08 `[BRIDGE]`
 - Chapter 근거: Access succeeded but rehydration failed 등 실패 분해
 - 선행 대조: X-CH08-043~053
-- 함께 구분할 후보: X-CH08-067~072
+- 함께 구분할 후보: X-CH08-066~068
 - 다음 확인: transition-specific failure, forgetting type
 - 주의: Bridge이며 0120 원문에 완성 실패 enum이 있다고 주장하지 않는다.
 
@@ -584,7 +584,7 @@
 - epoch / 출처: PATCH20-F
 - Chapter 근거: recollection이 grounds lane에 들어오려면 외부 기록 pointer를 요구하는 제안
 - 선행 대조: C0004, X-CH05-013~019, X-CH06-027
-- 함께 구분할 후보: X-CH08-058~061
+- 함께 구분할 후보: X-CH08-058~059
 - 다음 확인: artifact existence, source integrity, EvidenceLink, Warrant
 - 주의: pointer 존재와 사실 판정을 동일시하지 않는다.
 
@@ -594,7 +594,7 @@
 - epoch / 출처: Chapter 08 연구 후기
 - Chapter 근거: 외부 pointer 없는 기억을 전부 증거 불능으로 닫는 over-closure 경고
 - 선행 대조: evidence cluster, X-CH06-027~028
-- 함께 구분할 후보: X-CH08-056~057, X-CH08-059~061
+- 함께 구분할 후보: X-CH08-056~057, X-CH08-059
 - 다음 확인: source/provenance, independent support, method, claim-specific link
 - 주의: Bridge evidence lane을 0120 direct type으로 소급하지 않는다.
 
@@ -604,7 +604,7 @@
 - epoch / 출처: Chapter 08 `[BRIDGE]`
 - Chapter 근거: rehydrated experience 뒤 필요한 실패 가능한 전이
 - 선행 대조: X-CH08-051~058
-- 함께 구분할 후보: X-CH08-060~061, X-CH08-086~088
+- 함께 구분할 후보: X-CH08-055~058, X-CH08-086~088
 - 다음 확인: phenomenology, source memory, evidence, self-attribution
 - 주의: 친숙함을 나의 과거·정확성으로 바꾸지 않는다.
 
@@ -778,7 +778,7 @@
 - epoch / 출처: PATCH20-E
 - Chapter 근거: 비용·교훈은 실재하지만 책임 이동 권한 토큰이 아님
 - 선행 대조: X-CH08-014, X-CH06-042
-- 함께 구분할 후보: X-CH08-075, X-CH08-081~085
+- 함께 구분할 후보: X-CH08-014, X-CH08-085
 - 다음 확인: causal learning, responsibility, obligation
 - 주의: `I was hurt → attribution is true` 추론을 금지한다.
 
