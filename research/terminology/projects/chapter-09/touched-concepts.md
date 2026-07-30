@@ -516,6 +516,82 @@ B_A@RTO21
 
 `B_backlog@SLEEP22`는 Chapter 10 전방 예약만 남긴다.
 
+## 4-A. 보정 추가 후보의 concept 대조
+
+`extraction-map.md` J절의 `X-CH09-116~127`에 대한 대조다. 이 절도 기존 C-ID의 정의·특성·판정을 바꾸지 않는다.
+
+### 4-A.1 자기 경계 관계 축 — `X-CH09-116~122`
+
+기존 termbase는 이 축들을 소유하지 않는다. C0001~C0009는 행동 경로 선택, 외부 occurrence, 결과 상태, occurrence record, 현재 체험 표면, 비권위적 인과 영향, 실제 노동, 실제 지출, 회계 기록을 다루며 **관계적 자기 경계 축은 없다.**
+
+- 상태: 전부 `HOLD`.
+- 권한: `BRIDGE-CURRENT`. 0121 원문의 직접 정의가 아니므로 계보 근거로 쓰지 않는다.
+
+C0006과의 경계가 핵심 질문이다.
+
+```text
+C0006
+= 어떤 source가 Grounds·warrant·writer 권한 없이 변화를 일으키는 관계
+
+X-CH09-121 NarrativeGravity
+= 역사적 관계 지형이 경계 축을 기울이는 편향
+```
+
+둘은 같은 관계일 수 있고, C0006의 적용 사례일 수 있고, 별도 관계일 수 있다.
+
+```text
+NarrativeGravity NARROWER-OR-RELATED-CANDIDATE-OF C0006
+상태: HOLD
+재개 조건: 자기 경계 축 편향이 일반 후보·주의 편향과 갈라지는 대비 확보
+```
+
+C0009와의 경계도 확인한다. `AccountableResponsibility`는 귀속 기록의 대상일 수 있으나 기록 자체는 아니다.
+
+```text
+AccountableResponsibility RELATED-CANDIDATE-OF C0009
+상태: HOLD
+재개 조건: C0009 subject-field split 뒤 attribution record 후보와 대조
+```
+
+`X-CH09-117`은 여섯 축을 한 묶음으로 제안하므로 **subject field 후보**로 표시한다. README 4.7에 따라 이 상태로는 C-ID 발급 조건을 만족하지 않는다.
+
+### 4-A.2 몸 상태 이동과 유일성 주장 — `X-CH09-123~124`
+
+```text
+X-CH09-039  Seed          저속 상수 편향
+X-CH09-040  t_b           연속 리듬 변조
+X-CH09-123  Embodied Drift 현재 상태 변화의 결합 이동
+```
+
+세 후보는 모두 접근·비용 지형을 기울이지만 시간 규모와 원천이 다르다. 같은 `[RTO21]` 파일에 있다는 이유로 병합하지 않는다.
+
+- `X-CH09-123` 상태: `HOLD`. epoch는 `RTO21-D` Draft 권한이다.
+- `X-CH09-124` 상태: `HOLD`. 유일성 주장 자체를 과잉 일반화 후보로 보존한다.
+
+`X-CH09-124`는 concept 후보라기보다 **발급 조건 판정 시 걸리는 제약**이다. 개인차가 세 변수에서만 나온다는 주장이 참이면 Persona 계열 후보의 차별 특성이 달라지므로 identity cluster에서 함께 확인한다.
+
+### 4-A.3 현행 변형·기억·언어 Bridge — `X-CH09-125~127`
+
+세 후보는 `X-CH09-097~100`의 persistence-capable non-authoritative 공백과 같은 대상을 향한다.
+
+```text
+X-CH09-125  변형 유동성·안정화·재유동화
+X-CH09-126  기억을 현재 재형성 제약으로 보는 제안
+X-CH09-127  언어를 재접근 anchor로 보는 제안
+```
+
+- 상태: 전부 `HOLD`.
+- `X-CH09-125`의 `QualiaAnnealing`은 Chapter 10 전방 예약이다. 이번 배치는 발생 지점만 등록한다.
+- `X-CH09-126`은 C0004와 대조하지만 record가 아니라 **저장 대상**에 관한 주장이다.
+
+```text
+memory as deformation recipe RELATED-CANDIDATE-OF C0004
+상태: HOLD
+재개 조건: 저장 내용·접근 제약·현재 재구성의 관계 확정
+```
+
+- `X-CH09-127`은 `X-CH09-029` Why-token의 확대가 아니다. Chapter 09 계보표도 이를 `제한적 선행`으로만 판정한다.
+
 ## 5. 후속 cluster queue
 
 이번 intake 뒤 가능한 cluster는 다음과 같다. 순서는 이번 PR에서 확정하지 않는다.
@@ -536,8 +612,14 @@ B_A@RTO21
    - Q / Z / pull / constraint / mismatch / Φ / Meta / FlexCost
 8. **Continuity and Stability Cluster**
    - tracker / continuity work / felt continuity / safe-stopping / felt satisfaction
+9. **Self-Boundary Axis Cluster**
+   - belonging / stake / responsibility / authorship / identity dependence / authority scope
+10. **Embodiment Modulation Cluster**
+   - Seed bias / body rhythm / current-state coupled drift / individual-difference claim
 
 기본값은 전부 `HOLD`다. 리뷰 뒤 가장 경계가 잘 드러난 cluster 하나만 다음 PR로 구체화한다.
+
+9번과 10번은 보정 배치에서 추가됐다. `X-CH09-125~127`은 5번 Persistent Non-Authority Cluster의 입력에 포함한다.
 
 ## 6. 최종 판정
 
@@ -554,3 +636,11 @@ C0009 HOLD / SUBJECT-FIELD SPLIT 유지
 ```
 
 새 C-ID 없음. `MERGE` 없음. 기존 concept 정의·특성·판정 변경 없음.
+
+보정 배치 뒤에도 같다. `X-CH09-116~127`은 전부 `HOLD`이며 기존 판정을 건드리지 않는다. 이 보정은 판정 교정이 아니라 coverage 완성이므로 `harmonization` 기록을 만들지 않는다.
+
+```text
+최초 intake  X-CH09-001~115
+보정 추가    X-CH09-116~127
+합계         127
+```

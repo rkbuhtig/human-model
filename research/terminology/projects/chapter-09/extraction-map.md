@@ -296,7 +296,7 @@
 - epoch / 출처: QUAL13
 - Chapter 근거: re-parameterization·candidate reorder를 돕는 최소 산출
 - 선행 대조: X-CH03-018
-- 함께 구분할 후보: X-CH09-027~028, LanguageAnchor Bridge
+- 함께 구분할 후보: X-CH09-027~028, X-CH09-127
 - 다음 확인: question, explanation, language anchor
 - 주의: 선행 역할을 중복 발견하지 않고 일반 언어 기원으로 확대하지 않는다.
 
@@ -398,7 +398,7 @@
 - epoch / 출처: RTO21-A/B
 - Chapter 근거: B_A·θ_H·AddrSig·OpenEase·AfterCost·π 반응성을 편향
 - 선행 대조: X-CH08 Persona/Scar
-- 함께 구분할 후보: X-CH09-040~042, X-CH09-047~049
+- 함께 구분할 후보: X-CH09-040~042, X-CH09-047~049, X-CH09-123~124
 - 다음 확인: inherited parameter, body state, learned trace
 - 주의: Seed를 evidence·Warrant·과거 귀속 token으로 사용하지 않는다.
 
@@ -408,7 +408,7 @@
 - epoch / 출처: RTO21-A
 - Chapter 근거: 심장·호흡·자율신경 리듬이 대역·포화·임계를 흔듦
 - 선행 대조: Chapter 01 Body Veto, Chapter 06 body gap
-- 함께 구분할 후보: X-CH09-039, X-CH09-041~044
+- 함께 구분할 후보: X-CH09-039, X-CH09-041~044, X-CH09-123
 - 다음 확인: organismic modulation, authorization, evidence
 - 주의: 몸이 easy/urgent/vivid를 바꾼다고 truth·면책을 바꾸는 것은 아니다.
 
@@ -936,7 +936,7 @@
 - epoch / 출처: RTO21-D
 - Chapter 근거: body가 지속되는 자리
 - 선행 대조: Chapter 06 body gap
-- 함께 구분할 후보: X-CH09-093~096
+- 함께 구분할 후보: X-CH09-093~096, X-CH09-123
 - 다음 확인: organism, subject, continuity criterion
 - 주의: body persistence를 현재 experience·public attribution과 동일시하지 않는다.
 
@@ -976,7 +976,7 @@
 - epoch / 출처: Chapter synthesis
 - Chapter 근거: remembered-by-me·lived-by-me·NarrativeAdoption·authorship의 별도 문턱
 - 선행 대조: X-CH08-086~088
-- 함께 구분할 후보: X-CH09-094~095, X-CH09-101~105
+- 함께 구분할 후보: X-CH09-094~095, X-CH09-101~105, X-CH09-118~119
 - 다음 확인: provenance, narrative stance, accountability
 - 주의: 현재 태도가 과거 occurrence·actor relation을 새로 mint하지 않는다.
 
@@ -1016,7 +1016,7 @@
 - epoch / 출처: BRIDGE-CURRENT
 - Chapter 근거: dynamic readout과 authority register 사이 persistent deformation 필요
 - 선행 대조: X-CH09-034, X-CH09-054, X-CH09-097
-- 함께 구분할 후보: X-CH09-098~099
+- 함께 구분할 후보: X-CH09-098~099, X-CH09-125~126
 - 다음 확인: medium state, transition signature, record object
 - 주의: 직접 계보·C-ID·KEEP 근거로 사용하지 않는다.
 
@@ -1046,7 +1046,7 @@
 - epoch / 출처: BRIDGE-CURRENT
 - Chapter 근거: 사건 묶음의 출처와 자기서사 편입을 분리
 - 선행 대조: C0004, X-CH08-087~088
-- 함께 구분할 후보: X-CH09-099, X-CH09-101~105
+- 함께 구분할 후보: X-CH09-099, X-CH09-101~105, X-CH09-119
 - 다음 확인: event record, episode, adoption
 - 주의: NarrativeAdoption을 factual evidence나 free self-write로 만들지 않는다.
 
@@ -1056,7 +1056,7 @@
 - epoch / 출처: BRIDGE-CURRENT
 - Chapter 근거: 공적 책임 지속과 현재 Ghost의 felt responsibility가 다를 수 있음
 - 선행 대조: C0009, X-CH08 attribution
-- 함께 구분할 후보: X-CH09-094~096, X-CH09-105
+- 함께 구분할 후보: X-CH09-094~096, X-CH09-105, X-CH09-118
 - 다음 확인: accountable responsibility, felt responsibility, provenance
 - 주의: 죄책감 강도를 실제 책임 ledger로 쓰지 않는다.
 
@@ -1066,7 +1066,7 @@
 - epoch / 출처: BRIDGE-CURRENT
 - Chapter 근거: authority는 Ghost 사이 내적 상태처럼 전달되지 않음
 - 선행 대조: Chapter 05/06 authority, X-CH09-094
-- 함께 구분할 후보: X-CH09-101~104
+- 함께 구분할 후보: X-CH09-101~104, X-CH09-116, X-CH09-120
 - 다음 확인: scope, issuer, jurisdiction, transfer record
 - 주의: identity·belonging·stake가 authority를 자체 발행하지 않는다.
 
@@ -1186,6 +1186,7 @@
 - `X-CH09-092~096` → organismic / experiential / attribution subject relation cluster
 - `X-CH09-097~105` → persistent nonauthoritative plasticity / handoff / authorship cluster
 - `X-CH09-106~115` → symbol epoch index와 Chapter 10 intake
+- `X-CH09-116~127` → J절 보정 후보. 라우팅은 J.4에 있다.
 
 다음 입력 배치는 Chapter 10이다. 그 전에 review에서 다음 과병합이 없는지 확인한다.
 
@@ -1200,4 +1201,156 @@ ContinuityTax = debt / metabolic energy
 same ledger subject = lived-by-me
 QUAL13 Φ = QualiaMedium
 PlasticTrace = EventRecord / Scar / Bill
+```
+
+## J. 보정 추가 후보
+
+> 이 절은 최초 intake에서 누락된 후보를 보정한다. 번호는 `X-CH09-115` 뒤에 이어붙이며 기존 후보 ID와 서술은 수정하지 않는다. 기존 후보의 `함께 구분할 후보`에만 역참조를 추가한다.
+>
+> 누락 유형은 두 가지였다. 첫째, Chapter A7의 자기 경계 관계 축이 `BRIDGE-CURRENT`인데도 다른 `BRIDGE-CURRENT` 후보와 달리 추출되지 않았다. 둘째, `RTO21-D`와 `RTO21-B`의 직접 주장 두 개가 인접 후보에 흡수된 것처럼 보였으나 별도 주장이었다.
+
+## J.1 자기 경계 관계 축
+
+### X-CH09-116 — 타자의 존속·손상이 자기 유지 함수에 편입되는 것과 소유·통제·권한이 분리됨
+
+- 연결된 역사적 명칭: InternalizedIntoMyMaintenance, 확장된 자기 경계
+- epoch / 출처: BRIDGE-CURRENT + USER-DIRECT (Chapter A7.1)
+- Chapter 근거: 가족이 유지 함수에 들어오는 것과 대상을 소유·저작·통제·권한 아래 두는 것이 다름
+- 선행 대조: C0006, X-CH09-105, X-CH07 Love·타자성 residue
+- 함께 구분할 후보: X-CH09-117~122
+- 다음 확인: maintenance inclusion, ownership, jurisdiction
+- 주의: 0121 원문의 직접 정의가 아니다. 내재화 강도를 authority 근거로 쓰지 않는다.
+
+### X-CH09-117 — 자기 경계가 단일 원이 아니라 서로 환원되지 않는 관계 축의 묶음으로 제안됨
+
+- 연결된 역사적 명칭: `SelfBoundaryProfile`, Belonging, Stake, IdentityDependence
+- epoch / 출처: BRIDGE-CURRENT (Chapter A7.2)
+- Chapter 근거: 대상마다 소속·이해관계·책임·저자성·정체성 의존·권한을 별도로 판정하는 profile 구조
+- 선행 대조: X-CH09-092~096, C0006
+- 함께 구분할 후보: X-CH09-116, X-CH09-118~122
+- 다음 확인: 여섯 축이 하나의 profile concept인지 별도 concept의 집합인지
+- 주의: 축 목록을 하나의 C-ID로 발급하지 않는다. subject field 후보일 수 있다.
+
+### X-CH09-118 — 느껴지는 책임과 귀속 가능한 책임이 분리됨
+
+- 연결된 역사적 명칭: FeltResponsibility, AccountableResponsibility
+- epoch / 출처: BRIDGE-CURRENT (Chapter A7.2~A7.3)
+- Chapter 근거: 죄책감이 강해도 실제 책임이 자동 생기지 않고, 느끼지 않아도 공적 귀속이 사라지지 않음
+- 선행 대조: C0009, X-CH09-104, Chapter 06 obligation 후보
+- 함께 구분할 후보: X-CH09-117, X-CH09-119~120
+- 다음 확인: felt state, causal contribution, public accountability
+- 주의: 비대칭이 양방향이므로 한쪽을 다른 쪽의 readout으로 만들지 않는다.
+
+### X-CH09-119 — 서사 저자성·인과 기여·귀속 가능한 저자성이 세 역할로 분리됨
+
+- 연결된 역사적 명칭: NarrativeAuthorship, CausalContribution, AccountableAttribution
+- epoch / 출처: BRIDGE-CURRENT (Chapter A7.2)
+- Chapter 근거: 자기서사에서의 저자성, 실제 인과 기여, 공적 귀속이 서로 다른 판정
+- 선행 대조: C0002, C0004, X-CH09-096, X-CH08 self-adoption gap
+- 함께 구분할 후보: X-CH09-118, X-CH09-120, X-CH09-103
+- 다음 확인: authorship, contribution, attribution
+- 주의: 현재 서사 태도가 과거 인과나 공적 귀속을 새로 mint하지 않는다.
+
+### X-CH09-120 — 주장된 권한과 정당한 권한 범위가 분리됨
+
+- 연결된 역사적 명칭: AuthorityClaim, WarrantedAuthorityScope, `Authority_felt`, `ValidAuthority`
+- epoch / 출처: BRIDGE-CURRENT (Chapter A7.2~A7.3)
+- Chapter 근거: 내재화가 느껴지는 권한을 키울 수 있어도 정당한 권한을 자체 발행하지 못함
+- 선행 대조: X-CH09-105, Chapter 06 authority 후보, C0006
+- 함께 구분할 후보: X-CH09-116~119, X-CH09-121
+- 다음 확인: claim, warrant, jurisdiction, transfer event
+- 주의: felt scope와 warranted scope를 하나의 강도 축으로 합치지 않는다.
+
+### X-CH09-121 — 역사적 관계 지형이 경계 축을 기울이지만 책임·권한을 결정하지 않음
+
+- 연결된 역사적 명칭: `NarrativeGravity`
+- epoch / 출처: BRIDGE-CURRENT (Chapter A7.3)
+- Chapter 근거: 실제 Episode·돌봄·배신·수리가 소속·이해관계·느껴지는 책임·서사 저자성·정체성 의존을 기울이지만 귀속 가능한 책임과 정당한 권한 범위를 결정하지 않음
+- 선행 대조: C0006, X-CH09-118~120, X-CH08 access geometry
+- 함께 구분할 후보: X-CH09-117, X-CH09-122
+- 다음 확인: history-dependent bias, current stance, authorization
+- 주의: C0006과 같은 비권위 영향 관계인지 별도 관계인지 미정이며 자동 통합하지 않는다.
+
+### X-CH09-122 — 같은 공적 사실이 서로 다른 자기 경계 profile로 들어올 수 있음
+
+- 연결된 역사적 명칭: same public fact ≠ same SelfBoundary profile
+- epoch / 출처: USER-DIRECT + NON-CLAIM (Chapter A7.4)
+- Chapter 근거: 동일 사실을 알게 된 뒤 신뢰·소속·이해관계·권한 배분이 사람마다 다르게 재협상될 수 있음
+- 선행 대조: X-CH08 access geometry 사례, X-CH09-117
+- 함께 구분할 후보: X-CH09-116~121
+- 다음 확인: shared fact, activated history, adoption, profile
+- 주의: 사실 판정의 상대화가 아니다. 공적 사실·타자의 권리·권한 제한은 별도로 남는다.
+
+## J.2 몸 상태 이동과 유일성 주장
+
+### X-CH09-123 — 현재 몸 상태 변화가 예산·비용·주소·정책을 함께 이동시킴
+
+- 연결된 역사적 명칭: `Embodied Drift`
+- epoch / 출처: RTO21-D
+- Chapter 근거: 몸 상태가 바뀌면 Working Set 예산·AfterCost·OpenEase·AddrSig·정책이 함께 달라짐
+- 선행 대조: X-CH09-039, X-CH09-040, X-CH09-092
+- 함께 구분할 후보: X-CH09-039~041, X-CH09-124
+- 다음 확인: constitutional bias, continuous modulation, coupled multi-state shift
+- 주의: Seed의 저속 상수 편향과 현재 상태 변화의 결합 이동을 같은 후보로 합치지 않는다. BIO Draft 권한이다.
+
+### X-CH09-124 — 개인차가 Seed·주소 성향·흔적에서만 나온다는 유일성 주장이 제기됨
+
+- 연결된 역사적 명칭: same skeleton different bias
+- epoch / 출처: RTO21-B + MODEL ASSUMPTION
+- Chapter 근거: 모든 개인이 같은 포트 법과 방화벽을 공유하고 관측되는 성향 차이는 `Σ + AddrSig + Scar/trace`로만 설명된다는 선언
+- 선행 대조: X-CH09-039, X-CH09-045, X-CH06-040
+- 함께 구분할 후보: X-CH09-123, X-CH09-045~052
+- 다음 확인: shared architecture, parameter difference, uniqueness claim
+- 주의: 제시된 공리만으로 유일성이 도출되지 않는다. 과잉 일반화 자체를 후보로 보존한다.
+
+## J.3 현행 변형·기억·언어 Bridge
+
+### X-CH09-125 — 형상의 유동화·안정화·재유동화가 지능 유형으로 제안됨
+
+- 연결된 역사적 명칭: FluidIntelligence, CrystallizedIntelligence, CreativeIntelligence, `QualiaAnnealing`
+- epoch / 출처: BRIDGE-CURRENT (Chapter A6.2)
+- Chapter 근거: 낯선 입력에 맞춘 변형, 반복 검증된 형상의 안정화, 필요할 때의 재유동화와 재결정화
+- 선행 대조: X-CH09-030~033, X-CH09-097~100
+- 함께 구분할 후보: X-CH09-100, X-CH09-126
+- 다음 확인: plasticity capacity, stabilized form, controlled reflow
+- 주의: `QualiaAnnealing`의 정의와 수면 연결은 Chapter 10이 소유한다. 여기서는 발생 지점만 등록한다.
+
+### X-CH09-126 — 기억이 저장된 과거 형상이 아니라 현재 재형성 제약으로 제안됨
+
+- 연결된 역사적 명칭: memory as deformation recipe, remorphing constraint
+- epoch / 출처: BRIDGE-CURRENT (Chapter A5.4)
+- Chapter 근거: 회상이 동일 감각을 꺼내는 것이 아니라 현재 몸·맥락 위에서 과거 제약을 다시 실행하는 것일 수 있음
+- 선행 대조: X-CH08 Rehydration·backaction 후보, C0004, X-CH09-100
+- 함께 구분할 후보: X-CH09-125, X-CH09-127
+- 다음 확인: stored content, access constraint, present reconstruction
+- 주의: Chapter 08 Rehydration의 재발견이 아니라 저장 대상에 관한 별도 주장이다.
+
+### X-CH09-127 — 언어가 사적 형상의 기원이 아니라 재접근·재조합 anchor로 제안됨
+
+- 연결된 역사적 명칭: `LanguageAnchor`
+- epoch / 출처: BRIDGE-CURRENT + USER-DIRECT (Chapter A5.5)
+- Chapter 근거: 전언어적 형상이 먼저 있고 언어는 그것을 안정화·재접근·재조합하는 후발 도구라는 가설
+- 선행 대조: X-CH09-029, X-CH03-018
+- 함께 구분할 후보: X-CH09-029, X-CH09-125~126
+- 다음 확인: prelinguistic form, anchor, social coordination
+- 주의: Why-token 하나를 언어 일반의 기원으로 확대하지 않는다. 같은 단어가 같은 형상을 보증하지 않는다.
+
+## J.4 보정 후보 라우팅
+
+- `X-CH09-116~122` → self-boundary axis / authority scope cluster
+- `X-CH09-123~124` → embodiment modulation / individual-difference claim cluster
+- `X-CH09-125~127` → persistent nonauthoritative plasticity cluster (`X-CH09-097~105`와 같은 대상)
+
+`X-CH09-121`은 C0006 관계 질문과 직접 닿으므로 self-boundary cluster와 비권위 영향 경계를 함께 확인해야 한다.
+
+다음 과병합도 review에서 확인한다.
+
+```text
+SelfBoundaryProfile = 하나의 concept
+FeltResponsibility = AccountableResponsibility
+AuthorityClaim = WarrantedAuthorityScope
+NarrativeGravity = C0006
+Embodied Drift = Seed bias
+LanguageAnchor = Why-token
+memory recipe = Chapter 08 Rehydration
 ```
