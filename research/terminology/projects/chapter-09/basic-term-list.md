@@ -93,6 +93,36 @@
 | `R_runtime` | W·trace·Seed runtime state | X-CH09-114 | runtime-state family / HOLD | ρ_rev와 분리 |
 | `M^qual`, `Morph^qual`, `χ^qual` | 현행 Bridge namespace | X-CH09-115 | BRIDGE-CURRENT / HOLD | 0121 소급 금지 |
 
+## 보정 추가 색인
+
+`extraction-map.md` J절에서 보정한 후보의 명칭 색인이다. 기존 행은 수정하지 않았다.
+
+| 역사적 명칭 | epoch / 관찰된 역할 | 추출 항목 | concept / 상태 | 다음 확인 |
+|---|---|---|---|---|
+| InternalizedIntoMyMaintenance | A7.1 유지 함수 편입 | X-CH09-116 | BRIDGE-CURRENT / HOLD | 소유·통제·권한과 분리 |
+| `SelfBoundaryProfile` | A7.2 관계 축 묶음 | X-CH09-117 | BRIDGE-CURRENT / HOLD | subject field 후보 여부 |
+| Belonging | A7.2 소속 축 | X-CH09-117 | BRIDGE-CURRENT / HOLD | 애착·증빙 결합과 분리 |
+| Stake | A7.2 이해관계 축 | X-CH09-117 | BRIDGE-CURRENT / HOLD | 비용·돌봄·소망과 분리 |
+| IdentityDependence | A7.2 정체성 의존 축 | X-CH09-117 | BRIDGE-CURRENT / HOLD | Handle·Tracker와 분리 |
+| FeltResponsibility | A7.2 느껴지는 책임 | X-CH09-118 | BRIDGE-CURRENT / HOLD | 죄책감을 책임 ledger로 쓰지 않음 |
+| AccountableResponsibility | A7.2 귀속 가능한 책임 | X-CH09-118 | BRIDGE-CURRENT / HOLD | felt 부재가 귀속을 지우지 않음 |
+| NarrativeAuthorship | A7.2 서사 저자성 | X-CH09-119 | BRIDGE-CURRENT / HOLD | 인과 기여와 분리 |
+| CausalContribution | A7.2 인과 기여 | X-CH09-119 | BRIDGE-CURRENT / HOLD | 공적 귀속과 분리 |
+| AccountableAttribution | A7.2 귀속 가능한 저자성 | X-CH09-119 | BRIDGE-CURRENT / HOLD | 현재 태도로 mint 금지 |
+| AuthorityClaim | A7.2 주장된 권한 | X-CH09-120 | BRIDGE-CURRENT / HOLD | warranted scope와 분리 |
+| WarrantedAuthorityScope | A7.2 정당한 권한 범위 | X-CH09-120 | BRIDGE-CURRENT / HOLD | 내재화가 발행하지 않음 |
+| `Authority_felt` / `ValidAuthority` | A7.3 느껴지는·정당한 권한 대비 | X-CH09-120 | BRIDGE-CURRENT / HOLD | 단일 강도 축으로 합치지 않음 |
+| `NarrativeGravity` | A7.3 역사 의존 편향 | X-CH09-121 | BRIDGE-CURRENT / HOLD | C0006과 동일 관계인지 미정 |
+| same public fact ≠ same profile | A7.4 동일 사실의 상이 편입 | X-CH09-122 | USER-DIRECT / NON-CLAIM / HOLD | 사실 상대화가 아님 |
+| `Embodied Drift` | RTO21-D 몸 상태 결합 이동 | X-CH09-123 | historical proposal / HOLD | Seed bias와 분리 |
+| same skeleton different bias | RTO21-B 개인차 유일성 주장 | X-CH09-124 | MODEL ASSUMPTION / HOLD | 유일성 미도출 |
+| FluidIntelligence | A6.2 변형 유동성 | X-CH09-125 | BRIDGE-CURRENT / HOLD | 능력 판정으로 승격 금지 |
+| CrystallizedIntelligence | A6.2 형상 안정화 | X-CH09-125 | BRIDGE-CURRENT / HOLD | 경직성과 구분 |
+| CreativeIntelligence | A6.2 재유동화·재결정화 | X-CH09-125 | BRIDGE-CURRENT / HOLD | 정확성과 구분 |
+| `QualiaAnnealing` | A6.2 재유동화 가설 | X-CH09-125 | BRIDGE-CURRENT / Chapter 10 reservation | 정의·수면 연결은 다음 장 |
+| memory as deformation recipe | A5.4 현재 재형성 제약 | X-CH09-126 | BRIDGE-CURRENT / HOLD | Rehydration 재발견 아님 |
+| `LanguageAnchor` | A5.5 재접근·재조합 anchor | X-CH09-127 | BRIDGE-CURRENT / HOLD | Why-token 확대 금지 |
+
 ## 색인 봉인
 
 ```text
@@ -121,4 +151,26 @@ PlasticTrace
 ≠ Evidence
 ≠ Scar
 ≠ Debt
+
+SelfBoundaryProfile
+≠ 하나의 concept
+
+FeltResponsibility
+≠ AccountableResponsibility
+
+AuthorityClaim
+≠ WarrantedAuthorityScope
+
+NarrativeAuthorship
+≠ CausalContribution
+≠ AccountableAttribution
+
+NarrativeGravity
+≠ C0006
+
+Embodied Drift
+≠ Seed bias
+
+LanguageAnchor
+≠ Why-token
 ```
